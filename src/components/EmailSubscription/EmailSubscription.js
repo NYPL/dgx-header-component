@@ -9,7 +9,7 @@ import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWi
 import SubscribeMessageBox from './SubscribeMessageBox.js';
 import DotsLoader from '../Loaders/DotsLoader.js';
 
-import gaUtils from '../../utils/gaUtils.js';
+import utils from '../../utils/utils.js';
 
 class EmailSubscription extends React.Component {
 
@@ -95,7 +95,7 @@ class EmailSubscription extends React.Component {
         </div>);
 
       if (status === 'success') {
-        gaUtils._trackEvent('Subscribe', 'Success');
+        utils._trackHeader('Subscribe', 'Success');
         subscribeContent = (
           <div>
             <SubscribeMessageBox status={status} msg="Thank you for subscribing to our email updates." />
@@ -113,7 +113,7 @@ class EmailSubscription extends React.Component {
       }
 
       if (status === 'exists') {
-        gaUtils._trackEvent('Subscribe', 'Error -- already subscribed');
+        utils._trackHeader('Subscribe', 'Error -- already subscribed');
         subscribeContent = (
           <div>
             <SubscribeMessageBox status={status} msg="Looks like you're already signed up!" />
@@ -124,7 +124,7 @@ class EmailSubscription extends React.Component {
       }
 
       if (status === 'error' || status === 'Internal Server Error') {
-        gaUtils._trackEvent('Subscribe', 'Error');
+        utils._trackHeader('Subscribe', 'Error');
         subscribeContent = (
           <div className={`${this.props.className}-Misc-Error`}>
             <div>Hmm...</div>

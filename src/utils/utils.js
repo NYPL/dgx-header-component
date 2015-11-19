@@ -1,5 +1,7 @@
 import moment from 'moment';
 
+import gaUtils from './gaUtils.js';
+
 function Utils() {
   this.formatDate = (startDate, endDate) => {
     let formattedDate,
@@ -79,6 +81,16 @@ function Utils() {
 
     return formattedDate;
   };
+
+  /**
+   * _trackHeader(action, label)
+   * Track a GA click event, where action and label come from
+   * the higher level function call from _trackEvent().
+   *
+   * @param {action} String Action for GA event.
+   * @param {label} String Label for GA event.
+   */
+  this._trackHeader = gaUtils._trackEvent('Global Header');
 
 }
 

@@ -9,7 +9,7 @@ import Actions from '../../actions/Actions.js';
 
 import axios from 'axios';
 
-import gaUtils from '../../utils/gaUtils.js';
+import utils from '../../utils/utils.js';
 
 import MyNypl from '../MyNypl/MyNypl.js';
 
@@ -89,7 +89,7 @@ class MyNyplButton extends React.Component {
 
       let visibleState = this.state.myNyplVisible ? 'Closed' : 'Open';
       Actions.toggleMyNyplVisible(!this.state.myNyplVisible);
-      gaUtils._trackEvent('Log In', `MyNyplButton - ${visibleState}`);
+      utils._trackHeader('Log In', `MyNyplButton - ${visibleState}`);
     }
   }
 
@@ -101,7 +101,7 @@ class MyNyplButton extends React.Component {
   _handleOnClickOut(e) {
     if (HeaderStore._getMyNyplVisible()) {
       if (HeaderStore._getMobileMyNyplButtonValue() === '') {
-        gaUtils._trackEvent('Log In', 'MyNyplButton - Closed');
+        utils._trackHeader('Log In', 'MyNyplButton - Closed');
       }
       Actions.toggleMyNyplVisible(false);
     }

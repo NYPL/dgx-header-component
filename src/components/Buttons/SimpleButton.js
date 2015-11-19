@@ -1,7 +1,7 @@
 import React from 'react';
 import Radium from 'radium';
 
-import gaUtils from '../../utils/gaUtils.js';
+import gaUtils from '../../utils/utils.js';
 
 class SimpleButton extends React.Component {
   // Constructor used in ES6
@@ -27,7 +27,7 @@ class SimpleButton extends React.Component {
   }
 
   _onClick() {
-    gaUtils._trackEvent(this.props.gaAction, this.props.gaLabel);
+    utils._trackHeader(this.props.gaAction, this.props.gaLabel);
     this.props.onClick();
   }
 };

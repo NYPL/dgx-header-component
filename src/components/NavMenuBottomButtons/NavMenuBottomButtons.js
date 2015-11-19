@@ -1,7 +1,7 @@
 import React from 'react';
 import Radium from 'radium';
 
-import gaUtils from '../../utils/gaUtils.js';
+import utils from '../../utils/utils.js';
 
 // Dependent NYPL React Component
 import DonateButton from '../DonateButton/DonateButton.js';
@@ -19,7 +19,7 @@ class NavMenuBottomButtons extends React.Component{
     return (
       <div className={this.props.className} style={styles.base}>
         <a href={this.props.libraryCardLink} className={libraryCardClass}
-          style={styles.links} onClick={gaUtils._trackEvent.bind(this, 'Click', 'Mobile Bottom Buttons - Library Card')}>
+          style={styles.links} onClick={utils._trackHeader.bind(this, 'Click', 'Mobile Bottom Buttons - Library Card')}>
           <span className={`${libraryCardClass}-Wrapper`} style={[styles.wrapper, styles.libraryCardLinkWrapper]}>
             <span className={`${libraryCardClass}-Icon nypl-icon-card`} style={styles.icon}></span>
             <span className={`${libraryCardClass}-Label`} style={[styles.label, styles.libraryCardLinkLabel]}>
@@ -28,7 +28,7 @@ class NavMenuBottomButtons extends React.Component{
           </span>
         </a>
         <a href={this.props.subscribeLink} className={subscribeLinkClass}
-          style={styles.links} onClick={gaUtils._trackEvent.bind(this, 'Click', 'Mobile Bottom Buttons - Email Updates')}>
+          style={styles.links} onClick={utils._trackHeader.bind(this, 'Click', 'Mobile Bottom Buttons - Email Updates')}>
           <span className={`${subscribeLinkClass}-Wrapper`} style={[styles.wrapper, styles.subscribeLinkWrapper]}>
             <span className={`${subscribeLinkClass}-Icon nypl-icon-mail`} style={styles.icon}></span>
             <span className={`${subscribeLinkClass}-Label`} style={[styles.label, styles.subscribeLinkLabel]}>

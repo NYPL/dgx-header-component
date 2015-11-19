@@ -6,7 +6,7 @@ import ReactTappable from 'react-tappable';
 // ALT FLUX
 import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
-import gaUtils from '../../utils/gaUtils.js';
+import utils from '../../utils/utils.js';
 
 class MobileHeader extends React.Component {
 
@@ -142,7 +142,7 @@ class MobileHeader extends React.Component {
       }
     }
 
-    gaUtils._trackEvent('Click', `Mobile ${activeButton}`);
+    utils._trackHeader('Click', `Mobile ${activeButton}`);
   }
 
   /**

@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
-import gaUtils from '../../utils/gaUtils.js';
+import utils from '../../utils/utils.js';
 
 class EventProgramItem extends React.Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class EventProgramItem extends React.Component {
 
     return (
       <a href={feature.link} className={this.props.className}
-        onClick={gaUtils._trackEvent.bind(this, 'FeatureItem', `${this.props.navLabel} - ${feature.headline}`)}>
+        onClick={utils._trackHeader.bind(this, 'FeatureItem', `${this.props.navLabel} - ${feature.headline}`)}>
         <div className={`${this.props.className}-Wrapper`}>
           {img}
           <div className={'FeatureItem-Content ' + classes}>

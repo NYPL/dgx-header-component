@@ -11,7 +11,7 @@ import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
 
 // GA Utility Library
-import gaUtils from '../../utils/gaUtils.js';
+import utils from '../../utils/utils.js';
 
 class SearchBox extends React.Component {
   // Constructor used in ES6
@@ -205,7 +205,7 @@ class SearchBox extends React.Component {
       this._animationTimer(inputKeywords);
     } else {
       // Fire GA event to track Search
-      gaUtils._trackEvent('Search', gaSearchLabel);
+      utils._trackHeader('Search', gaSearchLabel);
 
       // Go to the search page
       window.location.assign(requestUrl);

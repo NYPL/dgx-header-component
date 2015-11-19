@@ -1,7 +1,7 @@
 import React from 'react';
 import Radium from 'radium';
 
-import gaUtils from '../../utils/gaUtils.js';
+import utils from '../../utils/utils.js';
 
 class DonateButton extends React.Component {
   // Constructor used in ES6
@@ -15,7 +15,7 @@ class DonateButton extends React.Component {
       className={this.props.className}
       href={this.props.target}
       lang={this.props.lang}
-      onClick={gaUtils._trackEvent.bind(this, 'Donate', this.props.gaLabel)}
+      onClick={utils._trackHeader.bind(this, 'Donate', this.props.gaLabel)}
       style={[
         styles.base,
         this.props.style //allows for parent-to-child css styling

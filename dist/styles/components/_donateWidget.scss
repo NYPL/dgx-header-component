@@ -1,0 +1,81 @@
+.DonateWidget {
+	&-DonateBox {
+		display: inline-table;
+		width: 50%;
+		height: 100%;
+		margin: 0;
+		padding: 0;
+
+		&-Wrapper {
+			color: #FFFFFF;
+			display: block;
+			position: relative;
+			margin: 0 0 0 $RIGHT_NAV_CONTAINER_LEFT_MARGIN;
+			top: 50px;
+
+			@include tablet-landscape {
+				margin: 0 0 0 31px;
+			}
+		}
+
+		&-Tag {
+			font-size: 13px;
+			@include Kievit-Medium;
+			text-transform: uppercase;
+			letter-spacing: 0.05em;
+		}
+		&-Title {
+			font-size: 30px;
+			@include Kievit-Book;
+			line-height: 1em;
+			margin: .75em 0;
+			font-weight: normal;
+			letter-spacing: 0.02em;
+		}
+
+		&-Desc {
+			@include Kievit-Regular;
+			font-size: 15.5px;
+			line-height: 1.5em;
+			letter-spacing: .01em;
+		}
+
+		&-DonationLinks {
+			list-style-type: none;
+			display: block;
+			margin: 1em 0;
+			padding: 0;
+
+			li {
+				display: inline-block;
+				margin: 0 10px 0 0;
+
+				@include large-display {
+					margin: 0 15px 0 0;
+				}
+
+				&:last-child {
+					margin-right: 0px
+				}
+
+				a {
+					color: #FFF;
+					display: block;
+					font-size: 16.5px;
+					padding: 15px 20px;
+					margin: 0;
+					border: 2px solid #FFF;
+					border-radius: 5px;
+
+					@include tablet-landscape {
+						padding: 10px 13px;
+					}
+
+					@include large-display {
+						font-size: 18px;
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import Radium from 'radium';
 
-import gaUtils from '../../utils/gaUtils.js';
+import utils from '../../utils/utils.js';
 import appConfig from '../../appConfig.js';
 
 class MobileMyNypl extends React.Component{
@@ -17,7 +17,7 @@ class MobileMyNypl extends React.Component{
     return (
       <div className={this.props.className} style={styles.base}>
         <a href={this.props.catalogLink} className={catalogLinkClass}
-          style={styles.links} onClick={gaUtils._trackEvent.bind(this, 'Mobile Log In', 'Catalog')}>
+          style={styles.links} onClick={utils._trackHeader.bind(this, 'Mobile Log In', 'Catalog')}>
           <span className={`${catalogLinkClass}-Wrapper`} style={[styles.wrapper, styles.catalogLinkWrapper]}>
             <span className={`${catalogLinkClass}-Icon nypl-icon-login`} style={styles.icon}></span>
             <span className={`${catalogLinkClass}-Label`} style={[styles.label, styles.catalogLinkLabel]}>
@@ -26,7 +26,7 @@ class MobileMyNypl extends React.Component{
           </span>
         </a>
         <a href={this.props.classicLink} className={classicLinkClass}
-          style={styles.links} onClick={gaUtils._trackEvent.bind(this, 'Mobile Log In', 'Classic')}>
+          style={styles.links} onClick={utils._trackHeader.bind(this, 'Mobile Log In', 'Classic')}>
           <span className={`${classicLinkClass}-Wrapper`} style={[styles.wrapper, styles.classicLinkWrapper]}>
             <span className={`${classicLinkClass}-Icon nypl-icon-bldg`} style={styles.icon}></span>
             <span className={`${classicLinkClass}-Label`} style={[styles.label, styles.classicLinkLabel]}>
@@ -35,7 +35,7 @@ class MobileMyNypl extends React.Component{
           </span>
         </a>
         <a className='Mobile-Catalog-Info' href={this.props.infoLink} lang={this.props.lang}
-          onClick={gaUtils._trackEvent.bind(this, 'Mobile Log In', 'Catalog Info')}
+          onClick={utils._trackHeader.bind(this, 'Mobile Log In', 'Catalog Info')}
           style={[
             styles.catalogInfoLink,
           ]}>

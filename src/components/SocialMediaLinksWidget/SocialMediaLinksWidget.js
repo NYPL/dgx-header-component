@@ -2,7 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 import _ from 'underscore';
 
-import gaUtils from '../../utils/gaUtils.js';
+import utils from '../../utils/utils.js';
 
 class SocialMediaLinksWidget extends React.Component{
 
@@ -33,7 +33,7 @@ class SocialMediaLinksWidget extends React.Component{
         <li key={key} className={`${this.props.className}-ListItem`}>
           <a 
             href={item}
-            onClick={gaUtils._trackEvent.bind(this, 'Click', `Social Media - ${key}`)}
+            onClick={utils._trackHeader.bind(this, 'Click', `Social Media - ${key}`)}
             className={`${this.props.className}-Link ${hoverClass}`} 
             onMouseEnter={this._handleOnMouseEnter.bind(this, key)}
             onMouseLeave={this._handleOnMouseLeave.bind(this)}>

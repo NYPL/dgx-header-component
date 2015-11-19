@@ -4,7 +4,7 @@ import Radium from 'radium';
 
 import config from '../../appConfig.js';
 import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWidget.js';
-import gaUtils from '../../utils/gaUtils.js';
+import utils from '../../utils/utils.js';
 
 class MegaMenuSubNav extends React.Component {
 
@@ -28,7 +28,8 @@ class MegaMenuSubNav extends React.Component {
         
         return (
           <li key={i}>
-            <a href={target} onClick={gaUtils._trackEvent.bind(this, 'Go to...', `${this.props.label[this.props.lang].text}--${m.name[this.props.lang]['text']}`)}>
+            <a href={target}
+              onClick={utils._trackHeader.bind(this, 'Go to...', `${this.props.label[this.props.lang].text}--${m.name[this.props.lang]['text']}`)}>
               {m.name[this.props.lang]['text']}
             </a>
           </li>
@@ -45,7 +46,8 @@ class MegaMenuSubNav extends React.Component {
     return (
       <div className='MegaMenu-SubNav'>
         <h2>
-          <a style={styles.topLink} href={this.props.topLink}>
+          <a style={styles.topLink} href={this.props.topLink}
+            onClick={utils._trackHeader.bind(this, 'Go to...', `SubNav Title--${this.props.label[this.props.lang].text}`)}>
             {this.props.label[this.props.lang].text}
           </a>
         </h2>

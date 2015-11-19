@@ -2,7 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 
 // Google Analytics Utility Library
-import gaUtils from '../../utils/gaUtils.js';
+import utils from '../../utils/utils.js';
 
 import HeaderStore from '../../stores/HeaderStore.js';
 
@@ -60,7 +60,7 @@ class NavMenuItem extends React.Component {
           <a
             href={target}
             className={linkClass}
-            onClick={gaUtils._trackEvent.bind(this, 'Go to...', `${this.props.label['en'].text}`)}>
+            onClick={utils._trackHeader.bind(this, 'Go to...', `${this.props.label['en'].text}`)}>
               {this.props.label[this.props.lang].text}
           </a>
           {megaMenuArrow}

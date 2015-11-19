@@ -9,7 +9,7 @@ import Actions from '../../actions/Actions.js';
 
 import axios from 'axios';
 
-import gaUtils from '../../utils/gaUtils.js';
+import utils from '../../utils/utils.js';
 
 import MyNypl from '../MyNypl/MyNypl.js';
 
@@ -89,7 +89,7 @@ class StickyMyNyplButton extends React.Component {
 
       let visibleState = this.state.myNyplVisible ? 'Closed' : 'Open';
       Actions.toggleStickyMyNyplVisible(!this.state.myNyplVisible);
-      gaUtils._trackEvent('Log In', `StickyMyNyplButton - ${visibleState}`);
+      utils._trackHeader('Log In', `StickyMyNyplButton - ${visibleState}`);
     }
   }
 
@@ -101,7 +101,7 @@ class StickyMyNyplButton extends React.Component {
   _handleOnClickOut(e) {
     if (HeaderStore._getStickyMyNyplVisible()) {
       Actions.toggleStickyMyNyplVisible(false);
-      gaUtils._trackEvent('Log In', 'StickyMyNyplButton - Closed');
+      utils._trackHeader('Log In', 'StickyMyNyplButton - Closed');
     }
   }
 

@@ -79,7 +79,8 @@ var _utilsUtilsJs = require('../../utils/utils.js');
 
 var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
 
-require('../../styles/main.scss');
+// When minifying with Webpack, you can use this:
+// import '../../styles/main.scss';
 
 var Header = (function (_React$Component) {
 

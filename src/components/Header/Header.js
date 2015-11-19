@@ -20,7 +20,8 @@ import GlobalAlerts from '../GlobalAlerts/GlobalAlerts.js';
 
 import utils from '../../utils/utils.js';
 
-import '../../styles/main.scss';
+// When minifying with Webpack, you can use this:
+// import '../../styles/main.scss';
 
 class Header extends React.Component {
 

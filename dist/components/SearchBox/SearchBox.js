@@ -1,0 +1,471 @@
+// Import React libraries
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+// Import components
+
+var _InputFieldInputFieldJs = require('../InputField/InputField.js');
+
+var _InputFieldInputFieldJs2 = _interopRequireDefault(_InputFieldInputFieldJs);
+
+var _ButtonsSimpleButtonJs = require('../Buttons/SimpleButton.js');
+
+var _ButtonsSimpleButtonJs2 = _interopRequireDefault(_ButtonsSimpleButtonJs);
+
+// ALT Flux Store/Actions
+
+var _storesStoreJs = require('../../stores/Store.js');
+
+var _storesStoreJs2 = _interopRequireDefault(_storesStoreJs);
+
+var _actionsActionsJs = require('../../actions/Actions.js');
+
+var _actionsActionsJs2 = _interopRequireDefault(_actionsActionsJs);
+
+// GA Utility Library
+
+var _utilsGaUtilsJs = require('../../utils/gaUtils.js');
+
+var _utilsGaUtilsJs2 = _interopRequireDefault(_utilsGaUtilsJs);
+
+var SearchBox = (function (_React$Component) {
+  // Constructor used in ES6
+
+  function SearchBox(props) {
+    _classCallCheck(this, SearchBox);
+
+    _get(Object.getPrototypeOf(SearchBox.prototype), 'constructor', this).call(this, props);
+
+    // The default values of input fields
+    this.state = {
+      searchKeywords: '',
+      searchOption: 'catalog',
+      placeholder: 'What would you like to find?',
+      placeholderAnimation: null,
+      noAnimationBefore: true,
+      actionValue: _storesStoreJs2['default'].getState().searchButtonAction,
+      lastActiveMenuItem: _storesStoreJs2['default'].getState().lastActiveMenuItem
+    };
+
+    // The function listens to the changes of input fields
+    this._inputChange = this._inputChange.bind(this);
+    // The function sends search requests
+    this._submitSearchRequest = this._submitSearchRequest.bind(this);
+    // Listen to the event if enter is pressed
+    this._triggerSubmit = this._triggerSubmit.bind(this);
+    // The fucntion to trigger validation animation for keywords input
+    this._animationTimer = this._animationTimer.bind(this);
+  }
+
+  _inherits(SearchBox, _React$Component);
+
+  _createClass(SearchBox, [{
+    key: 'componentDidMount',
+
+    // Listen to the search button action changes in Store,
+    value: function componentDidMount() {
+      _storesStoreJs2['default'].listen(this._onChange.bind(this));
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      _storesStoreJs2['default'].unlisten(this._onChange.bind(this));
+    }
+  }, {
+    key: '_onChange',
+
+    // Update the state of the class
+    value: function _onChange() {
+      this.setState({
+        actionValue: _storesStoreJs2['default'].getState().searchButtonAction,
+        lastActiveMenuItem: _storesStoreJs2['default'].getState().lastActiveMenuItem
+      });
+    }
+  }, {
+    key: 'render',
+
+    // Dom Render Section
+    value: function render() {
+      var _this = this;
+
+      // Set active class if search button is hovered or clicked
+      var classes = (0, _classnames2['default'])({
+        'active animateMegaMenuEnter fadeIn': this.state.actionValue === 'hoverSearch',
+        'active': _storesStoreJs2['default']._getLastActiveMenuItem() === 'hoverSearch',
+        'mobileActive': this.state.actionValue === 'clickSearch'
+      }),
+
+      // Classes for keywords input fields to activate pulse animation
+      pulseAnimation = (0, _classnames2['default'])({
+        'keywords-pulse-fade-in': this.state.placeholderAnimation === 'initial',
+        'keywords-pulse': this.state.placeholderAnimation === 'sequential'
+      }),
+
+      // Render radio buttons with their own properties
+      inputOptions = inputOptionData.map(function (element, i) {
+        return _react2['default'].createElement(
+          'div',
+          { className: '' + _this.props.className + '-Input-Option', key: i },
+          _react2['default'].createElement(_InputFieldInputFieldJs2['default'], { type: 'radio',
+            id: element.id,
+            name: element.name,
+            value: element.value,
+            ref: element.ref,
+            checked: _this.state.searchOption === element.value,
+            onChange: _this._inputChange.bind(_this, 'option') }),
+          _react2['default'].createElement(
+            'label',
+            { htmlFor: element.id, className: '' + _this.props.className + '-Input-Options-label' },
+            element.labelText
+          )
+        );
+      }),
+
+      // Render submit buttons for the mobile version
+      mobileSubmitButtons = mobileSubmitButtonData.map(function (element, i) {
+        return _react2['default'].createElement(
+          'div',
+          { key: i,
+            className: '' + _this.props.className + '-Mobile-Submit-Option ' + element.columnClass,
+            value: element.value,
+            onClick: _this._submitSearchRequest.bind(_this, element.value) },
+          _react2['default'].createElement(
+            'span',
+            { className: 'title' },
+            element.text
+          ),
+          _react2['default'].createElement('span', { className: 'nypl-icon-wedge-right icon' })
+        );
+      });
+
+      return _react2['default'].createElement(
+        'div',
+        {
+          id: this.props.id,
+          className: '' + this.props.className + ' ' + classes,
+          onKeyPress: this._triggerSubmit,
+          onMouseEnter: this._watchHoverIntentEnter.bind(this),
+          onMouseLeave: this._watchHoverIntentLeave.bind(this) },
+        _react2['default'].createElement(
+          'div',
+          { id: '' + this.props.className + '-Elements-Wrapper', className: '' + this.props.className + '-Elements-Wrapper' },
+          _react2['default'].createElement(
+            'div',
+            { id: '' + this.props.className + '-Elements-Input-Wrapper',
+              className: '' + this.props.className + '-Elements-Input-Wrapper' },
+            _react2['default'].createElement(
+              'div',
+              { id: '' + this.props.className + '-Elements-Input-Keywords-Wrapper',
+                className: '' + this.props.className + '-Elements-Input-Keywords-Wrapper' },
+              _react2['default'].createElement(
+                'div',
+                { className: '' + this.props.className + '-Input-Keywords-Border' },
+                _react2['default'].createElement('span', { className: 'nypl-icon-magnifier-thin icon' }),
+                _react2['default'].createElement(_InputFieldInputFieldJs2['default'], { type: 'text',
+                  id: '' + this.props.id + '-Input-Keywords',
+                  className: '' + this.props.className + '-Input-Keywords ' + pulseAnimation,
+                  ref: 'keywords',
+                  value: this.state.searchKeywords,
+                  maxLength: '128',
+                  placeholder: this.state.placeholder,
+                  onChange: this._inputChange.bind(this, 'keywords') })
+              )
+            ),
+            _react2['default'].createElement(
+              'div',
+              { id: '' + this.props.className + '-Elements-Input-Options-Wrapper',
+                className: '' + this.props.className + '-Elements-Input-Options-Wrapper' },
+              inputOptions
+            )
+          ),
+          _react2['default'].createElement(
+            'div',
+            { id: '' + this.props.className + '-Mobile-Submit',
+              className: '' + this.props.className + '-Mobile-Submit' },
+            mobileSubmitButtons
+          ),
+          _react2['default'].createElement('button', { id: '' + this.props.className + '-Elements-SubmitButton',
+            className: 'nypl-icon-magnifier-fat ' + this.props.className + '-Elements-SubmitButton',
+            onClick: this._submitSearchRequest.bind(this, null) })
+        )
+      );
+    }
+  }, {
+    key: '_inputChange',
+
+    /**
+     *  _inputChange(field, event)
+     * Listen to the changes on keywords input field and option input fields.
+     * Grab the event value, and change the state.
+     * The parameter indicates which input field has been changed.
+     * Passng event as the argument here as FireFox doesn't accept event
+     * as a global variable.
+     *
+     * @param {String} field  {Event Object} event
+     */
+    value: function _inputChange(field, event) {
+      if (field === 'keywords') {
+        this.setState({ searchKeywords: event.target.value });
+      } else if (field === 'option') {
+        this.setState({ searchOption: event.target.value });
+      }
+    }
+  }, {
+    key: '_submitSearchRequest',
+
+    /**
+     * _submitSearchRequest(value)
+     * Submit the search request based on the values of the input fields.
+     *
+     * @param {String} value
+     */
+    value: function _submitSearchRequest(value) {
+      // Store the data that the user entered
+      var requestParameters = {
+        keywords: this.state.searchKeywords.trim(),
+        // If the value is null, it indicates the function is triggered on desktop version.
+        // Then it should get the value for option from state.
+        option: value || this.state.searchOption
+      },
+
+      // The variable for request URL
+      requestUrl = undefined,
+          encoreBaseUrl = 'http://browse.nypl.org/iii/encore/search/',
+          catalogBaseUrl = 'http://www.nypl.org/search/apachesolr_search/',
+          gaSearchLabel = undefined,
+          inputKeywords = undefined,
+          pulse = undefined;
+
+      // Decide the search option based on which button the user clicked on mobile version search box
+      if (requestParameters.option === 'catalog') {
+        gaSearchLabel = 'Submit Catalog Search';
+        requestUrl = this._setEncoreUrl(requestParameters.keywords, encoreBaseUrl, 'eng');
+      } else if (requestParameters.option === 'website') {
+        gaSearchLabel = 'Submit Search';
+        requestUrl = this._setCatalogUrl(requestParameters.keywords, catalogBaseUrl);
+      }
+
+      // This portion is for the interactions if the user doesn't enter any input
+      if (!requestParameters.keywords) {
+        // The selector for inputKeywords DOM element
+        inputKeywords = this.refs.keywords;
+        // The new placeholder that tells users there's no keywords input
+        this.setState({ placeholder: 'Please enter a search term.' });
+        // Trigger the validation animation
+        this._animationTimer(inputKeywords);
+      } else {
+        // Fire GA event to track Search
+        _utilsGaUtilsJs2['default']._trackEvent('Search', gaSearchLabel);
+
+        // Go to the search page
+        window.location.assign(requestUrl);
+      }
+    }
+  }, {
+    key: '_triggerSubmit',
+
+    /**
+     * _triggerSubmit(event)
+     * The fuction listens to the event of enter key.
+     * Submit search request if enter is pressed.
+     *
+     * @param {Event} event
+     */
+    value: function _triggerSubmit(event) {
+      if (event && event.charCode === 13) {
+        this._submitSearchRequest(null);
+      }
+    }
+  }, {
+    key: '_animationTimer',
+
+    /**
+     * _animationTimer(element)
+     * Add the CSS animation to the placeholder of the keywords Input.
+     * It adds the proper class to the html element to trigger the animation,
+     * and then removes the class to stop it.
+     *
+     * @param {DOM Element} element
+     */
+    value: function _animationTimer(element) {
+      var _this2 = this;
+
+      var frame = 0,
+          animation = setInterval(function () {
+        frame++;
+        // Remove the class to stop the animation after 0.1s
+        if (frame > 1) {
+          clearInterval(animation);
+          _this2.setState({ placeholderAnimation: null });
+          // Set animation to be sequential
+          _this2.setState({ noAnimationBefore: false });
+        }
+      }, 100);
+
+      // Decide which CSS animation is going to perform
+      // by adding different classes to the element.
+      // It is based on if it is the first time the validation to be triggered.
+      if (this.state.noAnimationBefore) {
+        this.setState({ placeholderAnimation: 'initial' });
+      } else {
+        this.setState({ placeholderAnimation: 'sequential' });
+      }
+    }
+  }, {
+    key: '_watchHoverIntentEnter',
+
+    /**
+     * _watchHoverIntentEnter()
+     * If the lastActiveMenuItem passed as a prop
+     * matches the search by hover. Then fire the
+     * Action to store a reference to the lastActiveMenuItem as hoverSearch.
+     */
+    value: function _watchHoverIntentEnter() {
+      if (this.state.actionValue === 'hoverSearch') {
+        _actionsActionsJs2['default'].setLastActiveMenuItem(this.state.actionValue);
+      }
+    }
+  }, {
+    key: '_watchHoverIntentLeave',
+
+    /**
+     * _watchHoverIntentLeave()
+     * Sets the Store's lastActiveMenuItem
+     * property to an empty string when
+     * hovered out.
+     */
+    value: function _watchHoverIntentLeave() {
+      _actionsActionsJs2['default'].setLastActiveMenuItem('');
+    }
+  }, {
+    key: '_setCatalogUrl',
+
+    /**
+     * _setCatalogUrl(searchString, catalogBaseUrl)
+     * Returns the final URL for the catalog search.
+     */
+    value: function _setCatalogUrl(searchString, catalogBaseUrl) {
+      var catalogUrl = catalogBaseUrl || 'http://www.nypl.org/search/apachesolr_search/';
+
+      if (searchString) {
+        return catalogUrl + encodeURIComponent(searchString);
+      }
+    }
+  }, {
+    key: '_encoreEncodeSearchString',
+
+    /**
+     * _encoreEncodeSearchString(string)
+     * base64_encoding_map includes special characters that need to be
+     * encoded using base64 - these chars are "=","/", "\", "?"
+     * character : base64 encoded 
+     */
+    value: function _encoreEncodeSearchString(string) {
+      var base64_enc_map = {
+        '=': 'PQ==',
+        '/': 'Lw==',
+        '\\': 'XA==',
+        '?': 'Pw=='
+      },
+          encodedString = string,
+          charRegExString = undefined,
+          base64Regex = undefined;
+
+      Object.keys(base64_enc_map).forEach(function (specialChar) {
+        charRegExString = specialChar.replace(/([\.\*\+\?\^\=\!\:\$\{\}\(\)\|\[\]\/\\])/g, '\\$1');
+        base64Regex = new RegExp(charRegExString, 'g');
+        encodedString = encodedString.replace(base64Regex, base64_enc_map[specialChar]);
+      });
+
+      return encodedString;
+    }
+  }, {
+    key: '_setEncoreUrl',
+
+    /**
+     * _setEncoreUrl(searchInput, baseUrl, language)
+     * Returns the final URL for encore search which,
+     * is first encoded, then concatenated by the
+     * base encore root url. An optional scope and
+     * language may be concatenated as well.
+     */
+    value: function _setEncoreUrl(searchInput, baseUrl, language, scopeString) {
+      var searchTerm = this._encoreEncodeSearchString(searchInput),
+          rootUrl = baseUrl || 'http://browse.nypl.org/iii/encore/search/',
+          defaultLang = language ? '?lang=' + language : '',
+          finalEncoreUrl = undefined;
+
+      if (searchTerm) {
+        finalEncoreUrl = this._encoreAddScope(rootUrl, searchTerm, scopeString) + defaultLang;
+      }
+
+      return finalEncoreUrl;
+    }
+  }, {
+    key: '_encoreAddScope',
+
+    /**
+     * _encoreAddScope(baseUrl, searchString, scopeString)
+     * Enchances the encore url with a possible scope.
+     * If no scope is set, adds the required string to
+     * be returned as the final url.
+     */
+    value: function _encoreAddScope(baseUrl, searchString, scopeString) {
+      return scopeString ? '' + baseUrl + 'C__S' + searchString + '' + scopeString + '__Orightresult__U' : '' + baseUrl + 'C__S' + searchString + '__Orightresult__U';
+    }
+  }]);
+
+  return SearchBox;
+})(_react2['default'].Component);
+
+SearchBox.defaultProps = {
+  lang: 'en',
+  id: 'SearchBox',
+  className: 'SearchBox'
+};
+
+// Radio button properties
+var inputOptionData = [{
+  id: 'catalog',
+  name: 'inputOption',
+  value: 'catalog',
+  ref: 'optionCatalog',
+  labelText: 'Search the Catalog'
+}, {
+  id: 'website',
+  name: 'inputOption',
+  value: 'website',
+  ref: 'optionWebsite',
+  labelText: 'Search NYPL.org'
+}],
+
+// mobile submit button properties
+mobileSubmitButtonData = [{
+  columnClass: 'left-column',
+  value: 'catalog',
+  text: 'catalog'
+}, {
+  columnClass: 'right-column',
+  value: 'website',
+  text: 'nypl.org'
+}];
+
+// Export the component
+module.exports = SearchBox;

@@ -4,7 +4,7 @@ import cx from 'classnames';
 // Google Analytics Utility Library
 import gaUtils from '../../utils/gaUtils.js';
 
-import HeaderStore from '../../stores/Store.js';
+import HeaderStore from '../../stores/HeaderStore.js';
 
 // NYPL Dependent React Components
 import MegaMenu from '../MegaMenu/MegaMenu.js';

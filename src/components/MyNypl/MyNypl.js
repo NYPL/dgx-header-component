@@ -4,7 +4,7 @@ import cx from 'classnames';
 import ClickOutHandler from 'react-onclickout';
 import SimpleButton from '../Buttons/SimpleButton.js';
 
-import Store from '../../stores/Store.js';
+import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
 
 import gaUtils from '../../utils/gaUtils.js';

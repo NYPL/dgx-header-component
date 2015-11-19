@@ -4,7 +4,7 @@ import cx from 'classnames';
 import ClickOutHandler from 'react-onclickout';
 import SimpleButton from '../Buttons/SimpleButton.js';
 
-import Store from '../../stores/Store.js';
+import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
 
 import axios from 'axios';
@@ -20,17 +20,17 @@ class MyNyplButton extends React.Component {
     super(props);
 
     this.state = {
-      myNyplVisible: Store._getMyNyplVisible(),
+      myNyplVisible: HeaderStore._getMyNyplVisible(),
       target: this.props.target
     };
   }
 
   componentDidMount() {
-    Store.listen(this._onChange.bind(this));
+    HeaderStore.listen(this._onChange.bind(this));
   }
 
   componentWillUnmount() {
-    Store.unlisten(this._onChange.bind(this));
+    HeaderStore.unlisten(this._onChange.bind(this));
   }
 
   render() {
@@ -99,8 +99,8 @@ class MyNyplButton extends React.Component {
    * currently visible.
    */
   _handleOnClickOut(e) {
-    if (Store._getMyNyplVisible()) {
-      if (Store._getMobileMyNyplButtonValue() === '') {
+    if (HeaderStore._getMyNyplVisible()) {
+      if (HeaderStore._getMobileMyNyplButtonValue() === '') {
         gaUtils._trackEvent('Log In', 'MyNyplButton - Closed');
       }
       Actions.toggleMyNyplVisible(false);
@@ -112,7 +112,7 @@ class MyNyplButton extends React.Component {
    * Updates the state of the form based off the Header Store.
    */
   _onChange() {
-    this.setState({myNyplVisible: Store._getMyNyplVisible()});
+    this.setState({myNyplVisible: HeaderStore._getMyNyplVisible()});
   }
 }
 

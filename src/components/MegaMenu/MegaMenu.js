@@ -2,7 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 
 // ALT Flux Store/Actions
-import HeaderStore from '../../stores/Store.js';
+import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
 
 // Dependent NYPL React Components

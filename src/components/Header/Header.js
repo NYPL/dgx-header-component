@@ -4,7 +4,7 @@ import Radium from 'radium';
 import cx from 'classnames';
 
 // ALT Flux
-import Store from '../../stores/Store.js';
+import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
 
 // NYPL Components
@@ -20,7 +20,7 @@ import GlobalAlerts from '../GlobalAlerts/GlobalAlerts.js';
 
 import gaUtils from '../../utils/gaUtils.js';
 
-// import '../../styles/main.scss';
+import '../../styles/main.scss';
 
 class Header extends React.Component {
 
@@ -28,13 +28,13 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
     // replaces getInitialState()
-    this.state = Store.getState();
+    this.state = HeaderStore.getState();
   }
 
   componentDidMount() {
-    Store.listen(this._onChange.bind(this));
+    HeaderStore.listen(this._onChange.bind(this));
 
-    // If the Store is not populated with
+    // If the HeaderStore is not populated with
     // the proper Data, then fetch.
     this._fetchDataIfNeeded();
 
@@ -47,18 +47,18 @@ class Header extends React.Component {
   }
 
   componentWillUnmount() {
-    Store.unlisten(this._onChange.bind(this));
+    HeaderStore.unlisten(this._onChange.bind(this));
   }
 
   _onChange() {
-    this.setState(Store.getState());
+    this.setState(HeaderStore.getState());
   }
 
   render () {
     let isHeaderSticky = this.state.isSticky,
       headerClass = this.props.className || 'Header',
       headerClasses = cx(headerClass, {'sticky': isHeaderSticky}),
-      showDialog = Store._getMobileMyNyplButtonValue(),
+      showDialog = HeaderStore._getMobileMyNyplButtonValue(),
       mobileMyNyplClasses = cx({'active': showDialog});
 
     return (
@@ -108,8 +108,8 @@ class Header extends React.Component {
    * to obtain data.
    */
   _fetchDataIfNeeded() {
-    if (Store.getState().headerData.length < 1) {
-      Actions.fetchHeaderData(Store._getClientAppEnv());
+    if (HeaderStore.getState().headerData.length < 1) {
+      Actions.fetchHeaderData(HeaderStore._getClientAppEnv());
     }
   }
 
@@ -117,7 +117,7 @@ class Header extends React.Component {
    * _handleStickyHeader() 
    * returns the Actions.updateIsHeaderSticky()
    * with the proper boolean value to update the 
-   * Store.isSticky value based on the window 
+   * HeaderStore.isSticky value based on the window 
    * vertical scroll position surpassing the height
    * of the Header DOM element.
    */

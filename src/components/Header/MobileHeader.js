@@ -4,7 +4,7 @@ import cx from 'classnames';
 import ReactTappable from 'react-tappable';
 
 // ALT FLUX
-import HeaderStore from '../../stores/Store.js';
+import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
 import gaUtils from '../../utils/gaUtils.js';
 

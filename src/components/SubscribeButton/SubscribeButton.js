@@ -5,7 +5,7 @@ import ClickOutHandler from 'react-onclickout';
 import SimpleButton from '../Buttons/SimpleButton.js';
 import EmailSubscription from '../EmailSubscription/EmailSubscription.js';
 
-import Store from '../../stores/Store.js';
+import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
 
 import axios from 'axios';
@@ -18,20 +18,20 @@ class SubscribeButton extends React.Component {
     super(props);
 
     this.state = {
-      subscribeFormVisible: Store._getSubscribeFormVisible(),
+      subscribeFormVisible: HeaderStore._getSubscribeFormVisible(),
       target: this.props.target
     };
   }
 
   componentDidMount() {
-    Store.listen(this._onChange.bind(this));
+    HeaderStore.listen(this._onChange.bind(this));
     // Make an axios call to the mailinglist API server to check it th server is working.
     // And determine the behavior of subscribe button based on the status of the server.
     this._callMailinglistApi();
   }
 
   componentWillUnmount() {
-    Store.unlisten(this._onChange.bind(this));
+    HeaderStore.unlisten(this._onChange.bind(this));
   }
 
   render() {
@@ -104,7 +104,7 @@ class SubscribeButton extends React.Component {
    */
   _handleOnClickOut(e) {
 
-    if (Store._getSubscribeFormVisible()) {
+    if (HeaderStore._getSubscribeFormVisible()) {
       Actions.toggleSubscribeFormVisible(false);
       gaUtils._trackEvent('Click', 'Subscribe - Closed');
     }
@@ -116,7 +116,7 @@ class SubscribeButton extends React.Component {
    * Updates the state of the form based off the Header Store.
    */
   _onChange() {
-    this.setState({subscribeFormVisible: Store._getSubscribeFormVisible()});
+    this.setState({subscribeFormVisible: HeaderStore._getSubscribeFormVisible()});
   }
 
   /**

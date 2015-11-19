@@ -7,7 +7,7 @@ import BasicButton from '../Buttons/BasicButton.js';
 import SearchBox from '../SearchBox/SearchBox.js';
 
 // ALT Flux Store/Actions
-import HeaderStore from '../../stores/Store.js';
+import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
 
 // GA Utility Library

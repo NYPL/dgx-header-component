@@ -4,7 +4,7 @@ import cx from 'classnames';
 import ClickOutHandler from 'react-onclickout';
 import SimpleButton from '../Buttons/SimpleButton.js';
 
-import Store from '../../stores/Store.js';
+import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
 
 import axios from 'axios';
@@ -20,17 +20,17 @@ class StickyMyNyplButton extends React.Component {
     super(props);
 
     this.state = {
-      myNyplVisible: Store._getStickyMyNyplVisible(),
+      myNyplVisible: HeaderStore._getStickyMyNyplVisible(),
       target: this.props.target
     };
   }
 
   componentDidMount() {
-    Store.listen(this._onChange.bind(this));
+    HeaderStore.listen(this._onChange.bind(this));
   }
 
   componentWillUnmount() {
-    Store.unlisten(this._onChange.bind(this));
+    HeaderStore.unlisten(this._onChange.bind(this));
   }
 
   render() {
@@ -80,7 +80,7 @@ class StickyMyNyplButton extends React.Component {
   /**
    * _handleClick(e) 
    * Toggles the visibility of the form. Sends an Action
-   * that will dispatch an event to the Header Store.
+   * that will dispatch an event to the HeaderStore.
    */
   _handleClick(e) {
 
@@ -99,7 +99,7 @@ class StickyMyNyplButton extends React.Component {
    * currently visible.
    */
   _handleOnClickOut(e) {
-    if (Store._getStickyMyNyplVisible()) {
+    if (HeaderStore._getStickyMyNyplVisible()) {
       Actions.toggleStickyMyNyplVisible(false);
       gaUtils._trackEvent('Log In', 'StickyMyNyplButton - Closed');
     }
@@ -107,10 +107,10 @@ class StickyMyNyplButton extends React.Component {
 
   /**
    * _onChange()
-   * Updates the state of the form based off the Header Store.
+   * Updates the state of the form based off the HeaderStore.
    */
   _onChange() {
-    this.setState({myNyplVisible: Store._getStickyMyNyplVisible()});
+    this.setState({myNyplVisible: HeaderStore._getStickyMyNyplVisible()});
   }
 }
 

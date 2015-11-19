@@ -7,7 +7,7 @@ import InputField from '../InputField/InputField.js';
 import SimpleButton from '../Buttons/SimpleButton.js';
 
 // ALT Flux Store/Actions
-import HeaderStore from '../../stores/Store.js';
+import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
 
 // GA Utility Library

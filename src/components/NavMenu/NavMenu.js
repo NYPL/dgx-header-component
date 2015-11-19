@@ -4,7 +4,7 @@ import cx from 'classnames';
 import appConfig from '../../appConfig.js';
 
 // Header Store
-import HeaderStore from '../../stores/Store.js';
+import HeaderStore from '../../stores/HeaderStore.js';
 
 // Dependent Components
 import SearchButton from '../SearchButton/SearchButton.js';

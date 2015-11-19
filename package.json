@@ -1,5 +1,5 @@
 {
-  "name": "dgx-header-component-test",
+  "name": "dgx-header-component",
   "version": "0.0.1",
   "description": "NYPL Header",
   "main": "dist/components/Header/Header.js",
@@ -12,7 +12,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://bitbucket.org/NYPL/dgx-header-component-test.git"
+    "url": "git+https://bitbucket.org/NYPL/dgx-header-component.git"
   },
   "keywords": [
     "webpack",

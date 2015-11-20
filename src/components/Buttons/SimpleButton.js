@@ -1,7 +1,7 @@
 import React from 'react';
 import Radium from 'radium';
 
-import gaUtils from '../../utils/utils.js';
+import utils from '../../utils/utils.js';
 
 class SimpleButton extends React.Component {
   // Constructor used in ES6

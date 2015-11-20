@@ -55,7 +55,7 @@ var SimpleButton = (function (_React$Component) {
   }, {
     key: '_onClick',
     value: function _onClick() {
-      utils._trackHeader(this.props.gaAction, this.props.gaLabel);
+      _utilsUtilsJs2['default']._trackHeader(this.props.gaAction, this.props.gaLabel);
       this.props.onClick();
     }
   }]);

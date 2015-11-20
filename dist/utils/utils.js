@@ -10,9 +10,7 @@ var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
 
-var _gaUtilsJs = require('./gaUtils.js');
-
-var _gaUtilsJs2 = _interopRequireDefault(_gaUtilsJs);
+var _dgxReactGa = require('dgx-react-ga');
 
 function Utils() {
   this.formatDate = function (startDate, endDate) {
@@ -86,7 +84,7 @@ function Utils() {
    * @param {action} String Action for GA event.
    * @param {label} String Label for GA event.
    */
-  this._trackHeader = _gaUtilsJs2['default']._trackEvent('Global Header');
+  this._trackHeader = _dgxReactGa.ga._trackEvent('Global Header');
 }
 
 exports['default'] = new Utils();

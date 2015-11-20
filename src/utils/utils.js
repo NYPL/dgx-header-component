@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-import gaUtils from './gaUtils.js';
+import {ga} from 'dgx-react-ga';
 
 function Utils() {
   this.formatDate = (startDate, endDate) => {
@@ -90,7 +90,7 @@ function Utils() {
    * @param {action} String Action for GA event.
    * @param {label} String Label for GA event.
    */
-  this._trackHeader = gaUtils._trackEvent('Global Header');
+  this._trackHeader = ga._trackEvent('Global Header');
 
 }
 

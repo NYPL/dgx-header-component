@@ -77,7 +77,7 @@ if (process.env.NODE_ENV !== 'development') {
       new webpack.HotModuleReplacementPlugin()
     ],
     resolve: {
-      extensions: ['', '.js', '.jsx']
+      extensions: ['', '.js', '.jsx', '.scss']
     },
     module: {
       loaders: [
@@ -88,12 +88,8 @@ if (process.env.NODE_ENV !== 'development') {
         },
         {
           test: /\.scss$/,
-          include: path.resolve(rootPath, 'src'),
-          loader: ExtractTextPlugin.extract(
-            // activate source maps via loader query
-            'css?sourceMap!' +
-            'sass?sourceMap'
-          )
+          loader: 'style!css!sass',
+          include: path.resolve(rootPath, 'src')
         }
       ]
     }

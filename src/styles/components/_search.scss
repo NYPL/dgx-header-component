@@ -2,9 +2,13 @@
 &-SearchBox-Wrapper {
   display: block;
 
-  @include tablet-landscape-and-desktop {
+  @include min-screen(769px) {
     display: inline-table;
     vertical-align: middle;
+    margin: 0 10 0 0px;
+  }
+
+  @include min-screen(792px) {
     margin: 0 20px 0 10px;
   }
 }
@@ -21,7 +25,7 @@
   font-size: 22px;
   padding: 8px 10px 14px 10px;
 
-  @include tablet-landscape-and-desktop {
+  @include min-screen(769px) {
     display: block;
   }
 
@@ -29,7 +33,7 @@
     border-bottom-color: $BG_MENU_SEARCH;
     border-bottom-style: none;
 
-    @include tablet-landscape-and-desktop {
+    @include min-screen(769px) {
       border-bottom-color: $BG_MENU_SEARCH;
       border-bottom-style: solid;
       border-bottom-width: 2px;
@@ -43,7 +47,7 @@
     -webkit-transition: background-color .3s linear .25s, color .3s linear .25s; /* Safari */
     transition: background-color .3s linear .25s, color .3s linear .25s;
 
-    @include tablet-landscape-and-desktop {
+    @include min-screen(769px) {
       display: block;
     }
   }
@@ -64,9 +68,9 @@
   /* Rules for Desktop Active State */
   &.active {
 
-    @include tablet-landscape-and-desktop {
+    @include min-screen(769px) {
       display: block;
-      top: 42px;
+      top: 43.75px;
       height: 225px;
     }
   }
@@ -77,7 +81,7 @@
     margin: -1px 0 0 0;
     top: 0px;
 
-    @include tablet-landscape-and-desktop {
+    @include min-screen(769px) {
       display: none;
     }
   }
@@ -91,16 +95,13 @@
   position: relative;
   width: 100%;
 
-  @include tablet-landscape-and-desktop {
+  @include min-screen(769px) {
     margin: 60px auto 0px;
     display: table;
-  }
-
-  @include tablet-landscape {
     width: auto;
   }
 
-  @include desktop {
+  @include min-screen(1025px) {
     width: 100%;
   }
 
@@ -108,7 +109,7 @@
   input::-webkit-input-placeholder {
     color: #A3A19E;
 
-    @include tablet-landscape-and-desktop {
+    @include min-screen(769px) {
       color: #FFFFFF;
     }
   }
@@ -116,7 +117,7 @@
   input:-moz-placeholder { /* Firefox 18- */
     color: #A3A19E;
 
-    @include tablet-landscape-and-desktop {
+    @include min-screen(769px) {
       color: #FFFFFF;
     }
   }
@@ -124,7 +125,7 @@
   input:-moz-placeholder {  /* Firefox 19+ */
     color: #A3A19E;
 
-    @include tablet-landscape-and-desktop {
+    @include min-screen(769px) {
       color: #FFFFFF;
     }
   }
@@ -132,7 +133,7 @@
   input:-ms-input-placeholder {
     color: #A3A19E;
 
-    @include tablet-landscape-and-desktop {
+    @include min-screen(769px) {
       color: #FFFFFF;
     }
   }
@@ -173,18 +174,15 @@
   position: relative;
   text-align: center;
 
-  @include tablet-landscape-and-desktop {
+  @include min-screen(769px) {
     border-bottom-style: none;
     display: table-cell;
     margin: 0;
     width: 100%;
-  }
-
-  @include tablet-landscape {
     padding: 0 0 0 115px;
   }
 
-  @include desktop {
+  @include min-screen(1025px) {
     padding: 0 0 0 135px;
   }
 }
@@ -207,12 +205,12 @@
     position: absolute;
     top: 22px;
 
-    @include tablet-landscape-and-desktop {
+    @include min-screen(769px) {
       display: none;
     }
   }
 
-  @include tablet-landscape-and-desktop {
+  @include min-screen(769px) {
     margin: 0 0 25px 0;
     display: block; 
   }
@@ -236,14 +234,18 @@
     box-shadow: none;
   }
 
-  @include tablet-landscape-and-desktop {
+  @include min-screen(769px) {
     background-color: #1DA1D4;
     color: #FFFFFF;
     @include Kievit-Light;
-    font-size: 66px;
+    font-size: 58px;
     font-style: normal;
     letter-spacing: -0.8px;
     padding: 0px !important;
+  }
+
+  @include min-screen(980px) {
+    font-size: 66px;
   }
 }
 
@@ -252,7 +254,7 @@
   display: block;
   width: 100%;
 
-  @include tablet-landscape-and-desktop {
+  @include min-screen(769px) {
     display: inline-block;
     border-bottom: solid;
     border-bottom-width: 2px;
@@ -267,7 +269,7 @@
   float: left;
   font-size: 16px;
 
-  @include tablet-landscape-and-desktop {
+  @include min-screen(769px) {
     display: inline-block;
   }
 }
@@ -299,7 +301,7 @@
     border-width: 2px;
   }
 
-  @include tablet-landscape-and-desktop {
+  @include min-screen(769px) {
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
@@ -328,7 +330,7 @@
   text-transform: uppercase;
   display: block;
 
-  @include tablet-landscape-and-desktop {
+  @include min-screen(769px) {
     display: none;
   }
 }

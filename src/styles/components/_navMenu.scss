@@ -2,13 +2,13 @@
 	position: relative;
 	display: block;
 
-	@include tablet-landscape {
+	@include min-screen(769px) {
 		position: absolute;
 		width: 100%;
 		bottom: 6px;
 	}
 
-	@include desktop {
+	@include min-screen(1025px) {
 		position: relative;
 		width: auto;
 		bottom: inherit;
@@ -19,7 +19,7 @@
 	/* Wrapper for the NavMenu */
 	&-Wrapper {
 
-		@include tablet-landscape-and-desktop {
+		@include min-screen(769px) {
 			max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
 			text-align: right;
 			margin: 0 auto;
@@ -32,7 +32,7 @@
 			width: 100%;
 			z-index: 1000;
 
-			@include tablet-landscape-and-desktop {
+			@include min-screen(769px) {
 				position: initial;
 				margin-top: 0px;
 				width: initial;
@@ -42,7 +42,7 @@
 			#NavMenu-List {
 				display: block;
 
-				@include tablet-landscape-and-desktop {
+				@include min-screen(769px) {
 					display: inline-table;
 				}
 			}
@@ -51,7 +51,7 @@
 			.MobileLogoText {
 				display: block;
 
-				@include tablet-landscape-and-desktop {
+				@include min-screen(769px) {
 					display: none;
 				}
 			}
@@ -60,7 +60,7 @@
 			.MobileBottomButtons {
 				display: block;
 
-				@include tablet-landscape-and-desktop {
+				@include min-screen(769px) {
 					display: none;
 				}
 			}
@@ -89,16 +89,14 @@
   	margin: 0;
   	list-style-type: none;
   	text-align: right;
+  	vertical-align: 0px;
 
-  	@include tablet-and-up {
+  	@include min-screen(769px) {
   		margin: 0;
-  	}
-
-		@include tablet-landscape-and-desktop {
   		display: inline-table;
   		background-color: transparent;
   		padding: 0;
-		}
+  	}
 
   	/* Top level Link Rules */
   	.NavMenuItem {
@@ -109,34 +107,28 @@
 		  &.DonateButtonItem {
 		  	display: none;
 
-		  	@include tablet-landscape-and-desktop {
+		  	@include min-screen(769px) {
 		  		display: inline-block;
+		  		margin-left: 10px;
 		  	}
 
-		  	@include tablet-landscape {
-		  		margin-left: 10px;	  		
-		  	}
-
-	  		@include desktop {
+	  		@include min-screen(1025px) {
 	  			margin-left: 7px;
 	  		}
 		  }
 
-		  @include tablet-landscape-and-desktop {
+		  @include min-screen(769px) {
   			display: inline-block;
   			padding: 0;
   			line-height: normal !important;
+  			margin: 0 0 0 10px;
 
   			&:first-child {
   				margin-left: 0px;
   			}
 		  }
 
-		  @include tablet-landscape {
-		  	margin: 0 0 0 10px;
-		  }
-
-  		@include desktop {
+  		@include min-screen(1025px) {
   			margin: 0 0 0 8px;
   		}
 
@@ -165,16 +157,13 @@
 		  			outline: initial;
 		  		}
 
-		  		@include tablet-landscape-and-desktop {
+		  		@include min-screen(769px) {
 	  				color: #000;
-		  		}
-
-		  		@include tablet-landscape {
 		  			font-size: 18px;
 	  				padding: 0px 4px;
 		  		}
 
-	  			@include desktop {
+	  			@include min-screen(1025px) {
 	  				font-size: 16px;
 	  				padding: 0px 7px;
 	  			}
@@ -188,16 +177,16 @@
 	  		left: 30%;
 	  		z-index: 999;
 
-	  		@include tablet-landscape {
+	  		@include min-screen(769px) {
 	  			top: 19px;
 	  		}
 
-	  		@include desktop {
-	  			top: 15px;	
+	  		@include min-screen(1025px) {
+	  			top: 15.75px;
 	  		}
 
-				/* Arrow Assignment for Tablet Landscape, Desktop and up */
-				@include tablet-landscape-and-desktop {
+				/* Arrow Assignment for Tablets and up */
+				@include min-screen(769px) {
 					&.active {
 						display: block;
 					}
@@ -262,20 +251,17 @@
   		position: absolute;
 	  	left: 0;
 
-	  	/* Only display MegaMenu's on  Tablet Landscape/Desktop and up */
+	  	/* Only display MegaMenu's on  Tablet and up */
 	  	&.active {
 
-	  		@include tablet-landscape-and-desktop {
+	  		@include min-screen(769px) {
 	  			display: block;
+	  			top: 45px;
 	  			z-index: 999;
 	  		}
 
-	  		@include tablet-landscape {
-	  			top: 43px;
-	  		}
-
-	  		@include desktop {
-	  			top: 41.75px;
+	  		@include min-screen(1025px) {
+	  			top: 43.5px;
 	  		}
 	  	}
 
@@ -285,11 +271,11 @@
 				left: 0;
 				z-index: 0;
 
-				@include tablet-landscape {
+				@include min-screen(769px) {
 					min-height: $MAIN_MENU_TABLET_HEIGHT;
 				}
 
-				@include desktop {
+				@include min-screen(1025px) {
 					min-height: $MAIN_MENU_DESKTOP_HEIGHT;
 				}
 	  	}
@@ -302,11 +288,11 @@
 		  	z-index: 1;
 		  	position: relative;
 
-				@include tablet-landscape {
+				@include min-screen(769px) {
 					min-height: $MAIN_MENU_TABLET_HEIGHT;
 				}
 
-				@include desktop {
+				@include min-screen(1025px) {
 					min-height: $MAIN_MENU_DESKTOP_HEIGHT;
 				}
 	  	}
@@ -317,12 +303,12 @@
 	  		margin: 0;
 	  		padding: 0;
 
-	  		@include tablet-landscape {
+	  		@include min-screen(769px) {
 	  			width: 280px;
 	  			min-height: $MAIN_MENU_TABLET_HEIGHT;
 	  		}
 
-	  		@include desktop {
+	  		@include min-screen(1025px) {
 	  			width: 310px;
 	  			min-height: $MAIN_MENU_DESKTOP_HEIGHT;
 	  		}
@@ -333,11 +319,11 @@
 	  		right: $LEFT_NAV_RIGHT_MARGIN;
 	  		text-align: left;
 
-	  		@include tablet-landscape {
+	  		@include min-screen(769px) {
 	  			width: 138px;
 	  		}
 
-	  		@include desktop {
+	  		@include min-screen(1025px) {
 	  			width: 140px;
 	  		}
 
@@ -412,12 +398,12 @@
 	  		padding: 0;
 	  		text-align: left;
 
-	  		@include tablet-landscape {
+	  		@include min-screen(769px) {
 	  			margin: 0 20px 0 280px;
 					min-height: $MAIN_MENU_TABLET_HEIGHT;
 	  		}
 
-	  		@include desktop {
+	  		@include min-screen(1025px) {
 	  			margin: 0 20px 0 310px;
 	  			min-height: $MAIN_MENU_DESKTOP_HEIGHT;
 	  		}
@@ -443,11 +429,11 @@
 					position: relative;
 					top: 50px;
 
-					@include tablet-landscape {
+					@include min-screen(769px) {
 						margin: 0 0 0 31px;
 					}
 
-					@include desktop {
+					@include min-screen(1140px) {
 						margin: 0 0 0 $RIGHT_NAV_CONTAINER_LEFT_MARGIN;				
 					}
 				}
@@ -459,12 +445,24 @@
 
 	.StickyItems {
 		display: none;
-		margin-right: 20px;
 
-		@include tablet-and-up {
+		.DonateButton {
+			display: none;
+
+			@include min-screen(892px) {
+				display: inline-block;
+			}
+		}
+
+		@include min-screen(769px) {	
 			&.active {
 				display: inline-block;
 			}
+		}
+
+		@include min-screen(870px) {
+			// Used with the above DonateButton class to display correctly.	
+			margin-right: 20px;
 		}
 	}
 

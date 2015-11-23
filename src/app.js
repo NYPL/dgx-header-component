@@ -4,6 +4,8 @@ import nyplComponent from './components/Header/Header.js';
 import ga from 'react-ga';
 import {config} from 'dgx-react-ga';
 
+import './styles/main.scss';
+
 // Use for testing GA events
 if (!window.ga) {
   console.log('Analytics not available - loading through React.');

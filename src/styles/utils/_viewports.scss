@@ -1,82 +1,79 @@
-$SMALL_PHONE_WIDTH: 320px;
-$TABLET_WIDTH: 768px;
-$DESKTOP_WIDTH: 1025px;
-$LARGE_DISPLAY_WIDTH: 1280px;
+/* --- Media Query Generator ---
+ * Reusable mixin used to generate
+ * variations of media query properties.
+ */
+@mixin generate-mq($args...) {
+  $media-type: 'only screen';
+  $media-type-key: 'media-type';
+  $args: keywords($args);
+  $expr: '';
 
-/*
- * Viewport: 0px - 320px
-*/
-@mixin phone-small {
-  @media (min-width: #{SMALL_PHONE_WIDTH})
-  and (-webkit-min-device-pixel-ratio: 2) {
+  @if map-has-key($args, $media-type-key) {
+    $media-type: map-get($args, $media-type-key);
+    $args: map-remove($args, $media-type-key);
+  }
+
+  @each $key, $value in $args {
+    @if $value {
+      $expr: "#{$expr} and (#{$key}: #{$value})";
+    }
+  }
+
+  @media #{$media-type} #{$expr} {
     @content;
   }
 }
 
-/*
- * Viewport: 321px and up
-*/
-@mixin phone-large {
-  @media (min-width: #{$SMALL_PHONE_WIDTH + 1px})
-  and (-webkit-min-device-pixel-ratio: 2) {
-    @content;
-  } 
-}
-
-/*
- * Viewport: 768px and up
-*/
-@mixin tablet-and-up {
-  @media (min-width: #{$TABLET_WIDTH}) {
+/* min-and-max-screen($min, $max, $orientation) 
+ * $min - required
+ * $max - required
+ * $orientation - optional
+ * Ex: @include min-and-max-screen(768px, 1024px, landscape) { ... }
+ */
+@mixin min-and-max-screen($min, $max, $orientation: false) {
+  @include generate-mq($min-width: $min, $max-width: $max, $orientation: $orientation) {
     @content;
   }
 }
 
-/*
- * Viewport: 768px - 1024px (portrait orientation)
-*/
-@mixin tablet-portrait {
-  @media (min-width: #{$TABLET_WIDTH})
-  and (orientation: portrait) 
-  and (-webkit-min-device-pixel-ratio: 1) {
+/* max-screen($max, $orientation) 
+ * $max - required
+ * $orientation - optional
+ * Ex #1: @include max-screen(768px, landscape) { ... }
+ * Ex #2: @include max-screen(768px) { ... }
+ */
+@mixin max-screen($max, $orientation: false) {
+  @include generate-mq($max-width: $max, $orientation: $orientation) {
     @content;
   }
 }
 
-/*
- * Viewport: 768px - 1024px (landscape orientation)
-*/
-@mixin tablet-landscape {
-  @media (min-width: #{$TABLET_WIDTH})
-  and (orientation: landscape) 
-  and (-webkit-min-device-pixel-ratio: 1) {
+/* min-screen($min, $orientation) 
+ * $min - required
+ * $orientation - optional
+ * Ex #1: @include min-screen(768px, landscape) { ... }
+ * Ex #2: @include min-screen(768px) { ... }
+ */
+@mixin min-screen($min, $orientation: false) {
+  @include generate-mq($min-width: $min, $orientation: $orientation) {
     @content;
   }
 }
 
-@mixin tablet-landscape-and-desktop {
-  @media (min-width: #{$TABLET_WIDTH})
-  and (orientation: landscape) 
-  and (-webkit-min-device-pixel-ratio: 1)
-  , (min-width: #{$DESKTOP_WIDTH}) {
+/* landscape() 
+ * Ex: @include landscape() { ... }
+ */
+@mixin landscape() {
+  @include generate-mq($orientation: landscape) {
     @content;
   }
 }
 
-/*
- * Viewport: 1025px and up
-*/
-@mixin desktop {
-  @media (min-width: #{$DESKTOP_WIDTH}) {
-    @content;
-  }
-}
-
-/*
- * Viewport: 1280px and up
-*/
-@mixin large-display {
-  @media (min-width: #{$LARGE_DISPLAY_WIDTH}) {
+/* portrait() 
+ * Ex: @include portrait() { ... }
+ */
+@mixin portrait() {
+  @include generate-mq($orientation: portrait) {
     @content;
   }
 }

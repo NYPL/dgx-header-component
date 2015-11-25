@@ -2,8 +2,8 @@
 	position: relative;
 	border-bottom: 1px solid #908034;
 
-	/* No red bottom-border on tablet landscape, desktop and up */
-	@include tablet-landscape-and-desktop {
+	/* No red bottom-border on tablet and up */
+	@include min-screen(769px) {
 		border-bottom: none;
 	}
 
@@ -14,7 +14,7 @@
 	&-Wrapper {
 		margin: 0;
 
-		@include tablet-and-up {
+		@include min-screen(769px) {
   		display: block;
   		max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
   		margin: 0 auto;
@@ -32,7 +32,7 @@
 		display: block;
 		z-index: 1;
 
-		@include desktop {
+		@include min-screen(769px) {
 			top: -15px;
 			right: 5px;
 		}
@@ -42,11 +42,11 @@
 		position: relative;
 		margin: .75em 1.2em .5em 1.2em;
 
-		@include tablet-landscape {
+		@include min-screen(769px) {
 			margin: .5em 0 .5em 113px;
 		}
 		
-		@include desktop {
+		@include min-screen(1025px) {
 			margin: .5em 0 .5em 135px;
 		}
 

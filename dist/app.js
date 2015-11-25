@@ -16,6 +16,8 @@ var _reactGa2 = _interopRequireDefault(_reactGa);
 
 var _dgxReactGa = require('dgx-react-ga');
 
+require('./styles/main.scss');
+
 // Use for testing GA events
 if (!window.ga) {
   console.log('Analytics not available - loading through React.');

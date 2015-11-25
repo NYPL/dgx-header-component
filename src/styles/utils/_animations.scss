@@ -3336,7 +3336,7 @@ Copyright (c) 2015 Daniel Eden
  * input.
 */
 .keywords-pulse-fade-in {
-  @include desktop {
+  @include min-screen(769px) {
     -webkit-animation-name: keywordsPulseFadeIn;
     animation-duration: 0.2s;
     animation-name: keywordsPulseFadeIn;
@@ -3382,7 +3382,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .keywords-pulse {
-  @include desktop {
+  @include min-screen(769px) {
     -webkit-animation-name: keywordsPulse;
     animation-duration: 0.2s;
     animation-name: keywordsPulse;

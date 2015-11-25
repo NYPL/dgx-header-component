@@ -95,7 +95,7 @@
   &.active {
     display: block;
 
-    @include tablet-landscape-and-desktop {
+    @include min-screen(769px) {
       display: none;
     }
   }

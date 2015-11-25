@@ -12,7 +12,7 @@
  * -- Mobile First approach
 */
 .Header {
-	@include Kievit-Book;
+  @include Kievit-Book;
   width: 100%;
   background-color: #FFF;
   border-bottom: 2px solid #ED1C24;
@@ -23,154 +23,149 @@
     text-decoration: none;
   }
 
-	/* MOBILE HEADER
-	 * -------------
-	*/
-	&-Mobile {
-		display: block;
-		
-  	/* Hide MobileHeader on Tablet Landscape, Desktop and larger viewports */
-  	@include tablet-landscape-and-desktop {
-  		display: none;
-  	}
-	}
-
-	&-Wrapper {
-		position: relative;
-	}
-
-	/* STICKY HEADER
-	 * -------------
-	*/
-  &.sticky {
-  	@include tablet-landscape-and-desktop {
-	  	.Header {
-	  		&-Wrapper{
-	  			border-top: 2px solid #ED1C24;
-	  			z-index: 999;
-					width: 100%;
-					position: fixed;
-					top: 0;
-					background-color: #FFF;
-					height: 65px;
-					box-shadow: 0px 2px 2.5px 0px rgba(50, 50, 50, 0.25);
-					transition: all 0.4s ease;
-	  		}
-
-	  		&-TopWrapper {
-	  			min-height: initial;
-	  		}
-
-	  		&-Buttons {
-	  			display: none !important;
-	  		}
-
-	  		&-Logo {
-	  			display: inline-block;
-	  			left: 0;
-	  			width: auto;
-	  			z-index: 3;
-
-	  			img {
-	  				display: none;
-	  			}
-
-	  			span {
-	  				display: block !important;
-	  				font-size: 65px;
-	  				color: #000;
-	  			}
-	  		}
-
-	  		&-NavMenu {
-	  			position: absolute;
-	  			width: 100%;
-	  			bottom: 5px;
-	  		}
-	  	}
-  	}
+  /* MOBILE HEADER
+   * -------------
+  */
+  &-Mobile {
+    display: block;
+    
+    /* Hide MobileHeader on Tablet larger viewports */
+    @include min-screen(769px) {
+      display: none;
+    }
   }
 
-	/* DESKTOP HEADER WRAPPER
-	 * ----------------------
-	 * Sets the max-width on a desktop and up device.
-	*/
-	&-TopWrapper {
-  	display: none;
+  &-Wrapper {
+    position: relative;
+  }
 
-  	@include tablet-landscape-and-desktop {
-  		display: block;
-  		max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
-  	}
+  /* STICKY HEADER
+   * -------------
+  */
+  &.sticky {
+    @include min-screen(769px) {
+      .Header {
+        &-Wrapper{
+          border-top: 2px solid #ED1C24;
+          z-index: 999;
+          width: 100%;
+          position: fixed;
+          top: 0;
+          background-color: #FFF;
+          height: 65px;
+          box-shadow: 0px 2px 2.5px 0px rgba(50, 50, 50, 0.25);
+          transition: all 0.4s ease;
+        }
 
-  	@include tablet-landscape {
-  		margin: 0px 20px;
-  		min-height: 136px;
-  	}
+        &-TopWrapper {
+          min-height: initial;
+        }
 
-  	@include desktop {
-  		margin: 0px auto;
-  		min-height: inherit;
-  	}
-	}
+        &-Buttons {
+          display: none !important;
+        }
 
-	/* DESKTOP LOGO
-	 * ------------
-	 * Defined width for desktop.
-	 * position adjustments left.
-	*/
-	&-Logo {
+        &-Logo {
+          display: inline-block;
+          left: 0;
+          width: auto;
+          z-index: 3;
 
-		@include tablet-landscape-and-desktop {
-			display: block;
-			position: relative;
-		}
+          img {
+            display: none;
+          }
 
-		@include tablet-landscape {
-	    width: 158px;
-	    left: 15px;
-	    margin: 0;
-		}
+          span {
+            display: block !important;
+            font-size: 63.5px;
+            color: #000;
+          }
+        }
 
-		@include desktop {
-	    width: 230px;
-	    margin: 0 0 0 20px;
-	    left: inherit;
-	  }
-	}
+        &-NavMenu {
+          position: absolute;
+          width: 100%;
+          bottom: 5px;
+        }
+      }
+    }
+  }
 
-	/* TOP HEADER BUTTONS (excludes subscribe)
-	 * ---------------------------------------
-	 * - Library Card
-	 * - Donate
-	*/ 
-	&-Buttons {
+  /* DESKTOP HEADER WRAPPER
+   * ----------------------
+   * Sets the max-width on a desktop and up device.
+  */
+  &-TopWrapper {
+    display: none;
 
-		.DonateButton, .LibraryCardButton {
-			@include Kievit-Bold;
-			font-size: 12px;
+    @include min-screen(769px) {
+      display: block;
+      max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
+      margin: 0px 20px;
+      min-height: 136px;
+    }
 
-			&:visited {
-				color: #000;
-			}
-		}
 
-		.DonateButton {
-			border-radius: 4px;
-		}
-	}
+    @include min-screen(1025px) {
+      margin: 0px auto;
+      min-height: inherit;
+    }
+  }
 
-	/* Global Alerts
-	 * -------------
-	*/
-	@import 'components/_globalAlerts';
+  /* DESKTOP LOGO
+   * ------------
+   * Defined width for desktop.
+   * position adjustments left.
+  */
+  &-Logo {
 
-	/* EMAIL SUBSCRIBE BUTTON/FORM
-	 * ---------------------------
-	 * - Includes Button rules (also for MyNYPL)
-	 * - Includes Email Signup rules
-	*/
-	@import 'components/_emailSubscribeButton';
+    @include min-screen(769px) {
+      display: block;
+      position: relative;
+      width: 158px;
+      left: 15px;
+      margin: 0;
+    }
+
+    @include min-screen(1025px) {
+      width: 230px;
+      margin: 0 0 0 20px;
+      left: inherit;
+    }
+  }
+
+  /* TOP HEADER BUTTONS (excludes subscribe)
+   * ---------------------------------------
+   * - Library Card
+   * - Donate
+  */ 
+  &-Buttons {
+
+    .DonateButton, .LibraryCardButton {
+      @include Kievit-Bold;
+      font-size: 12px;
+
+      &:visited {
+        color: #000;
+      }
+    }
+
+    .DonateButton {
+      border-radius: 4px;
+    }
+  }
+
+  /* Global Alerts
+   * -------------
+  */
+  @import 'components/_globalAlerts';
+
+  /* EMAIL SUBSCRIBE BUTTON/FORM
+   * ---------------------------
+   * - Includes Button rules (also for MyNYPL)
+   * - Includes Email Signup rules
+  */
+  @import 'components/_emailSubscribeButton';
 
   /* MYNYPL LOGIN BUTTON
    * ---------------------------
@@ -178,11 +173,11 @@
   */
   @import 'components/_myNypl';
 
-	/* MAIN NAVIGATION
-	 * ---------------
-	 * - Includes MegaMenu's
-	 * - Includes Logo text for mobile
-	 * - Arrows on NavMenu Top Links
-	*/
-	@import 'components/_navMenu';
+  /* MAIN NAVIGATION
+   * ---------------
+   * - Includes MegaMenu's
+   * - Includes Logo text for mobile
+   * - Arrows on NavMenu Top Links
+  */
+  @import 'components/_navMenu';
 }

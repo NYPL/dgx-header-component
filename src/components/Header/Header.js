@@ -17,6 +17,7 @@ import MobileMyNypl from '../MyNypl/MobileMyNypl.js';
 import NavMenu from '../NavMenu/NavMenu.js';
 import MobileHeader from './MobileHeader.js';
 import GlobalAlerts from '../GlobalAlerts/GlobalAlerts.js';
+import SkipNavigation from 'dgx-skip-navigation-link';
 
 import utils from '../../utils/utils.js';
 
@@ -64,6 +65,7 @@ class Header extends React.Component {
 
     return (
       <header id={this.props.id} className={headerClasses} ref='nyplHeader'>
+        <SkipNavigation target={'maincontent'} />
         <GlobalAlerts className={`${headerClass}-GlobalAlerts`} />
         <div className={`${headerClass}-Wrapper`}>
           <MobileHeader className={`${headerClass}-Mobile`} locatorUrl={'//www.nypl.org/locations/map?nearme=true'} />

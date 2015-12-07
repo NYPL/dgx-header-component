@@ -195,7 +195,7 @@ class Header extends React.Component {
 
     // We check here to see if the header is sticky or on mobile view to decide
     // if we need to scroll the page
-    if(Store.getState().isSticky && headerMobileDisplay == 'none') {
+    if(HeaderStore.getState().isSticky && headerMobileDisplay == 'none') {
       if (window.location.hash) {
         setTimeout(() => {
           window.scrollBy(0, -offsetDistance);

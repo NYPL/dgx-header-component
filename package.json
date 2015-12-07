@@ -4,7 +4,7 @@
   "description": "NYPL Header",
   "main": "dist/components/Header/Header.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "NODE_ENV=development node server.js",
     "babel-build": "babel src -d dist && cp -r src/styles/ dist/styles",
     "build": "NODE_ENV=production node_modules/.bin/webpack -p --config webpack.config.js"
   },

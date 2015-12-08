@@ -87,6 +87,7 @@ class Header extends React.Component {
                 lang={this.props.lang}
                 style={styles.subscribeButton} />
               <DonateButton
+                id='Top-DonateButton'
                 lang={this.props.lang}
                 style={styles.donateButton}
                 gaLabel={'Header Button'} />

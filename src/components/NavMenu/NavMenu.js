@@ -34,7 +34,10 @@ class NavMenu extends React.Component {
         <div className={stickyItemsClass}>
           <span className='lineSeparator' style={styles.lineSeparator}></span>
           <StickyMyNyplButton />
-          <DonateButton style={styles.donateButton} gaLabel={'Collapsed Donate Button'}/>
+          <DonateButton
+            id='Collapsed-DonateButton'
+            style={styles.donateButton}
+            gaLabel={'Collapsed Donate Button'} />
         </div>,
       navMenu = navItems.map((item, index) => {
         return (

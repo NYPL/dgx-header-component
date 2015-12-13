@@ -9,7 +9,8 @@
   (String, default: "en")
 - `skipNav`: Props to be passed to the `SkipNavigation` component. If these are
   not supplied the skip navigation link will not be output. It will also not be
-  output if the props are not sufficient for the component (Object, default: {})
+  output if the props are not sufficient for the component (Object, default:
+  null)
 
 For example, to generate a header that has a skip navigation that targets the id
 `#topcontent`:

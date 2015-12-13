@@ -11,7 +11,8 @@
   not supplied the skip navigation link will not be output. It will also not be
   output if the props are not sufficient for the component (Object, default: {})
 
-For example, to generate a header that has a skip navigation that target the id `#topcontent`:
+For example, to generate a header that has a skip navigation that targets the id
+`#topcontent`:
 
     <Header skipNav: {target: 'topcontent'} />
 

@@ -61,11 +61,13 @@ class Header extends React.Component {
       headerClass = this.props.className || 'Header',
       headerClasses = cx(headerClass, {'sticky': isHeaderSticky}),
       showDialog = HeaderStore._getMobileMyNyplButtonValue(),
-      mobileMyNyplClasses = cx({'active': showDialog});
+      mobileMyNyplClasses = cx({'active': showDialog}),
+      skipNav = this.props.skipNav ?
+            (<SkipNavigation {...this.props.skipNav} />) : '';  
 
     return (
-      <header id={this.props.id} className={headerClasses} ref='nyplHeader'>
-        <SkipNavigation target={'maincontent'} />
+        <header id={this.props.id} className={headerClasses} ref='nyplHeader'>
+        {skipNav}
         <GlobalAlerts className={`${headerClass}-GlobalAlerts`} />
         <div className={`${headerClass}-Wrapper`}>
           <MobileHeader className={`${headerClass}-Mobile`} locatorUrl={'//www.nypl.org/locations/map?nearme=true'} />
@@ -164,7 +166,8 @@ class Header extends React.Component {
 Header.defaultProps = {
   lang: 'en',
   className: 'Header',
-  id: 'nyplHeader'
+  id: 'nyplHeader',
+  skipNav: null,
 };
 
 const styles = {

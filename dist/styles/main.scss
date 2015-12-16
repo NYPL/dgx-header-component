@@ -27,6 +27,7 @@
    * -------------
   */
   &-Mobile {
+    min-width: 320px;
     display: block;
     
     /* Hide MobileHeader on Tablet larger viewports */
@@ -155,6 +156,11 @@
     }
   }
 
+  /* Skip Navigation
+   * ---------------
+   */
+  @import 'components/_skipNav.scss';
+  
   /* Global Alerts
    * -------------
   */

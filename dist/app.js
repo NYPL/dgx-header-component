@@ -29,4 +29,4 @@ if (!window.ga) {
 /* app.jsx
  * Used for local development of React Components
  */
-_react2['default'].render(_react2['default'].createElement(_componentsHeaderHeaderJs2['default']), document.getElementById('app'));
+_react2['default'].render(_react2['default'].createElement(_componentsHeaderHeaderJs2['default'], { skipNav: { target: 'maincontent' } }), document.getElementById('app'));

@@ -82,7 +82,8 @@ function ContentModel() {
   this.eventExhibition = function (content, data) {
     content.dates = {
       start: data.attributes['start-date'],
-      end: data.attributes['end-date'] };
+      end: data.attributes['end-date']
+    };
     content.name = data.attributes.name;
     content.description = data.attributes.description;
     content.spaceName = data.attributes['space-name'];

@@ -30,20 +30,20 @@ function Utils() {
 
       // String assignment based on type
       switch (type) {
-        case 'current':
-          dateString = 'Open now. Ends ' + months[end.getUTCMonth()] + ' ' + end.getUTCDate() + ', ' + end.getUTCFullYear() + '.';
+        case "current":
+          dateString = "Open now. Ends " + months[end.getUTCMonth()] + " " + end.getUTCDate() + ", " + end.getUTCFullYear() + ".";
           break;
-        case 'current-ongoing':
-          dateString = 'Open now. Ongoing.';
+        case "current-ongoing":
+          dateString = "Open now. Ongoing.";
           break;
-        case 'upcoming':
-          dateString = 'Opening soon. ' + months[start.getUTCMonth()] + ' ' + start.getUTCDate() + ', ' + start.getUTCFullYear() + ' - ' + months[end.getUTCMonth()] + ' ' + end.getUTCDate() + ', ' + end.getUTCFullYear() + '.';
+        case "upcoming":
+          dateString = "Opening soon. " + months[start.getUTCMonth()] + " " + start.getUTCDate() + ", " + start.getUTCFullYear() + " - " + months[end.getUTCMonth()] + " " + end.getUTCDate() + ", " + end.getUTCFullYear() + ".";
           break;
-        case 'upcoming-ongoing':
-          dateString = 'Opening soon. ' + months[start.getUTCMonth()] + ' ' + start.getUTCDate() + ', ' + start.getUTCFullYear() + '.';
+        case "upcoming-ongoing":
+          dateString = "Opening soon. " + months[start.getUTCMonth()] + " " + start.getUTCDate() + ", " + start.getUTCFullYear() + ".";
           break;
         default:
-          dateString = months[start.getUTCMonth()] + ' ' + start.getUTCDate() + ', ' + start.getUTCFullYear() + ' - ' + months[end.getUTCMonth()] + ' ' + end.getUTCDate() + ', ' + end.getUTCFullYear() + '.';
+          dateString = months[start.getUTCMonth()] + " " + start.getUTCDate() + ", " + start.getUTCFullYear() + " - " + months[end.getUTCMonth()] + " " + end.getUTCDate() + ", " + end.getUTCFullYear() + ".";
       }
       return dateString;
     };
@@ -61,16 +61,16 @@ function Utils() {
       }
       // Current Event and past 1 year which implies Ongoing
       else if (sDate.getTime() <= today.getTime() && eDate.getTime() >= today.getTime() && daysBetweenStartEnd > rangeLimit) {
-        formattedDate = dateToString(sDate, eDate, 'current-ongoing');
-      }
-      // Upcoming Event and not past 1 year between start and end dates.
-      else if (sDate.getTime() > today.getTime() && eDate.getTime() >= today.getTime() && daysBetweenStartEnd < rangeLimit && daysBetweenStartEnd > 0) {
-        formattedDate = dateToString(sDate, eDate, 'upcoming');
-      }
-      // Upcoming Event and past 1 year which implies Ongoing.
-      else {
-        formattedDate = dateToString(sDate, eDate, 'upcoming-ongoing');
-      }
+          formattedDate = dateToString(sDate, eDate, 'current-ongoing');
+        }
+        // Upcoming Event and not past 1 year between start and end dates.
+        else if (sDate.getTime() > today.getTime() && eDate.getTime() >= today.getTime() && daysBetweenStartEnd < rangeLimit && daysBetweenStartEnd > 0) {
+            formattedDate = dateToString(sDate, eDate, 'upcoming');
+          }
+          // Upcoming Event and past 1 year which implies Ongoing.
+          else {
+              formattedDate = dateToString(sDate, eDate, 'upcoming-ongoing');
+            }
     }
 
     return formattedDate;

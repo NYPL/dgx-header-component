@@ -203,7 +203,6 @@ class Header extends React.Component {
       if (window.location.hash) {
         setTimeout(() => {
           window.scrollBy(0, -offsetDistance);
-          console.log('>>>>>>>offset');
         }, 1000);
       }
     }

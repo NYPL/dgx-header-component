@@ -282,9 +282,6 @@ var Header = (function (_React$Component) {
         headerMobileDisplay = window.getComputedStyle(headerMobile, null).getPropertyValue('display');
       }
 
-      console.log(_storesHeaderStoreJs2['default'].getState().isSticky);
-      console.log(headerMobileDisplay);
-
       // We check here to see if the header is sticky or on mobile view to decide
       // if we need to scroll the page
       if (_storesHeaderStoreJs2['default'].getState().isSticky && headerMobileDisplay === 'none') {

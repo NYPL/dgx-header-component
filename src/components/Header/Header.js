@@ -199,9 +199,6 @@ class Header extends React.Component {
         .getPropertyValue('display');
     }
 
-    console.log(HeaderStore.getState().isSticky);
-    console.log(headerMobileDisplay);
-
     // We check here to see if the header is sticky or on mobile view to decide
     // if we need to scroll the page
     if(HeaderStore.getState().isSticky && headerMobileDisplay === 'none') {

@@ -25,8 +25,13 @@ class SearchButton extends React.Component {
     // Give active class if the button is activated by hover
     let classes = cx({
         'active': HeaderStore._getSearchButtonActionValue() === 'hoverSearch' ||
-          HeaderStore._getLastActiveMenuItem() === 'hoverSearch'
-      });
+          HeaderStore._getLastActiveMenuItem() === 'hoverSearch',
+      }),
+      // Detect if the header is sticky now
+      stickyStatus = cx({
+        'isSticky': HeaderStore.getState().isSticky
+      }),
+      searchLabel = <div className={`Search-Text ${classes} ${stickyStatus} visuallyHidden`}>Search</div>;
 
     return (
       <div className={`${this.props.className}-SearchBox-Wrapper`}>
@@ -36,7 +41,7 @@ class SearchButton extends React.Component {
           id={`${this.props.className}-SearchButton`}
           className={`nypl-icon-magnifier-fat ${this.props.className}-SearchButton ${classes}`}
           name='Search Button'
-          label='' />
+          label={searchLabel} />
         <SearchBox 
           id={`${this.props.className}-SearchBox`}
           className={`${this.props.className}-SearchBox`} />

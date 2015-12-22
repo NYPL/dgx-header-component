@@ -44,8 +44,15 @@ class Header extends React.Component {
     // enable the sticky header depending on position.
     this._handleStickyHeader();
 
+    // Check if the sticky header covers the anchor
+    this._offsetStickyHeader();
+
     // Listen to the scroll event for the sticky header.
     window.addEventListener('scroll', this._handleStickyHeader.bind(this));
+
+    // Listen to hash change and check if the sticky header covers the anchor
+    window.addEventListener('hashchange', this._offsetStickyHeader.bind(this),
+      false);
   }
 
   componentWillUnmount() {
@@ -70,11 +77,15 @@ class Header extends React.Component {
         {skipNav}
         <GlobalAlerts className={`${headerClass}-GlobalAlerts`} />
         <div className={`${headerClass}-Wrapper`}>
-          <MobileHeader className={`${headerClass}-Mobile`} locatorUrl={'//www.nypl.org/locations/map?nearme=true'} />
+          <MobileHeader className={`${headerClass}-Mobile`}
+            locatorUrl={'//www.nypl.org/locations/map?nearme=true'}
+            ref='headerMobile' />
           <div className={`MobileMyNypl-Wrapper ${mobileMyNyplClasses}`}>
             <MobileMyNypl />
           </div>
-          <div className={`${headerClass}-TopWrapper`} style={styles.wrapper}>
+          <div className={`${headerClass}-TopWrapper`}
+            style={styles.wrapper}
+            ref='headerTopWrapper'>
             <Logo className={`${headerClass}-Logo`} />
             <div className={`${headerClass}-Buttons`} style={styles.topButtons}>
               <MyNyplButton label='Log In' refId='desktopLogin' />
@@ -139,6 +150,7 @@ class Header extends React.Component {
     } else {
       Actions.updateIsHeaderSticky(false);
     }
+
   }
 
   /**
@@ -161,6 +173,44 @@ class Header extends React.Component {
     return window.scrollY 
       || window.pageYOffset 
       || document.documentElement.scrollTop;
+  }
+
+
+  /**
+  * _offsetStickyHeader()
+  * change the sticky header's vertical postion so it won't
+  * cover the title of the anchor if the user got to the page by
+  * type in the URL with anchor in it.
+  * 68px is the height of sticky header.
+  */
+  _offsetStickyHeader() {
+    // Get sticky header's height: 68px and add 10px distance
+    let stickyHeaderHeight = 68,
+      offsetDistance = stickyHeaderHeight + 10,
+      headerMobile = React.findDOMNode(this.refs.headerMobile),
+      headerMobileDisplay;
+
+    // Get the display CSS feature of mobile header to see if we are on mobile
+    // view. currentStyle is for IE, and getComputedStyle is for other browsers
+    if (headerMobile.currentStyle) {
+      headerMobileDisplay = headerMobile.currentStyle.display;
+    } else if (window.getComputedStyle) {
+      headerMobileDisplay = window.getComputedStyle(headerMobile, null)
+        .getPropertyValue('display');
+    }
+
+    console.log(HeaderStore.getState().isSticky);
+    console.log(headerMobileDisplay);
+
+    // We check here to see if the header is sticky or on mobile view to decide
+    // if we need to scroll the page
+    if(HeaderStore.getState().isSticky && headerMobileDisplay === 'none') {
+      if (window.location.hash) {
+        setTimeout(() => {
+          window.scrollBy(0, -offsetDistance);
+        }, 1000);
+      }
+    }
   }
 };
 

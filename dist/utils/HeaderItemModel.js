@@ -98,8 +98,7 @@ function Model() {
     featuredItem.headline = data.attributes.headline;
     featuredItem.dates = {
       start: data.attributes['display-date-start'],
-      end: data.attributes['display-date-end']
-    };
+      end: data.attributes['display-date-end'] };
 
     if (data.images) {
       featuredItem.images = _underscore2['default'].map(data.images, _ContentModelJs2['default'].image);

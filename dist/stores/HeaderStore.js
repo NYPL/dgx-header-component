@@ -64,21 +64,21 @@ var HeaderStore = (function () {
     };
   }
 
-  // Export ALT Store
-
-  /*** PUBLIC METHODS ***/
-  /**
-   * _getMobileMenuBtnValue()
-   * returns the current state.activeMobileButton
-   * value.
-   * @return {String}
-   */
-
   _createClass(HeaderStore, [{
     key: '_getMobileMenuBtnValue',
+
+    /*** PUBLIC METHODS ***/
+    /**
+     * _getMobileMenuBtnValue()
+     * returns the current state.activeMobileButton
+     * value.
+     * @return {String}
+     */
     value: function _getMobileMenuBtnValue() {
       return this.state.activeMobileButton;
     }
+  }, {
+    key: '_getMobileMyNyplButtonValue',
 
     /**
      * _getMobileMyNyplButtonValue()
@@ -86,11 +86,11 @@ var HeaderStore = (function () {
      * value.
      * @return {String}
      */
-  }, {
-    key: '_getMobileMyNyplButtonValue',
     value: function _getMobileMyNyplButtonValue() {
       return this.state.mobileMyNyplButton;
     }
+  }, {
+    key: '_getSubscribeFormVisible',
 
     /**
      * _getSubscribeFormVisible()
@@ -98,11 +98,11 @@ var HeaderStore = (function () {
      * value.
      * @return {Boolean} true/false
      */
-  }, {
-    key: '_getSubscribeFormVisible',
     value: function _getSubscribeFormVisible() {
       return this.state.subscribeFormVisible;
     }
+  }, {
+    key: '_getMyNyplVisible',
 
     /**
      * _getMyNyplVisible()
@@ -110,11 +110,11 @@ var HeaderStore = (function () {
      * value.
      * @return {Boolean} true/false
      */
-  }, {
-    key: '_getMyNyplVisible',
     value: function _getMyNyplVisible() {
       return this.state.myNyplVisible;
     }
+  }, {
+    key: '_getStickyMyNyplVisible',
 
     /**
      * _getStickyMyNyplVisible()
@@ -122,11 +122,11 @@ var HeaderStore = (function () {
      * value.
      * @return {Boolean} true/false
      */
-  }, {
-    key: '_getStickyMyNyplVisible',
     value: function _getStickyMyNyplVisible() {
       return this.state.stickyLoginVisible;
     }
+  }, {
+    key: '_getSearchButtonActionValue',
 
     /**
      * _getSearchButtonActionValue()
@@ -134,11 +134,11 @@ var HeaderStore = (function () {
      * value.
      * @return {String}
      */
-  }, {
-    key: '_getSearchButtonActionValue',
     value: function _getSearchButtonActionValue() {
       return this.state.searchButtonAction;
     }
+  }, {
+    key: '_getIsStickyValue',
 
     /**
      * _getIsStickyValue() 
@@ -146,11 +146,11 @@ var HeaderStore = (function () {
      *
      * @return {Boolean} true/false
      */
-  }, {
-    key: '_getIsStickyValue',
     value: function _getIsStickyValue() {
       return this.state.isSticky;
     }
+  }, {
+    key: '_getLastActiveMenuItem',
 
     /**
      * _getLastActiveMenuItem()
@@ -158,8 +158,6 @@ var HeaderStore = (function () {
      * value.
      * @return {String}
      */
-  }, {
-    key: '_getLastActiveMenuItem',
     value: function _getLastActiveMenuItem() {
       return this.state.lastActiveMenuItem;
     }
@@ -168,10 +166,10 @@ var HeaderStore = (function () {
     value: function _getClientAppEnv() {
       return this.state.clientAppEnv;
     }
-
-    /*** PRIVATE METHODS ***/
   }, {
     key: 'handleUpdateHeaderData',
+
+    /*** PRIVATE METHODS ***/
     value: function handleUpdateHeaderData(data) {
       this.setState({ headerData: data });
     }
@@ -195,10 +193,10 @@ var HeaderStore = (function () {
     value: function handleSetMobileMyNyplButtonValue(value) {
       this.setState({ mobileMyNyplButton: value });
     }
-
-    // The set search button action value to Store
   }, {
     key: 'handleSearchButtonActionValue',
+
+    // The set search button action value to Store
     value: function handleSearchButtonActionValue(actionValue) {
       this.setState({ searchButtonAction: actionValue });
     }
@@ -237,5 +235,6 @@ var HeaderStore = (function () {
   return HeaderStore;
 })();
 
+// Export ALT Store
 exports['default'] = _dgxAltCenter2['default'].createStore(HeaderStore, 'HeaderStore');
 module.exports = exports['default'];

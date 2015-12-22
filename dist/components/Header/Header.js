@@ -7,13 +7,13 @@ Object.defineProperty(exports, '__esModule', {
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 var _react = require('react');
 
@@ -87,7 +87,6 @@ var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
 // import '../../styles/main.scss';
 
 var Header = (function (_React$Component) {
-  _inherits(Header, _React$Component);
 
   // Constructor used in ES6
 
@@ -98,6 +97,8 @@ var Header = (function (_React$Component) {
     // replaces getInitialState()
     this.state = _storesHeaderStoreJs2['default'].getState();
   }
+
+  _inherits(Header, _React$Component);
 
   _createClass(Header, [{
     key: 'componentDidMount',
@@ -112,8 +113,14 @@ var Header = (function (_React$Component) {
       // enable the sticky header depending on position.
       this._handleStickyHeader();
 
+      // Check if the sticky header covers the anchor
+      this._offsetStickyHeader();
+
       // Listen to the scroll event for the sticky header.
       window.addEventListener('scroll', this._handleStickyHeader.bind(this));
+
+      // Listen to hash change and check if the sticky header covers the anchor
+      window.addEventListener('hashchange', this._offsetStickyHeader.bind(this), false);
     }
   }, {
     key: 'componentWillUnmount',
@@ -139,11 +146,13 @@ var Header = (function (_React$Component) {
         'header',
         { id: this.props.id, className: headerClasses, ref: 'nyplHeader' },
         skipNav,
-        _react2['default'].createElement(_GlobalAlertsGlobalAlertsJs2['default'], { className: headerClass + '-GlobalAlerts' }),
+        _react2['default'].createElement(_GlobalAlertsGlobalAlertsJs2['default'], { className: '' + headerClass + '-GlobalAlerts' }),
         _react2['default'].createElement(
           'div',
-          { className: headerClass + '-Wrapper' },
-          _react2['default'].createElement(_MobileHeaderJs2['default'], { className: headerClass + '-Mobile', locatorUrl: '//www.nypl.org/locations/map?nearme=true' }),
+          { className: '' + headerClass + '-Wrapper' },
+          _react2['default'].createElement(_MobileHeaderJs2['default'], { className: '' + headerClass + '-Mobile',
+            locatorUrl: '//www.nypl.org/locations/map?nearme=true',
+            ref: 'headerMobile' }),
           _react2['default'].createElement(
             'div',
             { className: 'MobileMyNypl-Wrapper ' + mobileMyNyplClasses },
@@ -151,11 +160,13 @@ var Header = (function (_React$Component) {
           ),
           _react2['default'].createElement(
             'div',
-            { className: headerClass + '-TopWrapper', style: styles.wrapper },
-            _react2['default'].createElement(_LogoLogoJs2['default'], { className: headerClass + '-Logo' }),
+            { className: '' + headerClass + '-TopWrapper',
+              style: styles.wrapper,
+              ref: 'headerTopWrapper' },
+            _react2['default'].createElement(_LogoLogoJs2['default'], { className: '' + headerClass + '-Logo' }),
             _react2['default'].createElement(
               'div',
-              { className: headerClass + '-Buttons', style: styles.topButtons },
+              { className: '' + headerClass + '-Buttons', style: styles.topButtons },
               _react2['default'].createElement(_MyNyplButtonMyNyplButtonJs2['default'], { label: 'Log In', refId: 'desktopLogin' }),
               _react2['default'].createElement(_ButtonsSimpleButtonJs2['default'], {
                 label: 'Get a Library Card',
@@ -177,12 +188,14 @@ var Header = (function (_React$Component) {
             )
           ),
           _react2['default'].createElement(_NavMenuNavMenuJs2['default'], {
-            className: headerClass + '-NavMenu',
+            className: '' + headerClass + '-NavMenu',
             lang: this.props.lang,
             items: this.state.headerData })
         )
       );
     }
+  }, {
+    key: '_fetchDataIfNeeded',
 
     /**
      * _fetchDataIfNeeded() 
@@ -191,13 +204,13 @@ var Header = (function (_React$Component) {
      * method to dispatch a client-side event
      * to obtain data.
      */
-  }, {
-    key: '_fetchDataIfNeeded',
     value: function _fetchDataIfNeeded() {
       if (_storesHeaderStoreJs2['default'].getState().headerData.length < 1) {
         _actionsActionsJs2['default'].fetchHeaderData(_storesHeaderStoreJs2['default']._getClientAppEnv());
       }
     }
+  }, {
+    key: '_handleStickyHeader',
 
     /**
      * _handleStickyHeader() 
@@ -207,8 +220,6 @@ var Header = (function (_React$Component) {
      * vertical scroll position surpassing the height
      * of the Header DOM element.
      */
-  }, {
-    key: '_handleStickyHeader',
     value: function _handleStickyHeader() {
       var headerHeight = this._getHeaderHeight(),
           windowVerticalDistance = this._getWindowVerticalScroll();
@@ -222,29 +233,67 @@ var Header = (function (_React$Component) {
         _actionsActionsJs2['default'].updateIsHeaderSticky(false);
       }
     }
+  }, {
+    key: '_getHeaderHeight',
 
     /**
      * _getHeaderHeight() 
      * returns the Height of the Header DOM
      * element in pixels.
      */
-  }, {
-    key: '_getHeaderHeight',
     value: function _getHeaderHeight() {
       var headerContainer = _react2['default'].findDOMNode(this.refs.nyplHeader);
 
       return headerContainer.clientHeight;
     }
+  }, {
+    key: '_getWindowVerticalScroll',
 
     /**
      * _getWindowVerticallScroll() 
      * returns the current window vertical
      * scroll position in pixels.
      */
-  }, {
-    key: '_getWindowVerticalScroll',
     value: function _getWindowVerticalScroll() {
       return window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+    }
+  }, {
+    key: '_offsetStickyHeader',
+
+    /**
+    * _offsetStickyHeader()
+    * change the sticky header's vertical postion so it won't
+    * cover the title of the anchor if the user got to the page by
+    * type in the URL with anchor in it.
+    * 68px is the height of sticky header.
+    */
+    value: function _offsetStickyHeader() {
+      // Get sticky header's height: 68px and add 10px distance
+      var stickyHeaderHeight = 68,
+          offsetDistance = stickyHeaderHeight + 10,
+          headerMobile = _react2['default'].findDOMNode(this.refs.headerMobile),
+          headerMobileDisplay = undefined;
+
+      // Get the display CSS feature of mobile header to see if we are on mobile
+      // view. currentStyle is for IE, and getComputedStyle is for other browsers
+      if (headerMobile.currentStyle) {
+        headerMobileDisplay = headerMobile.currentStyle.display;
+      } else if (window.getComputedStyle) {
+        headerMobileDisplay = window.getComputedStyle(headerMobile, null).getPropertyValue('display');
+      }
+
+      console.log(_storesHeaderStoreJs2['default'].getState().isSticky);
+      console.log(headerMobileDisplay);
+
+      // We check here to see if the header is sticky or on mobile view to decide
+      // if we need to scroll the page
+      if (_storesHeaderStoreJs2['default'].getState().isSticky && headerMobileDisplay === 'none') {
+        if (window.location.hash) {
+          setTimeout(function () {
+            window.scrollBy(0, -offsetDistance);
+          }, 1000);
+        }
+      }
     }
   }]);
 
@@ -257,8 +306,7 @@ Header.defaultProps = {
   lang: 'en',
   className: 'Header',
   id: 'nyplHeader',
-  skipNav: null
-};
+  skipNav: null };
 
 var styles = {
   wrapper: {

@@ -2,7 +2,7 @@ import alt from 'dgx-alt-center';
 import Actions from '../actions/Actions.js';
 
 class HeaderStore {
-  constructor(){
+  constructor() {
 
     this.bindListeners({
       handleUpdateHeaderData: Actions.UPDATE_HEADER_DATA,

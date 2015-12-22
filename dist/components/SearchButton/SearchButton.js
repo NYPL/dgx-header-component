@@ -68,8 +68,17 @@ var SearchButton = (function (_React$Component) {
     value: function render() {
       // Give active class if the button is activated by hover
       var classes = (0, _classnames2['default'])({
-        'active': _storesHeaderStoreJs2['default']._getSearchButtonActionValue() === 'hoverSearch' || _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === 'hoverSearch'
-      });
+        'active': _storesHeaderStoreJs2['default']._getSearchButtonActionValue() === 'hoverSearch' || _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === 'hoverSearch' }),
+
+      // Detect if the header is sticky now
+      stickyStatus = (0, _classnames2['default'])({
+        'isSticky': _storesHeaderStoreJs2['default'].getState().isSticky
+      }),
+          searchLabel = _react2['default'].createElement(
+        'div',
+        { className: 'Search-Text ' + classes + ' ' + stickyStatus + ' visuallyHidden' },
+        'Search'
+      );
 
       return _react2['default'].createElement(
         'div',
@@ -80,7 +89,7 @@ var SearchButton = (function (_React$Component) {
           id: '' + this.props.className + '-SearchButton',
           className: 'nypl-icon-magnifier-fat ' + this.props.className + '-SearchButton ' + classes,
           name: 'Search Button',
-          label: '' }),
+          label: searchLabel }),
         _react2['default'].createElement(_SearchBoxSearchBoxJs2['default'], {
           id: '' + this.props.className + '-SearchBox',
           className: '' + this.props.className + '-SearchBox' })

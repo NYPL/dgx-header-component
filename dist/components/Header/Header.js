@@ -75,6 +75,10 @@ var _GlobalAlertsGlobalAlertsJs = require('../GlobalAlerts/GlobalAlerts.js');
 
 var _GlobalAlertsGlobalAlertsJs2 = _interopRequireDefault(_GlobalAlertsGlobalAlertsJs);
 
+var _dgxSkipNavigationLink = require('dgx-skip-navigation-link');
+
+var _dgxSkipNavigationLink2 = _interopRequireDefault(_dgxSkipNavigationLink);
+
 var _utilsUtilsJs = require('../../utils/utils.js');
 
 var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
@@ -109,8 +113,14 @@ var Header = (function (_React$Component) {
       // enable the sticky header depending on position.
       this._handleStickyHeader();
 
+      // Check if the sticky header covers the anchor
+      this._offsetStickyHeader();
+
       // Listen to the scroll event for the sticky header.
       window.addEventListener('scroll', this._handleStickyHeader.bind(this));
+
+      // Listen to hash change and check if the sticky header covers the anchor
+      window.addEventListener('hashchange', this._offsetStickyHeader.bind(this), false);
     }
   }, {
     key: 'componentWillUnmount',
@@ -129,16 +139,20 @@ var Header = (function (_React$Component) {
           headerClass = this.props.className || 'Header',
           headerClasses = (0, _classnames2['default'])(headerClass, { 'sticky': isHeaderSticky }),
           showDialog = _storesHeaderStoreJs2['default']._getMobileMyNyplButtonValue(),
-          mobileMyNyplClasses = (0, _classnames2['default'])({ 'active': showDialog });
+          mobileMyNyplClasses = (0, _classnames2['default'])({ 'active': showDialog }),
+          skipNav = this.props.skipNav ? _react2['default'].createElement(_dgxSkipNavigationLink2['default'], this.props.skipNav) : '';
 
       return _react2['default'].createElement(
         'header',
         { id: this.props.id, className: headerClasses, ref: 'nyplHeader' },
+        skipNav,
         _react2['default'].createElement(_GlobalAlertsGlobalAlertsJs2['default'], { className: '' + headerClass + '-GlobalAlerts' }),
         _react2['default'].createElement(
           'div',
           { className: '' + headerClass + '-Wrapper' },
-          _react2['default'].createElement(_MobileHeaderJs2['default'], { className: '' + headerClass + '-Mobile', locatorUrl: '//www.nypl.org/locations/map?nearme=true' }),
+          _react2['default'].createElement(_MobileHeaderJs2['default'], { className: '' + headerClass + '-Mobile',
+            locatorUrl: '//www.nypl.org/locations/map?nearme=true',
+            ref: 'headerMobile' }),
           _react2['default'].createElement(
             'div',
             { className: 'MobileMyNypl-Wrapper ' + mobileMyNyplClasses },
@@ -146,7 +160,9 @@ var Header = (function (_React$Component) {
           ),
           _react2['default'].createElement(
             'div',
-            { className: '' + headerClass + '-TopWrapper', style: styles.wrapper },
+            { className: '' + headerClass + '-TopWrapper',
+              style: styles.wrapper,
+              ref: 'headerTopWrapper' },
             _react2['default'].createElement(_LogoLogoJs2['default'], { className: '' + headerClass + '-Logo' }),
             _react2['default'].createElement(
               'div',
@@ -165,6 +181,7 @@ var Header = (function (_React$Component) {
                 lang: this.props.lang,
                 style: styles.subscribeButton }),
               _react2['default'].createElement(_DonateButtonDonateButtonJs2['default'], {
+                id: 'Top-DonateButton',
                 lang: this.props.lang,
                 style: styles.donateButton,
                 gaLabel: 'Header Button' })
@@ -240,6 +257,41 @@ var Header = (function (_React$Component) {
     value: function _getWindowVerticalScroll() {
       return window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
     }
+  }, {
+    key: '_offsetStickyHeader',
+
+    /**
+    * _offsetStickyHeader()
+    * change the sticky header's vertical postion so it won't
+    * cover the title of the anchor if the user got to the page by
+    * type in the URL with anchor in it.
+    * 68px is the height of sticky header.
+    */
+    value: function _offsetStickyHeader() {
+      // Get sticky header's height: 68px and add 10px distance
+      var stickyHeaderHeight = 68,
+          offsetDistance = stickyHeaderHeight + 10,
+          headerMobile = _react2['default'].findDOMNode(this.refs.headerMobile),
+          headerMobileDisplay = undefined;
+
+      // Get the display CSS feature of mobile header to see if we are on mobile
+      // view. currentStyle is for IE, and getComputedStyle is for other browsers
+      if (headerMobile.currentStyle) {
+        headerMobileDisplay = headerMobile.currentStyle.display;
+      } else if (window.getComputedStyle) {
+        headerMobileDisplay = window.getComputedStyle(headerMobile, null).getPropertyValue('display');
+      }
+
+      // We check here to see if the header is sticky or on mobile view to decide
+      // if we need to scroll the page
+      if (_storesHeaderStoreJs2['default'].getState().isSticky && headerMobileDisplay === 'none') {
+        if (window.location.hash) {
+          setTimeout(function () {
+            window.scrollBy(0, -offsetDistance);
+          }, 1000);
+        }
+      }
+    }
   }]);
 
   return Header;
@@ -250,8 +302,8 @@ var Header = (function (_React$Component) {
 Header.defaultProps = {
   lang: 'en',
   className: 'Header',
-  id: 'nyplHeader'
-};
+  id: 'nyplHeader',
+  skipNav: null };
 
 var styles = {
   wrapper: {

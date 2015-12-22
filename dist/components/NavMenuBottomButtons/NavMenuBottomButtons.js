@@ -80,7 +80,11 @@ var NavMenuBottomButtons = (function (_React$Component) {
             )
           )
         ),
-        _react2['default'].createElement(_DonateButtonDonateButtonJs2['default'], { className: 'DonateLink', style: styles.donateLink, gaLabel: 'Mobile Buttons Donate' })
+        _react2['default'].createElement(_DonateButtonDonateButtonJs2['default'], {
+          id: 'MobileNav-DonateButton',
+          className: 'DonateLink',
+          style: styles.donateLink,
+          gaLabel: 'Mobile Buttons Donate' })
       );
     }
   }]);

@@ -87,7 +87,10 @@ var NavMenu = (function (_React$Component) {
         { className: stickyItemsClass },
         _react2['default'].createElement('span', { className: 'lineSeparator', style: styles.lineSeparator }),
         _react2['default'].createElement(_MyNyplButtonStickyMyNyplButtonJs2['default'], null),
-        _react2['default'].createElement(_DonateButtonDonateButtonJs2['default'], { style: styles.donateButton, gaLabel: 'Collapsed Donate Button' })
+        _react2['default'].createElement(_DonateButtonDonateButtonJs2['default'], {
+          id: 'Collapsed-DonateButton',
+          style: styles.donateButton,
+          gaLabel: 'Collapsed Donate Button' })
       ),
           navMenu = navItems.map(function (item, index) {
         return _react2['default'].createElement(_NavMenuItemNavMenuItemJs2['default'], {

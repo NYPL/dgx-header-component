@@ -36,7 +36,11 @@ class NavMenuBottomButtons extends React.Component{
             </span>
           </span>
         </a>
-        <DonateButton className='DonateLink' style={styles.donateLink} gaLabel={'Mobile Buttons Donate'}/>
+        <DonateButton
+          id='MobileNav-DonateButton'
+          className='DonateLink'
+          style={styles.donateLink}
+          gaLabel={'Mobile Buttons Donate'} />
       </div>
     );
   }

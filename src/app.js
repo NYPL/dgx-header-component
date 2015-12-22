@@ -17,4 +17,4 @@ if (!window.ga) {
 /* app.jsx
  * Used for local development of React Components
  */
-React.render(React.createElement(nyplComponent), document.getElementById('app'));
+React.render(React.createElement(nyplComponent, {skipNav: {target: 'maincontent'}}), document.getElementById('app'));

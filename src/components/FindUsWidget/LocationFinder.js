@@ -119,7 +119,7 @@ class LocationFinder extends React.Component {
   _handleChange() {
     let zipcode = React.findDOMNode(this.refs.zipCodeInput).value;
 
-  	if(this._validateZipcode(zipcode)) {
+  	if (this._validateZipcode(zipcode)) {
 
       // Update the state.zipcode value
       this._setZipcodeValue(zipcode);

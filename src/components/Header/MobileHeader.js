@@ -86,6 +86,7 @@ class MobileHeader extends React.Component {
             ]}
             className={`${this.props.className}-SearchButton ${mobileSearchClass}`}
             ref='MobileSearchButton'>
+            <div className='visuallyHidden'>Search</div>
           </span>
         </ReactTappable>
 

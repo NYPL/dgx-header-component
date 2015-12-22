@@ -118,10 +118,18 @@ var MobileHeader = (function (_React$Component) {
         _react2['default'].createElement(
           _reactTappable2['default'],
           { onTap: this._handleMenuBtnPress.bind(this, 'clickSearch') },
-          _react2['default'].createElement('span', {
-            style: [styles.searchIcon, searchButtonAction === 'clickSearch' ? styles.activeSearchIcon : ''],
-            className: '' + this.props.className + '-SearchButton ' + mobileSearchClass,
-            ref: 'MobileSearchButton' })
+          _react2['default'].createElement(
+            'span',
+            {
+              style: [styles.searchIcon, searchButtonAction === 'clickSearch' ? styles.activeSearchIcon : ''],
+              className: '' + this.props.className + '-SearchButton ' + mobileSearchClass,
+              ref: 'MobileSearchButton' },
+            _react2['default'].createElement(
+              'div',
+              { className: 'visuallyHidden' },
+              'Search'
+            )
+          )
         ),
         _react2['default'].createElement(
           _reactTappable2['default'],

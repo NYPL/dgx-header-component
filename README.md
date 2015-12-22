@@ -29,4 +29,4 @@ key should focus the skip navigation link which will reveal it visually.
 
 If the target of the link is not naturally focusable, as a div is not, it should
 be given a tabindex of −1. This allows the element to receive programmatic focus
-while being ignored during normal navigation flow
+while being ignored during normal navigation flow.

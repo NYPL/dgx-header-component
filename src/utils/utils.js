@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-import {ga} from 'dgx-react-ga';
+import { ga } from 'dgx-react-ga';
 
 function Utils() {
   this.formatDate = (startDate, endDate) => {

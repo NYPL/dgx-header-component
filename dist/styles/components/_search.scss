@@ -11,6 +11,7 @@
   @include min-screen(792px) {
     margin: 0 20px 0 10px;
   }
+
 }
 
 /* CSS for Search button */
@@ -24,6 +25,62 @@
   display: none;
   font-size: 22px;
   padding: 8px 10px 14px 10px;
+  border-radius: 0;
+
+  & .Search-Text {
+
+    @include Kievit-Book;
+
+    position: relative;
+    color: $BG_MENU_SEARCH;
+    display: inline-block;
+    float: left;
+    font-size: 18px;
+    line-height: 22px;
+    padding: 0;
+    top: 2px;
+
+
+    &.active {
+      color: #78CCED;
+      -webkit-transition: color .3s linear .25s, color .3s linear .25s;
+      transition: color .3s linear .25s, color .3s linear .25s;
+    }
+
+    &.isSticky {
+
+      height: 1px;
+      left: -10000px;
+      overflow: hidden;
+      position: absolute;
+      top: auto;
+      width: 1px;
+
+      &.visuallyHidden {
+        height: 1px;
+        left: -10000px;
+        overflow: hidden;
+        position: absolute;
+        top: auto;
+        width: 1px;
+      }
+
+      @include min-screen(892px) {
+        position: relative;
+        left: 0;
+        top: 2px;
+        width: auto;
+        height: auto;
+        overflow: hidden;
+      }
+
+    }
+
+    @include min-screen(1025px) {
+      font-size: 16px;
+    }
+
+  }
 
   @include min-screen(769px) {
     display: block;
@@ -50,9 +107,9 @@
     @include min-screen(769px) {
       display: block;
     }
+
   }
 }
-
 
 /* CSS for Search box. It shows only activated. Default is not displayed. */
 &-SearchBox {

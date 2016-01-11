@@ -289,12 +289,12 @@ const styles = {
   },
   privacyLink: {
     textDecoration: 'underline',
-    fontSize: '11px',
+    fontSize: '10px',
     color: 'rgba(255, 255, 255, 0.5)',
     fontWeight: '200',
     textTransform: 'uppercase',
     position: 'absolute',
-    bottom: '26px',
+    bottom: '45px',
     right: '30px'
   },
   scLink: {
@@ -304,8 +304,9 @@ const styles = {
     fontWeight: '200',
     textTransform: 'uppercase',
     position: 'absolute',
-    bottom: '46px',
-    right: '30px'
+    bottom: '68px',
+    right: '30px',
+    letterSpacing: '0.03em',
   },    
 };
 

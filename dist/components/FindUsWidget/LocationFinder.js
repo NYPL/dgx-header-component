@@ -6,19 +6,21 @@ Object.defineProperty(exports, '__esModule', {
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
 var LocationFinder = (function (_React$Component) {
+  _inherits(LocationFinder, _React$Component);
+
   function LocationFinder(props) {
     _classCallCheck(this, LocationFinder);
 
@@ -34,8 +36,6 @@ var LocationFinder = (function (_React$Component) {
     this._handleSubmit = this._handleSubmit.bind(this);
     this._handleChange = this._handleChange.bind(this);
   }
-
-  _inherits(LocationFinder, _React$Component);
 
   _createClass(LocationFinder, [{
     key: 'render',
@@ -72,8 +72,6 @@ var LocationFinder = (function (_React$Component) {
         )
       );
     }
-  }, {
-    key: '_handleSubmit',
 
     /**
      * _handleSubmit() 
@@ -83,9 +81,9 @@ var LocationFinder = (function (_React$Component) {
      *
      * @return {Object} location
      */
-    value: function _handleSubmit() {}
   }, {
-    key: '_enableSubmitButton',
+    key: '_handleSubmit',
+    value: function _handleSubmit() {}
 
     /**
      * _enableSubmitButton() 
@@ -93,11 +91,11 @@ var LocationFinder = (function (_React$Component) {
      * property value to false
      *
      */
+  }, {
+    key: '_enableSubmitButton',
     value: function _enableSubmitButton() {
       this.setState({ disableSubmit: false });
     }
-  }, {
-    key: '_getNearestLocations',
 
     /**
      * _getNearestLocations(zipcode) 
@@ -108,9 +106,9 @@ var LocationFinder = (function (_React$Component) {
      * @param {Number} zipcode
      * @return {Object} location
      */
-    value: function _getNearestLocations(zipcode) {}
   }, {
-    key: '_validateZipcode',
+    key: '_getNearestLocations',
+    value: function _getNearestLocations(zipcode) {}
 
     /**
      * _validateZipcode(zipcode) 
@@ -120,14 +118,14 @@ var LocationFinder = (function (_React$Component) {
      * @param {Number} zipcode
      * @return {Boolean} true/false
      */
+  }, {
+    key: '_validateZipcode',
     value: function _validateZipcode(zipcode) {
       if (zipcode && !isNaN(zipcode) && zipcode.length === 5) {
         return true;
       }
       return false;
     }
-  }, {
-    key: '_getZipcodeValue',
 
     /**
      * _getZipcodeValue() 
@@ -136,11 +134,11 @@ var LocationFinder = (function (_React$Component) {
      *
      * @return {Number} state.zipcode
      */
+  }, {
+    key: '_getZipcodeValue',
     value: function _getZipcodeValue() {
       return this.state.zipcode;
     }
-  }, {
-    key: '_setZipcodeValue',
 
     /**
      * _setZipcodeValue(value) 
@@ -149,11 +147,11 @@ var LocationFinder = (function (_React$Component) {
      *
      * @param {Number} value
      */
+  }, {
+    key: '_setZipcodeValue',
     value: function _setZipcodeValue(value) {
       this.setState({ zipcode: value });
     }
-  }, {
-    key: '_handleChange',
 
     /**
      * _handleChange() 
@@ -163,6 +161,8 @@ var LocationFinder = (function (_React$Component) {
      * the nearest location suggestions
      *
      */
+  }, {
+    key: '_handleChange',
     value: function _handleChange() {
       var zipcode = _react2['default'].findDOMNode(this.refs.zipCodeInput).value;
 
@@ -176,7 +176,9 @@ var LocationFinder = (function (_React$Component) {
 
         // Execute Autocomplete Search Suggestions
         console.log('Input is valid, suggestions should be enabled');
-      } else {}
+      } else {
+        // Do not execute Autocomplete
+      }
     }
   }]);
 
@@ -190,5 +192,3 @@ LocationFinder.defaultProps = {
 
 exports['default'] = LocationFinder;
 module.exports = exports['default'];
-
-// Do not execute Autocomplete

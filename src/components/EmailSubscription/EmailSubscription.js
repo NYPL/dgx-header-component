@@ -143,7 +143,8 @@ class EmailSubscription extends React.Component {
               {subscribeContent}
           <a href={this.props.subCenterUrl}
 	    className={`${this.props.className}-sc-link`}
-	    style={styles.scLink}>
+	    style={styles.scLink}
+	    onClick={utils._trackHeader.bind(this, 'Subscribe', 'Subscription Center')}>
 	    Subscription Center
 	  </a>
           <a href={this.props.policyUrl}

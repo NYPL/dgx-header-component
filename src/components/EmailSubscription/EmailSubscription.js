@@ -140,7 +140,7 @@ class EmailSubscription extends React.Component {
       // Always show the privacy link except in the loading phase.
       return (
         <div className={this.props.className}>
-              {subscribeContent}
+          {subscribeContent}
           <a href={this.props.subCenterUrl}
 	    className={`${this.props.className}-sc-link`}
 	    style={styles.scLink}

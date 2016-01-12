@@ -74,7 +74,8 @@ class MobileHeader extends React.Component {
 
         <a 
           style={styles.locatorIcon} 
-          href={locatorUrl} 
+          href={locatorUrl}
+          onClick={utils._trackHeader.bind(this, 'Click', 'Mobile Locations Button')}
           className={`${this.props.className}-Locator nypl-icon-locator-large`}>
         </a>
 

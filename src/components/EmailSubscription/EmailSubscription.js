@@ -141,6 +141,12 @@ class EmailSubscription extends React.Component {
       return (
         <div className={this.props.className}>
           {subscribeContent}
+          <a href={this.props.subCenterUrl}
+	    className={`${this.props.className}-sc-link`}
+	    style={styles.scLink}
+	    onClick={utils._trackHeader.bind(this, 'Subscribe', 'Subscription Center')}>
+	    Subscription Center
+	  </a>
           <a href={this.props.policyUrl}
             className={`${this.props.className}-pp-link`}
             style={styles.privacyLink}>
@@ -241,7 +247,8 @@ EmailSubscription.defaultProps = {
   list_id: '1061',
   form_method: 'POST',
   placeholder: 'Your email address',
-  policyUrl: 'http://www.nypl.org/help/about-nypl/legal-notices/privacy-policy'
+  policyUrl: 'http://www.nypl.org/help/about-nypl/legal-notices/privacy-policy',
+  subCenterUrl: 'http://pages.email.nypl.org/page.aspx?QS=3935619f7de112ef7250fe02b84fb2f9ab74e4ea015814b7',
 };
 
 const styles = {
@@ -283,13 +290,25 @@ const styles = {
   },
   privacyLink: {
     textDecoration: 'underline',
-    fontSize: '12px',
+    fontSize: '10px',
     color: 'rgba(255, 255, 255, 0.5)',
     fontWeight: '200',
+    textTransform: 'uppercase',
     position: 'absolute',
-    bottom: '26px',
+    bottom: '45px',
     right: '30px'
-  }
+  },
+  scLink: {
+    textDecoration: 'underline',
+    fontSize: '11px',
+    color: 'white',
+    fontWeight: '200',
+    textTransform: 'uppercase',
+    position: 'absolute',
+    bottom: '68px',
+    right: '30px',
+    letterSpacing: '0.03em',
+  },    
 };
 
 export default Radium(EmailSubscription);

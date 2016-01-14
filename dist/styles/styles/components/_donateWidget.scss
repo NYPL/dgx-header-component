@@ -1,0 +1,115 @@
+.DonateWidget {
+  &-DonateBox {
+    display: inline-table;
+    width: 50%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    &-Wrapper {
+      color: #FFFFFF;
+      display: block;
+      position: relative;
+      margin: 0;
+      top: 50px;
+
+      @include min-screen(769px) {
+        margin: 0 0 0 31px;
+      }
+
+      @include min-screen(1115px) {
+        margin: 0 0 0 $RIGHT_NAV_CONTAINER_LEFT_MARGIN;
+      }
+    }
+
+    &-Tag {
+      font-size: 13px;
+      @include Kievit-Medium;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    &-Title {
+      font-size: 27px;
+      @include Kievit-Book;
+      line-height: 1em;
+      margin: .75em 0;
+      font-weight: normal;
+      letter-spacing: 0.02em;
+
+      @include min-screen(960px) {
+        font-size: 30px;
+      }
+    }
+
+    &-Desc {
+      @include Kievit-Regular;
+      font-size: 15.5px;
+      line-height: 1.3em;
+      letter-spacing: .01em;
+
+      @include min-screen(960px) {
+        line-height: 1.5em;
+      }
+    }
+
+    &-DonationLinks {
+      list-style-type: none;
+      display: none;
+      margin: .5em 0 0 0;
+      padding: 0;
+
+      @include min-screen(892px) {
+        display: block;
+      }
+
+      @include min-screen(960px) {
+        margin: 1em 0;
+      }
+
+      li {
+        display: inline-block;
+        margin: 0 7px 0 0;
+
+        @include min-screen(960px) {
+          margin: 0 10px 0 0;
+        }
+
+        @include min-screen(1280px) {
+          margin: 0 15px 0 0;
+        }
+
+        &:last-child {
+          margin-right: 0px
+        }
+
+        a {
+          color: #FFF;
+          display: block;
+          font-size: 15px;
+          padding: 15px 20px;
+          margin: 0;
+          border: 2px solid #FFF;
+          border-radius: 5px;
+
+          &:hover {
+            color: $BG_MENU_BROWSE_RIGHT;
+            background: #fff;
+          }
+
+          @include min-screen(769px) {
+            padding: 7px 8px;
+          }
+
+          @include min-screen(960px) {
+            font-size: 16.5px;
+            padding: 10px 13px;
+          }
+
+          @include min-screen(1280px) {
+            font-size: 18px;
+          }
+        }
+      }
+    }
+  }
+}

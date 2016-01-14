@@ -3,13 +3,13 @@
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _react = require('react');
 
@@ -46,6 +46,8 @@ var _utilsUtilsJs = require('../../utils/utils.js');
 var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
 
 var SearchBox = (function (_React$Component) {
+  _inherits(SearchBox, _React$Component);
+
   // Constructor used in ES6
 
   function SearchBox(props) {
@@ -74,12 +76,10 @@ var SearchBox = (function (_React$Component) {
     this._animationTimer = this._animationTimer.bind(this);
   }
 
-  _inherits(SearchBox, _React$Component);
+  // Listen to the search button action changes in Store,
 
   _createClass(SearchBox, [{
     key: 'componentDidMount',
-
-    // Listen to the search button action changes in Store,
     value: function componentDidMount() {
       _storesHeaderStoreJs2['default'].listen(this._onChange.bind(this));
     }
@@ -88,20 +88,20 @@ var SearchBox = (function (_React$Component) {
     value: function componentWillUnmount() {
       _storesHeaderStoreJs2['default'].unlisten(this._onChange.bind(this));
     }
-  }, {
-    key: '_onChange',
 
     // Update the state of the class
+  }, {
+    key: '_onChange',
     value: function _onChange() {
       this.setState({
         actionValue: _storesHeaderStoreJs2['default'].getState().searchButtonAction,
         lastActiveMenuItem: _storesHeaderStoreJs2['default'].getState().lastActiveMenuItem
       });
     }
-  }, {
-    key: 'render',
 
     // Dom Render Section
+  }, {
+    key: 'render',
     value: function render() {
       var _this = this;
 
@@ -122,7 +122,7 @@ var SearchBox = (function (_React$Component) {
       inputOptions = inputOptionData.map(function (element, i) {
         return _react2['default'].createElement(
           'div',
-          { className: '' + _this.props.className + '-Input-Option', key: i },
+          { className: _this.props.className + '-Input-Option', key: i },
           _react2['default'].createElement(_InputFieldInputFieldJs2['default'], { type: 'radio',
             id: element.id,
             name: element.name,
@@ -132,7 +132,7 @@ var SearchBox = (function (_React$Component) {
             onChange: _this._inputChange.bind(_this, 'option') }),
           _react2['default'].createElement(
             'label',
-            { htmlFor: element.id, className: '' + _this.props.className + '-Input-Options-label' },
+            { htmlFor: element.id, className: _this.props.className + '-Input-Options-label' },
             element.labelText
           )
         );
@@ -143,7 +143,7 @@ var SearchBox = (function (_React$Component) {
         return _react2['default'].createElement(
           'div',
           { key: i,
-            className: '' + _this.props.className + '-Mobile-Submit-Option ' + element.columnClass,
+            className: _this.props.className + '-Mobile-Submit-Option ' + element.columnClass,
             value: element.value,
             onClick: _this._submitSearchRequest.bind(_this, element.value) },
           _react2['default'].createElement(
@@ -159,28 +159,28 @@ var SearchBox = (function (_React$Component) {
         'div',
         {
           id: this.props.id,
-          className: '' + this.props.className + ' ' + classes,
+          className: this.props.className + ' ' + classes,
           onKeyPress: this._triggerSubmit,
           onMouseEnter: this._watchHoverIntentEnter.bind(this),
           onMouseLeave: this._watchHoverIntentLeave.bind(this) },
         _react2['default'].createElement(
           'div',
-          { id: '' + this.props.className + '-Elements-Wrapper', className: '' + this.props.className + '-Elements-Wrapper' },
+          { id: this.props.className + '-Elements-Wrapper', className: this.props.className + '-Elements-Wrapper' },
           _react2['default'].createElement(
             'div',
-            { id: '' + this.props.className + '-Elements-Input-Wrapper',
-              className: '' + this.props.className + '-Elements-Input-Wrapper' },
+            { id: this.props.className + '-Elements-Input-Wrapper',
+              className: this.props.className + '-Elements-Input-Wrapper' },
             _react2['default'].createElement(
               'div',
-              { id: '' + this.props.className + '-Elements-Input-Keywords-Wrapper',
-                className: '' + this.props.className + '-Elements-Input-Keywords-Wrapper' },
+              { id: this.props.className + '-Elements-Input-Keywords-Wrapper',
+                className: this.props.className + '-Elements-Input-Keywords-Wrapper' },
               _react2['default'].createElement(
                 'div',
-                { className: '' + this.props.className + '-Input-Keywords-Border' },
+                { className: this.props.className + '-Input-Keywords-Border' },
                 _react2['default'].createElement('span', { className: 'nypl-icon-magnifier-thin icon' }),
                 _react2['default'].createElement(_InputFieldInputFieldJs2['default'], { type: 'text',
-                  id: '' + this.props.id + '-Input-Keywords',
-                  className: '' + this.props.className + '-Input-Keywords ' + pulseAnimation,
+                  id: this.props.id + '-Input-Keywords',
+                  className: this.props.className + '-Input-Keywords ' + pulseAnimation,
                   ref: 'keywords',
                   value: this.state.searchKeywords,
                   maxLength: '128',
@@ -190,25 +190,23 @@ var SearchBox = (function (_React$Component) {
             ),
             _react2['default'].createElement(
               'div',
-              { id: '' + this.props.className + '-Elements-Input-Options-Wrapper',
-                className: '' + this.props.className + '-Elements-Input-Options-Wrapper' },
+              { id: this.props.className + '-Elements-Input-Options-Wrapper',
+                className: this.props.className + '-Elements-Input-Options-Wrapper' },
               inputOptions
             )
           ),
           _react2['default'].createElement(
             'div',
-            { id: '' + this.props.className + '-Mobile-Submit',
-              className: '' + this.props.className + '-Mobile-Submit' },
+            { id: this.props.className + '-Mobile-Submit',
+              className: this.props.className + '-Mobile-Submit' },
             mobileSubmitButtons
           ),
-          _react2['default'].createElement('button', { id: '' + this.props.className + '-Elements-SubmitButton',
+          _react2['default'].createElement('button', { id: this.props.className + '-Elements-SubmitButton',
             className: 'nypl-icon-magnifier-fat ' + this.props.className + '-Elements-SubmitButton',
             onClick: this._submitSearchRequest.bind(this, null) })
         )
       );
     }
-  }, {
-    key: '_inputChange',
 
     /**
      *  _inputChange(field, event)
@@ -220,6 +218,8 @@ var SearchBox = (function (_React$Component) {
      *
      * @param {String} field  {Event Object} event
      */
+  }, {
+    key: '_inputChange',
     value: function _inputChange(field, event) {
       if (field === 'keywords') {
         this.setState({ searchKeywords: event.target.value });
@@ -227,8 +227,6 @@ var SearchBox = (function (_React$Component) {
         this.setState({ searchOption: event.target.value });
       }
     }
-  }, {
-    key: '_submitSearchRequest',
 
     /**
      * _submitSearchRequest(value)
@@ -236,6 +234,8 @@ var SearchBox = (function (_React$Component) {
      *
      * @param {String} value
      */
+  }, {
+    key: '_submitSearchRequest',
     value: function _submitSearchRequest(value) {
       // Store the data that the user entered
       var requestParameters = {
@@ -278,8 +278,6 @@ var SearchBox = (function (_React$Component) {
         window.location.assign(requestUrl);
       }
     }
-  }, {
-    key: '_triggerSubmit',
 
     /**
      * _triggerSubmit(event)
@@ -288,13 +286,13 @@ var SearchBox = (function (_React$Component) {
      *
      * @param {Event} event
      */
+  }, {
+    key: '_triggerSubmit',
     value: function _triggerSubmit(event) {
       if (event && event.charCode === 13) {
         this._submitSearchRequest(null);
       }
     }
-  }, {
-    key: '_animationTimer',
 
     /**
      * _animationTimer(element)
@@ -304,6 +302,8 @@ var SearchBox = (function (_React$Component) {
      *
      * @param {DOM Element} element
      */
+  }, {
+    key: '_animationTimer',
     value: function _animationTimer(element) {
       var _this2 = this;
 
@@ -328,8 +328,6 @@ var SearchBox = (function (_React$Component) {
         this.setState({ placeholderAnimation: 'sequential' });
       }
     }
-  }, {
-    key: '_watchHoverIntentEnter',
 
     /**
      * _watchHoverIntentEnter()
@@ -337,13 +335,13 @@ var SearchBox = (function (_React$Component) {
      * matches the search by hover. Then fire the
      * Action to store a reference to the lastActiveMenuItem as hoverSearch.
      */
+  }, {
+    key: '_watchHoverIntentEnter',
     value: function _watchHoverIntentEnter() {
       if (this.state.actionValue === 'hoverSearch') {
         _actionsActionsJs2['default'].setLastActiveMenuItem(this.state.actionValue);
       }
     }
-  }, {
-    key: '_watchHoverIntentLeave',
 
     /**
      * _watchHoverIntentLeave()
@@ -351,16 +349,18 @@ var SearchBox = (function (_React$Component) {
      * property to an empty string when
      * hovered out.
      */
+  }, {
+    key: '_watchHoverIntentLeave',
     value: function _watchHoverIntentLeave() {
       _actionsActionsJs2['default'].setLastActiveMenuItem('');
     }
-  }, {
-    key: '_setCatalogUrl',
 
     /**
      * _setCatalogUrl(searchString, catalogBaseUrl)
      * Returns the final URL for the catalog search.
      */
+  }, {
+    key: '_setCatalogUrl',
     value: function _setCatalogUrl(searchString, catalogBaseUrl) {
       var catalogUrl = catalogBaseUrl || 'http://www.nypl.org/search/apachesolr_search/';
 
@@ -368,8 +368,6 @@ var SearchBox = (function (_React$Component) {
         return catalogUrl + encodeURIComponent(searchString);
       }
     }
-  }, {
-    key: '_encoreEncodeSearchString',
 
     /**
      * _encoreEncodeSearchString(string)
@@ -377,6 +375,8 @@ var SearchBox = (function (_React$Component) {
      * encoded using base64 - these chars are "=","/", "\", "?"
      * character : base64 encoded 
      */
+  }, {
+    key: '_encoreEncodeSearchString',
     value: function _encoreEncodeSearchString(string) {
       var base64_enc_map = {
         '=': 'PQ==',
@@ -396,8 +396,6 @@ var SearchBox = (function (_React$Component) {
 
       return encodedString;
     }
-  }, {
-    key: '_setEncoreUrl',
 
     /**
      * _setEncoreUrl(searchInput, baseUrl, language)
@@ -406,6 +404,8 @@ var SearchBox = (function (_React$Component) {
      * base encore root url. An optional scope and
      * language may be concatenated as well.
      */
+  }, {
+    key: '_setEncoreUrl',
     value: function _setEncoreUrl(searchInput, baseUrl, language, scopeString) {
       var searchTerm = this._encoreEncodeSearchString(searchInput),
           rootUrl = baseUrl || 'http://browse.nypl.org/iii/encore/search/',
@@ -418,8 +418,6 @@ var SearchBox = (function (_React$Component) {
 
       return finalEncoreUrl;
     }
-  }, {
-    key: '_encoreAddScope',
 
     /**
      * _encoreAddScope(baseUrl, searchString, scopeString)
@@ -427,8 +425,10 @@ var SearchBox = (function (_React$Component) {
      * If no scope is set, adds the required string to
      * be returned as the final url.
      */
+  }, {
+    key: '_encoreAddScope',
     value: function _encoreAddScope(baseUrl, searchString, scopeString) {
-      return scopeString ? '' + baseUrl + 'C__S' + searchString + '' + scopeString + '__Orightresult__U' : '' + baseUrl + 'C__S' + searchString + '__Orightresult__U';
+      return scopeString ? baseUrl + 'C__S' + searchString + scopeString + '__Orightresult__U' : baseUrl + 'C__S' + searchString + '__Orightresult__U';
     }
   }]);
 

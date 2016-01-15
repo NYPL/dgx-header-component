@@ -17,6 +17,9 @@
   background-color: #FFF;
   border-bottom: 2px solid #ED1C24;
   @extend %clearfix;
+  @include min-screen(769px) {
+      height: 289px;
+  }
 
   /* Global rules for repetitive link elements */
   a {

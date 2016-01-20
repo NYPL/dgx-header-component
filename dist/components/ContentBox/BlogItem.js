@@ -39,7 +39,7 @@ var BlogItem = (function (_React$Component) {
           img = feature.imgSrc ? _react2['default'].createElement(
         'div',
         { className: 'FeatureItem-Image ' + classes },
-        _react2['default'].createElement('img', { src: feature.imgSrc })
+        _react2['default'].createElement('img', { src: feature.imgSrc, alt: '' })
       ) : null;
 
       return _react2['default'].createElement(

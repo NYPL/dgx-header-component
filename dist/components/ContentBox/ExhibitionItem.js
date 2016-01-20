@@ -43,7 +43,7 @@ var ExhibitionItem = (function (_React$Component) {
           img = feature.imgSrc ? _react2['default'].createElement(
         'div',
         { className: 'FeatureItem-Image ' + classes },
-        _react2['default'].createElement('img', { src: feature.imgSrc })
+        _react2['default'].createElement('img', { src: feature.imgSrc, alt: '' })
       ) : null,
           startDate = (0, _moment2['default'])(feature.eventDates.start),
           endDate = (0, _moment2['default'])(feature.eventDates.end),

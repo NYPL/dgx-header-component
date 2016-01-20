@@ -17,7 +17,15 @@
   background-color: #FFF;
   border-bottom: 2px solid #ED1C24;
   @extend %clearfix;
+  @include min-screen(769px) {
+      height: 136px;
+  }
 
+  @include min-screen(1025px) {
+      height: 226px;
+  }
+
+  
   /* Global rules for repetitive link elements */
   a {
     text-decoration: none;
@@ -55,7 +63,7 @@
           background-color: #FFF;
           height: 65px;
           box-shadow: 0px 2px 2.5px 0px rgba(50, 50, 50, 0.25);
-          transition: all 0.4s ease;
+          transition: height 0.4s ease;
         }
 
         &-TopWrapper {
@@ -103,13 +111,12 @@
       display: block;
       max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
       margin: 0px 20px;
-      min-height: 136px;
+      height: 136px;
     }
 
 
     @include min-screen(1025px) {
       margin: 0px auto;
-      min-height: inherit;
     }
   }
 

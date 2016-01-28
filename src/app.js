@@ -1,5 +1,5 @@
 import React from 'react';
-import nyplComponent from './components/Header/Header.js';
+import nyplHeaderComponent from './components/Header/Header.js';
 
 import ga from 'react-ga';
 import {config} from 'dgx-react-ga';
@@ -17,4 +17,4 @@ if (!window.ga) {
 /* app.jsx
  * Used for local development of React Components
  */
-React.render(React.createElement(nyplComponent, {skipNav: {target: 'maincontent'}}), document.getElementById('app'));
+React.render(React.createElement(nyplHeaderComponent, {skipNav: {target: 'maincontent'}}), document.getElementById('app'));

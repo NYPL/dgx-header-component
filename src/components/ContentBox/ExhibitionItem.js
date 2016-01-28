@@ -14,7 +14,7 @@ class ExhibitionItem extends React.Component {
       classes = this.props.classes,
       img = feature.imgSrc ?
         <div className={'FeatureItem-Image ' + classes}>
-          <img src={feature.imgSrc} />
+          <img src={feature.imgSrc} alt="" />
         </div> : null,
       startDate = moment(feature.eventDates.start),
       endDate = moment(feature.eventDates.end),

@@ -12,6 +12,7 @@ import Actions from '../../actions/Actions.js';
 
 // GA Utility Library
 import utils from '../../utils/utils.js';
+import FeatureFlags from 'dgx-feature-flags';
 
 // Create React class
 class SearchButton extends React.Component {
@@ -19,9 +20,27 @@ class SearchButton extends React.Component {
   // Constructor used in ES6
   constructor(props) {
     super(props);
+
+    this.state = {
+      featureFlags: FeatureFlags.store.getState()
+    }
+  }
+
+  componentDidMount() {
+    FeatureFlags.store.listen(this._onChange.bind(this));
+  }
+
+  componentWillUnmount() {
+    FeatureFlags.store.unlisten(this._onChange.bind(this));
+  }
+
+  _onChange() {
+    this.setState({featureFlags: FeatureFlags.store.getState()});
   }
 
   render () {
+    console.log(FeatureFlags.store._getImmuteState());
+
     // Give active class if the button is activated by hover
     let classes = cx({
         'active': HeaderStore._getSearchButtonActionValue() === 'hoverSearch' ||
@@ -31,7 +50,10 @@ class SearchButton extends React.Component {
       stickyStatus = cx({
         'isSticky': HeaderStore.getState().isSticky
       }),
-      searchLabel = <div className={`Search-Text ${classes} ${stickyStatus} visuallyHidden`}>Search</div>;
+      searchLabelFlag = cx({
+        'visuallyHidden': !FeatureFlags.store._isExperimentActive('search-label')
+      }),
+      searchLabel = <div className={`Search-Text ${classes} ${stickyStatus} ${searchLabelFlag}`}>Search</div>;
 
     return (
       <div className={`${this.props.className}-SearchBox-Wrapper`}>

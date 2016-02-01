@@ -54,8 +54,7 @@ class SearchButton extends React.Component {
       searchLabel = <div className={`Search-Text ${classes} ${stickyStatus} ${searchLabelFlag}`}>
         Search</div>;
 
-    if (FeatureFlags.store._isExperimentActive('search-label')) {
-      return (
+    return (
       <div className={`${this.props.className}-SearchBox-Wrapper`}>
         <BasicButton
           onMouseEnter={this._activateHover.bind(this)}
@@ -64,21 +63,6 @@ class SearchButton extends React.Component {
           className={`nypl-icon-magnifier-fat ${this.props.className}-SearchButton ${classes}`}
           name='Search Button'
           label={searchLabel} />
-        <SearchBox 
-          id={`${this.props.className}-SearchBox`}
-          className={`${this.props.className}-SearchBox`} />
-      </div>
-      );
-    }
-
-    return (
-      <div className={`${this.props.className}-SearchBox-Wrapper`}>
-        <BasicButton
-          onMouseEnter={this._activateHover.bind(this)}
-          onMouseLeave={this._deactivateHover.bind(this)}
-          id={`${this.props.className}-SearchButton`}
-          className={`nypl-icon-magnifier-fat ${this.props.className}-SearchButton ${classes}`}
-          name='Search Button' />
         <SearchBox 
           id={`${this.props.className}-SearchBox`}
           className={`${this.props.className}-SearchBox`} />

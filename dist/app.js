@@ -30,6 +30,7 @@ if (!window.ga) {
   _reactGa2['default'].initialize(_dgxReactGa.config.google.code(false), gaOpts);
 }
 
+// Used to activate/deactivate AB tests on global namespace.
 if (!window.dgxFeatureFlags) {
   window.dgxFeatureFlags = _dgxFeatureFlags2['default'].utils;
 }

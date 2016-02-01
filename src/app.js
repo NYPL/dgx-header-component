@@ -15,6 +15,7 @@ if (!window.ga) {
   ga.initialize(config.google.code(false), gaOpts);
 }
 
+// Used to activate/deactivate AB tests on global namespace.
 if (!window.dgxFeatureFlags) {
 	window.dgxFeatureFlags = FeatureFlags.utils;
 }

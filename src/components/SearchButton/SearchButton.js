@@ -39,8 +39,6 @@ class SearchButton extends React.Component {
   }
 
   render () {
-    console.log(FeatureFlags.store._getImmuteState());
-
     // Give active class if the button is activated by hover
     let classes = cx({
         'active': HeaderStore._getSearchButtonActionValue() === 'hoverSearch' ||
@@ -53,9 +51,11 @@ class SearchButton extends React.Component {
       searchLabelFlag = cx({
         'visuallyHidden': !FeatureFlags.store._isExperimentActive('search-label')
       }),
-      searchLabel = <div className={`Search-Text ${classes} ${stickyStatus} ${searchLabelFlag}`}>Search</div>;
+      searchLabel = <div className={`Search-Text ${classes} ${stickyStatus} ${searchLabelFlag}`}>
+        Search</div>;
 
-    return (
+    if (FeatureFlags.store._isExperimentActive('search-label')) {
+      return (
       <div className={`${this.props.className}-SearchBox-Wrapper`}>
         <BasicButton
           onMouseEnter={this._activateHover.bind(this)}
@@ -64,6 +64,21 @@ class SearchButton extends React.Component {
           className={`nypl-icon-magnifier-fat ${this.props.className}-SearchButton ${classes}`}
           name='Search Button'
           label={searchLabel} />
+        <SearchBox 
+          id={`${this.props.className}-SearchBox`}
+          className={`${this.props.className}-SearchBox`} />
+      </div>
+      );
+    }
+
+    return (
+      <div className={`${this.props.className}-SearchBox-Wrapper`}>
+        <BasicButton
+          onMouseEnter={this._activateHover.bind(this)}
+          onMouseLeave={this._deactivateHover.bind(this)}
+          id={`${this.props.className}-SearchButton`}
+          className={`nypl-icon-magnifier-fat ${this.props.className}-SearchButton ${classes}`}
+          name='Search Button' />
         <SearchBox 
           id={`${this.props.className}-SearchBox`}
           className={`${this.props.className}-SearchBox`} />

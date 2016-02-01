@@ -88,8 +88,6 @@ var SearchButton = (function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      console.log(_dgxFeatureFlags2['default'].store._getImmuteState());
-
       // Give active class if the button is activated by hover
       var classes = (0, _classnames2['default'])({
         'active': _storesHeaderStoreJs2['default']._getSearchButtonActionValue() === 'hoverSearch' || _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === 'hoverSearch'
@@ -108,6 +106,23 @@ var SearchButton = (function (_React$Component) {
         'Search'
       );
 
+      if (_dgxFeatureFlags2['default'].store._isExperimentActive('search-label')) {
+        return _react2['default'].createElement(
+          'div',
+          { className: this.props.className + '-SearchBox-Wrapper' },
+          _react2['default'].createElement(_ButtonsBasicButtonJs2['default'], {
+            onMouseEnter: this._activateHover.bind(this),
+            onMouseLeave: this._deactivateHover.bind(this),
+            id: this.props.className + '-SearchButton',
+            className: 'nypl-icon-magnifier-fat ' + this.props.className + '-SearchButton ' + classes,
+            name: 'Search Button',
+            label: searchLabel }),
+          _react2['default'].createElement(_SearchBoxSearchBoxJs2['default'], {
+            id: this.props.className + '-SearchBox',
+            className: this.props.className + '-SearchBox' })
+        );
+      }
+
       return _react2['default'].createElement(
         'div',
         { className: this.props.className + '-SearchBox-Wrapper' },
@@ -116,8 +131,7 @@ var SearchButton = (function (_React$Component) {
           onMouseLeave: this._deactivateHover.bind(this),
           id: this.props.className + '-SearchButton',
           className: 'nypl-icon-magnifier-fat ' + this.props.className + '-SearchButton ' + classes,
-          name: 'Search Button',
-          label: searchLabel }),
+          name: 'Search Button' }),
         _react2['default'].createElement(_SearchBoxSearchBoxJs2['default'], {
           id: this.props.className + '-SearchBox',
           className: this.props.className + '-SearchBox' })

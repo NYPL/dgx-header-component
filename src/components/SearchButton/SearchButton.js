@@ -49,7 +49,7 @@ class SearchButton extends React.Component {
         'isSticky': HeaderStore.getState().isSticky
       }),
       searchLabelFlag = cx({
-        'visuallyHidden': !FeatureFlags.store._isExperimentActive('search-label')
+        'visuallyHidden': !FeatureFlags.store._isFlagActive('search-label')
       }),
       searchLabel = <div className={`Search-Text ${classes} ${stickyStatus} ${searchLabelFlag}`}>
         Search</div>;

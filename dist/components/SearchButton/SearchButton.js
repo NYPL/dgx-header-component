@@ -98,7 +98,7 @@ var SearchButton = (function (_React$Component) {
         'isSticky': _storesHeaderStoreJs2['default'].getState().isSticky
       }),
           searchLabelFlag = (0, _classnames2['default'])({
-        'visuallyHidden': !_dgxFeatureFlags2['default'].store._isFlagActive('search-label')
+        'visuallyHidden': !_dgxFeatureFlags2['default'].store._isFeatureActive('search-label')
       }),
           searchLabel = _react2['default'].createElement(
         'div',

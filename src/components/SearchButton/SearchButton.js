@@ -48,7 +48,9 @@ class SearchButton extends React.Component {
       stickyStatus = cx({
         'isSticky': HeaderStore.getState().isSticky
       }),
-      searchLabel = <div className={`Search-Text ${classes} ${stickyStatus}`}>Search</div>;
+      searchLabel = <div className={`Search-Text visuallyHidden ${classes} ${stickyStatus}`}>
+        Search</div>,
+      searchLabelFeature = <div className={`Search-Text ${classes} ${stickyStatus}`}>Search</div>;
 
     /*
      * Feature Flag -- 'search-label'
@@ -63,7 +65,7 @@ class SearchButton extends React.Component {
             id={`${this.props.className}-SearchButton`}
             className={`nypl-icon-magnifier-fat ${this.props.className}-SearchButton ${classes}`}
             name='Search Button'
-            label={searchLabel} />
+            label={searchLabelFeature} />
           <SearchBox 
             id={`${this.props.className}-SearchBox`}
             className={`${this.props.className}-SearchBox`} />
@@ -79,7 +81,7 @@ class SearchButton extends React.Component {
           id={`${this.props.className}-SearchButton`}
           className={`nypl-icon-magnifier-fat ${this.props.className}-SearchButton ${classes}`}
           name='Search Button'
-          label={''} />
+          label={searchLabel} />
         <SearchBox 
           id={`${this.props.className}-SearchBox`}
           className={`${this.props.className}-SearchBox`} />

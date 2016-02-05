@@ -99,6 +99,11 @@ var SearchButton = (function (_React$Component) {
       }),
           searchLabel = _react2['default'].createElement(
         'div',
+        { className: 'Search-Text visuallyHidden ' + classes + ' ' + stickyStatus },
+        'Search'
+      ),
+          searchLabelFeature = _react2['default'].createElement(
+        'div',
         { className: 'Search-Text ' + classes + ' ' + stickyStatus },
         'Search'
       );
@@ -117,7 +122,7 @@ var SearchButton = (function (_React$Component) {
             id: this.props.className + '-SearchButton',
             className: 'nypl-icon-magnifier-fat ' + this.props.className + '-SearchButton ' + classes,
             name: 'Search Button',
-            label: searchLabel }),
+            label: searchLabelFeature }),
           _react2['default'].createElement(_SearchBoxSearchBoxJs2['default'], {
             id: this.props.className + '-SearchBox',
             className: this.props.className + '-SearchBox' })
@@ -133,7 +138,7 @@ var SearchButton = (function (_React$Component) {
           id: this.props.className + '-SearchButton',
           className: 'nypl-icon-magnifier-fat ' + this.props.className + '-SearchButton ' + classes,
           name: 'Search Button',
-          label: '' }),
+          label: searchLabel }),
         _react2['default'].createElement(_SearchBoxSearchBoxJs2['default'], {
           id: this.props.className + '-SearchBox',
           className: this.props.className + '-SearchBox' })

@@ -48,11 +48,28 @@ class SearchButton extends React.Component {
       stickyStatus = cx({
         'isSticky': HeaderStore.getState().isSticky
       }),
-      searchLabelFlag = cx({
-        'visuallyHidden': !FeatureFlags.store._isFeatureActive('search-label')
-      }),
-      searchLabel = <div className={`Search-Text ${classes} ${stickyStatus} ${searchLabelFlag}`}>
-        Search</div>;
+      searchLabel = <div className={`Search-Text ${classes} ${stickyStatus}`}>Search</div>;
+
+    /*
+     * Feature Flag -- 'search-label'
+     * Return a DOM that includes the search-label text.
+    */
+    if (FeatureFlags.store._isFeatureActive('search-label')) {
+      return (
+        <div className={`${this.props.className}-SearchBox-Wrapper`}>
+          <BasicButton
+            onMouseEnter={this._activateHover.bind(this)}
+            onMouseLeave={this._deactivateHover.bind(this)}
+            id={`${this.props.className}-SearchButton`}
+            className={`nypl-icon-magnifier-fat ${this.props.className}-SearchButton ${classes}`}
+            name='Search Button'
+            label={searchLabel} />
+          <SearchBox 
+            id={`${this.props.className}-SearchBox`}
+            className={`${this.props.className}-SearchBox`} />
+        </div>        
+      );
+    }
 
     return (
       <div className={`${this.props.className}-SearchBox-Wrapper`}>
@@ -62,7 +79,7 @@ class SearchButton extends React.Component {
           id={`${this.props.className}-SearchButton`}
           className={`nypl-icon-magnifier-fat ${this.props.className}-SearchButton ${classes}`}
           name='Search Button'
-          label={searchLabel} />
+          label={''} />
         <SearchBox 
           id={`${this.props.className}-SearchBox`}
           className={`${this.props.className}-SearchBox`} />

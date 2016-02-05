@@ -97,14 +97,32 @@ var SearchButton = (function (_React$Component) {
       stickyStatus = (0, _classnames2['default'])({
         'isSticky': _storesHeaderStoreJs2['default'].getState().isSticky
       }),
-          searchLabelFlag = (0, _classnames2['default'])({
-        'visuallyHidden': !_dgxFeatureFlags2['default'].store._isFeatureActive('search-label')
-      }),
           searchLabel = _react2['default'].createElement(
         'div',
-        { className: 'Search-Text ' + classes + ' ' + stickyStatus + ' ' + searchLabelFlag },
+        { className: 'Search-Text ' + classes + ' ' + stickyStatus },
         'Search'
       );
+
+      /*
+       * Feature Flag -- 'search-label'
+       * Return a DOM that includes the search-label text.
+      */
+      if (_dgxFeatureFlags2['default'].store._isFeatureActive('search-label')) {
+        return _react2['default'].createElement(
+          'div',
+          { className: this.props.className + '-SearchBox-Wrapper' },
+          _react2['default'].createElement(_ButtonsBasicButtonJs2['default'], {
+            onMouseEnter: this._activateHover.bind(this),
+            onMouseLeave: this._deactivateHover.bind(this),
+            id: this.props.className + '-SearchButton',
+            className: 'nypl-icon-magnifier-fat ' + this.props.className + '-SearchButton ' + classes,
+            name: 'Search Button',
+            label: searchLabel }),
+          _react2['default'].createElement(_SearchBoxSearchBoxJs2['default'], {
+            id: this.props.className + '-SearchBox',
+            className: this.props.className + '-SearchBox' })
+        );
+      }
 
       return _react2['default'].createElement(
         'div',
@@ -115,7 +133,7 @@ var SearchButton = (function (_React$Component) {
           id: this.props.className + '-SearchButton',
           className: 'nypl-icon-magnifier-fat ' + this.props.className + '-SearchButton ' + classes,
           name: 'Search Button',
-          label: searchLabel }),
+          label: '' }),
         _react2['default'].createElement(_SearchBoxSearchBoxJs2['default'], {
           id: this.props.className + '-SearchBox',
           className: this.props.className + '-SearchBox' })

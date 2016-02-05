@@ -12,6 +12,7 @@ import Actions from '../../actions/Actions.js';
 
 // GA Utility Library
 import utils from '../../utils/utils.js';
+import FeatureFlags from 'dgx-feature-flags';
 
 // Create React class
 class SearchButton extends React.Component {
@@ -19,6 +20,22 @@ class SearchButton extends React.Component {
   // Constructor used in ES6
   constructor(props) {
     super(props);
+
+    this.state = {
+      featureFlags: FeatureFlags.store.getState()
+    }
+  }
+
+  componentDidMount() {
+    FeatureFlags.store.listen(this._onChange.bind(this));
+  }
+
+  componentWillUnmount() {
+    FeatureFlags.store.unlisten(this._onChange.bind(this));
+  }
+
+  _onChange() {
+    this.setState({featureFlags: FeatureFlags.store.getState()});
   }
 
   render () {
@@ -31,7 +48,30 @@ class SearchButton extends React.Component {
       stickyStatus = cx({
         'isSticky': HeaderStore.getState().isSticky
       }),
-      searchLabel = <div className={`Search-Text ${classes} ${stickyStatus} visuallyHidden`}>Search</div>;
+      searchLabel = <div className={`Search-Text visuallyHidden ${classes} ${stickyStatus}`}>
+        Search</div>,
+      searchLabelFeature = <div className={`Search-Text ${classes} ${stickyStatus}`}>Search</div>;
+
+    /*
+     * Feature Flag -- 'search-label'
+     * Return a DOM that includes the search-label text.
+    */
+    if (FeatureFlags.store._isFeatureActive('search-label')) {
+      return (
+        <div className={`${this.props.className}-SearchBox-Wrapper`}>
+          <BasicButton
+            onMouseEnter={this._activateHover.bind(this)}
+            onMouseLeave={this._deactivateHover.bind(this)}
+            id={`${this.props.className}-SearchButton`}
+            className={`nypl-icon-magnifier-fat ${this.props.className}-SearchButton ${classes}`}
+            name='Search Button'
+            label={searchLabelFeature} />
+          <SearchBox 
+            id={`${this.props.className}-SearchBox`}
+            className={`${this.props.className}-SearchBox`} />
+        </div>        
+      );
+    }
 
     return (
       <div className={`${this.props.className}-SearchBox-Wrapper`}>

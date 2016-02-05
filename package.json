@@ -32,7 +32,8 @@
     "react-onclickout": "^1.2.1",
     "react-tappable": "^0.6.0",
     "underscore": "^1.8.3",
-    "dgx-skip-navigation-link": "git+ssh://bitbucket.org/NYPL/dgx-skip-navigation-link.git#master"
+    "dgx-skip-navigation-link": "git+ssh://bitbucket.org/NYPL/dgx-skip-navigation-link.git#master",
+    "dgx-feature-flags": "git+ssh://bitbucket.org/NYPL/dgx-feature-flags.git#master"
   },
   "devDependencies": {
     "babel-core": "^5.8.30",

@@ -24,22 +24,20 @@
   border-width: 0px;
   display: none;
   font-size: 22px;
-  padding: 8px 10px 14px 10px;
+  padding: 9px 10px 13px 10px;
   border-radius: 0;
+  position: relative;
 
   & .Search-Text {
-
     @include Kievit-Book;
-
     position: relative;
     color: $BG_MENU_SEARCH;
     display: inline-block;
     float: left;
-    font-size: 18px;
-    line-height: 22px;
-    padding: 0;
-    top: 2px;
-
+    font-size: 18.5px;
+    line-height: 1em;
+    padding: 4px 2px 0 1px;
+    border-bottom: 2px solid $BG_MENU_SEARCH;
 
     &.active {
       color: #78CCED;
@@ -47,37 +45,18 @@
       transition: color .3s linear .25s, color .3s linear .25s;
     }
 
-    &.isSticky {
-
+    &.visuallyHidden {
       height: 1px;
       left: -10000px;
       overflow: hidden;
       position: absolute;
       top: auto;
       width: 1px;
-
-      &.visuallyHidden {
-        height: 1px;
-        left: -10000px;
-        overflow: hidden;
-        position: absolute;
-        top: auto;
-        width: 1px;
-      }
-
-      @include min-screen(892px) {
-        position: relative;
-        left: 0;
-        top: 2px;
-        width: auto;
-        height: auto;
-        overflow: hidden;
-      }
-
     }
 
     @include min-screen(1025px) {
       font-size: 16px;
+      padding: 6px 2px 0 1px;
     }
 
   }

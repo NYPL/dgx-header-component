@@ -16,6 +16,10 @@ var _reactGa2 = _interopRequireDefault(_reactGa);
 
 var _dgxReactGa = require('dgx-react-ga');
 
+var _dgxFeatureFlags = require('dgx-feature-flags');
+
+var _dgxFeatureFlags2 = _interopRequireDefault(_dgxFeatureFlags);
+
 require('./styles/main.scss');
 
 // Use for testing GA events
@@ -24,6 +28,11 @@ if (!window.ga) {
   var gaOpts = { debug: true };
   // Passing false to get the dev GA code.
   _reactGa2['default'].initialize(_dgxReactGa.config.google.code(false), gaOpts);
+}
+
+// Used to activate/deactivate AB tests on global namespace.
+if (!window.dgxFeatureFlags) {
+  window.dgxFeatureFlags = _dgxFeatureFlags2['default'].utils;
 }
 
 /* app.jsx

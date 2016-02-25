@@ -19,6 +19,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 var _radium = require('radium');
 
 var _radium2 = _interopRequireDefault(_radium);
@@ -241,7 +245,7 @@ var Header = (function (_React$Component) {
   }, {
     key: '_getHeaderHeight',
     value: function _getHeaderHeight() {
-      var headerContainer = _react2['default'].findDOMNode(this.refs.nyplHeader);
+      var headerContainer = _reactDom2['default'].findDOMNode(this.refs.nyplHeader);
 
       return headerContainer.clientHeight;
     }
@@ -270,7 +274,7 @@ var Header = (function (_React$Component) {
       // Get sticky header's height: 68px and add 10px distance
       var stickyHeaderHeight = 68,
           offsetDistance = stickyHeaderHeight + 10,
-          headerMobile = _react2['default'].findDOMNode(this.refs.headerMobile),
+          headerMobile = _reactDom2['default'].findDOMNode(this.refs.headerMobile),
           headerMobileDisplay = undefined;
 
       // Get the display CSS feature of mobile header to see if we are on mobile

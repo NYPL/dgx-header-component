@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import nyplHeaderComponent from './components/Header/Header.js';
 
 import ga from 'react-ga';
@@ -23,4 +24,4 @@ if (!window.dgxFeatureFlags) {
 /* app.jsx
  * Used for local development of React Components
  */
-React.render(React.createElement(nyplHeaderComponent, {skipNav: {target: 'maincontent'}}), document.getElementById('app'));
+ReactDOM.render(React.createElement(nyplHeaderComponent, {skipNav: {target: 'maincontent'}}), document.getElementById('app'));

@@ -18,6 +18,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 var _radium = require('radium');
 
 var _radium2 = _interopRequireDefault(_radium);
@@ -287,7 +291,7 @@ var EmailSubscription = (function (_React$Component) {
       // Prevent re-direct, handle validation
       e.preventDefault();
 
-      var userInput = _react2['default'].findDOMNode(this.refs.emailAddressField);
+      var userInput = _reactDom2['default'].findDOMNode(this.refs.emailAddressField);
 
       if (!this._isValidEmail(userInput.value)) {
         userInput.value = '';

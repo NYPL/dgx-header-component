@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 class LocationFinder extends React.Component {
 
@@ -117,7 +118,7 @@ class LocationFinder extends React.Component {
    *
    */
   _handleChange() {
-    let zipcode = React.findDOMNode(this.refs.zipCodeInput).value;
+    let zipcode = ReactDOM.findDOMNode(this.refs.zipCodeInput).value;
 
   	if (this._validateZipcode(zipcode)) {
 

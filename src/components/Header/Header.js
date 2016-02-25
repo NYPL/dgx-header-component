@@ -1,5 +1,6 @@
 // NPM Modules
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Radium from 'radium';
 import cx from 'classnames';
 
@@ -159,7 +160,7 @@ class Header extends React.Component {
    * element in pixels.
    */
   _getHeaderHeight() {
-    let headerContainer = React.findDOMNode(this.refs.nyplHeader);
+    let headerContainer = ReactDOM.findDOMNode(this.refs.nyplHeader);
 
     return headerContainer.clientHeight;
   }
@@ -187,7 +188,7 @@ class Header extends React.Component {
     // Get sticky header's height: 68px and add 10px distance
     let stickyHeaderHeight = 68,
       offsetDistance = stickyHeaderHeight + 10,
-      headerMobile = React.findDOMNode(this.refs.headerMobile),
+      headerMobile = ReactDOM.findDOMNode(this.refs.headerMobile),
       headerMobileDisplay;
 
     // Get the display CSS feature of mobile header to see if we are on mobile

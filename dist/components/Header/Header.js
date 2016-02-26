@@ -96,7 +96,13 @@ var Header = (function (_React$Component) {
 
     _get(Object.getPrototypeOf(Header.prototype), 'constructor', this).call(this, props);
     // replaces getInitialState()
-    this.state = _storesHeaderStoreJs2['default'].getState();
+    this.state = {
+      headerStore: _storesHeaderStoreJs2['default'].getState(),
+      headerHeight: null
+    };
+
+    this._handleStickyHeader = this._handleStickyHeader.bind(this);
+    this._setHeaderHeight = this._setHeaderHeight.bind(this);
   }
 
   _createClass(Header, [{
@@ -108,42 +114,45 @@ var Header = (function (_React$Component) {
       // the proper Data, then fetch.
       this._fetchDataIfNeeded();
 
-      // Once the component mounts,
-      // enable the sticky header depending on position.
-      this._handleStickyHeader();
-
-      // Check if the sticky header covers the anchor
-      this._offsetStickyHeader();
+      // Height needs to be set once the alerts (if any) are mounted.
+      window.addEventListener('load', this._setHeaderHeight, false);
 
       // Listen to the scroll event for the sticky header.
-      window.addEventListener('scroll', this._handleStickyHeader.bind(this));
-
-      // Listen to hash change and check if the sticky header covers the anchor
-      window.addEventListener('hashchange', this._offsetStickyHeader.bind(this), false);
+      window.addEventListener('scroll', this._handleStickyHeader, false);
     }
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
       _storesHeaderStoreJs2['default'].unlisten(this._onChange.bind(this));
+
+      // Removing event listener to minimize garbage collection
+      window.removeEventListener('load', this._setHeaderHeight, false);
+
+      window.removeEventListener('scroll', this._handleStickyHeader, false);
     }
   }, {
     key: '_onChange',
     value: function _onChange() {
-      this.setState(_storesHeaderStoreJs2['default'].getState());
+      this.setState({ headerStore: _storesHeaderStoreJs2['default'].getState() });
     }
   }, {
     key: 'render',
     value: function render() {
-      var isHeaderSticky = this.state.isSticky,
+      var isHeaderSticky = this.state.headerStore.isSticky,
           headerClass = this.props.className || 'Header',
           headerClasses = (0, _classnames2['default'])(headerClass, { 'sticky': isHeaderSticky }),
+          headerHeight = this.state.headerHeight,
           showDialog = _storesHeaderStoreJs2['default']._getMobileMyNyplButtonValue(),
           mobileMyNyplClasses = (0, _classnames2['default'])({ 'active': showDialog }),
           skipNav = this.props.skipNav ? _react2['default'].createElement(_dgxSkipNavigationLink2['default'], this.props.skipNav) : '';
 
       return _react2['default'].createElement(
         'header',
-        { id: this.props.id, className: headerClasses, ref: 'nyplHeader' },
+        {
+          id: this.props.id,
+          className: headerClasses,
+          ref: 'nyplHeader',
+          style: isHeaderSticky ? { height: headerHeight + 'px' } : null },
         skipNav,
         _react2['default'].createElement(_GlobalAlertsGlobalAlertsJs2['default'], { className: headerClass + '-GlobalAlerts' }),
         _react2['default'].createElement(
@@ -189,13 +198,13 @@ var Header = (function (_React$Component) {
           _react2['default'].createElement(_NavMenuNavMenuJs2['default'], {
             className: headerClass + '-NavMenu',
             lang: this.props.lang,
-            items: this.state.headerData })
+            items: this.state.headerStore.headerData })
         )
       );
     }
 
     /**
-     * _fetchDataIfNeeded() 
+     * _fetchDataIfNeeded()
      * checks the existence of headerData items,
      * triggers the Actions.fetchHeaderData()
      * method to dispatch a client-side event
@@ -210,44 +219,66 @@ var Header = (function (_React$Component) {
     }
 
     /**
-     * _handleStickyHeader() 
+     * _handleStickyHeader()
      * returns the Actions.updateIsHeaderSticky()
-     * with the proper boolean value to update the 
-     * HeaderStore.isSticky value based on the window 
+     * with the proper boolean value to update the
+     * HeaderStore.isSticky value based on the window
      * vertical scroll position surpassing the height
      * of the Header DOM element.
      */
   }, {
     key: '_handleStickyHeader',
     value: function _handleStickyHeader() {
-      var headerHeight = this._getHeaderHeight(),
+      var headerHeight = this.state.headerHeight,
           windowVerticalDistance = this._getWindowVerticalScroll();
 
-      if (windowVerticalDistance > headerHeight) {
-        // Fire GA Event when Header is in Sticky Mode
-        _utilsUtilsJs2['default']._trackHeader.bind(this, 'scroll', 'Sticky Header');
-
-        _actionsActionsJs2['default'].updateIsHeaderSticky(true);
+      if (windowVerticalDistance && headerHeight && windowVerticalDistance > headerHeight) {
+        // Only update the value if sticky is false
+        if (!_storesHeaderStoreJs2['default']._getIsStickyValue()) {
+          // Fire GA Event when Header is in Sticky Mode
+          _utilsUtilsJs2['default']._trackHeader.bind(this, 'scroll', 'Sticky Header');
+          // Update the isSticky flag
+          _actionsActionsJs2['default'].updateIsHeaderSticky(true);
+        }
       } else {
-        _actionsActionsJs2['default'].updateIsHeaderSticky(false);
+        // Avoids re-assignment on each scroll by checking if it is already true
+        if (_storesHeaderStoreJs2['default']._getIsStickyValue()) {
+          _actionsActionsJs2['default'].updateIsHeaderSticky(false);
+        }
       }
     }
 
     /**
-     * _getHeaderHeight() 
+     * _getHeaderHeight()
      * returns the Height of the Header DOM
      * element in pixels.
      */
   }, {
     key: '_getHeaderHeight',
     value: function _getHeaderHeight() {
-      var headerContainer = _react2['default'].findDOMNode(this.refs.nyplHeader);
-
-      return headerContainer.clientHeight;
+      var headerDOM = _react2['default'].findDOMNode(this.refs.nyplHeader);
+      return headerDOM.getBoundingClientRect().height;
     }
 
     /**
-     * _getWindowVerticallScroll() 
+     * _setHeaderHeight()
+     * Updates the state headerHeight property
+     * only if headerHeight is not defined.
+     */
+  }, {
+    key: '_setHeaderHeight',
+    value: function _setHeaderHeight() {
+      var _this = this;
+
+      if (!this.state.headerHeight) {
+        setTimeout(function () {
+          _this.setState({ headerHeight: _this._getHeaderHeight() });
+        }, 0);
+      }
+    }
+
+    /**
+     * _getWindowVerticallScroll()
      * returns the current window vertical
      * scroll position in pixels.
      */
@@ -255,41 +286,6 @@ var Header = (function (_React$Component) {
     key: '_getWindowVerticalScroll',
     value: function _getWindowVerticalScroll() {
       return window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-    }
-
-    /**
-    * _offsetStickyHeader()
-    * change the sticky header's vertical postion so it won't
-    * cover the title of the anchor if the user got to the page by
-    * type in the URL with anchor in it.
-    * 68px is the height of sticky header.
-    */
-  }, {
-    key: '_offsetStickyHeader',
-    value: function _offsetStickyHeader() {
-      // Get sticky header's height: 68px and add 10px distance
-      var stickyHeaderHeight = 68,
-          offsetDistance = stickyHeaderHeight + 10,
-          headerMobile = _react2['default'].findDOMNode(this.refs.headerMobile),
-          headerMobileDisplay = undefined;
-
-      // Get the display CSS feature of mobile header to see if we are on mobile
-      // view. currentStyle is for IE, and getComputedStyle is for other browsers
-      if (headerMobile.currentStyle) {
-        headerMobileDisplay = headerMobile.currentStyle.display;
-      } else if (window.getComputedStyle) {
-        headerMobileDisplay = window.getComputedStyle(headerMobile, null).getPropertyValue('display');
-      }
-
-      // We check here to see if the header is sticky or on mobile view to decide
-      // if we need to scroll the page
-      if (_storesHeaderStoreJs2['default'].getState().isSticky && headerMobileDisplay === 'none') {
-        if (window.location.hash) {
-          setTimeout(function () {
-            window.scrollBy(0, -offsetDistance);
-          }, 1000);
-        }
-      }
     }
   }]);
 

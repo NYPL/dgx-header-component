@@ -29,7 +29,7 @@ class Header extends React.Component {
   // Constructor used in ES6
   constructor(props) {
     super(props);
-    // replaces getInitialState()
+
     this.state = {
       headerStore: HeaderStore.getState(),
       headerHeight: null

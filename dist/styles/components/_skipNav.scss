@@ -1,0 +1,18 @@
+#skip {
+  background-color: white;
+  text-transform: uppercase;
+  font-family: 'Kievit-Bold';
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #2799c5;
+  margin: 5px;
+  padding: 5px 10px;
+  display: block;
+  z-index: 20;
+
+  &:focus {
+  	outline: none;
+  	box-shadow: 0 0 7px rgba(39, 153, 197, 0.75);
+  }
+}

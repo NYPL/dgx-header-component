@@ -146,6 +146,7 @@ var Header = (function (_React$Component) {
           mobileMyNyplClasses = (0, _classnames2['default'])({ 'active': showDialog }),
           skipNav = this.props.skipNav ? _react2['default'].createElement(_dgxSkipNavigationLink2['default'], this.props.skipNav) : '';
 
+      console.log(this.state.headerHeight);
       return _react2['default'].createElement(
         'header',
         {

@@ -76,6 +76,7 @@ class Header extends React.Component {
       skipNav = this.props.skipNav ?
             (<SkipNavigation {...this.props.skipNav} />) : '';
 
+    console.log(this.state.headerHeight);
     return (
         <header
           id={this.props.id}

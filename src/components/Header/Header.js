@@ -36,7 +36,7 @@ class Header extends React.Component {
     }
 
     this._handleStickyHeader = this._handleStickyHeader.bind(this);
-    this._setHeaderHeight = this._setHeaderHeight.bind(this);
+    //this._setHeaderHeight = this._setHeaderHeight.bind(this);
   }
 
   componentDidMount() {
@@ -47,7 +47,7 @@ class Header extends React.Component {
     this._fetchDataIfNeeded();
 
     // Height needs to be set once the alerts (if any) are mounted.
-    window.addEventListener('load', this._setHeaderHeight, false);
+    this._setHeaderHeight();
 
     // Listen to the scroll event for the sticky header.
     window.addEventListener('scroll', this._handleStickyHeader, false);
@@ -57,7 +57,7 @@ class Header extends React.Component {
     HeaderStore.unlisten(this._onChange.bind(this));
 
     // Removing event listener to minimize garbage collection
-    window.removeEventListener('load', this._setHeaderHeight, false);
+    //window.removeEventListener('load', this._setHeaderHeight, false);
 
     window.removeEventListener('scroll', this._handleStickyHeader, false);
   }
@@ -185,9 +185,9 @@ class Header extends React.Component {
   _setHeaderHeight() {
     console.log('set header called');
     if(!this.state.headerHeight) {
-      //setTimeout(() => {
+      setTimeout(() => {
         this.setState({headerHeight: this._getHeaderHeight()});
-      //}, 0);
+      }, 0);
     }
   }
 

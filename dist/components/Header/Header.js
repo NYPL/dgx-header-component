@@ -95,7 +95,7 @@ var Header = (function (_React$Component) {
     _classCallCheck(this, Header);
 
     _get(Object.getPrototypeOf(Header.prototype), 'constructor', this).call(this, props);
-    // replaces getInitialState()
+
     this.state = {
       headerStore: _storesHeaderStoreJs2['default'].getState(),
       headerHeight: null

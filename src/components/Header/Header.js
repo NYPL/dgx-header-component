@@ -25,8 +25,6 @@ import utils from '../../utils/utils.js';
 // import '../../styles/main.scss';
 
 class Header extends React.Component {
-
-  // Constructor used in ES6
   constructor(props) {
     super(props);
 
@@ -36,14 +34,13 @@ class Header extends React.Component {
     }
 
     this._handleStickyHeader = this._handleStickyHeader.bind(this);
-    //this._setHeaderHeight = this._setHeaderHeight.bind(this);
   }
 
   componentDidMount() {
     HeaderStore.listen(this._onChange.bind(this));
 
     // If the HeaderStore is not populated with
-    // the proper Data, then fetch.
+    // the proper data, then fetch via client-side
     this._fetchDataIfNeeded();
 
     // Height needs to be set once the alerts (if any) are mounted.
@@ -57,8 +54,6 @@ class Header extends React.Component {
     HeaderStore.unlisten(this._onChange.bind(this));
 
     // Removing event listener to minimize garbage collection
-    //window.removeEventListener('load', this._setHeaderHeight, false);
-
     window.removeEventListener('scroll', this._handleStickyHeader, false);
   }
 
@@ -68,15 +63,13 @@ class Header extends React.Component {
 
   render () {
     let isHeaderSticky = this.state.headerStore.isSticky,
+      headerHeight = this.state.headerHeight,
       headerClass = this.props.className || 'Header',
       headerClasses = cx(headerClass, {'sticky': isHeaderSticky}),
-      headerHeight = this.state.headerHeight,
       showDialog = HeaderStore._getMobileMyNyplButtonValue(),
       mobileMyNyplClasses = cx({'active': showDialog}),
       skipNav = this.props.skipNav ?
             (<SkipNavigation {...this.props.skipNav} />) : '';
-
-    console.log(this.state);
     return (
         <header
           id={this.props.id}
@@ -183,7 +176,6 @@ class Header extends React.Component {
    * only if headerHeight is not defined.
    */
   _setHeaderHeight() {
-    console.log('set header called');
     if(!this.state.headerHeight) {
       setTimeout(() => {
         this.setState({headerHeight: this._getHeaderHeight()});

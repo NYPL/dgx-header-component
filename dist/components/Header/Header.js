@@ -89,8 +89,6 @@ var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
 var Header = (function (_React$Component) {
   _inherits(Header, _React$Component);
 
-  // Constructor used in ES6
-
   function Header(props) {
     _classCallCheck(this, Header);
 
@@ -102,7 +100,6 @@ var Header = (function (_React$Component) {
     };
 
     this._handleStickyHeader = this._handleStickyHeader.bind(this);
-    //this._setHeaderHeight = this._setHeaderHeight.bind(this);
   }
 
   _createClass(Header, [{
@@ -111,7 +108,7 @@ var Header = (function (_React$Component) {
       _storesHeaderStoreJs2['default'].listen(this._onChange.bind(this));
 
       // If the HeaderStore is not populated with
-      // the proper Data, then fetch.
+      // the proper data, then fetch via client-side
       this._fetchDataIfNeeded();
 
       // Height needs to be set once the alerts (if any) are mounted.
@@ -126,8 +123,6 @@ var Header = (function (_React$Component) {
       _storesHeaderStoreJs2['default'].unlisten(this._onChange.bind(this));
 
       // Removing event listener to minimize garbage collection
-      //window.removeEventListener('load', this._setHeaderHeight, false);
-
       window.removeEventListener('scroll', this._handleStickyHeader, false);
     }
   }, {
@@ -139,14 +134,12 @@ var Header = (function (_React$Component) {
     key: 'render',
     value: function render() {
       var isHeaderSticky = this.state.headerStore.isSticky,
+          headerHeight = this.state.headerHeight,
           headerClass = this.props.className || 'Header',
           headerClasses = (0, _classnames2['default'])(headerClass, { 'sticky': isHeaderSticky }),
-          headerHeight = this.state.headerHeight,
           showDialog = _storesHeaderStoreJs2['default']._getMobileMyNyplButtonValue(),
           mobileMyNyplClasses = (0, _classnames2['default'])({ 'active': showDialog }),
           skipNav = this.props.skipNav ? _react2['default'].createElement(_dgxSkipNavigationLink2['default'], this.props.skipNav) : '';
-
-      console.log(this.state);
       return _react2['default'].createElement(
         'header',
         {
@@ -271,7 +264,6 @@ var Header = (function (_React$Component) {
     value: function _setHeaderHeight() {
       var _this = this;
 
-      console.log('set header called');
       if (!this.state.headerHeight) {
         setTimeout(function () {
           _this.setState({ headerHeight: _this._getHeaderHeight() });

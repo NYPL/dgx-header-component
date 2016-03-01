@@ -2,6 +2,7 @@
 import React from 'react';
 import Radium from 'radium';
 import cx from 'classnames';
+import _ from 'underscore';
 
 // ALT Flux
 import HeaderStore from '../../stores/HeaderStore.js';
@@ -28,10 +29,7 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      headerStore: HeaderStore.getState(),
-      headerHeight: null
-    }
+    this.state = _.extend({ headerHeight: null }, HeaderStore.getState());
 
     this._handleStickyHeader = this._handleStickyHeader.bind(this);
   }
@@ -58,18 +56,18 @@ class Header extends React.Component {
   }
 
   _onChange() {
-    this.setState({headerStore: HeaderStore.getState()});
+    this.setState(_.extend({ headerHeight: this.state.headerHeight },HeaderStore.getState()));
   }
 
   render () {
-    let isHeaderSticky = this.state.headerStore.isSticky,
+    let isHeaderSticky = this.state.isSticky,
       headerHeight = this.state.headerHeight,
       headerClass = this.props.className || 'Header',
       headerClasses = cx(headerClass, {'sticky': isHeaderSticky}),
       showDialog = HeaderStore._getMobileMyNyplButtonValue(),
       mobileMyNyplClasses = cx({'active': showDialog}),
       skipNav = this.props.skipNav ?
-            (<SkipNavigation {...this.props.skipNav} />) : '';
+        (<SkipNavigation {...this.props.skipNav} />) : '';
     return (
         <header
           id={this.props.id}
@@ -113,7 +111,7 @@ class Header extends React.Component {
           <NavMenu
             className={`${headerClass}-NavMenu`}
             lang={this.props.lang}
-            items={this.state.headerStore.headerData}  />
+            items={this.state.headerData}  />
         </div>
       </header>
     );
@@ -199,7 +197,7 @@ Header.defaultProps = {
   lang: 'en',
   className: 'Header',
   id: 'nyplHeader',
-  skipNav: null
+  skipNav: null,
 };
 
 const styles = {

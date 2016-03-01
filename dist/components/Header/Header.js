@@ -27,6 +27,10 @@ var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
+var _underscore = require('underscore');
+
+var _underscore2 = _interopRequireDefault(_underscore);
+
 // ALT Flux
 
 var _storesHeaderStoreJs = require('../../stores/HeaderStore.js');
@@ -94,10 +98,7 @@ var Header = (function (_React$Component) {
 
     _get(Object.getPrototypeOf(Header.prototype), 'constructor', this).call(this, props);
 
-    this.state = {
-      headerStore: _storesHeaderStoreJs2['default'].getState(),
-      headerHeight: null
-    };
+    this.state = _underscore2['default'].extend({ headerHeight: null }, _storesHeaderStoreJs2['default'].getState());
 
     this._handleStickyHeader = this._handleStickyHeader.bind(this);
   }
@@ -128,12 +129,12 @@ var Header = (function (_React$Component) {
   }, {
     key: '_onChange',
     value: function _onChange() {
-      this.setState({ headerStore: _storesHeaderStoreJs2['default'].getState() });
+      this.setState(_underscore2['default'].extend({ headerHeight: this.state.headerHeight }, _storesHeaderStoreJs2['default'].getState()));
     }
   }, {
     key: 'render',
     value: function render() {
-      var isHeaderSticky = this.state.headerStore.isSticky,
+      var isHeaderSticky = this.state.isSticky,
           headerHeight = this.state.headerHeight,
           headerClass = this.props.className || 'Header',
           headerClasses = (0, _classnames2['default'])(headerClass, { 'sticky': isHeaderSticky }),
@@ -192,7 +193,7 @@ var Header = (function (_React$Component) {
           _react2['default'].createElement(_NavMenuNavMenuJs2['default'], {
             className: headerClass + '-NavMenu',
             lang: this.props.lang,
-            items: this.state.headerStore.headerData })
+            items: this.state.headerData })
         )
       );
     }

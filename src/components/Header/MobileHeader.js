@@ -53,9 +53,9 @@ class MobileHeader extends React.Component {
     return (
       <div className={this.props.className} style={styles.base}>
         <a
-          style={styles.mobileLogo} 
+          style={styles.mobileLogo}
           href='//www.nypl.org'>
-          <span 
+          <span
             style={styles.logoIcon}
             className={`${this.props.className}-Logo nypl-icon-logo-mark`}>
           </span>
@@ -72,8 +72,8 @@ class MobileHeader extends React.Component {
           </span>
         </ReactTappable>
 
-        <a 
-          style={styles.locatorIcon} 
+        <a
+          style={styles.locatorIcon}
           href={locatorUrl}
           onClick={utils._trackHeader.bind(this, 'Click', 'Mobile Locations Button')}
           className={`${this.props.className}-Locator nypl-icon-locator-large`}>
@@ -106,7 +106,7 @@ class MobileHeader extends React.Component {
   }
 
   /**
-   * _toggleMobileMenu(activeButton) 
+   * _toggleMobileMenu(activeButton)
    * Verifies that the activeButton does not
    * match the HeaderStore's current value
    * and set's it as the param activeButton.
@@ -148,7 +148,7 @@ class MobileHeader extends React.Component {
   }
 
   /**
-   * _handleMenuBtnPress() 
+   * _handleMenuBtnPress()
    * Calls _toggleMobileMenu()
    * with the 'mobileMenu' as a param
    */
@@ -170,6 +170,9 @@ const styles = {
   },
   mobileLogo: {
     color: '#000',
+    position: 'absolute',
+    left: 0,
+    top: 0,
     textDecoration: 'none',
     ':hover': {
       color: '#000'
@@ -179,9 +182,6 @@ const styles = {
     }
   },
   logoIcon: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
     fontSize: '59px'
   },
   myNyplIcon: {

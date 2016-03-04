@@ -18,7 +18,6 @@
   border-bottom: 2px solid #ED1C24;
   @extend %clearfix;
 
-  
   /* Global rules for repetitive link elements */
   a {
     text-decoration: none;
@@ -30,7 +29,7 @@
   &-Mobile {
     min-width: 320px;
     display: block;
-    
+
     /* Hide MobileHeader on Tablet larger viewports */
     @include min-screen(769px) {
       display: none;
@@ -39,14 +38,6 @@
 
   &-Wrapper {
     position: relative;
-
-    @include min-screen(769px) {
-      height: 136px;
-    }
-
-    @include min-screen(1025px) {
-      height: 226px;
-    }
   }
 
   /* STICKY HEADER
@@ -56,6 +47,9 @@
     @include min-screen(769px) {
       .Header {
         &-Wrapper{
+          @extend .slideInDown;
+          -webkit-animation-duration: .5s;
+          animation-duration: .5s;
           border-top: 2px solid #ED1C24;
           z-index: 999;
           width: 100%;
@@ -64,7 +58,6 @@
           background-color: #FFF;
           height: 65px;
           box-shadow: 0px 2px 2.5px 0px rgba(50, 50, 50, 0.25);
-          transition: top 0.4s ease;
         }
 
         &-GlobalAlerts {
@@ -145,7 +138,7 @@
    * ---------------------------------------
    * - Library Card
    * - Donate
-  */ 
+  */
   &-Buttons {
 
     .DonateButton, .LibraryCardButton {

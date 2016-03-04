@@ -177,7 +177,7 @@ class Header extends React.Component {
     if(!this.state.headerHeight) {
       setTimeout(() => {
         this.setState({headerHeight: this._getHeaderHeight()});
-      }, 0);
+      }, 500);
     }
   }
 

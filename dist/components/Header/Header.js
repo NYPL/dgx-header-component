@@ -268,7 +268,7 @@ var Header = (function (_React$Component) {
       if (!this.state.headerHeight) {
         setTimeout(function () {
           _this.setState({ headerHeight: _this._getHeaderHeight() });
-        }, 0);
+        }, 500);
       }
     }
 

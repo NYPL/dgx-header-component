@@ -7,8 +7,7 @@ $SECONDARY_FONT_KIEVIT: 'Helvetica';
 $THIRD_FONT_KIEVIT: 'arial';
 $FOURTH_FONT_KIEVIT: 'sans-serif';
 
-//$SECONDARY_FONT_MILO: 'Roboto Slab';
-$THIRD_FONT_MILO: 'serif';
+$SECONDARY_FONT_MILO: 'serif';
 
 /* FONT DEFINITIONS
  * ---------------------------
@@ -81,23 +80,23 @@ $THIRD_FONT_MILO: 'serif';
 /* MILO MIXINS */
 // FOR REFERENCE SEE THIS URL: http://nypl.github.io/dgx-styleguide/milo.html
 @mixin Milo-Light {
-	font-family: 'Milo-Light', $SECONDARY_FONT_MILO, $THIRD_FONT_MILO;
+	font-family: 'Milo-Light', $SECONDARY_FONT_MILO;
 }
 
 @mixin Milo-Light-Italic {
-	font-family: 'Milo-Light-Italic', $SECONDARY_FONT_MILO, $THIRD_FONT_MILO;
+	font-family: 'Milo-Light-Italic', $SECONDARY_FONT_MILO;
 }
 
 @mixin Milo-Regular {
-	font-family: 'Milo-Regular', $SECONDARY_FONT_MILO, $THIRD_FONT_MILO;
+	font-family: 'Milo-Regular', $SECONDARY_FONT_MILO;
 }
 
 @mixin Milo-Regular-Italic {
-	font-family: 'Milo-Regular-Italic', $SECONDARY_FONT_MILO, $THIRD_FONT_MILO;
+	font-family: 'Milo-Regular-Italic', $SECONDARY_FONT_MILO;
 }
 
 @mixin Milo-Medium {
-	font-family: 'Milo-Medium', $SECONDARY_FONT_MILO, $THIRD_FONT_MILO;
+	font-family: 'Milo-Medium', $SECONDARY_FONT_MILO;
 }
 
 /* NYPL ICON FONT RULES */

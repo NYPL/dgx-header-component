@@ -2,6 +2,7 @@
 import React from 'react';
 import Radium from 'radium';
 import cx from 'classnames';
+import _ from 'underscore';
 
 // ALT Flux
 import HeaderStore from '../../stores/HeaderStore.js';
@@ -25,55 +26,54 @@ import utils from '../../utils/utils.js';
 // import '../../styles/main.scss';
 
 class Header extends React.Component {
-
-  // Constructor used in ES6
   constructor(props) {
     super(props);
-    // replaces getInitialState()
-    this.state = HeaderStore.getState();
+
+    this.state = _.extend({ headerHeight: null }, HeaderStore.getState());
+
+    this._handleStickyHeader = this._handleStickyHeader.bind(this);
   }
 
   componentDidMount() {
     HeaderStore.listen(this._onChange.bind(this));
 
     // If the HeaderStore is not populated with
-    // the proper Data, then fetch.
+    // the proper data, then fetch via client-side
     this._fetchDataIfNeeded();
 
-    // Once the component mounts,
-    // enable the sticky header depending on position.
-    this._handleStickyHeader();
-
-    // Check if the sticky header covers the anchor
-    this._offsetStickyHeader();
+    // Height needs to be set once the alerts (if any) are mounted.
+    this._setHeaderHeight();
 
     // Listen to the scroll event for the sticky header.
-    window.addEventListener('scroll', this._handleStickyHeader.bind(this));
-
-    // Listen to hash change and check if the sticky header covers the anchor
-    window.addEventListener('hashchange', this._offsetStickyHeader.bind(this),
-      false);
+    window.addEventListener('scroll', this._handleStickyHeader, false);
   }
 
   componentWillUnmount() {
     HeaderStore.unlisten(this._onChange.bind(this));
+
+    // Removing event listener to minimize garbage collection
+    window.removeEventListener('scroll', this._handleStickyHeader, false);
   }
 
   _onChange() {
-    this.setState(HeaderStore.getState());
+    this.setState(_.extend({ headerHeight: this.state.headerHeight },HeaderStore.getState()));
   }
 
   render () {
     let isHeaderSticky = this.state.isSticky,
+      headerHeight = this.state.headerHeight,
       headerClass = this.props.className || 'Header',
       headerClasses = cx(headerClass, {'sticky': isHeaderSticky}),
       showDialog = HeaderStore._getMobileMyNyplButtonValue(),
       mobileMyNyplClasses = cx({'active': showDialog}),
       skipNav = this.props.skipNav ?
-            (<SkipNavigation {...this.props.skipNav} />) : '';  
-
+        (<SkipNavigation {...this.props.skipNav} />) : '';
     return (
-        <header id={this.props.id} className={headerClasses} ref='nyplHeader'>
+        <header
+          id={this.props.id}
+          className={headerClasses}
+          ref='nyplHeader'
+          style={(isHeaderSticky) ? {height: `${headerHeight}px`} : null}>
         {skipNav}
         <GlobalAlerts className={`${headerClass}-GlobalAlerts`} />
         <div className={`${headerClass}-Wrapper`}>
@@ -89,15 +89,15 @@ class Header extends React.Component {
             <Logo className={`${headerClass}-Logo`} />
             <div className={`${headerClass}-Buttons`} style={styles.topButtons}>
               <MyNyplButton label='Log In' refId='desktopLogin' />
-              <SimpleButton 
-                label='Get a Library Card' 
-                target='//catalog.nypl.org/screens/selfregpick.html' 
+              <SimpleButton
+                label='Get a Library Card'
+                target='//catalog.nypl.org/screens/selfregpick.html'
                 className='LibraryCardButton'
                 id='LibraryCardButton'
                 gaAction='Get a Library Card'
                 gaLabel=''
                 style={styles.libraryCardButton} />
-              <SubscribeButton 
+              <SubscribeButton
                 label='Get Email Updates'
                 lang={this.props.lang}
                 style={styles.subscribeButton} />
@@ -108,7 +108,7 @@ class Header extends React.Component {
                 gaLabel={'Header Button'} />
             </div>
           </div>
-          <NavMenu 
+          <NavMenu
             className={`${headerClass}-NavMenu`}
             lang={this.props.lang}
             items={this.state.headerData}  />
@@ -118,7 +118,7 @@ class Header extends React.Component {
   }
 
   /**
-   * _fetchDataIfNeeded() 
+   * _fetchDataIfNeeded()
    * checks the existence of headerData items,
    * triggers the Actions.fetchHeaderData()
    * method to dispatch a client-side event
@@ -131,83 +131,65 @@ class Header extends React.Component {
   }
 
   /**
-   * _handleStickyHeader() 
+   * _handleStickyHeader()
    * returns the Actions.updateIsHeaderSticky()
-   * with the proper boolean value to update the 
-   * HeaderStore.isSticky value based on the window 
+   * with the proper boolean value to update the
+   * HeaderStore.isSticky value based on the window
    * vertical scroll position surpassing the height
    * of the Header DOM element.
    */
   _handleStickyHeader() {
-    let headerHeight = this._getHeaderHeight(),
+    let headerHeight = this.state.headerHeight,
       windowVerticalDistance = this._getWindowVerticalScroll();
 
-    if (windowVerticalDistance > headerHeight) {
-      // Fire GA Event when Header is in Sticky Mode
-      utils._trackHeader.bind(this, 'scroll', 'Sticky Header');
-
-      Actions.updateIsHeaderSticky(true);
+    if (windowVerticalDistance && headerHeight && (windowVerticalDistance > headerHeight)) {
+      // Only update the value if sticky is false
+      if (!HeaderStore._getIsStickyValue()) {
+        // Fire GA Event when Header is in Sticky Mode
+        utils._trackHeader.bind(this, 'scroll', 'Sticky Header');
+        // Update the isSticky flag
+        Actions.updateIsHeaderSticky(true);
+      }
     } else {
-      Actions.updateIsHeaderSticky(false);
+      // Avoids re-assignment on each scroll by checking if it is already true
+      if (HeaderStore._getIsStickyValue()) {
+        Actions.updateIsHeaderSticky(false);
+      }
     }
-
   }
 
   /**
-   * _getHeaderHeight() 
+   * _getHeaderHeight()
    * returns the Height of the Header DOM
    * element in pixels.
    */
   _getHeaderHeight() {
-    let headerContainer = React.findDOMNode(this.refs.nyplHeader);
-
-    return headerContainer.clientHeight;
+    let headerDOM = React.findDOMNode(this.refs.nyplHeader);
+    return headerDOM.getBoundingClientRect().height;
   }
 
   /**
-   * _getWindowVerticallScroll() 
+   * _setHeaderHeight()
+   * Updates the state headerHeight property
+   * only if headerHeight is not defined.
+   */
+  _setHeaderHeight() {
+    if(!this.state.headerHeight) {
+      setTimeout(() => {
+        this.setState({headerHeight: this._getHeaderHeight()});
+      }, 500);
+    }
+  }
+
+  /**
+   * _getWindowVerticallScroll()
    * returns the current window vertical
    * scroll position in pixels.
    */
   _getWindowVerticalScroll() {
-    return window.scrollY 
-      || window.pageYOffset 
+    return window.scrollY
+      || window.pageYOffset
       || document.documentElement.scrollTop;
-  }
-
-
-  /**
-  * _offsetStickyHeader()
-  * change the sticky header's vertical postion so it won't
-  * cover the title of the anchor if the user got to the page by
-  * type in the URL with anchor in it.
-  * 68px is the height of sticky header.
-  */
-  _offsetStickyHeader() {
-    // Get sticky header's height: 68px and add 10px distance
-    let stickyHeaderHeight = 68,
-      offsetDistance = stickyHeaderHeight + 10,
-      headerMobile = React.findDOMNode(this.refs.headerMobile),
-      headerMobileDisplay;
-
-    // Get the display CSS feature of mobile header to see if we are on mobile
-    // view. currentStyle is for IE, and getComputedStyle is for other browsers
-    if (headerMobile.currentStyle) {
-      headerMobileDisplay = headerMobile.currentStyle.display;
-    } else if (window.getComputedStyle) {
-      headerMobileDisplay = window.getComputedStyle(headerMobile, null)
-        .getPropertyValue('display');
-    }
-
-    // We check here to see if the header is sticky or on mobile view to decide
-    // if we need to scroll the page
-    if(HeaderStore.getState().isSticky && headerMobileDisplay === 'none') {
-      if (window.location.hash) {
-        setTimeout(() => {
-          window.scrollBy(0, -offsetDistance);
-        }, 1000);
-      }
-    }
   }
 };
 

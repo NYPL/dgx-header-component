@@ -144,7 +144,7 @@ var MobileHeader = (function (_React$Component) {
     }
 
     /**
-     * _toggleMobileMenu(activeButton) 
+     * _toggleMobileMenu(activeButton)
      * Verifies that the activeButton does not
      * match the HeaderStore's current value
      * and set's it as the param activeButton.
@@ -188,7 +188,7 @@ var MobileHeader = (function (_React$Component) {
     }
 
     /**
-     * _handleMenuBtnPress() 
+     * _handleMenuBtnPress()
      * Calls _toggleMobileMenu()
      * with the 'mobileMenu' as a param
      */
@@ -215,6 +215,9 @@ var styles = {
   },
   mobileLogo: {
     color: '#000',
+    position: 'absolute',
+    left: 0,
+    top: 0,
     textDecoration: 'none',
     ':hover': {
       color: '#000'
@@ -224,9 +227,6 @@ var styles = {
     }
   },
   logoIcon: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
     fontSize: '59px'
   },
   myNyplIcon: {

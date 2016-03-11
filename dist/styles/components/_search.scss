@@ -248,7 +248,7 @@
 
   @include min-screen(769px) {
     margin: 0 0 25px 0;
-    display: block; 
+    display: block;
   }
 }
 
@@ -257,7 +257,7 @@
   border: none !important;
   color: #000000;
   display: inline-block;
-  @include Kievit-Light;
+  @include Kievit-Book;
   font-size: 18px;
   font-style: italic;
   height: 66px;
@@ -273,7 +273,7 @@
   @include min-screen(769px) {
     background-color: #1DA1D4;
     color: #FFFFFF;
-    @include Kievit-Light;
+    @include Kievit-Book;
     font-size: 58px;
     font-style: normal;
     letter-spacing: -0.8px;
@@ -359,7 +359,7 @@
 &-SearchBox-Mobile-Submit {
   border-top-style: solid;
   border-color: rgba(102, 102, 102, 0.21);
-  border-width: 1px; 
+  border-width: 1px;
   color: #FFFFFF;
   font-size: 14px;
   text-align: center;

@@ -8,7 +8,25 @@
     "babel-build": "babel src -d dist && cp -r src/styles/ dist/styles",
     "build": "NODE_ENV=production node_modules/.bin/webpack -p --config webpack.config.js"
   },
-  "author": "Edwin Guzman <edwinguzman@nypl.org>",
+  "author": "NYPL Digital Experience",
+  "contributors": [
+    {
+      "name": "Edwin Guzman",
+      "email": "edwinguzman@nypl.org"
+    },
+    {
+      "name": "Rafael Hernandez",
+      "email": "rafaelhernandez@nypl.org"
+    },
+    {
+      "name": "Kang-Ting Peng",
+      "email": "kangtingpeng@nypl.org"
+    },
+    {
+      "name": "Sean Redmond",
+      "email": "seanredmond@nypl.org"
+    }
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -32,16 +50,16 @@
     "react-onclickout": "^1.2.1",
     "react-tappable": "^0.6.0",
     "underscore": "^1.8.3",
-    "dgx-skip-navigation-link": "git+ssh://bitbucket.org/NYPL/dgx-skip-navigation-link.git#master",
-    "dgx-feature-flags": "git+ssh://bitbucket.org/NYPL/dgx-feature-flags.git#master"
+    "dgx-skip-navigation-link": "git+ssh://git@bitbucket.org/NYPL/dgx-skip-navigation-link.git#master",
+    "dgx-feature-flags": "git+ssh://git@bitbucket.org/NYPL/dgx-feature-flags.git#master"
   },
   "devDependencies": {
     "babel-core": "^5.8.30",
     "babel-loader": "^5.3.2",
     "clean-webpack-plugin": "^0.1.3",
     "css-loader": "^0.15.6",
-    "dgx-alt-center": "git+ssh://bitbucket.org/NYPL/dgx-alt-center.git#master",
-    "dgx-react-ga": "git+ssh://bitbucket.org/NYPL/dgx-react-ga.git#master",
+    "dgx-alt-center": "git+ssh://git@bitbucket.org/NYPL/dgx-alt-center.git#master",
+    "dgx-react-ga": "git+ssh://git@bitbucket.org/NYPL/dgx-react-ga.git#master",
     "extract-text-webpack-plugin": "^0.8.2",
     "node-sass": "^3.2.0",
     "react-hot-loader": "^1.3.0",

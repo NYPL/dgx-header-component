@@ -257,9 +257,9 @@
   border: none !important;
   color: #000000;
   display: inline-block;
-  @include Kievit-Book;
+  @include Kievit-Light;
   font-size: 18px;
-  font-style: italic;
+  font-style: normal;
   height: 66px;
   padding: 0 0 0 25px !important;
   width: 100%;
@@ -273,7 +273,7 @@
   @include min-screen(769px) {
     background-color: #1DA1D4;
     color: #FFFFFF;
-    @include Kievit-Book;
+    //@include Kievit-Book;
     font-size: 58px;
     font-style: normal;
     letter-spacing: -0.8px;

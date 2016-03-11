@@ -127,7 +127,7 @@
 
   .EmailSubscribeForm {
     &-Error {
-      @include Kievit-Light;
+      @include Kievit-Book;
       display: none;
       position: absolute;
       margin-top: 15px;

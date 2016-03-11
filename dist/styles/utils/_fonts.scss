@@ -21,10 +21,11 @@ $SECONDARY_FONT_MILO: 'serif';
 /* Kievit Meduim */
 @include font-face(Kievit-Medium, '#{$FONT_PATH}/ff_kievit_web/KievitWeb-Medi');
 /* Kievit Meduim Italic */
-@include font-face(Kievit-Medium, '#{$FONT_PATH}/ff_kievit_web/KievitWeb-MediIta');
+@include font-face(Kievit-Medium-Italic, '#{$FONT_PATH}/ff_kievit_web/KievitWeb-MediIta');
 /* Kievit Bold */
 @include font-face(Kievit-Bold, '#{$FONT_PATH}/ff_kievit_web/KievitWeb-Bold');
-// Kievit Light used in the main Search Field Text only...
+/* Kievit Light */
+// Used in the main Search Field Text only
 @include font-face(Kievit-Light, '#{$FONT_PATH}/ff_kievit_web/KievitWeb-Light');
 // @include font-face(Kievit-Thin, '#{$FONT_PATH}/ff_kievit_web/KievitWeb-Thin');
 

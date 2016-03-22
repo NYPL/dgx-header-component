@@ -165,7 +165,7 @@ class Header extends React.Component {
    * element in pixels.
    */
   _getHeaderHeight() {
-    let headerDOM = React.findDOMNode(this.refs.nyplHeader);
+    let headerDOM = ReactDOM.findDOMNode(this.refs.nyplHeader);
     return headerDOM.getBoundingClientRect().height;
   }
 

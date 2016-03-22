@@ -255,7 +255,7 @@ var Header = (function (_React$Component) {
   }, {
     key: '_getHeaderHeight',
     value: function _getHeaderHeight() {
-      var headerDOM = _react2['default'].findDOMNode(this.refs.nyplHeader);
+      var headerDOM = _reactDom2['default'].findDOMNode(this.refs.nyplHeader);
       return headerDOM.getBoundingClientRect().height;
     }
 

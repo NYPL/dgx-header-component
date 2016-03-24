@@ -4,7 +4,7 @@
   }
 
   @include min-screen(1025px) {
-    right: 20px;  
+    right: 20px;
   }
 
   .SubscribeButton,
@@ -27,7 +27,7 @@
     &:visited {
       color: #000;
     }
-      
+
     .icon {
       opacity: .8;
     }
@@ -70,7 +70,7 @@
       margin-top: 20px;
       font-size: 12px;
       text-transform: uppercase;
-      @include Kievit-Light;
+      @include Kievit-Book;
 
       a {
         border-bottom: 1px solid #fff;
@@ -109,7 +109,7 @@
       margin-top: 40px;
       font-size: 12px;
     }
-    
+
     &-Misc-Error {
       color: #fff;
       font-size: 20px;
@@ -127,7 +127,7 @@
 
   .EmailSubscribeForm {
     &-Error {
-      @include Kievit-Light;
+      @include Kievit-Book;
       display: none;
       position: absolute;
       margin-top: 15px;

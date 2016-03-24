@@ -1,5 +1,5 @@
 @import 'mixins';
-@import url('//fonts.googleapis.com/css?family=Roboto+Slab:400,300,100,700');
+//@import url('//fonts.googleapis.com/css?family=Roboto+Slab:400,300,100,700');
 
 $FONT_PATH: '//ux-static.nypl.org';
 
@@ -7,33 +7,55 @@ $SECONDARY_FONT_KIEVIT: 'Helvetica';
 $THIRD_FONT_KIEVIT: 'arial';
 $FOURTH_FONT_KIEVIT: 'sans-serif';
 
-$SECONDARY_FONT_MILO: 'Roboto Slab';
-$THIRD_FONT_MILO: 'serif';
+$SECONDARY_FONT_MILO: 'serif';
 
 /* FONT DEFINITIONS
  * ---------------------------
 */
-/* KIEVIT */
-@include font-face(Kievit-Regular, '#{$FONT_PATH}/ff_kievit_web/KievitWeb');
-@include font-face(Kievit-Medium, '#{$FONT_PATH}/ff_kievit_web/KievitWeb-Medi');
-@include font-face(Kievit-Bold, '#{$FONT_PATH}/ff_kievit_web/KievitWeb-Bold');
+/* KIEVIT INCLUDES */
+// @include font-face(Kievit-Regular, '#{$FONT_PATH}/ff_kievit_web/KievitWeb');
+/* Kievit Book */
 @include font-face(Kievit-Book, '#{$FONT_PATH}/ff_kievit_web/KievitWeb-Book');
+/* Kievit Book Italic */
 @include font-face(Kievit-Book-Italic, '#{$FONT_PATH}/ff_kievit_web/KievitWeb-BookIta');
+/* Kievit Meduim */
+@include font-face(Kievit-Medium, '#{$FONT_PATH}/ff_kievit_web/KievitWeb-Medi');
+/* Kievit Meduim Italic */
+@include font-face(Kievit-Medium-Italic, '#{$FONT_PATH}/ff_kievit_web/KievitWeb-MediIta');
+/* Kievit Bold */
+@include font-face(Kievit-Bold, '#{$FONT_PATH}/ff_kievit_web/KievitWeb-Bold');
+/* Kievit Light */
+// Used in the main Search Field Text only
 @include font-face(Kievit-Light, '#{$FONT_PATH}/ff_kievit_web/KievitWeb-Light');
-@include font-face(Kievit-Thin, '#{$FONT_PATH}/ff_kievit_web/KievitWeb-Thin');
-/* KIEVIT Small Caps */
-@include font-face(Kievit-SC, '#{$FONT_PATH}/ff_kievit_web/KievitScWeb');
+// @include font-face(Kievit-Thin, '#{$FONT_PATH}/ff_kievit_web/KievitWeb-Thin');
 
-/* MILO */
-@include font-face(Milo-Regular, '#{$FONT_PATH}/milo-web/milo-slab-pro-regular/MiloSlabWebPro');
-@include font-face(Milo-Regular-Italic, '#{$FONT_PATH}/milo-web/milo-slab-pro-regular-italic/MiloSlabWebPro-Italic');
+/* KIEVIT Small Caps */
+//@include font-face(Kievit-SC, '#{$FONT_PATH}/ff_kievit_web/KievitScWeb');
+
+/* MILO INCLUDES */
+/* Milo Slab Light */
 @include font-face(Milo-Light, '#{$FONT_PATH}/milo-web/milo-slab-pro-light/MiloSlabWebPro-Light');
+/* Milo Slab Light Italic */
 @include font-face(Milo-Light-Italic, '#{$FONT_PATH}/milo-web/milo-slab-pro-light-italic/MiloSlabWebPro-LightItalic');
+/* Milo Slab Regular */
+@include font-face(Milo-Regular, '#{$FONT_PATH}/milo-web/milo-slab-pro-regular/MiloSlabWebPro');
+/* Milo Slab Regular Italic */
+@include font-face(Milo-Regular-Italic, '#{$FONT_PATH}/milo-web/milo-slab-pro-regular-italic/MiloSlabWebPro-Italic');
+/* Milo Slab Medium  */
 @include font-face(Milo-Medium, '#{$FONT_PATH}/milo-web/milo-slab-pro-medium/MiloSlabWebPro-Medium');
 
-/* KIEVIT INCLUDES */
-@mixin Kievit-Regular {
-  font-family: 'Kievit-Regular', $SECONDARY_FONT_KIEVIT, $THIRD_FONT_KIEVIT;
+/* KIEVIT MIXINS */
+// Map all the instances of Kievit-Regular to Kievit-Book... please.
+// @mixin Kievit-Regular {
+//   font-family: 'Kievit-Regular', $SECONDARY_FONT_KIEVIT, $THIRD_FONT_KIEVIT;
+// }
+// FOR REFERENCE SEE THIS URL:http://nypl.github.io/dgx-styleguide/kievit.html
+@mixin Kievit-Book {
+  font-family: 'Kievit-Book', $SECONDARY_FONT_KIEVIT, $THIRD_FONT_KIEVIT;
+}
+
+@mixin Kievit-Book-Italic {
+  font-family: 'Kievit-Book-Italic', $SECONDARY_FONT_KIEVIT, $THIRD_FONT_KIEVIT;
 }
 
 @mixin Kievit-Medium {
@@ -44,45 +66,39 @@ $THIRD_FONT_MILO: 'serif';
   font-family: 'Kievit-Bold', $SECONDARY_FONT_KIEVIT, $THIRD_FONT_KIEVIT;
 }
 
-@mixin Kievit-Book {
-  font-family: 'Kievit-Book', $SECONDARY_FONT_KIEVIT, $THIRD_FONT_KIEVIT;
-}
-
-@mixin Kievit-Book-Italic {
-  font-family: 'Kievit-Book-Italic', $SECONDARY_FONT_KIEVIT, $THIRD_FONT_KIEVIT;
-}
 
 @mixin Kievit-Light {
   font-family: 'Kievit-Light', $SECONDARY_FONT_KIEVIT, $THIRD_FONT_KIEVIT;
 }
 
-@mixin Kievit-Thin {
-  font-family: 'Kievit-Thin', $SECONDARY_FONT_KIEVIT, $THIRD_FONT_KIEVIT;
-}
+//@mixin Kievit-Thin {
+//  font-family: 'Kievit-Thin', $SECONDARY_FONT_KIEVIT, $THIRD_FONT_KIEVIT;
+//}
 
-@mixin Kievit-SC {
-  font-family: 'Kievit-SC', $SECONDARY_FONT_KIEVIT, $THIRD_FONT_KIEVIT;
-}
+//@mixin Kievit-SC {
+//  font-family: 'Kievit-SC', $SECONDARY_FONT_KIEVIT, $THIRD_FONT_KIEVIT;
+//}
 
-/* MILO INCLUDES */
-@mixin Milo-Regular {
-	font-family: 'Milo-Regular', $SECONDARY_FONT_MILO, $THIRD_FONT_MILO;
-}
-
-@mixin Milo-Regular-Italic {
-	font-family: 'Milo-Regular-Italic', $SECONDARY_FONT_MILO, $THIRD_FONT_MILO;
-}
-
+/* MILO MIXINS */
+// FOR REFERENCE SEE THIS URL: http://nypl.github.io/dgx-styleguide/milo.html
 @mixin Milo-Light {
-	font-family: 'Milo-Light', $SECONDARY_FONT_MILO, $THIRD_FONT_MILO;
+	font-family: 'Milo-Light', $SECONDARY_FONT_MILO;
 }
 
 @mixin Milo-Light-Italic {
-	font-family: 'Milo-Light-Italic', $SECONDARY_FONT_MILO, $THIRD_FONT_MILO;
+	font-family: 'Milo-Light-Italic', $SECONDARY_FONT_MILO;
+}
+
+@mixin Milo-Regular {
+	font-family: 'Milo-Regular', $SECONDARY_FONT_MILO;
+}
+
+@mixin Milo-Regular-Italic {
+	font-family: 'Milo-Regular-Italic', $SECONDARY_FONT_MILO;
 }
 
 @mixin Milo-Medium {
-	font-family: 'Milo-Medium', $SECONDARY_FONT_MILO, $THIRD_FONT_MILO;
+	font-family: 'Milo-Medium', $SECONDARY_FONT_MILO;
 }
 
 /* NYPL ICON FONT RULES */

@@ -74,10 +74,11 @@ var MegaMenuFeatureItem = (function (_React$Component) {
 
       if (contentObj.content && contentObj.content.type) {
         switch (contentObj.content.type) {
-          case 'blog':
-            featuredItem = _react2['default'].createElement(_ContentBoxBlogItemJs2['default'], { feature: contentObj,
-              className: this.props.className, classes: classes, navLabel: this.props.navLabel });
-            break;
+          // case 'blog':
+          // console.log(contentObj);
+          //   featuredItem = <BlogItem feature={contentObj}
+          //     className={this.props.className} classes={classes} navLabel={this.props.navLabel} />;
+          //   break;
           case 'event-program':
             featuredItem = _react2['default'].createElement(_ContentBoxEventProgramItemJs2['default'], { feature: contentObj,
               className: this.props.className, classes: classes, navLabel: this.props.navLabel });

@@ -248,7 +248,7 @@
 
   @include min-screen(769px) {
     margin: 0 0 25px 0;
-    display: block; 
+    display: block;
   }
 }
 
@@ -259,7 +259,7 @@
   display: inline-block;
   @include Kievit-Light;
   font-size: 18px;
-  font-style: italic;
+  font-style: normal;
   height: 66px;
   padding: 0 0 0 25px !important;
   width: 100%;
@@ -273,7 +273,6 @@
   @include min-screen(769px) {
     background-color: #1DA1D4;
     color: #FFFFFF;
-    @include Kievit-Light;
     font-size: 58px;
     font-style: normal;
     letter-spacing: -0.8px;
@@ -359,7 +358,7 @@
 &-SearchBox-Mobile-Submit {
   border-top-style: solid;
   border-color: rgba(102, 102, 102, 0.21);
-  border-width: 1px; 
+  border-width: 1px;
   color: #FFFFFF;
   font-size: 14px;
   text-align: center;

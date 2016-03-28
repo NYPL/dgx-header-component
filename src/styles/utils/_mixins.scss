@@ -1,9 +1,9 @@
 /* FONT FACE MIXIN
  * ---------------
- * Usage: @include font-face('Kievit-Regular', 'http://...');
+ * Usage: @include font-face('Kievit-Book', 'http://...');
  * Desc: Do not include the font file extension, this mixin
  * will generate the proper extensions.
-*/ 
+*/
 @mixin font-face($font-family, $file-path) {
   @font-face {
     font-family: $font-family;
@@ -18,7 +18,7 @@
  * -------------------
  * Usage: @include border-radius(5px);
  * Desc: Creates a border radius
-*/ 
+*/
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
   border-radius: $radius;
@@ -56,7 +56,7 @@
     border-top-color: transparent;
     border-left-color: transparent;
     border-right-color: transparent;
-    border-bottom-color: $color;    
+    border-bottom-color: $color;
     left: $left;
 
     @if ($bottom-or-top == 'top') {

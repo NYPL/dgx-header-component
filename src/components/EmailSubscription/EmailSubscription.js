@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Radium from 'radium';
 import axios from 'axios';
 import cx from 'classnames';
@@ -179,7 +180,7 @@ class EmailSubscription extends React.Component {
     // Prevent re-direct, handle validation
     e.preventDefault();
 
-    let userInput = React.findDOMNode(this.refs.emailAddressField);
+    let userInput = ReactDOM.findDOMNode(this.refs.emailAddressField);
 
     if (!this._isValidEmail(userInput.value)) {
       userInput.value = '';

@@ -19,6 +19,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 var _radium = require('radium');
 
 var _radium2 = _interopRequireDefault(_radium);
@@ -251,7 +255,7 @@ var Header = (function (_React$Component) {
   }, {
     key: '_getHeaderHeight',
     value: function _getHeaderHeight() {
-      var headerDOM = _react2['default'].findDOMNode(this.refs.nyplHeader);
+      var headerDOM = _reactDom2['default'].findDOMNode(this.refs.nyplHeader);
       return headerDOM.getBoundingClientRect().height;
     }
 

@@ -6,6 +6,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 var _componentsHeaderHeaderJs = require('./components/Header/Header.js');
 
 var _componentsHeaderHeaderJs2 = _interopRequireDefault(_componentsHeaderHeaderJs);
@@ -38,4 +42,4 @@ if (!window.dgxFeatureFlags) {
 /* app.jsx
  * Used for local development of React Components
  */
-_react2['default'].render(_react2['default'].createElement(_componentsHeaderHeaderJs2['default'], { skipNav: { target: 'maincontent' } }), document.getElementById('app'));
+_reactDom2['default'].render(_react2['default'].createElement(_componentsHeaderHeaderJs2['default'], { skipNav: { target: 'maincontent' } }), document.getElementById('app'));

@@ -1,5 +1,6 @@
 // NPM Modules
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Radium from 'radium';
 import cx from 'classnames';
 import _ from 'underscore';
@@ -164,7 +165,7 @@ class Header extends React.Component {
    * element in pixels.
    */
   _getHeaderHeight() {
-    let headerDOM = React.findDOMNode(this.refs.nyplHeader);
+    let headerDOM = ReactDOM.findDOMNode(this.refs.nyplHeader);
     return headerDOM.getBoundingClientRect().height;
   }
 

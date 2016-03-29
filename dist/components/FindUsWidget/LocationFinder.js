@@ -18,6 +18,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 var LocationFinder = (function (_React$Component) {
   _inherits(LocationFinder, _React$Component);
 
@@ -164,7 +168,7 @@ var LocationFinder = (function (_React$Component) {
   }, {
     key: '_handleChange',
     value: function _handleChange() {
-      var zipcode = _react2['default'].findDOMNode(this.refs.zipCodeInput).value;
+      var zipcode = _reactDom2['default'].findDOMNode(this.refs.zipCodeInput).value;
 
       if (this._validateZipcode(zipcode)) {
 

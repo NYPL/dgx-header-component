@@ -78,7 +78,6 @@ const styles = {
   donateButton: {
     padding: '8px 15px',
     textTransform: 'uppercase',
-    borderRadius: '3px',
     fontSize: '12.5px',
     letterSpacing: '.04em'
   },

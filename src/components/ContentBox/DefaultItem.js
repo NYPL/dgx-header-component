@@ -8,23 +8,25 @@ class DefaultItem extends React.Component {
   }
 
   render() {
-    let defaultFeature = {
-        category: 'NYPL',
-        headline: 'Find more about NYPL',
-        desc: 'NYPL Rocks!',
-        link: 'http://nypl.org',
-        img: null
-      },
-      feature = this.props.feature || defaultFeature,
-      classes = this.props.classes || 'without-image',
-      img = feature.imgSrc ?
-        <div className={'FeatureItem-Image ' + classes}>
+    const defaultFeature = {
+      category: 'NYPL',
+      headline: 'Find more about NYPL',
+      desc: 'NYPL Rocks!',
+      link: 'http://nypl.org',
+      img: null
+    };
+    const feature = this.props.feature || defaultFeature;
+    const classes = this.props.classes || 'without-image';
+    const img = feature.imgSrc ?
+        (<div className={'FeatureItem-Image ' + classes}>
           <img src={feature.imgSrc} alt="" />
-        </div> : null;
+        </div>) : null;
 
     return (
       <a href={feature.link} className={this.props.className}
-        onClick={utils._trackHeader.bind(this, 'FeatureItem', `${this.props.navLabel} - ${feature.headline}`)}>
+        onClick={utils._trackHeader
+          .bind(this, 'FeatureItem', `${this.props.navLabel} - ${feature.headline}`)}
+      >
         <div className={`${this.props.className}-Wrapper`}>
           {img}
           <div className={'FeatureItem-Content ' + classes}>

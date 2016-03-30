@@ -40,10 +40,10 @@ var DefaultItem = (function (_React$Component) {
         desc: 'NYPL Rocks!',
         link: 'http://nypl.org',
         img: null
-      },
-          feature = this.props.feature || defaultFeature,
-          classes = this.props.classes || 'without-image',
-          img = feature.imgSrc ? _react2['default'].createElement(
+      };
+      var feature = this.props.feature || defaultFeature;
+      var classes = this.props.classes || 'without-image';
+      var img = feature.imgSrc ? _react2['default'].createElement(
         'div',
         { className: 'FeatureItem-Image ' + classes },
         _react2['default'].createElement('img', { src: feature.imgSrc, alt: '' })
@@ -52,7 +52,8 @@ var DefaultItem = (function (_React$Component) {
       return _react2['default'].createElement(
         'a',
         { href: feature.link, className: this.props.className,
-          onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'FeatureItem', this.props.navLabel + ' - ' + feature.headline) },
+          onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'FeatureItem', this.props.navLabel + ' - ' + feature.headline)
+        },
         _react2['default'].createElement(
           'div',
           { className: this.props.className + '-Wrapper' },

@@ -86,7 +86,6 @@ const styles = {
     margin: '0 0 -10px 0',
     width: '2px',
     height: '30px',
-    opacity: '0.65',
     backgroundColor: '#837377'
   }
 };

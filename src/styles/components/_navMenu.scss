@@ -445,6 +445,10 @@
 	.StickyItems {
 		display: none;
 
+		.lineSeparator {
+			opacity: 0.65;
+		}
+
 		.DonateButton {
 			display: none;
 

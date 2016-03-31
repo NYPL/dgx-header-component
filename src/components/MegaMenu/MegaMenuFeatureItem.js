@@ -12,7 +12,7 @@ class MegaMenuFeatureItem extends React.Component {
   
 	render() {
     const feature = this.props.feature;
-		const classes = cx({
+    const classes = cx({
       'with-image': feature && feature.images,
       'without-image': !feature || !feature.images
     });

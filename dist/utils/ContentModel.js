@@ -1,13 +1,25 @@
-import _ from 'underscore';
+'use strict';
 
-function ContentModel() {  
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _underscore = require('underscore');
+
+var _underscore2 = _interopRequireDefault(_underscore);
+
+function ContentModel() {
+  var _this = this;
+
   // Function to get image object.
-  this.image = data => {
+  this.image = function (data) {
     if (!data) {
       return;
     }
 
-    let image = {};
+    var image = {};
 
     image.id = data.id;
     image.type = data.type;
@@ -18,12 +30,12 @@ function ContentModel() {
   };
 
   // Function used to get any type of content - blog, events, node, etc.
-  this.content = data => {
+  this.content = function (data) {
     if (!data) {
       return;
     }
 
-    let content = {};
+    var content = {};
 
     content.id = data.id;
     content.type = data.type;
@@ -31,25 +43,25 @@ function ContentModel() {
     content.uri = data.attributes.uri['full-uri'];
 
     if (data.type === 'blog') {
-      this.blog(content, data)
+      _this.blog(content, data);
     }
 
     if (data.type === 'event-program' || data.type === 'event-exhibition') {
-      this.eventExhibition(content, data);
+      _this.eventExhibition(content, data);
     }
 
     return content;
   };
 
-  this.blog = (content, data) => {
+  this.blog = function (content, data) {
     content.title = data.attributes.title;
     content.body = data.attributes.body;
 
-    content.authors = _.map(data.authors, this.authors);
+    content.authors = _underscore2['default'].map(data.authors, _this.authors);
   };
 
-  this.authors = data => {
-    let authors = {};
+  this.authors = function (data) {
+    var authors = {};
 
     authors.id = data.id;
     authors.type = data.type;
@@ -61,28 +73,28 @@ function ContentModel() {
     authors.lastName = data.attributes['last-name'];
 
     if (data['nypl-location']) {
-      authors.location = this.location(data['nypl-location']);
+      authors.location = _this.location(data['nypl-location']);
     }
 
     return authors;
   };
 
-  this.eventExhibition = (content, data) => {
+  this.eventExhibition = function (content, data) {
     content.dates = {
       start: data.attributes['start-date'],
-      end: data.attributes['end-date'],
+      end: data.attributes['end-date']
     };
     content.name = data.attributes.name;
     content.description = data.attributes.description;
     content.spaceName = data.attributes['space-name'];
 
     if (data['nypl-location']) {
-      content.location = this.location(data.location);
+      content.location = _this.location(data.location);
     }
   };
 
-  this.location = data => {
-    let location = {};
+  this.location = function (data) {
+    var location = {};
 
     location.type = data.type;
     location.id = data.id;
@@ -93,16 +105,17 @@ function ContentModel() {
     return location;
   };
 
-  this.featureItem = (data, lang) => {
+  this.featureItem = function (data, lang) {
     return {
       headline: data.headline ? data.headline[lang].text : '',
       category: data.category ? data.category[lang].text : '',
       imgSrc: data.images ? data.images[0].uri : '',
       // Assuming that the text is already trimmed we should redo this:
       description: data.description ? data.description[lang].text.substring(0, '175') : '',
-      link: data.link ? data.link[lang].text : '',
+      link: data.link ? data.link[lang].text : ''
     };
   };
 }
 
-export default new ContentModel();
+exports['default'] = new ContentModel();
+module.exports = exports['default'];

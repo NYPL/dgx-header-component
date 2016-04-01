@@ -10,8 +10,9 @@
   .SubscribeButton,
   .MyNyplButton {
     @include Kievit-Bold;
-    font-size: 12px;
+    font-size: 13px;
     color: #000;
+    letter-spacing: .04em;
 
     &.active {
       background-color: #1980A9;

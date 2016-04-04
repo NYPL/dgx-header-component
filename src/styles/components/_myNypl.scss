@@ -38,6 +38,7 @@
 .StickyMyNypl-Wrapper {
   text-transform: none;
   display: none;
+  box-sizing: content-box;
 
   &.active {
     display: block;
@@ -67,6 +68,13 @@
       list-style: none;
       padding: 0px;
       margin: 0px;
+
+      li {
+        a {
+          border-radius: 28px;
+          box-sizing: content-box;
+        }
+      }
     }
 
     &-Catalog-Btn {

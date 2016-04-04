@@ -272,7 +272,6 @@ const styles = {
     height: '38px',
     paddingLeft: '15px',
     width: '100px',
-    borderRadius: '20px',
     fontSize: '12px',
     backgroundColor: '#1DA1D4',
     fontFamily: 'Kievit-Book'
@@ -283,7 +282,6 @@ const styles = {
     color: 'white',
     padding: '5px 15px 5px 5px',
     width: '90px',
-    borderRadius: '20px',
     fontSize: '12px',
     backgroundColor: '#1DA1D4',
     fontFamily: 'Kievit-Book',

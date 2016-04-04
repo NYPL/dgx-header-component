@@ -93,10 +93,6 @@ function Model() {
       featuredItem.images = _.map(data.images, ContentModel.image);
     }
 
-    if (data['related-content']) {
-      featuredItem.content = ContentModel.content(data['related-content']);
-    }
-
     return featuredItem;
   };
 }

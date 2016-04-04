@@ -445,11 +445,16 @@
 	.StickyItems {
 		display: none;
 
+		.lineSeparator {
+			opacity: 0.65;
+		}
+
 		.DonateButton {
 			display: none;
 
 			@include min-screen(892px) {
 				display: inline-block;
+				border-radius: 3px;
 			}
 		}
 

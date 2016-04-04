@@ -197,8 +197,7 @@ var styles = {
     minWidth: '250px',
     minHeight: '190px',
     backgroundColor: '#1DA1D4',
-    padding: '25px 30px',
-    boxSizing: 'content-box'
+    padding: '25px 30px'
   },
   hide: {
     display: 'none'

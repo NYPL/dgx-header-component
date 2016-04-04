@@ -117,6 +117,10 @@
       padding-top: 40px;
       @include Kievit-Book;
 
+      a {
+        border-radius: 20px;
+      }
+
       .icon {
         vertical-align: middle;
         font-size: 25px;
@@ -163,6 +167,10 @@
       }
     }
     &-Submit {
+      input {
+        border-radius: 20px;
+      }
+
       .icon {
         color: #fff;
         font-size: 30px;

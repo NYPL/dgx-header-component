@@ -143,7 +143,8 @@
 
     .DonateButton, .LibraryCardButton {
       @include Kievit-Bold;
-      font-size: 12px;
+      font-size: 13px;
+      letter-spacing: .04em;
 
       &:visited {
         color: #000;

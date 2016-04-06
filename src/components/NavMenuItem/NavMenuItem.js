@@ -27,7 +27,7 @@ class NavMenuItem extends React.Component {
   render() {
 
     let linkClass = cx({
-        'active': this.props.index === this.state.activeItem 
+        'active': this.props.index === this.state.activeItem
           || HeaderStore._getLastActiveMenuItem() === this.props.navId
       }),
       megaMenuArrow = (this.props.subNav && this.props.features) ?
@@ -53,7 +53,7 @@ class NavMenuItem extends React.Component {
         id={(this.props.navId) ? `${this.props.className}-${this.props.navId}` : this.props.className}
         className={this.props.className}>
         <span
-          onMouseEnter={this._activateHover} 
+          onMouseEnter={this._activateHover}
           onMouseLeave={this._deactivateHover}
           className={'NavMenuItem-Link'}
           id={(this.props.navId) ? 'NavMenuItem-Link-' + this.props.navId : 'NavMenuItem-Link'}>
@@ -80,7 +80,7 @@ class NavMenuItem extends React.Component {
     this.hoverTimer = setTimeout(() => {
       this.setState({lastActiveMenuItem: this.props.navId});
       this.setState({activeItem: this.props.index});
-    }, 150);
+    }, 80);
   }
 
   /**

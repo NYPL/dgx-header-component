@@ -41,8 +41,8 @@
 
     &.active {
       color: #78CCED;
-      -webkit-transition: color .3s linear .25s, color .3s linear .25s;
-      transition: color .3s linear .25s, color .3s linear .25s;
+      -webkit-transition: color .2s linear .2s, color .2s linear .2s;
+      transition: color .2s linear .2s, color .2s linear .2s;
     }
 
     &.visuallyHidden {
@@ -80,8 +80,8 @@
   &.active {
     background-color: $BG_MENU_SEARCH;
     color: #78CCED;
-    -webkit-transition: background-color .3s linear .25s, color .3s linear .25s; /* Safari */
-    transition: background-color .3s linear .25s, color .3s linear .25s;
+    -webkit-transition: background-color .2s linear .2s, color .2s linear .2s; /* Safari */
+    transition: background-color .2s linear .2s, color .2s linear .2s;
 
     @include min-screen(769px) {
       display: block;

@@ -66,10 +66,10 @@ class SearchButton extends React.Component {
             className={`nypl-icon-magnifier-fat ${this.props.className}-SearchButton ${classes}`}
             name='Search Button'
             label={searchLabelFeature} />
-          <SearchBox 
+          <SearchBox
             id={`${this.props.className}-SearchBox`}
             className={`${this.props.className}-SearchBox`} />
-        </div>        
+        </div>
       );
     }
 
@@ -82,7 +82,7 @@ class SearchButton extends React.Component {
           className={`nypl-icon-magnifier-fat ${this.props.className}-SearchButton ${classes}`}
           name='Search Button'
           label={searchLabel} />
-        <SearchBox 
+        <SearchBox
           id={`${this.props.className}-SearchBox`}
           className={`${this.props.className}-SearchBox`} />
       </div>
@@ -100,7 +100,7 @@ class SearchButton extends React.Component {
 
       // Fire GA event to track when the Search Menu is open
       utils._trackHeader('Search', 'Open Menu');
-    }, 150);
+    }, 80);
   }
 
   /**

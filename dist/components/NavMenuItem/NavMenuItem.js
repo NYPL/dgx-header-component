@@ -1,7 +1,7 @@
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
-    value: true
+  value: true
 });
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -43,127 +43,116 @@ var _MegaMenuMegaMenuArrowJs = require('../MegaMenu/MegaMenuArrow.js');
 var _MegaMenuMegaMenuArrowJs2 = _interopRequireDefault(_MegaMenuMegaMenuArrowJs);
 
 var NavMenuItem = (function (_React$Component) {
-    _inherits(NavMenuItem, _React$Component);
+  _inherits(NavMenuItem, _React$Component);
 
-    function NavMenuItem(props) {
-        _classCallCheck(this, NavMenuItem);
+  function NavMenuItem(props) {
+    _classCallCheck(this, NavMenuItem);
 
-        _get(Object.getPrototypeOf(NavMenuItem.prototype), 'constructor', this).call(this, props);
+    _get(Object.getPrototypeOf(NavMenuItem.prototype), 'constructor', this).call(this, props);
 
-        this.state = {
-            activeItem: null,
-            lastActiveMenuItem: ''
-        };
+    this.state = {
+      activeItem: null,
+      lastActiveMenuItem: ''
+    };
 
-        this._activateHover = this._activateHover.bind(this);
-        this._deactivateHover = this._deactivateHover.bind(this);
+    this._activateHover = this._activateHover.bind(this);
+    this._deactivateHover = this._deactivateHover.bind(this);
+  }
+
+  _createClass(NavMenuItem, [{
+    key: 'render',
+    value: function render() {
+
+      var linkClass = (0, _classnames2['default'])({
+        'active': this.props.index === this.state.activeItem || _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === this.props.navId
+      }),
+          megaMenuArrow = this.props.subNav && this.props.features ? _react2['default'].createElement(_MegaMenuMegaMenuArrowJs2['default'], {
+        navId: this.props.navId,
+        index: this.props.index,
+        currentActiveItem: this.state.activeItem }) : null,
+          target = this.props.target.indexOf('nypl.org') !== -1 || this.props.target === '#' ? this.props.target : '' + this.props.root + this.props.target,
+          megaMenu = this.props.subNav && this.props.features ? _react2['default'].createElement(_MegaMenuMegaMenuJs2['default'], {
+        label: this.props.label,
+        lang: this.props.lang,
+        items: this.props.subNav,
+        navId: this.props.navId,
+        features: this.props.features,
+        topLink: target,
+        index: this.props.index,
+        lastActiveMenuItem: this.state.lastActiveMenuItem,
+        currentActiveItem: this.state.activeItem }) : null;
+      return _react2['default'].createElement(
+        'li',
+        {
+          id: this.props.navId ? this.props.className + '-' + this.props.navId : this.props.className,
+          className: this.props.className },
+        _react2['default'].createElement(
+          'span',
+          {
+            onMouseEnter: this._activateHover,
+            onMouseLeave: this._deactivateHover,
+            className: 'NavMenuItem-Link',
+            id: this.props.navId ? 'NavMenuItem-Link-' + this.props.navId : 'NavMenuItem-Link' },
+          _react2['default'].createElement(
+            'a',
+            {
+              href: target,
+              className: linkClass,
+              onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Go to...', '' + this.props.label['en'].text) },
+            this.props.label[this.props.lang].text
+          ),
+          megaMenuArrow
+        ),
+        megaMenu
+      );
     }
 
-    _createClass(NavMenuItem, [{
-        key: 'render',
-        value: function render() {
+    /**
+     * _activateHover()
+     * Sets the state's lastActiveMenuItem
+     * & activeItem after set time.
+     */
+  }, {
+    key: '_activateHover',
+    value: function _activateHover() {
+      var _this = this;
 
-            var linkClass = (0, _classnames2['default'])({
-                'active': this.props.index === this.state.activeItem || _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === this.props.navId
-            }),
-                megaMenuArrow = this.props.subNav && this.props.features ? _react2['default'].createElement(_MegaMenuMegaMenuArrowJs2['default'], {
-                navId: this.props.navId,
-                index: this.props.index,
-                currentActiveItem: this.state.activeItem
-            }) : null,
-                target = this.props.target.indexOf('nypl.org') !== -1 || this.props.target === '#' ? this.props.target : '' + this.props.root + this.props.target,
-                megaMenu = this.props.subNav && this.props.features ? _react2['default'].createElement(_MegaMenuMegaMenuJs2['default'], {
-                label: this.props.label,
-                lang: this.props.lang,
-                items: this.props.subNav,
-                navId: this.props.navId,
-                features: this.props.features,
-                topLink: target,
-                index: this.props.index,
-                lastActiveMenuItem: this.state.lastActiveMenuItem,
-                currentActiveItem: this.state.activeItem
-            }) : null;
-            return _react2['default'].createElement(
-                'li',
-                { id: this.props.navId ? this.props.className + '-' + this.props.navId : this.props.className,
-                    className: this.props.className },
-                _react2['default'].createElement(
-                    'span',
-                    { onMouseEnter: this._activateHover,
-                        onMouseLeave: this._deactivateHover,
-                        className: 'NavMenuItem-Link',
-                        id: this.props.navId ? 'NavMenuItem-Link-' + this.props.navId : 'NavMenuItem-Link' },
-                    _react2['default'].createElement(
-                        'a',
-                        { href: target,
-                            className: linkClass,
-                            onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Go to...', '' + this.props.label['en'].text) },
-                        ' ',
-                        this.props.label[this.props.lang].text,
-                        ' '
-                    ),
-                    ' ',
-                    megaMenuArrow,
-                    ' '
-                ),
-                ' ',
-                megaMenu,
-                ' '
-            );
-        }
+      this.hoverTimer = setTimeout(function () {
+        _this.setState({ lastActiveMenuItem: _this.props.navId });
+        _this.setState({ activeItem: _this.props.index });
+      }, 80);
+    }
 
-        /**
-         * _activateHover()
-         * Sets the state's lastActiveMenuItem
-         * & activeItem after set time.
-         */
-    }, {
-        key: '_activateHover',
-        value: function _activateHover() {
-            var _this = this;
+    /**
+     * _deactivateHover()
+     * Initially clears thhe hoverTimer.
+     * Then removes the state's activeItem
+     * after set time.
+     */
+  }, {
+    key: '_deactivateHover',
+    value: function _deactivateHover() {
+      var _this2 = this;
 
-            this.hoverTimer = setTimeout(function () {
-                _this.setState({
-                    lastActiveMenuItem: _this.props.navId
-                });
-                _this.setState({
-                    activeItem: _this.props.index
-                });
-            }, 80);
-        }
+      // Will clear the set timer that activates the menu
+      // from executing
+      clearTimeout(this.hoverTimer);
 
-        /**
-         * _deactivateHover()
-         * Initially clears thhe hoverTimer.
-         * Then removes the state's activeItem
-         * after set time.
-         */
-    }, {
-        key: '_deactivateHover',
-        value: function _deactivateHover() {
-            var _this2 = this;
+      setTimeout(function () {
+        _this2.setState({ activeItem: null });
+      }, 250);
+    }
+  }]);
 
-            // Will clear the set timer that activates the menu
-            // from executing
-            clearTimeout(this.hoverTimer);
-
-            setTimeout(function () {
-                _this2.setState({
-                    activeItem: null
-                });
-            }, 250);
-        }
-    }]);
-
-    return NavMenuItem;
+  return NavMenuItem;
 })(_react2['default'].Component);
 
 NavMenuItem.defaultProps = {
-    target: '#',
-    root: '//www.nypl.org/',
-    lang: 'en',
-    className: 'NavMenuItem',
-    hoverTimer: null
+  target: '#',
+  root: '//www.nypl.org/',
+  lang: 'en',
+  className: 'NavMenuItem',
+  hoverTimer: null
 };
 
 exports['default'] = NavMenuItem;

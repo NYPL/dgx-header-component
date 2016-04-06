@@ -45,7 +45,7 @@
 					display: inline-table;
 				}
 			}
-			
+
 			/* Only display Logo Text on Mobile */
 			.MobileLogoText {
 				display: block;
@@ -69,7 +69,7 @@
   		/* Hide on all viewports, trigger display based on class */
   		display: none;
   	}
-  	
+
   	.MobileLogoText {
   		/* Hide on all viewports, trigger display based on class */
   		display: none;
@@ -163,7 +163,7 @@
 		  		}
 
 	  			@include min-screen(1025px) {
-	  				font-size: 16px;
+	  				//font-size: 16px;
 	  				padding: 0px 7px;
 	  			}
 	  		}
@@ -236,7 +236,7 @@
 			  	&-13d95ad5-f117-4415-ba2c-5c0b9618984d {
 			  		&.active {
 			  			color: $BG_MENU_HELP_RIGHT;
-			  		}  		
+			  		}
 			  	}
 				}
 	  	}
@@ -353,7 +353,7 @@
 	  				&:first-child {
 	  					margin-top: 0px;
 	  				}
-	  				
+
 	  				a {
 	  					font-size: 16.5px;
 	  					margin: 0;
@@ -433,7 +433,7 @@
 					}
 
 					@include min-screen(1140px) {
-						margin: 0 0 0 $RIGHT_NAV_CONTAINER_LEFT_MARGIN;				
+						margin: 0 0 0 $RIGHT_NAV_CONTAINER_LEFT_MARGIN;
 					}
 				}
 	  	}
@@ -445,22 +445,27 @@
 	.StickyItems {
 		display: none;
 
+		.lineSeparator {
+			opacity: 0.65;
+		}
+
 		.DonateButton {
 			display: none;
 
 			@include min-screen(892px) {
 				display: inline-block;
+				border-radius: 3px;
 			}
 		}
 
-		@include min-screen(769px) {	
+		@include min-screen(769px) {
 			&.active {
 				display: inline-block;
 			}
 		}
 
 		@include min-screen(892px) {
-			// Used with the above DonateButton class to display correctly.	
+			// Used with the above DonateButton class to display correctly.
 			margin-right: 20px;
 		}
 	}
@@ -470,7 +475,7 @@
 	 * Specific SASS rules for
 	 * this reusable feature item
 	 * content box within the Header
-	*/ 
+	*/
 	@import '_featureItem';
 
 
@@ -478,7 +483,7 @@
 	 * --------------
 	 * Specific SASS rules for
 	 * this widget within the Header.
-	*/ 
+	*/
 	@import '_findUsWidget';
 
 
@@ -486,6 +491,6 @@
 	 * --------------
 	 * Specific SASS rules for
 	 * this widget within the Header.
-	*/ 
+	*/
 	@import '_donateWidget';
 }

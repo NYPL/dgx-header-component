@@ -120,7 +120,7 @@ var NavMenuItem = (function (_React$Component) {
       this.hoverTimer = setTimeout(function () {
         _this.setState({ lastActiveMenuItem: _this.props.navId });
         _this.setState({ activeItem: _this.props.index });
-      }, 150);
+      }, 80);
     }
 
     /**

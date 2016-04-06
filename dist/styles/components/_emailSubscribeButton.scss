@@ -10,8 +10,9 @@
   .SubscribeButton,
   .MyNyplButton {
     @include Kievit-Bold;
-    font-size: 12px;
+    font-size: 13px;
     color: #000;
+    letter-spacing: .04em;
 
     &.active {
       background-color: #1980A9;
@@ -117,6 +118,10 @@
       padding-top: 40px;
       @include Kievit-Book;
 
+      a {
+        border-radius: 20px;
+      }
+
       .icon {
         vertical-align: middle;
         font-size: 25px;
@@ -163,6 +168,10 @@
       }
     }
     &-Submit {
+      input {
+        border-radius: 20px;
+      }
+
       .icon {
         color: #fff;
         font-size: 30px;

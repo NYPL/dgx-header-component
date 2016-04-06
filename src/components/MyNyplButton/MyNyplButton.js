@@ -146,7 +146,6 @@ const styles = {
     minHeight: '190px',
     backgroundColor: '#1DA1D4',
     padding: '25px 30px',
-    boxSizing: 'content-box'
   },
   hide: {
     display: 'none'

@@ -11,8 +11,9 @@
 .MyNyplButton,
 .StickyMyNyplButton {
   @include Kievit-Bold;
-  font-size: 12px;
+  font-size: 13px;
   color: #000;
+  letter-spacing: .04em;
 
   &.active {
     background-color: #1980A9;
@@ -28,7 +29,7 @@
   &:visited {
     color: #000;
   }
-    
+
   .icon {
     opacity: .8;
   }
@@ -38,6 +39,7 @@
 .StickyMyNypl-Wrapper {
   text-transform: none;
   display: none;
+  box-sizing: content-box;
 
   &.active {
     display: block;
@@ -67,6 +69,13 @@
       list-style: none;
       padding: 0px;
       margin: 0px;
+
+      li {
+        a {
+          border-radius: 28px;
+          box-sizing: content-box;
+        }
+      }
     }
 
     &-Catalog-Btn {
@@ -76,7 +85,7 @@
     &-Classic-Btn {
       min-width: 230px;
     }
-    
+
     .icon {
       font-size: 25px;
       color: rgba(255, 255, 255, 0.6);

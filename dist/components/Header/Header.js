@@ -321,8 +321,7 @@ var styles = {
   },
   donateButton: {
     display: 'inline-block',
-    padding: '11px 18px 9px 18px',
-    borderRadius: '4px'
+    padding: '11px 18px 9px 18px'
   },
   mobileMyNypl: {
     position: 'absolute',

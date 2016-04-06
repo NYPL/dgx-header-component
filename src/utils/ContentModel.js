@@ -94,43 +94,14 @@ function ContentModel() {
   };
 
   this.featureItem = (data, lang) => {
-    let item = {};
-
-    item.headline = data.headline[lang].text || '';
-    item.category = data.category ? data.category[lang].text : item.headline;
-    item.imgSrc = data.images ? data.images[0].uri : '';
-    // Assuming that the text is already trimmed we should redo this:
-    item.description = data.description ? data.description[lang].text.substring(0, '175') : '';
-    item.link = data.link ? data.link[lang].text : '';
-
-    if (data.content) {
-      item.content = {
-        type: data.content.type
-      };
-
-      switch (data.content.type) {
-        case 'blog':
-          item.author = {
-            fullName: data.content.authors[0].fullName,
-            title: data.content.authors[0].title
-          };
-          break;
-        case 'event-program':
-        case 'event-exhibition':
-          item.eventDates = {
-            start: data.content.dates.start,
-            end: data.content.dates.end
-          };
-          item.location = {
-            fullName: data.content.location ? data.content.location.fullName : ''
-          };
-          break;
-        default:
-          break;
-      }
-    }
-
-    return item;
+    return {
+      headline: data.headline ? data.headline[lang].text : '',
+      category: data.category ? data.category[lang].text : '',
+      imgSrc: data.images ? data.images[0].uri : '',
+      // Assuming that the text is already trimmed we should redo this:
+      description: data.description ? data.description[lang].text.substring(0, '175') : '',
+      link: data.link ? data.link[lang].text : '',
+    };
   };
 }
 

@@ -223,7 +223,6 @@ const styles = {
   donateButton: {
     display: 'inline-block',
     padding: '11px 18px 9px 18px',
-    borderRadius: '4px'
   },
   mobileMyNypl: {
     position: 'absolute',

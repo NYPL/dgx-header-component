@@ -105,10 +105,6 @@ function Model() {
       featuredItem.images = _underscore2['default'].map(data.images, _ContentModelJs2['default'].image);
     }
 
-    if (data['related-content']) {
-      featuredItem.content = _ContentModelJs2['default'].content(data['related-content']);
-    }
-
     return featuredItem;
   };
 }

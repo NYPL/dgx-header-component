@@ -145,12 +145,10 @@ var styles = {
     border: '2px solid #fff',
     color: 'white',
     padding: '9px 10px 7px',
-    borderRadius: '28px',
     fontSize: '12px',
     backgroundColor: '#1DA1D4',
     fontFamily: 'Kievit-Book',
-    marginTop: '20px',
-    boxSizing: 'content-box'
+    marginTop: '20px'
   }
 };
 

@@ -22,21 +22,9 @@ var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _ContentBoxBlogItemJs = require('../ContentBox/BlogItem.js');
-
-var _ContentBoxBlogItemJs2 = _interopRequireDefault(_ContentBoxBlogItemJs);
-
 var _ContentBoxDefaultItemJs = require('../ContentBox/DefaultItem.js');
 
 var _ContentBoxDefaultItemJs2 = _interopRequireDefault(_ContentBoxDefaultItemJs);
-
-var _ContentBoxEventProgramItemJs = require('../ContentBox/EventProgramItem.js');
-
-var _ContentBoxEventProgramItemJs2 = _interopRequireDefault(_ContentBoxEventProgramItemJs);
-
-var _ContentBoxExhibitionItemJs = require('../ContentBox/ExhibitionItem.js');
-
-var _ContentBoxExhibitionItemJs2 = _interopRequireDefault(_ContentBoxExhibitionItemJs);
 
 var _utilsContentModelJs = require('../../utils/ContentModel.js');
 
@@ -56,40 +44,18 @@ var MegaMenuFeatureItem = (function (_React$Component) {
   _createClass(MegaMenuFeatureItem, [{
     key: 'render',
     value: function render() {
-      // There should always be a featured item, but just in case:
-      if (!this.props.feature) {
-        return _react2['default'].createElement(_ContentBoxDefaultItemJs2['default'], { className: this.props.className });
-      }
-
-      var feature = this.props.feature,
-          classes = (0, _classnames2['default'])({
+      var feature = this.props.feature;
+      var classes = (0, _classnames2['default'])({
         'with-image': feature && feature.images,
         'without-image': !feature || !feature.images
-      }),
-          contentObj = _utilsContentModelJs2['default'].featureItem(feature, this.props.lang),
-          featuredItem = _react2['default'].createElement(_ContentBoxDefaultItemJs2['default'], { feature: contentObj,
+      });
+      var contentObj = _utilsContentModelJs2['default'].featureItem(feature, this.props.lang);
+      var featuredItem = _react2['default'].createElement(_ContentBoxDefaultItemJs2['default'], {
+        feature: contentObj,
         className: this.props.className,
         classes: classes,
-        navLabel: this.props.navLabel });
-
-      if (contentObj.content && contentObj.content.type) {
-        switch (contentObj.content.type) {
-          case 'blog':
-            featuredItem = _react2['default'].createElement(_ContentBoxBlogItemJs2['default'], { feature: contentObj,
-              className: this.props.className, classes: classes, navLabel: this.props.navLabel });
-            break;
-          case 'event-program':
-            featuredItem = _react2['default'].createElement(_ContentBoxEventProgramItemJs2['default'], { feature: contentObj,
-              className: this.props.className, classes: classes, navLabel: this.props.navLabel });
-            break;
-          case 'event-exhibition':
-            featuredItem = _react2['default'].createElement(_ContentBoxExhibitionItemJs2['default'], { feature: contentObj,
-              className: this.props.className, classes: classes, navLabel: this.props.navLabel });
-            break;
-          default:
-            break;
-        }
-      }
+        navLabel: this.props.navLabel
+      });
 
       return featuredItem;
     }

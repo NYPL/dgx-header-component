@@ -16,6 +16,7 @@
 
 /* CSS for Search button */
 &-SearchButton {
+  position: relative;
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
@@ -24,20 +25,37 @@
   border-width: 0px;
   display: none;
   font-size: 22px;
-  padding: 9px 10px 13px 10px;
+  padding: 8px 10px 14px 10px;
   border-radius: 0;
   position: relative;
+  line-height: normal;
+
+  &:before {
+    border-bottom-color: $BG_MENU_SEARCH;
+    border-bottom-style: none;
+    line-height: normal;
+
+    @include min-screen(769px) {
+      border-bottom-color: $BG_MENU_SEARCH;
+      border-bottom-style: solid;
+      border-bottom-width: 2px;
+    }
+  }
 
   & .Search-Text {
     @include Kievit-Book;
     position: relative;
     color: $BG_MENU_SEARCH;
+    border-bottom: 2px solid $BG_MENU_SEARCH;
     display: inline-block;
     float: left;
-    font-size: 18.5px;
+    font-size: 19px;
     line-height: 1em;
-    padding: 4px 2px 0 1px;
-    border-bottom: 2px solid $BG_MENU_SEARCH;
+    padding: 0;
+    top: 3px;
+    @-moz-document url-prefix() {
+      padding: 0 0 1px 0;
+    }
 
     &.active {
       color: #78CCED;
@@ -53,27 +71,10 @@
       top: auto;
       width: 1px;
     }
-
-    @include min-screen(1025px) {
-      font-size: 16px;
-      padding: 6px 2px 0 1px;
-    }
-
   }
 
   @include min-screen(769px) {
     display: block;
-  }
-
-  &:before {
-    border-bottom-color: $BG_MENU_SEARCH;
-    border-bottom-style: none;
-
-    @include min-screen(769px) {
-      border-bottom-color: $BG_MENU_SEARCH;
-      border-bottom-style: solid;
-      border-bottom-width: 2px;
-    }
   }
 
   /* ACTIVE STATE */

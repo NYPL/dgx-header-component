@@ -26,56 +26,68 @@ var _utilsUtilsJs = require('../../utils/utils.js');
 
 var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
 
+var styles = {
+  base: {}
+};
+
 var SimpleButton = (function (_React$Component) {
   _inherits(SimpleButton, _React$Component);
-
-  // Constructor used in ES6
 
   function SimpleButton(props) {
     _classCallCheck(this, SimpleButton);
 
     _get(Object.getPrototypeOf(SimpleButton.prototype), 'constructor', this).call(this, props);
+    this._onClick = this._onClick.bind(this);
   }
 
   _createClass(SimpleButton, [{
+    key: '_onClick',
+    value: function _onClick() {
+      _utilsUtilsJs2['default']._trackHeader(this.props.gaAction, this.props.gaLabel);
+      this.props.onClick();
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2['default'].createElement(
         'a',
         {
-          ref: 'SimpleButton',
+          ref: this.props.ref,
           id: this.props.id,
           className: this.props.className,
           href: this.props.target,
-          onClick: this._onClick.bind(this),
-          style: [styles.base, this.props.style] },
+          onClick: this._onClick,
+          style: [styles.base, this.props.style]
+        },
         this.props.label
       );
-    }
-  }, {
-    key: '_onClick',
-    value: function _onClick() {
-      _utilsUtilsJs2['default']._trackHeader(this.props.gaAction, this.props.gaLabel);
-      this.props.onClick();
     }
   }]);
 
   return SimpleButton;
 })(_react2['default'].Component);
 
-;
+SimpleButton.propTypes = {
+  id: _react2['default'].PropTypes.string,
+  ref: _react2['default'].PropTypes.string,
+  className: _react2['default'].PropTypes.string.isRequired,
+  lang: _react2['default'].PropTypes.string,
+  style: _react2['default'].PropTypes.object,
+  target: _react2['default'].PropTypes.string,
+  label: _react2['default'].PropTypes.string,
+  onClick: _react2['default'].PropTypes.func,
+  gaAction: _react2['default'].PropTypes.string,
+  gaLabel: _react2['default'].PropTypes.string
+};
 
 SimpleButton.defaultProps = {
   id: 'SimpleButton',
+  ref: 'SimpleButton',
   className: 'SimpleButton',
   label: 'Button',
   lang: 'en',
   target: '#',
   onClick: function onClick() {}
-};
-
-var styles = {
-  base: {}
 };
 
 exports['default'] = (0, _radium2['default'])(SimpleButton);

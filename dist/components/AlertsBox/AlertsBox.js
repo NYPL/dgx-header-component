@@ -26,6 +26,10 @@ var _underscore = require('underscore');
 
 var _underscore2 = _interopRequireDefault(_underscore);
 
+var styles = {
+  base: {}
+};
+
 var AlertsBox = (function (_React$Component) {
   _inherits(AlertsBox, _React$Component);
 
@@ -40,21 +44,24 @@ var AlertsBox = (function (_React$Component) {
     value: function render() {
       var _this = this;
 
-      var alerts = this.props.alerts,
-          alertItems = _underscore2['default'].map(alerts, function (item, index) {
+      var alerts = this.props.alerts;
+      var alertItems = _underscore2['default'].map(alerts, function (item, index) {
         var alertDescription = item.attributes['alert-text'][_this.props.lang];
 
         return _react2['default'].createElement('div', {
           key: index,
           className: _this.props.className + '-Item',
-          dangerouslySetInnerHTML: { __html: alertDescription.text } });
+          dangerouslySetInnerHTML: { __html: alertDescription.text }
+        });
       });
 
       return _react2['default'].createElement(
         'div',
         {
           className: this.props.className,
-          id: this.props.id, style: [styles.base, this.props.style] },
+          id: this.props.id,
+          style: [styles.base, this.props.style]
+        },
         alertItems
       );
     }
@@ -63,14 +70,18 @@ var AlertsBox = (function (_React$Component) {
   return AlertsBox;
 })(_react2['default'].Component);
 
+AlertsBox.propTypes = {
+  id: _react2['default'].PropTypes.string,
+  className: _react2['default'].PropTypes.string.isRequired,
+  lang: _react2['default'].PropTypes.string,
+  style: _react2['default'].PropTypes.object,
+  alerts: _react2['default'].PropTypes.object
+};
+
 AlertsBox.defaultProps = {
   lang: 'en',
   className: 'AlertsBox',
   id: 'AlertsBox'
-};
-
-var styles = {
-  base: {}
 };
 
 exports['default'] = (0, _radium2['default'])(AlertsBox);

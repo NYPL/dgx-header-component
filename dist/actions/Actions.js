@@ -30,9 +30,9 @@ var Actions = (function () {
   _createClass(Actions, [{
     key: 'fetchHeaderData',
     value: function fetchHeaderData(environment) {
-      var self = this,
-          appEnv = environment,
-          headerRootUrl = undefined;
+      var self = this;
+      var appEnv = environment;
+      var headerRootUrl = undefined;
 
       // Set the proper URL to fetch the Header Data model.
       if (appEnv === 'development') {
@@ -44,7 +44,7 @@ var Actions = (function () {
       }
 
       // Here we will use the client side AJAX request
-      // to fetch data
+      // to fetch Header Data
       _axios2['default'].get(headerRootUrl + '/header-data').then(function (result) {
         self.actions.updateHeaderData(result.data);
       })['catch'](function (response) {

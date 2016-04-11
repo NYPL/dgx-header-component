@@ -37,14 +37,17 @@ var DonateBox = (function (_React$Component) {
       var _this = this;
 
       // Enforce limit to 4 links as per design.
-      var donationLinks = this.props.donationLinks.slice(0, 4),
-          donationLinkItems = donationLinks && donationLinks.length ? donationLinks.map(function (item, index) {
+      var donationLinks = this.props.donationLinks.slice(0, 4);
+      var donationLinkItems = donationLinks && donationLinks.length ? donationLinks.map(function (item, index) {
         return _react2['default'].createElement(
           'li',
           { key: index },
           _react2['default'].createElement(
             'a',
-            { href: item.url, onClick: _utilsUtilsJs2['default']._trackHeader.bind(_this, 'Donate', 'Menu--' + item.amount) },
+            {
+              href: item.url,
+              onClick: _utilsUtilsJs2['default']._trackHeader.bind(_this, 'Donate', 'Menu--' + item.amount)
+            },
             item.amount
           )
         );
@@ -83,6 +86,15 @@ var DonateBox = (function (_React$Component) {
 
   return DonateBox;
 })(_react2['default'].Component);
+
+DonateBox.propTypes = {
+  className: _react2['default'].PropTypes.string,
+  lang: _react2['default'].PropTypes.string,
+  tag: _react2['default'].PropTypes.string,
+  title: _react2['default'].PropTypes.string,
+  desc: _react2['default'].PropTypes.string,
+  donationLinks: _react2['default'].PropTypes.array
+};
 
 DonateBox.defaultProps = {
   lang: 'en',

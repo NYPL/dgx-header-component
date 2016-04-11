@@ -4,11 +4,10 @@ import axios from 'axios';
 import appConfig from '../appConfig.js';
 
 class Actions {
-
   fetchHeaderData(environment) {
-    let self = this,
-      appEnv = environment,
-      headerRootUrl;
+    const self = this;
+    const appEnv = environment;
+    let headerRootUrl;
 
     // Set the proper URL to fetch the Header Data model.
     if (appEnv === 'development') {
@@ -20,14 +19,14 @@ class Actions {
     }
 
     // Here we will use the client side AJAX request
-    // to fetch data
+    // to fetch Header Data
     axios
-      .get(headerRootUrl + '/header-data')
+      .get(`${headerRootUrl}/header-data`)
       .then(result => {
         self.actions.updateHeaderData(result.data);
       })
       .catch(response => {
-        console.warn('Error on Axios GET request: ' + headerRootUrl + '/header-data');
+        console.warn(`Error on Axios GET request: ${headerRootUrl}/header-data`);
 
         if (response instanceof Error) {
           console.log(response.message);

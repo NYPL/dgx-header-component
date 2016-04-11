@@ -38,34 +38,7 @@ var DonateWidget = (function (_React$Component) {
   _createClass(DonateWidget, [{
     key: 'render',
     value: function render() {
-      // This is pending removal once we establish the Data from API.
-      var mockedFeaturedLocation = {
-        headline: {
-          en: {
-            text: 'George Bruce Library Celebrates 100 Years'
-          }
-        },
-        category: {
-          en: {
-            text: 'Mocked Location Spotlight'
-          }
-        },
-        images: [{
-          uri: 'http://fpoimg.com/88x88'
-        }],
-        description: {
-          en: {
-            text: 'The original George Bruce Library was located on 42nd Street.'
-          }
-        },
-        link: {
-          en: {
-            text: 'nypl.org'
-          }
-        }
-      };
-
-      var featuredItem = this.props.featuredItem || mockedFeaturedLocation;
+      var featuredItem = this.props.featuredItem;
 
       return _react2['default'].createElement(
         'div',
@@ -75,15 +48,25 @@ var DonateWidget = (function (_React$Component) {
           tag: 'Donate',
           title: 'Donate to the Library',
           donationLinks: this.props.donationLinks,
-          desc: 'We rely on your generosity to provide books, literacy classes, children\'s story hours, and much more FREE for all New Yorkers.' }),
+          desc: 'We rely on your generosity to provide books, literacy classes, children\'s ' + 'story hours, and much more FREE for all New Yorkers.'
+        }),
         _react2['default'].createElement(_MegaMenuMegaMenuFeatureItemJs2['default'], {
-          feature: featuredItem, navLabel: this.props.navLabel })
+          feature: featuredItem,
+          navLabel: this.props.navLabel
+        })
       );
     }
   }]);
 
   return DonateWidget;
 })(_react2['default'].Component);
+
+DonateWidget.propTypes = {
+  className: _react2['default'].PropTypes.string,
+  featuredItem: _react2['default'].PropTypes.object,
+  donationLinks: _react2['default'].PropTypes.array,
+  navLabel: _react2['default'].PropTypes.string
+};
 
 DonateWidget.defaultProps = {
   lang: 'en',

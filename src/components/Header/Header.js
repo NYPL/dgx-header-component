@@ -136,6 +136,7 @@ class Header extends React.Component {
    */
   _fetchDataIfNeeded() {
     if (HeaderStore.getState().headerData.length < 1) {
+      console.log(HeaderStore._getClientAppEnv(), this.props.urls);
       Actions.fetchHeaderData(HeaderStore._getClientAppEnv(), this.props.urls);
     }
   }

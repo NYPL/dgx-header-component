@@ -222,8 +222,8 @@ var Header = (function (_React$Component) {
     key: '_fetchDataIfNeeded',
     value: function _fetchDataIfNeeded() {
       if (_storesHeaderStoreJs2['default'].getState().headerData.length < 1) {
-        console.log(_storesHeaderStoreJs2['default']._getClientAppEnv(), this.props.urls);
-        _actionsActionsJs2['default'].fetchHeaderData(_storesHeaderStoreJs2['default']._getClientAppEnv(), this.props.urls);
+        console.log(this.props.env, this.props.urls);
+        _actionsActionsJs2['default'].fetchHeaderData(this.props.env, this.props.urls);
       }
     }
 
@@ -308,7 +308,8 @@ Header.defaultProps = {
   className: 'Header',
   id: 'nyplHeader',
   skipNav: null,
-  urls: ''
+  urls: '',
+  env: 'production'
 };
 
 var styles = {

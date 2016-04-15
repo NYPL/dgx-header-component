@@ -29,26 +29,28 @@ var Actions = (function () {
 
   _createClass(Actions, [{
     key: 'fetchHeaderData',
-    value: function fetchHeaderData(environment) {
-      var self = this,
-          appEnv = environment,
-          headerRootUrl = undefined;
+    value: function fetchHeaderData(environment, urlType) {
+      var _this = this;
+
+      var typeOfUrl = urlType === 'absolute' ? '/header-data?urls=absolute' : '/header-data';
+      var headerRootUrl = undefined;
 
       // Set the proper URL to fetch the Header Data model.
-      if (appEnv === 'development') {
+      if (environment === 'development') {
         headerRootUrl = _appConfigJs2['default'].headerClientEnv.development;
-      } else if (appEnv === 'qa') {
+      } else if (environment === 'qa') {
         headerRootUrl = _appConfigJs2['default'].headerClientEnv.qa;
       } else {
         headerRootUrl = _appConfigJs2['default'].headerClientEnv.production;
       }
 
-      // Here we will use the client side AJAX request
-      // to fetch data
-      _axios2['default'].get(headerRootUrl + '/header-data').then(function (result) {
-        self.actions.updateHeaderData(result.data);
+      var fullUrl = '' + headerRootUrl + typeOfUrl;
+
+      // Fetch proper /header-data endpoint
+      _axios2['default'].get(fullUrl).then(function (result) {
+        _this.actions.updateHeaderData(result.data);
       })['catch'](function (response) {
-        console.warn('Error on Axios GET request: ' + headerRootUrl + '/header-data');
+        console.warn('Error on Axios GET request: ' + fullUrl);
 
         if (response instanceof Error) {
           console.log(response.message);

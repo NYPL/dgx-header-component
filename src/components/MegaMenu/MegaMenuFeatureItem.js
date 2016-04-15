@@ -1,15 +1,13 @@
 import React from 'react';
 import cx from 'classnames';
 import DefaultItem from '../ContentBox/DefaultItem.js';
-
 import ContentModel from '../../utils/ContentModel.js';
 
 class MegaMenuFeatureItem extends React.Component {
-  // Constructor used in ES6
   constructor(props) {
     super(props);
   }
-  
+
 	render() {
     const feature = this.props.feature;
     const classes = cx({

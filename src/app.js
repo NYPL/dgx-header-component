@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import nyplHeaderComponent from './components/Header/Header.js';
+import Header from './components/Header/Header.js';
+import Actions from './actions/Actions.js';
 
 import ga from 'react-ga';
 import {config} from 'dgx-react-ga';
@@ -21,7 +22,13 @@ if (!window.dgxFeatureFlags) {
 	window.dgxFeatureFlags = FeatureFlags.utils;
 }
 
+// Sets the API path for local testing
+Actions.setClientAppEnv('development');
+
 /* app.jsx
  * Used for local development of React Components
  */
-ReactDOM.render(React.createElement(nyplHeaderComponent, {skipNav: {target: 'maincontent'}}), document.getElementById('app'));
+ReactDOM.render(
+  <Header skipNav={{target: 'maincontent'}} urls='absolute' />,
+  document.getElementById('app')
+);

@@ -41,8 +41,6 @@ var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
 var MegaMenuSubNav = (function (_React$Component) {
   _inherits(MegaMenuSubNav, _React$Component);
 
-  // Constructor used in ES6
-
   function MegaMenuSubNav(props) {
     _classCallCheck(this, MegaMenuSubNav);
 
@@ -55,23 +53,15 @@ var MegaMenuSubNav = (function (_React$Component) {
       var _this = this;
 
       var items = _underscore2['default'].map(this.props.items, function (m, i) {
-        var target = m.link.en.text;
-
-        if (typeof target === 'undefined') {
-          // In reality target should never be undefined, but
-          // this is plugging some holes in the fake data
-          target = '#';
-        } else if (!/^http/.exec(target)) {
-          target = '//nypl.org/' + target;
-        }
-
+        var target = m.link[_this.props.lang].text || '#';
         return _react2['default'].createElement(
           'li',
           { key: i },
           _react2['default'].createElement(
             'a',
             { href: target,
-              onClick: _utilsUtilsJs2['default']._trackHeader.bind(_this, 'Go to...', _this.props.label[_this.props.lang].text + '--' + m.name[_this.props.lang]['text']) },
+              onClick: _utilsUtilsJs2['default']._trackHeader.bind(_this, 'Go to...', _this.props.label[_this.props.lang].text + '--' + m.name[_this.props.lang]['text'])
+            },
             m.name[_this.props.lang]['text']
           )
         );
@@ -81,7 +71,8 @@ var MegaMenuSubNav = (function (_React$Component) {
       var socialMediaWidget = this.props.navId === 'df621833-4dd1-4223-83e5-6ad7f98ad26a' ? _react2['default'].createElement(_SocialMediaLinksWidgetSocialMediaLinksWidgetJs2['default'], {
         className: 'MegaMenu-SubNav-SocialMediaWidget',
         links: _appConfigJs2['default'].socialMediaLinks,
-        displayOnly: ['facebook', 'twitter'] }) : null;
+        displayOnly: ['facebook', 'twitter']
+      }) : null;
 
       return _react2['default'].createElement(
         'div',
@@ -92,7 +83,8 @@ var MegaMenuSubNav = (function (_React$Component) {
           _react2['default'].createElement(
             'a',
             { style: styles.topLink, href: this.props.topLink,
-              onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Go to...', 'SubNav Title--' + this.props.label[this.props.lang].text) },
+              onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Go to...', 'SubNav Title--' + this.props.label[this.props.lang].text)
+            },
             this.props.label[this.props.lang].text
           )
         ),

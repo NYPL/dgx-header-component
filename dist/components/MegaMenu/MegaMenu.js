@@ -86,8 +86,9 @@ var MegaMenu = (function (_React$Component) {
         {
           onMouseEnter: this._watchHoverIntentEnter.bind(this),
           onMouseLeave: this._watchHoverIntentLeave.bind(this),
-          id: this.props.navId ? 'MegaMenu-' + this.props.navId : 'MegaMenu',
-          className: classes },
+          id: this.props.navId ? 'MegaMenu-' + this.props.navId : "MegaMenu",
+          className: classes
+        },
         _react2['default'].createElement('div', { className: 'MegaMenu-LeftBgWrapper' }),
         _react2['default'].createElement(
           'div',
@@ -100,7 +101,8 @@ var MegaMenu = (function (_React$Component) {
               items: this.props.items,
               lang: this.props.lang,
               topLink: this.props.topLink,
-              navId: this.props.navId })
+              navId: this.props.navId
+            })
           ),
           _react2['default'].createElement(
             'div',
@@ -108,7 +110,8 @@ var MegaMenu = (function (_React$Component) {
             _react2['default'].createElement(_MegaMenuFeaturesJs2['default'], {
               navId: this.props.navId,
               features: this.props.features,
-              navLabel: this.props.label['en'].text })
+              navLabel: this.props.label[this.props.lang].text
+            })
           )
         )
       );

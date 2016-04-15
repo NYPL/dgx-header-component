@@ -28,6 +28,8 @@ var _utilsUtilsJs = require('../../utils/utils.js');
 
 var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
 
+// Alt Store
+
 var _storesHeaderStoreJs = require('../../stores/HeaderStore.js');
 
 var _storesHeaderStoreJs2 = _interopRequireDefault(_storesHeaderStoreJs);
@@ -62,16 +64,16 @@ var NavMenuItem = (function (_React$Component) {
   _createClass(NavMenuItem, [{
     key: 'render',
     value: function render() {
-
+      var target = this.props.target;
       var linkClass = (0, _classnames2['default'])({
         'active': this.props.index === this.state.activeItem || _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === this.props.navId
-      }),
-          megaMenuArrow = this.props.subNav && this.props.features ? _react2['default'].createElement(_MegaMenuMegaMenuArrowJs2['default'], {
+      });
+      var megaMenuArrow = this.props.subNav && this.props.features ? _react2['default'].createElement(_MegaMenuMegaMenuArrowJs2['default'], {
         navId: this.props.navId,
         index: this.props.index,
-        currentActiveItem: this.state.activeItem }) : null,
-          target = this.props.target.indexOf('nypl.org') !== -1 || this.props.target === '#' ? this.props.target : '' + this.props.root + this.props.target,
-          megaMenu = this.props.subNav && this.props.features ? _react2['default'].createElement(_MegaMenuMegaMenuJs2['default'], {
+        currentActiveItem: this.state.activeItem
+      }) : null;
+      var megaMenu = this.props.subNav && this.props.features ? _react2['default'].createElement(_MegaMenuMegaMenuJs2['default'], {
         label: this.props.label,
         lang: this.props.lang,
         items: this.props.subNav,
@@ -80,25 +82,30 @@ var NavMenuItem = (function (_React$Component) {
         topLink: target,
         index: this.props.index,
         lastActiveMenuItem: this.state.lastActiveMenuItem,
-        currentActiveItem: this.state.activeItem }) : null;
+        currentActiveItem: this.state.activeItem
+      }) : null;
+
       return _react2['default'].createElement(
         'li',
         {
           id: this.props.navId ? this.props.className + '-' + this.props.navId : this.props.className,
-          className: this.props.className },
+          className: this.props.className
+        },
         _react2['default'].createElement(
           'span',
           {
             onMouseEnter: this._activateHover,
             onMouseLeave: this._deactivateHover,
             className: 'NavMenuItem-Link',
-            id: this.props.navId ? 'NavMenuItem-Link-' + this.props.navId : 'NavMenuItem-Link' },
+            id: this.props.navId ? 'NavMenuItem-Link-' + this.props.navId : 'NavMenuItem-Link'
+          },
           _react2['default'].createElement(
             'a',
             {
               href: target,
               className: linkClass,
-              onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Go to...', '' + this.props.label['en'].text) },
+              onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Go to...', '' + this.props.label['en'].text)
+            },
             this.props.label[this.props.lang].text
           ),
           megaMenuArrow

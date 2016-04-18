@@ -127,7 +127,7 @@ var SubscribeButton = (function (_React$Component) {
     }
 
     /**
-     * _handleClick(e) 
+     * _handleClick(e)
      * Toggles the visibility of the form. Sends an Action
      * that will dispatch an event to the Header Store.
      */
@@ -144,7 +144,7 @@ var SubscribeButton = (function (_React$Component) {
     }
 
     /**
-     * _handleOnClickOut(e) 
+     * _handleOnClickOut(e)
      * Handles closing the Subscribe form if it is
      * currently visible.
      */

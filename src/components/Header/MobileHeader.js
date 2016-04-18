@@ -1,6 +1,5 @@
 import React from 'react';
 import Radium from 'radium';
-import cx from 'classnames';
 import ReactTappable from 'react-tappable';
 
 // ALT FLUX
@@ -8,15 +7,78 @@ import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
 import utils from '../../utils/utils.js';
 
-class MobileHeader extends React.Component {
+const styles = {
+  base: {
+    position: 'relative',
+    height: '59px',
+    textAlign: 'right',
+  },
+  mobileLogo: {
+    color: '#000',
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    textDecoration: 'none',
+    ':hover': {
+      color: '#000',
+    },
+    ':visited': {
+      color: '#000',
+    },
+  },
+  logoIcon: {
+    fontSize: '59px',
+  },
+  myNyplIcon: {
+    fontSize: '31px',
+    margin: 0,
+    padding: '14px',
+    display: 'inline-block',
+    color: '#000',
+  },
+  locatorIcon: {
+    fontSize: '31px',
+    margin: 0,
+    padding: '14px',
+    display: 'inline-block',
+    color: '#000',
+  },
+  searchIcon: {
+    fontSize: '31px',
+    margin: 0,
+    padding: '14px',
+    display: 'inline-block',
+    color: '#000',
+  },
+  menuIcon: {
+    fontSize: '31px',
+    margin: 0,
+    padding: '14px',
+    display: 'inline-block',
+    color: '#000',
+  },
+  activeSearchIcon: {
+    color: '#FFF',
+    backgroundColor: '#29A1D2',
+  },
+  activeMenuIcon: {
+    color: '#FFF',
+    backgroundColor: '#2B2B2B',
+  },
+  activeMyNyplIcon: {
+    color: '#FFF',
+    backgroundColor: '#2B2B2B',
+  },
+};
 
+class MobileHeader extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       activeMobileButton: HeaderStore.getState().activeMobileButton,
       searchButtonAction: HeaderStore.getState().searchButtonAction,
-      mobileMyNyplButton: HeaderStore.getState().mobileMyNyplButton
+      mobileMyNyplButton: HeaderStore.getState().mobileMyNyplButton,
     };
 
     this._handleMenuBtnPress = this._handleMenuBtnPress.bind(this);
@@ -34,75 +96,8 @@ class MobileHeader extends React.Component {
     this.setState({
       activeMobileButton: HeaderStore.getState().activeMobileButton,
       searchButtonAction: HeaderStore.getState().searchButtonAction,
-      mobileMyNyplButton: HeaderStore.getState().mobileMyNyplButton
+      mobileMyNyplButton: HeaderStore.getState().mobileMyNyplButton,
     });
-  }
-
-  render () {
-    let activeButton = this.state.activeMobileButton,
-      searchButtonAction = this.state.searchButtonAction,
-      mobileMyNyplButton = this.state.mobileMyNyplButton,
-      locatorUrl = this.props.locatorUrl || '//www.nypl.org/locations/map?nearme=true',
-      mobileSearchClass = (searchButtonAction === 'clickSearch') ?
-        'active nypl-icon-solo-x': 'nypl-icon-magnifier-thin',
-      mobileMenuClass = (activeButton === 'mobileMenu') ?
-        'active nypl-icon-solo-x': 'nypl-icon-burger-nav',
-      mobileMyNyplClass = (mobileMyNyplButton === 'clickMyNypl') ?
-        'active nypl-icon-solo-x': 'nypl-icon-login';
-
-    return (
-      <div className={this.props.className} style={styles.base}>
-        <a
-          style={styles.mobileLogo}
-          href='//www.nypl.org'>
-          <span
-            style={styles.logoIcon}
-            className={`${this.props.className}-Logo nypl-icon-logo-mark`}>
-          </span>
-        </a>
-
-        <ReactTappable onTap={this._handleMenuBtnPress.bind(this, 'clickMyNypl')}>
-          <span
-            style={[
-              styles.myNyplIcon,
-              mobileMyNyplButton === 'clickMyNypl' ? styles.activeMyNyplIcon : ''
-            ]}
-            className={`${this.props.className}-MyNyplButton ${mobileMyNyplClass}`}
-            ref='MobileMyNyplButton'>
-          </span>
-        </ReactTappable>
-
-        <a
-          style={styles.locatorIcon}
-          href={locatorUrl}
-          onClick={utils._trackHeader.bind(this, 'Click', 'Mobile Locations Button')}
-          className={`${this.props.className}-Locator nypl-icon-locator-large`}>
-        </a>
-
-        <ReactTappable onTap={this._handleMenuBtnPress.bind(this, 'clickSearch')}>
-          <span
-            style={[
-              styles.searchIcon,
-              searchButtonAction === 'clickSearch' ? styles.activeSearchIcon : ''
-            ]}
-            className={`${this.props.className}-SearchButton ${mobileSearchClass}`}
-            ref='MobileSearchButton'>
-            <div className='visuallyHidden'>Search</div>
-          </span>
-        </ReactTappable>
-
-        <ReactTappable onTap={this._handleMenuBtnPress.bind(this, 'mobileMenu')}>
-          <span
-            style={[
-              styles.menuIcon,
-              activeButton === 'mobileMenu' ? styles.activeMenuIcon : ''
-            ]}
-            className={`${this.props.className}-MenuButton ${mobileMenuClass}`}
-            ref='MobileMenuButton'>
-          </span>
-        </ReactTappable>
-      </div>
-    );
   }
 
   /**
@@ -155,75 +150,90 @@ class MobileHeader extends React.Component {
   _handleMenuBtnPress(activeButton) {
     this._toggleMobileMenu(activeButton);
   }
+
+  render() {
+    const activeButton = this.state.activeMobileButton;
+    const searchButtonAction = this.state.searchButtonAction;
+    const mobileMyNyplButton = this.state.mobileMyNyplButton;
+    const locatorUrl = this.props.locatorUrl || '//www.nypl.org/locations/map?nearme=true';
+    const mobileSearchClass = (searchButtonAction === 'clickSearch') ?
+      'active nypl-icon-solo-x' : 'nypl-icon-magnifier-thin';
+    const mobileMenuClass = (activeButton === 'mobileMenu') ?
+      'active nypl-icon-solo-x' : 'nypl-icon-burger-nav';
+    const mobileMyNyplClass = (mobileMyNyplButton === 'clickMyNypl') ?
+      'active nypl-icon-solo-x' : 'nypl-icon-login';
+
+    return (
+      <div className={this.props.className} style={styles.base}>
+        <a
+          style={styles.mobileLogo}
+          href="//www.nypl.org"
+        >
+          <span
+            style={styles.logoIcon}
+            className={`${this.props.className}-Logo nypl-icon-logo-mark`}
+          >
+          </span>
+        </a>
+
+        <ReactTappable onTap={this._handleMenuBtnPress.bind(this, 'clickMyNypl')}>
+          <span
+            style={[
+              styles.myNyplIcon,
+              mobileMyNyplButton === 'clickMyNypl' ? styles.activeMyNyplIcon : '',
+            ]}
+            className={`${this.props.className}-MyNyplButton ${mobileMyNyplClass}`}
+            ref="MobileMyNyplButton"
+          >
+          </span>
+        </ReactTappable>
+
+        <a
+          style={styles.locatorIcon}
+          href={locatorUrl}
+          onClick={utils._trackHeader.bind(this, 'Click', 'Mobile Locations Button')}
+          className={`${this.props.className}-Locator nypl-icon-locator-large`}
+        >
+        </a>
+
+        <ReactTappable onTap={this._handleMenuBtnPress.bind(this, 'clickSearch')}>
+          <span
+            style={[
+              styles.searchIcon,
+              searchButtonAction === 'clickSearch' ? styles.activeSearchIcon : '',
+            ]}
+            className={`${this.props.className}-SearchButton ${mobileSearchClass}`}
+            ref="MobileSearchButton"
+          >
+            <div className="visuallyHidden">Search</div>
+          </span>
+        </ReactTappable>
+
+        <ReactTappable onTap={this._handleMenuBtnPress.bind(this, 'mobileMenu')}>
+          <span
+            style={[
+              styles.menuIcon,
+              activeButton === 'mobileMenu' ? styles.activeMenuIcon : '',
+            ]}
+            className={`${this.props.className}-MenuButton ${mobileMenuClass}`}
+            ref="MobileMenuButton"
+          >
+          </span>
+        </ReactTappable>
+      </div>
+    );
+  }
 }
+
+MobileHeader.propTypes = {
+  lang: React.PropTypes.string,
+  className: React.PropTypes.string,
+  locatorUrl: React.PropTypes.string,
+};
 
 MobileHeader.defaultProps = {
   lang: 'en',
-  className: 'MobileHeader'
+  className: 'MobileHeader',
 };
-
-const styles = {
-  base: {
-    position: 'relative',
-    height: '59px',
-    textAlign: 'right'
-  },
-  mobileLogo: {
-    color: '#000',
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    textDecoration: 'none',
-    ':hover': {
-      color: '#000'
-    },
-    ':visited': {
-      color: '#000'
-    }
-  },
-  logoIcon: {
-    fontSize: '59px'
-  },
-  myNyplIcon: {
-    fontSize: '31px',
-    margin: 0,
-    padding: '14px',
-    display: 'inline-block',
-    color: '#000'
-  },
-  locatorIcon: {
-    fontSize: '31px',
-    margin: 0,
-    padding: '14px',
-    display: 'inline-block',
-    color: '#000'
-  },
-  searchIcon: {
-    fontSize: '31px',
-    margin: 0,
-    padding: '14px',
-    display: 'inline-block',
-    color: '#000'
-  },
-  menuIcon: {
-    fontSize: '31px',
-    margin: 0,
-    padding: '14px',
-    display: 'inline-block',
-    color: '#000'
-  },
-  activeSearchIcon: {
-    color: '#FFF',
-    backgroundColor: '#29A1D2'
-  },
-  activeMenuIcon: {
-    color: '#FFF',
-    backgroundColor: '#2B2B2B'
-  },
-  activeMyNyplIcon: {
-    color: '#FFF',
-    backgroundColor: '#2B2B2B'
-  }
-}
 
 export default Radium(MobileHeader);

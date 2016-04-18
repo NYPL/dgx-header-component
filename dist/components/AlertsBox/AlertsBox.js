@@ -75,7 +75,7 @@ AlertsBox.propTypes = {
   className: _react2['default'].PropTypes.string.isRequired,
   lang: _react2['default'].PropTypes.string,
   style: _react2['default'].PropTypes.object,
-  alerts: _react2['default'].PropTypes.object
+  alerts: _react2['default'].PropTypes.array
 };
 
 AlertsBox.defaultProps = {

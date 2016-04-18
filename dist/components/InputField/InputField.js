@@ -22,10 +22,12 @@ var _radium = require('radium');
 
 var _radium2 = _interopRequireDefault(_radium);
 
+var styles = {
+  base: {}
+};
+
 var InputField = (function (_React$Component) {
   _inherits(InputField, _React$Component);
-
-  // Constructor used in ES6
 
   function InputField(props) {
     _classCallCheck(this, InputField);
@@ -49,23 +51,35 @@ var InputField = (function (_React$Component) {
         onClick: this.props.onClick,
         onChange: this.props.onChange,
         required: this.props.isRequired || false,
-        style: [styles.base, this.props.style] });
+        style: [styles.base, this.props.style]
+      });
     }
   }]);
 
   return InputField;
 })(_react2['default'].Component);
 
-;
+InputField.propTypes = {
+  type: _react2['default'].PropTypes.string,
+  lang: _react2['default'].PropTypes.string,
+  id: _react2['default'].PropTypes.string,
+  name: _react2['default'].PropTypes.string,
+  value: _react2['default'].PropTypes.string,
+  checked: _react2['default'].PropTypes.bool,
+  maxLength: _react2['default'].PropTypes.string,
+  placeholder: _react2['default'].PropTypes.string,
+  className: _react2['default'].PropTypes.string,
+  onClick: _react2['default'].PropTypes.func,
+  onChange: _react2['default'].PropTypes.func,
+  required: _react2['default'].PropTypes.bool,
+  isRequired: _react2['default'].PropTypes.bool,
+  style: _react2['default'].PropTypes.object
+};
 
 InputField.defaultProps = {
   type: 'text',
   lang: 'en',
   name: 'InputField'
-};
-
-var styles = {
-  base: {}
 };
 
 exports['default'] = (0, _radium2['default'])(InputField);

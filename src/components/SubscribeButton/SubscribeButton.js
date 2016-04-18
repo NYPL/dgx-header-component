@@ -13,13 +13,12 @@ import axios from 'axios';
 import utils from '../../utils/utils.js';
 
 class SubscribeButton extends React.Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
       subscribeFormVisible: HeaderStore._getSubscribeFormVisible(),
-      target: this.props.target
+      target: this.props.target,
     };
   }
 
@@ -82,7 +81,7 @@ class SubscribeButton extends React.Component {
   }
 
   /**
-   * _handleClick(e) 
+   * _handleClick(e)
    * Toggles the visibility of the form. Sends an Action
    * that will dispatch an event to the Header Store.
    */
@@ -98,7 +97,7 @@ class SubscribeButton extends React.Component {
   }
 
   /**
-   * _handleOnClickOut(e) 
+   * _handleOnClickOut(e)
    * Handles closing the Subscribe form if it is
    * currently visible.
    */
@@ -108,7 +107,7 @@ class SubscribeButton extends React.Component {
       Actions.toggleSubscribeFormVisible(false);
       utils._trackHeader('Click', 'Subscribe - Closed');
     }
-    
+
   }
 
   /**

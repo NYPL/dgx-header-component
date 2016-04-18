@@ -2,65 +2,41 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 class LocationFinder extends React.Component {
-
   constructor(props) {
     super(props);
 
-    // Holds the initial component state
     this.state = {
-    	zipcode: null,
+      zipcode: null,
       disableSubmit: true,
-      nearestLocation: null
+      nearestLocation: null,
     };
 
     this._handleSubmit = this._handleSubmit.bind(this);
     this._handleChange = this._handleChange.bind(this);
   }
 
-  render() {
-    // Reference the zipcode from the state.
-  	let zipcode = this.state.zipcode;
-
-    return (
-      <div className={this.props.className}>
-        <div className={this.props.className + '-Wrapper'}>
-          <div className={this.props.className + '-Tag'}>Find a Library</div>
-          <label htmlFor='LocationFinder-Input' className={this.props.className + '-IntroText'}>
-            Type a zip code where you would like to find a NYPL Location.
-          </label>
-          <div className={this.props.className + '-SearchBox'}>
-            <input type='text' placeholder='Zip Code' id='LocationFinder-Input' ref='zipCodeInput' onChange={this._handleChange} />
-            <button type='button' id='LocationFinder-Submit' disabled={this.state.disableSubmit} onClick={this._handleSubmit}>FIND</button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   /**
-   * _handleSubmit() 
-   * updates the state reference 
+   * _handleSubmit()
+   * updates the state reference
    * which holds the nearestLocation
    * property
    *
    * @return {Object} location
    */
-  _handleSubmit() {
-
-  }
+  _handleSubmit() {}
 
   /**
-   * _enableSubmitButton() 
+   * _enableSubmitButton()
    * sets the state's disableSubmit
    * property value to false
    *
    */
   _enableSubmitButton() {
-    this.setState({disableSubmit: false});
+    this.setState({ disableSubmit: false });
   }
 
   /**
-   * _getNearestLocations(zipcode) 
+   * _getNearestLocations(zipcode)
    * returns the nearest location object
    * from the list of NYPL locations
    * based of an API.
@@ -68,49 +44,49 @@ class LocationFinder extends React.Component {
    * @param {Number} zipcode
    * @return {Object} location
    */
-  _getNearestLocations(zipcode) {
-
-  }
+  // _getNearestLocations(zipcode) {
+  //
+  // }
 
   /**
-   * _validateZipcode(zipcode) 
-   * returns a boolean value based 
+   * _validateZipcode(zipcode)
+   * returns a boolean value based
    * on the validity of the zipcode param.
    *
    * @param {Number} zipcode
    * @return {Boolean} true/false
    */
   _validateZipcode(zipcode) {
-  	if (zipcode && !isNaN(zipcode) && zipcode.length === 5) {
-  		return true;
-  	}
-  	return false;
+    if (zipcode && !isNaN(zipcode) && zipcode.length === 5) {
+      return true;
+    }
+    return false;
   }
 
   /**
-   * _getZipcodeValue() 
+   * _getZipcodeValue()
    * returns the current value
    * from the state zipcode property
    *
    * @return {Number} state.zipcode
    */
   _getZipcodeValue() {
-   return this.state.zipcode;
+    return this.state.zipcode;
   }
 
   /**
-   * _setZipcodeValue(value) 
+   * _setZipcodeValue(value)
    * sets the state's zipcode
    * property with the param value
    *
    * @param {Number} value
    */
   _setZipcodeValue(value) {
-    this.setState({zipcode: value});
+    this.setState({ zipcode: value });
   }
 
   /**
-   * _handleChange() 
+   * _handleChange()
    * handles the changing value
    * of the zipcode input and
    * is responsible for firing off
@@ -118,27 +94,63 @@ class LocationFinder extends React.Component {
    *
    */
   _handleChange() {
-    let zipcode = ReactDOM.findDOMNode(this.refs.zipCodeInput).value;
+    const zipcode = ReactDOM.findDOMNode(this.refs.zipCodeInput).value;
 
-  	if (this._validateZipcode(zipcode)) {
-
+    if (this._validateZipcode(zipcode)) {
       // Update the state.zipcode value
       this._setZipcodeValue(zipcode);
 
       // Enable the submitButton
       this._enableSubmitButton();
 
-  		// Execute Autocomplete Search Suggestions
-  		console.log('Input is valid, suggestions should be enabled');
-  	} else {
-  		// Do not execute Autocomplete
-  	}
+      // Execute Autocomplete Search Suggestions
+      // console.log('Input is valid, suggestions should be enabled');
+    } else {
+      // Do not execute Autocomplete
+    }
+  }
+
+  render() {
+    // Reference the zipcode from the state.
+    // const zipcode = this.state.zipcode;
+    return (
+      <div className={this.props.className}>
+        <div className={`${this.props.className}-Wrapper`}>
+          <div className={`${this.props.className}-Tag`}>Find a Library</div>
+          <label htmlFor="LocationFinder-Input" className={`${this.props.className}-IntroText`}>
+            Type a zip code where you would like to find a NYPL Location.
+          </label>
+          <div className={`${this.props.className}-SearchBox`}>
+            <input
+              type="text"
+              placeholder="Zip Code"
+              id="LocationFinder-Input"
+              ref="zipCodeInput"
+              onChange={this._handleChange}
+            />
+            <button
+              type="button"
+              id="LocationFinder-Submit"
+              disabled={this.state.disableSubmit}
+              onClick={this._handleSubmit}
+            >
+              FIND
+            </button>
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 
+LocationFinder.propTypes = {
+  lang: React.PropTypes.string,
+  className: React.PropTypes.string,
+};
+
 LocationFinder.defaultProps = {
   lang: 'en',
-  className: 'LocationFinder'
+  className: 'LocationFinder',
 };
 
 export default LocationFinder;

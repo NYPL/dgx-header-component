@@ -9,7 +9,6 @@ import Actions from '../../actions/Actions.js';
 import utils from '../../utils/utils.js';
 
 class MobileHeader extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -38,23 +37,23 @@ class MobileHeader extends React.Component {
     });
   }
 
-  render () {
-    let activeButton = this.state.activeMobileButton,
-      searchButtonAction = this.state.searchButtonAction,
-      mobileMyNyplButton = this.state.mobileMyNyplButton,
-      locatorUrl = this.props.locatorUrl || '//www.nypl.org/locations/map?nearme=true',
-      mobileSearchClass = (searchButtonAction === 'clickSearch') ?
-        'active nypl-icon-solo-x': 'nypl-icon-magnifier-thin',
-      mobileMenuClass = (activeButton === 'mobileMenu') ?
-        'active nypl-icon-solo-x': 'nypl-icon-burger-nav',
-      mobileMyNyplClass = (mobileMyNyplButton === 'clickMyNypl') ?
-        'active nypl-icon-solo-x': 'nypl-icon-login';
+  render() {
+    const activeButton = this.state.activeMobileButton;
+    const searchButtonAction = this.state.searchButtonAction;
+    const mobileMyNyplButton = this.state.mobileMyNyplButton;
+    const locatorUrl = this.props.locatorUrl || '//www.nypl.org/locations/map?nearme=true';
+    const mobileSearchClass = (searchButtonAction === 'clickSearch') ?
+      'active nypl-icon-solo-x': 'nypl-icon-magnifier-thin';
+    const mobileMenuClass = (activeButton === 'mobileMenu') ?
+      'active nypl-icon-solo-x': 'nypl-icon-burger-nav';
+    const mobileMyNyplClass = (mobileMyNyplButton === 'clickMyNypl') ?
+      'active nypl-icon-solo-x': 'nypl-icon-login';
 
     return (
       <div className={this.props.className} style={styles.base}>
         <a
           style={styles.mobileLogo}
-          href='//www.nypl.org'>
+          href={this.props.nyplRootUrl}>
           <span
             style={styles.logoIcon}
             className={`${this.props.className}-Logo nypl-icon-logo-mark`}>
@@ -159,7 +158,8 @@ class MobileHeader extends React.Component {
 
 MobileHeader.defaultProps = {
   lang: 'en',
-  className: 'MobileHeader'
+  className: 'MobileHeader',
+  nyplRootUrl: '/',
 };
 
 const styles = {

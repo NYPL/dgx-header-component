@@ -31,7 +31,6 @@ var HeaderStore = (function () {
       handleSearchButtonActionValue: _actionsActionsJs2['default'].SEARCH_BUTTON_ACTION_VALUE,
       handleUpdateIsHeaderSticky: _actionsActionsJs2['default'].UPDATE_IS_HEADER_STICKY,
       handleSetLastActiveMenuItem: _actionsActionsJs2['default'].SET_LAST_ACTIVE_MENU_ITEM,
-      handleSetClientAppEnv: _actionsActionsJs2['default'].SET_CLIENT_APP_ENV,
       handleToggleSubscribeFormVisible: _actionsActionsJs2['default'].TOGGLE_SUBSCRIBE_FORM_VISIBLE,
       handleToggleMyNyplVisible: _actionsActionsJs2['default'].TOGGLE_MY_NYPL_VISIBLE,
       handleToggleStickyMyNyplVisible: _actionsActionsJs2['default'].TOGGLE_STICKY_MY_NYPL_VISIBLE
@@ -45,8 +44,7 @@ var HeaderStore = (function () {
       _getLastActiveMenuItem: this._getLastActiveMenuItem,
       _getSubscribeFormVisible: this._getSubscribeFormVisible,
       _getMyNyplVisible: this._getMyNyplVisible,
-      _getStickyMyNyplVisible: this._getStickyMyNyplVisible,
-      _getClientAppEnv: this._getClientAppEnv
+      _getStickyMyNyplVisible: this._getStickyMyNyplVisible
     });
 
     this.state = {
@@ -59,8 +57,7 @@ var HeaderStore = (function () {
       mobileMyNyplButton: '',
       subscribeFormVisible: false,
       myNyplVisible: false,
-      stickyLoginVisible: false,
-      clientAppEnv: ''
+      stickyLoginVisible: false
     };
   }
 
@@ -141,7 +138,7 @@ var HeaderStore = (function () {
     }
 
     /**
-     * _getIsStickyValue() 
+     * _getIsStickyValue()
      * returns the current state.isSticky value.
      *
      * @return {Boolean} true/false
@@ -162,11 +159,6 @@ var HeaderStore = (function () {
     key: '_getLastActiveMenuItem',
     value: function _getLastActiveMenuItem() {
       return this.state.lastActiveMenuItem;
-    }
-  }, {
-    key: '_getClientAppEnv',
-    value: function _getClientAppEnv() {
-      return this.state.clientAppEnv;
     }
 
     /*** PRIVATE METHODS ***/
@@ -211,11 +203,6 @@ var HeaderStore = (function () {
     key: 'handleSetLastActiveMenuItem',
     value: function handleSetLastActiveMenuItem(value) {
       this.setState({ lastActiveMenuItem: value });
-    }
-  }, {
-    key: 'handleSetClientAppEnv',
-    value: function handleSetClientAppEnv(value) {
-      this.setState({ clientAppEnv: value });
     }
   }, {
     key: 'handleToggleSubscribeFormVisible',

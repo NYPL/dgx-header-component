@@ -43,10 +43,7 @@ if (!window.dgxFeatureFlags) {
   window.dgxFeatureFlags = _dgxFeatureFlags2['default'].utils;
 }
 
-// Sets the API path for local testing
-_actionsActionsJs2['default'].setClientAppEnv('development');
-
 /* app.jsx
  * Used for local development of React Components
  */
-_reactDom2['default'].render(_react2['default'].createElement(_componentsHeaderHeaderJs2['default'], { skipNav: { target: 'maincontent' }, urls: 'absolute' }), document.getElementById('app'));
+_reactDom2['default'].render(_react2['default'].createElement(_componentsHeaderHeaderJs2['default'], { skipNav: { target: 'maincontent' }, env: 'development', urls: 'absolute' }), document.getElementById('app'));

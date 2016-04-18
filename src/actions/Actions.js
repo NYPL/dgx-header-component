@@ -60,10 +60,6 @@ class Actions {
     this.dispatch(value);
   }
 
-  setClientAppEnv(value) {
-    this.dispatch(value);
-  }
-
   searchButtonActionValue(actionValue) {
     this.dispatch(actionValue);
   }

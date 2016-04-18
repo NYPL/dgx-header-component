@@ -90,11 +90,6 @@ var Actions = (function () {
       this.dispatch(value);
     }
   }, {
-    key: 'setClientAppEnv',
-    value: function setClientAppEnv(value) {
-      this.dispatch(value);
-    }
-  }, {
     key: 'searchButtonActionValue',
     value: function searchButtonActionValue(actionValue) {
       this.dispatch(actionValue);

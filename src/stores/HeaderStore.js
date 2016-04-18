@@ -13,7 +13,6 @@ class HeaderStore {
       handleSearchButtonActionValue: Actions.SEARCH_BUTTON_ACTION_VALUE,
       handleUpdateIsHeaderSticky: Actions.UPDATE_IS_HEADER_STICKY,
       handleSetLastActiveMenuItem: Actions.SET_LAST_ACTIVE_MENU_ITEM,
-      handleSetClientAppEnv: Actions.SET_CLIENT_APP_ENV,
       handleToggleSubscribeFormVisible: Actions.TOGGLE_SUBSCRIBE_FORM_VISIBLE,
       handleToggleMyNyplVisible: Actions.TOGGLE_MY_NYPL_VISIBLE,
       handleToggleStickyMyNyplVisible: Actions.TOGGLE_STICKY_MY_NYPL_VISIBLE
@@ -27,8 +26,7 @@ class HeaderStore {
       _getLastActiveMenuItem: this._getLastActiveMenuItem,
       _getSubscribeFormVisible: this._getSubscribeFormVisible,
       _getMyNyplVisible: this._getMyNyplVisible,
-      _getStickyMyNyplVisible: this._getStickyMyNyplVisible,
-      _getClientAppEnv: this._getClientAppEnv
+      _getStickyMyNyplVisible: this._getStickyMyNyplVisible
     });
 
     this.state = {
@@ -42,7 +40,6 @@ class HeaderStore {
       subscribeFormVisible: false,
       myNyplVisible: false,
       stickyLoginVisible: false,
-      clientAppEnv: ''
     };
   }
 
@@ -108,7 +105,7 @@ class HeaderStore {
   }
 
   /**
-   * _getIsStickyValue() 
+   * _getIsStickyValue()
    * returns the current state.isSticky value.
    *
    * @return {Boolean} true/false
@@ -125,10 +122,6 @@ class HeaderStore {
    */
   _getLastActiveMenuItem() {
     return this.state.lastActiveMenuItem;
-  }
-
-  _getClientAppEnv() {
-    return this.state.clientAppEnv;
   }
 
   /*** PRIVATE METHODS ***/
@@ -163,10 +156,6 @@ class HeaderStore {
 
   handleSetLastActiveMenuItem(value) {
     this.setState({lastActiveMenuItem: value});
-  }
-
-  handleSetClientAppEnv(value) {
-    this.setState({clientAppEnv: value});
   }
 
   handleToggleSubscribeFormVisible(value) {

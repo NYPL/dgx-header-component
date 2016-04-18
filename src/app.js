@@ -22,13 +22,10 @@ if (!window.dgxFeatureFlags) {
 	window.dgxFeatureFlags = FeatureFlags.utils;
 }
 
-// Sets the API path for local testing
-Actions.setClientAppEnv('development');
-
 /* app.jsx
  * Used for local development of React Components
  */
 ReactDOM.render(
-  <Header skipNav={{target: 'maincontent'}} urls='absolute' />,
+  <Header skipNav={{target: 'maincontent'}} env="development" urls="absolute" />,
   document.getElementById('app')
 );

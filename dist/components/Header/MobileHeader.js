@@ -83,13 +83,13 @@ var MobileHeader = (function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var activeButton = this.state.activeMobileButton,
-          searchButtonAction = this.state.searchButtonAction,
-          mobileMyNyplButton = this.state.mobileMyNyplButton,
-          locatorUrl = this.props.locatorUrl || '//www.nypl.org/locations/map?nearme=true',
-          mobileSearchClass = searchButtonAction === 'clickSearch' ? 'active nypl-icon-solo-x' : 'nypl-icon-magnifier-thin',
-          mobileMenuClass = activeButton === 'mobileMenu' ? 'active nypl-icon-solo-x' : 'nypl-icon-burger-nav',
-          mobileMyNyplClass = mobileMyNyplButton === 'clickMyNypl' ? 'active nypl-icon-solo-x' : 'nypl-icon-login';
+      var activeButton = this.state.activeMobileButton;
+      var searchButtonAction = this.state.searchButtonAction;
+      var mobileMyNyplButton = this.state.mobileMyNyplButton;
+      var locatorUrl = this.props.locatorUrl || '//www.nypl.org/locations/map?nearme=true';
+      var mobileSearchClass = searchButtonAction === 'clickSearch' ? 'active nypl-icon-solo-x' : 'nypl-icon-magnifier-thin';
+      var mobileMenuClass = activeButton === 'mobileMenu' ? 'active nypl-icon-solo-x' : 'nypl-icon-burger-nav';
+      var mobileMyNyplClass = mobileMyNyplButton === 'clickMyNypl' ? 'active nypl-icon-solo-x' : 'nypl-icon-login';
 
       return _react2['default'].createElement(
         'div',
@@ -98,7 +98,7 @@ var MobileHeader = (function (_React$Component) {
           'a',
           {
             style: styles.mobileLogo,
-            href: '//www.nypl.org' },
+            href: this.props.nyplRootUrl },
           _react2['default'].createElement('span', {
             style: styles.logoIcon,
             className: this.props.className + '-Logo nypl-icon-logo-mark' })
@@ -204,7 +204,8 @@ var MobileHeader = (function (_React$Component) {
 
 MobileHeader.defaultProps = {
   lang: 'en',
-  className: 'MobileHeader'
+  className: 'MobileHeader',
+  nyplRootUrl: '/'
 };
 
 var styles = {

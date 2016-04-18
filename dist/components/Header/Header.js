@@ -162,8 +162,9 @@ var Header = (function (_React$Component) {
           { className: headerClass + '-Wrapper' },
           _react2['default'].createElement(_MobileHeaderJs2['default'], {
             className: headerClass + '-Mobile',
-            locatorUrl: '//www.nypl.org/locations/map?nearme=true',
-            ref: 'headerMobile'
+            ref: 'headerMobile',
+            nyplRootUrl: this.props.urls === 'absolute' ? "//www.nypl.org" : "/",
+            locatorUrl: this.props.urls === 'absolute' ? "//www.nypl.org/locations/map?nearme=true" : "/locations/map?nearme=true"
           }),
           _react2['default'].createElement(
             'div',
@@ -179,7 +180,7 @@ var Header = (function (_React$Component) {
             },
             _react2['default'].createElement(_LogoLogoJs2['default'], {
               className: headerClass + '-Logo',
-              target: this.props.urls === 'absolute' ? '//www.nypl.org' : '/'
+              target: this.props.urls === 'absolute' ? "//www.nypl.org" : "/"
             }),
             _react2['default'].createElement(
               'div',

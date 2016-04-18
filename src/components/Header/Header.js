@@ -82,8 +82,12 @@ class Header extends React.Component {
         <div className={`${headerClass}-Wrapper`}>
           <MobileHeader
             className={`${headerClass}-Mobile`}
-            locatorUrl={'//www.nypl.org/locations/map?nearme=true'}
             ref="headerMobile"
+            nyplRootUrl={(this.props.urls === 'absolute') ? "//www.nypl.org" : "/"}
+            locatorUrl={
+              (this.props.urls === 'absolute') ?
+                "//www.nypl.org/locations/map?nearme=true" : "/locations/map?nearme=true"
+            }
           />
           <div className={`MobileMyNypl-Wrapper ${mobileMyNyplClasses}`}>
             <MobileMyNypl />
@@ -95,7 +99,7 @@ class Header extends React.Component {
           >
             <Logo
               className={`${headerClass}-Logo`}
-              target={(this.props.urls === 'absolute') ? '//www.nypl.org' : '/'}
+              target={(this.props.urls === 'absolute') ? "//www.nypl.org" : "/"}
             />
             <div className={`${headerClass}-Buttons`} style={styles.topButtons}>
               <MyNyplButton label="Log In" refId="desktopLogin" />

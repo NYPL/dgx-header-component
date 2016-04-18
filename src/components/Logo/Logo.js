@@ -4,24 +4,21 @@ import Radium from 'radium';
 import utils from '../../utils/utils.js';
 
 class Logo extends React.Component {
-  // Constructor used in ES6
   constructor(props) {
     super(props);
   }
 
-  render () {
+  render() {
     return (
       <a
-      id={this.props.id}
-      className={this.props.className}
-      href={this.props.target}
-      onClick={utils._trackHeader.bind(this, 'Click Logo', '')}
-      style={[
-        styles.base,
-        this.props.style //allows for parent-to-child css styling
-      ]}>
+        id={this.props.id}
+        className={this.props.className}
+        href={this.props.target}
+        onClick={utils._trackHeader.bind(this, 'Click Logo', '')}
+        style={[styles.base, this.props.style]}
+      >
         <img src={this.props.src} style={styles.image} />
-        <span className='nypl-icon-logo-mark' style={styles.icon}></span>
+        <span className="nypl-icon-logo-mark" style={styles.icon}></span>
       </a>
     );
   }
@@ -29,7 +26,7 @@ class Logo extends React.Component {
 
 Logo.defaultProps = {
   src: '//ux-static.nypl.org/images/NYPL-logo-black-pos.svg',
-  target: '//www.nypl.org',
+  target: '/',
   id: 'Logo',
   className: 'Logo'
 };

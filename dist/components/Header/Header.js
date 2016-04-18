@@ -87,6 +87,8 @@ var _dgxSkipNavigationLink = require('dgx-skip-navigation-link');
 
 var _dgxSkipNavigationLink2 = _interopRequireDefault(_dgxSkipNavigationLink);
 
+// Utility Library
+
 var _utilsUtilsJs = require('../../utils/utils.js');
 
 var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
@@ -143,7 +145,7 @@ var Header = (function (_React$Component) {
       var headerClass = this.props.className || 'Header';
       var headerClasses = (0, _classnames2['default'])(headerClass, { 'sticky': isHeaderSticky });
       var mobileMyNyplClasses = (0, _classnames2['default'])({ 'active': _storesHeaderStoreJs2['default']._getMobileMyNyplButtonValue() });
-      var skipNav = this.props.skipNav ? _react2['default'].createElement(_dgxSkipNavigationLink2['default'], this.props.skipNav) : '';
+      var skipNav = this.props.skipNav ? _react2['default'].createElement(_dgxSkipNavigationLink2['default'], this.props.skipNav) : null;
 
       return _react2['default'].createElement(
         'header',
@@ -175,7 +177,10 @@ var Header = (function (_React$Component) {
               style: styles.wrapper,
               ref: 'headerTopWrapper'
             },
-            _react2['default'].createElement(_LogoLogoJs2['default'], { className: headerClass + '-Logo' }),
+            _react2['default'].createElement(_LogoLogoJs2['default'], {
+              className: headerClass + '-Logo',
+              target: this.props.urls === 'absolute' ? '//www.nypl.org' : '/'
+            }),
             _react2['default'].createElement(
               'div',
               { className: headerClass + '-Buttons', style: styles.topButtons },
@@ -222,14 +227,13 @@ var Header = (function (_React$Component) {
     key: '_fetchDataIfNeeded',
     value: function _fetchDataIfNeeded() {
       if (_storesHeaderStoreJs2['default'].getState().headerData.length < 1) {
-        console.log(this.props.env, this.props.urls);
         _actionsActionsJs2['default'].fetchHeaderData(this.props.env, this.props.urls);
       }
     }
 
     /**
      * _handleStickyHeader()
-     * returns the Actions.updateIsHeaderSticky()
+     * Executes Actions.updateIsHeaderSticky()
      * with the proper boolean value to update the
      * HeaderStore.isSticky value based on the window
      * vertical scroll position surpassing the height

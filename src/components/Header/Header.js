@@ -21,6 +21,7 @@ import MobileHeader from './MobileHeader.js';
 import GlobalAlerts from '../GlobalAlerts/GlobalAlerts.js';
 import SkipNavigation from 'dgx-skip-navigation-link';
 
+// Utility Library
 import utils from '../../utils/utils.js';
 
 // When minifying with Webpack, you can use this:
@@ -67,13 +68,13 @@ class Header extends React.Component {
     const headerClasses = cx(headerClass, {'sticky': isHeaderSticky});
     const mobileMyNyplClasses = cx({'active': HeaderStore._getMobileMyNyplButtonValue()});
     const skipNav = this.props.skipNav ?
-      (<SkipNavigation {...this.props.skipNav} />) : '';
+      (<SkipNavigation {...this.props.skipNav} />) : null;
 
     return (
       <header
         id={this.props.id}
         className={headerClasses}
-        ref='nyplHeader'
+        ref="nyplHeader"
         style={(isHeaderSticky) ? {height: `${headerHeight}px`} : null}
       >
         {skipNav}
@@ -82,7 +83,7 @@ class Header extends React.Component {
           <MobileHeader
             className={`${headerClass}-Mobile`}
             locatorUrl={'//www.nypl.org/locations/map?nearme=true'}
-            ref='headerMobile'
+            ref="headerMobile"
           />
           <div className={`MobileMyNypl-Wrapper ${mobileMyNyplClasses}`}>
             <MobileMyNypl />
@@ -92,9 +93,12 @@ class Header extends React.Component {
             style={styles.wrapper}
             ref='headerTopWrapper'
           >
-            <Logo className={`${headerClass}-Logo`} />
+            <Logo
+              className={`${headerClass}-Logo`}
+              target={(this.props.urls === 'absolute') ? '//www.nypl.org' : '/'}
+            />
             <div className={`${headerClass}-Buttons`} style={styles.topButtons}>
-              <MyNyplButton label='Log In' refId='desktopLogin' />
+              <MyNyplButton label="Log In" refId="desktopLogin" />
               <SimpleButton
                 label='Get a Library Card'
                 target='//catalog.nypl.org/screens/selfregpick.html'
@@ -105,7 +109,7 @@ class Header extends React.Component {
                 style={styles.libraryCardButton}
               />
               <SubscribeButton
-                label='Get Email Updates'
+                label="Get Email Updates"
                 lang={this.props.lang}
                 style={styles.subscribeButton}
               />
@@ -136,14 +140,13 @@ class Header extends React.Component {
    */
   _fetchDataIfNeeded() {
     if (HeaderStore.getState().headerData.length < 1) {
-      console.log(this.props.env, this.props.urls);
       Actions.fetchHeaderData(this.props.env, this.props.urls);
     }
   }
 
   /**
    * _handleStickyHeader()
-   * returns the Actions.updateIsHeaderSticky()
+   * Executes Actions.updateIsHeaderSticky()
    * with the proper boolean value to update the
    * HeaderStore.isSticky value based on the window
    * vertical scroll position surpassing the height

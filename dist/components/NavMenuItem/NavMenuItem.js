@@ -76,6 +76,7 @@ var NavMenuItem = (function (_React$Component) {
       var megaMenu = this.props.subNav && this.props.features ? _react2['default'].createElement(_MegaMenuMegaMenuJs2['default'], {
         label: this.props.label,
         lang: this.props.lang,
+        urlType: this.props.urlType,
         items: this.props.subNav,
         navId: this.props.navId,
         features: this.props.features,

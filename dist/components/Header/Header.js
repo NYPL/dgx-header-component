@@ -211,7 +211,8 @@ var Header = (function (_React$Component) {
           _react2['default'].createElement(_NavMenuNavMenuJs2['default'], {
             className: headerClass + '-NavMenu',
             lang: this.props.lang,
-            items: this.state.headerData
+            items: this.state.headerData,
+            urlType: this.props.urls
           })
         )
       );

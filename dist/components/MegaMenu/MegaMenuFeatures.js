@@ -62,7 +62,11 @@ var MegaMenuFeatures = (function (_React$Component) {
           featuredItem: widgetFeature,
           donationLinks: _appConfigJs2['default'].donationLinks, navLabel: this.props.navLabel });
       } else if (this.props.navId === 'df621833-4dd1-4223-83e5-6ad7f98ad26a') {
-        currentFeatureItem = _react2['default'].createElement(_FindUsWidgetFindUsWidgetJs2['default'], { navId: this.props.navId, featuredItem: widgetFeature, navLabel: this.props.navLabel });
+        currentFeatureItem = _react2['default'].createElement(_FindUsWidgetFindUsWidgetJs2['default'], {
+          navId: this.props.navId,
+          featuredItem: widgetFeature,
+          urlType: this.props.urlType,
+          navLabel: this.props.navLabel });
       } else {
         currentFeatureItem = this.props.features.map(function (item, i) {
           return _react2['default'].createElement(_MegaMenuFeatureItemJs2['default'], { key: i, feature: item.featuredItem, navLabel: _this.props.navLabel });

@@ -37,6 +37,7 @@ class NavMenuItem extends React.Component {
       <MegaMenu
         label={this.props.label}
         lang={this.props.lang}
+        urlType={this.props.urlType}
         items={this.props.subNav}
         navId={this.props.navId}
         features={this.props.features}

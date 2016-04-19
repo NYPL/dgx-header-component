@@ -110,6 +110,7 @@ var MegaMenu = (function (_React$Component) {
             _react2['default'].createElement(_MegaMenuFeaturesJs2['default'], {
               navId: this.props.navId,
               features: this.props.features,
+              urlType: this.props.urlType,
               navLabel: this.props.label[this.props.lang].text
             })
           )

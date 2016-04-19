@@ -58,7 +58,7 @@ class Header extends React.Component {
   }
 
   _onChange() {
-    this.setState(_.extend({ headerHeight: this.state.headerHeight },HeaderStore.getState()));
+    this.setState(_.extend({ headerHeight: this.state.headerHeight }, HeaderStore.getState()));
   }
 
   render () {
@@ -129,6 +129,7 @@ class Header extends React.Component {
             className={`${headerClass}-NavMenu`}
             lang={this.props.lang}
             items={this.state.headerData}
+            urlType={this.props.urls}
           />
         </div>
       </header>

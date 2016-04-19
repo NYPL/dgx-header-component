@@ -60,6 +60,7 @@ class MegaMenu extends React.Component {
             <MegaMenuFeatures
               navId={this.props.navId}
               features={this.props.features}
+              urlType={this.props.urlType}
               navLabel={this.props.label[this.props.lang].text}
             />
           </div>

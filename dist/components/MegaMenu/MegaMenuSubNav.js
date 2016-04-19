@@ -20,8 +20,6 @@ var _react2 = _interopRequireDefault(_react);
 
 var _underscore = require('underscore');
 
-var _underscore2 = _interopRequireDefault(_underscore);
-
 var _radium = require('radium');
 
 var _radium2 = _interopRequireDefault(_radium);
@@ -38,10 +36,15 @@ var _utilsUtilsJs = require('../../utils/utils.js');
 
 var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
 
+var styles = {
+  topLink: {
+    textDecoration: 'none',
+    color: '#FFF'
+  }
+};
+
 var MegaMenuSubNav = (function (_React$Component) {
   _inherits(MegaMenuSubNav, _React$Component);
-
-  // Constructor used in ES6
 
   function MegaMenuSubNav(props) {
     _classCallCheck(this, MegaMenuSubNav);
@@ -54,7 +57,7 @@ var MegaMenuSubNav = (function (_React$Component) {
     value: function render() {
       var _this = this;
 
-      var items = _underscore2['default'].map(this.props.items, function (m, i) {
+      var items = (0, _underscore.map)(this.props.items, function (m, i) {
         var target = m.link.en.text;
 
         if (typeof target === 'undefined') {
@@ -71,8 +74,9 @@ var MegaMenuSubNav = (function (_React$Component) {
           _react2['default'].createElement(
             'a',
             { href: target,
-              onClick: _utilsUtilsJs2['default']._trackHeader.bind(_this, 'Go to...', _this.props.label[_this.props.lang].text + '--' + m.name[_this.props.lang]['text']) },
-            m.name[_this.props.lang]['text']
+              onClick: _utilsUtilsJs2['default']._trackHeader.bind(_this, 'Go to...', _this.props.label[_this.props.lang].text + '--' + m.name[_this.props.lang].text)
+            },
+            m.name[_this.props.lang].text
           )
         );
       });
@@ -81,7 +85,8 @@ var MegaMenuSubNav = (function (_React$Component) {
       var socialMediaWidget = this.props.navId === 'df621833-4dd1-4223-83e5-6ad7f98ad26a' ? _react2['default'].createElement(_SocialMediaLinksWidgetSocialMediaLinksWidgetJs2['default'], {
         className: 'MegaMenu-SubNav-SocialMediaWidget',
         links: _appConfigJs2['default'].socialMediaLinks,
-        displayOnly: ['facebook', 'twitter'] }) : null;
+        displayOnly: ['facebook', 'twitter']
+      }) : null;
 
       return _react2['default'].createElement(
         'div',
@@ -91,8 +96,11 @@ var MegaMenuSubNav = (function (_React$Component) {
           null,
           _react2['default'].createElement(
             'a',
-            { style: styles.topLink, href: this.props.topLink,
-              onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Go to...', 'SubNav Title--' + this.props.label[this.props.lang].text) },
+            {
+              style: styles.topLink,
+              href: this.props.topLink,
+              onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Go to...', 'SubNav Title--' + this.props.label[this.props.lang].text)
+            },
             this.props.label[this.props.lang].text
           )
         ),
@@ -109,16 +117,17 @@ var MegaMenuSubNav = (function (_React$Component) {
   return MegaMenuSubNav;
 })(_react2['default'].Component);
 
+MegaMenuSubNav.propTypes = {
+  lang: _react2['default'].PropTypes.string,
+  topLink: _react2['default'].PropTypes.string,
+  navId: _react2['default'].PropTypes.string,
+  label: _react2['default'].PropTypes.object,
+  items: _react2['default'].PropTypes.array
+};
+
 MegaMenuSubNav.defaultProps = {
   lang: 'en',
   topLink: '#'
-};
-
-var styles = {
-  topLink: {
-    textDecoration: 'none',
-    color: '#FFF'
-  }
 };
 
 exports['default'] = (0, _radium2['default'])(MegaMenuSubNav);

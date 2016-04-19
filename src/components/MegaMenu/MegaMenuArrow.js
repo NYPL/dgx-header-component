@@ -3,7 +3,6 @@ import cx from 'classnames';
 
 // ALT Flux Store/Actions
 import HeaderStore from '../../stores/HeaderStore.js';
-import Actions from '../../actions/Actions.js';
 
 class MegaMenuArrow extends React.Component {
   constructor(props) {
@@ -12,22 +11,27 @@ class MegaMenuArrow extends React.Component {
 
   render() {
     // Dynamic class assignment based on activeItem property matching current index.
-    let classes = cx('NavMenuItem-Arrow nypl-icon-arrow-meganav-large', 
-      {
-        'active animateMegaMenuArrowEnter fadeIn': this.props.index === this.props.currentActiveItem,
-        'active': HeaderStore._getLastActiveMenuItem() === this.props.navId && this.props.index !== this.props.currentActiveItem
-      });
+    const classes = cx('NavMenuItem-Arrow nypl-icon-arrow-meganav-large', {
+      'active animateMegaMenuArrowEnter fadeIn': this.props.index === this.props.currentActiveItem,
+      active: HeaderStore._getLastActiveMenuItem() === this.props.navId &&
+        this.props.index !== this.props.currentActiveItem,
+    });
 
     return (
-      <span
-        className={`NavMenuItem-Arrow-${this.props.navId} ${classes}`}>
-      </span> 
+      <span className={`NavMenuItem-Arrow-${this.props.navId} ${classes}`} />
     );
   }
 }
 
+MegaMenuArrow.propTypes = {
+  lang: React.PropTypes.string,
+  index: React.PropTypes.number,
+  currentActiveItem: React.PropTypes.number,
+  navId: React.PropTypes.string,
+};
+
 MegaMenuArrow.defaultProps = {
-  lang: 'en'
+  lang: 'en',
 };
 
 export default MegaMenuArrow;

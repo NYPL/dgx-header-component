@@ -21,6 +21,7 @@ import MobileHeader from './MobileHeader.js';
 import GlobalAlerts from '../GlobalAlerts/GlobalAlerts.js';
 import SkipNavigation from 'dgx-skip-navigation-link';
 
+// Utility Library
 import utils from '../../utils/utils.js';
 
 // When minifying with Webpack, you can use this:
@@ -57,39 +58,51 @@ class Header extends React.Component {
   }
 
   _onChange() {
-    this.setState(_.extend({ headerHeight: this.state.headerHeight },HeaderStore.getState()));
+    this.setState(_.extend({ headerHeight: this.state.headerHeight }, HeaderStore.getState()));
   }
 
   render () {
-    let isHeaderSticky = this.state.isSticky,
-      headerHeight = this.state.headerHeight,
-      headerClass = this.props.className || 'Header',
-      headerClasses = cx(headerClass, {'sticky': isHeaderSticky}),
-      showDialog = HeaderStore._getMobileMyNyplButtonValue(),
-      mobileMyNyplClasses = cx({'active': showDialog}),
-      skipNav = this.props.skipNav ?
-        (<SkipNavigation {...this.props.skipNav} />) : '';
+    const isHeaderSticky = this.state.isSticky;
+    const headerHeight = this.state.headerHeight;
+    const headerClass = this.props.className || 'Header';
+    const headerClasses = cx(headerClass, {'sticky': isHeaderSticky});
+    const mobileMyNyplClasses = cx({'active': HeaderStore._getMobileMyNyplButtonValue()});
+    const skipNav = this.props.skipNav ?
+      (<SkipNavigation {...this.props.skipNav} />) : null;
+
     return (
-        <header
-          id={this.props.id}
-          className={headerClasses}
-          ref='nyplHeader'
-          style={(isHeaderSticky) ? {height: `${headerHeight}px`} : null}>
+      <header
+        id={this.props.id}
+        className={headerClasses}
+        ref="nyplHeader"
+        style={(isHeaderSticky) ? {height: `${headerHeight}px`} : null}
+      >
         {skipNav}
         <GlobalAlerts className={`${headerClass}-GlobalAlerts`} />
         <div className={`${headerClass}-Wrapper`}>
-          <MobileHeader className={`${headerClass}-Mobile`}
-            locatorUrl={'//www.nypl.org/locations/map?nearme=true'}
-            ref='headerMobile' />
+          <MobileHeader
+            className={`${headerClass}-Mobile`}
+            ref="headerMobile"
+            nyplRootUrl={(this.props.urls === 'absolute') ? "//www.nypl.org" : "/"}
+            locatorUrl={
+              (this.props.urls === 'absolute') ?
+                "//www.nypl.org/locations/map?nearme=true" : "/locations/map?nearme=true"
+            }
+          />
           <div className={`MobileMyNypl-Wrapper ${mobileMyNyplClasses}`}>
             <MobileMyNypl />
           </div>
-          <div className={`${headerClass}-TopWrapper`}
+          <div
+            className={`${headerClass}-TopWrapper`}
             style={styles.wrapper}
-            ref='headerTopWrapper'>
-            <Logo className={`${headerClass}-Logo`} />
+            ref='headerTopWrapper'
+          >
+            <Logo
+              className={`${headerClass}-Logo`}
+              target={(this.props.urls === 'absolute') ? "//www.nypl.org" : "/"}
+            />
             <div className={`${headerClass}-Buttons`} style={styles.topButtons}>
-              <MyNyplButton label='Log In' refId='desktopLogin' />
+              <MyNyplButton label="Log In" refId="desktopLogin" />
               <SimpleButton
                 label='Get a Library Card'
                 target='//catalog.nypl.org/screens/selfregpick.html'
@@ -97,22 +110,27 @@ class Header extends React.Component {
                 id='LibraryCardButton'
                 gaAction='Get a Library Card'
                 gaLabel=''
-                style={styles.libraryCardButton} />
+                style={styles.libraryCardButton}
+              />
               <SubscribeButton
-                label='Get Email Updates'
+                label="Get Email Updates"
                 lang={this.props.lang}
-                style={styles.subscribeButton} />
+                style={styles.subscribeButton}
+              />
               <DonateButton
                 id='Top-DonateButton'
                 lang={this.props.lang}
                 style={styles.donateButton}
-                gaLabel={'Header Button'} />
+                gaLabel={'Header Button'}
+              />
             </div>
           </div>
           <NavMenu
             className={`${headerClass}-NavMenu`}
             lang={this.props.lang}
-            items={this.state.headerData}  />
+            items={this.state.headerData}
+            urlType={this.props.urls}
+          />
         </div>
       </header>
     );
@@ -127,21 +145,21 @@ class Header extends React.Component {
    */
   _fetchDataIfNeeded() {
     if (HeaderStore.getState().headerData.length < 1) {
-      Actions.fetchHeaderData(HeaderStore._getClientAppEnv());
+      Actions.fetchHeaderData(this.props.env, this.props.urls);
     }
   }
 
   /**
    * _handleStickyHeader()
-   * returns the Actions.updateIsHeaderSticky()
+   * Executes Actions.updateIsHeaderSticky()
    * with the proper boolean value to update the
    * HeaderStore.isSticky value based on the window
    * vertical scroll position surpassing the height
    * of the Header DOM element.
    */
   _handleStickyHeader() {
-    let headerHeight = this.state.headerHeight,
-      windowVerticalDistance = this._getWindowVerticalScroll();
+    const headerHeight = this.state.headerHeight;
+    const windowVerticalDistance = this._getWindowVerticalScroll();
 
     if (windowVerticalDistance && headerHeight && (windowVerticalDistance > headerHeight)) {
       // Only update the value if sticky is false
@@ -165,7 +183,7 @@ class Header extends React.Component {
    * element in pixels.
    */
   _getHeaderHeight() {
-    let headerDOM = ReactDOM.findDOMNode(this.refs.nyplHeader);
+    const headerDOM = ReactDOM.findDOMNode(this.refs.nyplHeader);
     return headerDOM.getBoundingClientRect().height;
   }
 
@@ -199,6 +217,8 @@ Header.defaultProps = {
   className: 'Header',
   id: 'nyplHeader',
   skipNav: null,
+  urls: '',
+  env: 'production',
 };
 
 const styles = {

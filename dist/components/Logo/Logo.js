@@ -29,8 +29,6 @@ var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
 var Logo = (function (_React$Component) {
   _inherits(Logo, _React$Component);
 
-  // Constructor used in ES6
-
   function Logo(props) {
     _classCallCheck(this, Logo);
 
@@ -47,8 +45,8 @@ var Logo = (function (_React$Component) {
           className: this.props.className,
           href: this.props.target,
           onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Click Logo', ''),
-          style: [styles.base, this.props.style //allows for parent-to-child css styling
-          ] },
+          style: [styles.base, this.props.style]
+        },
         _react2['default'].createElement('img', { src: this.props.src, style: styles.image }),
         _react2['default'].createElement('span', { className: 'nypl-icon-logo-mark', style: styles.icon })
       );
@@ -62,7 +60,7 @@ var Logo = (function (_React$Component) {
 
 Logo.defaultProps = {
   src: '//ux-static.nypl.org/images/NYPL-logo-black-pos.svg',
-  target: '//www.nypl.org',
+  target: '/',
   id: 'Logo',
   className: 'Logo'
 };

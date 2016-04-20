@@ -61,8 +61,6 @@ var _MyNyplButtonStickyMyNyplButtonJs2 = _interopRequireDefault(_MyNyplButtonSti
 var NavMenu = (function (_React$Component) {
   _inherits(NavMenu, _React$Component);
 
-  // Constructor used in ES6
-
   function NavMenu(props) {
     _classCallCheck(this, NavMenu);
 
@@ -95,6 +93,7 @@ var NavMenu = (function (_React$Component) {
         return _react2['default'].createElement(_NavMenuItemNavMenuItemJs2['default'], {
           label: item.name,
           lang: _this.props.lang,
+          urlType: _this.props.urlType,
           target: item.link.en.text,
           navId: item.id,
           features: item.features,

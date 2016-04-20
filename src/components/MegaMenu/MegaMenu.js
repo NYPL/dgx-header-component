@@ -1,10 +1,8 @@
 import React from 'react';
 import cx from 'classnames';
-
 // ALT Flux Store/Actions
 import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
-
 // Dependent NYPL React Components
 import MegaMenuSubNav from './MegaMenuSubNav.js';
 import MegaMenuFeatures from './MegaMenuFeatures.js';
@@ -14,7 +12,7 @@ class MegaMenu extends React.Component {
     super(props);
 
     this.state = {
-      lastActiveMenuItem: HeaderStore.getState().lastActiveMenuItem
+      lastActiveMenuItem: HeaderStore.getState().lastActiveMenuItem,
     }
   }
 
@@ -34,32 +32,37 @@ class MegaMenu extends React.Component {
 
   render() {
     // Dynamic class assignment based on activeItem property matching current index.
-    let classes = cx('MegaMenu', {
+    const classes = cx('MegaMenu', {
       'active animateMegaMenuEnter fadeIn': this.props.index === this.props.currentActiveItem,
-      'active': HeaderStore._getLastActiveMenuItem() === this.props.navId && this.props.index !== this.props.currentActiveItem
+      'active': HeaderStore._getLastActiveMenuItem() === this.props.navId
+        && this.props.index !== this.props.currentActiveItem
     });
 
     return (
-      <div 
+      <div
         onMouseEnter={this._watchHoverIntentEnter.bind(this)}
         onMouseLeave={this._watchHoverIntentLeave.bind(this)}
-        id={(this.props.navId) ? 'MegaMenu-' + this.props.navId : 'MegaMenu'}
-        className={classes}>
-        <div className='MegaMenu-LeftBgWrapper'></div>
-        <div className='MegaMenu-Wrapper'>
-          <div className='MegaMenu-SubNavWrapper'>
+        id={(this.props.navId) ? `MegaMenu-${this.props.navId}` : "MegaMenu"}
+        className={classes}
+      >
+        <div className="MegaMenu-LeftBgWrapper"></div>
+        <div className="MegaMenu-Wrapper">
+          <div className="MegaMenu-SubNavWrapper">
             <MegaMenuSubNav
-              label={this.props.label} 
-              items={this.props.items} 
+              label={this.props.label}
+              items={this.props.items}
               lang={this.props.lang}
               topLink={this.props.topLink}
-              navId={this.props.navId} />
+              navId={this.props.navId}
+            />
           </div>
-          <div className='MegaMenu-FeaturesWrapper'>
-            <MegaMenuFeatures 
-              navId={this.props.navId} 
-              features={this.props.features} 
-              navLabel={this.props.label['en'].text} />
+          <div className="MegaMenu-FeaturesWrapper">
+            <MegaMenuFeatures
+              navId={this.props.navId}
+              features={this.props.features}
+              urlType={this.props.urlType}
+              navLabel={this.props.label[this.props.lang].text}
+            />
           </div>
         </div>
       </div>

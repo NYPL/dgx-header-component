@@ -33,8 +33,6 @@ var _utilsContentModelJs2 = _interopRequireDefault(_utilsContentModelJs);
 var MegaMenuFeatureItem = (function (_React$Component) {
   _inherits(MegaMenuFeatureItem, _React$Component);
 
-  // Constructor used in ES6
-
   function MegaMenuFeatureItem(props) {
     _classCallCheck(this, MegaMenuFeatureItem);
 

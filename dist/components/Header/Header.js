@@ -87,6 +87,8 @@ var _dgxSkipNavigationLink = require('dgx-skip-navigation-link');
 
 var _dgxSkipNavigationLink2 = _interopRequireDefault(_dgxSkipNavigationLink);
 
+// Utility Library
+
 var _utilsUtilsJs = require('../../utils/utils.js');
 
 var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
@@ -138,28 +140,32 @@ var Header = (function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var isHeaderSticky = this.state.isSticky,
-          headerHeight = this.state.headerHeight,
-          headerClass = this.props.className || 'Header',
-          headerClasses = (0, _classnames2['default'])(headerClass, { 'sticky': isHeaderSticky }),
-          showDialog = _storesHeaderStoreJs2['default']._getMobileMyNyplButtonValue(),
-          mobileMyNyplClasses = (0, _classnames2['default'])({ 'active': showDialog }),
-          skipNav = this.props.skipNav ? _react2['default'].createElement(_dgxSkipNavigationLink2['default'], this.props.skipNav) : '';
+      var isHeaderSticky = this.state.isSticky;
+      var headerHeight = this.state.headerHeight;
+      var headerClass = this.props.className || 'Header';
+      var headerClasses = (0, _classnames2['default'])(headerClass, { 'sticky': isHeaderSticky });
+      var mobileMyNyplClasses = (0, _classnames2['default'])({ 'active': _storesHeaderStoreJs2['default']._getMobileMyNyplButtonValue() });
+      var skipNav = this.props.skipNav ? _react2['default'].createElement(_dgxSkipNavigationLink2['default'], this.props.skipNav) : null;
+
       return _react2['default'].createElement(
         'header',
         {
           id: this.props.id,
           className: headerClasses,
           ref: 'nyplHeader',
-          style: isHeaderSticky ? { height: headerHeight + 'px' } : null },
+          style: isHeaderSticky ? { height: headerHeight + 'px' } : null
+        },
         skipNav,
         _react2['default'].createElement(_GlobalAlertsGlobalAlertsJs2['default'], { className: headerClass + '-GlobalAlerts' }),
         _react2['default'].createElement(
           'div',
           { className: headerClass + '-Wrapper' },
-          _react2['default'].createElement(_MobileHeaderJs2['default'], { className: headerClass + '-Mobile',
-            locatorUrl: '//www.nypl.org/locations/map?nearme=true',
-            ref: 'headerMobile' }),
+          _react2['default'].createElement(_MobileHeaderJs2['default'], {
+            className: headerClass + '-Mobile',
+            ref: 'headerMobile',
+            nyplRootUrl: this.props.urls === 'absolute' ? "//www.nypl.org" : "/",
+            locatorUrl: this.props.urls === 'absolute' ? "//www.nypl.org/locations/map?nearme=true" : "/locations/map?nearme=true"
+          }),
           _react2['default'].createElement(
             'div',
             { className: 'MobileMyNypl-Wrapper ' + mobileMyNyplClasses },
@@ -167,10 +173,15 @@ var Header = (function (_React$Component) {
           ),
           _react2['default'].createElement(
             'div',
-            { className: headerClass + '-TopWrapper',
+            {
+              className: headerClass + '-TopWrapper',
               style: styles.wrapper,
-              ref: 'headerTopWrapper' },
-            _react2['default'].createElement(_LogoLogoJs2['default'], { className: headerClass + '-Logo' }),
+              ref: 'headerTopWrapper'
+            },
+            _react2['default'].createElement(_LogoLogoJs2['default'], {
+              className: headerClass + '-Logo',
+              target: this.props.urls === 'absolute' ? "//www.nypl.org" : "/"
+            }),
             _react2['default'].createElement(
               'div',
               { className: headerClass + '-Buttons', style: styles.topButtons },
@@ -182,22 +193,27 @@ var Header = (function (_React$Component) {
                 id: 'LibraryCardButton',
                 gaAction: 'Get a Library Card',
                 gaLabel: '',
-                style: styles.libraryCardButton }),
+                style: styles.libraryCardButton
+              }),
               _react2['default'].createElement(_SubscribeButtonSubscribeButtonJs2['default'], {
                 label: 'Get Email Updates',
                 lang: this.props.lang,
-                style: styles.subscribeButton }),
+                style: styles.subscribeButton
+              }),
               _react2['default'].createElement(_DonateButtonDonateButtonJs2['default'], {
                 id: 'Top-DonateButton',
                 lang: this.props.lang,
                 style: styles.donateButton,
-                gaLabel: 'Header Button' })
+                gaLabel: 'Header Button'
+              })
             )
           ),
           _react2['default'].createElement(_NavMenuNavMenuJs2['default'], {
             className: headerClass + '-NavMenu',
             lang: this.props.lang,
-            items: this.state.headerData })
+            items: this.state.headerData,
+            urlType: this.props.urls
+          })
         )
       );
     }
@@ -213,13 +229,13 @@ var Header = (function (_React$Component) {
     key: '_fetchDataIfNeeded',
     value: function _fetchDataIfNeeded() {
       if (_storesHeaderStoreJs2['default'].getState().headerData.length < 1) {
-        _actionsActionsJs2['default'].fetchHeaderData(_storesHeaderStoreJs2['default']._getClientAppEnv());
+        _actionsActionsJs2['default'].fetchHeaderData(this.props.env, this.props.urls);
       }
     }
 
     /**
      * _handleStickyHeader()
-     * returns the Actions.updateIsHeaderSticky()
+     * Executes Actions.updateIsHeaderSticky()
      * with the proper boolean value to update the
      * HeaderStore.isSticky value based on the window
      * vertical scroll position surpassing the height
@@ -228,8 +244,8 @@ var Header = (function (_React$Component) {
   }, {
     key: '_handleStickyHeader',
     value: function _handleStickyHeader() {
-      var headerHeight = this.state.headerHeight,
-          windowVerticalDistance = this._getWindowVerticalScroll();
+      var headerHeight = this.state.headerHeight;
+      var windowVerticalDistance = this._getWindowVerticalScroll();
 
       if (windowVerticalDistance && headerHeight && windowVerticalDistance > headerHeight) {
         // Only update the value if sticky is false
@@ -297,7 +313,9 @@ Header.defaultProps = {
   lang: 'en',
   className: 'Header',
   id: 'nyplHeader',
-  skipNav: null
+  skipNav: null,
+  urls: '',
+  env: 'production'
 };
 
 var styles = {

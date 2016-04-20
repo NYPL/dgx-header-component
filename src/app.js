@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import nyplHeaderComponent from './components/Header/Header.js';
+import Header from './components/Header/Header.js';
 
 import ga from 'react-ga';
 import {config} from 'dgx-react-ga';
@@ -24,4 +24,7 @@ if (!window.dgxFeatureFlags) {
 /* app.jsx
  * Used for local development of React Components
  */
-ReactDOM.render(React.createElement(nyplHeaderComponent, {skipNav: {target: 'maincontent'}}), document.getElementById('app'));
+ReactDOM.render(
+  <Header skipNav={{target: 'maincontent'}} env="development" urls="absolute" />,
+  document.getElementById('app')
+);

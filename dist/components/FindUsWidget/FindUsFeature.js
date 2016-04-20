@@ -35,7 +35,7 @@ var FindUsFeature = (function (_React$Component) {
   _createClass(FindUsFeature, [{
     key: 'render',
     value: function render() {
-      var locinator = '//www.nypl.org/locations';
+      var locinator = this.props.urlType === 'absolute' ? '//www.nypl.org/locations' : '/locations';
 
       return _react2['default'].createElement(
         'div',

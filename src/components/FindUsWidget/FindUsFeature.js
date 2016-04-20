@@ -9,7 +9,8 @@ class FindUsFeature extends React.Component {
   }
 
   render() {
-    let locinator = '//www.nypl.org/locations';
+    const locinator = (this.props.urlType === 'absolute') ?
+      '//www.nypl.org/locations' : '/locations';
 
     return (
       <div className={this.props.className}>

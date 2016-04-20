@@ -14,15 +14,12 @@ import DonateButton from '../DonateButton/DonateButton.js';
 import StickyMyNyplButton from '../MyNyplButton/StickyMyNyplButton.js';
 
 class NavMenu extends React.Component {
-
-  // Constructor used in ES6
   constructor(props) {
     super(props);
   }
 
-  render () {
-
-    let navItems = (this.props.items && this.props.items.length) ? 
+  render() {
+    let navItems = (this.props.items && this.props.items.length) ?
         this.props.items : appConfig.navTopLinks,
       mobileActiveClass = cx({
         'mobileActive': HeaderStore._getMobileMenuBtnValue() === 'mobileMenu'
@@ -44,6 +41,7 @@ class NavMenu extends React.Component {
           <NavMenuItem
             label={item.name}
             lang={this.props.lang}
+            urlType={this.props.urlType}
             target={item.link.en.text}
             navId={item.id}
             features={item.features}

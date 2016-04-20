@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from './components/Header/Header.js';
-import Actions from './actions/Actions.js';
 
 import ga from 'react-ga';
 import {config} from 'dgx-react-ga';

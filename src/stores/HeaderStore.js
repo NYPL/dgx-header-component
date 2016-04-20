@@ -3,7 +3,6 @@ import Actions from '../actions/Actions.js';
 
 class HeaderStore {
   constructor() {
-
     this.bindListeners({
       handleUpdateHeaderData: Actions.UPDATE_HEADER_DATA,
       handleFetchHeaderData: Actions.FETCH_HEADER_DATA,
@@ -15,7 +14,7 @@ class HeaderStore {
       handleSetLastActiveMenuItem: Actions.SET_LAST_ACTIVE_MENU_ITEM,
       handleToggleSubscribeFormVisible: Actions.TOGGLE_SUBSCRIBE_FORM_VISIBLE,
       handleToggleMyNyplVisible: Actions.TOGGLE_MY_NYPL_VISIBLE,
-      handleToggleStickyMyNyplVisible: Actions.TOGGLE_STICKY_MY_NYPL_VISIBLE
+      handleToggleStickyMyNyplVisible: Actions.TOGGLE_STICKY_MY_NYPL_VISIBLE,
     });
 
     this.exportPublicMethods({
@@ -26,7 +25,7 @@ class HeaderStore {
       _getLastActiveMenuItem: this._getLastActiveMenuItem,
       _getSubscribeFormVisible: this._getSubscribeFormVisible,
       _getMyNyplVisible: this._getMyNyplVisible,
-      _getStickyMyNyplVisible: this._getStickyMyNyplVisible
+      _getStickyMyNyplVisible: this._getStickyMyNyplVisible,
     });
 
     this.state = {

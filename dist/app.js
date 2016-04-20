@@ -14,10 +14,6 @@ var _componentsHeaderHeaderJs = require('./components/Header/Header.js');
 
 var _componentsHeaderHeaderJs2 = _interopRequireDefault(_componentsHeaderHeaderJs);
 
-var _actionsActionsJs = require('./actions/Actions.js');
-
-var _actionsActionsJs2 = _interopRequireDefault(_actionsActionsJs);
-
 var _reactGa = require('react-ga');
 
 var _reactGa2 = _interopRequireDefault(_reactGa);

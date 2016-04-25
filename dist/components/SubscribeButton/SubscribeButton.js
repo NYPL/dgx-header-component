@@ -30,13 +30,11 @@ var _reactOnclickout = require('react-onclickout');
 
 var _reactOnclickout2 = _interopRequireDefault(_reactOnclickout);
 
-var _ButtonsSimpleButtonJs = require('../Buttons/SimpleButton.js');
-
-var _ButtonsSimpleButtonJs2 = _interopRequireDefault(_ButtonsSimpleButtonJs);
-
 var _EmailSubscriptionEmailSubscriptionJs = require('../EmailSubscription/EmailSubscription.js');
 
 var _EmailSubscriptionEmailSubscriptionJs2 = _interopRequireDefault(_EmailSubscriptionEmailSubscriptionJs);
+
+// Alt Store/Actions
 
 var _storesHeaderStoreJs = require('../../stores/HeaderStore.js');
 
@@ -46,6 +44,8 @@ var _actionsActionsJs = require('../../actions/Actions.js');
 
 var _actionsActionsJs2 = _interopRequireDefault(_actionsActionsJs);
 
+// Utilities
+
 var _axios = require('axios');
 
 var _axios2 = _interopRequireDefault(_axios);
@@ -53,6 +53,39 @@ var _axios2 = _interopRequireDefault(_axios);
 var _utilsUtilsJs = require('../../utils/utils.js');
 
 var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
+
+var styles = {
+  base: {
+    margin: '0px 15px',
+    position: 'relative',
+    display: 'inline-block'
+  },
+  SimpleButton: {
+    display: 'block',
+    padding: '9px 15px 11px 20px'
+  },
+  SubscribeIcon: {
+    fontSize: '15px',
+    verticalAlign: 'text-bottom',
+    marginLeft: '5px',
+    display: 'inline'
+  },
+  EmailSubscribeForm: {
+    position: 'absolute',
+    zIndex: 1000,
+    right: '0',
+    width: '250px',
+    minHeight: '210px',
+    backgroundColor: '#1DA1D4',
+    padding: '25px 30px'
+  },
+  hide: {
+    display: 'none'
+  },
+  show: {
+    display: 'block'
+  }
+};
 
 var SubscribeButton = (function (_React$Component) {
   _inherits(SubscribeButton, _React$Component);
@@ -66,6 +99,9 @@ var SubscribeButton = (function (_React$Component) {
       subscribeFormVisible: _storesHeaderStoreJs2['default']._getSubscribeFormVisible(),
       target: this.props.target
     };
+
+    this._handleOnClickOut = this._handleOnClickOut.bind(this);
+    this._handleClick = this._handleClick.bind(this);
   }
 
   _createClass(SubscribeButton, [{
@@ -81,50 +117,6 @@ var SubscribeButton = (function (_React$Component) {
     value: function componentWillUnmount() {
       _storesHeaderStoreJs2['default'].unlisten(this._onChange.bind(this));
     }
-  }, {
-    key: 'render',
-    value: function render() {
-      // Assign a variable to hold the reference of state boolean
-      var showDialog = this.state.subscribeFormVisible,
-          buttonClasses = (0, _classnames2['default'])({ 'active': showDialog }),
-          emailFormClasses = (0, _classnames2['default'])({
-        'active animatedFast fadeIn': showDialog
-      }),
-          iconClass = (0, _classnames2['default'])({
-        'nypl-icon-solo-x': showDialog,
-        'nypl-icon-wedge-down': !showDialog
-      });
-
-      return _react2['default'].createElement(
-        _reactOnclickout2['default'],
-        { onClickOut: this._handleOnClickOut.bind(this) },
-        _react2['default'].createElement(
-          'div',
-          { className: 'SubscribeButton-Wrapper',
-            ref: 'SubscribeButton',
-            style: [styles.base, this.props.style] },
-          _react2['default'].createElement(
-            'a',
-            {
-              id: 'SubscribeButton',
-              className: 'SubscribeButton ' + buttonClasses,
-              href: this.props.target,
-              onClick: this._handleClick.bind(this),
-              style: [styles.SimpleButton, this.props.style] },
-            this.props.label,
-            _react2['default'].createElement('span', { className: iconClass + ' icon', style: styles.SubscribeIcon })
-          ),
-          _react2['default'].createElement(
-            'div',
-            { className: 'EmailSubscription-Wrapper ' + emailFormClasses,
-              style: [styles.EmailSubscribeForm] },
-            _react2['default'].createElement(_EmailSubscriptionEmailSubscriptionJs2['default'], {
-              list_id: '1061',
-              target: 'https://mailinglistapi.nypl.org' })
-          )
-        )
-      );
-    }
 
     /**
      * _handleClick(e)
@@ -134,7 +126,6 @@ var SubscribeButton = (function (_React$Component) {
   }, {
     key: '_handleClick',
     value: function _handleClick(e) {
-
       if (this.state.target === '#') {
         e.preventDefault();
         var visibleState = this.state.subscribeFormVisible ? 'Closed' : 'Open';
@@ -144,14 +135,13 @@ var SubscribeButton = (function (_React$Component) {
     }
 
     /**
-     * _handleOnClickOut(e)
+     * _handleOnClickOut()
      * Handles closing the Subscribe form if it is
      * currently visible.
      */
   }, {
     key: '_handleOnClickOut',
-    value: function _handleOnClickOut(e) {
-
+    value: function _handleOnClickOut() {
       if (_storesHeaderStoreJs2['default']._getSubscribeFormVisible()) {
         _actionsActionsJs2['default'].toggleSubscribeFormVisible(false);
         _utilsUtilsJs2['default']._trackHeader('Click', 'Subscribe - Closed');
@@ -193,48 +183,70 @@ var SubscribeButton = (function (_React$Component) {
         }
       });
     }
+  }, {
+    key: 'render',
+    value: function render() {
+      // Assign a variable to hold the reference of state boolean
+      var showDialog = this.state.subscribeFormVisible;
+      var buttonClasses = (0, _classnames2['default'])({ active: showDialog });
+      var emailFormClasses = (0, _classnames2['default'])({ 'active animatedFast fadeIn': showDialog });
+      var iconClass = (0, _classnames2['default'])({
+        'nypl-icon-solo-x': showDialog,
+        'nypl-icon-wedge-down': !showDialog
+      });
+
+      return _react2['default'].createElement(
+        _reactOnclickout2['default'],
+        { onClickOut: this._handleOnClickOut },
+        _react2['default'].createElement(
+          'div',
+          {
+            className: 'SubscribeButton-Wrapper',
+            ref: 'SubscribeButton',
+            style: [styles.base, this.props.style]
+          },
+          _react2['default'].createElement(
+            'a',
+            {
+              id: 'SubscribeButton',
+              className: 'SubscribeButton ' + buttonClasses,
+              href: this.props.target,
+              onClick: this._handleClick,
+              style: [styles.SimpleButton, this.props.style]
+            },
+            this.props.label,
+            _react2['default'].createElement('span', { className: iconClass + ' icon', style: styles.SubscribeIcon })
+          ),
+          _react2['default'].createElement(
+            'div',
+            {
+              className: 'EmailSubscription-Wrapper ' + emailFormClasses,
+              style: [styles.EmailSubscribeForm]
+            },
+            _react2['default'].createElement(_EmailSubscriptionEmailSubscriptionJs2['default'], {
+              list_id: '1061',
+              target: 'https://mailinglistapi.nypl.org'
+            })
+          )
+        )
+      );
+    }
   }]);
 
   return SubscribeButton;
 })(_react2['default'].Component);
 
+SubscribeButton.propTypes = {
+  lang: _react2['default'].PropTypes.string,
+  label: _react2['default'].PropTypes.string,
+  target: _react2['default'].PropTypes.string,
+  style: _react2['default'].PropTypes.object
+};
+
 SubscribeButton.defaultProps = {
   lang: 'en',
   label: 'Subscribe',
-  target: 'http://pages.email.nypl.org/page.aspx?QS=3935619f7de112ef7250fe02b84fb2f9ab74e4ea015814b7'
-};
-
-var styles = {
-  base: {
-    margin: '0px 15px',
-    position: 'relative',
-    display: 'inline-block'
-  },
-  SimpleButton: {
-    display: 'block',
-    padding: '9px 15px 11px 20px'
-  },
-  SubscribeIcon: {
-    fontSize: '15px',
-    verticalAlign: 'text-bottom',
-    marginLeft: '5px',
-    display: 'inline'
-  },
-  EmailSubscribeForm: {
-    position: 'absolute',
-    zIndex: 1000,
-    right: '0',
-    width: '250px',
-    minHeight: '210px',
-    backgroundColor: '#1DA1D4',
-    padding: '25px 30px'
-  },
-  hide: {
-    display: 'none'
-  },
-  show: {
-    display: 'block'
-  }
+  target: 'http://pages.email.nypl.org/page.aspx' + '?QS=3935619f7de112ef7250fe02b84fb2f9ab74e4ea015814b7'
 };
 
 exports['default'] = (0, _radium2['default'])(SubscribeButton);

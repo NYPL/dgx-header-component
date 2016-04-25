@@ -55,13 +55,13 @@ class NavMenuItem extends React.Component {
     const target = this.props.target;
     const linkClass = cx({
       active: this.props.index === this.state.activeItem
-        || HeaderStore._getLastActiveMenuItem() === this.props.navId
-      });
+        || HeaderStore._getLastActiveMenuItem() === this.props.navId,
+    });
     const megaMenuArrow = (this.props.subNav && this.props.features) ?
       <MegaMenuArrow
-          navId={this.props.navId}
-          index={this.props.index}
-          currentActiveItem={this.state.activeItem}
+        navId={this.props.navId}
+        index={this.props.index}
+        currentActiveItem={this.state.activeItem}
       /> : null;
     const megaMenu = (this.props.subNav && this.props.features) ?
       <MegaMenu

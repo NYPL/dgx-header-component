@@ -13,81 +13,85 @@ import NavMenuBottomButtons from '../NavMenuBottomButtons/NavMenuBottomButtons.j
 import DonateButton from '../DonateButton/DonateButton.js';
 import StickyMyNyplButton from '../MyNyplButton/StickyMyNyplButton.js';
 
-class NavMenu extends React.Component {
-
-  // Constructor used in ES6
-  constructor(props) {
-    super(props);
-  }
-
-  render () {
-
-    let navItems = (this.props.items && this.props.items.length) ? 
-        this.props.items : appConfig.navTopLinks,
-      mobileActiveClass = cx({
-        'mobileActive': HeaderStore._getMobileMenuBtnValue() === 'mobileMenu'
-      }),
-      stickyItemsClass = cx('StickyItems', {
-        'active': HeaderStore._getIsStickyValue()
-      }),
-      stickyNavItems =
-        <div className={stickyItemsClass}>
-          <span className='lineSeparator' style={styles.lineSeparator}></span>
-          <StickyMyNyplButton />
-          <DonateButton
-            id='Collapsed-DonateButton'
-            style={styles.donateButton}
-            gaLabel={'Collapsed Donate Button'} />
-        </div>,
-      navMenu = navItems.map((item, index) => {
-        return (
-          <NavMenuItem
-            label={item.name}
-            lang={this.props.lang}
-            target={item.link.en.text}
-            navId={item.id}
-            features={item.features}
-            subNav={item.subnav}
-            key={index}
-            index={index} />
-        );
-      });
-
-    return (
-      <nav className={this.props.className}>
-        <div className={`${this.props.className}-Wrapper ${mobileActiveClass}`}>
-          <span className='MobileLogoText nypl-icon-logo-type'></span>
-          <ul className={`${this.props.className}-List`} id='NavMenu-List'>
-            {navMenu}
-          </ul>
-          <SearchButton className={`${this.props.className}`} />
-          {stickyNavItems}
-          <NavMenuBottomButtons className='MobileBottomButtons' />
-        </div>
-      </nav>
-    );
-  }
-}
-
-NavMenu.defaultProps = {
-  lang: 'en',
-  className: 'NavMenu'
-};
-
 const styles = {
   donateButton: {
     padding: '8px 15px',
     textTransform: 'uppercase',
     fontSize: '12.5px',
-    letterSpacing: '.04em'
+    letterSpacing: '.04em',
   },
   lineSeparator: {
     display: 'inline-block',
     margin: '0 0 -10px 0',
     width: '2px',
     height: '30px',
-    backgroundColor: '#837377'
+    backgroundColor: '#837377',
+  },
+};
+
+class NavMenu extends React.Component {
+  constructor(props) {
+    super(props);
   }
+
+  render() {
+    const navItems = (this.props.items && this.props.items.length) ?
+      this.props.items : appConfig.navTopLinks;
+    const mobileActiveClass = cx({
+      mobileActive: HeaderStore._getMobileMenuBtnValue() === 'mobileMenu',
+    });
+    const stickyItemsClass = cx('StickyItems', {
+      active: HeaderStore._getIsStickyValue(),
+    });
+    const stickyNavItems = (
+      <div className={stickyItemsClass}>
+        <span className="lineSeparator" style={styles.lineSeparator}></span>
+        <StickyMyNyplButton />
+        <DonateButton
+          id="Collapsed-DonateButton"
+          style={styles.donateButton}
+          gaLabel="Collapsed Donate Button"
+        />
+      </div>
+    );
+    const navMenu = navItems.map((item, index) =>
+      <NavMenuItem
+        label={item.name}
+        lang={this.props.lang}
+        target={item.link.en.text}
+        navId={item.id}
+        features={item.features}
+        subNav={item.subnav}
+        key={index}
+        index={index}
+      />
+    );
+
+    return (
+      <nav className={this.props.className}>
+        <div className={`${this.props.className}-Wrapper ${mobileActiveClass}`}>
+          <span className="MobileLogoText nypl-icon-logo-type"></span>
+          <ul className={`${this.props.className}-List`} id="NavMenu-List">
+            {navMenu}
+          </ul>
+          <SearchButton className={`${this.props.className}`} />
+          {stickyNavItems}
+          <NavMenuBottomButtons className="MobileBottomButtons" />
+        </div>
+      </nav>
+    );
+  }
+}
+
+NavMenu.propTypes = {
+  lang: React.PropTypes.string,
+  className: React.PropTypes.string,
+  items: React.PropTypes.array,
+};
+
+NavMenu.defaultProps = {
+  lang: 'en',
+  className: 'NavMenu',
 };
 
 export default Radium(NavMenu);

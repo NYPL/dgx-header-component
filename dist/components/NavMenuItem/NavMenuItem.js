@@ -28,6 +28,8 @@ var _utilsUtilsJs = require('../../utils/utils.js');
 
 var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
 
+// Alt Store
+
 var _storesHeaderStoreJs = require('../../stores/HeaderStore.js');
 
 var _storesHeaderStoreJs2 = _interopRequireDefault(_storesHeaderStoreJs);
@@ -59,67 +61,22 @@ var NavMenuItem = (function (_React$Component) {
     this._deactivateHover = this._deactivateHover.bind(this);
   }
 
+  /**
+   * _activateHover()
+   * Sets the state's lastActiveMenuItem
+   * & activeItem after set time.
+   */
+
   _createClass(NavMenuItem, [{
-    key: 'render',
-    value: function render() {
-
-      var linkClass = (0, _classnames2['default'])({
-        'active': this.props.index === this.state.activeItem || _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === this.props.navId
-      }),
-          megaMenuArrow = this.props.subNav && this.props.features ? _react2['default'].createElement(_MegaMenuMegaMenuArrowJs2['default'], {
-        navId: this.props.navId,
-        index: this.props.index,
-        currentActiveItem: this.state.activeItem }) : null,
-          target = this.props.target.indexOf('nypl.org') !== -1 || this.props.target === '#' ? this.props.target : '' + this.props.root + this.props.target,
-          megaMenu = this.props.subNav && this.props.features ? _react2['default'].createElement(_MegaMenuMegaMenuJs2['default'], {
-        label: this.props.label,
-        lang: this.props.lang,
-        items: this.props.subNav,
-        navId: this.props.navId,
-        features: this.props.features,
-        topLink: target,
-        index: this.props.index,
-        lastActiveMenuItem: this.state.lastActiveMenuItem,
-        currentActiveItem: this.state.activeItem }) : null;
-      return _react2['default'].createElement(
-        'li',
-        {
-          id: this.props.navId ? this.props.className + '-' + this.props.navId : this.props.className,
-          className: this.props.className },
-        _react2['default'].createElement(
-          'span',
-          {
-            onMouseEnter: this._activateHover,
-            onMouseLeave: this._deactivateHover,
-            className: 'NavMenuItem-Link',
-            id: this.props.navId ? 'NavMenuItem-Link-' + this.props.navId : 'NavMenuItem-Link' },
-          _react2['default'].createElement(
-            'a',
-            {
-              href: target,
-              className: linkClass,
-              onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Go to...', '' + this.props.label['en'].text) },
-            this.props.label[this.props.lang].text
-          ),
-          megaMenuArrow
-        ),
-        megaMenu
-      );
-    }
-
-    /**
-     * _activateHover()
-     * Sets the state's lastActiveMenuItem
-     * & activeItem after set time.
-     */
-  }, {
     key: '_activateHover',
     value: function _activateHover() {
       var _this = this;
 
       this.hoverTimer = setTimeout(function () {
-        _this.setState({ lastActiveMenuItem: _this.props.navId });
-        _this.setState({ activeItem: _this.props.index });
+        _this.setState({
+          lastActiveMenuItem: _this.props.navId,
+          activeItem: _this.props.index
+        });
       }, 80);
     }
 
@@ -142,10 +99,75 @@ var NavMenuItem = (function (_React$Component) {
         _this2.setState({ activeItem: null });
       }, 250);
     }
+  }, {
+    key: 'render',
+    value: function render() {
+      var linkClass = (0, _classnames2['default'])({
+        active: this.props.index === this.state.activeItem || _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === this.props.navId
+      });
+      var megaMenuArrow = this.props.subNav && this.props.features ? _react2['default'].createElement(_MegaMenuMegaMenuArrowJs2['default'], {
+        navId: this.props.navId,
+        index: this.props.index,
+        currentActiveItem: this.state.activeItem
+      }) : null;
+      var target = this.props.target.indexOf('nypl.org') !== -1 || this.props.target === '#' ? this.props.target : '' + this.props.root + this.props.target;
+      var megaMenu = this.props.subNav && this.props.features ? _react2['default'].createElement(_MegaMenuMegaMenuJs2['default'], {
+        label: this.props.label,
+        lang: this.props.lang,
+        items: this.props.subNav,
+        navId: this.props.navId,
+        features: this.props.features,
+        topLink: target,
+        index: this.props.index,
+        lastActiveMenuItem: this.state.lastActiveMenuItem,
+        currentActiveItem: this.state.activeItem
+      }) : null;
+
+      return _react2['default'].createElement(
+        'li',
+        {
+          id: this.props.navId ? this.props.className + '-' + this.props.navId : this.props.className,
+          className: this.props.className
+        },
+        _react2['default'].createElement(
+          'span',
+          {
+            onMouseEnter: this._activateHover,
+            onMouseLeave: this._deactivateHover,
+            className: 'NavMenuItem-Link',
+            id: this.props.navId ? 'NavMenuItem-Link-' + this.props.navId : 'NavMenuItem-Link'
+          },
+          _react2['default'].createElement(
+            'a',
+            {
+              href: target,
+              className: linkClass,
+              onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Go to...', '' + this.props.label[this.props.lang].text)
+            },
+            this.props.label[this.props.lang].text
+          ),
+          megaMenuArrow
+        ),
+        megaMenu
+      );
+    }
   }]);
 
   return NavMenuItem;
 })(_react2['default'].Component);
+
+NavMenuItem.propTypes = {
+  lang: _react2['default'].PropTypes.string,
+  root: _react2['default'].PropTypes.string,
+  target: _react2['default'].PropTypes.string,
+  className: _react2['default'].PropTypes.string,
+  hoverTimer: _react2['default'].PropTypes.func,
+  navId: _react2['default'].PropTypes.string,
+  index: _react2['default'].PropTypes.number,
+  label: _react2['default'].PropTypes.object,
+  subNav: _react2['default'].PropTypes.array,
+  features: _react2['default'].PropTypes.array
+};
 
 NavMenuItem.defaultProps = {
   target: '#',

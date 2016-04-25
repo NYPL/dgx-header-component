@@ -1,73 +1,24 @@
 import React from 'react';
 import cx from 'classnames';
-
 // Google Analytics Utility Library
 import utils from '../../utils/utils.js';
-
+// Alt Store
 import HeaderStore from '../../stores/HeaderStore.js';
-
 // NYPL Dependent React Components
 import MegaMenu from '../MegaMenu/MegaMenu.js';
 import MegaMenuArrow from '../MegaMenu/MegaMenuArrow.js';
 
 class NavMenuItem extends React.Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
       activeItem: null,
-      lastActiveMenuItem: ''
+      lastActiveMenuItem: '',
     };
 
     this._activateHover = this._activateHover.bind(this);
     this._deactivateHover = this._deactivateHover.bind(this);
-  }
-
-  render() {
-
-    let linkClass = cx({
-        'active': this.props.index === this.state.activeItem
-          || HeaderStore._getLastActiveMenuItem() === this.props.navId
-      }),
-      megaMenuArrow = (this.props.subNav && this.props.features) ?
-        <MegaMenuArrow
-          navId={this.props.navId}
-          index={this.props.index}
-          currentActiveItem={this.state.activeItem} /> : null,
-      target = (this.props.target.indexOf('nypl.org') !== -1 || this.props.target === '#') ?
-        this.props.target : `${this.props.root}${this.props.target}`,
-      megaMenu = (this.props.subNav && this.props.features) ?
-        <MegaMenu
-          label={this.props.label}
-          lang={this.props.lang}
-          items={this.props.subNav}
-          navId={this.props.navId}
-          features={this.props.features}
-          topLink={target}
-          index={this.props.index}
-          lastActiveMenuItem={this.state.lastActiveMenuItem}
-          currentActiveItem={this.state.activeItem} /> : null;
-    return (
-      <li
-        id={(this.props.navId) ? `${this.props.className}-${this.props.navId}` : this.props.className}
-        className={this.props.className}>
-        <span
-          onMouseEnter={this._activateHover}
-          onMouseLeave={this._deactivateHover}
-          className={'NavMenuItem-Link'}
-          id={(this.props.navId) ? 'NavMenuItem-Link-' + this.props.navId : 'NavMenuItem-Link'}>
-          <a
-            href={target}
-            className={linkClass}
-            onClick={utils._trackHeader.bind(this, 'Go to...', `${this.props.label['en'].text}`)}>
-              {this.props.label[this.props.lang].text}
-          </a>
-          {megaMenuArrow}
-        </span>
-        {megaMenu}
-      </li>
-    );
   }
 
   /**
@@ -76,10 +27,11 @@ class NavMenuItem extends React.Component {
    * & activeItem after set time.
    */
   _activateHover() {
-
     this.hoverTimer = setTimeout(() => {
-      this.setState({lastActiveMenuItem: this.props.navId});
-      this.setState({activeItem: this.props.index});
+      this.setState({
+        lastActiveMenuItem: this.props.navId,
+        activeItem: this.props.index,
+      });
     }, 80);
   }
 
@@ -95,17 +47,85 @@ class NavMenuItem extends React.Component {
     clearTimeout(this.hoverTimer);
 
     setTimeout(() => {
-      this.setState({activeItem: null});
+      this.setState({ activeItem: null });
     }, 250);
   }
+
+  render() {
+    const linkClass = cx({
+      active: this.props.index === this.state.activeItem
+        || HeaderStore._getLastActiveMenuItem() === this.props.navId,
+    });
+    const megaMenuArrow = (this.props.subNav && this.props.features) ?
+      <MegaMenuArrow
+        navId={this.props.navId}
+        index={this.props.index}
+        currentActiveItem={this.state.activeItem}
+      /> : null;
+    const target = (this.props.target.indexOf('nypl.org') !== -1 || this.props.target === '#') ?
+      this.props.target : `${this.props.root}${this.props.target}`;
+    const megaMenu = (this.props.subNav && this.props.features) ?
+      <MegaMenu
+        label={this.props.label}
+        lang={this.props.lang}
+        items={this.props.subNav}
+        navId={this.props.navId}
+        features={this.props.features}
+        topLink={target}
+        index={this.props.index}
+        lastActiveMenuItem={this.state.lastActiveMenuItem}
+        currentActiveItem={this.state.activeItem}
+      /> : null;
+
+    return (
+      <li
+        id={
+          (this.props.navId) ? `${this.props.className}-${this.props.navId}` : this.props.className
+        }
+        className={this.props.className}
+      >
+        <span
+          onMouseEnter={this._activateHover}
+          onMouseLeave={this._deactivateHover}
+          className={'NavMenuItem-Link'}
+          id={(this.props.navId) ? `NavMenuItem-Link-${this.props.navId}` : 'NavMenuItem-Link'}
+        >
+          <a
+            href={target}
+            className={linkClass}
+            onClick={
+              utils._trackHeader.bind(this, 'Go to...', `${this.props.label[this.props.lang].text}`)
+            }
+          >
+            {this.props.label[this.props.lang].text}
+          </a>
+          {megaMenuArrow}
+        </span>
+        {megaMenu}
+      </li>
+    );
+  }
 }
+
+NavMenuItem.propTypes = {
+  lang: React.PropTypes.string,
+  root: React.PropTypes.string,
+  target: React.PropTypes.string,
+  className: React.PropTypes.string,
+  hoverTimer: React.PropTypes.func,
+  navId: React.PropTypes.string,
+  index: React.PropTypes.number,
+  label: React.PropTypes.object,
+  subNav: React.PropTypes.array,
+  features: React.PropTypes.array,
+};
 
 NavMenuItem.defaultProps = {
   target: '#',
   root: '//www.nypl.org/',
   lang: 'en',
   className: 'NavMenuItem',
-  hoverTimer: null
+  hoverTimer: null,
 };
 
 export default NavMenuItem;

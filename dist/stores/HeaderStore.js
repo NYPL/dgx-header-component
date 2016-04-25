@@ -63,7 +63,6 @@ var HeaderStore = (function () {
 
   // Export ALT Store
 
-  /*** PUBLIC METHODS ***/
   /**
    * _getMobileMenuBtnValue()
    * returns the current state.activeMobileButton
@@ -160,8 +159,6 @@ var HeaderStore = (function () {
     value: function _getLastActiveMenuItem() {
       return this.state.lastActiveMenuItem;
     }
-
-    /*** PRIVATE METHODS ***/
   }, {
     key: 'handleUpdateHeaderData',
     value: function handleUpdateHeaderData(data) {
@@ -174,8 +171,8 @@ var HeaderStore = (function () {
     }
   }, {
     key: 'handleHeaderDataFailedFetch',
-    value: function handleHeaderDataFailedFetch(errorMessage) {
-      this.setState({ errorMessage: errorMessage });
+    value: function handleHeaderDataFailedFetch(errorMsg) {
+      this.setState({ errorMessage: errorMsg });
     }
   }, {
     key: 'handleSetMobileMenuButtonValue',

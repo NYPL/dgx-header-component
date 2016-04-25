@@ -34,7 +34,7 @@ class HeaderStore {
       isSticky: false,
       lastActiveMenuItem: '',
       activeMobileButton: '',
-      searchButtonAction:'',
+      searchButtonAction: '',
       mobileMyNyplButton: '',
       subscribeFormVisible: false,
       myNyplVisible: false,
@@ -42,7 +42,6 @@ class HeaderStore {
     };
   }
 
-  /*** PUBLIC METHODS ***/
   /**
    * _getMobileMenuBtnValue()
    * returns the current state.activeMobileButton
@@ -123,7 +122,6 @@ class HeaderStore {
     return this.state.lastActiveMenuItem;
   }
 
-  /*** PRIVATE METHODS ***/
   handleUpdateHeaderData(data) {
     this.setState({ headerData: data });
   }
@@ -132,8 +130,8 @@ class HeaderStore {
     this.setState({ headerData: [] });
   }
 
-  handleHeaderDataFailedFetch(errorMessage) {
-    this.setState({ errorMessage: errorMessage });
+  handleHeaderDataFailedFetch(errorMsg) {
+    this.setState({ errorMessage: errorMsg });
   }
 
   handleSetMobileMenuButtonValue(currentActiveMobileButton) {

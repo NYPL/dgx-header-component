@@ -58,16 +58,7 @@ var MegaMenuSubNav = (function (_React$Component) {
       var _this = this;
 
       var items = (0, _underscore.map)(this.props.items, function (m, i) {
-        var target = m.link.en.text;
-
-        if (typeof target === 'undefined') {
-          // In reality target should never be undefined, but
-          // this is plugging some holes in the fake data
-          target = '#';
-        } else if (!/^http/.exec(target)) {
-          target = '//nypl.org/' + target;
-        }
-
+        var target = m.link[_this.props.lang].text || '#';
         return _react2['default'].createElement(
           'li',
           { key: i },

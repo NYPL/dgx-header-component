@@ -43,7 +43,7 @@ Logo.propTypes = {
 
 Logo.defaultProps = {
   src: '//ux-static.nypl.org/images/NYPL-logo-black-pos.svg',
-  target: '//www.nypl.org',
+  target: '/',
   id: 'Logo',
   className: 'Logo',
 };

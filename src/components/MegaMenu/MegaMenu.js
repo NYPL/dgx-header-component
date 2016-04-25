@@ -1,10 +1,8 @@
 import React from 'react';
 import cx from 'classnames';
-
 // ALT Flux Store/Actions
 import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
-
 // Dependent NYPL React Components
 import MegaMenuSubNav from './MegaMenuSubNav.js';
 import MegaMenuFeatures from './MegaMenuFeatures.js';
@@ -84,6 +82,7 @@ class MegaMenu extends React.Component {
             <MegaMenuFeatures
               navId={this.props.navId}
               features={this.props.features}
+              urlType={this.props.urlType}
               navLabel={this.props.label[this.props.lang].text}
             />
           </div>
@@ -104,6 +103,7 @@ MegaMenu.propTypes = {
   features: React.PropTypes.array,
   items: React.PropTypes.array,
   topLink: React.PropTypes.string,
+  urlType: React.PropTypes.string,
 };
 
 MegaMenu.defaultProps = {

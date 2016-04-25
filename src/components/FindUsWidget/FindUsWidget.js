@@ -12,8 +12,14 @@ class FindUsWidget extends React.Component {
 
     return (
       <div className={this.props.className}>
-        <FindUsFeature className={`${this.props.className}-FindUsFeature`} />
-        <MegaMenuFeatureItem feature={feature} navLabel={this.props.navLabel} />
+        <FindUsFeature
+          urlType={this.props.urlType}
+          className={`${this.props.className}-FindUsFeature`}
+        />
+        <MegaMenuFeatureItem
+          feature={feature}
+          navLabel={this.props.navLabel}
+        />
       </div>
     );
   }
@@ -24,6 +30,7 @@ FindUsWidget.propTypes = {
   className: React.PropTypes.string,
   featuredItem: React.PropTypes.object,
   navLabel: React.PropTypes.string,
+  urlType: React.PropTypes.string,
 };
 
 FindUsWidget.defaultProps = {

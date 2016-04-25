@@ -52,22 +52,22 @@ class NavMenuItem extends React.Component {
   }
 
   render() {
+    const target = this.props.target;
     const linkClass = cx({
       active: this.props.index === this.state.activeItem
-        || HeaderStore._getLastActiveMenuItem() === this.props.navId,
-    });
+        || HeaderStore._getLastActiveMenuItem() === this.props.navId
+      });
     const megaMenuArrow = (this.props.subNav && this.props.features) ?
       <MegaMenuArrow
-        navId={this.props.navId}
-        index={this.props.index}
-        currentActiveItem={this.state.activeItem}
+          navId={this.props.navId}
+          index={this.props.index}
+          currentActiveItem={this.state.activeItem}
       /> : null;
-    const target = (this.props.target.indexOf('nypl.org') !== -1 || this.props.target === '#') ?
-      this.props.target : `${this.props.root}${this.props.target}`;
     const megaMenu = (this.props.subNav && this.props.features) ?
       <MegaMenu
         label={this.props.label}
         lang={this.props.lang}
+        urlType={this.props.urlType}
         items={this.props.subNav}
         navId={this.props.navId}
         features={this.props.features}
@@ -87,7 +87,7 @@ class NavMenuItem extends React.Component {
         <span
           onMouseEnter={this._activateHover}
           onMouseLeave={this._deactivateHover}
-          className={'NavMenuItem-Link'}
+          className="NavMenuItem-Link"
           id={(this.props.navId) ? `NavMenuItem-Link-${this.props.navId}` : 'NavMenuItem-Link'}
         >
           <a
@@ -118,6 +118,7 @@ NavMenuItem.propTypes = {
   label: React.PropTypes.object,
   subNav: React.PropTypes.array,
   features: React.PropTypes.array,
+  urlType: React.PropTypes.string,
 };
 
 NavMenuItem.defaultProps = {

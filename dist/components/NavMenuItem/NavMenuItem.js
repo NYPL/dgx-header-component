@@ -102,6 +102,7 @@ var NavMenuItem = (function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var target = this.props.target;
       var linkClass = (0, _classnames2['default'])({
         active: this.props.index === this.state.activeItem || _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === this.props.navId
       });
@@ -110,10 +111,10 @@ var NavMenuItem = (function (_React$Component) {
         index: this.props.index,
         currentActiveItem: this.state.activeItem
       }) : null;
-      var target = this.props.target.indexOf('nypl.org') !== -1 || this.props.target === '#' ? this.props.target : '' + this.props.root + this.props.target;
       var megaMenu = this.props.subNav && this.props.features ? _react2['default'].createElement(_MegaMenuMegaMenuJs2['default'], {
         label: this.props.label,
         lang: this.props.lang,
+        urlType: this.props.urlType,
         items: this.props.subNav,
         navId: this.props.navId,
         features: this.props.features,
@@ -166,7 +167,8 @@ NavMenuItem.propTypes = {
   index: _react2['default'].PropTypes.number,
   label: _react2['default'].PropTypes.object,
   subNav: _react2['default'].PropTypes.array,
-  features: _react2['default'].PropTypes.array
+  features: _react2['default'].PropTypes.array,
+  urlType: _react2['default'].PropTypes.string
 };
 
 NavMenuItem.defaultProps = {

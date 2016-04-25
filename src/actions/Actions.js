@@ -1,32 +1,31 @@
 import alt from 'dgx-alt-center';
 import axios from 'axios';
-
 import appConfig from '../appConfig.js';
 
 class Actions {
-  fetchHeaderData(environment) {
-    const self = this;
-    const appEnv = environment;
+  fetchHeaderData(environment, urlType) {
+    const typeOfUrl = urlType === 'absolute' ? '/header-data?urls=absolute' : '/header-data';
     let headerRootUrl;
 
     // Set the proper URL to fetch the Header Data model.
-    if (appEnv === 'development') {
+    if (environment === 'development') {
       headerRootUrl = appConfig.headerClientEnv.development;
-    } else if (appEnv === 'qa') {
+    } else if (environment === 'qa') {
       headerRootUrl = appConfig.headerClientEnv.qa;
     } else {
       headerRootUrl = appConfig.headerClientEnv.production;
     }
 
-    // Here we will use the client side AJAX request
-    // to fetch Header Data
+    const fullUrl = `${headerRootUrl}${typeOfUrl}`;
+
+    // Fetch proper /header-data endpoint
     axios
-      .get(`${headerRootUrl}/header-data`)
+      .get(fullUrl)
       .then(result => {
-        self.actions.updateHeaderData(result.data);
+        this.actions.updateHeaderData(result.data);
       })
       .catch(response => {
-        console.warn(`Error on Axios GET request: ${headerRootUrl}/header-data`);
+        console.warn(`Error on Axios GET request: ${fullUrl}`);
 
         if (response instanceof Error) {
           console.log(response.message);
@@ -58,10 +57,6 @@ class Actions {
   }
 
   setLastActiveMenuItem(value) {
-    this.dispatch(value);
-  }
-
-  setClientAppEnv(value) {
     this.dispatch(value);
   }
 

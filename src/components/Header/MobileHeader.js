@@ -167,7 +167,7 @@ class MobileHeader extends React.Component {
       <div className={this.props.className} style={styles.base}>
         <a
           style={styles.mobileLogo}
-          href="//www.nypl.org"
+          href={this.props.nyplRootUrl}
         >
           <span
             style={styles.logoIcon}
@@ -229,11 +229,13 @@ MobileHeader.propTypes = {
   lang: React.PropTypes.string,
   className: React.PropTypes.string,
   locatorUrl: React.PropTypes.string,
+  nyplRootUrl: React.PropTypes.string,
 };
 
 MobileHeader.defaultProps = {
   lang: 'en',
   className: 'MobileHeader',
+  nyplRootUrl: '/',
 };
 
 export default Radium(MobileHeader);

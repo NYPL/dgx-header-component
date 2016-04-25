@@ -137,6 +137,7 @@ var MegaMenu = (function (_React$Component) {
             _react2['default'].createElement(_MegaMenuFeaturesJs2['default'], {
               navId: this.props.navId,
               features: this.props.features,
+              urlType: this.props.urlType,
               navLabel: this.props.label[this.props.lang].text
             })
           )
@@ -158,7 +159,8 @@ MegaMenu.propTypes = {
   label: _react2['default'].PropTypes.object,
   features: _react2['default'].PropTypes.array,
   items: _react2['default'].PropTypes.array,
-  topLink: _react2['default'].PropTypes.string
+  topLink: _react2['default'].PropTypes.string,
+  urlType: _react2['default'].PropTypes.string
 };
 
 MegaMenu.defaultProps = {

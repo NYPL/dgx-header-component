@@ -18,9 +18,9 @@ class DefaultItem extends React.Component {
     const feature = this.props.feature || defaultFeature;
     const classes = this.props.classes || 'without-image';
     const img = feature.imgSrc ?
-        (<div className={`FeatureItem-Image ${classes}`}>
-          <img src={feature.imgSrc} alt="" />
-        </div>) : null;
+      (<div className={`FeatureItem-Image ${classes}`}>
+        <img src={feature.imgSrc} alt="" />
+      </div>) : null;
 
     return (
       <a

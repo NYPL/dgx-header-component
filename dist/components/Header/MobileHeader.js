@@ -213,7 +213,7 @@ var MobileHeader = (function (_React$Component) {
           'a',
           {
             style: styles.mobileLogo,
-            href: '//www.nypl.org'
+            href: this.props.nyplRootUrl
           },
           _react2['default'].createElement('span', {
             style: styles.logoIcon,
@@ -271,12 +271,14 @@ var MobileHeader = (function (_React$Component) {
 MobileHeader.propTypes = {
   lang: _react2['default'].PropTypes.string,
   className: _react2['default'].PropTypes.string,
-  locatorUrl: _react2['default'].PropTypes.string
+  locatorUrl: _react2['default'].PropTypes.string,
+  nyplRootUrl: _react2['default'].PropTypes.string
 };
 
 MobileHeader.defaultProps = {
   lang: 'en',
-  className: 'MobileHeader'
+  className: 'MobileHeader',
+  nyplRootUrl: '/'
 };
 
 exports['default'] = (0, _radium2['default'])(MobileHeader);

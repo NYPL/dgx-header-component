@@ -24,8 +24,6 @@ var _radium2 = _interopRequireDefault(_radium);
 
 var _underscore = require('underscore');
 
-var _underscore2 = _interopRequireDefault(_underscore);
-
 var styles = {
   base: {}
 };
@@ -45,7 +43,7 @@ var AlertsBox = (function (_React$Component) {
       var _this = this;
 
       var alerts = this.props.alerts;
-      var alertItems = _underscore2['default'].map(alerts, function (item, index) {
+      var alertItems = (0, _underscore.map)(alerts, function (item, index) {
         var alertDescription = item.attributes['alert-text'][_this.props.lang];
 
         return _react2['default'].createElement('div', {

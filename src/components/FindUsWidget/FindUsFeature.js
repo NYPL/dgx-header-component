@@ -15,7 +15,8 @@ class FindUsFeature extends React.Component {
   }
 
   render() {
-    const locinator = '//www.nypl.org/locations';
+    const locinator = (this.props.urlType === 'absolute') ?
+      '//www.nypl.org/locations' : '/locations';
 
     return (
       <div className={this.props.className}>
@@ -43,6 +44,7 @@ class FindUsFeature extends React.Component {
 FindUsFeature.propTypes = {
   lang: React.PropTypes.string,
   className: React.PropTypes.string,
+  urlType: React.PropTypes.string,
 };
 
 FindUsFeature.defaultProps = {

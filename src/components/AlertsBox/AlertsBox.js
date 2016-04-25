@@ -1,6 +1,6 @@
 import React from 'react';
 import Radium from 'radium';
-import _ from 'underscore';
+import { map as _map } from 'underscore';
 
 const styles = {
   base: {
@@ -14,7 +14,7 @@ class AlertsBox extends React.Component {
 
   render() {
     const alerts = this.props.alerts;
-    const alertItems = _.map(alerts, (item, index) => {
+    const alertItems = _map(alerts, (item, index) => {
       const alertDescription = item.attributes['alert-text'][this.props.lang];
 
       return (

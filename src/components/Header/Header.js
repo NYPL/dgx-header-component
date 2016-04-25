@@ -103,13 +103,13 @@ class Header extends React.Component {
    */
   _fetchDataIfNeeded() {
     if (HeaderStore.getState().headerData.length < 1) {
-      Actions.fetchHeaderData(HeaderStore._getClientAppEnv());
+      Actions.fetchHeaderData(this.props.env, this.props.urls);
     }
   }
 
   /**
    * _handleStickyHeader()
-   * returns the Actions.updateIsHeaderSticky()
+   * Executes Actions.updateIsHeaderSticky()
    * with the proper boolean value to update the
    * HeaderStore.isSticky value based on the window
    * vertical scroll position surpassing the height
@@ -191,7 +191,11 @@ class Header extends React.Component {
         <div className={`${headerClass}-Wrapper`}>
           <MobileHeader
             className={`${headerClass}-Mobile`}
-            locatorUrl="//www.nypl.org/locations/map?nearme=true"
+            locatorUrl={
+              (this.props.urls === 'absolute') ?
+                "//www.nypl.org/locations/map?nearme=true" : "/locations/map?nearme=true"
+            }
+            nyplRootUrl={(this.props.urls === 'absolute') ? "//www.nypl.org" : "/"}
             ref="headerMobile"
           />
           <div className={`MobileMyNypl-Wrapper ${mobileMyNyplClasses}`}>
@@ -201,8 +205,11 @@ class Header extends React.Component {
             className={`${headerClass}-TopWrapper`}
             style={styles.wrapper}
             ref="headerTopWrapper"
-          >
-            <Logo className={`${headerClass}-Logo`} />
+            >
+            <Logo
+              className={`${headerClass}-Logo`}
+              target={(this.props.urls === 'absolute') ? "//www.nypl.org" : "/"}
+            />
             <div className={`${headerClass}-Buttons`} style={styles.topButtons}>
               <MyNyplButton label="Log In" refId="desktopLogin" />
               <SimpleButton
@@ -231,6 +238,7 @@ class Header extends React.Component {
             className={`${headerClass}-NavMenu`}
             lang={this.props.lang}
             items={this.state.headerData}
+            urlType={this.props.urls}
           />
         </div>
       </header>
@@ -243,6 +251,8 @@ Header.propTypes = {
   className: React.PropTypes.string,
   id: React.PropTypes.string,
   skipNav: React.PropTypes.object,
+  urls: React.PropTypes.string,
+  env: React.PropTypes.string,
 };
 
 Header.defaultProps = {
@@ -250,6 +260,8 @@ Header.defaultProps = {
   className: 'Header',
   id: 'nyplHeader',
   skipNav: null,
+  urls: '',
+  env: 'production',
 };
 
 export default Radium(Header);

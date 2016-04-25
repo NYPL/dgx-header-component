@@ -20,25 +20,14 @@ class MegaMenuSubNav extends React.Component {
 
   render() {
     const items = _map(this.props.items, (m, i) => {
-      let target = m.link.en.text;
-
-      if (typeof target === 'undefined') {
-        // In reality target should never be undefined, but
-        // this is plugging some holes in the fake data
-        target = '#';
-      } else if (!/^http/.exec(target)) {
-        target = `//nypl.org/${target}`;
-      }
-
+      const target = m.link[this.props.lang].text || '#';
       return (
         <li key={i}>
           <a href={target}
-            onClick={
-              utils._trackHeader.bind(
-                this,
-                'Go to...',
-                `${this.props.label[this.props.lang].text}--${m.name[this.props.lang].text}`
-              )
+            onClick={utils._trackHeader.bind(
+              this,
+              'Go to...',
+              `${this.props.label[this.props.lang].text}--${m.name[this.props.lang].text}`)
             }
           >
             {m.name[this.props.lang].text}

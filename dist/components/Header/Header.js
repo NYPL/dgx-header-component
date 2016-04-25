@@ -180,13 +180,13 @@ var Header = (function (_React$Component) {
     key: '_fetchDataIfNeeded',
     value: function _fetchDataIfNeeded() {
       if (_storesHeaderStoreJs2['default'].getState().headerData.length < 1) {
-        _actionsActionsJs2['default'].fetchHeaderData(_storesHeaderStoreJs2['default']._getClientAppEnv());
+        _actionsActionsJs2['default'].fetchHeaderData(this.props.env, this.props.urls);
       }
     }
 
     /**
      * _handleStickyHeader()
-     * returns the Actions.updateIsHeaderSticky()
+     * Executes Actions.updateIsHeaderSticky()
      * with the proper boolean value to update the
      * HeaderStore.isSticky value based on the window
      * vertical scroll position surpassing the height
@@ -279,7 +279,8 @@ var Header = (function (_React$Component) {
           { className: headerClass + '-Wrapper' },
           _react2['default'].createElement(_MobileHeaderJs2['default'], {
             className: headerClass + '-Mobile',
-            locatorUrl: '//www.nypl.org/locations/map?nearme=true',
+            locatorUrl: this.props.urls === 'absolute' ? "//www.nypl.org/locations/map?nearme=true" : "/locations/map?nearme=true",
+            nyplRootUrl: this.props.urls === 'absolute' ? "//www.nypl.org" : "/",
             ref: 'headerMobile'
           }),
           _react2['default'].createElement(
@@ -294,7 +295,10 @@ var Header = (function (_React$Component) {
               style: styles.wrapper,
               ref: 'headerTopWrapper'
             },
-            _react2['default'].createElement(_LogoLogoJs2['default'], { className: headerClass + '-Logo' }),
+            _react2['default'].createElement(_LogoLogoJs2['default'], {
+              className: headerClass + '-Logo',
+              target: this.props.urls === 'absolute' ? "//www.nypl.org" : "/"
+            }),
             _react2['default'].createElement(
               'div',
               { className: headerClass + '-Buttons', style: styles.topButtons },
@@ -324,7 +328,8 @@ var Header = (function (_React$Component) {
           _react2['default'].createElement(_NavMenuNavMenuJs2['default'], {
             className: headerClass + '-NavMenu',
             lang: this.props.lang,
-            items: this.state.headerData
+            items: this.state.headerData,
+            urlType: this.props.urls
           })
         )
       );
@@ -338,14 +343,18 @@ Header.propTypes = {
   lang: _react2['default'].PropTypes.string,
   className: _react2['default'].PropTypes.string,
   id: _react2['default'].PropTypes.string,
-  skipNav: _react2['default'].PropTypes.object
+  skipNav: _react2['default'].PropTypes.object,
+  urls: _react2['default'].PropTypes.string,
+  env: _react2['default'].PropTypes.string
 };
 
 Header.defaultProps = {
   lang: 'en',
   className: 'Header',
   id: 'nyplHeader',
-  skipNav: null
+  skipNav: null,
+  urls: '',
+  env: 'production'
 };
 
 exports['default'] = (0, _radium2['default'])(Header);

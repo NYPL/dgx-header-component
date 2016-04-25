@@ -2,10 +2,8 @@ import Radium from 'radium';
 import React from 'react';
 import cx from 'classnames';
 import appConfig from '../../appConfig.js';
-
 // Header Store
 import HeaderStore from '../../stores/HeaderStore.js';
-
 // Dependent Components
 import SearchButton from '../SearchButton/SearchButton.js';
 import NavMenuItem from '../NavMenuItem/NavMenuItem.js';
@@ -59,6 +57,7 @@ class NavMenu extends React.Component {
         label={item.name}
         lang={this.props.lang}
         target={item.link.en.text}
+        urlType={this.props.urlType}
         navId={item.id}
         features={item.features}
         subNav={item.subnav}
@@ -87,6 +86,7 @@ NavMenu.propTypes = {
   lang: React.PropTypes.string,
   className: React.PropTypes.string,
   items: React.PropTypes.array,
+  urlType: React.PropTypes.string,
 };
 
 NavMenu.defaultProps = {

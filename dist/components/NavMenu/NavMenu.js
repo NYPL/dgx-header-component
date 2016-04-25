@@ -111,6 +111,7 @@ var NavMenu = (function (_React$Component) {
           label: item.name,
           lang: _this.props.lang,
           target: item.link.en.text,
+          urlType: _this.props.urlType,
           navId: item.id,
           features: item.features,
           subNav: item.subnav,
@@ -145,7 +146,8 @@ var NavMenu = (function (_React$Component) {
 NavMenu.propTypes = {
   lang: _react2['default'].PropTypes.string,
   className: _react2['default'].PropTypes.string,
-  items: _react2['default'].PropTypes.array
+  items: _react2['default'].PropTypes.array,
+  urlType: _react2['default'].PropTypes.string
 };
 
 NavMenu.defaultProps = {

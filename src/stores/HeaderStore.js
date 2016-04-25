@@ -3,7 +3,6 @@ import Actions from '../actions/Actions.js';
 
 class HeaderStore {
   constructor() {
-
     this.bindListeners({
       handleUpdateHeaderData: Actions.UPDATE_HEADER_DATA,
       handleFetchHeaderData: Actions.FETCH_HEADER_DATA,
@@ -13,10 +12,9 @@ class HeaderStore {
       handleSearchButtonActionValue: Actions.SEARCH_BUTTON_ACTION_VALUE,
       handleUpdateIsHeaderSticky: Actions.UPDATE_IS_HEADER_STICKY,
       handleSetLastActiveMenuItem: Actions.SET_LAST_ACTIVE_MENU_ITEM,
-      handleSetClientAppEnv: Actions.SET_CLIENT_APP_ENV,
       handleToggleSubscribeFormVisible: Actions.TOGGLE_SUBSCRIBE_FORM_VISIBLE,
       handleToggleMyNyplVisible: Actions.TOGGLE_MY_NYPL_VISIBLE,
-      handleToggleStickyMyNyplVisible: Actions.TOGGLE_STICKY_MY_NYPL_VISIBLE
+      handleToggleStickyMyNyplVisible: Actions.TOGGLE_STICKY_MY_NYPL_VISIBLE,
     });
 
     this.exportPublicMethods({
@@ -28,7 +26,6 @@ class HeaderStore {
       _getSubscribeFormVisible: this._getSubscribeFormVisible,
       _getMyNyplVisible: this._getMyNyplVisible,
       _getStickyMyNyplVisible: this._getStickyMyNyplVisible,
-      _getClientAppEnv: this._getClientAppEnv
     });
 
     this.state = {
@@ -42,7 +39,6 @@ class HeaderStore {
       subscribeFormVisible: false,
       myNyplVisible: false,
       stickyLoginVisible: false,
-      clientAppEnv: ''
     };
   }
 
@@ -108,7 +104,7 @@ class HeaderStore {
   }
 
   /**
-   * _getIsStickyValue() 
+   * _getIsStickyValue()
    * returns the current state.isSticky value.
    *
    * @return {Boolean} true/false
@@ -127,58 +123,50 @@ class HeaderStore {
     return this.state.lastActiveMenuItem;
   }
 
-  _getClientAppEnv() {
-    return this.state.clientAppEnv;
-  }
-
   /*** PRIVATE METHODS ***/
   handleUpdateHeaderData(data) {
-    this.setState({headerData: data});
+    this.setState({ headerData: data });
   }
 
   handleFetchHeaderData() {
-    this.setState({headerData: []});
+    this.setState({ headerData: [] });
   }
 
   handleHeaderDataFailedFetch(errorMessage) {
-    this.setState({errorMessage: errorMessage});
+    this.setState({ errorMessage: errorMessage });
   }
 
   handleSetMobileMenuButtonValue(currentActiveMobileButton) {
-    this.setState({activeMobileButton: currentActiveMobileButton});
+    this.setState({ activeMobileButton: currentActiveMobileButton });
   }
 
   handleSetMobileMyNyplButtonValue(value) {
-    this.setState({mobileMyNyplButton: value});
+    this.setState({ mobileMyNyplButton: value });
   }
 
   // The set search button action value to Store
   handleSearchButtonActionValue(actionValue) {
-    this.setState({searchButtonAction: actionValue});
+    this.setState({ searchButtonAction: actionValue });
   }
 
   handleUpdateIsHeaderSticky(value) {
-    this.setState({isSticky: value});
+    this.setState({ isSticky: value });
   }
 
   handleSetLastActiveMenuItem(value) {
-    this.setState({lastActiveMenuItem: value});
-  }
-
-  handleSetClientAppEnv(value) {
-    this.setState({clientAppEnv: value});
+    this.setState({ lastActiveMenuItem: value });
   }
 
   handleToggleSubscribeFormVisible(value) {
-    this.setState({subscribeFormVisible: value});
+    this.setState({ subscribeFormVisible: value });
   }
 
   handleToggleMyNyplVisible(value) {
-    this.setState({myNyplVisible: value});
+    this.setState({ myNyplVisible: value });
   }
 
   handleToggleStickyMyNyplVisible(value) {
-    this.setState({stickyLoginVisible: value});
+    this.setState({ stickyLoginVisible: value });
   }
 }
 

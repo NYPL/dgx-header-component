@@ -58,16 +58,15 @@ var _dgxFeatureFlags2 = _interopRequireDefault(_dgxFeatureFlags);
 var SearchButton = (function (_React$Component) {
   _inherits(SearchButton, _React$Component);
 
-  // Constructor used in ES6
-
   function SearchButton(props) {
     _classCallCheck(this, SearchButton);
 
     _get(Object.getPrototypeOf(SearchButton.prototype), 'constructor', this).call(this, props);
 
-    this.state = {
-      featureFlags: _dgxFeatureFlags2['default'].store.getState()
-    };
+    this.state = { featureFlags: _dgxFeatureFlags2['default'].store.getState() };
+
+    this._activateHover = this._activateHover.bind(this);
+    this._deactivateHover = this._deactivateHover.bind(this);
   }
 
   _createClass(SearchButton, [{
@@ -84,65 +83,6 @@ var SearchButton = (function (_React$Component) {
     key: '_onChange',
     value: function _onChange() {
       this.setState({ featureFlags: _dgxFeatureFlags2['default'].store.getState() });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      // Give active class if the button is activated by hover
-      var classes = (0, _classnames2['default'])({
-        'active': _storesHeaderStoreJs2['default']._getSearchButtonActionValue() === 'hoverSearch' || _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === 'hoverSearch'
-      }),
-
-      // Detect if the header is sticky now
-      stickyStatus = (0, _classnames2['default'])({
-        'isSticky': _storesHeaderStoreJs2['default'].getState().isSticky
-      }),
-          searchLabel = _react2['default'].createElement(
-        'div',
-        { className: 'Search-Text visuallyHidden ' + classes + ' ' + stickyStatus },
-        'Search'
-      ),
-          searchLabelFeature = _react2['default'].createElement(
-        'div',
-        { className: 'Search-Text ' + classes + ' ' + stickyStatus },
-        'Search'
-      );
-
-      /*
-       * Feature Flag -- 'search-label'
-       * Return a DOM that includes the search-label text.
-      */
-      if (_dgxFeatureFlags2['default'].store._isFeatureActive('search-label')) {
-        return _react2['default'].createElement(
-          'div',
-          { className: this.props.className + '-SearchBox-Wrapper' },
-          _react2['default'].createElement(_ButtonsBasicButtonJs2['default'], {
-            onMouseEnter: this._activateHover.bind(this),
-            onMouseLeave: this._deactivateHover.bind(this),
-            id: this.props.className + '-SearchButton',
-            className: 'nypl-icon-magnifier-fat ' + this.props.className + '-SearchButton ' + classes,
-            name: 'Search Button',
-            label: searchLabelFeature }),
-          _react2['default'].createElement(_SearchBoxSearchBoxJs2['default'], {
-            id: this.props.className + '-SearchBox',
-            className: this.props.className + '-SearchBox' })
-        );
-      }
-
-      return _react2['default'].createElement(
-        'div',
-        { className: this.props.className + '-SearchBox-Wrapper' },
-        _react2['default'].createElement(_ButtonsBasicButtonJs2['default'], {
-          onMouseEnter: this._activateHover.bind(this),
-          onMouseLeave: this._deactivateHover.bind(this),
-          id: this.props.className + '-SearchButton',
-          className: 'nypl-icon-magnifier-fat ' + this.props.className + '-SearchButton ' + classes,
-          name: 'Search Button',
-          label: searchLabel }),
-        _react2['default'].createElement(_SearchBoxSearchBoxJs2['default'], {
-          id: this.props.className + '-SearchBox',
-          className: this.props.className + '-SearchBox' })
-      );
     }
 
     /**
@@ -176,10 +116,75 @@ var SearchButton = (function (_React$Component) {
         _actionsActionsJs2['default'].searchButtonActionValue('');
       }, 250);
     }
+  }, {
+    key: 'render',
+    value: function render() {
+      // Give active class if the button is activated by hover
+      var classes = (0, _classnames2['default'])({
+        active: _storesHeaderStoreJs2['default']._getSearchButtonActionValue() === 'hoverSearch' || _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === 'hoverSearch'
+      });
+      // Detect if the header is sticky now
+      var stickyStatus = (0, _classnames2['default'])({ isSticky: _storesHeaderStoreJs2['default'].getState().isSticky });
+      var searchLabel = _react2['default'].createElement(
+        'div',
+        { className: 'Search-Text visuallyHidden ' + classes + ' ' + stickyStatus },
+        'Search'
+      );
+      var searchLabelFeature = _react2['default'].createElement(
+        'div',
+        { className: 'Search-Text ' + classes + ' ' + stickyStatus },
+        'Search'
+      );
+
+      /*
+       * Feature Flag -- 'search-label'
+       * Return a DOM that includes the search-label text.
+      */
+      if (_dgxFeatureFlags2['default'].store._isFeatureActive('search-label')) {
+        return _react2['default'].createElement(
+          'div',
+          { className: this.props.className + '-SearchBox-Wrapper' },
+          _react2['default'].createElement(_ButtonsBasicButtonJs2['default'], {
+            onMouseEnter: this._activateHover,
+            onMouseLeave: this._deactivateHover,
+            id: this.props.className + '-SearchButton',
+            className: 'nypl-icon-magnifier-fat ' + this.props.className + '-SearchButton ' + classes,
+            name: 'Search Button',
+            label: searchLabelFeature
+          }),
+          _react2['default'].createElement(_SearchBoxSearchBoxJs2['default'], {
+            id: this.props.className + '-SearchBox',
+            className: this.props.className + '-SearchBox'
+          })
+        );
+      }
+
+      return _react2['default'].createElement(
+        'div',
+        { className: this.props.className + '-SearchBox-Wrapper' },
+        _react2['default'].createElement(_ButtonsBasicButtonJs2['default'], {
+          onMouseEnter: this._activateHover,
+          onMouseLeave: this._deactivateHover,
+          id: this.props.className + '-SearchButton',
+          className: 'nypl-icon-magnifier-fat ' + this.props.className + '-SearchButton ' + classes,
+          name: 'Search Button',
+          label: searchLabel
+        }),
+        _react2['default'].createElement(_SearchBoxSearchBoxJs2['default'], {
+          id: this.props.className + '-SearchBox',
+          className: this.props.className + '-SearchBox'
+        })
+      );
+    }
   }]);
 
   return SearchButton;
 })(_react2['default'].Component);
+
+SearchButton.propTypes = {
+  lang: _react2['default'].PropTypes.string,
+  className: _react2['default'].PropTypes.string
+};
 
 SearchButton.defaultProps = {
   lang: 'en',

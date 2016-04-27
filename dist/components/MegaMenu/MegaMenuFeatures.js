@@ -37,8 +37,6 @@ var _appConfigJs2 = _interopRequireDefault(_appConfigJs);
 var MegaMenuFeatures = (function (_React$Component) {
   _inherits(MegaMenuFeatures, _React$Component);
 
-  // Constructor used in ES6
-
   function MegaMenuFeatures(props) {
     _classCallCheck(this, MegaMenuFeatures);
 
@@ -50,28 +48,37 @@ var MegaMenuFeatures = (function (_React$Component) {
     value: function render() {
       var _this = this;
 
-      var currentFeatureItem = undefined,
-
+      var currentFeatureItem = undefined;
       // The specific header items for Find Us and Give only have one feature.
-      widgetFeature = this.props.features[0].featuredItem;
+      var widgetFeature = this.props.features[0].featuredItem;
 
       // Donate Widget
       if (this.props.navId === '1d9ea0ec-6ca3-4577-9dd1-e8de1f2a8bb1') {
         currentFeatureItem = _react2['default'].createElement(_DonateWidgetDonateWidgetJs2['default'], {
           navId: this.props.navId,
           featuredItem: widgetFeature,
-          donationLinks: _appConfigJs2['default'].donationLinks, navLabel: this.props.navLabel });
+          donationLinks: _appConfigJs2['default'].donationLinks,
+          navLabel: this.props.navLabel
+        });
       } else if (this.props.navId === 'df621833-4dd1-4223-83e5-6ad7f98ad26a') {
-        currentFeatureItem = _react2['default'].createElement(_FindUsWidgetFindUsWidgetJs2['default'], { navId: this.props.navId, featuredItem: widgetFeature, navLabel: this.props.navLabel });
+        currentFeatureItem = _react2['default'].createElement(_FindUsWidgetFindUsWidgetJs2['default'], {
+          navId: this.props.navId,
+          featuredItem: widgetFeature,
+          navLabel: this.props.navLabel
+        });
       } else {
         currentFeatureItem = this.props.features.map(function (item, i) {
-          return _react2['default'].createElement(_MegaMenuFeatureItemJs2['default'], { key: i, feature: item.featuredItem, navLabel: _this.props.navLabel });
+          return _react2['default'].createElement(_MegaMenuFeatureItemJs2['default'], {
+            key: i,
+            feature: item.featuredItem,
+            navLabel: _this.props.navLabel
+          });
         });
       }
 
       return _react2['default'].createElement(
         'div',
-        { className: 'MegaMenu-Features' },
+        { className: this.props.className },
         currentFeatureItem
       );
     }
@@ -80,8 +87,17 @@ var MegaMenuFeatures = (function (_React$Component) {
   return MegaMenuFeatures;
 })(_react2['default'].Component);
 
+MegaMenuFeatures.propTypes = {
+  lang: _react2['default'].PropTypes.string,
+  className: _react2['default'].PropTypes.string,
+  features: _react2['default'].PropTypes.array,
+  navId: _react2['default'].PropTypes.string,
+  navLabel: _react2['default'].PropTypes.string
+};
+
 MegaMenuFeatures.defaultProps = {
-  lang: 'en'
+  lang: 'en',
+  className: 'MegaMenu-Features'
 };
 
 exports['default'] = MegaMenuFeatures;

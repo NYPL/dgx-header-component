@@ -58,10 +58,24 @@ var _MyNyplButtonStickyMyNyplButtonJs = require('../MyNyplButton/StickyMyNyplBut
 
 var _MyNyplButtonStickyMyNyplButtonJs2 = _interopRequireDefault(_MyNyplButtonStickyMyNyplButtonJs);
 
+var styles = {
+  donateButton: {
+    padding: '8px 15px',
+    textTransform: 'uppercase',
+    fontSize: '12.5px',
+    letterSpacing: '.04em'
+  },
+  lineSeparator: {
+    display: 'inline-block',
+    margin: '0 0 -10px 0',
+    width: '2px',
+    height: '30px',
+    backgroundColor: '#837377'
+  }
+};
+
 var NavMenu = (function (_React$Component) {
   _inherits(NavMenu, _React$Component);
-
-  // Constructor used in ES6
 
   function NavMenu(props) {
     _classCallCheck(this, NavMenu);
@@ -74,14 +88,14 @@ var NavMenu = (function (_React$Component) {
     value: function render() {
       var _this = this;
 
-      var navItems = this.props.items && this.props.items.length ? this.props.items : _appConfigJs2['default'].navTopLinks,
-          mobileActiveClass = (0, _classnames2['default'])({
-        'mobileActive': _storesHeaderStoreJs2['default']._getMobileMenuBtnValue() === 'mobileMenu'
-      }),
-          stickyItemsClass = (0, _classnames2['default'])('StickyItems', {
-        'active': _storesHeaderStoreJs2['default']._getIsStickyValue()
-      }),
-          stickyNavItems = _react2['default'].createElement(
+      var navItems = this.props.items && this.props.items.length ? this.props.items : _appConfigJs2['default'].navTopLinks;
+      var mobileActiveClass = (0, _classnames2['default'])({
+        mobileActive: _storesHeaderStoreJs2['default']._getMobileMenuBtnValue() === 'mobileMenu'
+      });
+      var stickyItemsClass = (0, _classnames2['default'])('StickyItems', {
+        active: _storesHeaderStoreJs2['default']._getIsStickyValue()
+      });
+      var stickyNavItems = _react2['default'].createElement(
         'div',
         { className: stickyItemsClass },
         _react2['default'].createElement('span', { className: 'lineSeparator', style: styles.lineSeparator }),
@@ -89,18 +103,21 @@ var NavMenu = (function (_React$Component) {
         _react2['default'].createElement(_DonateButtonDonateButtonJs2['default'], {
           id: 'Collapsed-DonateButton',
           style: styles.donateButton,
-          gaLabel: 'Collapsed Donate Button' })
-      ),
-          navMenu = navItems.map(function (item, index) {
+          gaLabel: 'Collapsed Donate Button'
+        })
+      );
+      var navMenu = navItems.map(function (item, index) {
         return _react2['default'].createElement(_NavMenuItemNavMenuItemJs2['default'], {
           label: item.name,
           lang: _this.props.lang,
           target: item.link.en.text,
+          urlType: _this.props.urlType,
           navId: item.id,
           features: item.features,
           subNav: item.subnav,
           key: index,
-          index: index });
+          index: index
+        });
       });
 
       return _react2['default'].createElement(
@@ -126,25 +143,16 @@ var NavMenu = (function (_React$Component) {
   return NavMenu;
 })(_react2['default'].Component);
 
+NavMenu.propTypes = {
+  lang: _react2['default'].PropTypes.string,
+  className: _react2['default'].PropTypes.string,
+  items: _react2['default'].PropTypes.array,
+  urlType: _react2['default'].PropTypes.string
+};
+
 NavMenu.defaultProps = {
   lang: 'en',
   className: 'NavMenu'
-};
-
-var styles = {
-  donateButton: {
-    padding: '8px 15px',
-    textTransform: 'uppercase',
-    fontSize: '12.5px',
-    letterSpacing: '.04em'
-  },
-  lineSeparator: {
-    display: 'inline-block',
-    margin: '0 0 -10px 0',
-    width: '2px',
-    height: '30px',
-    backgroundColor: '#837377'
-  }
 };
 
 exports['default'] = (0, _radium2['default'])(NavMenu);

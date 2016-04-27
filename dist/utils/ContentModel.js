@@ -106,7 +106,7 @@ function ContentModel() {
   };
 
   this.featureItem = function (data, lang) {
-    return {
+    var item = {
       headline: data.headline ? data.headline[lang].text : '',
       category: data.category ? data.category[lang].text : '',
       imgSrc: data.images ? data.images[0].uri : '',
@@ -114,6 +114,8 @@ function ContentModel() {
       description: data.description ? data.description[lang].text.substring(0, '175') : '',
       link: data.link ? data.link[lang].text : ''
     };
+
+    return item;
   };
 }
 

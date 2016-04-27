@@ -50,9 +50,10 @@ var MegaMenu = (function (_React$Component) {
 
     _get(Object.getPrototypeOf(MegaMenu.prototype), 'constructor', this).call(this, props);
 
-    this.state = {
-      lastActiveMenuItem: _storesHeaderStoreJs2['default'].getState().lastActiveMenuItem
-    };
+    this.state = { lastActiveMenuItem: _storesHeaderStoreJs2['default'].getState().lastActiveMenuItem };
+
+    this._watchHoverIntentEnter = this._watchHoverIntentEnter.bind(this);
+    this._watchHoverIntentLeave = this._watchHoverIntentLeave.bind(this);
   }
 
   _createClass(MegaMenu, [{
@@ -71,47 +72,6 @@ var MegaMenu = (function (_React$Component) {
       this.setState({
         lastActiveMenuItem: _storesHeaderStoreJs2['default'].getState().lastActiveMenuItem
       });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      // Dynamic class assignment based on activeItem property matching current index.
-      var classes = (0, _classnames2['default'])('MegaMenu', {
-        'active animateMegaMenuEnter fadeIn': this.props.index === this.props.currentActiveItem,
-        'active': _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === this.props.navId && this.props.index !== this.props.currentActiveItem
-      });
-
-      return _react2['default'].createElement(
-        'div',
-        {
-          onMouseEnter: this._watchHoverIntentEnter.bind(this),
-          onMouseLeave: this._watchHoverIntentLeave.bind(this),
-          id: this.props.navId ? 'MegaMenu-' + this.props.navId : 'MegaMenu',
-          className: classes },
-        _react2['default'].createElement('div', { className: 'MegaMenu-LeftBgWrapper' }),
-        _react2['default'].createElement(
-          'div',
-          { className: 'MegaMenu-Wrapper' },
-          _react2['default'].createElement(
-            'div',
-            { className: 'MegaMenu-SubNavWrapper' },
-            _react2['default'].createElement(_MegaMenuSubNavJs2['default'], {
-              label: this.props.label,
-              items: this.props.items,
-              lang: this.props.lang,
-              topLink: this.props.topLink,
-              navId: this.props.navId })
-          ),
-          _react2['default'].createElement(
-            'div',
-            { className: 'MegaMenu-FeaturesWrapper' },
-            _react2['default'].createElement(_MegaMenuFeaturesJs2['default'], {
-              navId: this.props.navId,
-              features: this.props.features,
-              navLabel: this.props.label['en'].text })
-          )
-        )
-      );
     }
 
     /**
@@ -139,13 +99,73 @@ var MegaMenu = (function (_React$Component) {
     value: function _watchHoverIntentLeave() {
       _actionsActionsJs2['default'].setLastActiveMenuItem('');
     }
+  }, {
+    key: 'render',
+    value: function render() {
+      // Dynamic class assignment based on activeItem property matching current index.
+      var classes = (0, _classnames2['default'])(this.props.className, {
+        'active animateMegaMenuEnter fadeIn': this.props.index === this.props.currentActiveItem,
+        active: _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === this.props.navId && this.props.index !== this.props.currentActiveItem
+      });
+
+      return _react2['default'].createElement(
+        'div',
+        {
+          onMouseEnter: this._watchHoverIntentEnter,
+          onMouseLeave: this._watchHoverIntentLeave,
+          id: this.props.navId ? 'MegaMenu-' + this.props.navId : 'MegaMenu',
+          className: classes
+        },
+        _react2['default'].createElement('div', { className: this.props.className + '-LeftBgWrapper' }),
+        _react2['default'].createElement(
+          'div',
+          { className: this.props.className + '-Wrapper' },
+          _react2['default'].createElement(
+            'div',
+            { className: this.props.className + '-SubNavWrapper' },
+            _react2['default'].createElement(_MegaMenuSubNavJs2['default'], {
+              label: this.props.label,
+              items: this.props.items,
+              lang: this.props.lang,
+              topLink: this.props.topLink,
+              navId: this.props.navId
+            })
+          ),
+          _react2['default'].createElement(
+            'div',
+            { className: this.props.className + '-FeaturesWrapper' },
+            _react2['default'].createElement(_MegaMenuFeaturesJs2['default'], {
+              navId: this.props.navId,
+              features: this.props.features,
+              urlType: this.props.urlType,
+              navLabel: this.props.label[this.props.lang].text
+            })
+          )
+        )
+      );
+    }
   }]);
 
   return MegaMenu;
 })(_react2['default'].Component);
 
+MegaMenu.propTypes = {
+  lang: _react2['default'].PropTypes.string,
+  className: _react2['default'].PropTypes.string,
+  lastActiveMenuItem: _react2['default'].PropTypes.string,
+  currentActiveItem: _react2['default'].PropTypes.number,
+  index: _react2['default'].PropTypes.number,
+  navId: _react2['default'].PropTypes.string,
+  label: _react2['default'].PropTypes.object,
+  features: _react2['default'].PropTypes.array,
+  items: _react2['default'].PropTypes.array,
+  topLink: _react2['default'].PropTypes.string,
+  urlType: _react2['default'].PropTypes.string
+};
+
 MegaMenu.defaultProps = {
-  lang: 'en'
+  lang: 'en',
+  className: 'MegaMenu'
 };
 
 exports['default'] = MegaMenu;

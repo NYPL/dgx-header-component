@@ -21,8 +21,6 @@ var _react2 = _interopRequireDefault(_react);
 var SubscribeMessageBox = (function (_React$Component) {
   _inherits(SubscribeMessageBox, _React$Component);
 
-  // Constructor used in ES6
-
   function SubscribeMessageBox(props) {
     _classCallCheck(this, SubscribeMessageBox);
 
@@ -47,6 +45,12 @@ var SubscribeMessageBox = (function (_React$Component) {
 
   return SubscribeMessageBox;
 })(_react2['default'].Component);
+
+SubscribeMessageBox.propTypes = {
+  msg: _react2['default'].PropTypes.string,
+  className: _react2['default'].PropTypes.string,
+  status: _react2['default'].PropTypes.string
+};
 
 SubscribeMessageBox.defaultProps = {
   msg: 'Thank you for subscribing to our email updates.',

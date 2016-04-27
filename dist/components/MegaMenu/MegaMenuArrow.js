@@ -28,10 +28,6 @@ var _storesHeaderStoreJs = require('../../stores/HeaderStore.js');
 
 var _storesHeaderStoreJs2 = _interopRequireDefault(_storesHeaderStoreJs);
 
-var _actionsActionsJs = require('../../actions/Actions.js');
-
-var _actionsActionsJs2 = _interopRequireDefault(_actionsActionsJs);
-
 var MegaMenuArrow = (function (_React$Component) {
   _inherits(MegaMenuArrow, _React$Component);
 
@@ -47,16 +43,22 @@ var MegaMenuArrow = (function (_React$Component) {
       // Dynamic class assignment based on activeItem property matching current index.
       var classes = (0, _classnames2['default'])('NavMenuItem-Arrow nypl-icon-arrow-meganav-large', {
         'active animateMegaMenuArrowEnter fadeIn': this.props.index === this.props.currentActiveItem,
-        'active': _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === this.props.navId && this.props.index !== this.props.currentActiveItem
+        active: _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === this.props.navId && this.props.index !== this.props.currentActiveItem
       });
 
-      return _react2['default'].createElement('span', {
-        className: 'NavMenuItem-Arrow-' + this.props.navId + ' ' + classes });
+      return _react2['default'].createElement('span', { className: 'NavMenuItem-Arrow-' + this.props.navId + ' ' + classes });
     }
   }]);
 
   return MegaMenuArrow;
 })(_react2['default'].Component);
+
+MegaMenuArrow.propTypes = {
+  lang: _react2['default'].PropTypes.string,
+  index: _react2['default'].PropTypes.number,
+  currentActiveItem: _react2['default'].PropTypes.number,
+  navId: _react2['default'].PropTypes.string
+};
 
 MegaMenuArrow.defaultProps = {
   lang: 'en'

@@ -1,21 +1,47 @@
-# NYPL Header NPM Component
+# NYPL Header React NPM Component
 
-## Props
+## Installation
+```sh
+$ npm install
+```
 
-- `className`: Class to be assigned to the main header container (String,
-  default: "Header"
+## Development Server
+Using Webpack hot-reload server at localhost:3000
+```sh
+$ npm start
+```
+
+## Component Props
+
+- `className`: Class to be assigned to the main header container (String, default: "Header")
+
 - `id`: ID to be assigned to the main header container (String, default: "nyplHeader")
-- `lang`: Language. Not used, but provided for future internationalization
-  (String, default: "en")
+
+- `lang`: Language. Not used, but provided for future internationalization (String, default: "en")
+
+- `env`: API environment established to request the Header Data on the client-side. Possible values: `production`, `qa` and `development`. (String, default: "production")
+
+```sh
+  <Header env='development' />
+```
+
+- `urls`: Type of URL's to be established for all link elements. If empty, it will utilize `relative` URL's by default. If `absolute` URL's are required, initialize the Header component as follows (String, default: ""):
+
+```sh
+  <Header urls='absolute' />
+```
+
 - `skipNav`: Props to be passed to the `SkipNavigation` component. If these are
   not supplied the skip navigation link will not be output. It will also not be
   output if the props are not sufficient for the component (Object, default:
   null)
 
-For example, to generate a header that has a skip navigation that targets the id
+  For example, to generate a header that has a skip navigation that targets the id
 `#topcontent`:
 
-    <Header skipNav: {target: 'topcontent'} />
+```sh
+  <Header skipNav={{ target: 'topcontent' }} />
+```
 
 ## Accessibility
 

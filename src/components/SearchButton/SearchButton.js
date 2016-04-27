@@ -16,14 +16,13 @@ import FeatureFlags from 'dgx-feature-flags';
 
 // Create React class
 class SearchButton extends React.Component {
-
-  // Constructor used in ES6
   constructor(props) {
     super(props);
 
-    this.state = {
-      featureFlags: FeatureFlags.store.getState()
-    }
+    this.state = { featureFlags: FeatureFlags.store.getState() };
+
+    this._activateHover = this._activateHover.bind(this);
+    this._deactivateHover = this._deactivateHover.bind(this);
   }
 
   componentDidMount() {
@@ -35,58 +34,7 @@ class SearchButton extends React.Component {
   }
 
   _onChange() {
-    this.setState({featureFlags: FeatureFlags.store.getState()});
-  }
-
-  render () {
-    // Give active class if the button is activated by hover
-    let classes = cx({
-        'active': HeaderStore._getSearchButtonActionValue() === 'hoverSearch' ||
-          HeaderStore._getLastActiveMenuItem() === 'hoverSearch',
-      }),
-      // Detect if the header is sticky now
-      stickyStatus = cx({
-        'isSticky': HeaderStore.getState().isSticky
-      }),
-      searchLabel = <div className={`Search-Text visuallyHidden ${classes} ${stickyStatus}`}>
-        Search</div>,
-      searchLabelFeature = <div className={`Search-Text ${classes} ${stickyStatus}`}>Search</div>;
-
-    /*
-     * Feature Flag -- 'search-label'
-     * Return a DOM that includes the search-label text.
-    */
-    if (FeatureFlags.store._isFeatureActive('search-label')) {
-      return (
-        <div className={`${this.props.className}-SearchBox-Wrapper`}>
-          <BasicButton
-            onMouseEnter={this._activateHover.bind(this)}
-            onMouseLeave={this._deactivateHover.bind(this)}
-            id={`${this.props.className}-SearchButton`}
-            className={`nypl-icon-magnifier-fat ${this.props.className}-SearchButton ${classes}`}
-            name='Search Button'
-            label={searchLabelFeature} />
-          <SearchBox
-            id={`${this.props.className}-SearchBox`}
-            className={`${this.props.className}-SearchBox`} />
-        </div>
-      );
-    }
-
-    return (
-      <div className={`${this.props.className}-SearchBox-Wrapper`}>
-        <BasicButton
-          onMouseEnter={this._activateHover.bind(this)}
-          onMouseLeave={this._deactivateHover.bind(this)}
-          id={`${this.props.className}-SearchButton`}
-          className={`nypl-icon-magnifier-fat ${this.props.className}-SearchButton ${classes}`}
-          name='Search Button'
-          label={searchLabel} />
-        <SearchBox
-          id={`${this.props.className}-SearchBox`}
-          className={`${this.props.className}-SearchBox`} />
-      </div>
-    );
+    this.setState({ featureFlags: FeatureFlags.store.getState() });
   }
 
   /**
@@ -116,11 +64,76 @@ class SearchButton extends React.Component {
       Actions.searchButtonActionValue('');
     }, 250);
   }
+
+  render() {
+    // Give active class if the button is activated by hover
+    const classes = cx({
+      active: HeaderStore._getSearchButtonActionValue() === 'hoverSearch' ||
+        HeaderStore._getLastActiveMenuItem() === 'hoverSearch',
+    });
+    // Detect if the header is sticky now
+    const stickyStatus = cx({ isSticky: HeaderStore.getState().isSticky });
+    const searchLabel = (
+      <div className={`Search-Text visuallyHidden ${classes} ${stickyStatus}`}>
+        Search
+      </div>
+    );
+    const searchLabelFeature = (
+      <div className={`Search-Text ${classes} ${stickyStatus}`}>
+        Search
+      </div>
+    );
+
+    /*
+     * Feature Flag -- 'search-label'
+     * Return a DOM that includes the search-label text.
+    */
+    if (FeatureFlags.store._isFeatureActive('search-label')) {
+      return (
+        <div className={`${this.props.className}-SearchBox-Wrapper`}>
+          <BasicButton
+            onMouseEnter={this._activateHover}
+            onMouseLeave={this._deactivateHover}
+            id={`${this.props.className}-SearchButton`}
+            className={`nypl-icon-magnifier-fat ${this.props.className}-SearchButton ${classes}`}
+            name="Search Button"
+            label={searchLabelFeature}
+          />
+          <SearchBox
+            id={`${this.props.className}-SearchBox`}
+            className={`${this.props.className}-SearchBox`}
+          />
+        </div>
+      );
+    }
+
+    return (
+      <div className={`${this.props.className}-SearchBox-Wrapper`}>
+        <BasicButton
+          onMouseEnter={this._activateHover}
+          onMouseLeave={this._deactivateHover}
+          id={`${this.props.className}-SearchButton`}
+          className={`nypl-icon-magnifier-fat ${this.props.className}-SearchButton ${classes}`}
+          name="Search Button"
+          label={searchLabel}
+        />
+        <SearchBox
+          id={`${this.props.className}-SearchBox`}
+          className={`${this.props.className}-SearchBox`}
+        />
+      </div>
+    );
+  }
 }
+
+SearchButton.propTypes = {
+  lang: React.PropTypes.string,
+  className: React.PropTypes.string,
+};
 
 SearchButton.defaultProps = {
   lang: 'en',
-  className: 'NavMenu'
+  className: 'NavMenu',
 };
 
 // Export the component

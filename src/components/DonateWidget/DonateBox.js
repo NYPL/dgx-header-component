@@ -1,26 +1,27 @@
 import React from 'react';
-
 import utils from '../../utils/utils.js';
 
 class DonateBox extends React.Component {
-
   constructor(props) {
     super(props);
   }
-  
+
   render() {
     // Enforce limit to 4 links as per design.
-    let donationLinks = this.props.donationLinks.slice(0, 4),
-      donationLinkItems = (donationLinks && donationLinks.length) ?
-        donationLinks.map((item, index) => {
-          return (
-            <li key={index}>
-              <a href={item.url} onClick={utils._trackHeader.bind(this, 'Donate', `Menu--${item.amount}`)}>
-                {item.amount}
-              </a>
-            </li>
-          );
-        }) : null;
+    const donationLinks = this.props.donationLinks.slice(0, 4);
+    const donationLinkItems = (donationLinks && donationLinks.length) ?
+      donationLinks.map((item, index) => {
+        return (
+          <li key={index}>
+            <a
+              href={item.url}
+              onClick={utils._trackHeader.bind(this, 'Donate', `Menu--${item.amount}`)}
+            >
+              {item.amount}
+            </a>
+          </li>
+        );
+      }) : null;
 
     return (
       <div className={this.props.className}>
@@ -37,9 +38,18 @@ class DonateBox extends React.Component {
   }
 }
 
+DonateBox.propTypes = {
+  className: React.PropTypes.string,
+  lang: React.PropTypes.string,
+  tag: React.PropTypes.string,
+  title: React.PropTypes.string,
+  desc: React.PropTypes.string,
+  donationLinks: React.PropTypes.array,
+};
+
 DonateBox.defaultProps = {
   lang: 'en',
-  className: 'DonateBox'
+  className: 'DonateBox',
 };
 
 export default DonateBox;

@@ -26,10 +26,18 @@ var _utilsUtilsJs = require('../../utils/utils.js');
 
 var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
 
+var styles = {
+  base: {},
+  image: {
+    maxWidth: '230px'
+  },
+  icon: {
+    display: 'none'
+  }
+};
+
 var Logo = (function (_React$Component) {
   _inherits(Logo, _React$Component);
-
-  // Constructor used in ES6
 
   function Logo(props) {
     _classCallCheck(this, Logo);
@@ -47,8 +55,8 @@ var Logo = (function (_React$Component) {
           className: this.props.className,
           href: this.props.target,
           onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Click Logo', ''),
-          style: [styles.base, this.props.style //allows for parent-to-child css styling
-          ] },
+          style: [styles.base, this.props.style]
+        },
         _react2['default'].createElement('img', { src: this.props.src, style: styles.image }),
         _react2['default'].createElement('span', { className: 'nypl-icon-logo-mark', style: styles.icon })
       );
@@ -58,23 +66,19 @@ var Logo = (function (_React$Component) {
   return Logo;
 })(_react2['default'].Component);
 
-;
+Logo.propTypes = {
+  src: _react2['default'].PropTypes.string,
+  target: _react2['default'].PropTypes.string,
+  id: _react2['default'].PropTypes.string,
+  className: _react2['default'].PropTypes.string,
+  style: _react2['default'].PropTypes.object
+};
 
 Logo.defaultProps = {
   src: '//ux-static.nypl.org/images/NYPL-logo-black-pos.svg',
-  target: '//www.nypl.org',
+  target: '/',
   id: 'Logo',
   className: 'Logo'
-};
-
-var styles = {
-  base: {},
-  image: {
-    maxWidth: '230px'
-  },
-  icon: {
-    display: 'none'
-  }
 };
 
 exports['default'] = (0, _radium2['default'])(Logo);

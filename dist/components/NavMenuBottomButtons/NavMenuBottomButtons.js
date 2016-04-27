@@ -32,73 +32,6 @@ var _DonateButtonDonateButtonJs = require('../DonateButton/DonateButton.js');
 
 var _DonateButtonDonateButtonJs2 = _interopRequireDefault(_DonateButtonDonateButtonJs);
 
-var NavMenuBottomButtons = (function (_React$Component) {
-  _inherits(NavMenuBottomButtons, _React$Component);
-
-  function NavMenuBottomButtons(props) {
-    _classCallCheck(this, NavMenuBottomButtons);
-
-    _get(Object.getPrototypeOf(NavMenuBottomButtons.prototype), 'constructor', this).call(this, props);
-  }
-
-  _createClass(NavMenuBottomButtons, [{
-    key: 'render',
-    value: function render() {
-      var libraryCardClass = 'LibraryCardLink',
-          subscribeLinkClass = 'SubscribeLink';
-
-      return _react2['default'].createElement(
-        'div',
-        { className: this.props.className, style: styles.base },
-        _react2['default'].createElement(
-          'a',
-          { href: this.props.libraryCardLink, className: libraryCardClass,
-            style: styles.links, onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Click', 'Mobile Bottom Buttons - Library Card') },
-          _react2['default'].createElement(
-            'span',
-            { className: libraryCardClass + '-Wrapper', style: [styles.wrapper, styles.libraryCardLinkWrapper] },
-            _react2['default'].createElement('span', { className: libraryCardClass + '-Icon nypl-icon-card', style: styles.icon }),
-            _react2['default'].createElement(
-              'span',
-              { className: libraryCardClass + '-Label', style: [styles.label, styles.libraryCardLinkLabel] },
-              'Get a Library Card'
-            )
-          )
-        ),
-        _react2['default'].createElement(
-          'a',
-          { href: this.props.subscribeLink, className: subscribeLinkClass,
-            style: styles.links, onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Click', 'Mobile Bottom Buttons - Email Updates') },
-          _react2['default'].createElement(
-            'span',
-            { className: subscribeLinkClass + '-Wrapper', style: [styles.wrapper, styles.subscribeLinkWrapper] },
-            _react2['default'].createElement('span', { className: subscribeLinkClass + '-Icon nypl-icon-mail', style: styles.icon }),
-            _react2['default'].createElement(
-              'span',
-              { className: subscribeLinkClass + '-Label', style: [styles.label, styles.subscribeLinkLabel] },
-              'Get Email Updates'
-            )
-          )
-        ),
-        _react2['default'].createElement(_DonateButtonDonateButtonJs2['default'], {
-          id: 'MobileNav-DonateButton',
-          className: 'DonateLink',
-          style: styles.donateLink,
-          gaLabel: 'Mobile Buttons Donate' })
-      );
-    }
-  }]);
-
-  return NavMenuBottomButtons;
-})(_react2['default'].Component);
-
-NavMenuBottomButtons.defaultProps = {
-  lang: 'en',
-  className: 'NavMenuBottomButtons',
-  libraryCardLink: '//catalog.nypl.org/screens/selfregpick.html',
-  subscribeLink: '//pages.email.nypl.org/page.aspx?QS=3935619f7de112ef7250fe02b84fb2f9ab74e4ea015814b7'
-};
-
 var styles = {
   base: {
     borderTop: '2px solid #363636',
@@ -152,6 +85,104 @@ var styles = {
     textTransform: 'uppercase',
     fontSize: '16px'
   }
+};
+
+var NavMenuBottomButtons = (function (_React$Component) {
+  _inherits(NavMenuBottomButtons, _React$Component);
+
+  function NavMenuBottomButtons(props) {
+    _classCallCheck(this, NavMenuBottomButtons);
+
+    _get(Object.getPrototypeOf(NavMenuBottomButtons.prototype), 'constructor', this).call(this, props);
+  }
+
+  _createClass(NavMenuBottomButtons, [{
+    key: 'render',
+    value: function render() {
+      var libraryCardClass = 'LibraryCardLink';
+      var subscribeLinkClass = 'SubscribeLink';
+
+      return _react2['default'].createElement(
+        'div',
+        { className: this.props.className, style: styles.base },
+        _react2['default'].createElement(
+          'a',
+          {
+            href: this.props.libraryCardLink,
+            className: libraryCardClass,
+            style: styles.links,
+            onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Click', 'Mobile Bottom Buttons - Library Card')
+          },
+          _react2['default'].createElement(
+            'span',
+            {
+              className: libraryCardClass + '-Wrapper',
+              style: [styles.wrapper, styles.libraryCardLinkWrapper]
+            },
+            _react2['default'].createElement('span', { className: libraryCardClass + '-Icon nypl-icon-card', style: styles.icon }),
+            _react2['default'].createElement(
+              'span',
+              {
+                className: libraryCardClass + '-Label',
+                style: [styles.label, styles.libraryCardLinkLabel]
+              },
+              'Get a Library Card'
+            )
+          )
+        ),
+        _react2['default'].createElement(
+          'a',
+          {
+            href: this.props.subscribeLink,
+            className: subscribeLinkClass,
+            style: styles.links,
+            onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Click', 'Mobile Bottom Buttons - Email Updates')
+          },
+          _react2['default'].createElement(
+            'span',
+            {
+              className: subscribeLinkClass + '-Wrapper',
+              style: [styles.wrapper, styles.subscribeLinkWrapper]
+            },
+            _react2['default'].createElement('span', {
+              className: subscribeLinkClass + '-Icon nypl-icon-mail',
+              style: styles.icon
+            }),
+            _react2['default'].createElement(
+              'span',
+              {
+                className: subscribeLinkClass + '-Label',
+                style: [styles.label, styles.subscribeLinkLabel]
+              },
+              'Get Email Updates'
+            )
+          )
+        ),
+        _react2['default'].createElement(_DonateButtonDonateButtonJs2['default'], {
+          id: 'MobileNav-DonateButton',
+          className: 'DonateLink',
+          style: styles.donateLink,
+          gaLabel: 'Mobile Buttons Donate'
+        })
+      );
+    }
+  }]);
+
+  return NavMenuBottomButtons;
+})(_react2['default'].Component);
+
+NavMenuBottomButtons.propTypes = {
+  lang: _react2['default'].PropTypes.string,
+  className: _react2['default'].PropTypes.string,
+  libraryCardLink: _react2['default'].PropTypes.string,
+  subscribeLink: _react2['default'].PropTypes.string
+};
+
+NavMenuBottomButtons.defaultProps = {
+  lang: 'en',
+  className: 'NavMenuBottomButtons',
+  libraryCardLink: '//catalog.nypl.org/screens/selfregpick.html',
+  subscribeLink: '//pages.email.nypl.org/page.aspx' + '?QS=3935619f7de112ef7250fe02b84fb2f9ab74e4ea015814b7'
 };
 
 exports['default'] = (0, _radium2['default'])(NavMenuBottomButtons);

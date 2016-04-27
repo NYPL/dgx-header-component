@@ -30,7 +30,6 @@ var LocationFinder = (function (_React$Component) {
 
     _get(Object.getPrototypeOf(LocationFinder.prototype), 'constructor', this).call(this, props);
 
-    // Holds the initial component state
     this.state = {
       zipcode: null,
       disableSubmit: true,
@@ -41,12 +40,118 @@ var LocationFinder = (function (_React$Component) {
     this._handleChange = this._handleChange.bind(this);
   }
 
+  /**
+   * _handleSubmit()
+   * updates the state reference
+   * which holds the nearestLocation
+   * property
+   *
+   * @return {Object} location
+   */
+
   _createClass(LocationFinder, [{
+    key: '_handleSubmit',
+    value: function _handleSubmit() {}
+
+    /**
+     * _enableSubmitButton()
+     * sets the state's disableSubmit
+     * property value to false
+     *
+     */
+  }, {
+    key: '_enableSubmitButton',
+    value: function _enableSubmitButton() {
+      this.setState({ disableSubmit: false });
+    }
+
+    /**
+     * _getNearestLocations(zipcode)
+     * returns the nearest location object
+     * from the list of NYPL locations
+     * based of an API.
+     *
+     * @param {Number} zipcode
+     * @return {Object} location
+     */
+    // _getNearestLocations(zipcode) {
+    //
+    // }
+
+    /**
+     * _validateZipcode(zipcode)
+     * returns a boolean value based
+     * on the validity of the zipcode param.
+     *
+     * @param {Number} zipcode
+     * @return {Boolean} true/false
+     */
+  }, {
+    key: '_validateZipcode',
+    value: function _validateZipcode(zipcode) {
+      if (zipcode && !isNaN(zipcode) && zipcode.length === 5) {
+        return true;
+      }
+      return false;
+    }
+
+    /**
+     * _getZipcodeValue()
+     * returns the current value
+     * from the state zipcode property
+     *
+     * @return {Number} state.zipcode
+     */
+  }, {
+    key: '_getZipcodeValue',
+    value: function _getZipcodeValue() {
+      return this.state.zipcode;
+    }
+
+    /**
+     * _setZipcodeValue(value)
+     * sets the state's zipcode
+     * property with the param value
+     *
+     * @param {Number} value
+     */
+  }, {
+    key: '_setZipcodeValue',
+    value: function _setZipcodeValue(value) {
+      this.setState({ zipcode: value });
+    }
+
+    /**
+     * _handleChange()
+     * handles the changing value
+     * of the zipcode input and
+     * is responsible for firing off
+     * the nearest location suggestions
+     *
+     */
+  }, {
+    key: '_handleChange',
+    value: function _handleChange() {
+      var zipcode = _reactDom2['default'].findDOMNode(this.refs.zipCodeInput).value;
+
+      if (this._validateZipcode(zipcode)) {
+        // Update the state.zipcode value
+        this._setZipcodeValue(zipcode);
+
+        // Enable the submitButton
+        this._enableSubmitButton();
+
+        // Execute Autocomplete Search Suggestions
+        // console.log('Input is valid, suggestions should be enabled');
+      } else {
+          // Do not execute Autocomplete
+        }
+    }
+  }, {
     key: 'render',
     value: function render() {
       // Reference the zipcode from the state.
-      var zipcode = this.state.zipcode;
-
+      // const zipcode = this.state.zipcode;
       return _react2['default'].createElement(
         'div',
         { className: this.props.className },
@@ -66,128 +171,36 @@ var LocationFinder = (function (_React$Component) {
           _react2['default'].createElement(
             'div',
             { className: this.props.className + '-SearchBox' },
-            _react2['default'].createElement('input', { type: 'text', placeholder: 'Zip Code', id: 'LocationFinder-Input', ref: 'zipCodeInput', onChange: this._handleChange }),
+            _react2['default'].createElement('input', {
+              type: 'text',
+              placeholder: 'Zip Code',
+              id: 'LocationFinder-Input',
+              ref: 'zipCodeInput',
+              onChange: this._handleChange
+            }),
             _react2['default'].createElement(
               'button',
-              { type: 'button', id: 'LocationFinder-Submit', disabled: this.state.disableSubmit, onClick: this._handleSubmit },
+              {
+                type: 'button',
+                id: 'LocationFinder-Submit',
+                disabled: this.state.disableSubmit,
+                onClick: this._handleSubmit
+              },
               'FIND'
             )
           )
         )
       );
     }
-
-    /**
-     * _handleSubmit() 
-     * updates the state reference 
-     * which holds the nearestLocation
-     * property
-     *
-     * @return {Object} location
-     */
-  }, {
-    key: '_handleSubmit',
-    value: function _handleSubmit() {}
-
-    /**
-     * _enableSubmitButton() 
-     * sets the state's disableSubmit
-     * property value to false
-     *
-     */
-  }, {
-    key: '_enableSubmitButton',
-    value: function _enableSubmitButton() {
-      this.setState({ disableSubmit: false });
-    }
-
-    /**
-     * _getNearestLocations(zipcode) 
-     * returns the nearest location object
-     * from the list of NYPL locations
-     * based of an API.
-     *
-     * @param {Number} zipcode
-     * @return {Object} location
-     */
-  }, {
-    key: '_getNearestLocations',
-    value: function _getNearestLocations(zipcode) {}
-
-    /**
-     * _validateZipcode(zipcode) 
-     * returns a boolean value based 
-     * on the validity of the zipcode param.
-     *
-     * @param {Number} zipcode
-     * @return {Boolean} true/false
-     */
-  }, {
-    key: '_validateZipcode',
-    value: function _validateZipcode(zipcode) {
-      if (zipcode && !isNaN(zipcode) && zipcode.length === 5) {
-        return true;
-      }
-      return false;
-    }
-
-    /**
-     * _getZipcodeValue() 
-     * returns the current value
-     * from the state zipcode property
-     *
-     * @return {Number} state.zipcode
-     */
-  }, {
-    key: '_getZipcodeValue',
-    value: function _getZipcodeValue() {
-      return this.state.zipcode;
-    }
-
-    /**
-     * _setZipcodeValue(value) 
-     * sets the state's zipcode
-     * property with the param value
-     *
-     * @param {Number} value
-     */
-  }, {
-    key: '_setZipcodeValue',
-    value: function _setZipcodeValue(value) {
-      this.setState({ zipcode: value });
-    }
-
-    /**
-     * _handleChange() 
-     * handles the changing value
-     * of the zipcode input and
-     * is responsible for firing off
-     * the nearest location suggestions
-     *
-     */
-  }, {
-    key: '_handleChange',
-    value: function _handleChange() {
-      var zipcode = _reactDom2['default'].findDOMNode(this.refs.zipCodeInput).value;
-
-      if (this._validateZipcode(zipcode)) {
-
-        // Update the state.zipcode value
-        this._setZipcodeValue(zipcode);
-
-        // Enable the submitButton
-        this._enableSubmitButton();
-
-        // Execute Autocomplete Search Suggestions
-        console.log('Input is valid, suggestions should be enabled');
-      } else {
-        // Do not execute Autocomplete
-      }
-    }
   }]);
 
   return LocationFinder;
 })(_react2['default'].Component);
+
+LocationFinder.propTypes = {
+  lang: _react2['default'].PropTypes.string,
+  className: _react2['default'].PropTypes.string
+};
 
 LocationFinder.defaultProps = {
   lang: 'en',

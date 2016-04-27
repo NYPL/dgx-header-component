@@ -1,4 +1,4 @@
-let config = {
+const config = {
   appTitle: 'NYPL | React Header',
   appName: 'NYPL DGX React Header',
   port: 3001,

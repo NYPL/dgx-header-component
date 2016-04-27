@@ -18,9 +18,14 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ButtonsSimpleButtonJs = require('../Buttons/SimpleButton.js');
-
-var _ButtonsSimpleButtonJs2 = _interopRequireDefault(_ButtonsSimpleButtonJs);
+var styles = {
+  base: {},
+  icon: {
+    fontSize: '25px',
+    verticalAlign: 'middle',
+    marginLeft: '5px'
+  }
+};
 
 var FindUsFeature = (function (_React$Component) {
   _inherits(FindUsFeature, _React$Component);
@@ -29,13 +34,12 @@ var FindUsFeature = (function (_React$Component) {
     _classCallCheck(this, FindUsFeature);
 
     _get(Object.getPrototypeOf(FindUsFeature.prototype), 'constructor', this).call(this, props);
-    this.state = {};
   }
 
   _createClass(FindUsFeature, [{
     key: 'render',
     value: function render() {
-      var locinator = '//www.nypl.org/locations';
+      var locinator = this.props.urlType === 'absolute' ? '//www.nypl.org/locations' : '/locations';
 
       return _react2['default'].createElement(
         'div',
@@ -55,7 +59,11 @@ var FindUsFeature = (function (_React$Component) {
           ),
           _react2['default'].createElement(
             'a',
-            { style: styles.base, href: locinator, className: this.props.className + '-Link' },
+            {
+              style: styles.base,
+              href: locinator,
+              className: this.props.className + '-Link'
+            },
             'FIND A LOCATION',
             _react2['default'].createElement('span', { style: styles.icon, className: 'nypl-icon-wedge-right icon' })
           )
@@ -67,18 +75,15 @@ var FindUsFeature = (function (_React$Component) {
   return FindUsFeature;
 })(_react2['default'].Component);
 
+FindUsFeature.propTypes = {
+  lang: _react2['default'].PropTypes.string,
+  className: _react2['default'].PropTypes.string,
+  urlType: _react2['default'].PropTypes.string
+};
+
 FindUsFeature.defaultProps = {
   lang: 'en',
   className: 'FindUsFeature'
-};
-
-var styles = {
-  base: {},
-  icon: {
-    fontSize: '25px',
-    verticalAlign: 'middle',
-    marginLeft: '5px'
-  }
 };
 
 exports['default'] = FindUsFeature;

@@ -1,26 +1,39 @@
 import React from 'react';
 
-import SimpleButton from '../Buttons/SimpleButton.js';
+const styles = {
+  base: {},
+  icon: {
+    fontSize: '25px',
+    verticalAlign: 'middle',
+    marginLeft: '5px',
+  },
+};
 
 class FindUsFeature extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
   }
 
   render() {
-    let locinator = '//www.nypl.org/locations';
+    const locinator = (this.props.urlType === 'absolute') ?
+      '//www.nypl.org/locations' : '/locations';
 
     return (
       <div className={this.props.className}>
-        <div className={this.props.className + '-Wrapper'}>
-          <div className={this.props.className + '-Tag'}>Locations</div>
-          <h2 className={this.props.className + '-Title'}>
+        <div className={`${this.props.className}-Wrapper`}>
+          <div className={`${this.props.className}-Tag`}>
+            Locations
+          </div>
+          <h2 className={`${this.props.className}-Title`}>
             Explore NYPL&apos;s 92 locations in the Bronx, Manhattan, and Staten Island.
           </h2>
-          <a style={styles.base} href={locinator} className={this.props.className + '-Link'}>
+          <a
+            style={styles.base}
+            href={locinator}
+            className={`${this.props.className}-Link`}
+          >
             FIND A LOCATION
-            <span style={styles.icon} className='nypl-icon-wedge-right icon'></span>
+            <span style={styles.icon} className="nypl-icon-wedge-right icon"></span>
           </a>
         </div>
       </div>
@@ -28,18 +41,15 @@ class FindUsFeature extends React.Component {
   }
 }
 
-FindUsFeature.defaultProps = {
-  lang: 'en',
-  className: 'FindUsFeature'
+FindUsFeature.propTypes = {
+  lang: React.PropTypes.string,
+  className: React.PropTypes.string,
+  urlType: React.PropTypes.string,
 };
 
-const styles = {
-  base: {},
-  icon: {
-    fontSize: '25px',
-    verticalAlign: 'middle',
-    marginLeft: '5px'
-  }
+FindUsFeature.defaultProps = {
+  lang: 'en',
+  className: 'FindUsFeature',
 };
 
 export default FindUsFeature;

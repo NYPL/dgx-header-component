@@ -1,5 +1,3 @@
-// The button component that doesn't activate any link, only interaction and submission
-// Import React libraries
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -20,10 +18,12 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var styles = {
+  base: {}
+};
+
 var BasicButton = (function (_React$Component) {
   _inherits(BasicButton, _React$Component);
-
-  // Constructor used in ES6
 
   function BasicButton(props) {
     _classCallCheck(this, BasicButton);
@@ -37,14 +37,15 @@ var BasicButton = (function (_React$Component) {
       return _react2['default'].createElement(
         'button',
         {
-          ref: 'BasicButton',
+          ref: this.props.ref,
           id: this.props.id,
           className: this.props.className,
           name: this.props.name,
           onClick: this.props.onClick,
           onMouseEnter: this.props.onMouseEnter,
           onMouseLeave: this.props.onMouseLeave,
-          style: [styles.base, this.props.style] },
+          style: [styles.base, this.props.style]
+        },
         this.props.label
       );
     }
@@ -53,21 +54,27 @@ var BasicButton = (function (_React$Component) {
   return BasicButton;
 })(_react2['default'].Component);
 
-;
+BasicButton.propTypes = {
+  ref: _react2['default'].PropTypes.string,
+  id: _react2['default'].PropTypes.string,
+  className: _react2['default'].PropTypes.string,
+  name: _react2['default'].PropTypes.string,
+  label: _react2['default'].PropTypes.object,
+  lang: _react2['default'].PropTypes.string,
+  onClick: _react2['default'].PropTypes.func,
+  onMouseEnter: _react2['default'].PropTypes.func,
+  onMouseLeave: _react2['default'].PropTypes.func,
+  style: _react2['default'].PropTypes.object
+};
 
 BasicButton.defaultProps = {
+  ref: 'BasicButton',
   id: 'BasicButton',
   className: 'BasicButton',
   name: 'BasicButton',
-  label: 'Basic Button',
   lang: 'en',
   onClick: function onClick() {}
 };
 
-var styles = {
-  base: {}
-};
-
-// Export the component
 exports['default'] = BasicButton;
 module.exports = exports['default'];

@@ -1,24 +1,50 @@
 // Import React libraries
 import React from 'react';
 import cx from 'classnames';
-
 // Import components
 import InputField from '../InputField/InputField.js';
-import SimpleButton from '../Buttons/SimpleButton.js';
-
 // ALT Flux Store/Actions
 import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
-
 // GA Utility Library
 import utils from '../../utils/utils.js';
 
+// Radio button properties
+const inputOptionData = [
+  {
+    id: 'catalog',
+    name: 'inputOption',
+    value: 'catalog',
+    ref: 'optionCatalog',
+    labelText: 'Search the Catalog',
+  },
+  {
+    id: 'website',
+    name: 'inputOption',
+    value: 'website',
+    ref: 'optionWebsite',
+    labelText: 'Search NYPL.org',
+  },
+];
+
+// mobile submit button properties
+const mobileSubmitButtonData = [
+  {
+    columnClass: 'left-column',
+    value: 'catalog',
+    text: 'catalog',
+  },
+  {
+    columnClass: 'right-column',
+    value: 'website',
+    text: 'nypl.org',
+  },
+];
+
 class SearchBox extends React.Component {
-  // Constructor used in ES6
   constructor(props) {
     super(props);
-    
-    // The default values of input fields
+
     this.state = {
       searchKeywords: '',
       searchOption: 'catalog',
@@ -26,7 +52,7 @@ class SearchBox extends React.Component {
       placeholderAnimation: null,
       noAnimationBefore: true,
       actionValue: HeaderStore.getState().searchButtonAction,
-      lastActiveMenuItem: HeaderStore.getState().lastActiveMenuItem
+      lastActiveMenuItem: HeaderStore.getState().lastActiveMenuItem,
     };
 
     // The function listens to the changes of input fields
@@ -37,6 +63,8 @@ class SearchBox extends React.Component {
     this._triggerSubmit = this._triggerSubmit.bind(this);
     // The fucntion to trigger validation animation for keywords input
     this._animationTimer = this._animationTimer.bind(this);
+    this._watchHoverIntentEnter = this._watchHoverIntentEnter.bind(this);
+    this._watchHoverIntentLeave = this._watchHoverIntentLeave.bind(this);
   }
 
   // Listen to the search button action changes in Store,
@@ -52,98 +80,8 @@ class SearchBox extends React.Component {
   _onChange() {
     this.setState({
       actionValue: HeaderStore.getState().searchButtonAction,
-      lastActiveMenuItem: HeaderStore.getState().lastActiveMenuItem
+      lastActiveMenuItem: HeaderStore.getState().lastActiveMenuItem,
     });
-  }
-
-  // Dom Render Section
-  render() {
-    // Set active class if search button is hovered or clicked
-    let classes = cx({
-        'active animateMegaMenuEnter fadeIn': this.state.actionValue === 'hoverSearch',
-        'active': HeaderStore._getLastActiveMenuItem() === 'hoverSearch',
-        'mobileActive': this.state.actionValue === 'clickSearch'
-      }),
-      // Classes for keywords input fields to activate pulse animation
-      pulseAnimation = cx({
-        'keywords-pulse-fade-in': this.state.placeholderAnimation === 'initial',
-        'keywords-pulse': this.state.placeholderAnimation === 'sequential'
-      }),
-      
-      // Render radio buttons with their own properties
-      inputOptions = inputOptionData.map((element, i) => {
-        return (
-          <div className={`${this.props.className}-Input-Option`} key={i}>
-            <InputField type='radio'
-              id={element.id}
-              name={element.name}
-              value = {element.value}
-              ref={element.ref}
-              checked={this.state.searchOption === element.value}
-              onChange={this._inputChange.bind(this, 'option')} />
-            <label htmlFor={element.id} className={`${this.props.className}-Input-Options-label`}>
-              {element.labelText}
-            </label>
-          </div>
-        );
-      }),
-
-      // Render submit buttons for the mobile version
-      mobileSubmitButtons = mobileSubmitButtonData.map((element, i) => {
-        return (
-          <div key={i}
-          className={`${this.props.className}-Mobile-Submit-Option ${element.columnClass}`}
-          value={element.value}
-          onClick={this._submitSearchRequest.bind(this, element.value)}>
-            <span className='title'>{element.text}</span>
-            <span className='nypl-icon-wedge-right icon'></span>
-          </div>
-        );
-      });
-
-    return (
-      <div 
-        id={this.props.id} 
-        className={`${this.props.className} ${classes}`} 
-        onKeyPress={this._triggerSubmit}
-        onMouseEnter={this._watchHoverIntentEnter.bind(this)}
-        onMouseLeave={this._watchHoverIntentLeave.bind(this)}>
-
-        <div id={`${this.props.className}-Elements-Wrapper`} className={`${this.props.className}-Elements-Wrapper`}>
-          <div id={`${this.props.className}-Elements-Input-Wrapper`}
-          className={`${this.props.className}-Elements-Input-Wrapper`}>
-            <div id={`${this.props.className}-Elements-Input-Keywords-Wrapper`}
-            className={`${this.props.className}-Elements-Input-Keywords-Wrapper`}>
-              <div className={`${this.props.className}-Input-Keywords-Border`}>
-                <span className='nypl-icon-magnifier-thin icon'></span>
-                <InputField type='text'
-                id={`${this.props.id}-Input-Keywords`}
-                className={`${this.props.className}-Input-Keywords ${pulseAnimation}`}
-                ref='keywords'
-                value={this.state.searchKeywords}
-                maxLength='128'
-                placeholder={this.state.placeholder}
-                onChange={this._inputChange.bind(this, 'keywords')} />
-              </div>
-            </div>
-            <div id={`${this.props.className}-Elements-Input-Options-Wrapper`}
-            className={`${this.props.className}-Elements-Input-Options-Wrapper`}>
-              {inputOptions}
-            </div>
-          </div>
-
-          <div id={`${this.props.className}-Mobile-Submit`}
-           className={`${this.props.className}-Mobile-Submit`}>
-            {mobileSubmitButtons}
-          </div>
-
-          <button id={`${this.props.className}-Elements-SubmitButton`}
-          className={`nypl-icon-magnifier-fat ${this.props.className}-Elements-SubmitButton`}
-          onClick={this._submitSearchRequest.bind(this, null)}>
-          </button>
-        </div>
-      </div>
-    );
   }
 
   /**
@@ -158,9 +96,9 @@ class SearchBox extends React.Component {
    */
   _inputChange(field, event) {
     if (field === 'keywords') {
-      this.setState({searchKeywords: event.target.value});
+      this.setState({ searchKeywords: event.target.value });
     } else if (field === 'option') {
-      this.setState({searchOption: event.target.value});
+      this.setState({ searchOption: event.target.value });
     }
   }
 
@@ -171,42 +109,37 @@ class SearchBox extends React.Component {
    * @param {String} value
    */
   _submitSearchRequest(value) {
+    const encoreBaseUrl = 'http://browse.nypl.org/iii/encore/search/';
+    const catalogBaseUrl = 'http://www.nypl.org/search/apachesolr_search/';
     // Store the data that the user entered
-    let requestParameters = {
-        keywords: this.state.searchKeywords.trim(),
-        // If the value is null, it indicates the function is triggered on desktop version.
-        // Then it should get the value for option from state.
-        option: value || this.state.searchOption
-      },
-      // The variable for request URL
-      requestUrl,
-      encoreBaseUrl = 'http://browse.nypl.org/iii/encore/search/',
-      catalogBaseUrl = 'http://www.nypl.org/search/apachesolr_search/',
-      gaSearchLabel,
-      inputKeywords,
-      pulse;
+    const requestParameters = {
+      keywords: this.state.searchKeywords.trim(),
+      // If the value is null, it indicates the function is triggered on desktop version.
+      // Then it should get the value for option from state.
+      option: value || this.state.searchOption,
+    };
+    // The variable for request URL
+    let requestUrl;
+    let gaSearchLabel;
 
     // Decide the search option based on which button the user clicked on mobile version search box
     if (requestParameters.option === 'catalog') {
       gaSearchLabel = 'Submit Catalog Search';
       requestUrl = this._setEncoreUrl(requestParameters.keywords, encoreBaseUrl, 'eng');
-    }  else if (requestParameters.option === 'website') {
+    } else if (requestParameters.option === 'website') {
       gaSearchLabel = 'Submit Search';
       requestUrl = this._setCatalogUrl(requestParameters.keywords, catalogBaseUrl);
     }
 
     // This portion is for the interactions if the user doesn't enter any input
     if (!requestParameters.keywords) {
-      // The selector for inputKeywords DOM element
-      inputKeywords = this.refs.keywords;
       // The new placeholder that tells users there's no keywords input
-      this.setState({placeholder: 'Please enter a search term.'});
+      this.setState({ placeholder: 'Please enter a search term.' });
       // Trigger the validation animation
-      this._animationTimer(inputKeywords);
+      this._animationTimer();
     } else {
       // Fire GA event to track Search
       utils._trackHeader('Search', gaSearchLabel);
-
       // Go to the search page
       window.location.assign(requestUrl);
     }
@@ -226,33 +159,32 @@ class SearchBox extends React.Component {
   }
 
   /**
-   * _animationTimer(element)
+   * _animationTimer()
    * Add the CSS animation to the placeholder of the keywords Input.
    * It adds the proper class to the html element to trigger the animation,
    * and then removes the class to stop it.
    *
-   * @param {DOM Element} element
    */
-  _animationTimer(element) {
-    let frame = 0,
-      animation = setInterval(() => {
-        frame ++;
-        // Remove the class to stop the animation after 0.1s
-        if (frame > 1) {
-          clearInterval(animation);
-          this.setState({placeholderAnimation: null});
-          // Set animation to be sequential
-          this.setState({noAnimationBefore: false});
-        }
-      }, 100);
+  _animationTimer() {
+    let frame = 0;
+    const animation = setInterval(() => {
+      frame ++;
+      // Remove the class to stop the animation after 0.1s
+      if (frame > 1) {
+        clearInterval(animation);
+        this.setState({ placeholderAnimation: null });
+        // Set animation to be sequential
+        this.setState({ noAnimationBefore: false });
+      }
+    }, 100);
 
     // Decide which CSS animation is going to perform
     // by adding different classes to the element.
     // It is based on if it is the first time the validation to be triggered.
     if (this.state.noAnimationBefore) {
-      this.setState({placeholderAnimation: 'initial'});
+      this.setState({ placeholderAnimation: 'initial' });
     } else {
-      this.setState({placeholderAnimation: 'sequential'});
+      this.setState({ placeholderAnimation: 'sequential' });
     }
   }
 
@@ -283,7 +215,7 @@ class SearchBox extends React.Component {
    * Returns the final URL for the catalog search.
    */
   _setCatalogUrl(searchString, catalogBaseUrl) {
-    let catalogUrl = catalogBaseUrl || 'http://www.nypl.org/search/apachesolr_search/';
+    const catalogUrl = catalogBaseUrl || 'http://www.nypl.org/search/apachesolr_search/';
 
     if (searchString) {
       return catalogUrl + encodeURIComponent(searchString);
@@ -294,23 +226,23 @@ class SearchBox extends React.Component {
    * _encoreEncodeSearchString(string)
    * base64_encoding_map includes special characters that need to be
    * encoded using base64 - these chars are "=","/", "\", "?"
-   * character : base64 encoded 
+   * character : base64 encoded
    */
   _encoreEncodeSearchString(string) {
-    let base64_enc_map = {
-        '=': 'PQ==',
-        '/': 'Lw==',
-        '\\': 'XA==',
-        '?': 'Pw=='
-      },
-      encodedString = string,
-      charRegExString,
-      base64Regex;
+    const base64EncMap = {
+      '=': 'PQ==',
+      '/': 'Lw==',
+      '\\': 'XA==',
+      '?': 'Pw==',
+    };
+    let encodedString = string;
+    let charRegExString;
+    let base64Regex;
 
-    Object.keys(base64_enc_map).forEach((specialChar) => {
+    Object.keys(base64EncMap).forEach((specialChar) => {
       charRegExString = specialChar.replace(/([\.\*\+\?\^\=\!\:\$\{\}\(\)\|\[\]\/\\])/g, '\\$1');
       base64Regex = new RegExp(charRegExString, 'g');
-      encodedString = encodedString.replace(base64Regex, base64_enc_map[specialChar]);
+      encodedString = encodedString.replace(base64Regex, base64EncMap[specialChar]);
     });
 
     return encodedString;
@@ -324,10 +256,10 @@ class SearchBox extends React.Component {
    * language may be concatenated as well.
    */
   _setEncoreUrl(searchInput, baseUrl, language, scopeString) {
-    let searchTerm = this._encoreEncodeSearchString(searchInput),
-      rootUrl = baseUrl || 'http://browse.nypl.org/iii/encore/search/',
-      defaultLang = (language) ? `?lang=${language}` : '',
-      finalEncoreUrl;
+    const searchTerm = this._encoreEncodeSearchString(searchInput);
+    const rootUrl = baseUrl || 'http://browse.nypl.org/iii/encore/search/';
+    const defaultLang = (language) ? `?lang=${language}` : '';
+    let finalEncoreUrl;
 
     if (searchTerm) {
       finalEncoreUrl = this._encoreAddScope(rootUrl, searchTerm, scopeString) + defaultLang;
@@ -343,49 +275,129 @@ class SearchBox extends React.Component {
    * be returned as the final url.
    */
   _encoreAddScope(baseUrl, searchString, scopeString) {
-    return scopeString ? 
+    return scopeString ?
       `${baseUrl}C__S${searchString}${scopeString}__Orightresult__U` :
       `${baseUrl}C__S${searchString}__Orightresult__U`;
   }
+
+  render() {
+    // Set active class if search button is hovered or clicked
+    const classes = cx({
+      'active animateMegaMenuEnter fadeIn': this.state.actionValue === 'hoverSearch',
+      active: HeaderStore._getLastActiveMenuItem() === 'hoverSearch',
+      mobileActive: this.state.actionValue === 'clickSearch',
+    });
+    // Classes for keywords input fields to activate pulse animation
+    const pulseAnimation = cx({
+      'keywords-pulse-fade-in': this.state.placeholderAnimation === 'initial',
+      'keywords-pulse': this.state.placeholderAnimation === 'sequential',
+    });
+
+    // Render radio buttons with their own properties
+    const inputOptions = inputOptionData.map((element, i) =>
+      <div className={`${this.props.className}-Input-Option`} key={i}>
+        <InputField
+          type="radio"
+          id={element.id}
+          name={element.name}
+          value = {element.value}
+          ref={element.ref}
+          checked={this.state.searchOption === element.value}
+          onChange={this._inputChange.bind(this, 'option')}
+        />
+        <label
+          htmlFor={element.id}
+          className={`${this.props.className}-Input-Options-label`}
+        >
+          {element.labelText}
+        </label>
+      </div>
+    );
+
+    // Render submit buttons for the mobile version
+    const mobileSubmitButtons = mobileSubmitButtonData.map((element, i) =>
+      <div
+        key={i}
+        className={`${this.props.className}-Mobile-Submit-Option ${element.columnClass}`}
+        value={element.value}
+        onClick={this._submitSearchRequest.bind(this, element.value)}
+      >
+        <span className="title">{element.text}</span>
+        <span className="nypl-icon-wedge-right icon"></span>
+      </div>
+    );
+
+    return (
+      <div
+        id={this.props.id}
+        className={`${this.props.className} ${classes}`}
+        onKeyPress={this._triggerSubmit}
+        onMouseEnter={this._watchHoverIntentEnter}
+        onMouseLeave={this._watchHoverIntentLeave}
+      >
+        <div
+          id={`${this.props.className}-Elements-Wrapper`}
+          className={`${this.props.className}-Elements-Wrapper`}
+        >
+          <div
+            id={`${this.props.className}-Elements-Input-Wrapper`}
+            className={`${this.props.className}-Elements-Input-Wrapper`}
+          >
+            <div
+              id={`${this.props.className}-Elements-Input-Keywords-Wrapper`}
+              className={`${this.props.className}-Elements-Input-Keywords-Wrapper`}
+            >
+              <div className={`${this.props.className}-Input-Keywords-Border`}>
+                <span className="nypl-icon-magnifier-thin icon"></span>
+                <InputField
+                  type="text"
+                  id={`${this.props.id}-Input-Keywords`}
+                  className={`${this.props.className}-Input-Keywords ${pulseAnimation}`}
+                  ref="keywords"
+                  value={this.state.searchKeywords}
+                  maxLength="128"
+                  placeholder={this.state.placeholder}
+                  onChange={this._inputChange.bind(this, 'keywords')}
+                />
+              </div>
+            </div>
+            <div
+              id={`${this.props.className}-Elements-Input-Options-Wrapper`}
+              className={`${this.props.className}-Elements-Input-Options-Wrapper`}
+            >
+              {inputOptions}
+            </div>
+          </div>
+
+          <div
+            id={`${this.props.className}-Mobile-Submit`}
+            className={`${this.props.className}-Mobile-Submit`}
+          >
+            {mobileSubmitButtons}
+          </div>
+
+          <button
+            id={`${this.props.className}-Elements-SubmitButton`}
+            className={`nypl-icon-magnifier-fat ${this.props.className}-Elements-SubmitButton`}
+            onClick={this._submitSearchRequest.bind(this, null)}
+          >
+          </button>
+        </div>
+      </div>
+    );
+  }
 }
+
+SearchBox.propTypes = {
+  lang: React.PropTypes.string,
+  id: React.PropTypes.string,
+  className: React.PropTypes.string,
+};
 
 SearchBox.defaultProps = {
   lang: 'en',
   id: 'SearchBox',
-  className: 'SearchBox'
+  className: 'SearchBox',
 };
 
-// Radio button properties
-const inputOptionData = [
-    {
-      id: 'catalog',
-      name: 'inputOption',
-      value: 'catalog',
-      ref: 'optionCatalog',
-      labelText: 'Search the Catalog'
-    },
-    {
-      id: 'website',
-      name: 'inputOption',
-      value: 'website',
-      ref: 'optionWebsite',
-      labelText: 'Search NYPL.org'
-    }
-  ],
-
-  // mobile submit button properties
-  mobileSubmitButtonData = [
-    {
-      columnClass: 'left-column',
-      value: 'catalog',
-      text: 'catalog'
-    },
-    {
-      columnClass: 'right-column',
-      value: 'website',
-      text: 'nypl.org'
-    }
-  ];
-
-// Export the component
-module.exports = SearchBox;
+export default SearchBox;

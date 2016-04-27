@@ -26,10 +26,17 @@ var _utilsUtilsJs = require('../../utils/utils.js');
 
 var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
 
+var styles = {
+  base: {
+    backgroundColor: '#E43534',
+    color: 'white',
+    padding: '1em',
+    margin: '0'
+  }
+};
+
 var DonateButton = (function (_React$Component) {
   _inherits(DonateButton, _React$Component);
-
-  // Constructor used in ES6
 
   function DonateButton(props) {
     _classCallCheck(this, DonateButton);
@@ -42,13 +49,14 @@ var DonateButton = (function (_React$Component) {
     value: function render() {
       return _react2['default'].createElement(
         'a',
-        { id: this.props.id,
+        {
+          id: this.props.id,
           className: this.props.className,
           href: this.props.target,
           lang: this.props.lang,
           onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Donate', this.props.gaLabel),
-          style: [styles.base, this.props.style //allows for parent-to-child css styling
-          ] },
+          style: [styles.base, this.props.style]
+        },
         this.props.label
       );
     }
@@ -57,7 +65,15 @@ var DonateButton = (function (_React$Component) {
   return DonateButton;
 })(_react2['default'].Component);
 
-;
+DonateButton.propTypes = {
+  id: _react2['default'].PropTypes.string,
+  className: _react2['default'].PropTypes.string,
+  target: _react2['default'].PropTypes.string,
+  label: _react2['default'].PropTypes.string,
+  lang: _react2['default'].PropTypes.string,
+  style: _react2['default'].PropTypes.object,
+  gaLabel: _react2['default'].PropTypes.string
+};
 
 DonateButton.defaultProps = {
   label: 'Donate',
@@ -65,15 +81,6 @@ DonateButton.defaultProps = {
   id: 'DonateButton',
   className: 'DonateButton',
   target: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form&JServSessionIdr003=dwcz55yj27.app304a&s_src=FRQ14ZZ_SWBN'
-};
-
-var styles = {
-  base: {
-    backgroundColor: '#E43534',
-    color: 'white',
-    padding: '1em',
-    margin: '0'
-  }
 };
 
 exports['default'] = (0, _radium2['default'])(DonateButton);

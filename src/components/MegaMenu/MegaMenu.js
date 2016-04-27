@@ -11,9 +11,10 @@ class MegaMenu extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      lastActiveMenuItem: HeaderStore.getState().lastActiveMenuItem,
-    }
+    this.state = { lastActiveMenuItem: HeaderStore.getState().lastActiveMenuItem };
+
+    this._watchHoverIntentEnter = this._watchHoverIntentEnter.bind(this);
+    this._watchHoverIntentLeave = this._watchHoverIntentLeave.bind(this);
   }
 
   componentDidMount() {
@@ -26,47 +27,8 @@ class MegaMenu extends React.Component {
 
   _onChange() {
     this.setState({
-      lastActiveMenuItem: HeaderStore.getState().lastActiveMenuItem
+      lastActiveMenuItem: HeaderStore.getState().lastActiveMenuItem,
     });
-  }
-
-  render() {
-    // Dynamic class assignment based on activeItem property matching current index.
-    const classes = cx('MegaMenu', {
-      'active animateMegaMenuEnter fadeIn': this.props.index === this.props.currentActiveItem,
-      'active': HeaderStore._getLastActiveMenuItem() === this.props.navId
-        && this.props.index !== this.props.currentActiveItem
-    });
-
-    return (
-      <div
-        onMouseEnter={this._watchHoverIntentEnter.bind(this)}
-        onMouseLeave={this._watchHoverIntentLeave.bind(this)}
-        id={(this.props.navId) ? `MegaMenu-${this.props.navId}` : "MegaMenu"}
-        className={classes}
-      >
-        <div className="MegaMenu-LeftBgWrapper"></div>
-        <div className="MegaMenu-Wrapper">
-          <div className="MegaMenu-SubNavWrapper">
-            <MegaMenuSubNav
-              label={this.props.label}
-              items={this.props.items}
-              lang={this.props.lang}
-              topLink={this.props.topLink}
-              navId={this.props.navId}
-            />
-          </div>
-          <div className="MegaMenu-FeaturesWrapper">
-            <MegaMenuFeatures
-              navId={this.props.navId}
-              features={this.props.features}
-              urlType={this.props.urlType}
-              navLabel={this.props.label[this.props.lang].text}
-            />
-          </div>
-        </div>
-      </div>
-    );
   }
 
   /**
@@ -90,10 +52,63 @@ class MegaMenu extends React.Component {
   _watchHoverIntentLeave() {
     Actions.setLastActiveMenuItem('');
   }
+  render() {
+    // Dynamic class assignment based on activeItem property matching current index.
+    const classes = cx(this.props.className, {
+      'active animateMegaMenuEnter fadeIn': this.props.index === this.props.currentActiveItem,
+      active: HeaderStore._getLastActiveMenuItem() === this.props.navId &&
+        this.props.index !== this.props.currentActiveItem,
+    });
+
+    return (
+      <div
+        onMouseEnter={this._watchHoverIntentEnter}
+        onMouseLeave={this._watchHoverIntentLeave}
+        id={(this.props.navId) ? `MegaMenu-${this.props.navId}` : 'MegaMenu'}
+        className={classes}
+      >
+        <div className={`${this.props.className}-LeftBgWrapper`}></div>
+        <div className={`${this.props.className}-Wrapper`}>
+          <div className={`${this.props.className}-SubNavWrapper`}>
+            <MegaMenuSubNav
+              label={this.props.label}
+              items={this.props.items}
+              lang={this.props.lang}
+              topLink={this.props.topLink}
+              navId={this.props.navId}
+            />
+          </div>
+          <div className={`${this.props.className}-FeaturesWrapper`}>
+            <MegaMenuFeatures
+              navId={this.props.navId}
+              features={this.props.features}
+              urlType={this.props.urlType}
+              navLabel={this.props.label[this.props.lang].text}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
+MegaMenu.propTypes = {
+  lang: React.PropTypes.string,
+  className: React.PropTypes.string,
+  lastActiveMenuItem: React.PropTypes.string,
+  currentActiveItem: React.PropTypes.number,
+  index: React.PropTypes.number,
+  navId: React.PropTypes.string,
+  label: React.PropTypes.object,
+  features: React.PropTypes.array,
+  items: React.PropTypes.array,
+  topLink: React.PropTypes.string,
+  urlType: React.PropTypes.string,
+};
+
 MegaMenu.defaultProps = {
-  lang: 'en'
+  lang: 'en',
+  className: 'MegaMenu',
 };
 
 export default MegaMenu;

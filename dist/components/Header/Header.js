@@ -33,8 +33,6 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 var _underscore = require('underscore');
 
-var _underscore2 = _interopRequireDefault(_underscore);
-
 // ALT Flux
 
 var _storesHeaderStoreJs = require('../../stores/HeaderStore.js');
@@ -95,6 +93,39 @@ var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
 
 // When minifying with Webpack, you can use this:
 // import '../../styles/main.scss';
+var styles = {
+  wrapper: {
+    position: 'relative'
+  },
+  topButtons: {
+    position: 'absolute',
+    top: '20px',
+    textTransform: 'uppercase',
+    display: 'block'
+  },
+  libraryCardButton: {
+    display: 'inline-block',
+    color: '#000',
+    margin: 0,
+    padding: 0
+  },
+  subscribeButton: {
+    display: 'inline-block'
+  },
+  donateButton: {
+    display: 'inline-block',
+    padding: '11px 18px 9px 18px'
+  },
+  mobileMyNypl: {
+    position: 'absolute',
+    zIndex: 1000,
+    right: '0',
+    width: '220px',
+    minHeight: '130px',
+    backgroundColor: '#1DA1D4',
+    padding: '25px 30px'
+  }
+};
 
 var Header = (function (_React$Component) {
   _inherits(Header, _React$Component);
@@ -104,7 +135,7 @@ var Header = (function (_React$Component) {
 
     _get(Object.getPrototypeOf(Header.prototype), 'constructor', this).call(this, props);
 
-    this.state = _underscore2['default'].extend({ headerHeight: null }, _storesHeaderStoreJs2['default'].getState());
+    this.state = (0, _underscore.extend)({ headerHeight: null }, _storesHeaderStoreJs2['default'].getState());
 
     this._handleStickyHeader = this._handleStickyHeader.bind(this);
   }
@@ -135,87 +166,7 @@ var Header = (function (_React$Component) {
   }, {
     key: '_onChange',
     value: function _onChange() {
-      this.setState(_underscore2['default'].extend({ headerHeight: this.state.headerHeight }, _storesHeaderStoreJs2['default'].getState()));
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var isHeaderSticky = this.state.isSticky;
-      var headerHeight = this.state.headerHeight;
-      var headerClass = this.props.className || 'Header';
-      var headerClasses = (0, _classnames2['default'])(headerClass, { 'sticky': isHeaderSticky });
-      var mobileMyNyplClasses = (0, _classnames2['default'])({ 'active': _storesHeaderStoreJs2['default']._getMobileMyNyplButtonValue() });
-      var skipNav = this.props.skipNav ? _react2['default'].createElement(_dgxSkipNavigationLink2['default'], this.props.skipNav) : null;
-
-      return _react2['default'].createElement(
-        'header',
-        {
-          id: this.props.id,
-          className: headerClasses,
-          ref: 'nyplHeader',
-          style: isHeaderSticky ? { height: headerHeight + 'px' } : null
-        },
-        skipNav,
-        _react2['default'].createElement(_GlobalAlertsGlobalAlertsJs2['default'], { className: headerClass + '-GlobalAlerts' }),
-        _react2['default'].createElement(
-          'div',
-          { className: headerClass + '-Wrapper' },
-          _react2['default'].createElement(_MobileHeaderJs2['default'], {
-            className: headerClass + '-Mobile',
-            ref: 'headerMobile',
-            nyplRootUrl: this.props.urls === 'absolute' ? "//www.nypl.org" : "/",
-            locatorUrl: this.props.urls === 'absolute' ? "//www.nypl.org/locations/map?nearme=true" : "/locations/map?nearme=true"
-          }),
-          _react2['default'].createElement(
-            'div',
-            { className: 'MobileMyNypl-Wrapper ' + mobileMyNyplClasses },
-            _react2['default'].createElement(_MyNyplMobileMyNyplJs2['default'], null)
-          ),
-          _react2['default'].createElement(
-            'div',
-            {
-              className: headerClass + '-TopWrapper',
-              style: styles.wrapper,
-              ref: 'headerTopWrapper'
-            },
-            _react2['default'].createElement(_LogoLogoJs2['default'], {
-              className: headerClass + '-Logo',
-              target: this.props.urls === 'absolute' ? "//www.nypl.org" : "/"
-            }),
-            _react2['default'].createElement(
-              'div',
-              { className: headerClass + '-Buttons', style: styles.topButtons },
-              _react2['default'].createElement(_MyNyplButtonMyNyplButtonJs2['default'], { label: 'Log In', refId: 'desktopLogin' }),
-              _react2['default'].createElement(_ButtonsSimpleButtonJs2['default'], {
-                label: 'Get a Library Card',
-                target: '//catalog.nypl.org/screens/selfregpick.html',
-                className: 'LibraryCardButton',
-                id: 'LibraryCardButton',
-                gaAction: 'Get a Library Card',
-                gaLabel: '',
-                style: styles.libraryCardButton
-              }),
-              _react2['default'].createElement(_SubscribeButtonSubscribeButtonJs2['default'], {
-                label: 'Get Email Updates',
-                lang: this.props.lang,
-                style: styles.subscribeButton
-              }),
-              _react2['default'].createElement(_DonateButtonDonateButtonJs2['default'], {
-                id: 'Top-DonateButton',
-                lang: this.props.lang,
-                style: styles.donateButton,
-                gaLabel: 'Header Button'
-              })
-            )
-          ),
-          _react2['default'].createElement(_NavMenuNavMenuJs2['default'], {
-            className: headerClass + '-NavMenu',
-            lang: this.props.lang,
-            items: this.state.headerData,
-            urlType: this.props.urls
-          })
-        )
-      );
+      this.setState((0, _underscore.extend)({ headerHeight: this.state.headerHeight }, _storesHeaderStoreJs2['default'].getState()));
     }
 
     /**
@@ -302,12 +253,100 @@ var Header = (function (_React$Component) {
     value: function _getWindowVerticalScroll() {
       return window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
     }
+  }, {
+    key: 'render',
+    value: function render() {
+      var isHeaderSticky = this.state.isSticky;
+      var headerHeight = this.state.headerHeight;
+      var headerClass = this.props.className || 'Header';
+      var headerClasses = (0, _classnames2['default'])(headerClass, { sticky: isHeaderSticky });
+      var showDialog = _storesHeaderStoreJs2['default']._getMobileMyNyplButtonValue();
+      var mobileMyNyplClasses = (0, _classnames2['default'])({ active: showDialog });
+      var skipNav = this.props.skipNav ? _react2['default'].createElement(_dgxSkipNavigationLink2['default'], this.props.skipNav) : '';
+
+      return _react2['default'].createElement(
+        'header',
+        {
+          id: this.props.id,
+          className: headerClasses,
+          ref: 'nyplHeader',
+          style: isHeaderSticky ? { height: headerHeight + 'px' } : null
+        },
+        skipNav,
+        _react2['default'].createElement(_GlobalAlertsGlobalAlertsJs2['default'], { className: headerClass + '-GlobalAlerts' }),
+        _react2['default'].createElement(
+          'div',
+          { className: headerClass + '-Wrapper' },
+          _react2['default'].createElement(_MobileHeaderJs2['default'], {
+            className: headerClass + '-Mobile',
+            locatorUrl: this.props.urls === 'absolute' ? "//www.nypl.org/locations/map?nearme=true" : "/locations/map?nearme=true",
+            nyplRootUrl: this.props.urls === 'absolute' ? "//www.nypl.org" : "/",
+            ref: 'headerMobile'
+          }),
+          _react2['default'].createElement(
+            'div',
+            { className: 'MobileMyNypl-Wrapper ' + mobileMyNyplClasses },
+            _react2['default'].createElement(_MyNyplMobileMyNyplJs2['default'], null)
+          ),
+          _react2['default'].createElement(
+            'div',
+            {
+              className: headerClass + '-TopWrapper',
+              style: styles.wrapper,
+              ref: 'headerTopWrapper'
+            },
+            _react2['default'].createElement(_LogoLogoJs2['default'], {
+              className: headerClass + '-Logo',
+              target: this.props.urls === 'absolute' ? "//www.nypl.org" : "/"
+            }),
+            _react2['default'].createElement(
+              'div',
+              { className: headerClass + '-Buttons', style: styles.topButtons },
+              _react2['default'].createElement(_MyNyplButtonMyNyplButtonJs2['default'], { label: 'Log In', refId: 'desktopLogin' }),
+              _react2['default'].createElement(_ButtonsSimpleButtonJs2['default'], {
+                label: 'Get a Library Card',
+                target: '//catalog.nypl.org/screens/selfregpick.html',
+                className: 'LibraryCardButton',
+                id: 'LibraryCardButton',
+                gaAction: 'Get a Library Card',
+                gaLabel: '',
+                style: styles.libraryCardButton
+              }),
+              _react2['default'].createElement(_SubscribeButtonSubscribeButtonJs2['default'], {
+                label: 'Get Email Updates',
+                lang: this.props.lang,
+                style: styles.subscribeButton
+              }),
+              _react2['default'].createElement(_DonateButtonDonateButtonJs2['default'], {
+                id: 'Top-DonateButton',
+                lang: this.props.lang,
+                style: styles.donateButton,
+                gaLabel: 'Header Button'
+              })
+            )
+          ),
+          _react2['default'].createElement(_NavMenuNavMenuJs2['default'], {
+            className: headerClass + '-NavMenu',
+            lang: this.props.lang,
+            items: this.state.headerData,
+            urlType: this.props.urls
+          })
+        )
+      );
+    }
   }]);
 
   return Header;
 })(_react2['default'].Component);
 
-;
+Header.propTypes = {
+  lang: _react2['default'].PropTypes.string,
+  className: _react2['default'].PropTypes.string,
+  id: _react2['default'].PropTypes.string,
+  skipNav: _react2['default'].PropTypes.object,
+  urls: _react2['default'].PropTypes.string,
+  env: _react2['default'].PropTypes.string
+};
 
 Header.defaultProps = {
   lang: 'en',
@@ -316,40 +355,6 @@ Header.defaultProps = {
   skipNav: null,
   urls: '',
   env: 'production'
-};
-
-var styles = {
-  wrapper: {
-    position: 'relative'
-  },
-  topButtons: {
-    position: 'absolute',
-    top: '20px',
-    textTransform: 'uppercase',
-    display: 'block'
-  },
-  libraryCardButton: {
-    display: 'inline-block',
-    color: '#000',
-    margin: 0,
-    padding: 0
-  },
-  subscribeButton: {
-    display: 'inline-block'
-  },
-  donateButton: {
-    display: 'inline-block',
-    padding: '11px 18px 9px 18px'
-  },
-  mobileMyNypl: {
-    position: 'absolute',
-    zIndex: 1000,
-    right: '0',
-    width: '220px',
-    minHeight: '130px',
-    backgroundColor: '#1DA1D4',
-    padding: '25px 30px'
-  }
 };
 
 exports['default'] = (0, _radium2['default'])(Header);

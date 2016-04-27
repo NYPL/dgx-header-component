@@ -20,8 +20,6 @@ var _react2 = _interopRequireDefault(_react);
 
 var _underscore = require('underscore');
 
-var _underscore2 = _interopRequireDefault(_underscore);
-
 var _radium = require('radium');
 
 var _radium2 = _interopRequireDefault(_radium);
@@ -38,6 +36,13 @@ var _utilsUtilsJs = require('../../utils/utils.js');
 
 var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
 
+var styles = {
+  topLink: {
+    textDecoration: 'none',
+    color: '#FFF'
+  }
+};
+
 var MegaMenuSubNav = (function (_React$Component) {
   _inherits(MegaMenuSubNav, _React$Component);
 
@@ -52,7 +57,7 @@ var MegaMenuSubNav = (function (_React$Component) {
     value: function render() {
       var _this = this;
 
-      var items = _underscore2['default'].map(this.props.items, function (m, i) {
+      var items = (0, _underscore.map)(this.props.items, function (m, i) {
         var target = m.link[_this.props.lang].text || '#';
         return _react2['default'].createElement(
           'li',
@@ -60,9 +65,9 @@ var MegaMenuSubNav = (function (_React$Component) {
           _react2['default'].createElement(
             'a',
             { href: target,
-              onClick: _utilsUtilsJs2['default']._trackHeader.bind(_this, 'Go to...', _this.props.label[_this.props.lang].text + '--' + m.name[_this.props.lang]['text'])
+              onClick: _utilsUtilsJs2['default']._trackHeader.bind(_this, 'Go to...', _this.props.label[_this.props.lang].text + '--' + m.name[_this.props.lang].text)
             },
-            m.name[_this.props.lang]['text']
+            m.name[_this.props.lang].text
           )
         );
       });
@@ -82,7 +87,9 @@ var MegaMenuSubNav = (function (_React$Component) {
           null,
           _react2['default'].createElement(
             'a',
-            { style: styles.topLink, href: this.props.topLink,
+            {
+              style: styles.topLink,
+              href: this.props.topLink,
               onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Go to...', 'SubNav Title--' + this.props.label[this.props.lang].text)
             },
             this.props.label[this.props.lang].text
@@ -101,16 +108,17 @@ var MegaMenuSubNav = (function (_React$Component) {
   return MegaMenuSubNav;
 })(_react2['default'].Component);
 
+MegaMenuSubNav.propTypes = {
+  lang: _react2['default'].PropTypes.string,
+  topLink: _react2['default'].PropTypes.string,
+  navId: _react2['default'].PropTypes.string,
+  label: _react2['default'].PropTypes.object,
+  items: _react2['default'].PropTypes.array
+};
+
 MegaMenuSubNav.defaultProps = {
   lang: 'en',
   topLink: '#'
-};
-
-var styles = {
-  topLink: {
-    textDecoration: 'none',
-    color: '#FFF'
-  }
 };
 
 exports['default'] = (0, _radium2['default'])(MegaMenuSubNav);

@@ -22,6 +22,8 @@ var _radium = require('radium');
 
 var _radium2 = _interopRequireDefault(_radium);
 
+// Config and Utility
+
 var _utilsUtilsJs = require('../../utils/utils.js');
 
 var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
@@ -29,76 +31,6 @@ var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
 var _appConfigJs = require('../../appConfig.js');
 
 var _appConfigJs2 = _interopRequireDefault(_appConfigJs);
-
-var MobileMyNypl = (function (_React$Component) {
-  _inherits(MobileMyNypl, _React$Component);
-
-  function MobileMyNypl(props) {
-    _classCallCheck(this, MobileMyNypl);
-
-    _get(Object.getPrototypeOf(MobileMyNypl.prototype), 'constructor', this).call(this, props);
-  }
-
-  _createClass(MobileMyNypl, [{
-    key: 'render',
-    value: function render() {
-      var catalogLinkClass = 'CatalogLink',
-          classicLinkClass = 'ClassicLink';
-
-      return _react2['default'].createElement(
-        'div',
-        { className: this.props.className, style: styles.base },
-        _react2['default'].createElement(
-          'a',
-          { href: this.props.catalogLink, className: catalogLinkClass,
-            style: styles.links, onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Mobile Log In', 'Catalog') },
-          _react2['default'].createElement(
-            'span',
-            { className: catalogLinkClass + '-Wrapper', style: [styles.wrapper, styles.catalogLinkWrapper] },
-            _react2['default'].createElement('span', { className: catalogLinkClass + '-Icon nypl-icon-login', style: styles.icon }),
-            _react2['default'].createElement(
-              'span',
-              { className: catalogLinkClass + '-Label', style: [styles.label, styles.catalogLinkLabel] },
-              'Log into the Catalog'
-            )
-          )
-        ),
-        _react2['default'].createElement(
-          'a',
-          { href: this.props.classicLink, className: classicLinkClass,
-            style: styles.links, onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Mobile Log In', 'Classic') },
-          _react2['default'].createElement(
-            'span',
-            { className: classicLinkClass + '-Wrapper', style: [styles.wrapper, styles.classicLinkWrapper] },
-            _react2['default'].createElement('span', { className: classicLinkClass + '-Icon nypl-icon-bldg', style: styles.icon }),
-            _react2['default'].createElement(
-              'span',
-              { className: classicLinkClass + '-Label', style: [styles.label, styles.classicLinkLabel] },
-              'Log into the Classic Catalog'
-            )
-          )
-        ),
-        _react2['default'].createElement(
-          'a',
-          { className: 'Mobile-Catalog-Info', href: this.props.infoLink, lang: this.props.lang,
-            onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Mobile Log In', 'Catalog Info'),
-            style: [styles.catalogInfoLink] },
-          'Catalog Info'
-        )
-      );
-    }
-  }]);
-
-  return MobileMyNypl;
-})(_react2['default'].Component);
-
-MobileMyNypl.defaultProps = {
-  lang: 'en',
-  className: 'MobileMyNypl',
-  catalogLink: _appConfigJs2['default'].myNyplLinks.catalog,
-  classicLink: _appConfigJs2['default'].myNyplLinks.classic,
-  infoLink: _appConfigJs2['default'].myNyplLinks.moreInfo
-};
 
 var styles = {
   base: {
@@ -153,6 +85,108 @@ var styles = {
     display: 'inline-block',
     color: 'rgba(255, 255, 255, 0.6)'
   }
+};
+
+var MobileMyNypl = (function (_React$Component) {
+  _inherits(MobileMyNypl, _React$Component);
+
+  function MobileMyNypl(props) {
+    _classCallCheck(this, MobileMyNypl);
+
+    _get(Object.getPrototypeOf(MobileMyNypl.prototype), 'constructor', this).call(this, props);
+  }
+
+  _createClass(MobileMyNypl, [{
+    key: 'render',
+    value: function render() {
+      var catalogLinkClass = 'CatalogLink';
+      var classicLinkClass = 'ClassicLink';
+
+      return _react2['default'].createElement(
+        'div',
+        { className: this.props.className, style: styles.base },
+        _react2['default'].createElement(
+          'a',
+          {
+            href: this.props.catalogLink,
+            className: catalogLinkClass,
+            style: styles.links,
+            onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Mobile Log In', 'Catalog')
+          },
+          _react2['default'].createElement(
+            'span',
+            {
+              className: catalogLinkClass + '-Wrapper',
+              style: [styles.wrapper, styles.catalogLinkWrapper]
+            },
+            _react2['default'].createElement('span', { className: catalogLinkClass + '-Icon nypl-icon-login', style: styles.icon }),
+            _react2['default'].createElement(
+              'span',
+              {
+                className: catalogLinkClass + '-Label',
+                style: [styles.label, styles.catalogLinkLabel]
+              },
+              'Log into the Catalog'
+            )
+          )
+        ),
+        _react2['default'].createElement(
+          'a',
+          {
+            href: this.props.classicLink,
+            className: classicLinkClass,
+            style: styles.links,
+            onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Mobile Log In', 'Classic')
+          },
+          _react2['default'].createElement(
+            'span',
+            {
+              className: classicLinkClass + '-Wrapper',
+              style: [styles.wrapper, styles.classicLinkWrapper]
+            },
+            _react2['default'].createElement('span', { className: classicLinkClass + '-Icon nypl-icon-bldg', style: styles.icon }),
+            _react2['default'].createElement(
+              'span',
+              {
+                className: classicLinkClass + '-Label',
+                style: [styles.label, styles.classicLinkLabel]
+              },
+              'Log into the Classic Catalog'
+            )
+          )
+        ),
+        _react2['default'].createElement(
+          'a',
+          {
+            className: 'Mobile-Catalog-Info',
+            href: this.props.infoLink,
+            lang: this.props.lang,
+            onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Mobile Log In', 'Catalog Info'),
+            style: [styles.catalogInfoLink]
+          },
+          'Catalog Info'
+        )
+      );
+    }
+  }]);
+
+  return MobileMyNypl;
+})(_react2['default'].Component);
+
+MobileMyNypl.propTypes = {
+  lang: _react2['default'].PropTypes.string,
+  className: _react2['default'].PropTypes.string,
+  catalogLink: _react2['default'].PropTypes.string,
+  classicLink: _react2['default'].PropTypes.string,
+  infoLink: _react2['default'].PropTypes.string
+};
+
+MobileMyNypl.defaultProps = {
+  lang: 'en',
+  className: 'MobileMyNypl',
+  catalogLink: _appConfigJs2['default'].myNyplLinks.catalog,
+  classicLink: _appConfigJs2['default'].myNyplLinks.classic,
+  infoLink: _appConfigJs2['default'].myNyplLinks.moreInfo
 };
 
 exports['default'] = (0, _radium2['default'])(MobileMyNypl);

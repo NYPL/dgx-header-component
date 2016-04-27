@@ -26,17 +26,11 @@ var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _reactTappable = require('react-tappable');
-
-var _reactTappable2 = _interopRequireDefault(_reactTappable);
-
 var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
 
 var _underscore = require('underscore');
-
-var _underscore2 = _interopRequireDefault(_underscore);
 
 var _axios = require('axios');
 
@@ -49,6 +43,16 @@ var _appConfigJs2 = _interopRequireDefault(_appConfigJs);
 var _AlertsBoxAlertsBoxJs = require('../AlertsBox/AlertsBox.js');
 
 var _AlertsBoxAlertsBoxJs2 = _interopRequireDefault(_AlertsBoxAlertsBoxJs);
+
+var styles = {
+  base: {
+    backgroundColor: '#fee24a',
+    width: '100%',
+    margin: 0,
+    padding: '15px 0',
+    color: '#333333'
+  }
+};
 
 var GlobalAlerts = (function (_React$Component) {
   _inherits(GlobalAlerts, _React$Component);
@@ -68,34 +72,12 @@ var GlobalAlerts = (function (_React$Component) {
   _createClass(GlobalAlerts, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      //Fetch the Global Alerts via Client
+      // Fetch the Global Alerts via Client
       this._fetchGlobalAlerts();
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var currentGlobalAlerts = this._filterCurrentClosingAlerts(this.state.globalAlerts),
-          classes = (0, _classnames2['default'])({
-        'animatedFast fadeOutUp': this.state.animateAlertsBox,
-        'hide': this.state.hideAlertsBox
-      });
-
-      return currentGlobalAlerts && currentGlobalAlerts.length ? _react2['default'].createElement(
-        'div',
-        { className: this.props.className + ' ' + classes, id: this.props.id, style: styles.base },
-        _react2['default'].createElement(
-          'div',
-          { className: this.props.className + '-Wrapper' },
-          _react2['default'].createElement(_AlertsBoxAlertsBoxJs2['default'], {
-            alerts: currentGlobalAlerts,
-            id: this.props.className + '-Box',
-            className: this.props.className + '-Box' })
-        )
-      ) : null;
     }
 
     /**
-     * _closeAlertsBox() 
+     * _closeAlertsBox()
      * updates both state properties
      * (animateAlertsBox & hideAlertsBox)
      * with a setTimeout to allow css transition.
@@ -125,21 +107,19 @@ var GlobalAlerts = (function (_React$Component) {
 
       _axios2['default'].get(_appConfigJs2['default'].alertsApiUrl).then(function (result) {
         if (result.data && result.data.data) {
-          _this2.setState({
-            globalAlerts: result.data.data
-          });
+          _this2.setState({ globalAlerts: result.data.data });
         }
       })['catch'](function (response) {
         console.warn('Error on Axios GET request: ' + _appConfigJs2['default'].alertsApiUrl);
         if (response instanceof Error) {
-          console.log(response.message);
+          console.warn(response.message);
         } else {
           // The request was made, but the server responded with a status code
           // that falls out of the range of 2xx
-          console.log(response.data);
-          console.log(response.status);
-          console.log(response.headers);
-          console.log(response.config);
+          console.warn(response.data);
+          console.warn(response.status);
+          console.warn(response.headers);
+          console.warn(response.config);
         }
       });
     }
@@ -160,11 +140,11 @@ var GlobalAlerts = (function (_React$Component) {
         return [];
       }
 
-      var today = (0, _moment2['default'])(),
-          sDate = undefined,
-          eDate = undefined;
+      var today = (0, _moment2['default'])();
+      var sDate = undefined;
+      var eDate = undefined;
 
-      return _underscore2['default'].filter(data, function (elem) {
+      return (0, _underscore.filter)(data, function (elem) {
         if (elem.attributes) {
           if (elem.attributes['display-date-start'] && elem.attributes['display-date-end']) {
             sDate = (0, _moment2['default'])(elem.attributes['display-date-start']);
@@ -177,25 +157,44 @@ var GlobalAlerts = (function (_React$Component) {
         }
       });
     }
+  }, {
+    key: 'render',
+    value: function render() {
+      var currentGlobalAlerts = this._filterCurrentClosingAlerts(this.state.globalAlerts);
+      var classes = (0, _classnames2['default'])({
+        'animatedFast fadeOutUp': this.state.animateAlertsBox,
+        hide: this.state.hideAlertsBox
+      });
+
+      return currentGlobalAlerts && currentGlobalAlerts.length ? _react2['default'].createElement(
+        'div',
+        { className: this.props.className + ' ' + classes, id: this.props.id, style: styles.base },
+        _react2['default'].createElement(
+          'div',
+          { className: this.props.className + '-Wrapper' },
+          _react2['default'].createElement(_AlertsBoxAlertsBoxJs2['default'], {
+            alerts: currentGlobalAlerts,
+            id: this.props.className + '-Box',
+            className: this.props.className + '-Box'
+          })
+        )
+      ) : null;
+    }
   }]);
 
   return GlobalAlerts;
 })(_react2['default'].Component);
 
+GlobalAlerts.propTypes = {
+  lang: _react2['default'].PropTypes.string,
+  className: _react2['default'].PropTypes.string,
+  id: _react2['default'].PropTypes.string
+};
+
 GlobalAlerts.defaultProps = {
   lang: 'en',
   className: 'GlobalAlerts',
   id: 'GlobalAlerts'
-};
-
-var styles = {
-  base: {
-    backgroundColor: '#fee24a',
-    width: '100%',
-    margin: 0,
-    padding: '15px 0',
-    color: '#333333'
-  }
 };
 
 exports['default'] = (0, _radium2['default'])(GlobalAlerts);

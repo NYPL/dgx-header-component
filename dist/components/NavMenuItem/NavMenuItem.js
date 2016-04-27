@@ -61,12 +61,50 @@ var NavMenuItem = (function (_React$Component) {
     this._deactivateHover = this._deactivateHover.bind(this);
   }
 
+  /**
+   * _activateHover()
+   * Sets the state's lastActiveMenuItem
+   * & activeItem after set time.
+   */
+
   _createClass(NavMenuItem, [{
+    key: '_activateHover',
+    value: function _activateHover() {
+      var _this = this;
+
+      this.hoverTimer = setTimeout(function () {
+        _this.setState({
+          lastActiveMenuItem: _this.props.navId,
+          activeItem: _this.props.index
+        });
+      }, 80);
+    }
+
+    /**
+     * _deactivateHover()
+     * Initially clears thhe hoverTimer.
+     * Then removes the state's activeItem
+     * after set time.
+     */
+  }, {
+    key: '_deactivateHover',
+    value: function _deactivateHover() {
+      var _this2 = this;
+
+      // Will clear the set timer that activates the menu
+      // from executing
+      clearTimeout(this.hoverTimer);
+
+      setTimeout(function () {
+        _this2.setState({ activeItem: null });
+      }, 250);
+    }
+  }, {
     key: 'render',
     value: function render() {
       var target = this.props.target;
       var linkClass = (0, _classnames2['default'])({
-        'active': this.props.index === this.state.activeItem || _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === this.props.navId
+        active: this.props.index === this.state.activeItem || _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === this.props.navId
       });
       var megaMenuArrow = this.props.subNav && this.props.features ? _react2['default'].createElement(_MegaMenuMegaMenuArrowJs2['default'], {
         navId: this.props.navId,
@@ -105,7 +143,7 @@ var NavMenuItem = (function (_React$Component) {
             {
               href: target,
               className: linkClass,
-              onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Go to...', '' + this.props.label['en'].text)
+              onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Go to...', '' + this.props.label[this.props.lang].text)
             },
             this.props.label[this.props.lang].text
           ),
@@ -114,46 +152,24 @@ var NavMenuItem = (function (_React$Component) {
         megaMenu
       );
     }
-
-    /**
-     * _activateHover()
-     * Sets the state's lastActiveMenuItem
-     * & activeItem after set time.
-     */
-  }, {
-    key: '_activateHover',
-    value: function _activateHover() {
-      var _this = this;
-
-      this.hoverTimer = setTimeout(function () {
-        _this.setState({ lastActiveMenuItem: _this.props.navId });
-        _this.setState({ activeItem: _this.props.index });
-      }, 80);
-    }
-
-    /**
-     * _deactivateHover()
-     * Initially clears thhe hoverTimer.
-     * Then removes the state's activeItem
-     * after set time.
-     */
-  }, {
-    key: '_deactivateHover',
-    value: function _deactivateHover() {
-      var _this2 = this;
-
-      // Will clear the set timer that activates the menu
-      // from executing
-      clearTimeout(this.hoverTimer);
-
-      setTimeout(function () {
-        _this2.setState({ activeItem: null });
-      }, 250);
-    }
   }]);
 
   return NavMenuItem;
 })(_react2['default'].Component);
+
+NavMenuItem.propTypes = {
+  lang: _react2['default'].PropTypes.string,
+  root: _react2['default'].PropTypes.string,
+  target: _react2['default'].PropTypes.string,
+  className: _react2['default'].PropTypes.string,
+  hoverTimer: _react2['default'].PropTypes.func,
+  navId: _react2['default'].PropTypes.string,
+  index: _react2['default'].PropTypes.number,
+  label: _react2['default'].PropTypes.object,
+  subNav: _react2['default'].PropTypes.array,
+  features: _react2['default'].PropTypes.array,
+  urlType: _react2['default'].PropTypes.string
+};
 
 NavMenuItem.defaultProps = {
   target: '#',

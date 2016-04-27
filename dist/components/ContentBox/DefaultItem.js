@@ -29,6 +29,7 @@ var DefaultItem = (function (_React$Component) {
     _classCallCheck(this, DefaultItem);
 
     _get(Object.getPrototypeOf(DefaultItem.prototype), 'constructor', this).call(this, props);
+    this._trackHeader = _utilsUtilsJs2['default']._trackHeader.bind(this);
   }
 
   _createClass(DefaultItem, [{
@@ -51,7 +52,9 @@ var DefaultItem = (function (_React$Component) {
 
       return _react2['default'].createElement(
         'a',
-        { href: feature.link, className: this.props.className,
+        {
+          href: feature.link,
+          className: this.props.className,
           onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'FeatureItem', this.props.navLabel + ' - ' + feature.headline)
         },
         _react2['default'].createElement(
@@ -84,6 +87,14 @@ var DefaultItem = (function (_React$Component) {
 
   return DefaultItem;
 })(_react2['default'].Component);
+
+DefaultItem.propTypes = {
+  className: _react2['default'].PropTypes.string,
+  lang: _react2['default'].PropTypes.string,
+  classes: _react2['default'].PropTypes.string,
+  feature: _react2['default'].PropTypes.object,
+  navLabel: _react2['default'].PropTypes.string
+};
 
 DefaultItem.defaultProps = {
   lang: 'en',

@@ -22,25 +22,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _classnames = require('classnames');
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _reactOnclickout = require('react-onclickout');
-
-var _reactOnclickout2 = _interopRequireDefault(_reactOnclickout);
-
-var _ButtonsSimpleButtonJs = require('../Buttons/SimpleButton.js');
-
-var _ButtonsSimpleButtonJs2 = _interopRequireDefault(_ButtonsSimpleButtonJs);
-
-var _storesHeaderStoreJs = require('../../stores/HeaderStore.js');
-
-var _storesHeaderStoreJs2 = _interopRequireDefault(_storesHeaderStoreJs);
-
-var _actionsActionsJs = require('../../actions/Actions.js');
-
-var _actionsActionsJs2 = _interopRequireDefault(_actionsActionsJs);
+// Config and Utility Library
 
 var _utilsUtilsJs = require('../../utils/utils.js');
 
@@ -49,75 +31,6 @@ var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
 var _appConfigJs = require('../../appConfig.js');
 
 var _appConfigJs2 = _interopRequireDefault(_appConfigJs);
-
-var MyNypl = (function (_React$Component) {
-  _inherits(MyNypl, _React$Component);
-
-  function MyNypl(props) {
-    _classCallCheck(this, MyNypl);
-
-    _get(Object.getPrototypeOf(MyNypl.prototype), 'constructor', this).call(this, props);
-
-    this.state;
-  }
-
-  _createClass(MyNypl, [{
-    key: 'render',
-    value: function render() {
-      return _react2['default'].createElement(
-        'div',
-        { id: this.props.id, className: this.props.className },
-        _react2['default'].createElement(
-          'ul',
-          { className: this.props.className + '-Login-List' },
-          _react2['default'].createElement(
-            'li',
-            null,
-            _react2['default'].createElement(
-              'a',
-              { href: this.props.catalogLink, style: styles.loginButtons,
-                className: this.props.className + '-Catalog-Btn',
-                onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Log In', 'Catalog') },
-              _react2['default'].createElement('span', { className: 'nypl-icon-login icon' }),
-              'LOG INTO THE CATALOG'
-            )
-          ),
-          _react2['default'].createElement(
-            'li',
-            null,
-            _react2['default'].createElement(
-              'a',
-              { href: this.props.classicLink, style: styles.loginButtons,
-                className: this.props.className + '-Classic-Btn',
-                onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Log In', 'Classic') },
-              _react2['default'].createElement('span', { className: 'nypl-icon-bldg icon' }),
-              'LOG INTO THE CLASSIC CATALOG'
-            )
-          )
-        ),
-        _react2['default'].createElement(
-          'a',
-          { href: this.props.infoLink,
-            className: this.props.className + '-Catalog-Link',
-            onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Log In', 'Catalog Info'),
-            style: styles.catalogInfo },
-          'Catalog Info'
-        )
-      );
-    }
-  }]);
-
-  return MyNypl;
-})(_react2['default'].Component);
-
-MyNypl.defaultProps = {
-  id: 'MyNypl',
-  className: 'MyNypl',
-  lang: 'en',
-  catalogLink: _appConfigJs2['default'].myNyplLinks.catalog,
-  classicLink: _appConfigJs2['default'].myNyplLinks.classic,
-  infoLink: _appConfigJs2['default'].myNyplLinks.moreInfo
-};
 
 var styles = {
   base: {
@@ -150,6 +63,90 @@ var styles = {
     fontFamily: 'Kievit-Book',
     marginTop: '20px'
   }
+};
+
+var MyNypl = (function (_React$Component) {
+  _inherits(MyNypl, _React$Component);
+
+  function MyNypl(props) {
+    _classCallCheck(this, MyNypl);
+
+    _get(Object.getPrototypeOf(MyNypl.prototype), 'constructor', this).call(this, props);
+  }
+
+  _createClass(MyNypl, [{
+    key: 'render',
+    value: function render() {
+      return _react2['default'].createElement(
+        'div',
+        { id: this.props.id, className: this.props.className },
+        _react2['default'].createElement(
+          'ul',
+          { className: this.props.className + '-Login-List' },
+          _react2['default'].createElement(
+            'li',
+            null,
+            _react2['default'].createElement(
+              'a',
+              {
+                href: this.props.catalogLink,
+                style: styles.loginButtons,
+                className: this.props.className + '-Catalog-Btn',
+                onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Log In', 'Catalog')
+              },
+              _react2['default'].createElement('span', { className: 'nypl-icon-login icon' }),
+              'LOG INTO THE CATALOG'
+            )
+          ),
+          _react2['default'].createElement(
+            'li',
+            null,
+            _react2['default'].createElement(
+              'a',
+              {
+                href: this.props.classicLink,
+                style: styles.loginButtons,
+                className: this.props.className + '-Classic-Btn',
+                onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Log In', 'Classic')
+              },
+              _react2['default'].createElement('span', { className: 'nypl-icon-bldg icon' }),
+              'LOG INTO THE CLASSIC CATALOG'
+            )
+          )
+        ),
+        _react2['default'].createElement(
+          'a',
+          {
+            href: this.props.infoLink,
+            className: this.props.className + '-Catalog-Link',
+            onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Log In', 'Catalog Info'),
+            style: styles.catalogInfo
+          },
+          'Catalog Info'
+        )
+      );
+    }
+  }]);
+
+  return MyNypl;
+})(_react2['default'].Component);
+
+MyNypl.propTypes = {
+  id: _react2['default'].PropTypes.string,
+  className: _react2['default'].PropTypes.string,
+  lang: _react2['default'].PropTypes.string,
+  catalogLink: _react2['default'].PropTypes.string,
+  classicLink: _react2['default'].PropTypes.string,
+  infoLink: _react2['default'].PropTypes.string
+};
+
+MyNypl.defaultProps = {
+  id: 'MyNypl',
+  className: 'MyNypl',
+  lang: 'en',
+  catalogLink: _appConfigJs2['default'].myNyplLinks.catalog,
+  classicLink: _appConfigJs2['default'].myNyplLinks.classic,
+  infoLink: _appConfigJs2['default'].myNyplLinks.moreInfo
 };
 
 exports['default'] = (0, _radium2['default'])(MyNypl);

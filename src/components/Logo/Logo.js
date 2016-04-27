@@ -1,7 +1,17 @@
 import React from 'react';
 import Radium from 'radium';
-
 import utils from '../../utils/utils.js';
+
+const styles = {
+  base: {
+  },
+  image: {
+    maxWidth: '230px',
+  },
+  icon: {
+    display: 'none',
+  },
+};
 
 class Logo extends React.Component {
   constructor(props) {
@@ -22,25 +32,20 @@ class Logo extends React.Component {
       </a>
     );
   }
+}
+Logo.propTypes = {
+  src: React.PropTypes.string,
+  target: React.PropTypes.string,
+  id: React.PropTypes.string,
+  className: React.PropTypes.string,
+  style: React.PropTypes.object,
 };
 
 Logo.defaultProps = {
   src: '//ux-static.nypl.org/images/NYPL-logo-black-pos.svg',
   target: '/',
   id: 'Logo',
-  className: 'Logo'
-};
-
-const styles = {
-  base: {
-
-  },
-  image: {
-    maxWidth: '230px'
-  },
-  icon: {
-    display: 'none'
-  }
+  className: 'Logo',
 };
 
 export default Radium(Logo);

@@ -1,15 +1,40 @@
 import React from 'react';
 import Radium from 'radium';
 
-class DotsLoader extends React.Component {
+const styles = {
+  text: {
+    display: 'inline-block',
+    fontFamily: 'Kievit-Book, Helvetica, arial',
+    color: '#FFF',
+    fontSize: '20px',
+    margin: '0 5px 0 0',
+  },
+  list: {
+    position: 'relative',
+    display: 'inline-block',
+    listStyle: 'none',
+    verticalAlign: '-1px',
+    margin: 0,
+    padding: 0,
+    fontSize: 0,
+  },
+  dots: {
+    margin: 0,
+    height: '3px',
+    width: '3px',
+    borderRadius: '100%',
+    border: '2px solid white',
+    display: 'inline-block',
+  },
+};
 
-  // Constructor used in ES6
+class DotsLoader extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  render () {
-    let dots = [];
+  render() {
+    const dots = [];
 
     for (let i = 0; i < this.props.dots; i++) {
       dots.push(
@@ -26,39 +51,18 @@ class DotsLoader extends React.Component {
       </div>
     );
   }
+}
+
+DotsLoader.propTypes = {
+  className: React.PropTypes.string,
+  id: React.PropTypes.string,
+  dots: React.PropTypes.number,
 };
 
 DotsLoader.defaultProps = {
   className: 'DotsLoader',
   id: 'DotsLoader',
-  dots: 3
-};
-
-const styles = {
-  text: {
-    display: 'inline-block',
-    fontFamily: 'Kievit-Book, Helvetica, arial',
-    color: '#FFF',
-    fontSize: '20px',
-    margin: '0 5px 0 0'
-  },
-  list: {
-    position: 'relative',
-    display: 'inline-block',
-    listStyle: 'none',
-    verticalAlign: '-1px',
-    margin: 0,
-    padding: 0,
-    fontSize: 0
-  },
-  dots: {
-    margin: 0,
-    height: '3px',
-    width: '3px',
-    borderRadius: '100%',
-    border: '2px solid white',
-    display: 'inline-block'
-  }
+  dots: 3,
 };
 
 export default Radium(DotsLoader);

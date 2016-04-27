@@ -62,6 +62,13 @@ var MegaMenuFeatureItem = (function (_React$Component) {
   return MegaMenuFeatureItem;
 })(_react2['default'].Component);
 
+MegaMenuFeatureItem.propTypes = {
+  lang: _react2['default'].PropTypes.string,
+  className: _react2['default'].PropTypes.string,
+  feature: _react2['default'].PropTypes.object,
+  navLabel: _react2['default'].PropTypes.string
+};
+
 MegaMenuFeatureItem.defaultProps = {
   lang: 'en',
   className: 'MegaMenu-FeatureItem'

@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Radium from 'radium';
 import cx from 'classnames';
-import _ from 'underscore';
+import { extend as _extend } from 'underscore';
 
 // ALT Flux
 import HeaderStore from '../../stores/HeaderStore.js';
@@ -26,12 +26,45 @@ import utils from '../../utils/utils.js';
 
 // When minifying with Webpack, you can use this:
 // import '../../styles/main.scss';
+const styles = {
+  wrapper: {
+    position: 'relative',
+  },
+  topButtons: {
+    position: 'absolute',
+    top: '20px',
+    textTransform: 'uppercase',
+    display: 'block',
+  },
+  libraryCardButton: {
+    display: 'inline-block',
+    color: '#000',
+    margin: 0,
+    padding: 0,
+  },
+  subscribeButton: {
+    display: 'inline-block',
+  },
+  donateButton: {
+    display: 'inline-block',
+    padding: '11px 18px 9px 18px',
+  },
+  mobileMyNypl: {
+    position: 'absolute',
+    zIndex: 1000,
+    right: '0',
+    width: '220px',
+    minHeight: '130px',
+    backgroundColor: '#1DA1D4',
+    padding: '25px 30px',
+  },
+};
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = _.extend({ headerHeight: null }, HeaderStore.getState());
+    this.state = _extend({ headerHeight: null }, HeaderStore.getState());
 
     this._handleStickyHeader = this._handleStickyHeader.bind(this);
   }
@@ -58,82 +91,7 @@ class Header extends React.Component {
   }
 
   _onChange() {
-    this.setState(_.extend({ headerHeight: this.state.headerHeight }, HeaderStore.getState()));
-  }
-
-  render () {
-    const isHeaderSticky = this.state.isSticky;
-    const headerHeight = this.state.headerHeight;
-    const headerClass = this.props.className || 'Header';
-    const headerClasses = cx(headerClass, {'sticky': isHeaderSticky});
-    const mobileMyNyplClasses = cx({'active': HeaderStore._getMobileMyNyplButtonValue()});
-    const skipNav = this.props.skipNav ?
-      (<SkipNavigation {...this.props.skipNav} />) : null;
-
-    return (
-      <header
-        id={this.props.id}
-        className={headerClasses}
-        ref="nyplHeader"
-        style={(isHeaderSticky) ? {height: `${headerHeight}px`} : null}
-      >
-        {skipNav}
-        <GlobalAlerts className={`${headerClass}-GlobalAlerts`} />
-        <div className={`${headerClass}-Wrapper`}>
-          <MobileHeader
-            className={`${headerClass}-Mobile`}
-            ref="headerMobile"
-            nyplRootUrl={(this.props.urls === 'absolute') ? "//www.nypl.org" : "/"}
-            locatorUrl={
-              (this.props.urls === 'absolute') ?
-                "//www.nypl.org/locations/map?nearme=true" : "/locations/map?nearme=true"
-            }
-          />
-          <div className={`MobileMyNypl-Wrapper ${mobileMyNyplClasses}`}>
-            <MobileMyNypl />
-          </div>
-          <div
-            className={`${headerClass}-TopWrapper`}
-            style={styles.wrapper}
-            ref='headerTopWrapper'
-          >
-            <Logo
-              className={`${headerClass}-Logo`}
-              target={(this.props.urls === 'absolute') ? "//www.nypl.org" : "/"}
-            />
-            <div className={`${headerClass}-Buttons`} style={styles.topButtons}>
-              <MyNyplButton label="Log In" refId="desktopLogin" />
-              <SimpleButton
-                label='Get a Library Card'
-                target='//catalog.nypl.org/screens/selfregpick.html'
-                className='LibraryCardButton'
-                id='LibraryCardButton'
-                gaAction='Get a Library Card'
-                gaLabel=''
-                style={styles.libraryCardButton}
-              />
-              <SubscribeButton
-                label="Get Email Updates"
-                lang={this.props.lang}
-                style={styles.subscribeButton}
-              />
-              <DonateButton
-                id='Top-DonateButton'
-                lang={this.props.lang}
-                style={styles.donateButton}
-                gaLabel={'Header Button'}
-              />
-            </div>
-          </div>
-          <NavMenu
-            className={`${headerClass}-NavMenu`}
-            lang={this.props.lang}
-            items={this.state.headerData}
-            urlType={this.props.urls}
-          />
-        </div>
-      </header>
-    );
+    this.setState(_extend({ headerHeight: this.state.headerHeight }, HeaderStore.getState()));
   }
 
   /**
@@ -193,9 +151,9 @@ class Header extends React.Component {
    * only if headerHeight is not defined.
    */
   _setHeaderHeight() {
-    if(!this.state.headerHeight) {
+    if (!this.state.headerHeight) {
       setTimeout(() => {
-        this.setState({headerHeight: this._getHeaderHeight()});
+        this.setState({ headerHeight: this._getHeaderHeight() });
       }, 500);
     }
   }
@@ -210,6 +168,91 @@ class Header extends React.Component {
       || window.pageYOffset
       || document.documentElement.scrollTop;
   }
+
+  render() {
+    const isHeaderSticky = this.state.isSticky;
+    const headerHeight = this.state.headerHeight;
+    const headerClass = this.props.className || 'Header';
+    const headerClasses = cx(headerClass, { sticky: isHeaderSticky });
+    const showDialog = HeaderStore._getMobileMyNyplButtonValue();
+    const mobileMyNyplClasses = cx({ active: showDialog });
+    const skipNav = this.props.skipNav ?
+      (<SkipNavigation {...this.props.skipNav} />) : '';
+
+    return (
+      <header
+        id={this.props.id}
+        className={headerClasses}
+        ref="nyplHeader"
+        style={(isHeaderSticky) ? { height: `${headerHeight}px` } : null}
+      >
+        {skipNav}
+        <GlobalAlerts className={`${headerClass}-GlobalAlerts`} />
+        <div className={`${headerClass}-Wrapper`}>
+          <MobileHeader
+            className={`${headerClass}-Mobile`}
+            locatorUrl={
+              (this.props.urls === 'absolute') ?
+                "//www.nypl.org/locations/map?nearme=true" : "/locations/map?nearme=true"
+            }
+            nyplRootUrl={(this.props.urls === 'absolute') ? "//www.nypl.org" : "/"}
+            ref="headerMobile"
+          />
+          <div className={`MobileMyNypl-Wrapper ${mobileMyNyplClasses}`}>
+            <MobileMyNypl />
+          </div>
+          <div
+            className={`${headerClass}-TopWrapper`}
+            style={styles.wrapper}
+            ref="headerTopWrapper"
+            >
+            <Logo
+              className={`${headerClass}-Logo`}
+              target={(this.props.urls === 'absolute') ? "//www.nypl.org" : "/"}
+            />
+            <div className={`${headerClass}-Buttons`} style={styles.topButtons}>
+              <MyNyplButton label="Log In" refId="desktopLogin" />
+              <SimpleButton
+                label="Get a Library Card"
+                target="//catalog.nypl.org/screens/selfregpick.html"
+                className="LibraryCardButton"
+                id="LibraryCardButton"
+                gaAction="Get a Library Card"
+                gaLabel=""
+                style={styles.libraryCardButton}
+              />
+              <SubscribeButton
+                label="Get Email Updates"
+                lang={this.props.lang}
+                style={styles.subscribeButton}
+              />
+              <DonateButton
+                id="Top-DonateButton"
+                lang={this.props.lang}
+                style={styles.donateButton}
+                gaLabel="Header Button"
+              />
+            </div>
+          </div>
+          <NavMenu
+            className={`${headerClass}-NavMenu`}
+            lang={this.props.lang}
+            items={this.state.headerData}
+            urlType={this.props.urls}
+          />
+        </div>
+      </header>
+    );
+  }
+}
+
+Header.propTypes = {
+  lang: React.PropTypes.string,
+  className: React.PropTypes.string,
+  id: React.PropTypes.string,
+  skipNav: React.PropTypes.object,
+  urls: React.PropTypes.string,
+  env: React.PropTypes.string,
 };
 
 Header.defaultProps = {
@@ -219,40 +262,6 @@ Header.defaultProps = {
   skipNav: null,
   urls: '',
   env: 'production',
-};
-
-const styles = {
-  wrapper: {
-    position: 'relative'
-  },
-  topButtons: {
-    position: 'absolute',
-    top: '20px',
-    textTransform: 'uppercase',
-    display: 'block'
-  },
-  libraryCardButton: {
-    display: 'inline-block',
-    color: '#000',
-    margin: 0,
-    padding: 0
-  },
-  subscribeButton: {
-    display: 'inline-block'
-  },
-  donateButton: {
-    display: 'inline-block',
-    padding: '11px 18px 9px 18px',
-  },
-  mobileMyNypl: {
-    position: 'absolute',
-    zIndex: 1000,
-    right: '0',
-    width: '220px',
-    minHeight: '130px',
-    backgroundColor: '#1DA1D4',
-    padding: '25px 30px'
-  }
 };
 
 export default Radium(Header);

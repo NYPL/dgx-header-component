@@ -34,7 +34,7 @@ class HeaderStore {
       isSticky: false,
       lastActiveMenuItem: '',
       activeMobileButton: '',
-      searchButtonAction:'',
+      searchButtonAction: '',
       mobileMyNyplButton: '',
       subscribeFormVisible: false,
       myNyplVisible: false,
@@ -42,7 +42,6 @@ class HeaderStore {
     };
   }
 
-  /*** PUBLIC METHODS ***/
   /**
    * _getMobileMenuBtnValue()
    * returns the current state.activeMobileButton
@@ -123,50 +122,49 @@ class HeaderStore {
     return this.state.lastActiveMenuItem;
   }
 
-  /*** PRIVATE METHODS ***/
   handleUpdateHeaderData(data) {
-    this.setState({headerData: data});
+    this.setState({ headerData: data });
   }
 
   handleFetchHeaderData() {
-    this.setState({headerData: []});
+    this.setState({ headerData: [] });
   }
 
-  handleHeaderDataFailedFetch(errorMessage) {
-    this.setState({errorMessage: errorMessage});
+  handleHeaderDataFailedFetch(errorMsg) {
+    this.setState({ errorMessage: errorMsg });
   }
 
   handleSetMobileMenuButtonValue(currentActiveMobileButton) {
-    this.setState({activeMobileButton: currentActiveMobileButton});
+    this.setState({ activeMobileButton: currentActiveMobileButton });
   }
 
   handleSetMobileMyNyplButtonValue(value) {
-    this.setState({mobileMyNyplButton: value});
+    this.setState({ mobileMyNyplButton: value });
   }
 
   // The set search button action value to Store
   handleSearchButtonActionValue(actionValue) {
-    this.setState({searchButtonAction: actionValue});
+    this.setState({ searchButtonAction: actionValue });
   }
 
   handleUpdateIsHeaderSticky(value) {
-    this.setState({isSticky: value});
+    this.setState({ isSticky: value });
   }
 
   handleSetLastActiveMenuItem(value) {
-    this.setState({lastActiveMenuItem: value});
+    this.setState({ lastActiveMenuItem: value });
   }
 
   handleToggleSubscribeFormVisible(value) {
-    this.setState({subscribeFormVisible: value});
+    this.setState({ subscribeFormVisible: value });
   }
 
   handleToggleMyNyplVisible(value) {
-    this.setState({myNyplVisible: value});
+    this.setState({ myNyplVisible: value });
   }
 
   handleToggleStickyMyNyplVisible(value) {
-    this.setState({stickyLoginVisible: value});
+    this.setState({ stickyLoginVisible: value });
   }
 }
 

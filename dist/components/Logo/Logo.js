@@ -26,6 +26,16 @@ var _utilsUtilsJs = require('../../utils/utils.js');
 
 var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
 
+var styles = {
+  base: {},
+  image: {
+    maxWidth: '230px'
+  },
+  icon: {
+    display: 'none'
+  }
+};
+
 var Logo = (function (_React$Component) {
   _inherits(Logo, _React$Component);
 
@@ -56,23 +66,19 @@ var Logo = (function (_React$Component) {
   return Logo;
 })(_react2['default'].Component);
 
-;
+Logo.propTypes = {
+  src: _react2['default'].PropTypes.string,
+  target: _react2['default'].PropTypes.string,
+  id: _react2['default'].PropTypes.string,
+  className: _react2['default'].PropTypes.string,
+  style: _react2['default'].PropTypes.object
+};
 
 Logo.defaultProps = {
   src: '//ux-static.nypl.org/images/NYPL-logo-black-pos.svg',
   target: '/',
   id: 'Logo',
   className: 'Logo'
-};
-
-var styles = {
-  base: {},
-  image: {
-    maxWidth: '230px'
-  },
-  icon: {
-    display: 'none'
-  }
 };
 
 exports['default'] = (0, _radium2['default'])(Logo);

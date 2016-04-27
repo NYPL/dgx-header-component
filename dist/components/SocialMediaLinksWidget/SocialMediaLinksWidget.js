@@ -18,13 +18,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _classnames = require('classnames');
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
 var _underscore = require('underscore');
 
-var _underscore2 = _interopRequireDefault(_underscore);
+// GA Utility
 
 var _utilsUtilsJs = require('../../utils/utils.js');
 
@@ -38,27 +34,21 @@ var SocialMediaLinksWidget = (function (_React$Component) {
 
     _get(Object.getPrototypeOf(SocialMediaLinksWidget.prototype), 'constructor', this).call(this, props);
 
-    this.state = {
-      linkClass: ''
-    };
+    this.state = { linkClass: '' };
+
+    this._handleOnMouseLeave = this._handleOnMouseLeave.bind(this);
+    this._handleOnMouseEnter = this._handleOnMouseEnter.bind(this);
+    this._trackHeader = _utilsUtilsJs2['default']._trackHeader.bind(this);
   }
 
   _createClass(SocialMediaLinksWidget, [{
-    key: 'render',
-    value: function render() {
+    key: '_generateLinksToDisplay',
+    value: function _generateLinksToDisplay(list, displayOnlyList) {
       var _this = this;
 
-      var displayOnlyList = this.props.displayOnly,
-          socialLinksList = this.props.links,
-          socialLinksToDisplay = undefined;
+      var socialLinksList = displayOnlyList && displayOnlyList.length ? (0, _underscore.pick)(list, displayOnlyList) : list;
 
-      // Pick the selected links to display (optional)
-      if (displayOnlyList && displayOnlyList.length) {
-        socialLinksList = _underscore2['default'].pick(socialLinksList, displayOnlyList);
-      }
-
-      // Iterate over each object key->value pair and display as a list item
-      socialLinksToDisplay = _underscore2['default'].map(socialLinksList, function (item, key) {
+      return (0, _underscore.map)(socialLinksList, function (item, key) {
         var hoverClass = _this.state.linkClass === key ? 'nypl-icon-' + key + '-circle-hover animateHover fadeInSlow' : 'nypl-icon-' + key + '-circle';
 
         return _react2['default'].createElement(
@@ -66,26 +56,21 @@ var SocialMediaLinksWidget = (function (_React$Component) {
           { key: key, className: _this.props.className + '-ListItem' },
           _react2['default'].createElement('a', {
             href: item,
-            onClick: _utilsUtilsJs2['default']._trackHeader.bind(_this, 'Click', 'Social Media - ' + key),
+            onClick: function () {
+              return _this._trackHeader('Click', 'Social Media - ' + key);
+            },
             className: _this.props.className + '-Link ' + hoverClass,
-            onMouseEnter: _this._handleOnMouseEnter.bind(_this, key),
-            onMouseLeave: _this._handleOnMouseLeave.bind(_this) })
+            onMouseEnter: function () {
+              return _this._handleOnMouseEnter(key);
+            },
+            onMouseLeave: _this._handleOnMouseLeave
+          })
         );
       });
-
-      return _react2['default'].createElement(
-        'div',
-        { className: this.props.className },
-        _react2['default'].createElement(
-          'ul',
-          { className: this.props.className + '-List' },
-          socialLinksToDisplay
-        )
-      );
     }
 
     /**
-     * _handleOnMouseEnter(key) 
+     * _handleOnMouseEnter(key)
      * Updates the linkClass state
      * object property with the param key
      *
@@ -98,7 +83,7 @@ var SocialMediaLinksWidget = (function (_React$Component) {
     }
 
     /**
-     * _handleOnMouseLeave() 
+     * _handleOnMouseLeave()
      * updates the linkClass state
      * object property to an empty string.
      *
@@ -108,10 +93,32 @@ var SocialMediaLinksWidget = (function (_React$Component) {
     value: function _handleOnMouseLeave() {
       this.setState({ linkClass: '' });
     }
+  }, {
+    key: 'render',
+    value: function render() {
+      var socialLinks = this._generateLinksToDisplay(this.props.links, this.props.displayOnlyList);
+
+      return _react2['default'].createElement(
+        'div',
+        { className: this.props.className },
+        _react2['default'].createElement(
+          'ul',
+          { className: this.props.className + '-List' },
+          socialLinks
+        )
+      );
+    }
   }]);
 
   return SocialMediaLinksWidget;
 })(_react2['default'].Component);
+
+SocialMediaLinksWidget.propTypes = {
+  lang: _react2['default'].PropTypes.string,
+  className: _react2['default'].PropTypes.string,
+  links: _react2['default'].PropTypes.object,
+  displayOnlyList: _react2['default'].PropTypes.array
+};
 
 SocialMediaLinksWidget.defaultProps = {
   lang: 'en',

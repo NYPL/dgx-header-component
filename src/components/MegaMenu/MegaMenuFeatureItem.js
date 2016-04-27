@@ -8,11 +8,11 @@ class MegaMenuFeatureItem extends React.Component {
     super(props);
   }
 
-	render() {
+  render() {
     const feature = this.props.feature;
     const classes = cx({
       'with-image': feature && feature.images,
-      'without-image': !feature || !feature.images
+      'without-image': !feature || !feature.images,
     });
     const contentObj = ContentModel.featureItem(feature, this.props.lang);
     const featuredItem = (
@@ -21,15 +21,23 @@ class MegaMenuFeatureItem extends React.Component {
         className={this.props.className}
         classes={classes}
         navLabel={this.props.navLabel}
-      />);
+      />
+    );
 
-		return featuredItem;
-	}
+    return featuredItem;
+  }
 }
 
+MegaMenuFeatureItem.propTypes = {
+  lang: React.PropTypes.string,
+  className: React.PropTypes.string,
+  feature: React.PropTypes.object,
+  navLabel: React.PropTypes.string,
+};
+
 MegaMenuFeatureItem.defaultProps = {
-	lang: 'en',
-	className: 'MegaMenu-FeatureItem'
+  lang: 'en',
+  className: 'MegaMenu-FeatureItem',
 };
 
 export default MegaMenuFeatureItem;

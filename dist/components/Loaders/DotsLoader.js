@@ -22,10 +22,35 @@ var _radium = require('radium');
 
 var _radium2 = _interopRequireDefault(_radium);
 
+var styles = {
+  text: {
+    display: 'inline-block',
+    fontFamily: 'Kievit-Book, Helvetica, arial',
+    color: '#FFF',
+    fontSize: '20px',
+    margin: '0 5px 0 0'
+  },
+  list: {
+    position: 'relative',
+    display: 'inline-block',
+    listStyle: 'none',
+    verticalAlign: '-1px',
+    margin: 0,
+    padding: 0,
+    fontSize: 0
+  },
+  dots: {
+    margin: 0,
+    height: '3px',
+    width: '3px',
+    borderRadius: '100%',
+    border: '2px solid white',
+    display: 'inline-block'
+  }
+};
+
 var DotsLoader = (function (_React$Component) {
   _inherits(DotsLoader, _React$Component);
-
-  // Constructor used in ES6
 
   function DotsLoader(props) {
     _classCallCheck(this, DotsLoader);
@@ -62,39 +87,16 @@ var DotsLoader = (function (_React$Component) {
   return DotsLoader;
 })(_react2['default'].Component);
 
-;
+DotsLoader.propTypes = {
+  className: _react2['default'].PropTypes.string,
+  id: _react2['default'].PropTypes.string,
+  dots: _react2['default'].PropTypes.number
+};
 
 DotsLoader.defaultProps = {
   className: 'DotsLoader',
   id: 'DotsLoader',
   dots: 3
-};
-
-var styles = {
-  text: {
-    display: 'inline-block',
-    fontFamily: 'Kievit-Book, Helvetica, arial',
-    color: '#FFF',
-    fontSize: '20px',
-    margin: '0 5px 0 0'
-  },
-  list: {
-    position: 'relative',
-    display: 'inline-block',
-    listStyle: 'none',
-    verticalAlign: '-1px',
-    margin: 0,
-    padding: 0,
-    fontSize: 0
-  },
-  dots: {
-    margin: 0,
-    height: '3px',
-    width: '3px',
-    borderRadius: '100%',
-    border: '2px solid white',
-    display: 'inline-block'
-  }
 };
 
 exports['default'] = (0, _radium2['default'])(DotsLoader);

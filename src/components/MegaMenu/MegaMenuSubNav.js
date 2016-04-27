@@ -1,10 +1,17 @@
 import React from 'react';
-import _ from 'underscore';
+import { map as _map } from 'underscore';
 import Radium from 'radium';
 
 import config from '../../appConfig.js';
 import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWidget.js';
 import utils from '../../utils/utils.js';
+
+const styles = {
+  topLink: {
+    textDecoration: 'none',
+    color: '#FFF',
+  },
+};
 
 class MegaMenuSubNav extends React.Component {
   constructor(props) {
@@ -12,7 +19,7 @@ class MegaMenuSubNav extends React.Component {
   }
 
   render() {
-    const items = _.map(this.props.items, (m, i) => {
+    const items = _map(this.props.items, (m, i) => {
       const target = m.link[this.props.lang].text || '#';
       return (
         <li key={i}>
@@ -20,10 +27,10 @@ class MegaMenuSubNav extends React.Component {
             onClick={utils._trackHeader.bind(
               this,
               'Go to...',
-              `${this.props.label[this.props.lang].text}--${m.name[this.props.lang]['text']}`)
+              `${this.props.label[this.props.lang].text}--${m.name[this.props.lang].text}`)
             }
           >
-            {m.name[this.props.lang]['text']}
+            {m.name[this.props.lang].text}
           </a>
         </li>
       );
@@ -32,7 +39,7 @@ class MegaMenuSubNav extends React.Component {
     // Assign widget to the FindUs Menu Item by ID match
     const socialMediaWidget = (this.props.navId === 'df621833-4dd1-4223-83e5-6ad7f98ad26a') ?
       <SocialMediaLinksWidget
-        className={'MegaMenu-SubNav-SocialMediaWidget'}
+        className="MegaMenu-SubNav-SocialMediaWidget"
         links={config.socialMediaLinks}
         displayOnly={['facebook', 'twitter']}
       /> : null;
@@ -40,9 +47,15 @@ class MegaMenuSubNav extends React.Component {
     return (
       <div className="MegaMenu-SubNav">
         <h2>
-          <a style={styles.topLink} href={this.props.topLink}
-            onClick={utils._trackHeader.bind(
-              this, 'Go to...', `SubNav Title--${this.props.label[this.props.lang].text}`)
+          <a
+            style={styles.topLink}
+            href={this.props.topLink}
+            onClick={
+              utils._trackHeader.bind(
+                this,
+                'Go to...',
+                `SubNav Title--${this.props.label[this.props.lang].text}`
+              )
             }
           >
             {this.props.label[this.props.lang].text}
@@ -55,16 +68,17 @@ class MegaMenuSubNav extends React.Component {
   }
 }
 
-MegaMenuSubNav.defaultProps = {
-  lang: 'en',
-  topLink: '#'
+MegaMenuSubNav.propTypes = {
+  lang: React.PropTypes.string,
+  topLink: React.PropTypes.string,
+  navId: React.PropTypes.string,
+  label: React.PropTypes.object,
+  items: React.PropTypes.array,
 };
 
-const styles = {
-  topLink: {
-    textDecoration: 'none',
-    color: '#FFF'
-  }
+MegaMenuSubNav.defaultProps = {
+  lang: 'en',
+  topLink: '#',
 };
 
 export default Radium(MegaMenuSubNav);

@@ -18,8 +18,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-// Add-on Modules to generate FindUs Widget
-
 var _FindUsFeatureJs = require('./FindUsFeature.js');
 
 var _FindUsFeatureJs2 = _interopRequireDefault(_FindUsFeatureJs);
@@ -59,6 +57,14 @@ var FindUsWidget = (function (_React$Component) {
 
   return FindUsWidget;
 })(_react2['default'].Component);
+
+FindUsWidget.propTypes = {
+  lang: _react2['default'].PropTypes.string,
+  className: _react2['default'].PropTypes.string,
+  featuredItem: _react2['default'].PropTypes.object,
+  navLabel: _react2['default'].PropTypes.string,
+  urlType: _react2['default'].PropTypes.string
+};
 
 FindUsWidget.defaultProps = {
   lang: 'en',

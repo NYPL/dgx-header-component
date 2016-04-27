@@ -1,5 +1,4 @@
 import React from 'react';
-// Add-on Modules to generate FindUs Widget
 import FindUsFeature from './FindUsFeature.js';
 import MegaMenuFeatureItem from '../MegaMenu/MegaMenuFeatureItem.js';
 
@@ -9,7 +8,7 @@ class FindUsWidget extends React.Component {
   }
 
   render() {
-    let feature = this.props.featuredItem;
+    const feature = this.props.featuredItem;
 
     return (
       <div className={this.props.className}>
@@ -26,9 +25,17 @@ class FindUsWidget extends React.Component {
   }
 }
 
+FindUsWidget.propTypes = {
+  lang: React.PropTypes.string,
+  className: React.PropTypes.string,
+  featuredItem: React.PropTypes.object,
+  navLabel: React.PropTypes.string,
+  urlType: React.PropTypes.string,
+};
+
 FindUsWidget.defaultProps = {
   lang: 'en',
-  className: 'FindUsWidget'
+  className: 'FindUsWidget',
 };
 
 export default FindUsWidget;

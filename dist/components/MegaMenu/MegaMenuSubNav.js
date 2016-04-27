@@ -24,14 +24,6 @@ var _radium = require('radium');
 
 var _radium2 = _interopRequireDefault(_radium);
 
-var _appConfigJs = require('../../appConfig.js');
-
-var _appConfigJs2 = _interopRequireDefault(_appConfigJs);
-
-var _SocialMediaLinksWidgetSocialMediaLinksWidgetJs = require('../SocialMediaLinksWidget/SocialMediaLinksWidget.js');
-
-var _SocialMediaLinksWidgetSocialMediaLinksWidgetJs2 = _interopRequireDefault(_SocialMediaLinksWidgetSocialMediaLinksWidgetJs);
-
 var _utilsUtilsJs = require('../../utils/utils.js');
 
 var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
@@ -72,13 +64,6 @@ var MegaMenuSubNav = (function (_React$Component) {
         );
       });
 
-      // Assign widget to the FindUs Menu Item by ID match
-      var socialMediaWidget = this.props.navId === 'df621833-4dd1-4223-83e5-6ad7f98ad26a' ? _react2['default'].createElement(_SocialMediaLinksWidgetSocialMediaLinksWidgetJs2['default'], {
-        className: 'MegaMenu-SubNav-SocialMediaWidget',
-        links: _appConfigJs2['default'].socialMediaLinks,
-        displayOnly: ['facebook', 'twitter']
-      }) : null;
-
       return _react2['default'].createElement(
         'div',
         { className: 'MegaMenu-SubNav' },
@@ -99,8 +84,7 @@ var MegaMenuSubNav = (function (_React$Component) {
           'ul',
           null,
           items
-        ),
-        socialMediaWidget
+        )
       );
     }
   }]);

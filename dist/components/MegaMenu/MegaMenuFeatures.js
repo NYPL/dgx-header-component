@@ -18,13 +18,11 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _underscore = require('underscore');
+
 var _MegaMenuFeatureItemJs = require('./MegaMenuFeatureItem.js');
 
 var _MegaMenuFeatureItemJs2 = _interopRequireDefault(_MegaMenuFeatureItemJs);
-
-var _FindUsWidgetFindUsWidgetJs = require('../FindUsWidget/FindUsWidget.js');
-
-var _FindUsWidgetFindUsWidgetJs2 = _interopRequireDefault(_FindUsWidgetFindUsWidgetJs);
 
 var _DonateWidgetDonateWidgetJs = require('../DonateWidget/DonateWidget.js');
 
@@ -49,7 +47,7 @@ var MegaMenuFeatures = (function (_React$Component) {
       var _this = this;
 
       var currentFeatureItem = undefined;
-      // The specific header items for Find Us and Give only have one feature.
+      // The specific header items for Give only have one feature.
       var widgetFeature = this.props.features[0].featuredItem;
 
       // Donate Widget
@@ -60,14 +58,8 @@ var MegaMenuFeatures = (function (_React$Component) {
           donationLinks: _appConfigJs2['default'].donationLinks,
           navLabel: this.props.navLabel
         });
-      } else if (this.props.navId === 'df621833-4dd1-4223-83e5-6ad7f98ad26a') {
-        currentFeatureItem = _react2['default'].createElement(_FindUsWidgetFindUsWidgetJs2['default'], {
-          navId: this.props.navId,
-          featuredItem: widgetFeature,
-          navLabel: this.props.navLabel
-        });
       } else {
-        currentFeatureItem = this.props.features.map(function (item, i) {
+        currentFeatureItem = (0, _underscore.map)(this.props.features, function (item, i) {
           return _react2['default'].createElement(_MegaMenuFeatureItemJs2['default'], {
             key: i,
             feature: item.featuredItem,

@@ -1,6 +1,6 @@
 import React from 'react';
+import { map as _map } from 'underscore';
 import MegaMenuFeatureItem from './MegaMenuFeatureItem.js';
-import FindUsWidget from '../FindUsWidget/FindUsWidget.js';
 import DonateWidget from '../DonateWidget/DonateWidget.js';
 import config from '../../appConfig.js';
 
@@ -11,7 +11,7 @@ class MegaMenuFeatures extends React.Component {
 
   render() {
     let currentFeatureItem;
-    // The specific header items for Find Us and Give only have one feature.
+    // The specific header items for Give only have one feature.
     const widgetFeature = this.props.features[0].featuredItem;
 
     // Donate Widget
@@ -24,16 +24,8 @@ class MegaMenuFeatures extends React.Component {
           navLabel={this.props.navLabel}
         />
       );
-    } else if (this.props.navId === 'df621833-4dd1-4223-83e5-6ad7f98ad26a') {
-      currentFeatureItem = (
-        <FindUsWidget
-          navId={this.props.navId}
-          featuredItem={widgetFeature}
-          navLabel={this.props.navLabel}
-        />
-      );
     } else {
-      currentFeatureItem = this.props.features.map((item, i) =>
+      currentFeatureItem = _map(this.props.features, (item, i) =>
         <MegaMenuFeatureItem
           key={i}
           feature={item.featuredItem}

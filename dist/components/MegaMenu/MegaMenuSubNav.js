@@ -20,6 +20,14 @@ var _react2 = _interopRequireDefault(_react);
 
 var _underscore = require('underscore');
 
+var _appConfigJs = require('../../appConfig.js');
+
+var _appConfigJs2 = _interopRequireDefault(_appConfigJs);
+
+var _SocialMediaLinksWidgetSocialMediaLinksWidgetJs = require('../SocialMediaLinksWidget/SocialMediaLinksWidget.js');
+
+var _SocialMediaLinksWidgetSocialMediaLinksWidgetJs2 = _interopRequireDefault(_SocialMediaLinksWidgetSocialMediaLinksWidgetJs);
+
 var _radium = require('radium');
 
 var _radium2 = _interopRequireDefault(_radium);
@@ -27,6 +35,12 @@ var _radium2 = _interopRequireDefault(_radium);
 var _utilsUtilsJs = require('../../utils/utils.js');
 
 var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
+
+// FeatureFlags Module
+
+var _dgxFeatureFlags = require('dgx-feature-flags');
+
+var _dgxFeatureFlags2 = _interopRequireDefault(_dgxFeatureFlags);
 
 var styles = {
   topLink: {
@@ -42,27 +56,87 @@ var MegaMenuSubNav = (function (_React$Component) {
     _classCallCheck(this, MegaMenuSubNav);
 
     _get(Object.getPrototypeOf(MegaMenuSubNav.prototype), 'constructor', this).call(this, props);
+
+    this.state = { featureFlags: _dgxFeatureFlags2['default'].store.getState() };
   }
 
   _createClass(MegaMenuSubNav, [{
-    key: 'render',
-    value: function render() {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      _dgxFeatureFlags2['default'].store.listen(this._onChange.bind(this));
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      _dgxFeatureFlags2['default'].store.unlisten(this._onChange.bind(this));
+    }
+  }, {
+    key: '_onChange',
+    value: function _onChange() {
+      this.setState({ featureFlags: _dgxFeatureFlags2['default'].store.getState() });
+    }
+  }, {
+    key: '_renderSubNavItems',
+    value: function _renderSubNavItems(items) {
       var _this = this;
 
-      var items = (0, _underscore.map)(this.props.items, function (m, i) {
+      if ((0, _underscore.isEmpty)(items)) {
+        return null;
+      }
+
+      return (0, _underscore.map)(items, function (m, i) {
         var target = m.link[_this.props.lang].text || '#';
         return _react2['default'].createElement(
           'li',
           { key: i },
           _react2['default'].createElement(
             'a',
-            { href: target,
+            {
+              href: target,
               onClick: _utilsUtilsJs2['default']._trackHeader.bind(_this, 'Go to...', _this.props.label[_this.props.lang].text + '--' + m.name[_this.props.lang].text)
             },
             m.name[_this.props.lang].text
           )
         );
       });
+    }
+  }, {
+    key: '_renderSocialMediaIcons',
+    value: function _renderSocialMediaIcons(navId) {
+      return this.props.navId === navId ? _react2['default'].createElement(_SocialMediaLinksWidgetSocialMediaLinksWidgetJs2['default'], {
+        className: 'MegaMenu-SubNav-SocialMediaWidget',
+        links: _appConfigJs2['default'].socialMediaLinks,
+        displayOnly: ['facebook', 'twitter']
+      }) : null;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      if (_dgxFeatureFlags2['default'].store._isFeatureActive('location-top-link')) {
+        return _react2['default'].createElement(
+          'div',
+          { className: 'MegaMenu-SubNav' },
+          _react2['default'].createElement(
+            'h2',
+            null,
+            _react2['default'].createElement(
+              'a',
+              {
+                style: styles.topLink,
+                href: this.props.topLink,
+                onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Go to...', 'SubNav Title--' + this.props.label[this.props.lang].text)
+              },
+              this.props.label[this.props.lang].text
+            )
+          ),
+          _react2['default'].createElement(
+            'ul',
+            null,
+            this._renderSubNavItems(this.props.items)
+          ),
+          this._renderSocialMediaIcons('df621833-4dd1-4223-83e5-6ad7f98ad26a')
+        );
+      }
 
       return _react2['default'].createElement(
         'div',
@@ -83,7 +157,7 @@ var MegaMenuSubNav = (function (_React$Component) {
         _react2['default'].createElement(
           'ul',
           null,
-          items
+          this._renderSubNavItems(this.props.items)
         )
       );
     }

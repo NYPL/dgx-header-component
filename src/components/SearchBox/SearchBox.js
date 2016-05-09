@@ -215,7 +215,7 @@ class SearchBox extends React.Component {
    * Returns the final URL for the catalog search.
    */
   _setCatalogUrl(searchString, catalogBaseUrl) {
-    const catalogUrl = catalogBaseUrl || 'http://www.nypl.org/search/apachesolr_search/';
+    const catalogUrl = catalogBaseUrl || '//www.nypl.org/search/apachesolr_search/';
 
     if (searchString) {
       return catalogUrl + encodeURIComponent(searchString);
@@ -348,17 +348,19 @@ class SearchBox extends React.Component {
               className={`${this.props.className}-Elements-Input-Keywords-Wrapper`}
             >
               <div className={`${this.props.className}-Input-Keywords-Border`}>
-                <span className="nypl-icon-magnifier-thin icon"></span>
-                <InputField
-                  type="text"
-                  id={`${this.props.id}-Input-Keywords`}
-                  className={`${this.props.className}-Input-Keywords ${pulseAnimation}`}
-                  ref="keywords"
-                  value={this.state.searchKeywords}
-                  maxLength="128"
-                  placeholder={this.state.placeholder}
-                  onChange={this._inputChange.bind(this, 'keywords')}
-                />
+                <label>
+                  <span className="nypl-icon-magnifier-thin icon"></span>
+                  <InputField
+                    type="text"
+                    id={`${this.props.id}-Input-Keywords`}
+                    className={`${this.props.className}-Input-Keywords ${pulseAnimation}`}
+                    ref="keywords"
+                    value={this.state.searchKeywords}
+                    maxLength="128"
+                    placeholder={this.state.placeholder}
+                    onChange={this._inputChange.bind(this, 'keywords')}
+                  />
+                </label>
               </div>
             </div>
             <div

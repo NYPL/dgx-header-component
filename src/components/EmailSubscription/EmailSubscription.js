@@ -162,9 +162,9 @@ class EmailSubscription extends React.Component {
     const isLoading = this.state.formProcessing;
     const notValidEmail = this.state.notValidEmail;
     const formClass = 'EmailSubscribeForm';
+    const emailAddressField = 'emailAddressField';
+    const errorClass = cx({ active: notValidEmail });
     let subscribeContent;
-
-    const errorClass = cx({ active: notValidEmail, '': !notValidEmail });
 
     if (!isLoading) {
       // The default view
@@ -173,8 +173,10 @@ class EmailSubscription extends React.Component {
           <div className={`SubscribeMessageBox ${status}`}>
             <div className="SubscribeMessageBox-Eyebrow"></div>
             <div className="SubscribeMessageBox-Title">
-              Get the <span className="SubscribeMessageBox-Title-BestNYPL">
-              best of NYPL</span> in your inbox
+              <label htmlFor={emailAddressField}>
+                Get the <span className="SubscribeMessageBox-Title-BestNYPL">
+                best of NYPL</span> in your inbox
+              </label>
             </div>
           </div>
 
@@ -202,7 +204,8 @@ class EmailSubscription extends React.Component {
                 name="Email Address"
                 placeholder={this.props.placeholder}
                 style={styles.emailField}
-                ref="emailAddressField"
+                ref={emailAddressField}
+                id={emailAddressField}
                 isRequired
               />
 
@@ -288,7 +291,7 @@ class EmailSubscription extends React.Component {
             href={this.props.subCenterUrl}
             className={`${this.props.className}-sc-link`}
             style={styles.scLink}
-            onClick={utils._trackHeader.bind(this, 'Subscribe', 'Subscription Center')}
+            onClick={() => utils._trackHeader('Subscribe', 'Subscription Center')}
           >
             Subscription Center
           </a>

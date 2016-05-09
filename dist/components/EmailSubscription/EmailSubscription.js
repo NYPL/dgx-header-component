@@ -215,9 +215,9 @@ var EmailSubscription = (function (_React$Component) {
       var isLoading = this.state.formProcessing;
       var notValidEmail = this.state.notValidEmail;
       var formClass = 'EmailSubscribeForm';
+      var emailAddressField = 'emailAddressField';
+      var errorClass = (0, _classnames2['default'])({ active: notValidEmail });
       var subscribeContent = undefined;
-
-      var errorClass = (0, _classnames2['default'])({ active: notValidEmail, '': !notValidEmail });
 
       if (!isLoading) {
         // The default view
@@ -231,13 +231,17 @@ var EmailSubscription = (function (_React$Component) {
             _react2['default'].createElement(
               'div',
               { className: 'SubscribeMessageBox-Title' },
-              'Get the ',
               _react2['default'].createElement(
-                'span',
-                { className: 'SubscribeMessageBox-Title-BestNYPL' },
-                'best of NYPL'
-              ),
-              ' in your inbox'
+                'label',
+                { htmlFor: emailAddressField },
+                'Get the ',
+                _react2['default'].createElement(
+                  'span',
+                  { className: 'SubscribeMessageBox-Title-BestNYPL' },
+                  'best of NYPL'
+                ),
+                ' in your inbox'
+              )
             )
           ),
           _react2['default'].createElement(
@@ -267,7 +271,8 @@ var EmailSubscription = (function (_React$Component) {
                 name: 'Email Address',
                 placeholder: this.props.placeholder,
                 style: styles.emailField,
-                ref: 'emailAddressField',
+                ref: emailAddressField,
+                id: emailAddressField,
                 isRequired: true
               }),
               _react2['default'].createElement(
@@ -389,7 +394,9 @@ var EmailSubscription = (function (_React$Component) {
               href: this.props.subCenterUrl,
               className: this.props.className + '-sc-link',
               style: styles.scLink,
-              onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Subscribe', 'Subscription Center')
+              onClick: function () {
+                return _utilsUtilsJs2['default']._trackHeader('Subscribe', 'Subscription Center');
+              }
             },
             'Subscription Center'
           ),

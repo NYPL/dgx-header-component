@@ -27,7 +27,7 @@ class Logo extends React.Component {
         onClick={utils._trackHeader.bind(this, 'Click Logo', '')}
         style={[styles.base, this.props.style]}
       >
-        <img src={this.props.src} style={styles.image} />
+        <img src={this.props.src} style={styles.image} alt={this.props.alt} />
         <span className="nypl-icon-logo-mark" style={styles.icon}></span>
       </a>
     );
@@ -39,6 +39,7 @@ Logo.propTypes = {
   id: React.PropTypes.string,
   className: React.PropTypes.string,
   style: React.PropTypes.object,
+  alt: React.PropTypes.string,
 };
 
 Logo.defaultProps = {
@@ -46,6 +47,7 @@ Logo.defaultProps = {
   target: '/',
   id: 'Logo',
   className: 'Logo',
+  alt: 'The New York Public Library',
 };
 
 export default Radium(Logo);

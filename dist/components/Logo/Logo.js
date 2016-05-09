@@ -57,7 +57,7 @@ var Logo = (function (_React$Component) {
           onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Click Logo', ''),
           style: [styles.base, this.props.style]
         },
-        _react2['default'].createElement('img', { src: this.props.src, style: styles.image }),
+        _react2['default'].createElement('img', { src: this.props.src, style: styles.image, alt: this.props.alt }),
         _react2['default'].createElement('span', { className: 'nypl-icon-logo-mark', style: styles.icon })
       );
     }
@@ -71,14 +71,16 @@ Logo.propTypes = {
   target: _react2['default'].PropTypes.string,
   id: _react2['default'].PropTypes.string,
   className: _react2['default'].PropTypes.string,
-  style: _react2['default'].PropTypes.object
+  style: _react2['default'].PropTypes.object,
+  alt: _react2['default'].PropTypes.string
 };
 
 Logo.defaultProps = {
   src: '//ux-static.nypl.org/images/NYPL-logo-black-pos.svg',
   target: '/',
   id: 'Logo',
-  className: 'Logo'
+  className: 'Logo',
+  alt: 'The New York Public Library'
 };
 
 exports['default'] = (0, _radium2['default'])(Logo);

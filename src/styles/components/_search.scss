@@ -174,33 +174,6 @@
       color: #FFFFFF;
     }
   }
-
-  /* Customized radio button */
-  input[type=radio] {
-    /* Hide original inputs, but still accessible for input related functions */
-    opacity: 0;
-  }
-
-  label:before {
-    background-color: #FFFFFF;
-    border-radius: 50%;
-    content: '';
-    display: inline-block;
-    height: 10px;
-    left: 0;
-    margin-right: 10px;
-    position: relative;
-    width: 10px;
-    top: 1px;
-    text-align: center;
-  }
-
-  input[type=radio]:checked + label:before {
-    content: '\2022';
-    color: #000000;
-    font-size: 18px;
-    line-height: 11px;
-  }
 }
 
 /* The wrapper for input fields */
@@ -274,10 +247,14 @@
   @include min-screen(769px) {
     background-color: #1DA1D4;
     color: #FFFFFF;
-    font-size: 58px;
+    font-size: 47px;
     font-style: normal;
     letter-spacing: -0.8px;
     padding: 0px !important;
+  }
+
+  @include min-screen(850px) {
+    font-size: 55px;
   }
 
   @include min-screen(980px) {
@@ -307,6 +284,33 @@
 
   @include min-screen(769px) {
     display: inline-block;
+  }
+
+  /* Customized radio button */
+  input[type=radio] {
+    /* Hide original inputs, but still accessible for input related functions */
+    opacity: 0;
+  }
+
+  label:before {
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    content: '';
+    display: inline-block;
+    height: 10px;
+    left: 0;
+    margin-right: 10px;
+    position: relative;
+    width: 10px;
+    top: 1px;
+    text-align: center;
+  }
+
+  input[type=radio]:checked + label:before {
+    content: '\2022';
+    color: #000000;
+    font-size: 18px;
+    line-height: 11px;
   }
 }
 

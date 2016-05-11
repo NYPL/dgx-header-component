@@ -36,40 +36,28 @@ var _appConfigJs = require('../../appConfig.js');
 
 var _appConfigJs2 = _interopRequireDefault(_appConfigJs);
 
-// FeatureFlags Module
-
-var _dgxFeatureFlags = require('dgx-feature-flags');
-
-var _dgxFeatureFlags2 = _interopRequireDefault(_dgxFeatureFlags);
-
 var MegaMenuFeatures = (function (_React$Component) {
   _inherits(MegaMenuFeatures, _React$Component);
 
-  function MegaMenuFeatures(props) {
+  function MegaMenuFeatures() {
     _classCallCheck(this, MegaMenuFeatures);
 
-    _get(Object.getPrototypeOf(MegaMenuFeatures.prototype), 'constructor', this).call(this, props);
-    this.state = { featureFlags: _dgxFeatureFlags2['default'].store.getState() };
+    _get(Object.getPrototypeOf(MegaMenuFeatures.prototype), 'constructor', this).apply(this, arguments);
   }
 
   _createClass(MegaMenuFeatures, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      _dgxFeatureFlags2['default'].store.listen(this._onChange.bind(this));
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      _dgxFeatureFlags2['default'].store.unlisten(this._onChange.bind(this));
-    }
-  }, {
-    key: '_onChange',
-    value: function _onChange() {
-      this.setState({ featureFlags: _dgxFeatureFlags2['default'].store.getState() });
-    }
-  }, {
-    key: '_renderFeatureitems',
-    value: function _renderFeatureitems(object) {
+    key: 'renderFeatureitems',
+
+    /**
+     * Generates the DOM for the FeatureItems.
+     * Optionally, returns the appropriate widget component based off navId match.
+     * @param {object[]} - Array containing FeatureItem Object data.
+     * @param {Object} param (optional) - Object containing widget properties.
+     * @param {string} param.donateWidget (optional) - Widget property with String value.
+     * @param {string} param.findWidget (optional) - Widget property with String value.
+     * @returns {Object} React DOM.
+     */
+    value: function renderFeatureitems(object) {
       var _this = this;
 
       var opts = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
@@ -79,14 +67,14 @@ var MegaMenuFeatures = (function (_React$Component) {
       }
 
       var _opts$donateWidget = opts.donateWidget;
-      var donateWidget = _opts$donateWidget === undefined ? false : _opts$donateWidget;
+      var donateWidget = _opts$donateWidget === undefined ? '' : _opts$donateWidget;
       var _opts$findWidget = opts.findWidget;
-      var findWidget = _opts$findWidget === undefined ? false : _opts$findWidget;
+      var findWidget = _opts$findWidget === undefined ? '' : _opts$findWidget;
 
       // Extract the first featured item to pass onto the widgets matching navId
       var widgetFeature = object[0].featuredItem;
 
-      if (this.props.navId === '1d9ea0ec-6ca3-4577-9dd1-e8de1f2a8bb1' && donateWidget) {
+      if (this.props.navId === donateWidget) {
         return _react2['default'].createElement(_DonateWidgetDonateWidgetJs2['default'], {
           key: 'donateWidget',
           navId: this.props.navId,
@@ -96,8 +84,9 @@ var MegaMenuFeatures = (function (_React$Component) {
         });
       }
 
-      if (this.props.navId === 'df621833-4dd1-4223-83e5-6ad7f98ad26a' && findWidget) {
+      if (this.props.navId === findWidget) {
         return _react2['default'].createElement(_FindUsWidgetFindUsWidgetJs2['default'], {
+          key: 'findUsWidget',
           navId: this.props.navId,
           featuredItem: widgetFeature,
           navLabel: this.props.navLabel
@@ -115,18 +104,13 @@ var MegaMenuFeatures = (function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      if (_dgxFeatureFlags2['default'].store._isFeatureActive('location-top-link')) {
-        return _react2['default'].createElement(
-          'div',
-          { className: this.props.className },
-          this._renderFeatureitems(this.props.features, { donateWidget: true, findWidget: true })
-        );
-      }
-
       return _react2['default'].createElement(
         'div',
         { className: this.props.className },
-        this._renderFeatureitems(this.props.features, { donateWidget: true })
+        this.renderFeatureitems(this.props.features, {
+          donateWidget: '1d9ea0ec-6ca3-4577-9dd1-e8de1f2a8bb1',
+          findWidget: 'df621833-4dd1-4223-83e5-6ad7f98ad26a'
+        })
       );
     }
   }]);

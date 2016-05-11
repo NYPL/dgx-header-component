@@ -26,6 +26,8 @@ var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
+var _underscore = require('underscore');
+
 var _appConfigJs = require('../../appConfig.js');
 
 var _appConfigJs2 = _interopRequireDefault(_appConfigJs);
@@ -58,6 +60,12 @@ var _MyNyplButtonStickyMyNyplButtonJs = require('../MyNyplButton/StickyMyNyplBut
 
 var _MyNyplButtonStickyMyNyplButtonJs2 = _interopRequireDefault(_MyNyplButtonStickyMyNyplButtonJs);
 
+// FeatureFlags Module
+
+var _dgxFeatureFlags = require('dgx-feature-flags');
+
+var _dgxFeatureFlags2 = _interopRequireDefault(_dgxFeatureFlags);
+
 var styles = {
   donateButton: {
     padding: '8px 15px',
@@ -81,23 +89,40 @@ var NavMenu = (function (_React$Component) {
     _classCallCheck(this, NavMenu);
 
     _get(Object.getPrototypeOf(NavMenu.prototype), 'constructor', this).call(this, props);
+
+    this.state = { featureFlags: _dgxFeatureFlags2['default'].store.getState() };
   }
 
   _createClass(NavMenu, [{
-    key: 'render',
-    value: function render() {
-      var _this = this;
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      _dgxFeatureFlags2['default'].store.listen(this.onChange.bind(this));
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      _dgxFeatureFlags2['default'].store.unlisten(this.onChange.bind(this));
+    }
+  }, {
+    key: 'onChange',
+    value: function onChange() {
+      this.setState({ featureFlags: _dgxFeatureFlags2['default'].store.getState() });
+    }
 
-      var navItems = this.props.items && this.props.items.length ? this.props.items : _appConfigJs2['default'].navTopLinks;
-      var mobileActiveClass = (0, _classnames2['default'])({
-        mobileActive: _storesHeaderStoreJs2['default']._getMobileMenuBtnValue() === 'mobileMenu'
-      });
-      var stickyItemsClass = (0, _classnames2['default'])('StickyItems', {
-        active: _storesHeaderStoreJs2['default']._getIsStickyValue()
-      });
-      var stickyNavItems = _react2['default'].createElement(
+    /**
+     * Generates the DOM for the Sticky Items that will
+     * display when the Header is in sticky mode.
+     * Adds the appropriate class based off the sticky value.
+     * @returns {Object} React DOM.
+     */
+  }, {
+    key: 'renderStickyNavItems',
+    value: function renderStickyNavItems() {
+      var stickyClass = (0, _classnames2['default'])('StickyItems', { active: _storesHeaderStoreJs2['default']._getIsStickyValue() });
+
+      return _react2['default'].createElement(
         'div',
-        { className: stickyItemsClass },
+        { className: stickyClass },
         _react2['default'].createElement('span', { className: 'lineSeparator', style: styles.lineSeparator }),
         _react2['default'].createElement(_MyNyplButtonStickyMyNyplButtonJs2['default'], null),
         _react2['default'].createElement(_DonateButtonDonateButtonJs2['default'], {
@@ -106,7 +131,29 @@ var NavMenu = (function (_React$Component) {
           gaLabel: 'Collapsed Donate Button'
         })
       );
-      var navMenu = navItems.map(function (item, index) {
+    }
+
+    /**
+     * Generates the DOM for the NavItems with appropriate class.
+     * Optionally, removes any NavItems if a match is found from the exceptionList.
+     * @param {items[]} - Array containing NavMenu item Objects.
+     * @param {exceptionList[]} (optional) - Array containing NavId strings.
+     * @returns {Object} React DOM.
+     */
+  }, {
+    key: 'renderNavMenu',
+    value: function renderNavMenu(items, exceptionList) {
+      var _this = this;
+
+      var navItems = (0, _underscore.isEmpty)(items) ? _appConfigJs2['default'].navTopLinks : items;
+
+      if ((0, _underscore.isArray)(exceptionList) && !(0, _underscore.isEmpty)(exceptionList)) {
+        navItems = (0, _underscore.filter)(navItems, function (item) {
+          return item.id && !(0, _underscore.contains)(exceptionList, item.id);
+        });
+      }
+
+      return (0, _underscore.map)(navItems, function (item, index) {
         return _react2['default'].createElement(_NavMenuItemNavMenuItemJs2['default'], {
           label: item.name,
           lang: _this.props.lang,
@@ -119,6 +166,34 @@ var NavMenu = (function (_React$Component) {
           index: index
         });
       });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var mobileActiveClass = (0, _classnames2['default'])({
+        mobileActive: _storesHeaderStoreJs2['default']._getMobileMenuBtnValue() === 'mobileMenu'
+      });
+
+      // Render NavMenuItems without navId passed as argument.
+      if (_dgxFeatureFlags2['default'].store._isFeatureActive('location-top-link')) {
+        return _react2['default'].createElement(
+          'nav',
+          { className: this.props.className },
+          _react2['default'].createElement(
+            'div',
+            { className: this.props.className + '-Wrapper ' + mobileActiveClass },
+            _react2['default'].createElement('span', { className: 'MobileLogoText nypl-icon-logo-type' }),
+            _react2['default'].createElement(
+              'ul',
+              { className: this.props.className + '-List', id: 'NavMenu-List' },
+              this.renderNavMenu(this.props.items, ['df621833-4dd1-4223-83e5-6ad7f98ad26a'])
+            ),
+            _react2['default'].createElement(_SearchButtonSearchButtonJs2['default'], { className: '' + this.props.className }),
+            this.renderStickyNavItems(),
+            _react2['default'].createElement(_NavMenuBottomButtonsNavMenuBottomButtonsJs2['default'], { className: 'MobileBottomButtons' })
+          )
+        );
+      }
 
       return _react2['default'].createElement(
         'nav',
@@ -130,10 +205,10 @@ var NavMenu = (function (_React$Component) {
           _react2['default'].createElement(
             'ul',
             { className: this.props.className + '-List', id: 'NavMenu-List' },
-            navMenu
+            this.renderNavMenu(this.props.items)
           ),
           _react2['default'].createElement(_SearchButtonSearchButtonJs2['default'], { className: '' + this.props.className }),
-          stickyNavItems,
+          this.renderStickyNavItems(),
           _react2['default'].createElement(_NavMenuBottomButtonsNavMenuBottomButtonsJs2['default'], { className: 'MobileBottomButtons' })
         )
       );

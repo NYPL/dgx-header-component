@@ -36,12 +36,6 @@ var _utilsUtilsJs = require('../../utils/utils.js');
 
 var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
 
-// FeatureFlags Module
-
-var _dgxFeatureFlags = require('dgx-feature-flags');
-
-var _dgxFeatureFlags2 = _interopRequireDefault(_dgxFeatureFlags);
-
 var styles = {
   topLink: {
     textDecoration: 'none',
@@ -52,32 +46,21 @@ var styles = {
 var MegaMenuSubNav = (function (_React$Component) {
   _inherits(MegaMenuSubNav, _React$Component);
 
-  function MegaMenuSubNav(props) {
+  function MegaMenuSubNav() {
     _classCallCheck(this, MegaMenuSubNav);
 
-    _get(Object.getPrototypeOf(MegaMenuSubNav.prototype), 'constructor', this).call(this, props);
-
-    this.state = { featureFlags: _dgxFeatureFlags2['default'].store.getState() };
+    _get(Object.getPrototypeOf(MegaMenuSubNav.prototype), 'constructor', this).apply(this, arguments);
   }
 
   _createClass(MegaMenuSubNav, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      _dgxFeatureFlags2['default'].store.listen(this._onChange.bind(this));
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      _dgxFeatureFlags2['default'].store.unlisten(this._onChange.bind(this));
-    }
-  }, {
-    key: '_onChange',
-    value: function _onChange() {
-      this.setState({ featureFlags: _dgxFeatureFlags2['default'].store.getState() });
-    }
-  }, {
-    key: '_renderSubNavItems',
-    value: function _renderSubNavItems(items) {
+    key: 'renderSubNavItems',
+
+    /**
+     * Generates the DOM for the MegaMenu Left SubNavItem elements.
+     * @param {items[]} - Array containing SubNavItem object data.
+     * @returns {Object} React DOM.
+     */
+    value: function renderSubNavItems(items) {
       var _this = this;
 
       if ((0, _underscore.isEmpty)(items)) {
@@ -93,16 +76,24 @@ var MegaMenuSubNav = (function (_React$Component) {
             'a',
             {
               href: target,
-              onClick: _utilsUtilsJs2['default']._trackHeader.bind(_this, 'Go to...', _this.props.label[_this.props.lang].text + '--' + m.name[_this.props.lang].text)
+              onClick: function () {
+                return _utilsUtilsJs2['default']._trackHeader('Go to...', _this.props.label[_this.props.lang].text + '--' + m.name[_this.props.lang].text);
+              }
             },
             m.name[_this.props.lang].text
           )
         );
       });
     }
+
+    /**
+     * Generates the DOM for the SocialMedia link icons only for a matching navId.
+     * @param {string} - Navigation UUID as string type.
+     * @returns {Object} React DOM.
+     */
   }, {
-    key: '_renderSocialMediaIcons',
-    value: function _renderSocialMediaIcons(navId) {
+    key: 'renderSocialMediaIcons',
+    value: function renderSocialMediaIcons(navId) {
       return this.props.navId === navId ? _react2['default'].createElement(_SocialMediaLinksWidgetSocialMediaLinksWidgetJs2['default'], {
         className: 'MegaMenu-SubNav-SocialMediaWidget',
         links: _appConfigJs2['default'].socialMediaLinks,
@@ -112,31 +103,7 @@ var MegaMenuSubNav = (function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      if (_dgxFeatureFlags2['default'].store._isFeatureActive('location-top-link')) {
-        return _react2['default'].createElement(
-          'div',
-          { className: 'MegaMenu-SubNav' },
-          _react2['default'].createElement(
-            'h2',
-            null,
-            _react2['default'].createElement(
-              'a',
-              {
-                style: styles.topLink,
-                href: this.props.topLink,
-                onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Go to...', 'SubNav Title--' + this.props.label[this.props.lang].text)
-              },
-              this.props.label[this.props.lang].text
-            )
-          ),
-          _react2['default'].createElement(
-            'ul',
-            null,
-            this._renderSubNavItems(this.props.items)
-          ),
-          this._renderSocialMediaIcons('df621833-4dd1-4223-83e5-6ad7f98ad26a')
-        );
-      }
+      var _this2 = this;
 
       return _react2['default'].createElement(
         'div',
@@ -149,7 +116,9 @@ var MegaMenuSubNav = (function (_React$Component) {
             {
               style: styles.topLink,
               href: this.props.topLink,
-              onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Go to...', 'SubNav Title--' + this.props.label[this.props.lang].text)
+              onClick: function () {
+                return _utilsUtilsJs2['default']._trackHeader('Go to...', 'SubNav Title--' + _this2.props.label[_this2.props.lang].text);
+              }
             },
             this.props.label[this.props.lang].text
           )
@@ -157,8 +126,9 @@ var MegaMenuSubNav = (function (_React$Component) {
         _react2['default'].createElement(
           'ul',
           null,
-          this._renderSubNavItems(this.props.items)
-        )
+          this.renderSubNavItems(this.props.items)
+        ),
+        this.renderSocialMediaIcons('df621833-4dd1-4223-83e5-6ad7f98ad26a')
       );
     }
   }]);

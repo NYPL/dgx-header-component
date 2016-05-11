@@ -4,8 +4,6 @@ import config from '../../appConfig.js';
 import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWidget.js';
 import Radium from 'radium';
 import utils from '../../utils/utils.js';
-// FeatureFlags Module
-import FeatureFlags from 'dgx-feature-flags';
 
 const styles = {
   topLink: {
@@ -15,25 +13,12 @@ const styles = {
 };
 
 class MegaMenuSubNav extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { featureFlags: FeatureFlags.store.getState() };
-  }
-
-  componentDidMount() {
-    FeatureFlags.store.listen(this._onChange.bind(this));
-  }
-
-  componentWillUnmount() {
-    FeatureFlags.store.unlisten(this._onChange.bind(this));
-  }
-
-  _onChange() {
-    this.setState({ featureFlags: FeatureFlags.store.getState() });
-  }
-
-  _renderSubNavItems(items) {
+  /**
+   * Generates the DOM for the MegaMenu Left SubNavItem elements.
+   * @param {items[]} - Array containing SubNavItem object data.
+   * @returns {Object} React DOM.
+   */
+  renderSubNavItems(items) {
     if (_isEmpty(items)) {
       return null;
     }
@@ -44,9 +29,8 @@ class MegaMenuSubNav extends React.Component {
         <li key={i}>
           <a
             href={target}
-            onClick={
-              utils._trackHeader.bind(
-                this,
+            onClick={() =>
+              utils._trackHeader(
                 'Go to...',
                 `${this.props.label[this.props.lang].text}--${m.name[this.props.lang].text}`
               )
@@ -59,7 +43,12 @@ class MegaMenuSubNav extends React.Component {
     });
   }
 
-  _renderSocialMediaIcons(navId) {
+  /**
+   * Generates the DOM for the SocialMedia link icons only for a matching navId.
+   * @param {string} - Navigation UUID as string type.
+   * @returns {Object} React DOM.
+   */
+  renderSocialMediaIcons(navId) {
     return (this.props.navId === navId) ?
       <SocialMediaLinksWidget
         className="MegaMenu-SubNav-SocialMediaWidget"
@@ -69,41 +58,14 @@ class MegaMenuSubNav extends React.Component {
   }
 
   render() {
-    if (FeatureFlags.store._isFeatureActive('location-top-link')) {
-      return (
-        <div className="MegaMenu-SubNav">
-          <h2>
-            <a
-              style={styles.topLink}
-              href={this.props.topLink}
-              onClick={
-                utils._trackHeader.bind(
-                  this,
-                  'Go to...',
-                  `SubNav Title--${this.props.label[this.props.lang].text}`
-                )
-              }
-            >
-              {this.props.label[this.props.lang].text}
-            </a>
-          </h2>
-          <ul>
-            {this._renderSubNavItems(this.props.items)}
-          </ul>
-          {this._renderSocialMediaIcons('df621833-4dd1-4223-83e5-6ad7f98ad26a')}
-        </div>
-      );
-    }
-
     return (
       <div className="MegaMenu-SubNav">
         <h2>
           <a
             style={styles.topLink}
             href={this.props.topLink}
-            onClick={
-              utils._trackHeader.bind(
-                this,
+            onClick={() =>
+              utils._trackHeader(
                 'Go to...',
                 `SubNav Title--${this.props.label[this.props.lang].text}`
               )
@@ -113,8 +75,9 @@ class MegaMenuSubNav extends React.Component {
           </a>
         </h2>
         <ul>
-          {this._renderSubNavItems(this.props.items)}
+          {this.renderSubNavItems(this.props.items)}
         </ul>
+        {this.renderSocialMediaIcons('df621833-4dd1-4223-83e5-6ad7f98ad26a')}
       </div>
     );
   }

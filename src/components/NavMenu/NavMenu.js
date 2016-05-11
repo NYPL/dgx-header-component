@@ -88,9 +88,7 @@ class NavMenu extends React.Component {
     let navItems = _isEmpty(items) ? appConfig.navTopLinks : items;
 
     if (_isArray(exceptionList) && !_isEmpty(exceptionList)) {
-      navItems = _filter(navItems, (item) =>
-        item.id && !_contains(exceptionList, item.id)
-      );
+      navItems = _filter(navItems, (item) => item.id && !_contains(exceptionList, item.id));
     }
 
     return _map(navItems, (item, index) =>

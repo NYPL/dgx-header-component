@@ -100,7 +100,7 @@ var SearchButton = (function (_React$Component) {
       });
       // Detect if the header is sticky
       var stickyStatus = (0, _classnames2['default'])({ isSticky: _storesHeaderStoreJs2['default'].getState().isSticky });
-      var searchLabelFeature = _react2['default'].createElement(
+      var searchLabel = _react2['default'].createElement(
         'div',
         { className: 'Search-Text ' + classes + ' ' + stickyStatus },
         'Search'
@@ -115,7 +115,7 @@ var SearchButton = (function (_React$Component) {
           id: this.props.className + '-SearchButton',
           className: 'nypl-icon-magnifier-fat ' + this.props.className + '-SearchButton ' + classes,
           name: 'Search Button',
-          label: searchLabelFeature
+          label: searchLabel
         }),
         _react2['default'].createElement(_SearchBoxSearchBoxJs2['default'], {
           id: this.props.className + '-SearchBox',

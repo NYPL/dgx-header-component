@@ -52,7 +52,7 @@ class SearchButton extends React.Component {
     });
     // Detect if the header is sticky
     const stickyStatus = cx({ isSticky: HeaderStore.getState().isSticky });
-    const searchLabelFeature = (
+    const searchLabel = (
       <div className={`Search-Text ${classes} ${stickyStatus}`}>
         Search
       </div>
@@ -66,7 +66,7 @@ class SearchButton extends React.Component {
           id={`${this.props.className}-SearchButton`}
           className={`nypl-icon-magnifier-fat ${this.props.className}-SearchButton ${classes}`}
           name="Search Button"
-          label={searchLabelFeature}
+          label={searchLabel}
         />
         <SearchBox
           id={`${this.props.className}-SearchBox`}

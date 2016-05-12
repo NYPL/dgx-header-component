@@ -4,40 +4,30 @@ import MegaMenuFeatureItem from './MegaMenuFeatureItem.js';
 import FindUsWidget from '../FindUsWidget/FindUsWidget.js';
 import DonateWidget from '../DonateWidget/DonateWidget.js';
 import config from '../../appConfig.js';
-// FeatureFlags Module
-import FeatureFlags from 'dgx-feature-flags';
 
 class MegaMenuFeatures extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { featureFlags: FeatureFlags.store.getState() };
-  }
-
-  componentDidMount() {
-    FeatureFlags.store.listen(this._onChange.bind(this));
-  }
-
-  componentWillUnmount() {
-    FeatureFlags.store.unlisten(this._onChange.bind(this));
-  }
-
-  _onChange() {
-    this.setState({ featureFlags: FeatureFlags.store.getState() });
-  }
-
-  _renderFeatureitems(object, opts = {}) {
+  /**
+   * Generates the DOM for the FeatureItems.
+   * Optionally, returns the appropriate widget component based off navId match.
+   * @param {object[]} - Array containing FeatureItem Object data.
+   * @param {Object} param (optional) - Object containing widget properties.
+   * @param {string} param.donateWidget (optional) - Widget property with String value.
+   * @param {string} param.findWidget (optional) - Widget property with String value.
+   * @returns {Object} React DOM.
+   */
+  renderFeatureitems(object, opts = {}) {
     if (_isEmpty(object)) {
       return null;
     }
 
     const {
-      donateWidget = false,
-      findWidget = false,
+      donateWidget = '',
+      findWidget = '',
     } = opts;
     // Extract the first featured item to pass onto the widgets matching navId
     const widgetFeature = object[0].featuredItem;
 
-    if (this.props.navId === '1d9ea0ec-6ca3-4577-9dd1-e8de1f2a8bb1' && donateWidget) {
+    if (this.props.navId === donateWidget) {
       return (
         <DonateWidget
           key="donateWidget"
@@ -49,9 +39,10 @@ class MegaMenuFeatures extends React.Component {
       );
     }
 
-    if (this.props.navId === 'df621833-4dd1-4223-83e5-6ad7f98ad26a' && findWidget) {
+    if (this.props.navId === findWidget) {
       return (
         <FindUsWidget
+          key="findUsWidget"
           navId={this.props.navId}
           featuredItem={widgetFeature}
           navLabel={this.props.navLabel}
@@ -69,17 +60,15 @@ class MegaMenuFeatures extends React.Component {
   }
 
   render() {
-    if (FeatureFlags.store._isFeatureActive('location-top-link')) {
-      return (
-        <div className={this.props.className}>
-          {this._renderFeatureitems(this.props.features, { donateWidget: true, findWidget: true })}
-        </div>
-      );
-    }
-
     return (
       <div className={this.props.className}>
-        {this._renderFeatureitems(this.props.features, { donateWidget: true })}
+        {this.renderFeatureitems(
+          this.props.features,
+          {
+            donateWidget: '1d9ea0ec-6ca3-4577-9dd1-e8de1f2a8bb1',
+            findWidget: 'df621833-4dd1-4223-83e5-6ad7f98ad26a',
+          }
+        )}
       </div>
     );
   }

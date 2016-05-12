@@ -57,19 +57,17 @@ var NavMenuItem = (function (_React$Component) {
       lastActiveMenuItem: ''
     };
 
-    this._activateHover = this._activateHover.bind(this);
-    this._deactivateHover = this._deactivateHover.bind(this);
+    this.activateHover = this.activateHover.bind(this);
+    this.deactivateHover = this.deactivateHover.bind(this);
   }
 
   /**
-   * _activateHover()
-   * Sets the state's lastActiveMenuItem
-   * & activeItem after set time.
+   * Sets the state's lastActiveMenuItem and activeItem after a given time delay.
    */
 
   _createClass(NavMenuItem, [{
-    key: '_activateHover',
-    value: function _activateHover() {
+    key: 'activateHover',
+    value: function activateHover() {
       var _this = this;
 
       this.hoverTimer = setTimeout(function () {
@@ -81,18 +79,14 @@ var NavMenuItem = (function (_React$Component) {
     }
 
     /**
-     * _deactivateHover()
-     * Initially clears thhe hoverTimer.
-     * Then removes the state's activeItem
-     * after set time.
+     * Initially clears the hoverTimer initialized by the activateHover function.
+     * Then removes the state's activeItem after a given time delay.
      */
   }, {
-    key: '_deactivateHover',
-    value: function _deactivateHover() {
+    key: 'deactivateHover',
+    value: function deactivateHover() {
       var _this2 = this;
 
-      // Will clear the set timer that activates the menu
-      // from executing
       clearTimeout(this.hoverTimer);
 
       setTimeout(function () {
@@ -102,6 +96,8 @@ var NavMenuItem = (function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this3 = this;
+
       var target = this.props.target;
       var linkClass = (0, _classnames2['default'])({
         active: this.props.index === this.state.activeItem || _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === this.props.navId
@@ -133,8 +129,8 @@ var NavMenuItem = (function (_React$Component) {
         _react2['default'].createElement(
           'span',
           {
-            onMouseEnter: this._activateHover,
-            onMouseLeave: this._deactivateHover,
+            onMouseEnter: this.activateHover,
+            onMouseLeave: this.deactivateHover,
             className: 'NavMenuItem-Link',
             id: this.props.navId ? 'NavMenuItem-Link-' + this.props.navId : 'NavMenuItem-Link'
           },
@@ -143,7 +139,9 @@ var NavMenuItem = (function (_React$Component) {
             {
               href: target,
               className: linkClass,
-              onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Go to...', '' + this.props.label[this.props.lang].text)
+              onClick: function () {
+                return _utilsUtilsJs2['default']._trackHeader('Go to...', '' + _this3.props.label[_this3.props.lang].text);
+              }
             },
             this.props.label[this.props.lang].text
           ),

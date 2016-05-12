@@ -50,53 +50,31 @@ var MegaMenu = (function (_React$Component) {
 
     _get(Object.getPrototypeOf(MegaMenu.prototype), 'constructor', this).call(this, props);
 
-    this.state = { lastActiveMenuItem: _storesHeaderStoreJs2['default'].getState().lastActiveMenuItem };
-
-    this._watchHoverIntentEnter = this._watchHoverIntentEnter.bind(this);
-    this._watchHoverIntentLeave = this._watchHoverIntentLeave.bind(this);
+    this.watchHoverIntentEnter = this.watchHoverIntentEnter.bind(this);
+    this.watchHoverIntentLeave = this.watchHoverIntentLeave.bind(this);
   }
 
-  _createClass(MegaMenu, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      _storesHeaderStoreJs2['default'].listen(this._onChange.bind(this));
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      _storesHeaderStoreJs2['default'].unlisten(this._onChange.bind(this));
-    }
-  }, {
-    key: '_onChange',
-    value: function _onChange() {
-      this.setState({
-        lastActiveMenuItem: _storesHeaderStoreJs2['default'].getState().lastActiveMenuItem
-      });
-    }
+  /**
+   * If the lastActiveMenuItem passed as a prop
+   * matches the MegaMenu's navId. Then fire the
+   * Action to store a reference to the lastActiveMenuItem.
+   */
 
-    /**
-     * _watchHoverIntentEnter()
-     * If the lastActiveMenuItem passed as a prop
-     * matches the MegaMenu's navId. Then fire the
-     * Action to store a reference to thhe lastActiveMenuItem.
-     */
-  }, {
-    key: '_watchHoverIntentEnter',
-    value: function _watchHoverIntentEnter() {
+  _createClass(MegaMenu, [{
+    key: 'watchHoverIntentEnter',
+    value: function watchHoverIntentEnter() {
       if (this.props.lastActiveMenuItem === this.props.navId) {
         _actionsActionsJs2['default'].setLastActiveMenuItem(this.props.navId);
       }
     }
 
     /**
-     * _watchHoverIntentLeave()
      * Sets the Store's lastActiveMenuItem
-     * property to an empty string when
-     * hovered out.
+     * property to an empty string when hovered out.
      */
   }, {
-    key: '_watchHoverIntentLeave',
-    value: function _watchHoverIntentLeave() {
+    key: 'watchHoverIntentLeave',
+    value: function watchHoverIntentLeave() {
       _actionsActionsJs2['default'].setLastActiveMenuItem('');
     }
   }, {
@@ -111,8 +89,8 @@ var MegaMenu = (function (_React$Component) {
       return _react2['default'].createElement(
         'div',
         {
-          onMouseEnter: this._watchHoverIntentEnter,
-          onMouseLeave: this._watchHoverIntentLeave,
+          onMouseEnter: this.watchHoverIntentEnter,
+          onMouseLeave: this.watchHoverIntentLeave,
           id: this.props.navId ? 'MegaMenu-' + this.props.navId : 'MegaMenu',
           className: classes
         },

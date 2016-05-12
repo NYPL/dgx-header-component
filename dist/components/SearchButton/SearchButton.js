@@ -49,12 +49,6 @@ var _utilsUtilsJs = require('../../utils/utils.js');
 
 var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
 
-var _dgxFeatureFlags = require('dgx-feature-flags');
-
-var _dgxFeatureFlags2 = _interopRequireDefault(_dgxFeatureFlags);
-
-// Create React class
-
 var SearchButton = (function (_React$Component) {
   _inherits(SearchButton, _React$Component);
 
@@ -63,36 +57,18 @@ var SearchButton = (function (_React$Component) {
 
     _get(Object.getPrototypeOf(SearchButton.prototype), 'constructor', this).call(this, props);
 
-    this.state = { featureFlags: _dgxFeatureFlags2['default'].store.getState() };
-
-    this._activateHover = this._activateHover.bind(this);
-    this._deactivateHover = this._deactivateHover.bind(this);
+    this.activateHover = this.activateHover.bind(this);
+    this.deactivateHover = this.deactivateHover.bind(this);
   }
 
-  _createClass(SearchButton, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      _dgxFeatureFlags2['default'].store.listen(this._onChange.bind(this));
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      _dgxFeatureFlags2['default'].store.unlisten(this._onChange.bind(this));
-    }
-  }, {
-    key: '_onChange',
-    value: function _onChange() {
-      this.setState({ featureFlags: _dgxFeatureFlags2['default'].store.getState() });
-    }
+  /**
+   * Update the Store's searchButtonActionValue
+   * with hoverSearch after a set time delay.
+   */
 
-    /**
-     * _activateHover()
-     * Update the Store's searchButtonActionValue
-     * with hoverSearch after a set time delay.
-     */
-  }, {
-    key: '_activateHover',
-    value: function _activateHover() {
+  _createClass(SearchButton, [{
+    key: 'activateHover',
+    value: function activateHover() {
       this.hoverTimer = setTimeout(function () {
         _actionsActionsJs2['default'].searchButtonActionValue('hoverSearch');
 
@@ -102,14 +78,13 @@ var SearchButton = (function (_React$Component) {
     }
 
     /**
-     * _hoverClose()
      * Clear the activateHover timer if it exists.
      * Reset the Store's searchButtonActionValue to empty
      * after a set time delay.
      */
   }, {
-    key: '_deactivateHover',
-    value: function _deactivateHover() {
+    key: 'deactivateHover',
+    value: function deactivateHover() {
       clearTimeout(this.hoverTimer);
 
       setTimeout(function () {
@@ -123,48 +98,20 @@ var SearchButton = (function (_React$Component) {
       var classes = (0, _classnames2['default'])({
         active: _storesHeaderStoreJs2['default']._getSearchButtonActionValue() === 'hoverSearch' || _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === 'hoverSearch'
       });
-      // Detect if the header is sticky now
+      // Detect if the header is sticky
       var stickyStatus = (0, _classnames2['default'])({ isSticky: _storesHeaderStoreJs2['default'].getState().isSticky });
       var searchLabel = _react2['default'].createElement(
-        'div',
-        { className: 'Search-Text visuallyHidden ' + classes + ' ' + stickyStatus },
-        'Search'
-      );
-      var searchLabelFeature = _react2['default'].createElement(
         'div',
         { className: 'Search-Text ' + classes + ' ' + stickyStatus },
         'Search'
       );
 
-      /*
-       * Feature Flag -- 'search-label'
-       * Return a DOM that includes the search-label text.
-      */
-      if (_dgxFeatureFlags2['default'].store._isFeatureActive('search-label')) {
-        return _react2['default'].createElement(
-          'div',
-          { className: this.props.className + '-SearchBox-Wrapper' },
-          _react2['default'].createElement(_ButtonsBasicButtonJs2['default'], {
-            onMouseEnter: this._activateHover,
-            onMouseLeave: this._deactivateHover,
-            id: this.props.className + '-SearchButton',
-            className: 'nypl-icon-magnifier-fat ' + this.props.className + '-SearchButton ' + classes,
-            name: 'Search Button',
-            label: searchLabelFeature
-          }),
-          _react2['default'].createElement(_SearchBoxSearchBoxJs2['default'], {
-            id: this.props.className + '-SearchBox',
-            className: this.props.className + '-SearchBox'
-          })
-        );
-      }
-
       return _react2['default'].createElement(
         'div',
         { className: this.props.className + '-SearchBox-Wrapper' },
         _react2['default'].createElement(_ButtonsBasicButtonJs2['default'], {
-          onMouseEnter: this._activateHover,
-          onMouseLeave: this._deactivateHover,
+          onMouseEnter: this.activateHover,
+          onMouseLeave: this.deactivateHover,
           id: this.props.className + '-SearchButton',
           className: 'nypl-icon-magnifier-fat ' + this.props.className + '-SearchButton ' + classes,
           name: 'Search Button',

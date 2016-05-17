@@ -1,6 +1,7 @@
 import React from 'react';
 import Radium from 'radium';
 import ReactTappable from 'react-tappable';
+import { LionLogoIcon } from 'dgx-svg-icons';
 
 // ALT FLUX
 import HeaderStore from '../../stores/HeaderStore.js';
@@ -16,8 +17,8 @@ const styles = {
   mobileLogo: {
     color: '#000',
     position: 'absolute',
-    left: 0,
-    top: 0,
+    left: 10,
+    top: 8,
     textDecoration: 'none',
     ':hover': {
       color: '#000',
@@ -25,9 +26,6 @@ const styles = {
     ':visited': {
       color: '#000',
     },
-  },
-  logoIcon: {
-    fontSize: '59px',
   },
   myNyplIcon: {
     fontSize: '31px',
@@ -169,11 +167,7 @@ class MobileHeader extends React.Component {
           style={styles.mobileLogo}
           href={this.props.nyplRootUrl}
         >
-          <span
-            style={styles.logoIcon}
-            className={`${this.props.className}-Logo nypl-icon-logo-mark`}
-          >
-          </span>
+          <LionLogoIcon className={`${this.props.className}-Logo`} />
         </a>
 
         <ReactTappable onTap={this._handleMenuBtnPress.bind(this, 'clickMyNypl')}>

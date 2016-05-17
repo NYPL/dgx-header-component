@@ -26,6 +26,8 @@ var _reactTappable = require('react-tappable');
 
 var _reactTappable2 = _interopRequireDefault(_reactTappable);
 
+var _dgxSvgIcons = require('dgx-svg-icons');
+
 // ALT FLUX
 
 var _storesHeaderStoreJs = require('../../stores/HeaderStore.js');
@@ -49,8 +51,8 @@ var styles = {
   mobileLogo: {
     color: '#000',
     position: 'absolute',
-    left: 0,
-    top: 0,
+    left: 10,
+    top: 8,
     textDecoration: 'none',
     ':hover': {
       color: '#000'
@@ -58,9 +60,6 @@ var styles = {
     ':visited': {
       color: '#000'
     }
-  },
-  logoIcon: {
-    fontSize: '59px'
   },
   myNyplIcon: {
     fontSize: '31px',
@@ -215,10 +214,7 @@ var MobileHeader = (function (_React$Component) {
             style: styles.mobileLogo,
             href: this.props.nyplRootUrl
           },
-          _react2['default'].createElement('span', {
-            style: styles.logoIcon,
-            className: this.props.className + '-Logo nypl-icon-logo-mark'
-          })
+          _react2['default'].createElement(_dgxSvgIcons.LionLogoIcon, { className: this.props.className + '-Logo' })
         ),
         _react2['default'].createElement(
           _reactTappable2['default'],

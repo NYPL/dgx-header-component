@@ -18,23 +18,11 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _radium = require('radium');
-
-var _radium2 = _interopRequireDefault(_radium);
+var _dgxSvgIcons = require('dgx-svg-icons');
 
 var _utilsUtilsJs = require('../../utils/utils.js');
 
 var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
-
-var styles = {
-  base: {},
-  image: {
-    maxWidth: '230px'
-  },
-  icon: {
-    display: 'none'
-  }
-};
 
 var Logo = (function (_React$Component) {
   _inherits(Logo, _React$Component);
@@ -54,11 +42,17 @@ var Logo = (function (_React$Component) {
           id: this.props.id,
           className: this.props.className,
           href: this.props.target,
-          onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Click Logo', ''),
-          style: [styles.base, this.props.style]
+          onClick: function () {
+            return _utilsUtilsJs2['default']._trackHeader('Click Logo', '');
+          },
+          style: this.props.style
         },
-        _react2['default'].createElement('img', { src: this.props.src, style: styles.image, alt: this.props.alt }),
-        _react2['default'].createElement('span', { className: 'nypl-icon-logo-mark', style: styles.icon })
+        _react2['default'].createElement(_dgxSvgIcons.LionLogoWithText, null),
+        _react2['default'].createElement(
+          'span',
+          { className: 'visuallyHidden' },
+          this.props.alt
+        )
       );
     }
   }]);
@@ -67,21 +61,19 @@ var Logo = (function (_React$Component) {
 })(_react2['default'].Component);
 
 Logo.propTypes = {
-  src: _react2['default'].PropTypes.string,
   target: _react2['default'].PropTypes.string,
   id: _react2['default'].PropTypes.string,
   className: _react2['default'].PropTypes.string,
-  style: _react2['default'].PropTypes.object,
-  alt: _react2['default'].PropTypes.string
+  alt: _react2['default'].PropTypes.string,
+  style: _react2['default'].PropTypes.object
 };
 
 Logo.defaultProps = {
-  src: '//ux-static.nypl.org/images/NYPL-logo-black-pos.svg',
   target: '/',
   id: 'Logo',
   className: 'Logo',
   alt: 'The New York Public Library'
 };
 
-exports['default'] = (0, _radium2['default'])(Logo);
+exports['default'] = Logo;
 module.exports = exports['default'];

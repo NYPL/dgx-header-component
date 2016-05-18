@@ -11,6 +11,7 @@
 	@include min-screen(1025px) {
 		position: relative;
 		width: auto;
+		bottom: inherit;
 	}
 
 	@import '_search';

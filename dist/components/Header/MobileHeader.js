@@ -117,22 +117,22 @@ var MobileHeader = (function (_React$Component) {
       mobileMyNyplButton: _storesHeaderStoreJs2['default'].getState().mobileMyNyplButton
     };
 
-    this._handleMenuBtnPress = this._handleMenuBtnPress.bind(this);
+    this.handleMenuBtnPress = this.handleMenuBtnPress.bind(this);
   }
 
   _createClass(MobileHeader, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      _storesHeaderStoreJs2['default'].listen(this._onChange.bind(this));
+      _storesHeaderStoreJs2['default'].listen(this.onChange.bind(this));
     }
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      _storesHeaderStoreJs2['default'].unlisten(this._onChange.bind(this));
+      _storesHeaderStoreJs2['default'].unlisten(this.onChange.bind(this));
     }
   }, {
-    key: '_onChange',
-    value: function _onChange() {
+    key: 'onChange',
+    value: function onChange() {
       this.setState({
         activeMobileButton: _storesHeaderStoreJs2['default'].getState().activeMobileButton,
         searchButtonAction: _storesHeaderStoreJs2['default'].getState().searchButtonAction,
@@ -141,7 +141,7 @@ var MobileHeader = (function (_React$Component) {
     }
 
     /**
-     * _toggleMobileMenu(activeButton)
+     * toggleMobileMenu(activeButton)
      * Verifies that the activeButton does not
      * match the HeaderStore's current value
      * and set's it as the param activeButton.
@@ -151,8 +151,8 @@ var MobileHeader = (function (_React$Component) {
      * @param {String} activeButton
      */
   }, {
-    key: '_toggleMobileMenu',
-    value: function _toggleMobileMenu(activeButton) {
+    key: 'toggleMobileMenu',
+    value: function toggleMobileMenu(activeButton) {
       if (activeButton === 'clickSearch') {
         if (_storesHeaderStoreJs2['default']._getSearchButtonActionValue() !== activeButton) {
           _actionsActionsJs2['default'].searchButtonActionValue(activeButton);
@@ -185,18 +185,20 @@ var MobileHeader = (function (_React$Component) {
     }
 
     /**
-     * _handleMenuBtnPress()
-     * Calls _toggleMobileMenu()
+     * handleMenuBtnPress()
+     * Calls toggleMobileMenu()
      * with the 'mobileMenu' as a param
      */
   }, {
-    key: '_handleMenuBtnPress',
-    value: function _handleMenuBtnPress(activeButton) {
-      this._toggleMobileMenu(activeButton);
+    key: 'handleMenuBtnPress',
+    value: function handleMenuBtnPress(activeButton) {
+      this.toggleMobileMenu(activeButton);
     }
   }, {
     key: 'render',
     value: function render() {
+      var _this = this;
+
       var activeButton = this.state.activeMobileButton;
       var searchButtonAction = this.state.searchButtonAction;
       var mobileMyNyplButton = this.state.mobileMyNyplButton;
@@ -214,11 +216,18 @@ var MobileHeader = (function (_React$Component) {
             style: styles.mobileLogo,
             href: this.props.nyplRootUrl
           },
-          _react2['default'].createElement(_dgxSvgIcons.LionLogoIcon, { className: this.props.className + '-Logo' })
+          _react2['default'].createElement(_dgxSvgIcons.LionLogoIcon, { className: this.props.className + '-Logo' }),
+          _react2['default'].createElement(
+            'span',
+            { className: 'visuallyHidden' },
+            this.props.alt
+          )
         ),
         _react2['default'].createElement(
           _reactTappable2['default'],
-          { onTap: this._handleMenuBtnPress.bind(this, 'clickMyNypl') },
+          { onTap: function () {
+              return _this.handleMenuBtnPress('clickMyNypl');
+            } },
           _react2['default'].createElement('span', {
             style: [styles.myNyplIcon, mobileMyNyplButton === 'clickMyNypl' ? styles.activeMyNyplIcon : ''],
             className: this.props.className + '-MyNyplButton ' + mobileMyNyplClass,
@@ -228,12 +237,16 @@ var MobileHeader = (function (_React$Component) {
         _react2['default'].createElement('a', {
           style: styles.locatorIcon,
           href: locatorUrl,
-          onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Click', 'Mobile Locations Button'),
+          onClick: function () {
+            return _utilsUtilsJs2['default']._trackHeader('Click', 'Mobile Locations Button');
+          },
           className: this.props.className + '-Locator nypl-icon-locator-large'
         }),
         _react2['default'].createElement(
           _reactTappable2['default'],
-          { onTap: this._handleMenuBtnPress.bind(this, 'clickSearch') },
+          { onTap: function () {
+              return _this.handleMenuBtnPress('clickSearch');
+            } },
           _react2['default'].createElement(
             'span',
             {
@@ -250,7 +263,9 @@ var MobileHeader = (function (_React$Component) {
         ),
         _react2['default'].createElement(
           _reactTappable2['default'],
-          { onTap: this._handleMenuBtnPress.bind(this, 'mobileMenu') },
+          { onTap: function () {
+              return _this.handleMenuBtnPress('mobileMenu');
+            } },
           _react2['default'].createElement('span', {
             style: [styles.menuIcon, activeButton === 'mobileMenu' ? styles.activeMenuIcon : ''],
             className: this.props.className + '-MenuButton ' + mobileMenuClass,
@@ -268,13 +283,15 @@ MobileHeader.propTypes = {
   lang: _react2['default'].PropTypes.string,
   className: _react2['default'].PropTypes.string,
   locatorUrl: _react2['default'].PropTypes.string,
-  nyplRootUrl: _react2['default'].PropTypes.string
+  nyplRootUrl: _react2['default'].PropTypes.string,
+  alt: _react2['default'].PropTypes.string
 };
 
 MobileHeader.defaultProps = {
   lang: 'en',
   className: 'MobileHeader',
-  nyplRootUrl: '/'
+  nyplRootUrl: '/',
+  alt: 'The New York Public Library'
 };
 
 exports['default'] = (0, _radium2['default'])(MobileHeader);

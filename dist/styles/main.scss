@@ -140,14 +140,18 @@
    * - Donate
   */
   &-Buttons {
-
-    .DonateButton, .LibraryCardButton {
+    // First instance top-level <a> tags
+    & > a {
       @include Kievit-Bold;
       font-size: 13px;
       letter-spacing: .04em;
+      margin: 0 10px 0 0;
 
       &:visited {
         color: #000;
+      }
+      &:last-child {
+        margin: 0;
       }
     }
 

@@ -4,11 +4,9 @@ import ReactDOM from 'react-dom';
 import Radium from 'radium';
 import cx from 'classnames';
 import { extend as _extend } from 'underscore';
-
 // ALT Flux
 import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
-
 // NYPL Components
 import Logo from '../Logo/Logo.js';
 import DonateButton from '../DonateButton/DonateButton.js';
@@ -20,9 +18,10 @@ import NavMenu from '../NavMenu/NavMenu.js';
 import MobileHeader from './MobileHeader.js';
 import GlobalAlerts from '../GlobalAlerts/GlobalAlerts.js';
 import SkipNavigation from 'dgx-skip-navigation-link';
-
 // Utility Library
 import utils from '../../utils/utils.js';
+// FeatureFlags Module
+import FeatureFlags from 'dgx-feature-flags';
 
 // When minifying with Webpack, you can use this:
 // import '../../styles/main.scss';
@@ -36,14 +35,19 @@ const styles = {
     textTransform: 'uppercase',
     display: 'block',
   },
+  locationsTopLink: {
+    display: 'inline-block',
+    color: '#000',
+    padding: '5px',
+  },
   libraryCardButton: {
     display: 'inline-block',
     color: '#000',
-    margin: 0,
-    padding: 0,
+    padding: '5px',
   },
   subscribeButton: {
     display: 'inline-block',
+    margin: '0px 10px 0px 0px',
   },
   donateButton: {
     display: 'inline-block',
@@ -64,60 +68,97 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = _extend({ headerHeight: null }, HeaderStore.getState());
+    this.state = _extend(
+      {
+        headerHeight: null,
+        featureFlags: FeatureFlags.store.getState(),
+      },
+      HeaderStore.getState()
+    );
 
-    this._handleStickyHeader = this._handleStickyHeader.bind(this);
+    this.handleStickyHeader = this.handleStickyHeader.bind(this);
   }
 
   componentDidMount() {
-    HeaderStore.listen(this._onChange.bind(this));
+    HeaderStore.listen(this.onChange.bind(this));
+    FeatureFlags.store.listen(this.onChange.bind(this));
 
     // If the HeaderStore is not populated with
     // the proper data, then fetch via client-side
-    this._fetchDataIfNeeded();
+    this.fetchDataIfNeeded();
 
     // Height needs to be set once the alerts (if any) are mounted.
-    this._setHeaderHeight();
+    this.setHeaderHeight();
 
     // Listen to the scroll event for the sticky header.
-    window.addEventListener('scroll', this._handleStickyHeader, false);
+    window.addEventListener('scroll', this.handleStickyHeader, false);
   }
 
   componentWillUnmount() {
-    HeaderStore.unlisten(this._onChange.bind(this));
+    HeaderStore.unlisten(this.onChange.bind(this));
+    FeatureFlags.store.unlisten(this.onChange.bind(this));
 
     // Removing event listener to minimize garbage collection
-    window.removeEventListener('scroll', this._handleStickyHeader, false);
+    window.removeEventListener('scroll', this.handleStickyHeader, false);
   }
 
-  _onChange() {
-    this.setState(_extend({ headerHeight: this.state.headerHeight }, HeaderStore.getState()));
+  onChange() {
+    this.setState(
+      _extend(
+        {
+          headerHeight: this.state.headerHeight,
+          featureFlags: FeatureFlags.store.getState(),
+        },
+        HeaderStore.getState()
+      )
+    );
   }
 
   /**
-   * _fetchDataIfNeeded()
-   * checks the existence of headerData items,
-   * triggers the Actions.fetchHeaderData()
-   * method to dispatch a client-side event
-   * to obtain data.
+   * getHeaderHeight()
+   * returns the Height of the Header DOM
+   * element in pixels.
    */
-  _fetchDataIfNeeded() {
-    if (HeaderStore.getState().headerData.length < 1) {
-      Actions.fetchHeaderData(this.props.env, this.props.urls);
+  getHeaderHeight() {
+    const headerDOM = ReactDOM.findDOMNode(this.refs.nyplHeader);
+    return headerDOM.getBoundingClientRect().height;
+  }
+
+  /**
+   * setHeaderHeight()
+   * Updates the state headerHeight property
+   * only if headerHeight is not defined.
+   */
+  setHeaderHeight() {
+    if (!this.state.headerHeight) {
+      setTimeout(() => {
+        this.setState({ headerHeight: this.getHeaderHeight() });
+      }, 500);
     }
   }
 
   /**
-   * _handleStickyHeader()
+   * getWindowVerticallScroll()
+   * returns the current window vertical
+   * scroll position in pixels.
+   */
+  getWindowVerticalScroll() {
+    return window.scrollY
+      || window.pageYOffset
+      || document.documentElement.scrollTop;
+  }
+
+  /**
+   * handleStickyHeader()
    * Executes Actions.updateIsHeaderSticky()
    * with the proper boolean value to update the
    * HeaderStore.isSticky value based on the window
    * vertical scroll position surpassing the height
    * of the Header DOM element.
    */
-  _handleStickyHeader() {
+  handleStickyHeader() {
     const headerHeight = this.state.headerHeight;
-    const windowVerticalDistance = this._getWindowVerticalScroll();
+    const windowVerticalDistance = this.getWindowVerticalScroll();
 
     if (windowVerticalDistance && headerHeight && (windowVerticalDistance > headerHeight)) {
       // Only update the value if sticky is false
@@ -136,37 +177,16 @@ class Header extends React.Component {
   }
 
   /**
-   * _getHeaderHeight()
-   * returns the Height of the Header DOM
-   * element in pixels.
+   * fetchDataIfNeeded()
+   * checks the existence of headerData items,
+   * triggers the Actions.fetchHeaderData()
+   * method to dispatch a client-side event
+   * to obtain data.
    */
-  _getHeaderHeight() {
-    const headerDOM = ReactDOM.findDOMNode(this.refs.nyplHeader);
-    return headerDOM.getBoundingClientRect().height;
-  }
-
-  /**
-   * _setHeaderHeight()
-   * Updates the state headerHeight property
-   * only if headerHeight is not defined.
-   */
-  _setHeaderHeight() {
-    if (!this.state.headerHeight) {
-      setTimeout(() => {
-        this.setState({ headerHeight: this._getHeaderHeight() });
-      }, 500);
+  fetchDataIfNeeded() {
+    if (HeaderStore.getState().headerData.length < 1) {
+      Actions.fetchHeaderData(this.props.env, this.props.urls);
     }
-  }
-
-  /**
-   * _getWindowVerticallScroll()
-   * returns the current window vertical
-   * scroll position in pixels.
-   */
-  _getWindowVerticalScroll() {
-    return window.scrollY
-      || window.pageYOffset
-      || document.documentElement.scrollTop;
   }
 
   render() {
@@ -193,9 +213,9 @@ class Header extends React.Component {
             className={`${headerClass}-Mobile`}
             locatorUrl={
               (this.props.urls === 'absolute') ?
-                "//www.nypl.org/locations/map?nearme=true" : "/locations/map?nearme=true"
+                '//www.nypl.org/locations/map?nearme=true' : '/locations/map?nearme=true'
             }
-            nyplRootUrl={(this.props.urls === 'absolute') ? "//www.nypl.org" : "/"}
+            nyplRootUrl={(this.props.urls === 'absolute') ? '//www.nypl.org' : '/'}
             ref="headerMobile"
           />
           <div className={`MobileMyNypl-Wrapper ${mobileMyNyplClasses}`}>
@@ -205,13 +225,31 @@ class Header extends React.Component {
             className={`${headerClass}-TopWrapper`}
             style={styles.wrapper}
             ref="headerTopWrapper"
-            >
+          >
             <Logo
               className={`${headerClass}-Logo`}
-              target={(this.props.urls === 'absolute') ? "//www.nypl.org" : "/"}
+              target={(this.props.urls === 'absolute') ? '//www.nypl.org' : '/'}
             />
             <div className={`${headerClass}-Buttons`} style={styles.topButtons}>
-              <MyNyplButton label="Log In" refId="desktopLogin" />
+              <MyNyplButton
+                label="Log In"
+                refId="desktopLogin"
+              />
+              {
+                FeatureFlags.store._isFeatureActive('location-top-link') ?
+                  <SimpleButton
+                    label="Locations"
+                    target={
+                      (this.props.urls === 'absolute') ?
+                        '//www.nypl.org/locations/map' : '/locations/map'
+                    }
+                    className="LocationsTopLink"
+                    id="LocationsTopLink"
+                    gaAction="Locations"
+                    gaLabel="Header Buttons"
+                    style={styles.locationsTopLink}
+                  /> : null
+              }
               <SimpleButton
                 label="Get a Library Card"
                 target="//catalog.nypl.org/screens/selfregpick.html"

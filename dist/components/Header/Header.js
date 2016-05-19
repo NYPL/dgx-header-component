@@ -91,6 +91,12 @@ var _utilsUtilsJs = require('../../utils/utils.js');
 
 var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
 
+// FeatureFlags Module
+
+var _dgxFeatureFlags = require('dgx-feature-flags');
+
+var _dgxFeatureFlags2 = _interopRequireDefault(_dgxFeatureFlags);
+
 // When minifying with Webpack, you can use this:
 // import '../../styles/main.scss';
 var styles = {
@@ -103,14 +109,19 @@ var styles = {
     textTransform: 'uppercase',
     display: 'block'
   },
+  locationsTopLink: {
+    display: 'inline-block',
+    color: '#000',
+    padding: '5px'
+  },
   libraryCardButton: {
     display: 'inline-block',
     color: '#000',
-    margin: 0,
-    padding: 0
+    padding: '5px'
   },
   subscribeButton: {
-    display: 'inline-block'
+    display: 'inline-block',
+    margin: '0px 10px 0px 0px'
   },
   donateButton: {
     display: 'inline-block',
@@ -135,57 +146,90 @@ var Header = (function (_React$Component) {
 
     _get(Object.getPrototypeOf(Header.prototype), 'constructor', this).call(this, props);
 
-    this.state = (0, _underscore.extend)({ headerHeight: null }, _storesHeaderStoreJs2['default'].getState());
+    this.state = (0, _underscore.extend)({
+      headerHeight: null,
+      featureFlags: _dgxFeatureFlags2['default'].store.getState()
+    }, _storesHeaderStoreJs2['default'].getState());
 
-    this._handleStickyHeader = this._handleStickyHeader.bind(this);
+    this.handleStickyHeader = this.handleStickyHeader.bind(this);
   }
 
   _createClass(Header, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      _storesHeaderStoreJs2['default'].listen(this._onChange.bind(this));
+      _storesHeaderStoreJs2['default'].listen(this.onChange.bind(this));
+      _dgxFeatureFlags2['default'].store.listen(this.onChange.bind(this));
 
       // If the HeaderStore is not populated with
       // the proper data, then fetch via client-side
-      this._fetchDataIfNeeded();
+      this.fetchDataIfNeeded();
 
       // Height needs to be set once the alerts (if any) are mounted.
-      this._setHeaderHeight();
+      this.setHeaderHeight();
 
       // Listen to the scroll event for the sticky header.
-      window.addEventListener('scroll', this._handleStickyHeader, false);
+      window.addEventListener('scroll', this.handleStickyHeader, false);
     }
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      _storesHeaderStoreJs2['default'].unlisten(this._onChange.bind(this));
+      _storesHeaderStoreJs2['default'].unlisten(this.onChange.bind(this));
+      _dgxFeatureFlags2['default'].store.unlisten(this.onChange.bind(this));
 
       // Removing event listener to minimize garbage collection
-      window.removeEventListener('scroll', this._handleStickyHeader, false);
+      window.removeEventListener('scroll', this.handleStickyHeader, false);
     }
   }, {
-    key: '_onChange',
-    value: function _onChange() {
-      this.setState((0, _underscore.extend)({ headerHeight: this.state.headerHeight }, _storesHeaderStoreJs2['default'].getState()));
+    key: 'onChange',
+    value: function onChange() {
+      this.setState((0, _underscore.extend)({
+        headerHeight: this.state.headerHeight,
+        featureFlags: _dgxFeatureFlags2['default'].store.getState()
+      }, _storesHeaderStoreJs2['default'].getState()));
     }
 
     /**
-     * _fetchDataIfNeeded()
-     * checks the existence of headerData items,
-     * triggers the Actions.fetchHeaderData()
-     * method to dispatch a client-side event
-     * to obtain data.
+     * getHeaderHeight()
+     * returns the Height of the Header DOM
+     * element in pixels.
      */
   }, {
-    key: '_fetchDataIfNeeded',
-    value: function _fetchDataIfNeeded() {
-      if (_storesHeaderStoreJs2['default'].getState().headerData.length < 1) {
-        _actionsActionsJs2['default'].fetchHeaderData(this.props.env, this.props.urls);
+    key: 'getHeaderHeight',
+    value: function getHeaderHeight() {
+      var headerDOM = _reactDom2['default'].findDOMNode(this.refs.nyplHeader);
+      return headerDOM.getBoundingClientRect().height;
+    }
+
+    /**
+     * setHeaderHeight()
+     * Updates the state headerHeight property
+     * only if headerHeight is not defined.
+     */
+  }, {
+    key: 'setHeaderHeight',
+    value: function setHeaderHeight() {
+      var _this = this;
+
+      if (!this.state.headerHeight) {
+        setTimeout(function () {
+          _this.setState({ headerHeight: _this.getHeaderHeight() });
+        }, 500);
       }
     }
 
     /**
-     * _handleStickyHeader()
+     * getWindowVerticallScroll()
+     * returns the current window vertical
+     * scroll position in pixels.
+     */
+  }, {
+    key: 'getWindowVerticalScroll',
+    value: function getWindowVerticalScroll() {
+      return window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+    }
+
+    /**
+     * handleStickyHeader()
      * Executes Actions.updateIsHeaderSticky()
      * with the proper boolean value to update the
      * HeaderStore.isSticky value based on the window
@@ -193,10 +237,10 @@ var Header = (function (_React$Component) {
      * of the Header DOM element.
      */
   }, {
-    key: '_handleStickyHeader',
-    value: function _handleStickyHeader() {
+    key: 'handleStickyHeader',
+    value: function handleStickyHeader() {
       var headerHeight = this.state.headerHeight;
-      var windowVerticalDistance = this._getWindowVerticalScroll();
+      var windowVerticalDistance = this.getWindowVerticalScroll();
 
       if (windowVerticalDistance && headerHeight && windowVerticalDistance > headerHeight) {
         // Only update the value if sticky is false
@@ -215,43 +259,18 @@ var Header = (function (_React$Component) {
     }
 
     /**
-     * _getHeaderHeight()
-     * returns the Height of the Header DOM
-     * element in pixels.
+     * fetchDataIfNeeded()
+     * checks the existence of headerData items,
+     * triggers the Actions.fetchHeaderData()
+     * method to dispatch a client-side event
+     * to obtain data.
      */
   }, {
-    key: '_getHeaderHeight',
-    value: function _getHeaderHeight() {
-      var headerDOM = _reactDom2['default'].findDOMNode(this.refs.nyplHeader);
-      return headerDOM.getBoundingClientRect().height;
-    }
-
-    /**
-     * _setHeaderHeight()
-     * Updates the state headerHeight property
-     * only if headerHeight is not defined.
-     */
-  }, {
-    key: '_setHeaderHeight',
-    value: function _setHeaderHeight() {
-      var _this = this;
-
-      if (!this.state.headerHeight) {
-        setTimeout(function () {
-          _this.setState({ headerHeight: _this._getHeaderHeight() });
-        }, 500);
+    key: 'fetchDataIfNeeded',
+    value: function fetchDataIfNeeded() {
+      if (_storesHeaderStoreJs2['default'].getState().headerData.length < 1) {
+        _actionsActionsJs2['default'].fetchHeaderData(this.props.env, this.props.urls);
       }
-    }
-
-    /**
-     * _getWindowVerticallScroll()
-     * returns the current window vertical
-     * scroll position in pixels.
-     */
-  }, {
-    key: '_getWindowVerticalScroll',
-    value: function _getWindowVerticalScroll() {
-      return window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
     }
   }, {
     key: 'render',
@@ -279,8 +298,8 @@ var Header = (function (_React$Component) {
           { className: headerClass + '-Wrapper' },
           _react2['default'].createElement(_MobileHeaderJs2['default'], {
             className: headerClass + '-Mobile',
-            locatorUrl: this.props.urls === 'absolute' ? "//www.nypl.org/locations/map?nearme=true" : "/locations/map?nearme=true",
-            nyplRootUrl: this.props.urls === 'absolute' ? "//www.nypl.org" : "/",
+            locatorUrl: this.props.urls === 'absolute' ? '//www.nypl.org/locations/map?nearme=true' : '/locations/map?nearme=true',
+            nyplRootUrl: this.props.urls === 'absolute' ? '//www.nypl.org' : '/',
             ref: 'headerMobile'
           }),
           _react2['default'].createElement(
@@ -297,12 +316,24 @@ var Header = (function (_React$Component) {
             },
             _react2['default'].createElement(_LogoLogoJs2['default'], {
               className: headerClass + '-Logo',
-              target: this.props.urls === 'absolute' ? "//www.nypl.org" : "/"
+              target: this.props.urls === 'absolute' ? '//www.nypl.org' : '/'
             }),
             _react2['default'].createElement(
               'div',
               { className: headerClass + '-Buttons', style: styles.topButtons },
-              _react2['default'].createElement(_MyNyplButtonMyNyplButtonJs2['default'], { label: 'Log In', refId: 'desktopLogin' }),
+              _react2['default'].createElement(_MyNyplButtonMyNyplButtonJs2['default'], {
+                label: 'Log In',
+                refId: 'desktopLogin'
+              }),
+              _dgxFeatureFlags2['default'].store._isFeatureActive('location-top-link') ? _react2['default'].createElement(_ButtonsSimpleButtonJs2['default'], {
+                label: 'Locations',
+                target: this.props.urls === 'absolute' ? '//www.nypl.org/locations/map' : '/locations/map',
+                className: 'LocationsTopLink',
+                id: 'LocationsTopLink',
+                gaAction: 'Locations',
+                gaLabel: 'Header Buttons',
+                style: styles.locationsTopLink
+              }) : null,
               _react2['default'].createElement(_ButtonsSimpleButtonJs2['default'], {
                 label: 'Get a Library Card',
                 target: '//catalog.nypl.org/screens/selfregpick.html',

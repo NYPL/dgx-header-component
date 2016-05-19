@@ -12,13 +12,11 @@ import utils from '../../utils/utils.js';
 
 const styles = {
   base: {
-    margin: '0px 15px',
     position: 'relative',
-    display: 'inline-block',
   },
   SimpleButton: {
     display: 'block',
-    padding: '9px 15px 11px 20px',
+    padding: '10px 10px 10px 12px',
   },
   SubscribeIcon: {
     fontSize: '15px',
@@ -148,7 +146,7 @@ class SubscribeButton extends React.Component {
             className={`SubscribeButton ${buttonClasses}`}
             href={this.props.target}
             onClick={this._handleClick}
-            style={[styles.SimpleButton, this.props.style]}
+            style={styles.SimpleButton}
           >
             {this.props.label}
             <span className={`${iconClass} icon`} style={styles.SubscribeIcon}></span>

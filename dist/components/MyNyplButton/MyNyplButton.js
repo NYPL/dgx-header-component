@@ -48,13 +48,13 @@ var _MyNyplMyNyplJs2 = _interopRequireDefault(_MyNyplMyNyplJs);
 
 var styles = {
   base: {
-    margin: '0px 15px',
+    margin: '0px 10px 0px 0px',
     position: 'relative',
     display: 'inline-block'
   },
   SimpleButton: {
     display: 'block',
-    padding: '9px 10px 11px 20px'
+    padding: '10px 10px 10px 12px'
   },
   MyNyplIcon: {
     fontSize: '15px',

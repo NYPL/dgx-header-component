@@ -5,7 +5,7 @@
   @include min-screen(769px) {
     display: inline-table;
     vertical-align: middle;
-    margin: 0 10px 0 0px;
+    margin: 0 10px 0 5px;
   }
 
   @include min-screen(792px) {

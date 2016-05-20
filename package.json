@@ -1,6 +1,6 @@
 {
   "name": "dgx-header-component",
-  "version": "1.2.3",
+  "version": "1.2.5",
   "description": "NYPL Header",
   "main": "dist/components/Header/Header.js",
   "scripts": {

@@ -89,7 +89,8 @@ var MegaMenuFeatures = (function (_React$Component) {
           key: 'findUsWidget',
           navId: this.props.navId,
           featuredItem: widgetFeature,
-          navLabel: this.props.navLabel
+          navLabel: this.props.navLabel,
+          urlType: this.props.urlType
         });
       }
 

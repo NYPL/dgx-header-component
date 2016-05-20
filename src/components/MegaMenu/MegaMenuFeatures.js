@@ -46,6 +46,7 @@ class MegaMenuFeatures extends React.Component {
           navId={this.props.navId}
           featuredItem={widgetFeature}
           navLabel={this.props.navLabel}
+          urlType={this.props.urlType}
         />
       );
     }

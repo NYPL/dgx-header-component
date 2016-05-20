@@ -34,6 +34,11 @@
     @include min-screen(769px) {
       display: none;
     }
+
+    &-Logo {
+      width: 45px;
+      height: 45px;
+    }
   }
 
   &-Wrapper {
@@ -44,10 +49,10 @@
    * -------------
   */
   &.sticky {
-    @include min-screen(769px) {
-      .Header {
-        &-Wrapper{
-          @extend .slideInDown;
+    .Header {
+      &-Wrapper {
+        @extend .slideInDown;
+        @include min-screen(769px) {
           -webkit-animation-duration: .5s;
           animation-duration: .5s;
           border-top: 2px solid #ED1C24;
@@ -59,36 +64,51 @@
           height: 65px;
           box-shadow: 0px 2px 2.5px 0px rgba(50, 50, 50, 0.25);
         }
+      }
 
-        &-GlobalAlerts {
-          display: none;
+      &-TopWrapper {
+        @include min-screen(769px) {
+          min-height: inherit;
         }
+      }
 
-        &-Buttons {
-          display: none !important;
+      &-GlobalAlerts {
+        display: none;
+      }
+
+      &-Buttons {
+        display: none !important;
+      }
+
+      &-Logo {
+        display: inline-block;
+        overflow: hidden;
+        left: 0;
+        bottom: 7px;
+        z-index: 3;
+        max-width: 55px;
+
+        @include min-screen(1025px) {
+          bottom: inherit;
+          top: -9px;
+          left: 20px;
         }
-
-        &-Logo {
-          display: inline-block;
-          left: 0;
-          width: auto;
-          z-index: 3;
-
-          img {
-            display: none;
+        .nyplLionLogo {
+          width: 115px;
+          height: 64px;
+          &-text {
+            @include min-screen(1025px) {
+              display: none;
+            }
           }
-
-          span {
-            display: block !important;
-            font-size: 63.5px;
-            color: #000;
-          }
         }
+      }
 
-        &-NavMenu {
+      &-NavMenu {
+        @include min-screen(769px) {
           position: absolute;
           width: 100%;
-          bottom: 5px;
+          bottom: 6px;
         }
       }
     }
@@ -105,10 +125,12 @@
       display: block;
       max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
       margin: 0px 20px;
+      min-height: 138px;
     }
 
     @include min-screen(1025px) {
       margin: 0px auto;
+      min-height: auto;
     }
   }
 
@@ -122,15 +144,34 @@
     @include min-screen(769px) {
       display: block;
       position: relative;
-      width: 158px;
-      left: 15px;
       margin: 0;
+      max-width: 90px;
     }
 
     @include min-screen(1025px) {
-      width: 230px;
-      margin: 0 0 0 20px;
-      left: inherit;
+      max-width: 260px;
+      left: 27px;
+      top: 20px;
+    }
+
+    .nyplLionLogo {
+      width: 200px;
+      height: 112px;
+
+      @include min-screen(1025px) {
+        width: 225px;
+        height: 126px;
+      }
+
+      &-text {
+        @include min-screen(769px) {
+          display: none;
+        }
+
+        @include min-screen(1025px) {
+          display: block;
+        }
+      }
     }
   }
 

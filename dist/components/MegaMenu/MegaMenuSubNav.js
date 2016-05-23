@@ -20,10 +20,6 @@ var _react2 = _interopRequireDefault(_react);
 
 var _underscore = require('underscore');
 
-var _radium = require('radium');
-
-var _radium2 = _interopRequireDefault(_radium);
-
 var _appConfigJs = require('../../appConfig.js');
 
 var _appConfigJs2 = _interopRequireDefault(_appConfigJs);
@@ -31,6 +27,10 @@ var _appConfigJs2 = _interopRequireDefault(_appConfigJs);
 var _SocialMediaLinksWidgetSocialMediaLinksWidgetJs = require('../SocialMediaLinksWidget/SocialMediaLinksWidget.js');
 
 var _SocialMediaLinksWidgetSocialMediaLinksWidgetJs2 = _interopRequireDefault(_SocialMediaLinksWidgetSocialMediaLinksWidgetJs);
+
+var _radium = require('radium');
+
+var _radium2 = _interopRequireDefault(_radium);
 
 var _utilsUtilsJs = require('../../utils/utils.js');
 
@@ -46,38 +46,64 @@ var styles = {
 var MegaMenuSubNav = (function (_React$Component) {
   _inherits(MegaMenuSubNav, _React$Component);
 
-  function MegaMenuSubNav(props) {
+  function MegaMenuSubNav() {
     _classCallCheck(this, MegaMenuSubNav);
 
-    _get(Object.getPrototypeOf(MegaMenuSubNav.prototype), 'constructor', this).call(this, props);
+    _get(Object.getPrototypeOf(MegaMenuSubNav.prototype), 'constructor', this).apply(this, arguments);
   }
 
   _createClass(MegaMenuSubNav, [{
-    key: 'render',
-    value: function render() {
+    key: 'renderSubNavItems',
+
+    /**
+     * Generates the DOM for the MegaMenu Left SubNavItem elements.
+     * @param {items[]} - Array containing SubNavItem object data.
+     * @returns {Object} React DOM.
+     */
+    value: function renderSubNavItems(items) {
       var _this = this;
 
-      var items = (0, _underscore.map)(this.props.items, function (m, i) {
+      if ((0, _underscore.isEmpty)(items)) {
+        return null;
+      }
+
+      return (0, _underscore.map)(items, function (m, i) {
         var target = m.link[_this.props.lang].text || '#';
         return _react2['default'].createElement(
           'li',
           { key: i },
           _react2['default'].createElement(
             'a',
-            { href: target,
-              onClick: _utilsUtilsJs2['default']._trackHeader.bind(_this, 'Go to...', _this.props.label[_this.props.lang].text + '--' + m.name[_this.props.lang].text)
+            {
+              href: target,
+              onClick: function () {
+                return _utilsUtilsJs2['default']._trackHeader('Go to...', _this.props.label[_this.props.lang].text + '--' + m.name[_this.props.lang].text);
+              }
             },
             m.name[_this.props.lang].text
           )
         );
       });
+    }
 
-      // Assign widget to the FindUs Menu Item by ID match
-      var socialMediaWidget = this.props.navId === 'df621833-4dd1-4223-83e5-6ad7f98ad26a' ? _react2['default'].createElement(_SocialMediaLinksWidgetSocialMediaLinksWidgetJs2['default'], {
+    /**
+     * Generates the DOM for the SocialMedia link icons only for a matching navId.
+     * @param {string} - Navigation UUID as string type.
+     * @returns {Object} React DOM.
+     */
+  }, {
+    key: 'renderSocialMediaIcons',
+    value: function renderSocialMediaIcons(navId) {
+      return this.props.navId === navId ? _react2['default'].createElement(_SocialMediaLinksWidgetSocialMediaLinksWidgetJs2['default'], {
         className: 'MegaMenu-SubNav-SocialMediaWidget',
         links: _appConfigJs2['default'].socialMediaLinks,
         displayOnly: ['facebook', 'twitter']
       }) : null;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
 
       return _react2['default'].createElement(
         'div',
@@ -90,7 +116,9 @@ var MegaMenuSubNav = (function (_React$Component) {
             {
               style: styles.topLink,
               href: this.props.topLink,
-              onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Go to...', 'SubNav Title--' + this.props.label[this.props.lang].text)
+              onClick: function () {
+                return _utilsUtilsJs2['default']._trackHeader('Go to...', 'SubNav Title--' + _this2.props.label[_this2.props.lang].text);
+              }
             },
             this.props.label[this.props.lang].text
           )
@@ -98,9 +126,9 @@ var MegaMenuSubNav = (function (_React$Component) {
         _react2['default'].createElement(
           'ul',
           null,
-          items
+          this.renderSubNavItems(this.props.items)
         ),
-        socialMediaWidget
+        this.renderSocialMediaIcons('df621833-4dd1-4223-83e5-6ad7f98ad26a')
       );
     }
   }]);

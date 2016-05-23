@@ -1,7 +1,7 @@
 import React from 'react';
 import Radium from 'radium';
 import ReactTappable from 'react-tappable';
-
+import { LionLogoIcon } from 'dgx-svg-icons';
 // ALT FLUX
 import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
@@ -16,8 +16,8 @@ const styles = {
   mobileLogo: {
     color: '#000',
     position: 'absolute',
-    left: 0,
-    top: 0,
+    left: 10,
+    top: 8,
     textDecoration: 'none',
     ':hover': {
       color: '#000',
@@ -25,9 +25,6 @@ const styles = {
     ':visited': {
       color: '#000',
     },
-  },
-  logoIcon: {
-    fontSize: '59px',
   },
   myNyplIcon: {
     fontSize: '31px',
@@ -81,18 +78,18 @@ class MobileHeader extends React.Component {
       mobileMyNyplButton: HeaderStore.getState().mobileMyNyplButton,
     };
 
-    this._handleMenuBtnPress = this._handleMenuBtnPress.bind(this);
+    this.handleMenuBtnPress = this.handleMenuBtnPress.bind(this);
   }
 
   componentDidMount() {
-    HeaderStore.listen(this._onChange.bind(this));
+    HeaderStore.listen(this.onChange.bind(this));
   }
 
   componentWillUnmount() {
-    HeaderStore.unlisten(this._onChange.bind(this));
+    HeaderStore.unlisten(this.onChange.bind(this));
   }
 
-  _onChange() {
+  onChange() {
     this.setState({
       activeMobileButton: HeaderStore.getState().activeMobileButton,
       searchButtonAction: HeaderStore.getState().searchButtonAction,
@@ -101,7 +98,7 @@ class MobileHeader extends React.Component {
   }
 
   /**
-   * _toggleMobileMenu(activeButton)
+   * toggleMobileMenu(activeButton)
    * Verifies that the activeButton does not
    * match the HeaderStore's current value
    * and set's it as the param activeButton.
@@ -110,7 +107,7 @@ class MobileHeader extends React.Component {
    *
    * @param {String} activeButton
    */
-  _toggleMobileMenu(activeButton) {
+  toggleMobileMenu(activeButton) {
     if (activeButton === 'clickSearch') {
       if (HeaderStore._getSearchButtonActionValue() !== activeButton) {
         Actions.searchButtonActionValue(activeButton);
@@ -143,12 +140,12 @@ class MobileHeader extends React.Component {
   }
 
   /**
-   * _handleMenuBtnPress()
-   * Calls _toggleMobileMenu()
+   * handleMenuBtnPress()
+   * Calls toggleMobileMenu()
    * with the 'mobileMenu' as a param
    */
-  _handleMenuBtnPress(activeButton) {
-    this._toggleMobileMenu(activeButton);
+  handleMenuBtnPress(activeButton) {
+    this.toggleMobileMenu(activeButton);
   }
 
   render() {
@@ -169,14 +166,11 @@ class MobileHeader extends React.Component {
           style={styles.mobileLogo}
           href={this.props.nyplRootUrl}
         >
-          <span
-            style={styles.logoIcon}
-            className={`${this.props.className}-Logo nypl-icon-logo-mark`}
-          >
-          </span>
+          <LionLogoIcon className={`${this.props.className}-Logo`} />
+          <span className="visuallyHidden">{this.props.alt}</span>
         </a>
 
-        <ReactTappable onTap={this._handleMenuBtnPress.bind(this, 'clickMyNypl')}>
+        <ReactTappable onTap={() => this.handleMenuBtnPress('clickMyNypl')}>
           <span
             style={[
               styles.myNyplIcon,
@@ -191,12 +185,12 @@ class MobileHeader extends React.Component {
         <a
           style={styles.locatorIcon}
           href={locatorUrl}
-          onClick={utils._trackHeader.bind(this, 'Click', 'Mobile Locations Button')}
+          onClick={() => utils._trackHeader('Click', 'Mobile Locations Button')}
           className={`${this.props.className}-Locator nypl-icon-locator-large`}
         >
         </a>
 
-        <ReactTappable onTap={this._handleMenuBtnPress.bind(this, 'clickSearch')}>
+        <ReactTappable onTap={() => this.handleMenuBtnPress('clickSearch')}>
           <span
             style={[
               styles.searchIcon,
@@ -209,7 +203,7 @@ class MobileHeader extends React.Component {
           </span>
         </ReactTappable>
 
-        <ReactTappable onTap={this._handleMenuBtnPress.bind(this, 'mobileMenu')}>
+        <ReactTappable onTap={() => this.handleMenuBtnPress('mobileMenu')}>
           <span
             style={[
               styles.menuIcon,
@@ -230,12 +224,14 @@ MobileHeader.propTypes = {
   className: React.PropTypes.string,
   locatorUrl: React.PropTypes.string,
   nyplRootUrl: React.PropTypes.string,
+  alt: React.PropTypes.string,
 };
 
 MobileHeader.defaultProps = {
   lang: 'en',
   className: 'MobileHeader',
   nyplRootUrl: '/',
+  alt: 'The New York Public Library',
 };
 
 export default Radium(MobileHeader);

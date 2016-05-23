@@ -1,50 +1,75 @@
 import React from 'react';
+import { map as _map, isEmpty as _isEmpty } from 'underscore';
 import MegaMenuFeatureItem from './MegaMenuFeatureItem.js';
 import FindUsWidget from '../FindUsWidget/FindUsWidget.js';
 import DonateWidget from '../DonateWidget/DonateWidget.js';
 import config from '../../appConfig.js';
 
 class MegaMenuFeatures extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  /**
+   * Generates the DOM for the FeatureItems.
+   * Optionally, returns the appropriate widget component based off navId match.
+   * @param {object[]} - Array containing FeatureItem Object data.
+   * @param {Object} param (optional) - Object containing widget properties.
+   * @param {string} param.donateWidget (optional) - Widget property with String value.
+   * @param {string} param.findWidget (optional) - Widget property with String value.
+   * @returns {Object} React DOM.
+   */
+  renderFeatureitems(object, opts = {}) {
+    if (_isEmpty(object)) {
+      return null;
+    }
 
-  render() {
-    let currentFeatureItem;
-    // The specific header items for Find Us and Give only have one feature.
-    const widgetFeature = this.props.features[0].featuredItem;
+    const {
+      donateWidget = '',
+      findWidget = '',
+    } = opts;
+    // Extract the first featured item to pass onto the widgets matching navId
+    const widgetFeature = object[0].featuredItem;
 
-    // Donate Widget
-    if (this.props.navId === '1d9ea0ec-6ca3-4577-9dd1-e8de1f2a8bb1') {
-      currentFeatureItem = (
+    if (this.props.navId === donateWidget) {
+      return (
         <DonateWidget
+          key="donateWidget"
           navId={this.props.navId}
           featuredItem={widgetFeature}
           donationLinks={config.donationLinks}
           navLabel={this.props.navLabel}
         />
       );
-    } else if (this.props.navId === 'df621833-4dd1-4223-83e5-6ad7f98ad26a') {
-      currentFeatureItem = (
+    }
+
+    if (this.props.navId === findWidget) {
+      return (
         <FindUsWidget
+          key="findUsWidget"
           navId={this.props.navId}
           featuredItem={widgetFeature}
           navLabel={this.props.navLabel}
-        />
-      );
-    } else {
-      currentFeatureItem = this.props.features.map((item, i) =>
-        <MegaMenuFeatureItem
-          key={i}
-          feature={item.featuredItem}
-          navLabel={this.props.navLabel}
+          urlType={this.props.urlType}
         />
       );
     }
 
+    return _map(object, (item, i) =>
+      <MegaMenuFeatureItem
+        key={i}
+        feature={item.featuredItem}
+        navLabel={this.props.navLabel}
+      />
+    );
+  }
+
+  render() {
     return (
       <div className={this.props.className}>
-        {currentFeatureItem}
+        {this.renderFeatureitems(
+          this.props.features,
+          {
+            donateWidget: '1d9ea0ec-6ca3-4577-9dd1-e8de1f2a8bb1',
+            findWidget: 'df621833-4dd1-4223-83e5-6ad7f98ad26a',
+          }
+        )}
       </div>
     );
   }

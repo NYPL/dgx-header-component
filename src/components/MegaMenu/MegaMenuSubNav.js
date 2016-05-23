@@ -1,9 +1,8 @@
 import React from 'react';
-import { map as _map } from 'underscore';
-import Radium from 'radium';
-
+import { map as _map, isEmpty as _isEmpty } from 'underscore';
 import config from '../../appConfig.js';
 import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWidget.js';
+import Radium from 'radium';
 import utils from '../../utils/utils.js';
 
 const styles = {
@@ -14,20 +13,27 @@ const styles = {
 };
 
 class MegaMenuSubNav extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  /**
+   * Generates the DOM for the MegaMenu Left SubNavItem elements.
+   * @param {items[]} - Array containing SubNavItem object data.
+   * @returns {Object} React DOM.
+   */
+  renderSubNavItems(items) {
+    if (_isEmpty(items)) {
+      return null;
+    }
 
-  render() {
-    const items = _map(this.props.items, (m, i) => {
+    return _map(items, (m, i) => {
       const target = m.link[this.props.lang].text || '#';
       return (
         <li key={i}>
-          <a href={target}
-            onClick={utils._trackHeader.bind(
-              this,
-              'Go to...',
-              `${this.props.label[this.props.lang].text}--${m.name[this.props.lang].text}`)
+          <a
+            href={target}
+            onClick={() =>
+              utils._trackHeader(
+                'Go to...',
+                `${this.props.label[this.props.lang].text}--${m.name[this.props.lang].text}`
+              )
             }
           >
             {m.name[this.props.lang].text}
@@ -35,24 +41,31 @@ class MegaMenuSubNav extends React.Component {
         </li>
       );
     });
+  }
 
-    // Assign widget to the FindUs Menu Item by ID match
-    const socialMediaWidget = (this.props.navId === 'df621833-4dd1-4223-83e5-6ad7f98ad26a') ?
+  /**
+   * Generates the DOM for the SocialMedia link icons only for a matching navId.
+   * @param {string} - Navigation UUID as string type.
+   * @returns {Object} React DOM.
+   */
+  renderSocialMediaIcons(navId) {
+    return (this.props.navId === navId) ?
       <SocialMediaLinksWidget
         className="MegaMenu-SubNav-SocialMediaWidget"
         links={config.socialMediaLinks}
         displayOnly={['facebook', 'twitter']}
       /> : null;
+  }
 
+  render() {
     return (
       <div className="MegaMenu-SubNav">
         <h2>
           <a
             style={styles.topLink}
             href={this.props.topLink}
-            onClick={
-              utils._trackHeader.bind(
-                this,
+            onClick={() =>
+              utils._trackHeader(
                 'Go to...',
                 `SubNav Title--${this.props.label[this.props.lang].text}`
               )
@@ -61,8 +74,10 @@ class MegaMenuSubNav extends React.Component {
             {this.props.label[this.props.lang].text}
           </a>
         </h2>
-        <ul>{items}</ul>
-        {socialMediaWidget}
+        <ul>
+          {this.renderSubNavItems(this.props.items)}
+        </ul>
+        {this.renderSocialMediaIcons('df621833-4dd1-4223-83e5-6ad7f98ad26a')}
       </div>
     );
   }

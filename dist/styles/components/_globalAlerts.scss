@@ -18,7 +18,7 @@
   		display: block;
   		max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
   		margin: 0 auto;
-  		position: relative;		
+  		position: relative;
 		}
 	}
 
@@ -45,9 +45,9 @@
 		@include min-screen(769px) {
 			margin: .5em 0 .5em 113px;
 		}
-		
+
 		@include min-screen(1025px) {
-			margin: .5em 0 .5em 135px;
+			margin: .5em 0 .5em 138px;
 		}
 
 		&-Item {

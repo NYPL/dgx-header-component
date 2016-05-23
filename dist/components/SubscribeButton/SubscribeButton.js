@@ -56,13 +56,11 @@ var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
 
 var styles = {
   base: {
-    margin: '0px 15px',
-    position: 'relative',
-    display: 'inline-block'
+    position: 'relative'
   },
   SimpleButton: {
     display: 'block',
-    padding: '9px 15px 11px 20px'
+    padding: '10px 10px 10px 12px'
   },
   SubscribeIcon: {
     fontSize: '15px',
@@ -212,7 +210,7 @@ var SubscribeButton = (function (_React$Component) {
               className: 'SubscribeButton ' + buttonClasses,
               href: this.props.target,
               onClick: this._handleClick,
-              style: [styles.SimpleButton, this.props.style]
+              style: styles.SimpleButton
             },
             this.props.label,
             _react2['default'].createElement('span', { className: iconClass + ' icon', style: styles.SubscribeIcon })

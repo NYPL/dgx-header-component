@@ -11,47 +11,29 @@ class MegaMenu extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { lastActiveMenuItem: HeaderStore.getState().lastActiveMenuItem };
-
-    this._watchHoverIntentEnter = this._watchHoverIntentEnter.bind(this);
-    this._watchHoverIntentLeave = this._watchHoverIntentLeave.bind(this);
-  }
-
-  componentDidMount() {
-    HeaderStore.listen(this._onChange.bind(this));
-  }
-
-  componentWillUnmount() {
-    HeaderStore.unlisten(this._onChange.bind(this));
-  }
-
-  _onChange() {
-    this.setState({
-      lastActiveMenuItem: HeaderStore.getState().lastActiveMenuItem,
-    });
+    this.watchHoverIntentEnter = this.watchHoverIntentEnter.bind(this);
+    this.watchHoverIntentLeave = this.watchHoverIntentLeave.bind(this);
   }
 
   /**
-   * _watchHoverIntentEnter()
    * If the lastActiveMenuItem passed as a prop
    * matches the MegaMenu's navId. Then fire the
-   * Action to store a reference to thhe lastActiveMenuItem.
+   * Action to store a reference to the lastActiveMenuItem.
    */
-  _watchHoverIntentEnter() {
+  watchHoverIntentEnter() {
     if (this.props.lastActiveMenuItem === this.props.navId) {
       Actions.setLastActiveMenuItem(this.props.navId);
     }
   }
 
   /**
-   * _watchHoverIntentLeave()
    * Sets the Store's lastActiveMenuItem
-   * property to an empty string when
-   * hovered out.
+   * property to an empty string when hovered out.
    */
-  _watchHoverIntentLeave() {
+  watchHoverIntentLeave() {
     Actions.setLastActiveMenuItem('');
   }
+
   render() {
     // Dynamic class assignment based on activeItem property matching current index.
     const classes = cx(this.props.className, {
@@ -62,8 +44,8 @@ class MegaMenu extends React.Component {
 
     return (
       <div
-        onMouseEnter={this._watchHoverIntentEnter}
-        onMouseLeave={this._watchHoverIntentLeave}
+        onMouseEnter={this.watchHoverIntentEnter}
+        onMouseLeave={this.watchHoverIntentLeave}
         id={(this.props.navId) ? `MegaMenu-${this.props.navId}` : 'MegaMenu'}
         className={classes}
       >

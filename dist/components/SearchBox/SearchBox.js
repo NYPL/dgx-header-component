@@ -271,7 +271,7 @@ var SearchBox = (function (_React$Component) {
   }, {
     key: '_setCatalogUrl',
     value: function _setCatalogUrl(searchString, catalogBaseUrl) {
-      var catalogUrl = catalogBaseUrl || 'http://www.nypl.org/search/apachesolr_search/';
+      var catalogUrl = catalogBaseUrl || '//www.nypl.org/search/apachesolr_search/';
 
       if (searchString) {
         return catalogUrl + encodeURIComponent(searchString);
@@ -430,17 +430,21 @@ var SearchBox = (function (_React$Component) {
               _react2['default'].createElement(
                 'div',
                 { className: this.props.className + '-Input-Keywords-Border' },
-                _react2['default'].createElement('span', { className: 'nypl-icon-magnifier-thin icon' }),
-                _react2['default'].createElement(_InputFieldInputFieldJs2['default'], {
-                  type: 'text',
-                  id: this.props.id + '-Input-Keywords',
-                  className: this.props.className + '-Input-Keywords ' + pulseAnimation,
-                  ref: 'keywords',
-                  value: this.state.searchKeywords,
-                  maxLength: '128',
-                  placeholder: this.state.placeholder,
-                  onChange: this._inputChange.bind(this, 'keywords')
-                })
+                _react2['default'].createElement(
+                  'label',
+                  null,
+                  _react2['default'].createElement('span', { className: 'nypl-icon-magnifier-thin icon' }),
+                  _react2['default'].createElement(_InputFieldInputFieldJs2['default'], {
+                    type: 'text',
+                    id: this.props.id + '-Input-Keywords',
+                    className: this.props.className + '-Input-Keywords ' + pulseAnimation,
+                    ref: 'keywords',
+                    value: this.state.searchKeywords,
+                    maxLength: '128',
+                    placeholder: this.state.placeholder,
+                    onChange: this._inputChange.bind(this, 'keywords')
+                  })
+                )
               )
             ),
             _react2['default'].createElement(

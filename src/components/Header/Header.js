@@ -38,7 +38,7 @@ const styles = {
   locationsTopLink: {
     display: 'inline-block',
     color: '#000',
-    padding: '5px',
+    padding: '5px 15px 5px 5px',
   },
   libraryCardButton: {
     display: 'inline-block',

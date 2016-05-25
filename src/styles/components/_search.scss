@@ -16,47 +16,35 @@
 
 /* CSS for Search button */
 &-SearchButton {
+  display: none;
   position: relative;
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
   background-color: transparent;
   color: $BG_MENU_SEARCH;
-  border-width: 0px;
-  display: none;
   font-size: 22px;
-  padding: 8px 10px 12px 10px;
+  padding: 8px 10px 13px 10px;
   border-radius: 0;
-  position: relative;
   line-height: normal;
+  border: none;
 
   &:before {
-    border-bottom-color: $BG_MENU_SEARCH;
-    border-bottom-style: none;
-    line-height: normal;
-
     @include min-screen(769px) {
-      border-bottom-color: $BG_MENU_SEARCH;
-      border-bottom-style: solid;
-      border-bottom-width: 2px;
-      float: right;
+      position: absolute;
+      right: 7px;
     }
   }
 
   & .Search-Text {
     @include Kievit-Book;
     position: relative;
+    display: block;
     color: $BG_MENU_SEARCH;
     border-bottom: 2px solid $BG_MENU_SEARCH;
-    display: inline-block;
-    float: left;
     font-size: 19px;
     line-height: 1em;
-    padding: 0;
-    top: 3px;
-    @-moz-document url-prefix() {
-      padding: 0 0 1px 0;
-    }
+    padding: 4px 20px 0 0;
 
     &.active {
       color: #78CCED;

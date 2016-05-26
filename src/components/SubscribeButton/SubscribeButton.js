@@ -14,7 +14,7 @@ const styles = {
   base: {
     position: 'relative',
   },
-  SimpleButton: {
+  SubscribeButton: {
     display: 'block',
     padding: '10px 10px 10px 12px',
   },
@@ -50,27 +50,35 @@ class SubscribeButton extends React.Component {
       target: this.props.target,
     };
 
-    this._handleOnClickOut = this._handleOnClickOut.bind(this);
-    this._handleClick = this._handleClick.bind(this);
+    this.handleOnClickOut = this.handleOnClickOut.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
-    HeaderStore.listen(this._onChange.bind(this));
+    HeaderStore.listen(this.onChange.bind(this));
     // Make an axios call to the mailinglist API server to check it th server is working.
     // And determine the behavior of subscribe button based on the status of the server.
-    this._callMailinglistApi();
+    this.callMailinglistApi();
   }
 
   componentWillUnmount() {
-    HeaderStore.unlisten(this._onChange.bind(this));
+    HeaderStore.unlisten(this.onChange.bind(this));
   }
 
   /**
-   * _handleClick(e)
+   * onChange()
+   * Updates the state of the form based off the Header Store.
+   */
+  onChange() {
+    this.setState({ subscribeFormVisible: HeaderStore._getSubscribeFormVisible() });
+  }
+
+  /**
+   * handleClick(e)
    * Toggles the visibility of the form. Sends an Action
    * that will dispatch an event to the Header Store.
    */
-  _handleClick(e) {
+  handleClick(e) {
     if (this.state.target === '#') {
       e.preventDefault();
       const visibleState = this.state.subscribeFormVisible ? 'Closed' : 'Open';
@@ -80,11 +88,11 @@ class SubscribeButton extends React.Component {
   }
 
   /**
-   * _handleOnClickOut()
+   * handleOnClickOut()
    * Handles closing the Subscribe form if it is
    * currently visible.
    */
-  _handleOnClickOut() {
+  handleOnClickOut() {
     if (HeaderStore._getSubscribeFormVisible()) {
       Actions.toggleSubscribeFormVisible(false);
       utils._trackHeader('Click', 'Subscribe - Closed');
@@ -92,21 +100,13 @@ class SubscribeButton extends React.Component {
   }
 
   /**
-   * _onChange()
-   * Updates the state of the form based off the Header Store.
-   */
-  _onChange() {
-    this.setState({ subscribeFormVisible: HeaderStore._getSubscribeFormVisible() });
-  }
-
-  /**
-  * _callMailinglistApi()
+  * callMailinglistApi()
   * An axios call to the mailinglist API server. If the server works,
   * change the link of the button to '#' so it will open the subscribe box.
   * If the server doesn't work, the button will link to subscribe landing page
   * as a fallback.
   */
-  _callMailinglistApi() {
+  callMailinglistApi() {
     axios
       .get('https://mailinglistapi.nypl.org')
       .then(response => {
@@ -135,18 +135,18 @@ class SubscribeButton extends React.Component {
     });
 
     return (
-      <ClickOutHandler onClickOut={this._handleOnClickOut}>
+      <ClickOutHandler onClickOut={this.handleOnClickOut}>
         <div
           className="SubscribeButton-Wrapper"
-          ref="SubscribeButton"
           style={[styles.base, this.props.style]}
         >
           <a
-            id={'SubscribeButton'}
+            id="SubscribeButton"
             className={`SubscribeButton ${buttonClasses}`}
-            href={this.props.target}
-            onClick={this._handleClick}
-            style={styles.SimpleButton}
+            href={this.state.target}
+            onClick={this.handleClick}
+            style={styles.SubscribeButton}
+            role={(this.state.target === '#') ? 'button' : null}
           >
             {this.props.label}
             <span className={`${iconClass} icon`} style={styles.SubscribeIcon}></span>

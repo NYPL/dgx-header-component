@@ -2,12 +2,12 @@ import Radium from 'radium';
 import React from 'react';
 import cx from 'classnames';
 import ClickOutHandler from 'react-onclickout';
-
+// Alt Store/Actions
 import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
-
+// GA Utilities
 import utils from '../../utils/utils.js';
-
+// Component Dependencies
 import MyNypl from '../MyNypl/MyNypl.js';
 
 const styles = {
@@ -16,9 +16,11 @@ const styles = {
     position: 'relative',
     display: 'inline-block',
   },
-  SimpleButton: {
+  MyNyplButton: {
     display: 'block',
+    border: 'none',
     padding: '10px 10px 10px 12px',
+    textTransform: 'uppercase',
   },
   MyNyplIcon: {
     fontSize: '15px',
@@ -47,41 +49,27 @@ class MyNyplButton extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      myNyplVisible: HeaderStore._getMyNyplVisible(),
-      target: this.props.target,
-    };
-  }
-
-  componentDidMount() {
-    HeaderStore.listen(this._onChange.bind(this));
-  }
-
-  componentWillUnmount() {
-    HeaderStore.unlisten(this._onChange.bind(this));
+    this.handleClick = this.handleClick.bind(this);
+    this.handleOnClickOut = this.handleOnClickOut.bind(this);
   }
 
   /**
-   * _handleClick(e)
+   * handleClick()
    * Toggles the visibility of the form. Sends an Action
    * that will dispatch an event to the Header Store.
    */
-  _handleClick(e) {
-    if (this.state.target === '#') {
-      e.preventDefault();
-
-      const visibleState = this.state.myNyplVisible ? 'Closed' : 'Open';
-      Actions.toggleMyNyplVisible(!this.state.myNyplVisible);
-      utils._trackHeader('Log In', `MyNyplButton - ${visibleState}`);
-    }
+  handleClick() {
+    const visibleState = HeaderStore._getMyNyplVisible() ? 'Closed' : 'Open';
+    Actions.toggleMyNyplVisible(!HeaderStore._getMyNyplVisible());
+    utils._trackHeader('Log In', `MyNyplButton - ${visibleState}`);
   }
 
   /**
-   * _handleOnClickOut()
+   * handleOnClickOut()
    * Handles closing the Subscribe form if it is
    * currently visible.
    */
-  _handleOnClickOut() {
+  handleOnClickOut() {
     if (HeaderStore._getMyNyplVisible()) {
       if (HeaderStore._getMobileMyNyplButtonValue() === '') {
         utils._trackHeader('Log In', 'MyNyplButton - Closed');
@@ -90,17 +78,9 @@ class MyNyplButton extends React.Component {
     }
   }
 
-  /**
-   * _onChange()
-   * Updates the state of the form based off the Header Store.
-   */
-  _onChange() {
-    this.setState({ myNyplVisible: HeaderStore._getMyNyplVisible() });
-  }
-
   render() {
     // Assign a variable to hold the reference of state boolean
-    const showDialog = this.state.myNyplVisible;
+    const showDialog = HeaderStore._getMyNyplVisible();
     const buttonClasses = cx({ active: showDialog });
     const myNyplClasses = cx({ 'active animatedFast fadeIn': showDialog });
     const iconClass = cx({
@@ -109,26 +89,24 @@ class MyNyplButton extends React.Component {
     });
 
     return (
-      <ClickOutHandler onClickOut={this._handleOnClickOut.bind(this)}>
+      <ClickOutHandler onClickOut={this.handleOnClickOut}>
         <div
           className="MyNyplButton-Wrapper"
           ref="MyNypl"
           style={[styles.base, this.props.style]}
         >
-          <a
+          <button
             id="MyNyplButton"
             className={`MyNyplButton ${buttonClasses}`}
-            href={this.props.target}
-            onClick={this._handleClick.bind(this)}
-            style={[styles.SimpleButton, this.props.style]}
+            onClick={this.handleClick}
+            style={[styles.MyNyplButton, this.props.style]}
           >
             {this.props.label}
             <span className={`${iconClass} icon`} style={styles.MyNyplIcon}></span>
-          </a>
-
+          </button>
           <div
             className={`MyNypl-Wrapper ${myNyplClasses}`}
-            style={[styles.MyNyplWrapper]}
+            style={styles.MyNyplWrapper}
           >
             <MyNypl />
           </div>
@@ -141,14 +119,12 @@ class MyNyplButton extends React.Component {
 MyNyplButton.propTypes = {
   lang: React.PropTypes.string,
   label: React.PropTypes.string,
-  target: React.PropTypes.string,
   style: React.PropTypes.object,
 };
 
 MyNyplButton.defaultProps = {
   lang: 'en',
   label: 'Log In',
-  target: '#',
 };
 
 export default Radium(MyNyplButton);

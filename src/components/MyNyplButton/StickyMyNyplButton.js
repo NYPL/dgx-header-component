@@ -13,10 +13,11 @@ const styles = {
     position: 'relative',
     display: 'inline-block',
   },
-  SimpleButton: {
+  MyNyplButton: {
     display: 'block',
     textTransform: 'uppercase',
     padding: '14px 13px 16px 20px',
+    border: 'none',
   },
   MyNyplIcon: {
     fontSize: '15px',
@@ -44,58 +45,36 @@ class StickyMyNyplButton extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      myNyplVisible: HeaderStore._getStickyMyNyplVisible(),
-      target: this.props.target,
-    };
-  }
-
-  componentDidMount() {
-    HeaderStore.listen(this._onChange.bind(this));
-  }
-
-  componentWillUnmount() {
-    HeaderStore.unlisten(this._onChange.bind(this));
+    this.handleClick = this.handleClick.bind(this);
+    this.handleOnClickOut = this.handleOnClickOut.bind(this);
   }
 
   /**
-   * _handleClick(e)
+   * handleClick()
    * Toggles the visibility of the form. Sends an Action
    * that will dispatch an event to the HeaderStore.
    */
-  _handleClick(e) {
-    if (this.state.target === '#') {
-      e.preventDefault();
-
-      const visibleState = this.state.myNyplVisible ? 'Closed' : 'Open';
-      Actions.toggleStickyMyNyplVisible(!this.state.myNyplVisible);
-      utils._trackHeader('Log In', `StickyMyNyplButton - ${visibleState}`);
-    }
+  handleClick() {
+    const visibleState = HeaderStore._getStickyMyNyplVisible() ? 'Closed' : 'Open';
+    Actions.toggleStickyMyNyplVisible(!HeaderStore._getStickyMyNyplVisible());
+    utils._trackHeader('Log In', `StickyMyNyplButton - ${visibleState}`);
   }
 
   /**
-   * _handleOnClickOut()
+   * handleOnClickOut()
    * Handles closing the Subscribe form if it is
    * currently visible.
    */
-  _handleOnClickOut() {
+  handleOnClickOut() {
     if (HeaderStore._getStickyMyNyplVisible()) {
       Actions.toggleStickyMyNyplVisible(false);
       utils._trackHeader('Log In', 'StickyMyNyplButton - Closed');
     }
   }
 
-  /**
-   * _onChange()
-   * Updates the state of the form based off the HeaderStore.
-   */
-  _onChange() {
-    this.setState({ myNyplVisible: HeaderStore._getStickyMyNyplVisible() });
-  }
-
   render() {
     // Assign a variable to hold the reference of state boolean
-    const showDialog = this.state.myNyplVisible;
+    const showDialog = HeaderStore._getStickyMyNyplVisible();
     const buttonClasses = cx({ active: showDialog });
     const myNyplClasses = cx({ 'active animatedFast fadeIn': showDialog });
     const iconClass = cx({
@@ -104,25 +83,24 @@ class StickyMyNyplButton extends React.Component {
     });
 
     return (
-      <ClickOutHandler onClickOut={this._handleOnClickOut.bind(this)}>
+      <ClickOutHandler onClickOut={this.handleOnClickOut}>
         <div
           className="MyNyplButton-Wrapper"
           ref="MyNypl"
           style={[styles.base, this.props.style]}
         >
-          <a
+          <button
             id="MyNyplButton"
             className={`MyNyplButton ${buttonClasses}`}
-            href={this.props.target}
-            onClick={this._handleClick.bind(this)}
-            style={[styles.SimpleButton, this.props.style]}
+            onClick={this.handleClick}
+            style={[styles.MyNyplButton, this.props.style]}
           >
             {this.props.label}
             <span className={`${iconClass} icon`} style={styles.MyNyplIcon}></span>
-          </a>
+          </button>
           <div
             className={`StickyMyNypl-Wrapper ${myNyplClasses}`}
-            style={[styles.MyNyplWrapper]}
+            style={styles.MyNyplWrapper}
           >
             <MyNypl />
           </div>
@@ -135,14 +113,12 @@ class StickyMyNyplButton extends React.Component {
 StickyMyNyplButton.propTypes = {
   lang: React.PropTypes.string,
   label: React.PropTypes.string,
-  target: React.PropTypes.string,
   style: React.PropTypes.object,
 };
 
 StickyMyNyplButton.defaultProps = {
   lang: 'en',
   label: 'Log In',
-  target: '#',
 };
 
 export default Radium(StickyMyNyplButton);

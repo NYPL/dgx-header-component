@@ -106,6 +106,16 @@ function ContentModel() {
   };
 
   this.featureItem = function (data, lang) {
+    if (!data) {
+      return {
+        headline: '',
+        category: '',
+        imgSrc: '',
+        description: '',
+        link: ''
+      };
+    }
+
     var item = {
       headline: data.headline ? data.headline[lang].text : '',
       category: data.category ? data.category[lang].text : '',

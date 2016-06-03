@@ -94,6 +94,16 @@ function ContentModel() {
   };
 
   this.featureItem = (data, lang) => {
+    if (!data) {
+      return {
+        headline: '',
+        category: '',
+        imgSrc: '',
+        description: '',
+        link: '',
+      };
+    }
+
     const item = {
       headline: data.headline ? data.headline[lang].text : '',
       category: data.category ? data.category[lang].text : '',

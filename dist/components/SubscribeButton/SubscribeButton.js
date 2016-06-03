@@ -58,7 +58,7 @@ var styles = {
   base: {
     position: 'relative'
   },
-  SimpleButton: {
+  SubscribeButton: {
     display: 'block',
     padding: '10px 10px 10px 12px'
   },
@@ -98,32 +98,42 @@ var SubscribeButton = (function (_React$Component) {
       target: this.props.target
     };
 
-    this._handleOnClickOut = this._handleOnClickOut.bind(this);
-    this._handleClick = this._handleClick.bind(this);
+    this.handleOnClickOut = this.handleOnClickOut.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   _createClass(SubscribeButton, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      _storesHeaderStoreJs2['default'].listen(this._onChange.bind(this));
+      _storesHeaderStoreJs2['default'].listen(this.onChange.bind(this));
       // Make an axios call to the mailinglist API server to check it th server is working.
       // And determine the behavior of subscribe button based on the status of the server.
-      this._callMailinglistApi();
+      this.callMailinglistApi();
     }
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      _storesHeaderStoreJs2['default'].unlisten(this._onChange.bind(this));
+      _storesHeaderStoreJs2['default'].unlisten(this.onChange.bind(this));
     }
 
     /**
-     * _handleClick(e)
+     * onChange()
+     * Updates the state of the form based off the Header Store.
+     */
+  }, {
+    key: 'onChange',
+    value: function onChange() {
+      this.setState({ subscribeFormVisible: _storesHeaderStoreJs2['default']._getSubscribeFormVisible() });
+    }
+
+    /**
+     * handleClick(e)
      * Toggles the visibility of the form. Sends an Action
      * that will dispatch an event to the Header Store.
      */
   }, {
-    key: '_handleClick',
-    value: function _handleClick(e) {
+    key: 'handleClick',
+    value: function handleClick(e) {
       if (this.state.target === '#') {
         e.preventDefault();
         var visibleState = this.state.subscribeFormVisible ? 'Closed' : 'Open';
@@ -133,13 +143,13 @@ var SubscribeButton = (function (_React$Component) {
     }
 
     /**
-     * _handleOnClickOut()
+     * handleOnClickOut()
      * Handles closing the Subscribe form if it is
      * currently visible.
      */
   }, {
-    key: '_handleOnClickOut',
-    value: function _handleOnClickOut() {
+    key: 'handleOnClickOut',
+    value: function handleOnClickOut() {
       if (_storesHeaderStoreJs2['default']._getSubscribeFormVisible()) {
         _actionsActionsJs2['default'].toggleSubscribeFormVisible(false);
         _utilsUtilsJs2['default']._trackHeader('Click', 'Subscribe - Closed');
@@ -147,25 +157,15 @@ var SubscribeButton = (function (_React$Component) {
     }
 
     /**
-     * _onChange()
-     * Updates the state of the form based off the Header Store.
-     */
-  }, {
-    key: '_onChange',
-    value: function _onChange() {
-      this.setState({ subscribeFormVisible: _storesHeaderStoreJs2['default']._getSubscribeFormVisible() });
-    }
-
-    /**
-    * _callMailinglistApi()
+    * callMailinglistApi()
     * An axios call to the mailinglist API server. If the server works,
     * change the link of the button to '#' so it will open the subscribe box.
     * If the server doesn't work, the button will link to subscribe landing page
     * as a fallback.
     */
   }, {
-    key: '_callMailinglistApi',
-    value: function _callMailinglistApi() {
+    key: 'callMailinglistApi',
+    value: function callMailinglistApi() {
       var _this = this;
 
       _axios2['default'].get('https://mailinglistapi.nypl.org').then(function (response) {
@@ -195,12 +195,11 @@ var SubscribeButton = (function (_React$Component) {
 
       return _react2['default'].createElement(
         _reactOnclickout2['default'],
-        { onClickOut: this._handleOnClickOut },
+        { onClickOut: this.handleOnClickOut },
         _react2['default'].createElement(
           'div',
           {
             className: 'SubscribeButton-Wrapper',
-            ref: 'SubscribeButton',
             style: [styles.base, this.props.style]
           },
           _react2['default'].createElement(
@@ -208,9 +207,10 @@ var SubscribeButton = (function (_React$Component) {
             {
               id: 'SubscribeButton',
               className: 'SubscribeButton ' + buttonClasses,
-              href: this.props.target,
-              onClick: this._handleClick,
-              style: styles.SimpleButton
+              href: this.state.target,
+              onClick: this.handleClick,
+              style: styles.SubscribeButton,
+              role: this.state.target === '#' ? 'button' : null
             },
             this.props.label,
             _react2['default'].createElement('span', { className: iconClass + ' icon', style: styles.SubscribeIcon })

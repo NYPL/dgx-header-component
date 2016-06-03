@@ -30,6 +30,8 @@ var _reactOnclickout = require('react-onclickout');
 
 var _reactOnclickout2 = _interopRequireDefault(_reactOnclickout);
 
+// Alt Store/Actions
+
 var _storesHeaderStoreJs = require('../../stores/HeaderStore.js');
 
 var _storesHeaderStoreJs2 = _interopRequireDefault(_storesHeaderStoreJs);
@@ -38,9 +40,13 @@ var _actionsActionsJs = require('../../actions/Actions.js');
 
 var _actionsActionsJs2 = _interopRequireDefault(_actionsActionsJs);
 
+// GA Utilities
+
 var _utilsUtilsJs = require('../../utils/utils.js');
 
 var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
+
+// Component Dependencies
 
 var _MyNyplMyNyplJs = require('../MyNypl/MyNypl.js');
 
@@ -52,9 +58,11 @@ var styles = {
     position: 'relative',
     display: 'inline-block'
   },
-  SimpleButton: {
+  MyNyplButton: {
     display: 'block',
-    padding: '10px 10px 10px 12px'
+    border: 'none',
+    padding: '10px 10px 10px 12px',
+    textTransform: 'uppercase'
   },
   MyNyplIcon: {
     fontSize: '15px',
@@ -87,48 +95,32 @@ var MyNyplButton = (function (_React$Component) {
 
     _get(Object.getPrototypeOf(MyNyplButton.prototype), 'constructor', this).call(this, props);
 
-    this.state = {
-      myNyplVisible: _storesHeaderStoreJs2['default']._getMyNyplVisible(),
-      target: this.props.target
-    };
+    this.handleClick = this.handleClick.bind(this);
+    this.handleOnClickOut = this.handleOnClickOut.bind(this);
   }
 
+  /**
+   * handleClick()
+   * Toggles the visibility of the form. Sends an Action
+   * that will dispatch an event to the Header Store.
+   */
+
   _createClass(MyNyplButton, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      _storesHeaderStoreJs2['default'].listen(this._onChange.bind(this));
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      _storesHeaderStoreJs2['default'].unlisten(this._onChange.bind(this));
+    key: 'handleClick',
+    value: function handleClick() {
+      var visibleState = _storesHeaderStoreJs2['default']._getMyNyplVisible() ? 'Closed' : 'Open';
+      _actionsActionsJs2['default'].toggleMyNyplVisible(!_storesHeaderStoreJs2['default']._getMyNyplVisible());
+      _utilsUtilsJs2['default']._trackHeader('Log In', 'MyNyplButton - ' + visibleState);
     }
 
     /**
-     * _handleClick(e)
-     * Toggles the visibility of the form. Sends an Action
-     * that will dispatch an event to the Header Store.
-     */
-  }, {
-    key: '_handleClick',
-    value: function _handleClick(e) {
-      if (this.state.target === '#') {
-        e.preventDefault();
-
-        var visibleState = this.state.myNyplVisible ? 'Closed' : 'Open';
-        _actionsActionsJs2['default'].toggleMyNyplVisible(!this.state.myNyplVisible);
-        _utilsUtilsJs2['default']._trackHeader('Log In', 'MyNyplButton - ' + visibleState);
-      }
-    }
-
-    /**
-     * _handleOnClickOut()
+     * handleOnClickOut()
      * Handles closing the Subscribe form if it is
      * currently visible.
      */
   }, {
-    key: '_handleOnClickOut',
-    value: function _handleOnClickOut() {
+    key: 'handleOnClickOut',
+    value: function handleOnClickOut() {
       if (_storesHeaderStoreJs2['default']._getMyNyplVisible()) {
         if (_storesHeaderStoreJs2['default']._getMobileMyNyplButtonValue() === '') {
           _utilsUtilsJs2['default']._trackHeader('Log In', 'MyNyplButton - Closed');
@@ -136,21 +128,11 @@ var MyNyplButton = (function (_React$Component) {
         _actionsActionsJs2['default'].toggleMyNyplVisible(false);
       }
     }
-
-    /**
-     * _onChange()
-     * Updates the state of the form based off the Header Store.
-     */
-  }, {
-    key: '_onChange',
-    value: function _onChange() {
-      this.setState({ myNyplVisible: _storesHeaderStoreJs2['default']._getMyNyplVisible() });
-    }
   }, {
     key: 'render',
     value: function render() {
       // Assign a variable to hold the reference of state boolean
-      var showDialog = this.state.myNyplVisible;
+      var showDialog = _storesHeaderStoreJs2['default']._getMyNyplVisible();
       var buttonClasses = (0, _classnames2['default'])({ active: showDialog });
       var myNyplClasses = (0, _classnames2['default'])({ 'active animatedFast fadeIn': showDialog });
       var iconClass = (0, _classnames2['default'])({
@@ -160,7 +142,7 @@ var MyNyplButton = (function (_React$Component) {
 
       return _react2['default'].createElement(
         _reactOnclickout2['default'],
-        { onClickOut: this._handleOnClickOut.bind(this) },
+        { onClickOut: this.handleOnClickOut },
         _react2['default'].createElement(
           'div',
           {
@@ -169,13 +151,12 @@ var MyNyplButton = (function (_React$Component) {
             style: [styles.base, this.props.style]
           },
           _react2['default'].createElement(
-            'a',
+            'button',
             {
               id: 'MyNyplButton',
               className: 'MyNyplButton ' + buttonClasses,
-              href: this.props.target,
-              onClick: this._handleClick.bind(this),
-              style: [styles.SimpleButton, this.props.style]
+              onClick: this.handleClick,
+              style: [styles.MyNyplButton, this.props.style]
             },
             this.props.label,
             _react2['default'].createElement('span', { className: iconClass + ' icon', style: styles.MyNyplIcon })
@@ -184,7 +165,7 @@ var MyNyplButton = (function (_React$Component) {
             'div',
             {
               className: 'MyNypl-Wrapper ' + myNyplClasses,
-              style: [styles.MyNyplWrapper]
+              style: styles.MyNyplWrapper
             },
             _react2['default'].createElement(_MyNyplMyNyplJs2['default'], null)
           )
@@ -199,14 +180,12 @@ var MyNyplButton = (function (_React$Component) {
 MyNyplButton.propTypes = {
   lang: _react2['default'].PropTypes.string,
   label: _react2['default'].PropTypes.string,
-  target: _react2['default'].PropTypes.string,
   style: _react2['default'].PropTypes.object
 };
 
 MyNyplButton.defaultProps = {
   lang: 'en',
-  label: 'Log In',
-  target: '#'
+  label: 'Log In'
 };
 
 exports['default'] = (0, _radium2['default'])(MyNyplButton);

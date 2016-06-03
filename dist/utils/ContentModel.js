@@ -105,13 +105,25 @@ function ContentModel() {
     return location;
   };
 
-  this.featureItem = function (data, lang) {
+  this.featureItem = function (data) {
+    var lang = arguments.length <= 1 || arguments[1] === undefined ? 'en' : arguments[1];
+
+    if (!data) {
+      return {
+        headline: '',
+        category: '',
+        imgSrc: '',
+        description: '',
+        link: ''
+      };
+    }
+
     var item = {
       headline: data.headline ? data.headline[lang].text : '',
       category: data.category ? data.category[lang].text : '',
-      imgSrc: data.images ? data.images[0].uri : '',
+      imgSrc: data.images && data.images[0] ? data.images[0].uri : '',
       // Assuming that the text is already trimmed we should redo this:
-      description: data.description ? data.description[lang].text.substring(0, '175') : '',
+      description: data.description && data.description[lang] ? data.description[lang].text.substring(0, '175') : '',
       link: data.link ? data.link[lang].text : ''
     };
 

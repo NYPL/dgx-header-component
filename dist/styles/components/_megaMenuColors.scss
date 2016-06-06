@@ -1,4 +1,8 @@
 /* Dynamic Background Color Assignments */
+.MegaMenu {
+	background-color: $BG_MENU_FINDUS_RIGHT; // Default bgColor assignment
+}
+
 #MegaMenu {
 	/* BROWSE */
 	&-29a4b824-e084-4771-aafc-52b3586c5e49{
@@ -48,11 +52,28 @@
 			&-FeaturesWrapper {
 				background-color: $BG_MENU_ATTEND_RIGHT;
 			}
-		}	
+		}
 	}
 
 	/* FIND US */
 	&-df621833-4dd1-4223-83e5-6ad7f98ad26a {
+		background-color: $BG_MENU_FINDUS_RIGHT;
+
+		.MegaMenu {
+			&-LeftBgWrapper {
+				background-color: $BG_MENU_FINDUS_LEFT;
+			}
+			&-SubNavWrapper {
+				background-color: $BG_MENU_FINDUS_LEFT;
+			}
+			&-FeaturesWrapper {
+				background-color: $BG_MENU_FINDUS_RIGHT;
+			}
+		}
+	}
+
+	/* CONNECT */
+	&-88d29fd3-16a0-4b93-8f28-244f781817da {
 		background-color: $BG_MENU_FINDUS_RIGHT;
 
 		.MegaMenu {

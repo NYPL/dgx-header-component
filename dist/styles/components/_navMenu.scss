@@ -176,7 +176,7 @@
 	  		position: absolute;
 	  		left: 30%;
 	  		z-index: 999;
-				color: $BG_MENU_FINDUS_RIGHT; //Default arrow color
+				color: $DEFAULT_MENU_BG_COLOR; //Default arrow color
 
 	  		@include min-screen(769px) {
 	  			top: 20px;

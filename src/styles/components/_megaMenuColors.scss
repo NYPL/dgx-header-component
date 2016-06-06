@@ -1,6 +1,6 @@
 /* Dynamic Background Color Assignments */
 .MegaMenu {
-	background-color: $BG_MENU_FINDUS_RIGHT; // Default bgColor assignment
+	background-color: $DEFAULT_MENU_BG_COLOR; // Default assignment
 }
 
 #MegaMenu {
@@ -74,8 +74,6 @@
 
 	/* CONNECT */
 	&-88d29fd3-16a0-4b93-8f28-244f781817da {
-		background-color: $BG_MENU_FINDUS_RIGHT;
-
 		.MegaMenu {
 			&-LeftBgWrapper {
 				background-color: $BG_MENU_FINDUS_LEFT;

@@ -53,7 +53,7 @@ var styles = {
     display: 'inline-block'
   },
   MyNyplButton: {
-    display: 'block',
+    display: 'inline',
     textTransform: 'uppercase',
     padding: '14px 13px 16px 20px',
     border: 'none'

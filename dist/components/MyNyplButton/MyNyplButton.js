@@ -56,7 +56,8 @@ var styles = {
   base: {
     margin: '0px 10px 0px 0px',
     position: 'relative',
-    display: 'inline-block'
+    display: 'inline-block',
+    verticalAlign: 'middle'
   },
   MyNyplButton: {
     display: 'block',

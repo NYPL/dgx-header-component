@@ -5,7 +5,7 @@
 	@include min-screen(769px) {
 		position: absolute;
 		width: 100%;
-		bottom: 6px;
+		bottom: 0px;
 	}
 
 	@include min-screen(1025px) {
@@ -176,13 +176,14 @@
 	  		position: absolute;
 	  		left: 30%;
 	  		z-index: 999;
+				color: $DEFAULT_MENU_BG_COLOR; //Default arrow color
 
 	  		@include min-screen(769px) {
-	  			top: 19px;
+	  			top: 20px;
 	  		}
 
 	  		@include min-screen(1025px) {
-	  			top: 15.75px;
+	  			top: 18px;
 	  		}
 
 				/* Arrow Assignment for Tablets and up */
@@ -218,6 +219,13 @@
 			  			color: $BG_MENU_FINDUS_RIGHT;
 			  		}
 		  		}
+
+					/* CONNECT */
+					&-88d29fd3-16a0-4b93-8f28-244f781817da {
+						&.active {
+			  			color: $BG_MENU_FINDUS_RIGHT;
+			  		}
+					}
 
 		  		/* RESEARCH */
 		  		&-4bd4f525-3f5c-4c45-b7a7-0ee6bbd301e9 {
@@ -256,12 +264,12 @@
 
 	  		@include min-screen(769px) {
 	  			display: block;
-	  			top: 45px;
+	  			top: 47px;
 	  			z-index: 999;
 	  		}
 
 	  		@include min-screen(1025px) {
-	  			top: 42px;
+	  			top: 44px;
 	  		}
 	  	}
 

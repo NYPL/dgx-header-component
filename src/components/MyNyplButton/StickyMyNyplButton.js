@@ -12,12 +12,16 @@ const styles = {
     margin: '0px 10px',
     position: 'relative',
     display: 'inline-block',
+    verticalAlign: 'middle',
   },
   MyNyplButton: {
     display: 'inline',
     textTransform: 'uppercase',
     padding: '14px 13px 16px 20px',
     border: 'none',
+    borderRadius: '0',
+    lineHeight: 'normal',
+    outline: 'none',
   },
   MyNyplIcon: {
     fontSize: '15px',

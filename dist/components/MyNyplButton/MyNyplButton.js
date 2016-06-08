@@ -57,13 +57,16 @@ var styles = {
     margin: '0px 10px 0px 0px',
     position: 'relative',
     display: 'inline-block',
-    verticalAlign: 'middle'
+    verticalAlign: 'middle',
+    lineHeight: 'normal'
   },
   MyNyplButton: {
-    display: 'block',
+    display: 'inline',
     border: 'none',
     padding: '10px 10px 10px 12px',
-    textTransform: 'uppercase'
+    textTransform: 'uppercase',
+    lineHeight: 'normal',
+    borderRadius: '0'
   },
   MyNyplIcon: {
     fontSize: '15px',

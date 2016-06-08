@@ -47,7 +47,7 @@ var DefaultItem = (function (_React$Component) {
       var img = feature.imgSrc ? _react2['default'].createElement(
         'div',
         { className: 'FeatureItem-Image ' + classes },
-        _react2['default'].createElement('img', { src: feature.imgSrc, alt: '' })
+        _react2['default'].createElement('img', { src: feature.imgSrc.uri, alt: '' })
       ) : null;
 
       return _react2['default'].createElement(

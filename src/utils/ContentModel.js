@@ -11,8 +11,8 @@ function ContentModel() {
 
     image.id = data.id;
     image.type = data.type;
-    image.created = data.attributes['date-created'];
-    image.uri = data.attributes.uri['full-uri'];
+    image.created = data.attributes ? data.attributes['date-created'] : '';
+    image.uri = data.attributes ? data.attributes.uri['full-uri'] : '';
 
     return image;
   };
@@ -105,13 +105,12 @@ function ContentModel() {
     }
 
     const item = {
-      headline: data.headline ? data.headline[lang].text : '',
       category: data.category ? data.category[lang].text : '',
-      imgSrc: data.images && data.images[0] ? data.images[0].uri : '',
+      imgSrc: data.images ? data.images : '',
       // Assuming that the text is already trimmed we should redo this:
       description: data.description && data.description[lang] ?
         data.description[lang].text.substring(0, '175') : '',
-      link: data.link ? data.link[lang].text : '',
+      link: data.link ? data.link : '',
     };
 
     return item;

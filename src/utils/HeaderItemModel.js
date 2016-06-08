@@ -1,17 +1,29 @@
-import _ from 'underscore';
+import {
+  isObject as _isObject,
+  isArray as _isArray,
+  isEmpty as _isEmpty,
+  each as _each,
+  map as _map
+} from 'underscore';
 import ContentModel from './ContentModel.js';
 
 function Model() {
 
+  this.setModelSettings = (opts = {}) => {
+    this.urlsAbsolute = opts.urlsAbsolute || false;
+  };
+
   // Build an array of header item models or a single one
-  this.build = (data) => {
+  this.build = (data, opts = {}) => {
     if (!data) {
       return;
     }
 
-    if (_.isArray(data) && data.length > 0) {
-      return _.map(data, this.headerItemModel);
-    } else if (_.isObject(data) && !_.isEmpty(data)) {
+    this.setModelSettings(opts);
+
+    if (_isArray(data) && data.length > 0) {
+      return _map(data, this.headerItemModel);
+    } else if (_isObject(data) && !_isEmpty(data)) {
       return this.headerItemModel(data);
     } else {
       return;
@@ -19,13 +31,14 @@ function Model() {
   };
 
   // The main modeling function
-  this.headerItemModel = data => {
+  this.headerItemModel = (data) => {
     let headerItem = {};
-    
+
     // Top level header-item attributes
     headerItem.id = data.id;
     headerItem.type = data.type;
-    headerItem.link = data.attributes.link;
+    headerItem.link = this.urlsAbsolute ?
+      data.attributes.link : this.validateUrlObjWithKey(data.attributes.link, 'text');
     headerItem.name = data.attributes.name;
     headerItem.sort = data.attributes.sort;
 
@@ -36,8 +49,8 @@ function Model() {
     }
 
     // The features if they are available
-    if (data['related-mega-menu-panes']) {
-      headerItem.features = this.mapArrayData(data['related-mega-menu-panes'], this.feature);
+    if (data['related-container-slots']) {
+      headerItem.features = this.mapArrayData(data['related-container-slots'], this.feature);
     }
 
     return headerItem;
@@ -45,11 +58,11 @@ function Model() {
 
   // Map a data set to a function.
   this.mapArrayData = (data, fn) => {
-    if (!data || !_.isArray(data)) {
+    if (!data || !_isArray(data)) {
       return;
     }
 
-    return _.map(data, fn);
+    return _map(data, fn);
   };
 
   // Create the featured slot in the mega menu
@@ -59,9 +72,9 @@ function Model() {
     }
 
     let feature = {},
-      featuredItem = data['current-mega-menu-item'] ?
-        data['current-mega-menu-item'] :
-        data['default-mega-menu-item'];
+      featuredItem = data['current-item'] ?
+        data['current-item'] :
+        data['default-item'];
 
     feature.id = data.id;
     feature.type = data.type;
@@ -71,7 +84,7 @@ function Model() {
     return feature;
   };
 
-  this.createFeatureItem = data => {
+  this.createFeatureItem = (data) => {
     if (!data) {
       return;
     }
@@ -81,22 +94,43 @@ function Model() {
     featuredItem.id = data.id;
     featuredItem.type = data.type;
     featuredItem.category = data.attributes.category;
-    featuredItem.link = data.attributes.link;
+    featuredItem.link = this.urlsAbsolute ?
+      data.attributes.url : this.validateUrlObjWithKey(data.attributes.url, 'url');
     featuredItem.description = data.attributes.description;
-    featuredItem.headline = data.attributes.headline;
-    featuredItem.dates = {
-      start: data.attributes['display-date-start'],
-      end: data.attributes['display-date-end'],
-    };
+    featuredItem.dates = data.attributes.date;
+    featuredItem.location = data.attributes.location;
 
-    if (data.images) {
-      featuredItem.images = _.map(data.images, ContentModel.image);
+    if (data['square-image']) {
+      featuredItem.images = ContentModel.image(data['square-image']);
     }
 
     return featuredItem;
   };
+
+  this.validateUrlObjWithKey = (obj, key) => {
+    if (_isObject(obj) && !_isEmpty(obj)) {
+      _each(obj, (v, k) => {
+        if (k === key && typeof v === 'string') {
+          obj[k] = this.convertUrlRelative(v);
+        } else {
+          this.validateUrlObjWithKey(v, key);
+        }
+      });
+    }
+
+    return obj;
+  };
+
+  this.convertUrlRelative = (url) => {
+    if (typeof url !== 'string') {
+      return '#';
+    }
+
+    const regex = new RegExp(/^http(s)?\:\/\/(www.)?nypl.org/i);
+
+    // Test regex matching pattern
+    return (regex.test(url)) ? url.replace(regex, "") : url;
+  };
 }
-
-
 
 export default new Model();

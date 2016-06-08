@@ -39,19 +39,24 @@ const styles = {
     display: 'inline-block',
     color: '#000',
     padding: '5px 15px 5px 5px',
+    verticalAlign: 'middle',
   },
   libraryCardButton: {
     display: 'inline-block',
     color: '#000',
     padding: '5px',
+    verticalAlign: 'middle',
   },
   subscribeButton: {
     display: 'inline-block',
     margin: '0px 10px 0px 0px',
+    verticalAlign: 'middle',
   },
   donateButton: {
     display: 'inline-block',
-    padding: '11px 18px 9px 18px',
+    padding: '10px 18px',
+    lineHeight: 'normal',
+    verticalAlign: 'middle',
   },
   mobileMyNypl: {
     position: 'absolute',

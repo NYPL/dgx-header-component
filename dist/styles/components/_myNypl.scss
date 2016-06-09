@@ -11,6 +11,7 @@
 .MyNyplButton,
 .StickyMyNyplButton {
   @include Kievit-Bold;
+  @include border-radius(0px);
   font-size: 13px;
   color: #000;
   letter-spacing: .04em;
@@ -19,8 +20,7 @@
   &.active {
     background-color: #1980A9;
     color: #FFF;
-    -webkit-transition: background-color .2s linear 0s, color .2s linear 0s; /* Safari */
-    transition: background-color .2s linear 0s, color .2s linear 0s;
+    @include transition(background-color .2s linear 0s, color .2s linear 0s);
 
     &:visited {
       color: #FFF;
@@ -32,7 +32,7 @@
   }
 
   .icon {
-    opacity: .8;
+    @include opacity(0.8);
   }
 }
 

@@ -455,7 +455,7 @@
 		display: none;
 
 		.lineSeparator {
-			opacity: 0.65;
+			@include opacity(0.65);
 		}
 
 		.DonateButton {

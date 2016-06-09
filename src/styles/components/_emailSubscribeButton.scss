@@ -17,8 +17,7 @@
     &.active {
       background-color: #1980A9;
       color: #FFF;
-      -webkit-transition: background-color .2s linear 0s, color .2s linear 0s; /* Safari */
-      transition: background-color .2s linear 0s, color .2s linear 0s;
+      @include transition(background-color .2s linear 0s, color .2s linear 0s);
 
       &:visited {
         color: #FFF;
@@ -30,7 +29,7 @@
     }
 
     .icon {
-      opacity: .8;
+      @include opacity(0.8);
     }
   }
 }

@@ -5,36 +5,55 @@ class DefaultItem extends React.Component {
   constructor(props) {
     super(props);
     this._trackHeader = utils._trackHeader.bind(this);
+    this.extraFeatureDetails = this.extraFeatureDetails.bind(this);
+    this.personField = this.personField.bind(this);
+    this.imageElem = this.imageElem.bind(this);
+  }
+
+  extraFeatureDetails(data, className) {
+    return data ? (<div className={className}>{data}</div>) : null;
+  }
+
+  personField(person) {
+    let personStr = `${person.firstName} ${person.lastName}`;
+    personStr += (personStr && person.title) ? `, ${person.title}` : '';
+
+    return personStr;
+  }
+
+  imageElem(image, classes) {
+    return image ?
+      (<div className={`FeatureItem-Image ${classes}`}>
+        <img src={image.uri} alt="" />
+      </div>) : null;
   }
 
   render() {
-    const defaultFeature = {
-      category: 'NYPL',
-      headline: 'Find more about NYPL',
-      desc: 'NYPL Rocks!',
-      link: 'http://nypl.org',
-      img: null,
-    };
-    const feature = this.props.feature || defaultFeature;
+    if (!this.props.feature) {
+      return null;
+    }
+
+    const feature = this.props.feature;
     const classes = this.props.classes || 'without-image';
-    const img = feature.imgSrc ?
-      (<div className={`FeatureItem-Image ${classes}`}>
-        <img src={feature.imgSrc.uri} alt="" />
-      </div>) : null;
+    const image = this.imageElem(feature.image, classes);
+    const person = this.personField(feature.person);
 
     return (
       <a
         href={feature.link}
         className={this.props.className}
         onClick={utils._trackHeader
-          .bind(this, 'FeatureItem', `${this.props.navLabel} - ${feature.headline}`)}
+          .bind(this, 'FeatureItem', `${this.props.navLabel} - ${feature.title}`)}
       >
         <div className={`${this.props.className}-Wrapper`}>
-          {img}
+          {image}
           <div className={`FeatureItem-Content ${classes}`}>
             <div className="FeatureItem-Content-Tag">{feature.category}</div>
-            <h3 className="FeatureItem-Content-Title">{feature.headline}</h3>
-            <div className="FeatureItem-Content-Desc">{feature.description}</div>
+            <h3 className="FeatureItem-Content-Title">{feature.title}</h3>
+            {this.extraFeatureDetails(feature.description, 'FeatureItem-Content-Desc')}
+            {this.extraFeatureDetails(feature.date, 'FeatureItem-Content-date')}
+            {this.extraFeatureDetails(feature.location, 'FeatureItem-Content-location')}
+            {this.extraFeatureDetails(person, 'FeatureItem-Content-person')}
           </div>
         </div>
       </a>

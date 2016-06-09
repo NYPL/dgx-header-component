@@ -30,37 +30,60 @@ var DefaultItem = (function (_React$Component) {
 
     _get(Object.getPrototypeOf(DefaultItem.prototype), 'constructor', this).call(this, props);
     this._trackHeader = _utilsUtilsJs2['default']._trackHeader.bind(this);
+    this.extraFeatureDetails = this.extraFeatureDetails.bind(this);
+    this.personField = this.personField.bind(this);
+    this.imageElem = this.imageElem.bind(this);
   }
 
   _createClass(DefaultItem, [{
-    key: 'render',
-    value: function render() {
-      var defaultFeature = {
-        category: 'NYPL',
-        headline: 'Find more about NYPL',
-        desc: 'NYPL Rocks!',
-        link: 'http://nypl.org',
-        img: null
-      };
-      var feature = this.props.feature || defaultFeature;
-      var classes = this.props.classes || 'without-image';
-      var img = feature.imgSrc ? _react2['default'].createElement(
+    key: 'extraFeatureDetails',
+    value: function extraFeatureDetails(data, className) {
+      return data ? _react2['default'].createElement(
+        'div',
+        { className: className },
+        data
+      ) : null;
+    }
+  }, {
+    key: 'personField',
+    value: function personField(person) {
+      var personStr = person.firstName + ' ' + person.lastName;
+      personStr += personStr && person.title ? ', ' + person.title : '';
+
+      return personStr;
+    }
+  }, {
+    key: 'imageElem',
+    value: function imageElem(image, classes) {
+      return image ? _react2['default'].createElement(
         'div',
         { className: 'FeatureItem-Image ' + classes },
-        _react2['default'].createElement('img', { src: feature.imgSrc.uri, alt: '' })
+        _react2['default'].createElement('img', { src: image.uri, alt: '' })
       ) : null;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      if (!this.props.feature) {
+        return null;
+      }
+
+      var feature = this.props.feature;
+      var classes = this.props.classes || 'without-image';
+      var image = this.imageElem(feature.image, classes);
+      var person = this.personField(feature.person);
 
       return _react2['default'].createElement(
         'a',
         {
           href: feature.link,
           className: this.props.className,
-          onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'FeatureItem', this.props.navLabel + ' - ' + feature.headline)
+          onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'FeatureItem', this.props.navLabel + ' - ' + feature.title)
         },
         _react2['default'].createElement(
           'div',
           { className: this.props.className + '-Wrapper' },
-          img,
+          image,
           _react2['default'].createElement(
             'div',
             { className: 'FeatureItem-Content ' + classes },
@@ -72,13 +95,12 @@ var DefaultItem = (function (_React$Component) {
             _react2['default'].createElement(
               'h3',
               { className: 'FeatureItem-Content-Title' },
-              feature.headline
+              feature.title
             ),
-            _react2['default'].createElement(
-              'div',
-              { className: 'FeatureItem-Content-Desc' },
-              feature.description
-            )
+            this.extraFeatureDetails(feature.description, 'FeatureItem-Content-Desc'),
+            this.extraFeatureDetails(feature.date, 'FeatureItem-Content-date'),
+            this.extraFeatureDetails(feature.location, 'FeatureItem-Content-location'),
+            this.extraFeatureDetails(person, 'FeatureItem-Content-person')
           )
         )
       );

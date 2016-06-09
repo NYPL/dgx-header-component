@@ -35,9 +35,9 @@ function Model() {
       return (0, _underscore.map)(data, _this.headerItemModel);
     } else if ((0, _underscore.isObject)(data) && !(0, _underscore.isEmpty)(data)) {
       return _this.headerItemModel(data);
-    } else {
-      return;
     }
+
+    return;
   };
 
   // The main modeling function
@@ -80,8 +80,8 @@ function Model() {
       return;
     }
 
-    var feature = {},
-        featuredItem = data['current-item'] ? data['current-item'] : data['default-item'];
+    var feature = {};
+    var featuredItem = data['current-item'] ? data['current-item'] : data['default-item'];
 
     feature.id = data.id;
     feature.type = data.type;
@@ -100,11 +100,17 @@ function Model() {
 
     featuredItem.id = data.id;
     featuredItem.type = data.type;
-    featuredItem.category = data.attributes.category;
+    featuredItem.title = data.attributes.title;
     featuredItem.link = _this.urlsAbsolute ? data.attributes.url : _this.validateUrlObjWithKey(data.attributes.url, 'url');
+    featuredItem.category = data.attributes.category;
     featuredItem.description = data.attributes.description;
-    featuredItem.dates = data.attributes.date;
+    featuredItem.date = data.attributes.date;
     featuredItem.location = data.attributes.location;
+    featuredItem.person = {
+      firstName: data.attributes['person-first-name'],
+      lastName: data.attributes['person-last-name'],
+      title: data.attributes['person-title']
+    };
 
     if (data['square-image']) {
       featuredItem.images = _ContentModelJs2['default'].image(data['square-image']);
@@ -135,7 +141,7 @@ function Model() {
     var regex = new RegExp(/^http(s)?\:\/\/(www.)?nypl.org/i);
 
     // Test regex matching pattern
-    return regex.test(url) ? url.replace(regex, "") : url;
+    return regex.test(url) ? url.replace(regex, '') : url;
   };
 }
 

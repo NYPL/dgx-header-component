@@ -96,21 +96,27 @@ function ContentModel() {
   this.featureItem = (data, lang = 'en') => {
     if (!data) {
       return {
-        headline: '',
-        category: '',
-        imgSrc: '',
-        description: '',
+        title: '',
         link: '',
+        category: '',
+        description: '',
+        date: '',
+        location: '',
+        person: {},
+        image: '',
       };
     }
 
     const item = {
+      title: data.title ? data.title[lang].text : '',
+      link: data.link || '',
       category: data.category ? data.category[lang].text : '',
-      imgSrc: data.images ? data.images : '',
-      // Assuming that the text is already trimmed we should redo this:
       description: data.description && data.description[lang] ?
-        data.description[lang].text.substring(0, '175') : '',
-      link: data.link ? data.link : '',
+        data.description[lang].text : '',
+      date: data.date ? data.date[lang].text : '',
+      location: data.location || '',
+      person: data.person || '',
+      image: data.images || {},
     };
 
     return item;

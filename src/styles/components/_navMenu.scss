@@ -328,11 +328,11 @@
 	  		text-align: left;
 
 	  		@include min-screen(769px) {
-	  			width: 138px;
+	  			width: 200px;
 	  		}
 
 	  		@include min-screen(1025px) {
-	  			width: 140px;
+	  			width: 180px;
 	  		}
 
 	  		a {

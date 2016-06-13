@@ -195,7 +195,11 @@
 		  		/* BROWSE */
 		  		&-29a4b824-e084-4771-aafc-52b3586c5e49 {
 			  		&.active {
-			  			color: $BG_MENU_BROWSE_RIGHT;
+			  			color: $BG_MENU_BROWSE_LEFT;
+
+							@include min-screen(972px) {
+								color:$BG_MENU_BROWSE_RIGHT;
+							}
 			  		}
 		  		}
 
@@ -230,7 +234,11 @@
 		  		/* RESEARCH */
 		  		&-4bd4f525-3f5c-4c45-b7a7-0ee6bbd301e9 {
 			  		&.active {
-			  			color: $BG_MENU_RESEARCH_RIGHT;
+			  			color: $BG_MENU_RESEARCH_LEFT;
+
+							@include min-screen(830px) {
+								color: $BG_MENU_RESEARCH_RIGHT;
+							}
 			  		}
 		  		}
 
@@ -247,27 +255,6 @@
 			  			color: $BG_MENU_HELP_RIGHT;
 			  		}
 			  	}
-				}
-				// We need to change the color of the pointer arrow
-				// when the viewport is very small. We also need to
-				// Introduce a couple very specific breakpoint here
-				// due the fact that the arrow
-				// placement is not really in fixed place...
-				@include max-screen(972px) {
-					/* BROWSE */
-		  		&-29a4b824-e084-4771-aafc-52b3586c5e49 {
-			  		&.active {
-			  			color: $BG_MENU_BROWSE_LEFT;
-			  		}
-		  		}
-				}
-				@include max-screen(830px) {
-					/* RESEARCH */
-		  		&-4bd4f525-3f5c-4c45-b7a7-0ee6bbd301e9 {
-			  		&.active {
-			  			color: $BG_MENU_RESEARCH_LEFT;
-			  		}
-		  		}
 				}
 	  	}
   	}

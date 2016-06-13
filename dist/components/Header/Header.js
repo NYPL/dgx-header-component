@@ -132,6 +132,13 @@ var styles = {
     lineHeight: 'normal',
     verticalAlign: 'baseline'
   },
+  shopLink: {
+    display: 'inline-block',
+    color: '#000',
+    padding: '10px 18px',
+    margin: '0 0 0 10px',
+    verticalAlign: 'baseline'
+  },
   mobileMyNypl: {
     position: 'absolute',
     zIndex: 1000,
@@ -358,7 +365,16 @@ var Header = (function (_React$Component) {
                 lang: this.props.lang,
                 style: styles.donateButton,
                 gaLabel: 'Header Button'
-              })
+              }),
+              _dgxFeatureFlags2['default'].store._isFeatureActive('shop-link') ? _react2['default'].createElement(_ButtonsSimpleButtonJs2['default'], {
+                label: 'Shop',
+                target: '//shop.nypl.org',
+                className: 'shopTopLink',
+                id: 'shopTopLink',
+                gaAction: 'Shop',
+                gaLabel: 'Header Buttons',
+                style: styles.shopLink
+              }) : null
             )
           ),
           _react2['default'].createElement(_NavMenuNavMenuJs2['default'], {

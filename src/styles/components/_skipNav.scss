@@ -1,7 +1,7 @@
 #skip {
   background-color: white;
   text-transform: uppercase;
-  font-family: 'Kievit-Bold';
+  @include Kievit-Bold;
   font-size: 13px;
   font-weight: 400;
   line-height: 22px;

@@ -24,7 +24,6 @@ const styles = {
     padding: '10px 10px 10px 12px',
     textTransform: 'uppercase',
     lineHeight: 'normal',
-    borderRadius: '0',
   },
   MyNyplIcon: {
     fontSize: '15px',

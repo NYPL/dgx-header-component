@@ -48,8 +48,7 @@
 
     &.active {
       color: #78CCED;
-      -webkit-transition: color .2s linear .2s, color .2s linear .2s;
-      transition: color .2s linear .2s, color .2s linear .2s;
+      @include transition(color .2s linear .2s, color .2s linear .2s);
     }
 
     &.visuallyHidden {
@@ -70,13 +69,11 @@
   &.active {
     background-color: $BG_MENU_SEARCH;
     color: #78CCED;
-    -webkit-transition: background-color .2s linear .2s, color .2s linear .2s; /* Safari */
-    transition: background-color .2s linear .2s, color .2s linear .2s;
+    @include transition(background-color .2s linear .2s, color .2s linear .2s);
 
     @include min-screen(769px) {
       display: block;
     }
-
   }
 }
 
@@ -277,7 +274,7 @@
   /* Customized radio button */
   input[type=radio] {
     /* Hide original inputs, but still accessible for input related functions */
-    opacity: 0;
+    @include opacity(0);
   }
 
   label:before {

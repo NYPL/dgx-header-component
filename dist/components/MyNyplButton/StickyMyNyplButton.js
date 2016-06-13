@@ -58,7 +58,6 @@ var styles = {
     textTransform: 'uppercase',
     padding: '14px 13px 16px 20px',
     border: 'none',
-    borderRadius: '0',
     lineHeight: 'normal',
     outline: 'none'
   },

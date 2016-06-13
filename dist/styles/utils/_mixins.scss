@@ -22,6 +22,7 @@
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
   border-radius: $radius;
+  background-clip: padding-box;
 }
 
 /* OPACITY MIXIN
@@ -93,7 +94,7 @@
 }
 
 /* VALUE CALCULATION MIXIN
- * ---------------------
+ * -----------------------
  * Usage: Makes the properties of an element
  * can be defined by both percentage
  * and pixels.
@@ -103,4 +104,17 @@
   #{$property}: -webkit-calc(#{$expression});
   #{$property}: -moz-calc(#{$expression});
   #{$property}: calc(#{$expression});
+}
+
+/* TRANSITION MIXIN
+ * ----------------
+ * Usage: Applies set argument transition across
+ * various browser prefixes.
+*/
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
 }

@@ -195,7 +195,7 @@
     }
 
     .DonateButton {
-      border-radius: 4px;
+      @include border-radius(4px);
     }
   }
 

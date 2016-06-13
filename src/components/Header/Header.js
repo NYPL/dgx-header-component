@@ -39,24 +39,31 @@ const styles = {
     display: 'inline-block',
     color: '#000',
     padding: '5px 15px 5px 5px',
-    verticalAlign: 'middle',
+    verticalAlign: 'baseline',
   },
   libraryCardButton: {
     display: 'inline-block',
     color: '#000',
     padding: '5px',
-    verticalAlign: 'middle',
+    verticalAlign: 'baseline',
   },
   subscribeButton: {
     display: 'inline-block',
     margin: '0px 10px 0px 0px',
-    verticalAlign: 'middle',
+    verticalAlign: 'baseline',
   },
   donateButton: {
     display: 'inline-block',
     padding: '10px 18px',
     lineHeight: 'normal',
-    verticalAlign: 'middle',
+    verticalAlign: 'baseline',
+  },
+  shopLink: {
+    display: 'inline-block',
+    color: '#000',
+    padding: '10px 18px',
+    margin: '0 0 0 10px',
+    verticalAlign: 'baseline',
   },
   mobileMyNypl: {
     position: 'absolute',
@@ -275,6 +282,18 @@ class Header extends React.Component {
                 style={styles.donateButton}
                 gaLabel="Header Button"
               />
+              {
+                FeatureFlags.store._isFeatureActive('shop-link') ?
+                  <SimpleButton
+                    label="Shop"
+                    target="//shop.nypl.org"
+                    className="shopTopLink"
+                    id="shopTopLink"
+                    gaAction="Shop"
+                    gaLabel="Header Buttons"
+                    style={styles.shopLink}
+                  /> : null
+              }
             </div>
           </div>
           <NavMenu

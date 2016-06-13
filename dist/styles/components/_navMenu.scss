@@ -195,7 +195,11 @@
 		  		/* BROWSE */
 		  		&-29a4b824-e084-4771-aafc-52b3586c5e49 {
 			  		&.active {
-			  			color: $BG_MENU_BROWSE_RIGHT;
+			  			color: $BG_MENU_BROWSE_LEFT;
+
+							@include min-screen(972px) {
+								color:$BG_MENU_BROWSE_RIGHT;
+							}
 			  		}
 		  		}
 
@@ -230,7 +234,11 @@
 		  		/* RESEARCH */
 		  		&-4bd4f525-3f5c-4c45-b7a7-0ee6bbd301e9 {
 			  		&.active {
-			  			color: $BG_MENU_RESEARCH_RIGHT;
+			  			color: $BG_MENU_RESEARCH_LEFT;
+
+							@include min-screen(830px) {
+								color: $BG_MENU_RESEARCH_RIGHT;
+							}
 			  		}
 		  		}
 
@@ -328,11 +336,11 @@
 	  		text-align: left;
 
 	  		@include min-screen(769px) {
-	  			width: 138px;
+	  			width: 200px;
 	  		}
 
 	  		@include min-screen(1025px) {
-	  			width: 140px;
+	  			width: 180px;
 	  		}
 
 	  		a {

@@ -11,8 +11,22 @@ function ContentModel() {
 
     image.id = data.id;
     image.type = data.type;
-    image.created = data.attributes ? data.attributes['date-created'] : '';
-    image.uri = data.attributes ? data.attributes.uri['full-uri'] : '';
+    try {
+      const {
+        attributes: {
+          ['date-created']: dateCreated = '',
+          uri: {
+            ['full-uri']: uri = '',
+          },
+        },
+      } = data;
+
+      image.created = dateCreated;
+      image.uri = uri;
+    } catch (e) {
+      image.created = '';
+      image.uri = '';
+    }
 
     return image;
   };

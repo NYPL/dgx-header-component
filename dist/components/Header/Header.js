@@ -113,24 +113,24 @@ var styles = {
     display: 'inline-block',
     color: '#000',
     padding: '5px 15px 5px 5px',
-    verticalAlign: 'middle'
+    verticalAlign: 'baseline'
   },
   libraryCardButton: {
     display: 'inline-block',
     color: '#000',
     padding: '5px',
-    verticalAlign: 'middle'
+    verticalAlign: 'baseline'
   },
   subscribeButton: {
     display: 'inline-block',
     margin: '0px 10px 0px 0px',
-    verticalAlign: 'middle'
+    verticalAlign: 'baseline'
   },
   donateButton: {
     display: 'inline-block',
     padding: '10px 18px',
     lineHeight: 'normal',
-    verticalAlign: 'middle'
+    verticalAlign: 'baseline'
   },
   mobileMyNypl: {
     position: 'absolute',

@@ -59,8 +59,13 @@ var styles = {
     position: 'relative'
   },
   SubscribeButton: {
-    display: 'block',
-    padding: '10px 10px 10px 12px'
+    display: 'inline-block',
+    padding: '10px 10px 10px 12px',
+    verticalAlign: 'baseline'
+  },
+  SubscribeLabel: {
+    display: 'inline',
+    verticalAlign: 'baseline'
   },
   SubscribeIcon: {
     fontSize: '15px',
@@ -212,14 +217,18 @@ var SubscribeButton = (function (_React$Component) {
               style: styles.SubscribeButton,
               role: this.state.target === '#' ? 'button' : null
             },
-            this.props.label,
+            _react2['default'].createElement(
+              'span',
+              { style: styles.SubscribeLabel },
+              this.props.label
+            ),
             _react2['default'].createElement('span', { className: iconClass + ' icon', style: styles.SubscribeIcon })
           ),
           _react2['default'].createElement(
             'div',
             {
               className: 'EmailSubscription-Wrapper ' + emailFormClasses,
-              style: [styles.EmailSubscribeForm]
+              style: styles.EmailSubscribeForm
             },
             _react2['default'].createElement(_EmailSubscriptionEmailSubscriptionJs2['default'], {
               list_id: '1061',

@@ -33,6 +33,7 @@ var DefaultItem = (function (_React$Component) {
     this.extraFeatureDetails = this.extraFeatureDetails.bind(this);
     this.personField = this.personField.bind(this);
     this.imageElem = this.imageElem.bind(this);
+    this.featureDetails = this.featureDetails.bind(this);
   }
 
   _createClass(DefaultItem, [{
@@ -62,6 +63,23 @@ var DefaultItem = (function (_React$Component) {
       ) : null;
     }
   }, {
+    key: 'featureDetails',
+    value: function featureDetails(feature) {
+      var person = this.personField(feature.person);
+
+      if (feature.description) {
+        return this.extraFeatureDetails(feature.description, 'FeatureItem-Content-Desc');
+      }
+
+      return _react2['default'].createElement(
+        'div',
+        null,
+        this.extraFeatureDetails(feature.date, 'FeatureItem-Content-date'),
+        this.extraFeatureDetails(feature.location, 'FeatureItem-Content-location'),
+        this.extraFeatureDetails(person, 'FeatureItem-Content-person')
+      );
+    }
+  }, {
     key: 'render',
     value: function render() {
       if (!this.props.feature) {
@@ -71,7 +89,7 @@ var DefaultItem = (function (_React$Component) {
       var feature = this.props.feature;
       var classes = this.props.classes || 'without-image';
       var image = this.imageElem(feature.image, classes);
-      var person = this.personField(feature.person);
+      var featureDetails = this.featureDetails(feature);
 
       return _react2['default'].createElement(
         'a',
@@ -97,10 +115,7 @@ var DefaultItem = (function (_React$Component) {
               { className: 'FeatureItem-Content-Title' },
               feature.title
             ),
-            this.extraFeatureDetails(feature.description, 'FeatureItem-Content-Desc'),
-            this.extraFeatureDetails(feature.date, 'FeatureItem-Content-date'),
-            this.extraFeatureDetails(feature.location, 'FeatureItem-Content-location'),
-            this.extraFeatureDetails(person, 'FeatureItem-Content-person')
+            featureDetails
           )
         )
       );

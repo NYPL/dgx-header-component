@@ -8,6 +8,7 @@ class DefaultItem extends React.Component {
     this.extraFeatureDetails = this.extraFeatureDetails.bind(this);
     this.personField = this.personField.bind(this);
     this.imageElem = this.imageElem.bind(this);
+    this.featureDetails = this.featureDetails.bind(this);
   }
 
   extraFeatureDetails(data, className) {
@@ -28,6 +29,22 @@ class DefaultItem extends React.Component {
       </div>) : null;
   }
 
+  featureDetails(feature) {
+    const person = this.personField(feature.person);
+
+    if (feature.description) {
+      return this.extraFeatureDetails(feature.description, 'FeatureItem-Content-Desc');
+    }
+
+    return (
+      <div>
+        {this.extraFeatureDetails(feature.date, 'FeatureItem-Content-date')}
+        {this.extraFeatureDetails(feature.location, 'FeatureItem-Content-location')}
+        {this.extraFeatureDetails(person, 'FeatureItem-Content-person')}
+      </div>
+    );
+  }
+
   render() {
     if (!this.props.feature) {
       return null;
@@ -36,7 +53,7 @@ class DefaultItem extends React.Component {
     const feature = this.props.feature;
     const classes = this.props.classes || 'without-image';
     const image = this.imageElem(feature.image, classes);
-    const person = this.personField(feature.person);
+    const featureDetails = this.featureDetails(feature);
 
     return (
       <a
@@ -50,10 +67,7 @@ class DefaultItem extends React.Component {
           <div className={`FeatureItem-Content ${classes}`}>
             <div className="FeatureItem-Content-Tag">{feature.category}</div>
             <h3 className="FeatureItem-Content-Title">{feature.title}</h3>
-            {this.extraFeatureDetails(feature.description, 'FeatureItem-Content-Desc')}
-            {this.extraFeatureDetails(feature.date, 'FeatureItem-Content-date')}
-            {this.extraFeatureDetails(feature.location, 'FeatureItem-Content-location')}
-            {this.extraFeatureDetails(person, 'FeatureItem-Content-person')}
+            {featureDetails}
           </div>
         </div>
       </a>

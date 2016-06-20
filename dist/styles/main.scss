@@ -82,15 +82,14 @@
 
       &-Logo {
         display: inline-block;
-        overflow: hidden;
         left: 0;
-        bottom: 7px;
+        bottom: 8px;
         z-index: 3;
-        max-width: 55px;
+        max-width: 50px;
 
         @include min-screen(1025px) {
           bottom: inherit;
-          top: -9px;
+          top: -8px;
           left: 20px;
         }
         .nyplLionLogo {
@@ -108,7 +107,7 @@
         @include min-screen(769px) {
           position: absolute;
           width: 100%;
-          bottom: 6px;
+          bottom: 5px;
         }
       }
     }
@@ -125,12 +124,11 @@
       display: block;
       max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
       margin: 0px 20px;
-      min-height: 138px;
+      min-height: 160px;
     }
 
     @include min-screen(1025px) {
       margin: 0px auto;
-      min-height: auto;
     }
   }
 
@@ -140,7 +138,7 @@
    * position adjustments left.
   */
   &-Logo {
-
+    overflow: hidden;
     @include min-screen(769px) {
       display: block;
       position: relative;
@@ -197,7 +195,7 @@
     }
 
     .DonateButton {
-      border-radius: 4px;
+      @include border-radius(4px);
     }
   }
 

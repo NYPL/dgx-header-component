@@ -5,7 +5,7 @@
 	@include min-screen(769px) {
 		position: absolute;
 		width: 100%;
-		bottom: 6px;
+		bottom: 0px;
 	}
 
 	@include min-screen(1025px) {
@@ -176,13 +176,14 @@
 	  		position: absolute;
 	  		left: 30%;
 	  		z-index: 999;
+				color: $DEFAULT_MENU_BG_COLOR; //Default arrow color
 
 	  		@include min-screen(769px) {
-	  			top: 19px;
+	  			top: 20px;
 	  		}
 
 	  		@include min-screen(1025px) {
-	  			top: 15.75px;
+	  			top: 18px;
 	  		}
 
 				/* Arrow Assignment for Tablets and up */
@@ -194,7 +195,11 @@
 		  		/* BROWSE */
 		  		&-29a4b824-e084-4771-aafc-52b3586c5e49 {
 			  		&.active {
-			  			color: $BG_MENU_BROWSE_RIGHT;
+			  			color: $BG_MENU_BROWSE_LEFT;
+
+							@include min-screen(972px) {
+								color:$BG_MENU_BROWSE_RIGHT;
+							}
 			  		}
 		  		}
 
@@ -219,10 +224,21 @@
 			  		}
 		  		}
 
+					/* CONNECT */
+					&-88d29fd3-16a0-4b93-8f28-244f781817da {
+						&.active {
+			  			color: $BG_MENU_FINDUS_RIGHT;
+			  		}
+					}
+
 		  		/* RESEARCH */
 		  		&-4bd4f525-3f5c-4c45-b7a7-0ee6bbd301e9 {
 			  		&.active {
-			  			color: $BG_MENU_RESEARCH_RIGHT;
+			  			color: $BG_MENU_RESEARCH_LEFT;
+
+							@include min-screen(830px) {
+								color: $BG_MENU_RESEARCH_RIGHT;
+							}
 			  		}
 		  		}
 
@@ -256,12 +272,12 @@
 
 	  		@include min-screen(769px) {
 	  			display: block;
-	  			top: 45px;
+	  			top: 47px;
 	  			z-index: 999;
 	  		}
 
 	  		@include min-screen(1025px) {
-	  			top: 42px;
+	  			top: 44px;
 	  		}
 	  	}
 
@@ -320,11 +336,11 @@
 	  		text-align: left;
 
 	  		@include min-screen(769px) {
-	  			width: 138px;
+	  			width: 200px;
 	  		}
 
 	  		@include min-screen(1025px) {
-	  			width: 140px;
+	  			width: 180px;
 	  		}
 
 	  		a {
@@ -447,7 +463,7 @@
 		display: none;
 
 		.lineSeparator {
-			opacity: 0.65;
+			@include opacity(0.65);
 		}
 
 		.DonateButton {

@@ -8,8 +8,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 var _underscore = require('underscore');
 
-var _underscore2 = _interopRequireDefault(_underscore);
-
 var _ContentModelJs = require('./ContentModel.js');
 
 var _ContentModelJs2 = _interopRequireDefault(_ContentModelJs);
@@ -17,19 +15,29 @@ var _ContentModelJs2 = _interopRequireDefault(_ContentModelJs);
 function Model() {
   var _this = this;
 
+  this.setModelSettings = function () {
+    var opts = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
+    _this.urlsAbsolute = opts.urlsAbsolute || false;
+  };
+
   // Build an array of header item models or a single one
   this.build = function (data) {
+    var opts = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+
     if (!data) {
       return;
     }
 
-    if (_underscore2['default'].isArray(data) && data.length > 0) {
-      return _underscore2['default'].map(data, _this.headerItemModel);
-    } else if (_underscore2['default'].isObject(data) && !_underscore2['default'].isEmpty(data)) {
+    _this.setModelSettings(opts);
+
+    if ((0, _underscore.isArray)(data) && data.length > 0) {
+      return (0, _underscore.map)(data, _this.headerItemModel);
+    } else if ((0, _underscore.isObject)(data) && !(0, _underscore.isEmpty)(data)) {
       return _this.headerItemModel(data);
-    } else {
-      return;
     }
+
+    return;
   };
 
   // The main modeling function
@@ -39,7 +47,7 @@ function Model() {
     // Top level header-item attributes
     headerItem.id = data.id;
     headerItem.type = data.type;
-    headerItem.link = data.attributes.link;
+    headerItem.link = _this.urlsAbsolute ? data.attributes.link : _this.validateUrlObjWithKey(data.attributes.link, 'text');
     headerItem.name = data.attributes.name;
     headerItem.sort = data.attributes.sort;
 
@@ -50,8 +58,8 @@ function Model() {
     }
 
     // The features if they are available
-    if (data['related-mega-menu-panes']) {
-      headerItem.features = _this.mapArrayData(data['related-mega-menu-panes'], _this.feature);
+    if (data['related-container-slots']) {
+      headerItem.features = _this.mapArrayData(data['related-container-slots'], _this.feature);
     }
 
     return headerItem;
@@ -59,11 +67,11 @@ function Model() {
 
   // Map a data set to a function.
   this.mapArrayData = function (data, fn) {
-    if (!data || !_underscore2['default'].isArray(data)) {
+    if (!data || !(0, _underscore.isArray)(data)) {
       return;
     }
 
-    return _underscore2['default'].map(data, fn);
+    return (0, _underscore.map)(data, fn);
   };
 
   // Create the featured slot in the mega menu
@@ -72,8 +80,8 @@ function Model() {
       return;
     }
 
-    var feature = {},
-        featuredItem = data['current-mega-menu-item'] ? data['current-mega-menu-item'] : data['default-mega-menu-item'];
+    var feature = {};
+    var featuredItem = data['current-item'] ? data['current-item'] : data['default-item'];
 
     feature.id = data.id;
     feature.type = data.type;
@@ -92,20 +100,48 @@ function Model() {
 
     featuredItem.id = data.id;
     featuredItem.type = data.type;
+    featuredItem.title = data.attributes.title;
+    featuredItem.link = _this.urlsAbsolute ? data.attributes.url : _this.validateUrlObjWithKey(data.attributes.url, 'url');
     featuredItem.category = data.attributes.category;
-    featuredItem.link = data.attributes.link;
     featuredItem.description = data.attributes.description;
-    featuredItem.headline = data.attributes.headline;
-    featuredItem.dates = {
-      start: data.attributes['display-date-start'],
-      end: data.attributes['display-date-end']
+    featuredItem.date = data.attributes.date;
+    featuredItem.location = data.attributes.location;
+    featuredItem.person = {
+      firstName: data.attributes['person-first-name'],
+      lastName: data.attributes['person-last-name'],
+      title: data.attributes['person-title']
     };
 
-    if (data.images) {
-      featuredItem.images = _underscore2['default'].map(data.images, _ContentModelJs2['default'].image);
+    if (data['square-image']) {
+      featuredItem.images = _ContentModelJs2['default'].image(data['square-image']);
     }
 
     return featuredItem;
+  };
+
+  this.validateUrlObjWithKey = function (obj, key) {
+    if ((0, _underscore.isObject)(obj) && !(0, _underscore.isEmpty)(obj)) {
+      (0, _underscore.each)(obj, function (v, k) {
+        if (k === key && typeof v === 'string') {
+          obj[k] = _this.convertUrlRelative(v);
+        } else {
+          _this.validateUrlObjWithKey(v, key);
+        }
+      });
+    }
+
+    return obj;
+  };
+
+  this.convertUrlRelative = function (url) {
+    if (typeof url !== 'string') {
+      return '#';
+    }
+
+    var regex = new RegExp(/^http(s)?\:\/\/(www.)?nypl.org/i);
+
+    // Test regex matching pattern
+    return regex.test(url) ? url.replace(regex, '') : url;
   };
 }
 

@@ -11,8 +11,22 @@ function ContentModel() {
 
     image.id = data.id;
     image.type = data.type;
-    image.created = data.attributes['date-created'];
-    image.uri = data.attributes.uri['full-uri'];
+    try {
+      const {
+        attributes: {
+          ['date-created']: dateCreated = '',
+          uri: {
+            ['full-uri']: uri = '',
+          },
+        },
+      } = data;
+
+      image.created = dateCreated;
+      image.uri = uri;
+    } catch (e) {
+      image.created = '';
+      image.uri = '';
+    }
 
     return image;
   };
@@ -96,22 +110,27 @@ function ContentModel() {
   this.featureItem = (data, lang = 'en') => {
     if (!data) {
       return {
-        headline: '',
-        category: '',
-        imgSrc: '',
-        description: '',
+        title: '',
         link: '',
+        category: '',
+        description: '',
+        date: '',
+        location: '',
+        person: {},
+        image: '',
       };
     }
 
     const item = {
-      headline: data.headline ? data.headline[lang].text : '',
+      title: data.title ? data.title[lang].text : '',
+      link: data.link || '',
       category: data.category ? data.category[lang].text : '',
-      imgSrc: data.images && data.images[0] ? data.images[0].uri : '',
-      // Assuming that the text is already trimmed we should redo this:
       description: data.description && data.description[lang] ?
-        data.description[lang].text.substring(0, '175') : '',
-      link: data.link ? data.link[lang].text : '',
+        data.description[lang].text : '',
+      date: data.date ? data.date[lang].text : '',
+      location: data.location || '',
+      person: data.person || '',
+      image: data.images || {},
     };
 
     return item;

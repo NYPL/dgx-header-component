@@ -15,8 +15,13 @@ const styles = {
     position: 'relative',
   },
   SubscribeButton: {
-    display: 'block',
+    display: 'inline-block',
     padding: '10px 10px 10px 12px',
+    verticalAlign: 'baseline',
+  },
+  SubscribeLabel: {
+    display: 'inline',
+    verticalAlign: 'baseline',
   },
   SubscribeIcon: {
     fontSize: '15px',
@@ -148,13 +153,13 @@ class SubscribeButton extends React.Component {
             style={styles.SubscribeButton}
             role={(this.state.target === '#') ? 'button' : null}
           >
-            {this.props.label}
+            <span style={styles.SubscribeLabel}>{this.props.label}</span>
             <span className={`${iconClass} icon`} style={styles.SubscribeIcon}></span>
           </a>
 
           <div
             className={`EmailSubscription-Wrapper ${emailFormClasses}`}
-            style={[styles.EmailSubscribeForm]}
+            style={styles.EmailSubscribeForm}
           >
             <EmailSubscription
               list_id="1061"

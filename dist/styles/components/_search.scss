@@ -99,7 +99,7 @@
 }
 
 /* The wrapper for all elements in SearchBox */
-&-SearchBox-Elements-Wrapper {
+&-searchBox-Elements-Wrapper {
   display: inline-block;
   margin: 20px 0 0 0;
   max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
@@ -151,7 +151,7 @@
 }
 
 /* The wrapper for input fields */
-&-SearchBox-Elements-Input-Wrapper {
+&-searchBox-Elements-Input-Wrapper {
   display: block;
   padding: 0 0 18px 0;
   margin: 0 20px;
@@ -171,7 +171,7 @@
   }
 }
 
-&-SearchBox-Elements-Input-Keywords-Wrapper {
+&-searchBox-Elements-Input-Keywords-Wrapper {
   display: inline-block;
   margin: 0 auto;
   position: relative;
@@ -200,7 +200,7 @@
   }
 }
 
-&-SearchBox-Input-Keywords {
+&-searchBox-Input-Keywords {
   background-color: #FFFFFF;
   border: none !important;
   color: #000000;
@@ -236,7 +236,7 @@
   }
 }
 
-&-SearchBox-Input-Keywords-Border {
+&-searchBox-Input-Keywords-Border {
   border: none;
   display: block;
   width: 100%;
@@ -250,7 +250,7 @@
   }
 }
 
-&-SearchBox-Elements-Input-Options-Wrapper {
+&-searchBox-Elements-Input-Options-Wrapper {
   display: none;
   color: #FFFFFF;
   float: left;
@@ -288,7 +288,7 @@
   }
 }
 
-&-SearchBox-Input-Option {
+&-searchBox-Input-Option {
   display: inline-block;
   margin: 0 40px 0 0;
   &:last-child {
@@ -296,7 +296,7 @@
   }
 }
 
-&-SearchBox-Input-Options-label {
+&-searchBox-Input-Options-label {
   cursor: pointer;
   display: inline-block;
   margin: 0 0 0 -10px;
@@ -304,7 +304,7 @@
   @include Kievit-Book;
 }
 
-&-SearchBox-Elements-SubmitButton {
+&-searchBox-Elements-SubmitButton {
   display: none;
 
   &:before {
@@ -334,7 +334,7 @@
 }
 
 /* Submit buttons with search options on mobile version */
-&-SearchBox-Mobile-Submit {
+&-searchBox-Mobile-Submit {
   border-top-style: solid;
   border-color: rgba(102, 102, 102, 0.21);
   border-width: 1px;
@@ -349,7 +349,7 @@
   }
 }
 
-&-SearchBox-Mobile-Submit-Option {
+&-searchBox-Mobile-Submit-Option {
   cursor: pointer;
   display: inline-block;
   padding: 20px 0;

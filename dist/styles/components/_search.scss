@@ -38,6 +38,12 @@
     border-bottom: 2px solid transparent;
     margin-left: $SEARCH_ICON_OFFSET;
   }
+  // Override NYPL Base rule
+  &:hover {
+    border: none;
+    background: inherit;
+    color: inherit;
+  }
 
   /* ACTIVE STATE */
   &.active {

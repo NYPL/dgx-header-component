@@ -17,8 +17,6 @@ import NavMenuItem from '../NavMenuItem/NavMenuItem.js';
 import NavMenuBottomButtons from '../NavMenuBottomButtons/NavMenuBottomButtons.js';
 import DonateButton from '../DonateButton/DonateButton.js';
 import StickyMyNyplButton from '../MyNyplButton/StickyMyNyplButton.js';
-// FeatureFlags Module
-import FeatureFlags from 'dgx-feature-flags';
 
 const styles = {
   donateButton: {
@@ -39,20 +37,6 @@ const styles = {
 class NavMenu extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = { featureFlags: FeatureFlags.store.getState() };
-  }
-
-  componentDidMount() {
-    FeatureFlags.store.listen(this.onChange.bind(this));
-  }
-
-  componentWillUnmount() {
-    FeatureFlags.store.unlisten(this.onChange.bind(this));
-  }
-
-  onChange() {
-    this.setState({ featureFlags: FeatureFlags.store.getState() });
   }
 
   /**
@@ -110,30 +94,13 @@ class NavMenu extends React.Component {
     const mobileActiveClass = cx({
       mobileActive: HeaderStore._getMobileMenuBtnValue() === 'mobileMenu',
     });
-
-    // Render NavMenuItems without navId passed as argument.
-    if (FeatureFlags.store._isFeatureActive('location-top-link')) {
-      return (
-        <nav className={this.props.className}>
-          <div className={`${this.props.className}-Wrapper ${mobileActiveClass}`}>
-            <span className="MobileLogoText nypl-icon-logo-type"></span>
-            <ul className={`${this.props.className}-List`} id="NavMenu-List">
-              {this.renderNavMenu(this.props.items, ['df621833-4dd1-4223-83e5-6ad7f98ad26a'])}
-            </ul>
-            <SearchButton className={`${this.props.className}`} />
-            {this.renderStickyNavItems()}
-            <NavMenuBottomButtons className="MobileBottomButtons" />
-          </div>
-        </nav>
-      );
-    }
-
+    // Ensure removal of FindUs UUID
     return (
       <nav className={this.props.className}>
         <div className={`${this.props.className}-Wrapper ${mobileActiveClass}`}>
           <span className="MobileLogoText nypl-icon-logo-type"></span>
           <ul className={`${this.props.className}-List`} id="NavMenu-List">
-            {this.renderNavMenu(this.props.items)}
+            {this.renderNavMenu(this.props.items, ['df621833-4dd1-4223-83e5-6ad7f98ad26a'])}
           </ul>
           <SearchButton className={`${this.props.className}`} />
           {this.renderStickyNavItems()}

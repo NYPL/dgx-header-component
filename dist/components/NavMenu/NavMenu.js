@@ -60,12 +60,6 @@ var _MyNyplButtonStickyMyNyplButtonJs = require('../MyNyplButton/StickyMyNyplBut
 
 var _MyNyplButtonStickyMyNyplButtonJs2 = _interopRequireDefault(_MyNyplButtonStickyMyNyplButtonJs);
 
-// FeatureFlags Module
-
-var _dgxFeatureFlags = require('dgx-feature-flags');
-
-var _dgxFeatureFlags2 = _interopRequireDefault(_dgxFeatureFlags);
-
 var styles = {
   donateButton: {
     padding: '8px 15px',
@@ -89,33 +83,16 @@ var NavMenu = (function (_React$Component) {
     _classCallCheck(this, NavMenu);
 
     _get(Object.getPrototypeOf(NavMenu.prototype), 'constructor', this).call(this, props);
-
-    this.state = { featureFlags: _dgxFeatureFlags2['default'].store.getState() };
   }
 
-  _createClass(NavMenu, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      _dgxFeatureFlags2['default'].store.listen(this.onChange.bind(this));
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      _dgxFeatureFlags2['default'].store.unlisten(this.onChange.bind(this));
-    }
-  }, {
-    key: 'onChange',
-    value: function onChange() {
-      this.setState({ featureFlags: _dgxFeatureFlags2['default'].store.getState() });
-    }
+  /**
+   * Generates the DOM for the Sticky Items that will
+   * display when the Header is in sticky mode.
+   * Adds the appropriate class based off the sticky value.
+   * @returns {Object} React DOM.
+   */
 
-    /**
-     * Generates the DOM for the Sticky Items that will
-     * display when the Header is in sticky mode.
-     * Adds the appropriate class based off the sticky value.
-     * @returns {Object} React DOM.
-     */
-  }, {
+  _createClass(NavMenu, [{
     key: 'renderStickyNavItems',
     value: function renderStickyNavItems() {
       var stickyClass = (0, _classnames2['default'])('StickyItems', { active: _storesHeaderStoreJs2['default']._getIsStickyValue() });
@@ -173,28 +150,7 @@ var NavMenu = (function (_React$Component) {
       var mobileActiveClass = (0, _classnames2['default'])({
         mobileActive: _storesHeaderStoreJs2['default']._getMobileMenuBtnValue() === 'mobileMenu'
       });
-
-      // Render NavMenuItems without navId passed as argument.
-      if (_dgxFeatureFlags2['default'].store._isFeatureActive('location-top-link')) {
-        return _react2['default'].createElement(
-          'nav',
-          { className: this.props.className },
-          _react2['default'].createElement(
-            'div',
-            { className: this.props.className + '-Wrapper ' + mobileActiveClass },
-            _react2['default'].createElement('span', { className: 'MobileLogoText nypl-icon-logo-type' }),
-            _react2['default'].createElement(
-              'ul',
-              { className: this.props.className + '-List', id: 'NavMenu-List' },
-              this.renderNavMenu(this.props.items, ['df621833-4dd1-4223-83e5-6ad7f98ad26a'])
-            ),
-            _react2['default'].createElement(_SearchButtonSearchButtonJs2['default'], { className: '' + this.props.className }),
-            this.renderStickyNavItems(),
-            _react2['default'].createElement(_NavMenuBottomButtonsNavMenuBottomButtonsJs2['default'], { className: 'MobileBottomButtons' })
-          )
-        );
-      }
-
+      // Ensure removal of FindUs UUID
       return _react2['default'].createElement(
         'nav',
         { className: this.props.className },
@@ -205,7 +161,7 @@ var NavMenu = (function (_React$Component) {
           _react2['default'].createElement(
             'ul',
             { className: this.props.className + '-List', id: 'NavMenu-List' },
-            this.renderNavMenu(this.props.items)
+            this.renderNavMenu(this.props.items, ['df621833-4dd1-4223-83e5-6ad7f98ad26a'])
           ),
           _react2['default'].createElement(_SearchButtonSearchButtonJs2['default'], { className: '' + this.props.className }),
           this.renderStickyNavItems(),

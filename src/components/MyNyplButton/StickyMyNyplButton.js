@@ -6,10 +6,10 @@ import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
 import utils from '../../utils/utils.js';
 import MyNypl from '../MyNypl/MyNypl.js';
+import { LoginIcon } from 'dgx-svg-icons';
 
 const styles = {
   base: {
-    margin: '0px 10px',
     position: 'relative',
     display: 'inline-block',
     verticalAlign: 'middle',
@@ -17,7 +17,7 @@ const styles = {
   MyNyplButton: {
     display: 'inline',
     textTransform: 'uppercase',
-    padding: '14px 13px 16px 20px',
+    padding: '5px 7.5px',
     border: 'none',
     lineHeight: 'normal',
     outline: 'none',
@@ -80,10 +80,6 @@ class StickyMyNyplButton extends React.Component {
     const showDialog = HeaderStore._getStickyMyNyplVisible();
     const buttonClasses = cx({ active: showDialog });
     const myNyplClasses = cx({ 'active animatedFast fadeIn': showDialog });
-    const iconClass = cx({
-      'nypl-icon-solo-x': showDialog,
-      'nypl-icon-wedge-down': !showDialog,
-    });
 
     return (
       <ClickOutHandler onClickOut={this.handleOnClickOut}>
@@ -98,8 +94,14 @@ class StickyMyNyplButton extends React.Component {
             onClick={this.handleClick}
             style={[styles.MyNyplButton, this.props.style]}
           >
-            {this.props.label}
-            <span className={`${iconClass} icon`} style={styles.MyNyplIcon}></span>
+            <span className="visuallyHidden">
+              {this.props.label}
+            </span>
+            <LoginIcon
+              width="25"
+              height="25"
+              fill={showDialog ? '#FFF' : '#333'}
+            />
           </button>
           <div
             className={`StickyMyNypl-Wrapper ${myNyplClasses}`}

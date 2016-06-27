@@ -62,7 +62,10 @@ class NavMenu extends React.Component {
    * @returns {Object} React DOM.
    */
   renderStickyNavItems() {
-    const stickyClass = cx('StickyItems', { active: HeaderStore._getIsStickyValue() });
+    const stickyClass = cx(
+      `${this.props.className}-stickyItems`,
+      { active: HeaderStore._getIsStickyValue() }
+    );
 
     return (
       <div className={stickyClass}>

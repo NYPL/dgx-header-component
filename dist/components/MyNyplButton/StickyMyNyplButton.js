@@ -46,9 +46,10 @@ var _MyNyplMyNyplJs = require('../MyNypl/MyNypl.js');
 
 var _MyNyplMyNyplJs2 = _interopRequireDefault(_MyNyplMyNyplJs);
 
+var _dgxSvgIcons = require('dgx-svg-icons');
+
 var styles = {
   base: {
-    margin: '0px 10px',
     position: 'relative',
     display: 'inline-block',
     verticalAlign: 'middle'
@@ -56,7 +57,7 @@ var styles = {
   MyNyplButton: {
     display: 'inline',
     textTransform: 'uppercase',
-    padding: '14px 13px 16px 20px',
+    padding: '5px 7.5px',
     border: 'none',
     lineHeight: 'normal',
     outline: 'none'
@@ -129,10 +130,6 @@ var StickyMyNyplButton = (function (_React$Component) {
       var showDialog = _storesHeaderStoreJs2['default']._getStickyMyNyplVisible();
       var buttonClasses = (0, _classnames2['default'])({ active: showDialog });
       var myNyplClasses = (0, _classnames2['default'])({ 'active animatedFast fadeIn': showDialog });
-      var iconClass = (0, _classnames2['default'])({
-        'nypl-icon-solo-x': showDialog,
-        'nypl-icon-wedge-down': !showDialog
-      });
 
       return _react2['default'].createElement(
         _reactOnclickout2['default'],
@@ -152,8 +149,16 @@ var StickyMyNyplButton = (function (_React$Component) {
               onClick: this.handleClick,
               style: [styles.MyNyplButton, this.props.style]
             },
-            this.props.label,
-            _react2['default'].createElement('span', { className: iconClass + ' icon', style: styles.MyNyplIcon })
+            _react2['default'].createElement(
+              'span',
+              { className: 'visuallyHidden' },
+              this.props.label
+            ),
+            _react2['default'].createElement(_dgxSvgIcons.LoginIcon, {
+              width: '25',
+              height: '25',
+              fill: showDialog ? '#FFF' : '#333'
+            })
           ),
           _react2['default'].createElement(
             'div',

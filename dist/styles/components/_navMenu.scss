@@ -16,6 +16,10 @@
 
 	@import '_search';
 
+	&-stickyItems {
+		display: none;
+	}
+
 	/* Wrapper for the NavMenu */
 	&-Wrapper {
 
@@ -164,7 +168,6 @@
 		  		}
 
 	  			@include min-screen(1025px) {
-	  				//font-size: 16px;
 	  				padding: 0px 7px;
 	  			}
 	  		}
@@ -457,34 +460,6 @@
 	  }
 
 	  @import '_megaMenuColors';
-	}
-
-	.StickyItems {
-		display: none;
-
-		.lineSeparator {
-			@include opacity(0.65);
-		}
-
-		.DonateButton {
-			display: none;
-
-			@include min-screen(892px) {
-				display: inline-block;
-				border-radius: 3px;
-			}
-		}
-
-		@include min-screen(769px) {
-			&.active {
-				display: inline-block;
-			}
-		}
-
-		@include min-screen(892px) {
-			// Used with the above DonateButton class to display correctly.
-			margin-right: 20px;
-		}
 	}
 
 	/* FEATURE ITEM

@@ -1,23 +1,22 @@
 /* The Wrapper for putting in the icon for search button and search box */
-&-SearchBox-Wrapper {
+// NOTE: All sticky rules are in _stickyHeader.scss
+&-searchBox-Wrapper {
   display: block;
 
-  @include min-screen(769px) {
+  @include min-screen($TABLET_PORTRAIT_BP) {
     display: inline-table;
     vertical-align: middle;
     margin: 0 10px 0 5px;
   }
-
+  // Progressive enhancement rule to increase left/right margin
   @include min-screen(792px) {
-    margin: 0 20px 0 10px;
+    margin: 0 10px;
   }
-
 }
 
-/* CSS for Search button */
-&-SearchButton {
+/* CSS for Search Button */
+&-searchButton {
   display: none;
-  position: relative;
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
@@ -29,40 +28,15 @@
   line-height: normal;
   border: none;
 
+  // Always display the search button after $TABLET_PORTRAIT_BP
+  @include min-screen($TABLET_PORTRAIT_BP) {
+    display: block;
+  }
+
+  // Holds the font icon
   &:before {
-    @include min-screen(769px) {
-      position: absolute;
-      right: 7px;
-    }
-  }
-
-  & .Search-Text {
-    @include Kievit-Book;
-    position: relative;
-    display: block;
-    color: $BG_MENU_SEARCH;
-    border-bottom: 2px solid $BG_MENU_SEARCH;
-    font-size: 19px;
-    line-height: 1em;
-    padding: 4px 20px 0 0;
-
-    &.active {
-      color: #78CCED;
-      @include transition(color .2s linear .2s, color .2s linear .2s);
-    }
-
-    &.visuallyHidden {
-      height: 1px;
-      left: -10000px;
-      overflow: hidden;
-      position: absolute;
-      top: auto;
-      width: 1px;
-    }
-  }
-
-  @include min-screen(769px) {
-    display: block;
+    border-bottom: 2px solid transparent;
+    margin-left: $SEARCH_ICON_OFFSET;
   }
 
   /* ACTIVE STATE */
@@ -70,15 +44,30 @@
     background-color: $BG_MENU_SEARCH;
     color: #78CCED;
     @include transition(background-color .2s linear .2s, color .2s linear .2s);
-
-    @include min-screen(769px) {
+    @include min-screen($TABLET_PORTRAIT_BP) {
       display: block;
+    }
+  }
+
+  &-text {
+    @include Kievit-Book;
+    display: inline-block;
+    float: left;
+    color: $BG_MENU_SEARCH;
+    border-bottom: 2px solid $BG_MENU_SEARCH;
+    font-size: 19px;
+    line-height: 1em;
+    padding: 5px 18px 0 0;
+
+    &.active {
+      color: #78CCED;
+      @include transition(color .2s linear .2s, color .2s linear .2s);
     }
   }
 }
 
 /* CSS for Search box. It shows only activated. Default is not displayed. */
-&-SearchBox {
+&-searchBox {
   display: none;
   background-color: $BG_MENU_SEARCH;
   color: #000000;
@@ -90,7 +79,7 @@
 
   /* Rules for Desktop Active State */
   &.active {
-    @include min-screen(769px) {
+    @include min-screen($TABLET_PORTRAIT_BP) {
       display: block;
       top: 45.5px;
       height: 225px;
@@ -103,7 +92,7 @@
     margin: -1px 0 0 0;
     top: 0px;
 
-    @include min-screen(769px) {
+    @include min-screen($TABLET_PORTRAIT_BP) {
       display: none;
     }
   }
@@ -117,7 +106,7 @@
   position: relative;
   width: 100%;
 
-  @include min-screen(769px) {
+  @include min-screen($TABLET_PORTRAIT_BP) {
     margin: 60px auto 0px;
     display: table;
     width: auto;
@@ -131,7 +120,7 @@
   input::-webkit-input-placeholder {
     color: #A3A19E;
 
-    @include min-screen(769px) {
+    @include min-screen($TABLET_PORTRAIT_BP) {
       color: #FFFFFF;
     }
   }
@@ -139,7 +128,7 @@
   input:-moz-placeholder { /* Firefox 18- */
     color: #A3A19E;
 
-    @include min-screen(769px) {
+    @include min-screen($TABLET_PORTRAIT_BP) {
       color: #FFFFFF;
     }
   }
@@ -147,7 +136,7 @@
   input:-moz-placeholder {  /* Firefox 19+ */
     color: #A3A19E;
 
-    @include min-screen(769px) {
+    @include min-screen($TABLET_PORTRAIT_BP) {
       color: #FFFFFF;
     }
   }
@@ -155,7 +144,7 @@
   input:-ms-input-placeholder {
     color: #A3A19E;
 
-    @include min-screen(769px) {
+    @include min-screen($TABLET_PORTRAIT_BP) {
       color: #FFFFFF;
     }
   }
@@ -169,7 +158,7 @@
   position: relative;
   text-align: center;
 
-  @include min-screen(769px) {
+  @include min-screen($TABLET_PORTRAIT_BP) {
     border-bottom-style: none;
     display: table-cell;
     margin: 0;
@@ -200,12 +189,12 @@
     position: absolute;
     top: 22px;
 
-    @include min-screen(769px) {
+    @include min-screen($TABLET_PORTRAIT_BP) {
       display: none;
     }
   }
 
-  @include min-screen(769px) {
+  @include min-screen($TABLET_PORTRAIT_BP) {
     margin: 0 0 25px 0;
     display: block;
   }
@@ -229,7 +218,7 @@
     box-shadow: none;
   }
 
-  @include min-screen(769px) {
+  @include min-screen($TABLET_PORTRAIT_BP) {
     background-color: #1DA1D4;
     color: #FFFFFF;
     font-size: 47px;
@@ -252,7 +241,7 @@
   display: block;
   width: 100%;
 
-  @include min-screen(769px) {
+  @include min-screen($TABLET_PORTRAIT_BP) {
     display: inline-block;
     border-bottom: solid;
     border-bottom-width: 2px;
@@ -267,7 +256,7 @@
   float: left;
   font-size: 16px;
 
-  @include min-screen(769px) {
+  @include min-screen($TABLET_PORTRAIT_BP) {
     display: inline-block;
   }
 
@@ -326,7 +315,7 @@
     border-width: 2px;
   }
 
-  @include min-screen(769px) {
+  @include min-screen($TABLET_PORTRAIT_BP) {
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
@@ -355,7 +344,7 @@
   text-transform: uppercase;
   display: block;
 
-  @include min-screen(769px) {
+  @include min-screen($TABLET_PORTRAIT_BP) {
     display: none;
   }
 }

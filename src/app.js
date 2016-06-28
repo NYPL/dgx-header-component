@@ -20,10 +20,12 @@ if (!window.dgxFeatureFlags) {
   window.dgxFeatureFlags = FeatureFlags.utils;
 }
 
+FeatureFlags.utils.activateFeature('location-top-link');
+
 /* app.jsx
  * Used for local development of React Components
  */
 ReactDOM.render(
-  <Header skipNav={{ target: 'maincontent' }} urls="absolute" />,
+  <Header skipNav={{ target: 'maincontent' }} urls="absolute" env="qa" />,
   document.getElementById('app')
 );

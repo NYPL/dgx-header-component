@@ -118,7 +118,7 @@ var NavMenu = (function (_React$Component) {
   }, {
     key: 'renderStickyNavItems',
     value: function renderStickyNavItems() {
-      var stickyClass = (0, _classnames2['default'])('StickyItems', { active: _storesHeaderStoreJs2['default']._getIsStickyValue() });
+      var stickyClass = (0, _classnames2['default'])(this.props.className + '-stickyItems', { active: _storesHeaderStoreJs2['default']._getIsStickyValue() });
 
       return _react2['default'].createElement(
         'div',

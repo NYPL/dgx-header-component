@@ -1,39 +1,39 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _dgxAltCenter = require('dgx-alt-center');
 
 var _dgxAltCenter2 = _interopRequireDefault(_dgxAltCenter);
 
-var _actionsActionsJs = require('../actions/Actions.js');
+var _Actions = require('../actions/Actions.js');
 
-var _actionsActionsJs2 = _interopRequireDefault(_actionsActionsJs);
+var _Actions2 = _interopRequireDefault(_Actions);
 
-var HeaderStore = (function () {
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var HeaderStore = function () {
   function HeaderStore() {
     _classCallCheck(this, HeaderStore);
 
     this.bindListeners({
-      handleUpdateHeaderData: _actionsActionsJs2['default'].UPDATE_HEADER_DATA,
-      handleFetchHeaderData: _actionsActionsJs2['default'].FETCH_HEADER_DATA,
-      handleHeaderDataFailedFetch: _actionsActionsJs2['default'].FAILED_HEADER_DATA,
-      handleSetMobileMenuButtonValue: _actionsActionsJs2['default'].SET_MOBILE_MENU_BUTTON_VALUE,
-      handleSetMobileMyNyplButtonValue: _actionsActionsJs2['default'].SET_MOBILE_MY_NYPL_BUTTON_VALUE,
-      handleSearchButtonActionValue: _actionsActionsJs2['default'].SEARCH_BUTTON_ACTION_VALUE,
-      handleUpdateIsHeaderSticky: _actionsActionsJs2['default'].UPDATE_IS_HEADER_STICKY,
-      handleSetLastActiveMenuItem: _actionsActionsJs2['default'].SET_LAST_ACTIVE_MENU_ITEM,
-      handleToggleSubscribeFormVisible: _actionsActionsJs2['default'].TOGGLE_SUBSCRIBE_FORM_VISIBLE,
-      handleToggleMyNyplVisible: _actionsActionsJs2['default'].TOGGLE_MY_NYPL_VISIBLE,
-      handleToggleStickyMyNyplVisible: _actionsActionsJs2['default'].TOGGLE_STICKY_MY_NYPL_VISIBLE
+      handleUpdateHeaderData: _Actions2.default.UPDATE_HEADER_DATA,
+      handleFetchHeaderData: _Actions2.default.FETCH_HEADER_DATA,
+      handleHeaderDataFailedFetch: _Actions2.default.FAILED_HEADER_DATA,
+      handleSetMobileMenuButtonValue: _Actions2.default.SET_MOBILE_MENU_BUTTON_VALUE,
+      handleSetMobileMyNyplButtonValue: _Actions2.default.SET_MOBILE_MY_NYPL_BUTTON_VALUE,
+      handleSearchButtonActionValue: _Actions2.default.SEARCH_BUTTON_ACTION_VALUE,
+      handleUpdateIsHeaderSticky: _Actions2.default.UPDATE_IS_HEADER_STICKY,
+      handleSetLastActiveMenuItem: _Actions2.default.SET_LAST_ACTIVE_MENU_ITEM,
+      handleToggleSubscribeFormVisible: _Actions2.default.TOGGLE_SUBSCRIBE_FORM_VISIBLE,
+      handleToggleMyNyplVisible: _Actions2.default.TOGGLE_MY_NYPL_VISIBLE,
+      handleToggleStickyMyNyplVisible: _Actions2.default.TOGGLE_STICKY_MY_NYPL_VISIBLE
     });
 
     this.exportPublicMethods({
@@ -61,14 +61,13 @@ var HeaderStore = (function () {
     };
   }
 
-  // Export ALT Store
-
   /**
    * _getMobileMenuBtnValue()
    * returns the current state.activeMobileButton
    * value.
    * @return {String}
    */
+
 
   _createClass(HeaderStore, [{
     key: '_getMobileMenuBtnValue',
@@ -82,6 +81,7 @@ var HeaderStore = (function () {
      * value.
      * @return {String}
      */
+
   }, {
     key: '_getMobileMyNyplButtonValue',
     value: function _getMobileMyNyplButtonValue() {
@@ -94,6 +94,7 @@ var HeaderStore = (function () {
      * value.
      * @return {Boolean} true/false
      */
+
   }, {
     key: '_getSubscribeFormVisible',
     value: function _getSubscribeFormVisible() {
@@ -106,6 +107,7 @@ var HeaderStore = (function () {
      * value.
      * @return {Boolean} true/false
      */
+
   }, {
     key: '_getMyNyplVisible',
     value: function _getMyNyplVisible() {
@@ -118,6 +120,7 @@ var HeaderStore = (function () {
      * value.
      * @return {Boolean} true/false
      */
+
   }, {
     key: '_getStickyMyNyplVisible',
     value: function _getStickyMyNyplVisible() {
@@ -130,6 +133,7 @@ var HeaderStore = (function () {
      * value.
      * @return {String}
      */
+
   }, {
     key: '_getSearchButtonActionValue',
     value: function _getSearchButtonActionValue() {
@@ -142,6 +146,7 @@ var HeaderStore = (function () {
      *
      * @return {Boolean} true/false
      */
+
   }, {
     key: '_getIsStickyValue',
     value: function _getIsStickyValue() {
@@ -154,6 +159,7 @@ var HeaderStore = (function () {
      * value.
      * @return {String}
      */
+
   }, {
     key: '_getLastActiveMenuItem',
     value: function _getLastActiveMenuItem() {
@@ -186,6 +192,7 @@ var HeaderStore = (function () {
     }
 
     // The set search button action value to Store
+
   }, {
     key: 'handleSearchButtonActionValue',
     value: function handleSearchButtonActionValue(actionValue) {
@@ -219,7 +226,9 @@ var HeaderStore = (function () {
   }]);
 
   return HeaderStore;
-})();
+}();
 
-exports['default'] = _dgxAltCenter2['default'].createStore(HeaderStore, 'HeaderStore');
-module.exports = exports['default'];
+// Export ALT Store
+
+
+exports.default = _dgxAltCenter2.default.createStore(HeaderStore, 'HeaderStore');

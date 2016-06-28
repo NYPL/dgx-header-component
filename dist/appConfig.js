@@ -1,6 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var config = {
@@ -169,5 +169,4 @@ var config = {
   }
 };
 
-exports['default'] = config;
-module.exports = exports['default'];
+exports.default = config;

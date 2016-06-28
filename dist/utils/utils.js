@@ -1,10 +1,8 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _moment = require('moment');
 
@@ -12,16 +10,18 @@ var _moment2 = _interopRequireDefault(_moment);
 
 var _dgxReactGa = require('dgx-react-ga');
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function Utils() {
   this.formatDate = function (startDate, endDate) {
-    var formattedDate = undefined,
+    var formattedDate = void 0,
         numDaysBetween = function numDaysBetween(start, end) {
-      var s = (0, _moment2['default'])(start),
-          e = (0, _moment2['default'])(end);
+      var s = (0, _moment2.default)(start),
+          e = (0, _moment2.default)(end);
       return e.diff(s, 'days');
     },
         dateToString = function dateToString(start, end, type) {
-      var dateString = undefined,
+      var dateString = void 0,
           months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
       if (!start && !end) {
@@ -87,5 +87,4 @@ function Utils() {
   this._trackHeader = _dgxReactGa.ga._trackEvent('Global Header');
 }
 
-exports['default'] = new Utils();
-module.exports = exports['default'];
+exports.default = new Utils();

@@ -1,10 +1,5 @@
 import React from 'react';
 
-const styles = {
-  base: {
-  },
-};
-
 class BasicButton extends React.Component {
   constructor(props) {
     super(props);
@@ -20,7 +15,7 @@ class BasicButton extends React.Component {
         onClick={this.props.onClick}
         onMouseEnter={this.props.onMouseEnter}
         onMouseLeave={this.props.onMouseLeave}
-        style={[styles.base, this.props.style]}
+        style={this.props.style}
       >
         {this.props.label}
       </button>

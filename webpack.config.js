@@ -32,10 +32,7 @@ if (process.env.NODE_ENV !== 'development') {
         {
           test: /\.jsx?$/,
           exclude: /(node_modules|bower_components)/,
-          loader: 'babel',
-          query: {
-            presets: ['react', 'es2015']
-          }
+          loaders: ['babel']
         },
         {
           test: /\.scss$/,
@@ -87,10 +84,7 @@ if (process.env.NODE_ENV !== 'development') {
         {
           test: /\.jsx?$/,
           exclude: /(node_modules|bower_components)/,
-          loader: 'babel',
-          query: {
-            presets: ['react', 'es2015']
-          }
+          loaders: ['react-hot', 'babel']
         },
         {
           test: /\.scss$/,

@@ -1,10 +1,18 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _react = require('react');
 
@@ -26,37 +34,29 @@ var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _appConfig = require('../../appConfig.js');
+var _appConfigJs = require('../../appConfig.js');
 
-var _appConfig2 = _interopRequireDefault(_appConfig);
+var _appConfigJs2 = _interopRequireDefault(_appConfigJs);
 
-var _InputField = require('../InputField/InputField.js');
+var _InputFieldInputFieldJs = require('../InputField/InputField.js');
 
-var _InputField2 = _interopRequireDefault(_InputField);
+var _InputFieldInputFieldJs2 = _interopRequireDefault(_InputFieldInputFieldJs);
 
-var _SocialMediaLinksWidget = require('../SocialMediaLinksWidget/SocialMediaLinksWidget.js');
+var _SocialMediaLinksWidgetSocialMediaLinksWidgetJs = require('../SocialMediaLinksWidget/SocialMediaLinksWidget.js');
 
-var _SocialMediaLinksWidget2 = _interopRequireDefault(_SocialMediaLinksWidget);
+var _SocialMediaLinksWidgetSocialMediaLinksWidgetJs2 = _interopRequireDefault(_SocialMediaLinksWidgetSocialMediaLinksWidgetJs);
 
-var _SubscribeMessageBox = require('./SubscribeMessageBox.js');
+var _SubscribeMessageBoxJs = require('./SubscribeMessageBox.js');
 
-var _SubscribeMessageBox2 = _interopRequireDefault(_SubscribeMessageBox);
+var _SubscribeMessageBoxJs2 = _interopRequireDefault(_SubscribeMessageBoxJs);
 
-var _DotsLoader = require('../Loaders/DotsLoader.js');
+var _LoadersDotsLoaderJs = require('../Loaders/DotsLoader.js');
 
-var _DotsLoader2 = _interopRequireDefault(_DotsLoader);
+var _LoadersDotsLoaderJs2 = _interopRequireDefault(_LoadersDotsLoaderJs);
 
-var _utils = require('../../utils/utils.js');
+var _utilsUtilsJs = require('../../utils/utils.js');
 
-var _utils2 = _interopRequireDefault(_utils);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
 
 var styles = {
   base: {
@@ -116,23 +116,22 @@ var styles = {
   }
 };
 
-var EmailSubscription = function (_React$Component) {
+var EmailSubscription = (function (_React$Component) {
   _inherits(EmailSubscription, _React$Component);
 
   function EmailSubscription(props) {
     _classCallCheck(this, EmailSubscription);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(EmailSubscription).call(this, props));
+    _get(Object.getPrototypeOf(EmailSubscription.prototype), 'constructor', this).call(this, props);
 
-    _this.state = {
+    this.state = {
       formProcessing: false,
       formStatus: '',
       notValidEmail: false
     };
 
-    _this._validateForm = _this._validateForm.bind(_this);
-    _this._initForm = _this._initForm.bind(_this);
-    return _this;
+    this._validateForm = this._validateForm.bind(this);
+    this._initForm = this._initForm.bind(this);
   }
 
   _createClass(EmailSubscription, [{
@@ -156,7 +155,7 @@ var EmailSubscription = function (_React$Component) {
       // Prevent re-direct, handle validation
       e.preventDefault();
 
-      var userInput = _reactDom2.default.findDOMNode(this.refs.emailAddressField);
+      var userInput = _reactDom2['default'].findDOMNode(this.refs.emailAddressField);
 
       if (!this._isValidEmail(userInput.value)) {
         userInput.value = '';
@@ -186,7 +185,7 @@ var EmailSubscription = function (_React$Component) {
   }, {
     key: '_addSubscriberToList',
     value: function _addSubscriberToList(userEmail, url, listid) {
-      var _this2 = this;
+      var _this = this;
 
       var postUrl = url + '/add-subscriber/' + listid;
 
@@ -195,15 +194,15 @@ var EmailSubscription = function (_React$Component) {
         formProcessing: true
       });
 
-      _axios2.default.post(postUrl, {
+      _axios2['default'].post(postUrl, {
         email: userEmail
       }).then(function (response) {
-        _this2.setState({
+        _this.setState({
           formStatus: response.data.responseStatus,
           formProcessing: false
         });
-      }).catch(function (response) {
-        _this2.setState({
+      })['catch'](function (response) {
+        _this.setState({
           formStatus: response.data.responseStatus || response.statusText,
           formProcessing: false
         });
@@ -217,26 +216,26 @@ var EmailSubscription = function (_React$Component) {
       var notValidEmail = this.state.notValidEmail;
       var formClass = 'EmailSubscribeForm';
       var emailAddressField = 'emailAddressField';
-      var errorClass = (0, _classnames2.default)({ active: notValidEmail });
-      var subscribeContent = void 0;
+      var errorClass = (0, _classnames2['default'])({ active: notValidEmail });
+      var subscribeContent = undefined;
 
       if (!isLoading) {
         // The default view
-        subscribeContent = _react2.default.createElement(
+        subscribeContent = _react2['default'].createElement(
           'div',
           null,
-          _react2.default.createElement(
+          _react2['default'].createElement(
             'div',
             { className: 'SubscribeMessageBox ' + status },
-            _react2.default.createElement('div', { className: 'SubscribeMessageBox-Eyebrow' }),
-            _react2.default.createElement(
+            _react2['default'].createElement('div', { className: 'SubscribeMessageBox-Eyebrow' }),
+            _react2['default'].createElement(
               'div',
               { className: 'SubscribeMessageBox-Title' },
-              _react2.default.createElement(
+              _react2['default'].createElement(
                 'label',
                 { htmlFor: emailAddressField },
                 'Get the ',
-                _react2.default.createElement(
+                _react2['default'].createElement(
                   'span',
                   { className: 'SubscribeMessageBox-Title-BestNYPL' },
                   'best of NYPL'
@@ -245,7 +244,7 @@ var EmailSubscription = function (_React$Component) {
               )
             )
           ),
-          _react2.default.createElement(
+          _react2['default'].createElement(
             'form',
             {
               ref: 'EmailSubscribeForm',
@@ -257,16 +256,16 @@ var EmailSubscription = function (_React$Component) {
               onSubmit: this._validateForm,
               style: [styles.base, this.props.style]
             },
-            _react2.default.createElement(
+            _react2['default'].createElement(
               'div',
               { className: formClass + '-fields' },
-              _react2.default.createElement(_InputField2.default, { type: 'hidden', name: 'thx', value: 'http://pages.email.nypl.org/confirmation' }),
-              _react2.default.createElement(_InputField2.default, { type: 'hidden', name: 'err', value: 'http://pages.email.nypl.org/confirmation' }),
-              _react2.default.createElement(_InputField2.default, { type: 'hidden', name: 'SubAction', value: 'sub_add_update' }),
-              _react2.default.createElement(_InputField2.default, { type: 'hidden', name: 'MID', value: '7000413' }),
-              _react2.default.createElement(_InputField2.default, { type: 'hidden', name: 'Email Type', value: 'HTML' }),
-              _react2.default.createElement(_InputField2.default, { type: 'hidden', name: 'lid', value: '1061' }),
-              _react2.default.createElement(_InputField2.default, {
+              _react2['default'].createElement(_InputFieldInputFieldJs2['default'], { type: 'hidden', name: 'thx', value: 'http://pages.email.nypl.org/confirmation' }),
+              _react2['default'].createElement(_InputFieldInputFieldJs2['default'], { type: 'hidden', name: 'err', value: 'http://pages.email.nypl.org/confirmation' }),
+              _react2['default'].createElement(_InputFieldInputFieldJs2['default'], { type: 'hidden', name: 'SubAction', value: 'sub_add_update' }),
+              _react2['default'].createElement(_InputFieldInputFieldJs2['default'], { type: 'hidden', name: 'MID', value: '7000413' }),
+              _react2['default'].createElement(_InputFieldInputFieldJs2['default'], { type: 'hidden', name: 'Email Type', value: 'HTML' }),
+              _react2['default'].createElement(_InputFieldInputFieldJs2['default'], { type: 'hidden', name: 'lid', value: '1061' }),
+              _react2['default'].createElement(_InputFieldInputFieldJs2['default'], {
                 className: formClass + '-Input',
                 type: 'email',
                 name: 'Email Address',
@@ -276,61 +275,61 @@ var EmailSubscription = function (_React$Component) {
                 id: emailAddressField,
                 isRequired: true
               }),
-              _react2.default.createElement(
+              _react2['default'].createElement(
                 'div',
                 { className: formClass + '-Error ' + errorClass },
-                _react2.default.createElement('span', { className: 'nypl-icon-solo-x icon' }),
-                _react2.default.createElement(
+                _react2['default'].createElement('span', { className: 'nypl-icon-solo-x icon' }),
+                _react2['default'].createElement(
                   'span',
                   null,
                   'Please enter a valid email address'
                 )
               ),
-              _react2.default.createElement(
+              _react2['default'].createElement(
                 'div',
                 { className: formClass + '-Submit' },
-                _react2.default.createElement('span', { className: 'nypl-icon-check-solo icon' }),
-                _react2.default.createElement(_InputField2.default, {
+                _react2['default'].createElement('span', { className: 'nypl-icon-check-solo icon' }),
+                _react2['default'].createElement(_InputFieldInputFieldJs2['default'], {
                   type: 'submit',
                   name: 'submit',
                   value: 'SIGN UP',
                   style: styles.submitButton
                 })
               ),
-              _react2.default.createElement(_InputField2.default, { type: 'hidden', name: 'Source Code', value: 'Homepage' })
+              _react2['default'].createElement(_InputFieldInputFieldJs2['default'], { type: 'hidden', name: 'Source Code', value: 'Homepage' })
             )
           )
         );
 
         if (status === 'success') {
-          _utils2.default._trackHeader('Subscribe', 'Success');
-          subscribeContent = _react2.default.createElement(
+          _utilsUtilsJs2['default']._trackHeader('Subscribe', 'Success');
+          subscribeContent = _react2['default'].createElement(
             'div',
             null,
-            _react2.default.createElement(_SubscribeMessageBox2.default, {
+            _react2['default'].createElement(_SubscribeMessageBoxJs2['default'], {
               status: status,
               msg: 'Thank you for subscribing to our email updates.'
             }),
-            _react2.default.createElement(
+            _react2['default'].createElement(
               'div',
               { className: this.props.className + '-NewEmail' },
-              _react2.default.createElement(
+              _react2['default'].createElement(
                 'a',
                 { href: '', onClick: this._initForm },
                 'Enter another email address'
               )
             ),
-            _react2.default.createElement(
+            _react2['default'].createElement(
               'div',
               { className: this.props.className + '-FollowUs' },
-              _react2.default.createElement(
+              _react2['default'].createElement(
                 'p',
                 null,
                 'Follow us:'
               ),
-              _react2.default.createElement(_SocialMediaLinksWidget2.default, {
+              _react2['default'].createElement(_SocialMediaLinksWidgetSocialMediaLinksWidgetJs2['default'], {
                 className: this.props.className + '-SocialMediaWidget',
-                links: _appConfig2.default.socialMediaLinks,
+                links: _appConfigJs2['default'].socialMediaLinks,
                 displayOnly: ['facebook', 'twitter']
               })
             )
@@ -338,15 +337,15 @@ var EmailSubscription = function (_React$Component) {
         }
 
         if (status === 'exists') {
-          _utils2.default._trackHeader('Subscribe', 'Error -- already subscribed');
-          subscribeContent = _react2.default.createElement(
+          _utilsUtilsJs2['default']._trackHeader('Subscribe', 'Error -- already subscribed');
+          subscribeContent = _react2['default'].createElement(
             'div',
             null,
-            _react2.default.createElement(_SubscribeMessageBox2.default, { status: status, msg: 'Looks like you\'re already signed up!' }),
-            _react2.default.createElement(
+            _react2['default'].createElement(_SubscribeMessageBoxJs2['default'], { status: status, msg: 'Looks like you\'re already signed up!' }),
+            _react2['default'].createElement(
               'div',
               { className: this.props.className + '-NewEmail' },
-              _react2.default.createElement(
+              _react2['default'].createElement(
                 'a',
                 { href: '', onClick: this._initForm },
                 'Enter a different email address'
@@ -356,52 +355,52 @@ var EmailSubscription = function (_React$Component) {
         }
 
         if (status === 'error' || status === 'Internal Server Error') {
-          _utils2.default._trackHeader('Subscribe', 'Error');
-          subscribeContent = _react2.default.createElement(
+          _utilsUtilsJs2['default']._trackHeader('Subscribe', 'Error');
+          subscribeContent = _react2['default'].createElement(
             'div',
             { className: this.props.className + '-Misc-Error' },
-            _react2.default.createElement(
+            _react2['default'].createElement(
               'div',
               null,
               'Hmm...'
             ),
-            _react2.default.createElement(
+            _react2['default'].createElement(
               'div',
               null,
               'Something isn\'t quite right.'
             ),
-            _react2.default.createElement(
+            _react2['default'].createElement(
               'div',
               null,
               'Please try again.'
             ),
-            _react2.default.createElement(
+            _react2['default'].createElement(
               'a',
               { href: '', onClick: this._initForm, style: styles.tryAgainButton },
-              _react2.default.createElement('span', { className: 'nypl-icon-arrow-left icon' }),
+              _react2['default'].createElement('span', { className: 'nypl-icon-arrow-left icon' }),
               'TRY AGAIN'
             )
           );
         }
 
         // Always show the privacy link except in the loading phase.
-        return _react2.default.createElement(
+        return _react2['default'].createElement(
           'div',
           { className: this.props.className },
           subscribeContent,
-          _react2.default.createElement(
+          _react2['default'].createElement(
             'a',
             {
               href: this.props.subCenterUrl,
               className: this.props.className + '-sc-link',
               style: styles.scLink,
-              onClick: function onClick() {
-                return _utils2.default._trackHeader('Subscribe', 'Subscription Center');
+              onClick: function () {
+                return _utilsUtilsJs2['default']._trackHeader('Subscribe', 'Subscription Center');
               }
             },
             'Subscription Center'
           ),
-          _react2.default.createElement(
+          _react2['default'].createElement(
             'a',
             {
               href: this.props.policyUrl,
@@ -412,29 +411,29 @@ var EmailSubscription = function (_React$Component) {
           )
         );
       }
-      return _react2.default.createElement(
+      return _react2['default'].createElement(
         'div',
         { className: this.props.className },
-        _react2.default.createElement(_DotsLoader2.default, null)
+        _react2['default'].createElement(_LoadersDotsLoaderJs2['default'], null)
       );
     }
   }]);
 
   return EmailSubscription;
-}(_react2.default.Component);
+})(_react2['default'].Component);
 
 EmailSubscription.propTypes = {
-  id: _react2.default.PropTypes.string,
-  className: _react2.default.PropTypes.string,
-  lang: _react2.default.PropTypes.string,
-  target: _react2.default.PropTypes.string,
-  form_name: _react2.default.PropTypes.string,
-  list_id: _react2.default.PropTypes.string,
-  form_method: _react2.default.PropTypes.string,
-  placeholder: _react2.default.PropTypes.string,
-  policyUrl: _react2.default.PropTypes.string,
-  subCenterUrl: _react2.default.PropTypes.string,
-  style: _react2.default.PropTypes.object
+  id: _react2['default'].PropTypes.string,
+  className: _react2['default'].PropTypes.string,
+  lang: _react2['default'].PropTypes.string,
+  target: _react2['default'].PropTypes.string,
+  form_name: _react2['default'].PropTypes.string,
+  list_id: _react2['default'].PropTypes.string,
+  form_method: _react2['default'].PropTypes.string,
+  placeholder: _react2['default'].PropTypes.string,
+  policyUrl: _react2['default'].PropTypes.string,
+  subCenterUrl: _react2['default'].PropTypes.string,
+  style: _react2['default'].PropTypes.object
 };
 
 EmailSubscription.defaultProps = {
@@ -450,4 +449,5 @@ EmailSubscription.defaultProps = {
   subCenterUrl: 'http://pages.email.nypl.org/page.aspx?QS=3935619f7de112ef7250fe02b84fb2f9ab74e4ea015814b7'
 };
 
-exports.default = (0, _radium2.default)(EmailSubscription);
+exports['default'] = (0, _radium2['default'])(EmailSubscription);
+module.exports = exports['default'];

@@ -27,6 +27,7 @@
   border-radius: 0;
   line-height: normal;
   border: none;
+  white-space: normal !important;
 
   // Always display the search button after $TABLET_PORTRAIT_BP
   @include min-screen($TABLET_PORTRAIT_BP) {

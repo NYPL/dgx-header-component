@@ -1,18 +1,10 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _radium = require('radium');
 
@@ -28,37 +20,45 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 var _underscore = require('underscore');
 
-var _appConfigJs = require('../../appConfig.js');
+var _appConfig = require('../../appConfig.js');
 
-var _appConfigJs2 = _interopRequireDefault(_appConfigJs);
+var _appConfig2 = _interopRequireDefault(_appConfig);
 
+var _HeaderStore = require('../../stores/HeaderStore.js');
+
+var _HeaderStore2 = _interopRequireDefault(_HeaderStore);
+
+var _SearchButton = require('../SearchButton/SearchButton.js');
+
+var _SearchButton2 = _interopRequireDefault(_SearchButton);
+
+var _NavMenuItem = require('../NavMenuItem/NavMenuItem.js');
+
+var _NavMenuItem2 = _interopRequireDefault(_NavMenuItem);
+
+var _NavMenuBottomButtons = require('../NavMenuBottomButtons/NavMenuBottomButtons.js');
+
+var _NavMenuBottomButtons2 = _interopRequireDefault(_NavMenuBottomButtons);
+
+var _DonateButton = require('../DonateButton/DonateButton.js');
+
+var _DonateButton2 = _interopRequireDefault(_DonateButton);
+
+var _StickyMyNyplButton = require('../MyNyplButton/StickyMyNyplButton.js');
+
+var _StickyMyNyplButton2 = _interopRequireDefault(_StickyMyNyplButton);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 // Header Store
-
-var _storesHeaderStoreJs = require('../../stores/HeaderStore.js');
-
-var _storesHeaderStoreJs2 = _interopRequireDefault(_storesHeaderStoreJs);
 
 // Dependent Components
 
-var _SearchButtonSearchButtonJs = require('../SearchButton/SearchButton.js');
-
-var _SearchButtonSearchButtonJs2 = _interopRequireDefault(_SearchButtonSearchButtonJs);
-
-var _NavMenuItemNavMenuItemJs = require('../NavMenuItem/NavMenuItem.js');
-
-var _NavMenuItemNavMenuItemJs2 = _interopRequireDefault(_NavMenuItemNavMenuItemJs);
-
-var _NavMenuBottomButtonsNavMenuBottomButtonsJs = require('../NavMenuBottomButtons/NavMenuBottomButtons.js');
-
-var _NavMenuBottomButtonsNavMenuBottomButtonsJs2 = _interopRequireDefault(_NavMenuBottomButtonsNavMenuBottomButtonsJs);
-
-var _DonateButtonDonateButtonJs = require('../DonateButton/DonateButton.js');
-
-var _DonateButtonDonateButtonJs2 = _interopRequireDefault(_DonateButtonDonateButtonJs);
-
-var _MyNyplButtonStickyMyNyplButtonJs = require('../MyNyplButton/StickyMyNyplButton.js');
-
-var _MyNyplButtonStickyMyNyplButtonJs2 = _interopRequireDefault(_MyNyplButtonStickyMyNyplButtonJs);
 
 var styles = {
   donateButton: {
@@ -76,13 +76,13 @@ var styles = {
   }
 };
 
-var NavMenu = (function (_React$Component) {
+var NavMenu = function (_React$Component) {
   _inherits(NavMenu, _React$Component);
 
   function NavMenu(props) {
     _classCallCheck(this, NavMenu);
 
-    _get(Object.getPrototypeOf(NavMenu.prototype), 'constructor', this).call(this, props);
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(NavMenu).call(this, props));
   }
 
   /**
@@ -92,17 +92,18 @@ var NavMenu = (function (_React$Component) {
    * @returns {Object} React DOM.
    */
 
+
   _createClass(NavMenu, [{
     key: 'renderStickyNavItems',
     value: function renderStickyNavItems() {
-      var stickyClass = (0, _classnames2['default'])(this.props.className + '-stickyItems', { active: _storesHeaderStoreJs2['default']._getIsStickyValue() });
+      var stickyClass = (0, _classnames2.default)(this.props.className + '-stickyItems', { active: _HeaderStore2.default._getIsStickyValue() });
 
-      return _react2['default'].createElement(
+      return _react2.default.createElement(
         'div',
         { className: stickyClass },
-        _react2['default'].createElement('span', { className: 'lineSeparator', style: styles.lineSeparator }),
-        _react2['default'].createElement(_MyNyplButtonStickyMyNyplButtonJs2['default'], null),
-        _react2['default'].createElement(_DonateButtonDonateButtonJs2['default'], {
+        _react2.default.createElement('span', { className: 'lineSeparator', style: styles.lineSeparator }),
+        _react2.default.createElement(_StickyMyNyplButton2.default, null),
+        _react2.default.createElement(_DonateButton2.default, {
           id: 'Collapsed-DonateButton',
           style: styles.donateButton,
           gaLabel: 'Collapsed Donate Button'
@@ -117,12 +118,13 @@ var NavMenu = (function (_React$Component) {
      * @param {exceptionList[]} (optional) - Array containing NavId strings.
      * @returns {Object} React DOM.
      */
+
   }, {
     key: 'renderNavMenu',
     value: function renderNavMenu(items, exceptionList) {
-      var _this = this;
+      var _this2 = this;
 
-      var navItems = (0, _underscore.isEmpty)(items) ? _appConfigJs2['default'].navTopLinks : items;
+      var navItems = (0, _underscore.isEmpty)(items) ? _appConfig2.default.navTopLinks : items;
 
       if ((0, _underscore.isArray)(exceptionList) && !(0, _underscore.isEmpty)(exceptionList)) {
         navItems = (0, _underscore.filter)(navItems, function (item) {
@@ -131,11 +133,11 @@ var NavMenu = (function (_React$Component) {
       }
 
       return (0, _underscore.map)(navItems, function (item, index) {
-        return _react2['default'].createElement(_NavMenuItemNavMenuItemJs2['default'], {
+        return _react2.default.createElement(_NavMenuItem2.default, {
           label: item.name,
-          lang: _this.props.lang,
+          lang: _this2.props.lang,
           target: item.link.en.text,
-          urlType: _this.props.urlType,
+          urlType: _this2.props.urlType,
           navId: item.id,
           features: item.features,
           subNav: item.subnav,
@@ -147,38 +149,38 @@ var NavMenu = (function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var mobileActiveClass = (0, _classnames2['default'])({
-        mobileActive: _storesHeaderStoreJs2['default']._getMobileMenuBtnValue() === 'mobileMenu'
+      var mobileActiveClass = (0, _classnames2.default)({
+        mobileActive: _HeaderStore2.default._getMobileMenuBtnValue() === 'mobileMenu'
       });
       // Ensure removal of FindUs UUID
-      return _react2['default'].createElement(
+      return _react2.default.createElement(
         'nav',
         { className: this.props.className },
-        _react2['default'].createElement(
+        _react2.default.createElement(
           'div',
           { className: this.props.className + '-Wrapper ' + mobileActiveClass },
-          _react2['default'].createElement('span', { className: 'MobileLogoText nypl-icon-logo-type' }),
-          _react2['default'].createElement(
+          _react2.default.createElement('span', { className: 'MobileLogoText nypl-icon-logo-type' }),
+          _react2.default.createElement(
             'ul',
             { className: this.props.className + '-List', id: 'NavMenu-List' },
             this.renderNavMenu(this.props.items, ['df621833-4dd1-4223-83e5-6ad7f98ad26a'])
           ),
-          _react2['default'].createElement(_SearchButtonSearchButtonJs2['default'], { className: '' + this.props.className }),
+          _react2.default.createElement(_SearchButton2.default, { className: '' + this.props.className }),
           this.renderStickyNavItems(),
-          _react2['default'].createElement(_NavMenuBottomButtonsNavMenuBottomButtonsJs2['default'], { className: 'MobileBottomButtons' })
+          _react2.default.createElement(_NavMenuBottomButtons2.default, { className: 'MobileBottomButtons' })
         )
       );
     }
   }]);
 
   return NavMenu;
-})(_react2['default'].Component);
+}(_react2.default.Component);
 
 NavMenu.propTypes = {
-  lang: _react2['default'].PropTypes.string,
-  className: _react2['default'].PropTypes.string,
-  items: _react2['default'].PropTypes.array,
-  urlType: _react2['default'].PropTypes.string
+  lang: _react2.default.PropTypes.string,
+  className: _react2.default.PropTypes.string,
+  items: _react2.default.PropTypes.array,
+  urlType: _react2.default.PropTypes.string
 };
 
 NavMenu.defaultProps = {
@@ -186,5 +188,4 @@ NavMenu.defaultProps = {
   className: 'NavMenu'
 };
 
-exports['default'] = (0, _radium2['default'])(NavMenu);
-module.exports = exports['default'];
+exports.default = (0, _radium2.default)(NavMenu);

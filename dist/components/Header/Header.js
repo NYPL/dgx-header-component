@@ -337,7 +337,7 @@ var Header = (function (_React$Component) {
                 label: 'Log In',
                 refId: 'desktopLogin'
               }),
-              _dgxFeatureFlags2['default'].store._isFeatureActive('location-top-link') ? _react2['default'].createElement(_ButtonsSimpleButtonJs2['default'], {
+              _react2['default'].createElement(_ButtonsSimpleButtonJs2['default'], {
                 label: 'Locations',
                 target: this.props.urls === 'absolute' ? '//www.nypl.org/locations/map' : '/locations/map',
                 className: 'LocationsTopLink',
@@ -345,7 +345,7 @@ var Header = (function (_React$Component) {
                 gaAction: 'Locations',
                 gaLabel: 'Header Buttons',
                 style: styles.locationsTopLink
-              }) : null,
+              }),
               _react2['default'].createElement(_ButtonsSimpleButtonJs2['default'], {
                 label: 'Get a Library Card',
                 target: '//catalog.nypl.org/screens/selfregpick.html',

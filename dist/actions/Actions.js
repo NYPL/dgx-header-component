@@ -1,10 +1,14 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 var _dgxAltCenter = require('dgx-alt-center');
 
@@ -14,15 +18,11 @@ var _axios = require('axios');
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _appConfig = require('../appConfig.js');
+var _appConfigJs = require('../appConfig.js');
 
-var _appConfig2 = _interopRequireDefault(_appConfig);
+var _appConfigJs2 = _interopRequireDefault(_appConfigJs);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Actions = function () {
+var Actions = (function () {
   function Actions() {
     _classCallCheck(this, Actions);
   }
@@ -33,23 +33,23 @@ var Actions = function () {
       var _this = this;
 
       var typeOfUrl = urlType === 'absolute' ? '/header-data?urls=absolute' : '/header-data';
-      var headerRootUrl = void 0;
+      var headerRootUrl = undefined;
 
       // Set the proper URL to fetch the Header Data model.
       if (environment === 'development') {
-        headerRootUrl = _appConfig2.default.headerClientEnv.development;
+        headerRootUrl = _appConfigJs2['default'].headerClientEnv.development;
       } else if (environment === 'qa') {
-        headerRootUrl = _appConfig2.default.headerClientEnv.qa;
+        headerRootUrl = _appConfigJs2['default'].headerClientEnv.qa;
       } else {
-        headerRootUrl = _appConfig2.default.headerClientEnv.production;
+        headerRootUrl = _appConfigJs2['default'].headerClientEnv.production;
       }
 
       var fullUrl = '' + headerRootUrl + typeOfUrl;
 
       // Fetch proper /header-data endpoint
-      _axios2.default.get(fullUrl).then(function (result) {
+      _axios2['default'].get(fullUrl).then(function (result) {
         _this.actions.updateHeaderData(result.data);
-      }).catch(function (response) {
+      })['catch'](function (response) {
         console.warn('Error on Axios GET request: ' + fullUrl);
 
         if (response instanceof Error) {
@@ -117,6 +117,7 @@ var Actions = function () {
   }]);
 
   return Actions;
-}();
+})();
 
-exports.default = _dgxAltCenter2.default.createActions(Actions);
+exports['default'] = _dgxAltCenter2['default'].createActions(Actions);
+module.exports = exports['default'];

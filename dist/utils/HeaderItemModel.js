@@ -1,16 +1,16 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
 var _underscore = require('underscore');
 
-var _ContentModel = require('./ContentModel.js');
+var _ContentModelJs = require('./ContentModel.js');
 
-var _ContentModel2 = _interopRequireDefault(_ContentModel);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _ContentModelJs2 = _interopRequireDefault(_ContentModelJs);
 
 function Model() {
   var _this = this;
@@ -113,7 +113,7 @@ function Model() {
     };
 
     if (data['square-image']) {
-      featuredItem.images = _ContentModel2.default.image(data['square-image']);
+      featuredItem.images = _ContentModelJs2['default'].image(data['square-image']);
     }
 
     return featuredItem;
@@ -145,4 +145,5 @@ function Model() {
   };
 }
 
-exports.default = new Model();
+exports['default'] = new Model();
+module.exports = exports['default'];

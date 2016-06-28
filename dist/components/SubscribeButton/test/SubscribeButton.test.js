@@ -1,19 +1,19 @@
 'use strict';
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+var _addons = require('react/addons');
 
-var _reactAddons = require('react/addons');
+var _addons2 = _interopRequireDefault(_addons);
 
-var _reactAddons2 = _interopRequireDefault(_reactAddons);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 jest.dontMock('../SubscribeButton.jsx');
 
 var SubscribeButton = require('../SubscribeButton.jsx');
-var ReactTestUtils = _reactAddons2['default'].addons.TestUtils;
+var ReactTestUtils = _addons2.default.addons.TestUtils;
 
 describe('SubscribeButton Component', function () {
 
-  var componentInstance = ReactTestUtils.renderIntoDocument(_reactAddons2['default'].createElement(SubscribeButton, { label: 'Subscribe', lang: 'en' }));
+  var componentInstance = ReactTestUtils.renderIntoDocument(_addons2.default.createElement(SubscribeButton, { label: 'Subscribe', lang: 'en' }));
 
   it('should render', function () {
     expect(componentInstance).toBeDefined();

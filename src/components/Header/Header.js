@@ -247,21 +247,18 @@ class Header extends React.Component {
                 label="Log In"
                 refId="desktopLogin"
               />
-              {
-                FeatureFlags.store._isFeatureActive('location-top-link') ?
-                  <SimpleButton
-                    label="Locations"
-                    target={
-                      (this.props.urls === 'absolute') ?
-                        '//www.nypl.org/locations/map' : '/locations/map'
-                    }
-                    className="LocationsTopLink"
-                    id="LocationsTopLink"
-                    gaAction="Locations"
-                    gaLabel="Header Buttons"
-                    style={styles.locationsTopLink}
-                  /> : null
-              }
+              <SimpleButton
+                label="Locations"
+                target={
+                  (this.props.urls === 'absolute') ?
+                    '//www.nypl.org/locations/map' : '/locations/map'
+                }
+                className="LocationsTopLink"
+                id="LocationsTopLink"
+                gaAction="Locations"
+                gaLabel="Header Buttons"
+                style={styles.locationsTopLink}
+              />
               <SimpleButton
                 label="Get a Library Card"
                 target="//catalog.nypl.org/screens/selfregpick.html"

@@ -24,6 +24,6 @@ if (!window.dgxFeatureFlags) {
  * Used for local development of React Components
  */
 ReactDOM.render(
-  <Header skipNav={{ target: 'maincontent' }} urls="absolute" />,
+  <Header skipNav={{ target: 'maincontent' }} />,
   document.getElementById('app')
 );

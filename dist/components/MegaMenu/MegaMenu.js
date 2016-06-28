@@ -1,18 +1,10 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -22,36 +14,45 @@ var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
+var _HeaderStore = require('../../stores/HeaderStore.js');
+
+var _HeaderStore2 = _interopRequireDefault(_HeaderStore);
+
+var _Actions = require('../../actions/Actions.js');
+
+var _Actions2 = _interopRequireDefault(_Actions);
+
+var _MegaMenuSubNav = require('./MegaMenuSubNav.js');
+
+var _MegaMenuSubNav2 = _interopRequireDefault(_MegaMenuSubNav);
+
+var _MegaMenuFeatures = require('./MegaMenuFeatures.js');
+
+var _MegaMenuFeatures2 = _interopRequireDefault(_MegaMenuFeatures);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 // ALT Flux Store/Actions
-
-var _storesHeaderStoreJs = require('../../stores/HeaderStore.js');
-
-var _storesHeaderStoreJs2 = _interopRequireDefault(_storesHeaderStoreJs);
-
-var _actionsActionsJs = require('../../actions/Actions.js');
-
-var _actionsActionsJs2 = _interopRequireDefault(_actionsActionsJs);
 
 // Dependent NYPL React Components
 
-var _MegaMenuSubNavJs = require('./MegaMenuSubNav.js');
 
-var _MegaMenuSubNavJs2 = _interopRequireDefault(_MegaMenuSubNavJs);
-
-var _MegaMenuFeaturesJs = require('./MegaMenuFeatures.js');
-
-var _MegaMenuFeaturesJs2 = _interopRequireDefault(_MegaMenuFeaturesJs);
-
-var MegaMenu = (function (_React$Component) {
+var MegaMenu = function (_React$Component) {
   _inherits(MegaMenu, _React$Component);
 
   function MegaMenu(props) {
     _classCallCheck(this, MegaMenu);
 
-    _get(Object.getPrototypeOf(MegaMenu.prototype), 'constructor', this).call(this, props);
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MegaMenu).call(this, props));
 
-    this.watchHoverIntentEnter = this.watchHoverIntentEnter.bind(this);
-    this.watchHoverIntentLeave = this.watchHoverIntentLeave.bind(this);
+    _this.watchHoverIntentEnter = _this.watchHoverIntentEnter.bind(_this);
+    _this.watchHoverIntentLeave = _this.watchHoverIntentLeave.bind(_this);
+    return _this;
   }
 
   /**
@@ -60,11 +61,12 @@ var MegaMenu = (function (_React$Component) {
    * Action to store a reference to the lastActiveMenuItem.
    */
 
+
   _createClass(MegaMenu, [{
     key: 'watchHoverIntentEnter',
     value: function watchHoverIntentEnter() {
       if (this.props.lastActiveMenuItem === this.props.navId) {
-        _actionsActionsJs2['default'].setLastActiveMenuItem(this.props.navId);
+        _Actions2.default.setLastActiveMenuItem(this.props.navId);
       }
     }
 
@@ -72,21 +74,22 @@ var MegaMenu = (function (_React$Component) {
      * Sets the Store's lastActiveMenuItem
      * property to an empty string when hovered out.
      */
+
   }, {
     key: 'watchHoverIntentLeave',
     value: function watchHoverIntentLeave() {
-      _actionsActionsJs2['default'].setLastActiveMenuItem('');
+      _Actions2.default.setLastActiveMenuItem('');
     }
   }, {
     key: 'render',
     value: function render() {
       // Dynamic class assignment based on activeItem property matching current index.
-      var classes = (0, _classnames2['default'])(this.props.className, {
+      var classes = (0, _classnames2.default)(this.props.className, {
         'active animateMegaMenuEnter fadeIn': this.props.index === this.props.currentActiveItem,
-        active: _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === this.props.navId && this.props.index !== this.props.currentActiveItem
+        active: _HeaderStore2.default._getLastActiveMenuItem() === this.props.navId && this.props.index !== this.props.currentActiveItem
       });
 
-      return _react2['default'].createElement(
+      return _react2.default.createElement(
         'div',
         {
           onMouseEnter: this.watchHoverIntentEnter,
@@ -94,14 +97,14 @@ var MegaMenu = (function (_React$Component) {
           id: this.props.navId ? 'MegaMenu-' + this.props.navId : 'MegaMenu',
           className: classes
         },
-        _react2['default'].createElement('div', { className: this.props.className + '-LeftBgWrapper' }),
-        _react2['default'].createElement(
+        _react2.default.createElement('div', { className: this.props.className + '-LeftBgWrapper' }),
+        _react2.default.createElement(
           'div',
           { className: this.props.className + '-Wrapper' },
-          _react2['default'].createElement(
+          _react2.default.createElement(
             'div',
             { className: this.props.className + '-SubNavWrapper' },
-            _react2['default'].createElement(_MegaMenuSubNavJs2['default'], {
+            _react2.default.createElement(_MegaMenuSubNav2.default, {
               label: this.props.label,
               items: this.props.items,
               lang: this.props.lang,
@@ -109,10 +112,10 @@ var MegaMenu = (function (_React$Component) {
               navId: this.props.navId
             })
           ),
-          _react2['default'].createElement(
+          _react2.default.createElement(
             'div',
             { className: this.props.className + '-FeaturesWrapper' },
-            _react2['default'].createElement(_MegaMenuFeaturesJs2['default'], {
+            _react2.default.createElement(_MegaMenuFeatures2.default, {
               navId: this.props.navId,
               features: this.props.features,
               urlType: this.props.urlType,
@@ -125,20 +128,20 @@ var MegaMenu = (function (_React$Component) {
   }]);
 
   return MegaMenu;
-})(_react2['default'].Component);
+}(_react2.default.Component);
 
 MegaMenu.propTypes = {
-  lang: _react2['default'].PropTypes.string,
-  className: _react2['default'].PropTypes.string,
-  lastActiveMenuItem: _react2['default'].PropTypes.string,
-  currentActiveItem: _react2['default'].PropTypes.number,
-  index: _react2['default'].PropTypes.number,
-  navId: _react2['default'].PropTypes.string,
-  label: _react2['default'].PropTypes.object,
-  features: _react2['default'].PropTypes.array,
-  items: _react2['default'].PropTypes.array,
-  topLink: _react2['default'].PropTypes.string,
-  urlType: _react2['default'].PropTypes.string
+  lang: _react2.default.PropTypes.string,
+  className: _react2.default.PropTypes.string,
+  lastActiveMenuItem: _react2.default.PropTypes.string,
+  currentActiveItem: _react2.default.PropTypes.number,
+  index: _react2.default.PropTypes.number,
+  navId: _react2.default.PropTypes.string,
+  label: _react2.default.PropTypes.object,
+  features: _react2.default.PropTypes.array,
+  items: _react2.default.PropTypes.array,
+  topLink: _react2.default.PropTypes.string,
+  urlType: _react2.default.PropTypes.string
 };
 
 MegaMenu.defaultProps = {
@@ -146,5 +149,4 @@ MegaMenu.defaultProps = {
   className: 'MegaMenu'
 };
 
-exports['default'] = MegaMenu;
-module.exports = exports['default'];
+exports.default = MegaMenu;

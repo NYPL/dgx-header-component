@@ -1,21 +1,17 @@
 import React from 'react';
-import Radium from 'radium';
 import cx from 'classnames';
 import moment from 'moment';
 import { filter as _filter } from 'underscore';
 import axios from 'axios';
 import config from '../../appConfig.js';
-
 import AlertsBox from '../AlertsBox/AlertsBox.js';
 
 const styles = {
-  base: {
-    backgroundColor: '#fee24a',
-    width: '100%',
-    margin: 0,
-    padding: '15px 0',
-    color: '#333333',
-  },
+  backgroundColor: '#fee24a',
+  width: '100%',
+  margin: 0,
+  padding: '15px 0',
+  color: '#333333',
 };
 
 class GlobalAlerts extends React.Component {
@@ -31,7 +27,7 @@ class GlobalAlerts extends React.Component {
 
   componentDidMount() {
     // Fetch the Global Alerts via Client
-    this._fetchGlobalAlerts();
+    this.fetchGlobalAlerts();
   }
 
   /**
@@ -41,7 +37,7 @@ class GlobalAlerts extends React.Component {
    * with a setTimeout to allow css transition.
    * NOTE: Disabled for now until further notice.
    */
-  _closeAlertsBox() {
+  closeAlertsBox() {
     this.setState({ animateAlertsBox: true });
 
     setTimeout(() => {
@@ -54,7 +50,7 @@ class GlobalAlerts extends React.Component {
    * using axios, fetch the alerts data
    * and assign to state globalAlerts property.
    */
-  _fetchGlobalAlerts() {
+  fetchGlobalAlerts() {
     axios
       .get(config.alertsApiUrl)
       .then(result => {
@@ -86,7 +82,7 @@ class GlobalAlerts extends React.Component {
    * @param {Array} data
    * @return {Array} Alerts
    */
-  _filterCurrentClosingAlerts(data) {
+  filterCurrentClosingAlerts(data) {
     if (!data) {
       return [];
     }
@@ -110,14 +106,18 @@ class GlobalAlerts extends React.Component {
   }
 
   render() {
-    const currentGlobalAlerts = this._filterCurrentClosingAlerts(this.state.globalAlerts);
+    const currentGlobalAlerts = this.filterCurrentClosingAlerts(this.state.globalAlerts);
     const classes = cx({
       'animatedFast fadeOutUp': this.state.animateAlertsBox,
       hide: this.state.hideAlertsBox,
     });
 
     return currentGlobalAlerts && currentGlobalAlerts.length ? (
-      <div className={`${this.props.className} ${classes}`} id={this.props.id} style={styles.base}>
+      <div
+        className={`${this.props.className} ${classes}`}
+        id={this.props.id}
+        style={styles}
+      >
         <div className={`${this.props.className}-Wrapper`}>
           <AlertsBox
             alerts={currentGlobalAlerts}
@@ -142,4 +142,4 @@ GlobalAlerts.defaultProps = {
   id: 'GlobalAlerts',
 };
 
-export default Radium(GlobalAlerts);
+export default GlobalAlerts;

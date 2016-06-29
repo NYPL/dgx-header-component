@@ -18,10 +18,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _radium = require('radium');
-
-var _radium2 = _interopRequireDefault(_radium);
-
 var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
@@ -45,13 +41,11 @@ var _AlertsBoxAlertsBoxJs = require('../AlertsBox/AlertsBox.js');
 var _AlertsBoxAlertsBoxJs2 = _interopRequireDefault(_AlertsBoxAlertsBoxJs);
 
 var styles = {
-  base: {
-    backgroundColor: '#fee24a',
-    width: '100%',
-    margin: 0,
-    padding: '15px 0',
-    color: '#333333'
-  }
+  backgroundColor: '#fee24a',
+  width: '100%',
+  margin: 0,
+  padding: '15px 0',
+  color: '#333333'
 };
 
 var GlobalAlerts = (function (_React$Component) {
@@ -73,7 +67,7 @@ var GlobalAlerts = (function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       // Fetch the Global Alerts via Client
-      this._fetchGlobalAlerts();
+      this.fetchGlobalAlerts();
     }
 
     /**
@@ -84,8 +78,8 @@ var GlobalAlerts = (function (_React$Component) {
      * NOTE: Disabled for now until further notice.
      */
   }, {
-    key: '_closeAlertsBox',
-    value: function _closeAlertsBox() {
+    key: 'closeAlertsBox',
+    value: function closeAlertsBox() {
       var _this = this;
 
       this.setState({ animateAlertsBox: true });
@@ -101,8 +95,8 @@ var GlobalAlerts = (function (_React$Component) {
      * and assign to state globalAlerts property.
      */
   }, {
-    key: '_fetchGlobalAlerts',
-    value: function _fetchGlobalAlerts() {
+    key: 'fetchGlobalAlerts',
+    value: function fetchGlobalAlerts() {
       var _this2 = this;
 
       _axios2['default'].get(_appConfigJs2['default'].alertsApiUrl).then(function (result) {
@@ -134,8 +128,8 @@ var GlobalAlerts = (function (_React$Component) {
      * @return {Array} Alerts
      */
   }, {
-    key: '_filterCurrentClosingAlerts',
-    value: function _filterCurrentClosingAlerts(data) {
+    key: 'filterCurrentClosingAlerts',
+    value: function filterCurrentClosingAlerts(data) {
       if (!data) {
         return [];
       }
@@ -160,7 +154,7 @@ var GlobalAlerts = (function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var currentGlobalAlerts = this._filterCurrentClosingAlerts(this.state.globalAlerts);
+      var currentGlobalAlerts = this.filterCurrentClosingAlerts(this.state.globalAlerts);
       var classes = (0, _classnames2['default'])({
         'animatedFast fadeOutUp': this.state.animateAlertsBox,
         hide: this.state.hideAlertsBox
@@ -168,7 +162,11 @@ var GlobalAlerts = (function (_React$Component) {
 
       return currentGlobalAlerts && currentGlobalAlerts.length ? _react2['default'].createElement(
         'div',
-        { className: this.props.className + ' ' + classes, id: this.props.id, style: styles.base },
+        {
+          className: this.props.className + ' ' + classes,
+          id: this.props.id,
+          style: styles
+        },
         _react2['default'].createElement(
           'div',
           { className: this.props.className + '-Wrapper' },
@@ -197,5 +195,5 @@ GlobalAlerts.defaultProps = {
   id: 'GlobalAlerts'
 };
 
-exports['default'] = (0, _radium2['default'])(GlobalAlerts);
+exports['default'] = GlobalAlerts;
 module.exports = exports['default'];

@@ -18,17 +18,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _radium = require('radium');
-
-var _radium2 = _interopRequireDefault(_radium);
-
 var _utilsUtilsJs = require('../../utils/utils.js');
 
 var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
-
-var styles = {
-  base: {}
-};
 
 var SimpleButton = (function (_React$Component) {
   _inherits(SimpleButton, _React$Component);
@@ -37,12 +29,12 @@ var SimpleButton = (function (_React$Component) {
     _classCallCheck(this, SimpleButton);
 
     _get(Object.getPrototypeOf(SimpleButton.prototype), 'constructor', this).call(this, props);
-    this._onClick = this._onClick.bind(this);
+    this.handleOnClick = this.handleOnClick.bind(this);
   }
 
   _createClass(SimpleButton, [{
-    key: '_onClick',
-    value: function _onClick() {
+    key: 'handleOnClick',
+    value: function handleOnClick() {
       _utilsUtilsJs2['default']._trackHeader(this.props.gaAction, this.props.gaLabel);
       this.props.onClick();
     }
@@ -56,8 +48,8 @@ var SimpleButton = (function (_React$Component) {
           id: this.props.id,
           className: this.props.className,
           href: this.props.target,
-          onClick: this._onClick,
-          style: [styles.base, this.props.style]
+          onClick: this.handleOnClick,
+          style: this.props.style
         },
         this.props.label
       );
@@ -70,7 +62,7 @@ var SimpleButton = (function (_React$Component) {
 SimpleButton.propTypes = {
   id: _react2['default'].PropTypes.string,
   ref: _react2['default'].PropTypes.string,
-  className: _react2['default'].PropTypes.string.isRequired,
+  className: _react2['default'].PropTypes.string,
   lang: _react2['default'].PropTypes.string,
   style: _react2['default'].PropTypes.object,
   target: _react2['default'].PropTypes.string,
@@ -81,7 +73,6 @@ SimpleButton.propTypes = {
 };
 
 SimpleButton.defaultProps = {
-  id: 'SimpleButton',
   ref: 'SimpleButton',
   className: 'SimpleButton',
   label: 'Button',
@@ -90,5 +81,5 @@ SimpleButton.defaultProps = {
   onClick: function onClick() {}
 };
 
-exports['default'] = (0, _radium2['default'])(SimpleButton);
+exports['default'] = SimpleButton;
 module.exports = exports['default'];

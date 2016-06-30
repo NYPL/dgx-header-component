@@ -128,7 +128,7 @@
       }
     }
 
-    .DonateButton {
+    .DonateButton, .shopTopLink {
       @include border-radius(4px);
     }
   }

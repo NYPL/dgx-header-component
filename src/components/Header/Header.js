@@ -55,14 +55,17 @@ const styles = {
   donateButton: {
     display: 'inline-block',
     padding: '10px 18px',
+    margin: '0 5px 0 0',
     lineHeight: 'normal',
     verticalAlign: 'baseline',
   },
   shopLink: {
     display: 'inline-block',
-    color: '#000',
+    color: '#FFF',
+    backgroundColor: '#726958',
+    border: 'none',
     padding: '10px 18px',
-    margin: '0 0 0 10px',
+    margin: '0 0 0 5px',
     verticalAlign: 'baseline',
   },
   mobileMyNypl: {

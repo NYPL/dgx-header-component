@@ -1,54 +1,40 @@
 import React from 'react';
 
-const styles = {
-  base: {},
-  icon: {
-    fontSize: '25px',
-    verticalAlign: 'middle',
-    marginLeft: '5px',
-  },
+const iconStyles = {
+  fontSize: '25px',
+  verticalAlign: 'middle',
+  marginLeft: '5px',
 };
 
-class FindUsFeature extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    const locinator = (this.props.urlType === 'absolute') ?
-      '//www.nypl.org/locations' : '/locations';
-
-    return (
-      <div className={this.props.className}>
-        <div className={`${this.props.className}-Wrapper`}>
-          <div className={`${this.props.className}-Tag`}>
-            Locations
-          </div>
-          <h2 className={`${this.props.className}-Title`}>
-            Explore NYPL&apos;s 92 locations in the Bronx, Manhattan, and Staten Island.
-          </h2>
-          <a
-            style={styles.base}
-            href={locinator}
-            className={`${this.props.className}-Link`}
-          >
-            FIND A LOCATION
-            <span style={styles.icon} className="nypl-icon-wedge-right icon"></span>
-          </a>
+const FindUsFeature = ({ className, urlType }) => {
+  const url = (urlType === 'absolute') ? '//www.nypl.org/locations' : '/locations';
+  return (
+    <div className={className}>
+      <div className={`${className}-Wrapper`}>
+        <div className={`${className}-Tag`}>
+          Locations
         </div>
+        <h2 className={`${className}-Title`}>
+          Explore NYPL&apos;s 92 locations in the Bronx, Manhattan, and Staten Island.
+        </h2>
+        <a
+          href={url}
+          className={`${className}-Link`}
+        >
+          FIND A LOCATION
+          <span style={iconStyles} className="nypl-icon-wedge-right icon"></span>
+        </a>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 FindUsFeature.propTypes = {
-  lang: React.PropTypes.string,
   className: React.PropTypes.string,
   urlType: React.PropTypes.string,
 };
 
 FindUsFeature.defaultProps = {
-  lang: 'en',
   className: 'FindUsFeature',
 };
 

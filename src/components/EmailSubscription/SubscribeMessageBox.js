@@ -1,21 +1,13 @@
 import React from 'react';
 
-class SubscribeMessageBox extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <div className={`${this.props.className} ${this.props.status}`}>
-        <div className={`${this.props.className}-Eyebrow`}></div>
-        <div className={`${this.props.className}-Title`}>
-          {this.props.msg}
-        </div>
-      </div>
-    );
-  }
-}
+const SubscribeMessageBox = ({ className, status, msg }) => (
+  <div className={`${className} ${status}`}>
+    <div className={`${className}-Eyebrow`}></div>
+    <div className={`${className}-Title`}>
+      {msg}
+    </div>
+  </div>
+);
 
 SubscribeMessageBox.propTypes = {
   msg: React.PropTypes.string,

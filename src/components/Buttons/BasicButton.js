@@ -1,30 +1,29 @@
 import React from 'react';
 
-class BasicButton extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <button
-        ref={this.props.ref}
-        id={this.props.id}
-        className={this.props.className}
-        name={this.props.name}
-        onClick={this.props.onClick}
-        onMouseEnter={this.props.onMouseEnter}
-        onMouseLeave={this.props.onMouseLeave}
-        style={this.props.style}
-      >
-        {this.props.label}
-      </button>
-    );
-  }
-}
+const BasicButton = ({
+  id,
+  className,
+  name,
+  onClick,
+  onMouseEnter,
+  onMouseLeave,
+  style,
+  label,
+}) => (
+  <button
+    id={id}
+    className={className}
+    name={name}
+    onClick={onClick}
+    onMouseEnter={onMouseEnter}
+    onMouseLeave={onMouseLeave}
+    style={style}
+  >
+    {label}
+  </button>
+);
 
 BasicButton.propTypes = {
-  ref: React.PropTypes.string,
   id: React.PropTypes.string,
   className: React.PropTypes.string,
   name: React.PropTypes.string,
@@ -37,12 +36,9 @@ BasicButton.propTypes = {
 };
 
 BasicButton.defaultProps = {
-  ref: 'BasicButton',
-  id: 'BasicButton',
   className: 'BasicButton',
   name: 'BasicButton',
   lang: 'en',
-  onClick() {},
 };
 
 export default BasicButton;

@@ -40,18 +40,20 @@
 
 	&-Box {
 		position: relative;
-		margin: .75em 1.2em .5em 1.2em;
+		margin: .5em 1.2em .5em 1.2em;
 
 		@include min-screen(769px) {
-			margin: .5em 0 .5em 113px;
+			margin-right: 20px;
 		}
 
 		@include min-screen(1025px) {
-			margin: .5em 0 .5em 138px;
+			margin-left: 138px;
 		}
 
 		&-Item {
+			font-size: 16px;
 			margin: .5em 0;
+			line-height: 1.2em;
 
 			p {
 				display: block;
@@ -74,6 +76,7 @@
 			}
 
 			* {
+				font-size: 16px;
 				margin: 0;
 				padding: 0;
 			}

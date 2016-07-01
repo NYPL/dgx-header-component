@@ -51,7 +51,8 @@
 		}
 
 		&-Item {
-			margin: .5em 0;
+			margin: .5em 20px .5em 0px;
+			font-size: 16px;
 
 			p {
 				display: block;
@@ -74,6 +75,7 @@
 			}
 
 			* {
+				font-size: 16px;
 				margin: 0;
 				padding: 0;
 			}

@@ -134,11 +134,8 @@ var styles = {
     verticalAlign: 'baseline'
   },
   shopLink: {
-    display: 'inline-block',
-    color: '#FFF',
-    backgroundColor: '#726958',
-    border: 'none',
-    padding: '10px 18px',
+    color: '#000',
+    padding: '10px 15px',
     margin: '0 0 0 5px',
     verticalAlign: 'baseline'
   },
@@ -346,7 +343,7 @@ var Header = (function (_React$Component) {
                 className: 'LocationsTopLink',
                 id: 'LocationsTopLink',
                 gaAction: 'Locations',
-                gaLabel: 'Header Buttons',
+                gaLabel: 'Header Top Links',
                 style: styles.locationsTopLink
               }),
               _react2['default'].createElement(_ButtonsSimpleButtonJs2['default'], {
@@ -355,7 +352,7 @@ var Header = (function (_React$Component) {
                 className: 'LibraryCardButton',
                 id: 'LibraryCardButton',
                 gaAction: 'Get a Library Card',
-                gaLabel: '',
+                gaLabel: 'Header Top Links',
                 style: styles.libraryCardButton
               }),
               _react2['default'].createElement(_SubscribeButtonSubscribeButtonJs2['default'], {
@@ -367,15 +364,15 @@ var Header = (function (_React$Component) {
                 id: 'Top-DonateButton',
                 lang: this.props.lang,
                 style: styles.donateButton,
-                gaLabel: 'Header Button'
+                gaLabel: 'Header Top Links'
               }),
               _dgxFeatureFlags2['default'].store._isFeatureActive('shop-link') ? _react2['default'].createElement(_ButtonsSimpleButtonJs2['default'], {
                 label: 'Shop',
-                target: '//shop.nypl.org',
+                target: 'http://shop.nypl.org',
                 className: 'shopTopLink',
                 id: 'shopTopLink',
                 gaAction: 'Shop',
-                gaLabel: 'Header Buttons',
+                gaLabel: 'Header Top Links',
                 style: styles.shopLink
               }) : null
             )

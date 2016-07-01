@@ -70,7 +70,7 @@ var styles = {
   SubscribeIcon: {
     fontSize: '15px',
     verticalAlign: 'text-bottom',
-    marginLeft: '5px',
+    marginLeft: '3px',
     display: 'inline'
   },
   EmailSubscribeForm: {

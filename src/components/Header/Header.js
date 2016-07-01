@@ -60,11 +60,8 @@ const styles = {
     verticalAlign: 'baseline',
   },
   shopLink: {
-    display: 'inline-block',
-    color: '#FFF',
-    backgroundColor: '#726958',
-    border: 'none',
-    padding: '10px 18px',
+    color: '#000',
+    padding: '10px 15px',
     margin: '0 0 0 5px',
     verticalAlign: 'baseline',
   },
@@ -259,7 +256,7 @@ class Header extends React.Component {
                 className="LocationsTopLink"
                 id="LocationsTopLink"
                 gaAction="Locations"
-                gaLabel="Header Buttons"
+                gaLabel="Header Top Links"
                 style={styles.locationsTopLink}
               />
               <SimpleButton
@@ -268,7 +265,7 @@ class Header extends React.Component {
                 className="LibraryCardButton"
                 id="LibraryCardButton"
                 gaAction="Get a Library Card"
-                gaLabel=""
+                gaLabel="Header Top Links"
                 style={styles.libraryCardButton}
               />
               <SubscribeButton
@@ -280,17 +277,17 @@ class Header extends React.Component {
                 id="Top-DonateButton"
                 lang={this.props.lang}
                 style={styles.donateButton}
-                gaLabel="Header Button"
+                gaLabel="Header Top Links"
               />
               {
                 FeatureFlags.store._isFeatureActive('shop-link') ?
                   <SimpleButton
                     label="Shop"
-                    target="//shop.nypl.org"
+                    target="http://shop.nypl.org"
                     className="shopTopLink"
                     id="shopTopLink"
                     gaAction="Shop"
-                    gaLabel="Header Buttons"
+                    gaLabel="Header Top Links"
                     style={styles.shopLink}
                   /> : null
               }

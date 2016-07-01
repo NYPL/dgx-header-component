@@ -131,6 +131,13 @@
     .DonateButton {
       @include border-radius(4px);
     }
+
+    .shopTopLink {
+      display: none;
+      @include min-screen(860px) {
+        display: inline-block;
+      }
+    }
   }
 
   /* Skip Navigation

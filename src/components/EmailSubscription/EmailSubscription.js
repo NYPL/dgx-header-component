@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Radium from 'radium';
 import axios from 'axios';
 import cx from 'classnames';
-
+import { extend as _extend } from 'underscore';
 import config from '../../appConfig.js';
 import InputField from '../InputField/InputField.js';
 import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWidget.js';
@@ -17,13 +16,6 @@ const styles = {
     padding: '0px',
     width: 'auto',
   },
-  display: {
-    display: 'block',
-  },
-  hide: {
-    display: 'none',
-  },
-  emailField: {},
   submitButton: {
     marginTop: '50px',
     border: '2px solid #fff',
@@ -79,11 +71,11 @@ class EmailSubscription extends React.Component {
       notValidEmail: false,
     };
 
-    this._validateForm = this._validateForm.bind(this);
-    this._initForm = this._initForm.bind(this);
+    this.validateForm = this.validateForm.bind(this);
+    this.initForm = this.initForm.bind(this);
   }
 
-  _initForm(e) {
+  initForm(e) {
     e.preventDefault();
     this.setState({
       formProcessing: false,
@@ -96,13 +88,13 @@ class EmailSubscription extends React.Component {
     this.setState({formStatus: HeaderStore.getSubscribeFormStatus()});
   } */
 
-  _validateForm(e) {
+  validateForm(e) {
     // Prevent re-direct, handle validation
     e.preventDefault();
 
     const userInput = ReactDOM.findDOMNode(this.refs.emailAddressField);
 
-    if (!this._isValidEmail(userInput.value)) {
+    if (!this.isValidEmail(userInput.value)) {
       userInput.value = '';
       userInput.focus();
       this.setState({
@@ -114,7 +106,7 @@ class EmailSubscription extends React.Component {
       });
 
       // Send as a POST request
-      this._addSubscriberToList(
+      this.addSubscriberToList(
         userInput.value,
         this.props.target,
         this.props.list_id
@@ -122,16 +114,15 @@ class EmailSubscription extends React.Component {
     }
   }
 
-  _isValidEmail(value) {
+  isValidEmail(value) {
     const emailRegex = new RegExp(/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i);
     if (!value) {
       return false;
     }
-
     return emailRegex.test(value);
   }
 
-  _addSubscriberToList(userEmail, url, listid) {
+  addSubscriberToList(userEmail, url, listid) {
     const postUrl = `${url}/add-subscriber/${listid}`;
 
     // Display loader while processing finalizes.
@@ -187,8 +178,8 @@ class EmailSubscription extends React.Component {
             action={this.props.target}
             method={this.props.form_method}
             name={this.props.form_name}
-            onSubmit={this._validateForm}
-            style={[styles.base, this.props.style]}
+            onSubmit={this.validateForm}
+            style={_extend(this.props.style, styles.base)}
           >
             <div className={`${formClass}-fields`}>
               <InputField type="hidden" name="thx" value="http://pages.email.nypl.org/confirmation" />
@@ -203,7 +194,6 @@ class EmailSubscription extends React.Component {
                 type="email"
                 name="Email Address"
                 placeholder={this.props.placeholder}
-                style={styles.emailField}
                 ref={emailAddressField}
                 id={emailAddressField}
                 isRequired
@@ -238,7 +228,7 @@ class EmailSubscription extends React.Component {
               msg="Thank you for subscribing to our email updates."
             />
             <div className={`${this.props.className}-NewEmail`}>
-              <a href="" onClick={this._initForm}>
+              <a href="" onClick={this.initForm}>
                 Enter another email address
               </a>
             </div>
@@ -260,7 +250,7 @@ class EmailSubscription extends React.Component {
           <div>
             <SubscribeMessageBox status={status} msg="Looks like you're already signed up!" />
             <div className={`${this.props.className}-NewEmail`}>
-              <a href="" onClick={this._initForm}>
+              <a href="" onClick={this.initForm}>
                 Enter a different email address
               </a>
             </div>
@@ -275,7 +265,7 @@ class EmailSubscription extends React.Component {
             <div>Hmm...</div>
             <div>Something isn&apos;t quite right.</div>
             <div>Please try again.</div>
-            <a href="" onClick={this._initForm} style={styles.tryAgainButton}>
+            <a href="" onClick={this.initForm} style={styles.tryAgainButton}>
               <span className="nypl-icon-arrow-left icon"></span>
               TRY AGAIN
             </a>
@@ -340,4 +330,4 @@ EmailSubscription.defaultProps = {
   subCenterUrl: 'http://pages.email.nypl.org/page.aspx?QS=3935619f7de112ef7250fe02b84fb2f9ab74e4ea015814b7',
 };
 
-export default Radium(EmailSubscription);
+export default EmailSubscription;

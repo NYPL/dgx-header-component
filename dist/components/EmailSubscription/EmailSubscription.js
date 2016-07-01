@@ -22,10 +22,6 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _radium = require('radium');
-
-var _radium2 = _interopRequireDefault(_radium);
-
 var _axios = require('axios');
 
 var _axios2 = _interopRequireDefault(_axios);
@@ -33,6 +29,8 @@ var _axios2 = _interopRequireDefault(_axios);
 var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
+
+var _underscore = require('underscore');
 
 var _appConfigJs = require('../../appConfig.js');
 
@@ -64,13 +62,6 @@ var styles = {
     padding: '0px',
     width: 'auto'
   },
-  display: {
-    display: 'block'
-  },
-  hide: {
-    display: 'none'
-  },
-  emailField: {},
   submitButton: {
     marginTop: '50px',
     border: '2px solid #fff',
@@ -130,13 +121,13 @@ var EmailSubscription = (function (_React$Component) {
       notValidEmail: false
     };
 
-    this._validateForm = this._validateForm.bind(this);
-    this._initForm = this._initForm.bind(this);
+    this.validateForm = this.validateForm.bind(this);
+    this.initForm = this.initForm.bind(this);
   }
 
   _createClass(EmailSubscription, [{
-    key: '_initForm',
-    value: function _initForm(e) {
+    key: 'initForm',
+    value: function initForm(e) {
       e.preventDefault();
       this.setState({
         formProcessing: false,
@@ -150,14 +141,14 @@ var EmailSubscription = (function (_React$Component) {
     } */
 
   }, {
-    key: '_validateForm',
-    value: function _validateForm(e) {
+    key: 'validateForm',
+    value: function validateForm(e) {
       // Prevent re-direct, handle validation
       e.preventDefault();
 
       var userInput = _reactDom2['default'].findDOMNode(this.refs.emailAddressField);
 
-      if (!this._isValidEmail(userInput.value)) {
+      if (!this.isValidEmail(userInput.value)) {
         userInput.value = '';
         userInput.focus();
         this.setState({
@@ -169,22 +160,21 @@ var EmailSubscription = (function (_React$Component) {
         });
 
         // Send as a POST request
-        this._addSubscriberToList(userInput.value, this.props.target, this.props.list_id);
+        this.addSubscriberToList(userInput.value, this.props.target, this.props.list_id);
       }
     }
   }, {
-    key: '_isValidEmail',
-    value: function _isValidEmail(value) {
+    key: 'isValidEmail',
+    value: function isValidEmail(value) {
       var emailRegex = new RegExp(/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i);
       if (!value) {
         return false;
       }
-
       return emailRegex.test(value);
     }
   }, {
-    key: '_addSubscriberToList',
-    value: function _addSubscriberToList(userEmail, url, listid) {
+    key: 'addSubscriberToList',
+    value: function addSubscriberToList(userEmail, url, listid) {
       var _this = this;
 
       var postUrl = url + '/add-subscriber/' + listid;
@@ -253,8 +243,8 @@ var EmailSubscription = (function (_React$Component) {
               action: this.props.target,
               method: this.props.form_method,
               name: this.props.form_name,
-              onSubmit: this._validateForm,
-              style: [styles.base, this.props.style]
+              onSubmit: this.validateForm,
+              style: (0, _underscore.extend)(this.props.style, styles.base)
             },
             _react2['default'].createElement(
               'div',
@@ -270,7 +260,6 @@ var EmailSubscription = (function (_React$Component) {
                 type: 'email',
                 name: 'Email Address',
                 placeholder: this.props.placeholder,
-                style: styles.emailField,
                 ref: emailAddressField,
                 id: emailAddressField,
                 isRequired: true
@@ -315,7 +304,7 @@ var EmailSubscription = (function (_React$Component) {
               { className: this.props.className + '-NewEmail' },
               _react2['default'].createElement(
                 'a',
-                { href: '', onClick: this._initForm },
+                { href: '', onClick: this.initForm },
                 'Enter another email address'
               )
             ),
@@ -347,7 +336,7 @@ var EmailSubscription = (function (_React$Component) {
               { className: this.props.className + '-NewEmail' },
               _react2['default'].createElement(
                 'a',
-                { href: '', onClick: this._initForm },
+                { href: '', onClick: this.initForm },
                 'Enter a different email address'
               )
             )
@@ -376,7 +365,7 @@ var EmailSubscription = (function (_React$Component) {
             ),
             _react2['default'].createElement(
               'a',
-              { href: '', onClick: this._initForm, style: styles.tryAgainButton },
+              { href: '', onClick: this.initForm, style: styles.tryAgainButton },
               _react2['default'].createElement('span', { className: 'nypl-icon-arrow-left icon' }),
               'TRY AGAIN'
             )
@@ -449,5 +438,5 @@ EmailSubscription.defaultProps = {
   subCenterUrl: 'http://pages.email.nypl.org/page.aspx?QS=3935619f7de112ef7250fe02b84fb2f9ab74e4ea015814b7'
 };
 
-exports['default'] = (0, _radium2['default'])(EmailSubscription);
+exports['default'] = EmailSubscription;
 module.exports = exports['default'];

@@ -1,19 +1,13 @@
 import React from 'react';
-import Radium from 'radium';
 import utils from '../../utils/utils.js';
-
-const styles = {
-  base: {
-  },
-};
 
 class SimpleButton extends React.Component {
   constructor(props) {
     super(props);
-    this._onClick = this._onClick.bind(this);
+    this.handleOnClick = this.handleOnClick.bind(this);
   }
 
-  _onClick() {
+  handleOnClick() {
     utils._trackHeader(this.props.gaAction, this.props.gaLabel);
     this.props.onClick();
   }
@@ -25,8 +19,8 @@ class SimpleButton extends React.Component {
         id={this.props.id}
         className={this.props.className}
         href={this.props.target}
-        onClick={this._onClick}
-        style={[styles.base, this.props.style]}
+        onClick={this.handleOnClick}
+        style={this.props.style}
       >
         {this.props.label}
       </a>
@@ -37,7 +31,7 @@ class SimpleButton extends React.Component {
 SimpleButton.propTypes = {
   id: React.PropTypes.string,
   ref: React.PropTypes.string,
-  className: React.PropTypes.string.isRequired,
+  className: React.PropTypes.string,
   lang: React.PropTypes.string,
   style: React.PropTypes.object,
   target: React.PropTypes.string,
@@ -48,7 +42,6 @@ SimpleButton.propTypes = {
 };
 
 SimpleButton.defaultProps = {
-  id: 'SimpleButton',
   ref: 'SimpleButton',
   className: 'SimpleButton',
   label: 'Button',
@@ -57,4 +50,4 @@ SimpleButton.defaultProps = {
   onClick() {},
 };
 
-export default Radium(SimpleButton);
+export default SimpleButton;

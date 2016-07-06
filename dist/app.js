@@ -12,8 +12,6 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _componentsHeaderHeaderJs = require('./components/Header/Header.js');
 
-var _componentsHeaderHeaderJs2 = _interopRequireDefault(_componentsHeaderHeaderJs);
-
 var _reactGa = require('react-ga');
 
 var _reactGa2 = _interopRequireDefault(_reactGa);
@@ -39,7 +37,10 @@ if (!window.dgxFeatureFlags) {
   window.dgxFeatureFlags = _dgxFeatureFlags2['default'].utils;
 }
 
+// Local testing of navConfig import
+console.log(_componentsHeaderHeaderJs.navConfig);
+
 /* app.jsx
  * Used for local development of React Components
  */
-_reactDom2['default'].render(_react2['default'].createElement(_componentsHeaderHeaderJs2['default'], { skipNav: { target: 'maincontent' } }), document.getElementById('app'));
+_reactDom2['default'].render(_react2['default'].createElement(_componentsHeaderHeaderJs.Header, { skipNav: { target: 'maincontent' } }), document.getElementById('app'));

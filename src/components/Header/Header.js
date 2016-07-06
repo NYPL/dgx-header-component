@@ -1,9 +1,10 @@
 // NPM Modules
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Radium from 'radium';
 import cx from 'classnames';
 import { extend as _extend } from 'underscore';
+// Nav Config
+import navConfig from '../../navConfig.js';
 // ALT Flux
 import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
@@ -323,4 +324,7 @@ Header.defaultProps = {
   env: 'production',
 };
 
-export default Radium(Header);
+export default {
+  Header,
+  navConfig,
+};

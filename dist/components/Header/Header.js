@@ -162,6 +162,7 @@ var Header = (function (_React$Component) {
 
     this.state = (0, _underscore.extend)({
       headerHeight: null,
+      previewCookie: this.getCookie('nyplpreview'),
       featureFlags: _dgxFeatureFlags2['default'].store.getState()
     }, _storesHeaderStoreJs2['default'].getState());
 
@@ -174,12 +175,15 @@ var Header = (function (_React$Component) {
       _storesHeaderStoreJs2['default'].listen(this.onChange.bind(this));
       _dgxFeatureFlags2['default'].store.listen(this.onChange.bind(this));
 
-      // If the HeaderStore is not populated with
-      // the proper data, then fetch via client-side
-      this.fetchDataIfNeeded();
-
       // Height needs to be set once the alerts (if any) are mounted.
       this.setHeaderHeight();
+
+      // Set which FeatureFlag is to be fired based off preview cookie
+      this.setFeatFlagHeaderCall();
+
+      // Watch which FeatureFlag is called to fire
+      // the proper client-side ajax call to populate the Header data state
+      this.watchFeatFlagHeaderCall();
 
       // Listen to the scroll event for the sticky header.
       window.addEventListener('scroll', this.handleStickyHeader, false);
@@ -198,6 +202,7 @@ var Header = (function (_React$Component) {
     value: function onChange() {
       this.setState((0, _underscore.extend)({
         headerHeight: this.state.headerHeight,
+        previewCookie: this.state.previewCookie,
         featureFlags: _dgxFeatureFlags2['default'].store.getState()
       }, _storesHeaderStoreJs2['default'].getState()));
     }
@@ -243,6 +248,46 @@ var Header = (function (_React$Component) {
     }
 
     /**
+     * Returns the value for the given cookie name.
+     * If the cookie doesn't exist a null value will be returned.
+     * @returns {string} - Cookie value.
+     */
+  }, {
+    key: 'getCookie',
+    value: function getCookie(name) {
+      if (!name) {
+        return null;
+      }
+      return decodeURIComponent(document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(name).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || null;
+    }
+
+    /**
+     * Verifies if the previewCookie has been set to '1' and
+     * activates the appropriate FeatureFlag
+     */
+  }, {
+    key: 'setFeatFlagHeaderCall',
+    value: function setFeatFlagHeaderCall() {
+      if (this.state.previewCookie && this.state.previewCookie === '1') {
+        _dgxFeatureFlags2['default'].utils.activateFeature('alt-header-ia');
+      }
+    }
+
+    /**
+     * Checks if the FeatureFlag name passed is active or not and triggers
+     * the appropriate Action to fetch the Header data.
+     */
+  }, {
+    key: 'watchFeatFlagHeaderCall',
+    value: function watchFeatFlagHeaderCall() {
+      if (_dgxFeatureFlags2['default'].store._isFeatureActive('alt-header-ia')) {
+        _actionsActionsJs2['default'].fetchHeaderData(this.props.env, this.props.urls, 'upcoming');
+      } else {
+        _actionsActionsJs2['default'].fetchHeaderData(this.props.env, this.props.urls);
+      }
+    }
+
+    /**
      * handleStickyHeader()
      * Executes Actions.updateIsHeaderSticky()
      * with the proper boolean value to update the
@@ -269,21 +314,6 @@ var Header = (function (_React$Component) {
         if (_storesHeaderStoreJs2['default']._getIsStickyValue()) {
           _actionsActionsJs2['default'].updateIsHeaderSticky(false);
         }
-      }
-    }
-
-    /**
-     * fetchDataIfNeeded()
-     * checks the existence of headerData items,
-     * triggers the Actions.fetchHeaderData()
-     * method to dispatch a client-side event
-     * to obtain data.
-     */
-  }, {
-    key: 'fetchDataIfNeeded',
-    value: function fetchDataIfNeeded() {
-      if (_storesHeaderStoreJs2['default'].getState().headerData.length < 1) {
-        _actionsActionsJs2['default'].fetchHeaderData(this.props.env, this.props.urls);
       }
     }
   }, {

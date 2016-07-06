@@ -37,9 +37,6 @@ if (!window.dgxFeatureFlags) {
   window.dgxFeatureFlags = _dgxFeatureFlags2['default'].utils;
 }
 
-// Local testing of navConfig import
-console.log(_componentsHeaderHeaderJs.navConfig);
-
 /* app.jsx
  * Used for local development of React Components
  */

@@ -22,6 +22,10 @@ var _appConfigJs = require('../appConfig.js');
 
 var _appConfigJs2 = _interopRequireDefault(_appConfigJs);
 
+var _navConfigJs = require('../navConfig.js');
+
+var _navConfigJs2 = _interopRequireDefault(_navConfigJs);
+
 var Actions = (function () {
   function Actions() {
     _classCallCheck(this, Actions);
@@ -29,11 +33,14 @@ var Actions = (function () {
 
   _createClass(Actions, [{
     key: 'fetchHeaderData',
-    value: function fetchHeaderData(environment, urlType) {
+    value: function fetchHeaderData(environment, urlType, iaType) {
       var _this = this;
 
-      var typeOfUrl = urlType === 'absolute' ? '/header-data?urls=absolute' : '/header-data';
       var headerRootUrl = undefined;
+      var fullUrl = undefined;
+      var headerEndpoint = '/header-data';
+      var typeOfUrl = urlType === 'absolute' ? 'urls=absolute' : '';
+      var typeOfIa = iaType === 'upcoming' ? 'ia=upcoming' : '';
 
       // Set the proper URL to fetch the Header Data model.
       if (environment === 'development') {
@@ -44,13 +51,29 @@ var Actions = (function () {
         headerRootUrl = _appConfigJs2['default'].headerClientEnv.production;
       }
 
-      var fullUrl = '' + headerRootUrl + typeOfUrl;
+      // Concatenate the proper query params
+      if (typeOfUrl !== '' && typeOfIa !== '') {
+        fullUrl = '' + headerRootUrl + headerEndpoint + '?' + typeOfUrl + '&' + typeOfIa;
+      } else if (typeOfUrl !== '' && typeOfIa === '') {
+        fullUrl = '' + headerRootUrl + headerEndpoint + '?' + typeOfUrl;
+      } else if (typeOfUrl === '' && typeOfIa !== '') {
+        fullUrl = '' + headerRootUrl + headerEndpoint + '?' + typeOfIa;
+      } else {
+        fullUrl = '' + headerRootUrl + headerEndpoint;
+      }
 
       // Fetch proper /header-data endpoint
       _axios2['default'].get(fullUrl).then(function (result) {
         _this.actions.updateHeaderData(result.data);
       })['catch'](function (response) {
         console.warn('Error on Axios GET request: ' + fullUrl);
+
+        // Fallback Mode - Populate Header Items from config
+        if (typeOfIa !== '') {
+          _this.actions.updateHeaderData(_navConfigJs2['default'].upcoming);
+        } else {
+          _this.actions.updateHeaderData(_navConfigJs2['default'].current);
+        }
 
         if (response instanceof Error) {
           console.log(response.message);

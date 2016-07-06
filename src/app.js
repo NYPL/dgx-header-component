@@ -20,9 +20,6 @@ if (!window.dgxFeatureFlags) {
   window.dgxFeatureFlags = FeatureFlags.utils;
 }
 
-// Local testing of navConfig import
-console.log(navConfig);
-
 /* app.jsx
  * Used for local development of React Components
  */

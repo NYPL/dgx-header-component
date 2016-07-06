@@ -6,7 +6,7 @@ const current = [
       type: 'text-group',
       en: {
         type: 'text-single',
-        text: '/browse',
+        text: 'http://www.nypl.org/browse',
       },
     },
     name: {
@@ -42,7 +42,7 @@ const current = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/browse/recommendations',
+          text: 'http://www.nypl.org/browse/recommendations',
         },
       },
       name: {
@@ -60,7 +60,7 @@ const current = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/blog',
+          text: 'http://www.nypl.org/blog',
         },
       },
       name: {
@@ -78,7 +78,7 @@ const current = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/browse/public-projects',
+          text: 'http://www.nypl.org/browse/public-projects',
         },
       },
       name: {
@@ -116,11 +116,11 @@ const current = [
       type: 'text-group',
       en: {
         type: 'text-single',
-        text: '/learn',
+        text: 'http://www.nypl.org/learn',
       },
       es: {
         type: 'text-single',
-        text: 'learn',
+        text: 'http://www.nypl.org/learn',
       },
     },
     name: {
@@ -142,7 +142,7 @@ const current = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/learn/kids',
+          text: 'http://www.nypl.org/learn/kids',
         },
       },
       name: {
@@ -160,7 +160,7 @@ const current = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/learn/teens',
+          text: 'http://www.nypl.org/learn/teens',
         },
       },
       name: {
@@ -178,7 +178,7 @@ const current = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/learn/parents',
+          text: 'http://www.nypl.org/learn/parents',
         },
       },
       name: {
@@ -196,7 +196,7 @@ const current = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/learn/teachers',
+          text: 'http://www.nypl.org/learn/teachers',
         },
       },
       name: {
@@ -214,7 +214,7 @@ const current = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/learn/adults',
+          text: 'http://www.nypl.org/learn/adults',
         },
       },
       name: {
@@ -234,7 +234,7 @@ const current = [
       type: 'text-group',
       en: {
         type: 'text-single',
-        text: '/attend',
+        text: 'http://www.nypl.org/attend',
       },
     },
     name: {
@@ -252,7 +252,7 @@ const current = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/events/calendar',
+          text: 'http://www.nypl.org/events/calendar',
         },
       },
       name: {
@@ -270,7 +270,7 @@ const current = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/attend/exhibitions',
+          text: 'http://www.nypl.org/attend/exhibitions',
         },
       },
       name: {
@@ -288,7 +288,7 @@ const current = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/events/tours',
+          text: 'http://www.nypl.org/events/tours',
         },
       },
       name: {
@@ -308,7 +308,7 @@ const current = [
       type: 'text-group',
       en: {
         type: 'text-single',
-        text: '/research',
+        text: 'http://www.nypl.org/research',
       },
     },
     name: {
@@ -326,7 +326,7 @@ const current = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/research/collections',
+          text: 'http://www.nypl.org/research/collections',
         },
       },
       name: {
@@ -344,7 +344,7 @@ const current = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/research/information',
+          text: 'http://www.nypl.org/research/information',
         },
       },
       name: {
@@ -362,7 +362,7 @@ const current = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/research/services',
+          text: 'http://www.nypl.org/research/services',
         },
       },
       name: {
@@ -382,7 +382,7 @@ const current = [
       type: 'text-group',
       en: {
         type: 'text-single',
-        text: '/locations/map',
+        text: 'http://www.nypl.org/locations/map',
       },
     },
     name: {
@@ -400,11 +400,11 @@ const current = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/locations/list',
+          text: 'http://www.nypl.org/locations/list',
         },
         es: {
           type: 'text-single',
-          text: '/locations/list',
+          text: 'http://www.nypl.org/locations/list',
         },
       },
       name: {
@@ -426,7 +426,7 @@ const current = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/locations/map?libraries=research',
+          text: 'http://www.nypl.org/locations/map?libraries=research',
         },
       },
       name: {
@@ -446,7 +446,7 @@ const current = [
       type: 'text-group',
       en: {
         type: 'text-single',
-        text: '/give',
+        text: 'http://www.nypl.org/give',
       },
     },
     name: {
@@ -464,7 +464,7 @@ const current = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/support/donate',
+          text: 'http://www.nypl.org/support/donate',
         },
       },
       name: {
@@ -482,7 +482,7 @@ const current = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/help/about-nypl/volunteer-nypl',
+          text: 'http://www.nypl.org/help/about-nypl/volunteer-nypl',
         },
       },
       name: {
@@ -502,7 +502,7 @@ const current = [
       type: 'text-group',
       en: {
         type: 'text-single',
-        text: '/get-help',
+        text: 'http://www.nypl.org/get-help',
       },
     },
     name: {
@@ -520,7 +520,7 @@ const current = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/get-help/how-to',
+          text: 'http://www.nypl.org/get-help/how-to',
         },
       },
       name: {
@@ -538,7 +538,7 @@ const current = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/ask-nypl',
+          text: 'http://www.nypl.org/ask-nypl',
         },
       },
       name: {
@@ -561,11 +561,7 @@ const upcoming = [
       type: 'text-group',
       en: {
         type: 'text-single',
-        text: '/books-music-dvds',
-      },
-      es: {
-        type: 'text-single',
-        text: 'browse',
+        text: 'http://www.nypl.org/books-music-dvds',
       },
     },
     name: {
@@ -573,10 +569,6 @@ const upcoming = [
       en: {
         type: 'text-single',
         text: 'Books/Music/DVDs',
-      },
-      es: {
-        type: 'text-single',
-        text: 'Explorar',
       },
     },
     sort: 100,
@@ -623,11 +615,7 @@ const upcoming = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/ask-nypl/ebookcentral',
-        },
-        es: {
-          type: 'text-single',
-          text: '/locations/list',
+          text: 'http://www.nypl.org/ask-nypl/ebookcentral',
         },
       },
       name: {
@@ -635,10 +623,6 @@ const upcoming = [
         en: {
           type: 'text-single',
           text: 'E-Book Central',
-        },
-        es: {
-          type: 'text-single',
-          text: 'Todas Las Ubicaciones',
         },
       },
       sort: 2,
@@ -649,7 +633,7 @@ const upcoming = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/books-music-dvds/recommendations',
+          text: 'http://www.nypl.org/books-music-dvds/recommendations',
         },
       },
       name: {
@@ -669,7 +653,7 @@ const upcoming = [
       type: 'text-group',
       en: {
         type: 'text-single',
-        text: '/research',
+        text: 'http://www.nypl.org/research',
       },
     },
     name: {
@@ -687,7 +671,7 @@ const upcoming = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/research/collections',
+          text: 'http://www.nypl.org/research/collections',
         },
       },
       name: {
@@ -705,7 +689,7 @@ const upcoming = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/locations/map?libraries=research',
+          text: 'http://www.nypl.org/locations/map?libraries=research',
         },
       },
       name: {
@@ -723,7 +707,7 @@ const upcoming = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/research-divisions/',
+          text: 'http://www.nypl.org/research-divisions/',
         },
       },
       name: {
@@ -741,7 +725,7 @@ const upcoming = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/research/support',
+          text: 'http://www.nypl.org/research/support',
         },
       },
       name: {
@@ -759,7 +743,7 @@ const upcoming = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/research/services',
+          text: 'http://www.nypl.org/research/services',
         },
       },
       name: {
@@ -779,11 +763,7 @@ const upcoming = [
       type: 'text-group',
       en: {
         type: 'text-single',
-        text: '/education',
-      },
-      es: {
-        type: 'text-single',
-        text: 'learn',
+        text: 'http://www.nypl.org/education',
       },
     },
     name: {
@@ -791,10 +771,6 @@ const upcoming = [
       en: {
         type: 'text-single',
         text: 'Education',
-      },
-      es: {
-        type: 'text-single',
-        text: 'Aprender',
       },
     },
     sort: 102,
@@ -805,7 +781,7 @@ const upcoming = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/events/classes/calendar',
+          text: 'http://www.nypl.org/events/classes/calendar',
         },
       },
       name: {
@@ -823,7 +799,7 @@ const upcoming = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/education/adults',
+          text: 'http://www.nypl.org/education/adults',
         },
       },
       name: {
@@ -841,7 +817,7 @@ const upcoming = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/education/parents',
+          text: 'http://www.nypl.org/education/parents',
         },
       },
       name: {
@@ -859,7 +835,7 @@ const upcoming = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/education/educators',
+          text: 'http://www.nypl.org/education/educators',
         },
       },
       name: {
@@ -877,7 +853,7 @@ const upcoming = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/education/kids',
+          text: 'http://www.nypl.org/education/kids',
         },
       },
       name: {
@@ -895,7 +871,7 @@ const upcoming = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/education/teens',
+          text: 'http://www.nypl.org/education/teens',
         },
       },
       name: {
@@ -915,7 +891,7 @@ const upcoming = [
       type: 'text-group',
       en: {
         type: 'text-single',
-        text: '/events',
+        text: 'http://www.nypl.org/events',
       },
     },
     name: {
@@ -933,7 +909,7 @@ const upcoming = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/events/calendar',
+          text: 'http://www.nypl.org/events/calendar',
         },
       },
       name: {
@@ -951,7 +927,7 @@ const upcoming = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/events/exhibitions',
+          text: 'http://www.nypl.org/events/exhibitions',
         },
       },
       name: {
@@ -969,7 +945,7 @@ const upcoming = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/events/author-talks-conversations',
+          text: 'http://www.nypl.org/events/author-talks-conversations',
         },
       },
       name: {
@@ -987,7 +963,7 @@ const upcoming = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/events/performing-arts-films',
+          text: 'http://www.nypl.org/events/performing-arts-films',
         },
       },
       name: {
@@ -1007,7 +983,7 @@ const upcoming = [
       type: 'text-group',
       en: {
         type: 'text-single',
-        text: '/connect',
+        text: 'http://www.nypl.org/connect',
       },
     },
     name: {
@@ -1043,7 +1019,7 @@ const upcoming = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/blog',
+          text: 'http://www.nypl.org/blog',
         },
       },
       name: {
@@ -1079,7 +1055,7 @@ const upcoming = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/connect/public-projects',
+          text: 'http://www.nypl.org/connect/public-projects',
         },
       },
       name: {
@@ -1097,7 +1073,7 @@ const upcoming = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/connect/follow-us',
+          text: 'http://www.nypl.org/connect/follow-us',
         },
       },
       name: {
@@ -1117,7 +1093,7 @@ const upcoming = [
       type: 'text-group',
       en: {
         type: 'text-single',
-        text: '/give',
+        text: 'http://www.nypl.org/give',
       },
     },
     name: {
@@ -1135,7 +1111,7 @@ const upcoming = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/give/donate',
+          text: 'http://www.nypl.org/give/donate',
         },
       },
       name: {
@@ -1153,7 +1129,7 @@ const upcoming = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/help/about-nypl/volunteer-nypl',
+          text: 'http://www.nypl.org/help/about-nypl/volunteer-nypl',
         },
       },
       name: {
@@ -1173,7 +1149,7 @@ const upcoming = [
       type: 'text-group',
       en: {
         type: 'text-single',
-        text: '/get-help',
+        text: 'http://www.nypl.org/get-help',
       },
     },
     name: {
@@ -1191,7 +1167,7 @@ const upcoming = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/get-help/using-library',
+          text: 'http://www.nypl.org/get-help/using-library',
         },
       },
       name: {
@@ -1209,7 +1185,7 @@ const upcoming = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/get-help/contact-us',
+          text: 'http://www.nypl.org/get-help/contact-us',
         },
       },
       name: {
@@ -1227,7 +1203,7 @@ const upcoming = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: '/get-help/community-resources',
+          text: 'http://www.nypl.org/get-help/community-resources',
         },
       },
       name: {

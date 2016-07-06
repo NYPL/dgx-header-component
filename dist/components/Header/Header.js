@@ -23,15 +23,17 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _radium = require('radium');
-
-var _radium2 = _interopRequireDefault(_radium);
-
 var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
 var _underscore = require('underscore');
+
+// Nav Config
+
+var _navConfigJs = require('../../navConfig.js');
+
+var _navConfigJs2 = _interopRequireDefault(_navConfigJs);
 
 // ALT Flux
 
@@ -409,5 +411,8 @@ Header.defaultProps = {
   env: 'production'
 };
 
-exports['default'] = (0, _radium2['default'])(Header);
+exports['default'] = {
+  Header: Header,
+  navConfig: _navConfigJs2['default']
+};
 module.exports = exports['default'];

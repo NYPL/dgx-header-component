@@ -22,13 +22,11 @@ var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
+var _dgxModelData = require('dgx-model-data');
+
 var _ContentBoxDefaultItemJs = require('../ContentBox/DefaultItem.js');
 
 var _ContentBoxDefaultItemJs2 = _interopRequireDefault(_ContentBoxDefaultItemJs);
-
-var _utilsContentModelJs = require('../../utils/ContentModel.js');
-
-var _utilsContentModelJs2 = _interopRequireDefault(_utilsContentModelJs);
 
 var MegaMenuFeatureItem = (function (_React$Component) {
   _inherits(MegaMenuFeatureItem, _React$Component);
@@ -47,7 +45,7 @@ var MegaMenuFeatureItem = (function (_React$Component) {
         'with-image': feature && feature.images,
         'without-image': !feature || !feature.images
       });
-      var contentObj = _utilsContentModelJs2['default'].featureItem(feature, this.props.lang);
+      var contentObj = _dgxModelData.ContentModel.featureItem(feature, this.props.lang);
       var featuredItem = _react2['default'].createElement(_ContentBoxDefaultItemJs2['default'], {
         feature: contentObj,
         className: this.props.className,

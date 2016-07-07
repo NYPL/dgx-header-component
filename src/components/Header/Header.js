@@ -119,6 +119,17 @@ class Header extends React.Component {
     window.removeEventListener('scroll', this.handleStickyHeader, false);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    // Re-fetch the default/current IA /header-data endpoint if
+    // the FeatureFlag 'header-upcoming-ia' has been deactivated.
+    // Used only as a fallback to deactivate a flag and set the
+    // Header data to it's default IA.
+    if (!this.state.featureFlags.get('header-upcoming-ia') &&
+      prevState.featureFlags.get('header-upcoming-ia')) {
+      Actions.fetchHeaderData(this.props.env, this.props.urls);
+    }
+  }
+
   onChange() {
     this.setState(
       _extend(

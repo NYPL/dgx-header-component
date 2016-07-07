@@ -23,6 +23,6 @@ if (!window.dgxFeatureFlags) {
  * Used for local development of React Components
  */
 ReactDOM.render(
-  <Header skipNav={{ target: 'maincontent' }} env="local" />,
+  <Header skipNav={{ target: 'maincontent' }} />,
   document.getElementById('app')
 );

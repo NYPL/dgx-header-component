@@ -202,7 +202,7 @@ var Header = (function (_React$Component) {
     value: function onChange() {
       this.setState((0, _underscore.extend)({
         headerHeight: this.state.headerHeight,
-        previewCookie: this.state.previewCookie,
+        cookie: this.state.cookie,
         featureFlags: _dgxFeatureFlags2['default'].store.getState()
       }, _storesHeaderStoreJs2['default'].getState()));
     }
@@ -269,7 +269,7 @@ var Header = (function (_React$Component) {
   }, {
     key: 'setFeatureFlagHeaderCall',
     value: function setFeatureFlagHeaderCall() {
-      if (this.state.previewCookie && this.state.previewCookie === '1') {
+      if (this.state.cookie && this.state.cookie === '1') {
         _dgxFeatureFlags2['default'].utils.activateFeature('header-upcoming-ia');
       }
     }

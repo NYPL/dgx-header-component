@@ -124,7 +124,7 @@ class Header extends React.Component {
       _extend(
         {
           headerHeight: this.state.headerHeight,
-          previewCookie: this.state.previewCookie,
+          cookie: this.state.cookie,
           featureFlags: FeatureFlags.store.getState(),
         },
         HeaderStore.getState()
@@ -190,7 +190,7 @@ class Header extends React.Component {
    * activates the appropriate FeatureFlag
    */
   setFeatureFlagHeaderCall() {
-    if (this.state.previewCookie && this.state.previewCookie === '1') {
+    if (this.state.cookie && this.state.cookie === '1') {
       FeatureFlags.utils.activateFeature('header-upcoming-ia');
     }
   }

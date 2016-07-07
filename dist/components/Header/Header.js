@@ -162,7 +162,7 @@ var Header = (function (_React$Component) {
 
     this.state = (0, _underscore.extend)({
       headerHeight: null,
-      previewCookie: this.getCookie('nyplpreview'),
+      cookie: this.getCookie('nyplpreview'),
       featureFlags: _dgxFeatureFlags2['default'].store.getState()
     }, _storesHeaderStoreJs2['default'].getState());
 
@@ -179,11 +179,11 @@ var Header = (function (_React$Component) {
       this.setHeaderHeight();
 
       // Set which FeatureFlag is to be fired based off preview cookie
-      this.setFeatFlagHeaderCall();
+      this.setFeatureFlagHeaderCall();
 
       // Watch which FeatureFlag is called to fire
       // the proper client-side ajax call to populate the Header data state
-      this.watchFeatFlagHeaderCall();
+      this.watchFeatureFlagHeaderCall();
 
       // Listen to the scroll event for the sticky header.
       window.addEventListener('scroll', this.handleStickyHeader, false);
@@ -250,12 +250,13 @@ var Header = (function (_React$Component) {
     /**
      * Returns the value for the given cookie name.
      * If the cookie doesn't exist a null value will be returned.
+     * https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie/Simple_document.cookie_framework
      * @returns {string} - Cookie value.
      */
   }, {
     key: 'getCookie',
     value: function getCookie(name) {
-      if (!name) {
+      if (!name || typeof document === 'undefined' || !document.cookie) {
         return null;
       }
       return decodeURIComponent(document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(name).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || null;
@@ -266,10 +267,10 @@ var Header = (function (_React$Component) {
      * activates the appropriate FeatureFlag
      */
   }, {
-    key: 'setFeatFlagHeaderCall',
-    value: function setFeatFlagHeaderCall() {
+    key: 'setFeatureFlagHeaderCall',
+    value: function setFeatureFlagHeaderCall() {
       if (this.state.previewCookie && this.state.previewCookie === '1') {
-        _dgxFeatureFlags2['default'].utils.activateFeature('alt-header-ia');
+        _dgxFeatureFlags2['default'].utils.activateFeature('header-upcoming-ia');
       }
     }
 
@@ -278,9 +279,9 @@ var Header = (function (_React$Component) {
      * the appropriate Action to fetch the Header data.
      */
   }, {
-    key: 'watchFeatFlagHeaderCall',
-    value: function watchFeatFlagHeaderCall() {
-      if (_dgxFeatureFlags2['default'].store._isFeatureActive('alt-header-ia')) {
+    key: 'watchFeatureFlagHeaderCall',
+    value: function watchFeatureFlagHeaderCall() {
+      if (_dgxFeatureFlags2['default'].store._isFeatureActive('header-upcoming-ia')) {
         _actionsActionsJs2['default'].fetchHeaderData(this.props.env, this.props.urls, 'upcoming');
       } else {
         _actionsActionsJs2['default'].fetchHeaderData(this.props.env, this.props.urls);

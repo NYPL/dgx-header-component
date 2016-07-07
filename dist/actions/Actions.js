@@ -47,6 +47,8 @@ var Actions = (function () {
         headerRootUrl = _appConfigJs2['default'].headerClientEnv.development;
       } else if (environment === 'qa') {
         headerRootUrl = _appConfigJs2['default'].headerClientEnv.qa;
+      } else if (environment === 'local') {
+        headerRootUrl = _appConfigJs2['default'].headerClientEnv.local;
       } else {
         headerRootUrl = _appConfigJs2['default'].headerClientEnv.production;
       }

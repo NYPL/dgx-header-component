@@ -84,7 +84,7 @@ class Header extends React.Component {
     this.state = _extend(
       {
         headerHeight: null,
-        previewCookie: this.getCookie('nyplpreview'),
+        cookie: this.getCookie('nyplpreview'),
         featureFlags: FeatureFlags.store.getState(),
       },
       HeaderStore.getState()
@@ -101,11 +101,11 @@ class Header extends React.Component {
     this.setHeaderHeight();
 
     // Set which FeatureFlag is to be fired based off preview cookie
-    this.setFeatFlagHeaderCall();
+    this.setFeatureFlagHeaderCall();
 
     // Watch which FeatureFlag is called to fire
     // the proper client-side ajax call to populate the Header data state
-    this.watchFeatFlagHeaderCall();
+    this.watchFeatureFlagHeaderCall();
 
     // Listen to the scroll event for the sticky header.
     window.addEventListener('scroll', this.handleStickyHeader, false);
@@ -169,10 +169,11 @@ class Header extends React.Component {
   /**
    * Returns the value for the given cookie name.
    * If the cookie doesn't exist a null value will be returned.
+   * https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie/Simple_document.cookie_framework
    * @returns {string} - Cookie value.
    */
   getCookie(name) {
-    if (!name) {
+    if (!name || typeof document === 'undefined' || !document.cookie) {
       return null;
     }
     return decodeURIComponent(
@@ -188,9 +189,9 @@ class Header extends React.Component {
    * Verifies if the previewCookie has been set to '1' and
    * activates the appropriate FeatureFlag
    */
-  setFeatFlagHeaderCall() {
+  setFeatureFlagHeaderCall() {
     if (this.state.previewCookie && this.state.previewCookie === '1') {
-      FeatureFlags.utils.activateFeature('alt-header-ia');
+      FeatureFlags.utils.activateFeature('header-upcoming-ia');
     }
   }
 
@@ -198,8 +199,8 @@ class Header extends React.Component {
    * Checks if the FeatureFlag name passed is active or not and triggers
    * the appropriate Action to fetch the Header data.
    */
-  watchFeatFlagHeaderCall() {
-    if (FeatureFlags.store._isFeatureActive('alt-header-ia')) {
+  watchFeatureFlagHeaderCall() {
+    if (FeatureFlags.store._isFeatureActive('header-upcoming-ia')) {
       Actions.fetchHeaderData(this.props.env, this.props.urls, 'upcoming');
     } else {
       Actions.fetchHeaderData(this.props.env, this.props.urls);

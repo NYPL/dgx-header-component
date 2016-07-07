@@ -16,6 +16,8 @@ class Actions {
       headerRootUrl = appConfig.headerClientEnv.development;
     } else if (environment === 'qa') {
       headerRootUrl = appConfig.headerClientEnv.qa;
+    } else if (environment === 'local') {
+      headerRootUrl = appConfig.headerClientEnv.local;
     } else {
       headerRootUrl = appConfig.headerClientEnv.production;
     }

@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Header, navConfig } from './components/Header/Header.js';
 import ga from 'react-ga';
 import { config } from 'dgx-react-ga';
 import FeatureFlags from 'dgx-feature-flags';
-
+import { Header } from './components/Header/Header.js';
 import './styles/main.scss';
 
 // Use for testing GA events
@@ -24,6 +23,6 @@ if (!window.dgxFeatureFlags) {
  * Used for local development of React Components
  */
 ReactDOM.render(
-  <Header skipNav={{ target: 'maincontent' }} />,
+  <Header skipNav={{ target: 'maincontent' }} env="local" />,
   document.getElementById('app')
 );

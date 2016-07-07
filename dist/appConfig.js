@@ -31,22 +31,11 @@ var config = {
     url: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form&amt=0&s_src=FRQ16ZZ_TNN&s_subsrc=other',
     amount: 'Other'
   }],
-  refineryApi: {
-    root: {
-      development: 'https://dev-refinery.nypl.org',
-      qa: 'https://qa-refinery.nypl.org',
-      production: 'https://refinery.nypl.org'
-    },
-    endpoint: '/api/nypl/ndo/v0.1/site-data/header-items',
-    includes: ['children', 'related-mega-menu-panes.current-mega-menu-item.images', 'related-mega-menu-panes.current-mega-menu-item.related-content.authors.nypl-location', 'related-mega-menu-panes.current-mega-menu-item.related-content.location', 'related-mega-menu-panes.default-mega-menu-item.images', 'related-mega-menu-panes.default-mega-menu-item.related-content.authors.nypl-location', 'related-mega-menu-panes.default-mega-menu-item.related-content.location'],
-    filters: {
-      relationships: { parent: 'null' }
-    }
-  },
   headerClientEnv: {
-    production: 'https://header.nypl.org',
+    local: 'http://localhost:3001',
+    development: 'https://dev-header.nypl.org',
     qa: 'https://qa-header.nypl.org',
-    development: 'https://dev-header.nypl.org'
+    production: 'https://header.nypl.org'
   },
   myNyplLinks: {
     catalog: 'https://browse.nypl.org/iii/encore/myaccount',

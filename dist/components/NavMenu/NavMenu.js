@@ -28,10 +28,6 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 var _underscore = require('underscore');
 
-var _appConfigJs = require('../../appConfig.js');
-
-var _appConfigJs2 = _interopRequireDefault(_appConfigJs);
-
 // Header Store
 
 var _storesHeaderStoreJs = require('../../stores/HeaderStore.js');
@@ -79,21 +75,21 @@ var styles = {
 var NavMenu = (function (_React$Component) {
   _inherits(NavMenu, _React$Component);
 
-  function NavMenu(props) {
+  function NavMenu() {
     _classCallCheck(this, NavMenu);
 
-    _get(Object.getPrototypeOf(NavMenu.prototype), 'constructor', this).call(this, props);
+    _get(Object.getPrototypeOf(NavMenu.prototype), 'constructor', this).apply(this, arguments);
   }
-
-  /**
-   * Generates the DOM for the Sticky Items that will
-   * display when the Header is in sticky mode.
-   * Adds the appropriate class based off the sticky value.
-   * @returns {Object} React DOM.
-   */
 
   _createClass(NavMenu, [{
     key: 'renderStickyNavItems',
+
+    /**
+     * Generates the DOM for the Sticky Items that will
+     * display when the Header is in sticky mode.
+     * Adds the appropriate class based off the sticky value.
+     * @returns {Object} React DOM.
+     */
     value: function renderStickyNavItems() {
       var stickyClass = (0, _classnames2['default'])(this.props.className + '-stickyItems', { active: _storesHeaderStoreJs2['default']._getIsStickyValue() });
 
@@ -122,7 +118,7 @@ var NavMenu = (function (_React$Component) {
     value: function renderNavMenu(items, exceptionList) {
       var _this = this;
 
-      var navItems = (0, _underscore.isEmpty)(items) ? _appConfigJs2['default'].navTopLinks : items;
+      var navItems = items;
 
       if ((0, _underscore.isArray)(exceptionList) && !(0, _underscore.isEmpty)(exceptionList)) {
         navItems = (0, _underscore.filter)(navItems, function (item) {

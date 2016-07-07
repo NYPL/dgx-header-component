@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Header, navConfig } from './components/Header/Header.js';
 import ga from 'react-ga';
 import { config } from 'dgx-react-ga';
 import FeatureFlags from 'dgx-feature-flags';
-
+import { Header } from './components/Header/Header.js';
 import './styles/main.scss';
 
 // Use for testing GA events
@@ -19,9 +18,6 @@ if (!window.ga) {
 if (!window.dgxFeatureFlags) {
   window.dgxFeatureFlags = FeatureFlags.utils;
 }
-
-// Local testing of navConfig import
-console.log(navConfig);
 
 /* app.jsx
  * Used for local development of React Components

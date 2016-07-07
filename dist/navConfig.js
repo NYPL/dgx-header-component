@@ -4,7 +4,8 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 var current = [{
-  id: '29a4b824-e084-4771-aafc-52b3586c5e49',
+  id: 'c2793eb2-9ac2-4696-82f2-2730763a4f0d',
+  slug: 'browse',
   type: 'header-item',
   link: {
     type: 'text-group',
@@ -113,7 +114,8 @@ var current = [{
     sort: 4
   }]
 }, {
-  id: '925d1fa9-1138-403c-9990-38861902b02d',
+  id: '73005d44-0754-4f16-bc51-4b3d0ca96e9c',
+  slug: 'learn',
   type: 'header-item',
   link: {
     type: 'text-group',
@@ -230,7 +232,8 @@ var current = [{
     sort: 4
   }]
 }, {
-  id: '851ed351-08f5-43f0-9011-9c317f85f0ca',
+  id: '9c3b8da4-8114-4b7f-be5d-aa87257578db',
+  slug: 'attend',
   type: 'header-item',
   link: {
     type: 'text-group',
@@ -303,7 +306,8 @@ var current = [{
     sort: 2
   }]
 }, {
-  id: '4bd4f525-3f5c-4c45-b7a7-0ee6bbd301e9',
+  id: 'c1585704-8a24-40bc-8416-5ae579b047d9',
+  slug: 'research',
   type: 'header-item',
   link: {
     type: 'text-group',
@@ -376,7 +380,8 @@ var current = [{
     sort: 2
   }]
 }, {
-  id: 'df621833-4dd1-4223-83e5-6ad7f98ad26a',
+  id: '1b4916f4-6723-44f0-bfae-112441527c4d',
+  slug: 'find-us',
   type: 'header-item',
   link: {
     type: 'text-group',
@@ -439,7 +444,8 @@ var current = [{
     sort: 1
   }]
 }, {
-  id: '1d9ea0ec-6ca3-4577-9dd1-e8de1f2a8bb1',
+  id: 'ca83f064-e0be-4c05-8df3-9fa3b5dd6009',
+  slug: 'give',
   type: 'header-item',
   link: {
     type: 'text-group',
@@ -494,7 +500,8 @@ var current = [{
     sort: 1
   }]
 }, {
-  id: '13d95ad5-f117-4415-ba2c-5c0b9618984d',
+  id: '4b439e81-48a0-4b0a-959f-ec9591addb3a',
+  slug: 'get-help',
   type: 'header-item',
   link: {
     type: 'text-group',
@@ -551,7 +558,8 @@ var current = [{
 }];
 
 var upcoming = [{
-  id: '29a4b824-e084-4771-aafc-52b3586c5e49',
+  id: '488afdf5-7a3c-4cee-8c89-1667be3032f7',
+  slug: 'booksmusicdvds',
   type: 'header-item',
   link: {
     type: 'text-group',
@@ -642,7 +650,8 @@ var upcoming = [{
     sort: 3
   }]
 }, {
-  id: '4bd4f525-3f5c-4c45-b7a7-0ee6bbd301e9',
+  id: '4a8ee293-2e42-4f3f-8f62-8ab9d11a688a',
+  slug: 'n-research',
   type: 'header-item',
   link: {
     type: 'text-group',
@@ -751,7 +760,8 @@ var upcoming = [{
     sort: 4
   }]
 }, {
-  id: '925d1fa9-1138-403c-9990-38861902b02d',
+  id: '17eb88cf-08cb-4b08-89bb-f835c3c032b1',
+  slug: 'education',
   type: 'header-item',
   link: {
     type: 'text-group',
@@ -878,7 +888,8 @@ var upcoming = [{
     sort: 5
   }]
 }, {
-  id: '851ed351-08f5-43f0-9011-9c317f85f0ca',
+  id: '1a56e236-b251-477c-b87c-9b6588aad6b8',
+  slug: 'events',
   type: 'header-item',
   link: {
     type: 'text-group',
@@ -969,7 +980,8 @@ var upcoming = [{
     sort: 3
   }]
 }, {
-  id: '88d29fd3-16a0-4b93-8f28-244f781817da',
+  id: 'a77fd2d8-dc15-45b3-bee6-13e76375ffe8',
+  slug: 'connect',
   type: 'header-item',
   link: {
     type: 'text-group',
@@ -1078,7 +1090,8 @@ var upcoming = [{
     sort: 4
   }]
 }, {
-  id: '1d9ea0ec-6ca3-4577-9dd1-e8de1f2a8bb1',
+  id: '793f73d4-0ed8-458e-87de-896bee17043c',
+  slug: 'n-give',
   type: 'header-item',
   link: {
     type: 'text-group',
@@ -1133,7 +1146,8 @@ var upcoming = [{
     sort: 1
   }]
 }, {
-  id: '13d95ad5-f117-4415-ba2c-5c0b9618984d',
+  id: 'ca639f96-6d00-4dd4-b0c4-33f1653f6b2c',
+  slug: 'n-get-help',
   type: 'header-item',
   link: {
     type: 'text-group',

@@ -10,8 +10,6 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _componentsHeaderHeaderJs = require('./components/Header/Header.js');
-
 var _reactGa = require('react-ga');
 
 var _reactGa2 = _interopRequireDefault(_reactGa);
@@ -21,6 +19,8 @@ var _dgxReactGa = require('dgx-react-ga');
 var _dgxFeatureFlags = require('dgx-feature-flags');
 
 var _dgxFeatureFlags2 = _interopRequireDefault(_dgxFeatureFlags);
+
+var _componentsHeaderHeaderJs = require('./components/Header/Header.js');
 
 require('./styles/main.scss');
 
@@ -36,9 +36,6 @@ if (!window.ga) {
 if (!window.dgxFeatureFlags) {
   window.dgxFeatureFlags = _dgxFeatureFlags2['default'].utils;
 }
-
-// Local testing of navConfig import
-console.log(_componentsHeaderHeaderJs.navConfig);
 
 /* app.jsx
  * Used for local development of React Components

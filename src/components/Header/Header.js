@@ -84,6 +84,7 @@ class Header extends React.Component {
     this.state = _extend(
       {
         headerHeight: null,
+        cookie: this.getCookie('nyplpreview'),
         featureFlags: FeatureFlags.store.getState(),
       },
       HeaderStore.getState()
@@ -96,12 +97,15 @@ class Header extends React.Component {
     HeaderStore.listen(this.onChange.bind(this));
     FeatureFlags.store.listen(this.onChange.bind(this));
 
-    // If the HeaderStore is not populated with
-    // the proper data, then fetch via client-side
-    this.fetchDataIfNeeded();
-
     // Height needs to be set once the alerts (if any) are mounted.
     this.setHeaderHeight();
+
+    // Set which FeatureFlag is to be fired based off preview cookie
+    this.setFeatureFlagHeaderCall();
+
+    // Watch which FeatureFlag is called to fire
+    // the proper client-side ajax call to populate the Header data state
+    this.watchFeatureFlagHeaderCall();
 
     // Listen to the scroll event for the sticky header.
     window.addEventListener('scroll', this.handleStickyHeader, false);
@@ -115,11 +119,23 @@ class Header extends React.Component {
     window.removeEventListener('scroll', this.handleStickyHeader, false);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    // Re-fetch the default/current IA /header-data endpoint if
+    // the FeatureFlag 'header-upcoming-ia' has been deactivated.
+    // Used only as a fallback to deactivate a flag and set the
+    // Header data to it's default IA.
+    if (!this.state.featureFlags.get('header-upcoming-ia') &&
+      prevState.featureFlags.get('header-upcoming-ia')) {
+      Actions.fetchHeaderData(this.props.env, this.props.urls);
+    }
+  }
+
   onChange() {
     this.setState(
       _extend(
         {
           headerHeight: this.state.headerHeight,
+          cookie: this.state.cookie,
           featureFlags: FeatureFlags.store.getState(),
         },
         HeaderStore.getState()
@@ -162,6 +178,47 @@ class Header extends React.Component {
   }
 
   /**
+   * Returns the value for the given cookie name.
+   * If the cookie doesn't exist a null value will be returned.
+   * https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie/Simple_document.cookie_framework
+   * @returns {string} - Cookie value.
+   */
+  getCookie(name) {
+    if (!name || typeof document === 'undefined' || !document.cookie) {
+      return null;
+    }
+    return decodeURIComponent(
+      document.cookie.replace(
+        new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(name).replace(/[\-\.\+\*]/g, '\\$&')
+          + '\\s*\\=\\s*([^;]*).*$)|^.*$'),
+        '$1'
+      )
+    ) || null;
+  }
+
+  /**
+   * Verifies if the previewCookie has been set to '1' and
+   * activates the appropriate FeatureFlag
+   */
+  setFeatureFlagHeaderCall() {
+    if (this.state.cookie && this.state.cookie === '1') {
+      FeatureFlags.utils.activateFeature('header-upcoming-ia');
+    }
+  }
+
+  /**
+   * Checks if the FeatureFlag name passed is active or not and triggers
+   * the appropriate Action to fetch the Header data.
+   */
+  watchFeatureFlagHeaderCall() {
+    if (FeatureFlags.store._isFeatureActive('header-upcoming-ia')) {
+      Actions.fetchHeaderData(this.props.env, this.props.urls, 'upcoming');
+    } else {
+      Actions.fetchHeaderData(this.props.env, this.props.urls);
+    }
+  }
+
+  /**
    * handleStickyHeader()
    * Executes Actions.updateIsHeaderSticky()
    * with the proper boolean value to update the
@@ -186,19 +243,6 @@ class Header extends React.Component {
       if (HeaderStore._getIsStickyValue()) {
         Actions.updateIsHeaderSticky(false);
       }
-    }
-  }
-
-  /**
-   * fetchDataIfNeeded()
-   * checks the existence of headerData items,
-   * triggers the Actions.fetchHeaderData()
-   * method to dispatch a client-side event
-   * to obtain data.
-   */
-  fetchDataIfNeeded() {
-    if (HeaderStore.getState().headerData.length < 1) {
-      Actions.fetchHeaderData(this.props.env, this.props.urls);
     }
   }
 

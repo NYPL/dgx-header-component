@@ -53,6 +53,9 @@ var Actions = (function () {
         headerRootUrl = _appConfigJs2['default'].headerClientEnv.production;
       }
 
+      // Hard coding this for now.
+      headerRootUrl = _appConfigJs2['default'].headerClientEnv.qa;
+
       // Concatenate the proper query params
       if (typeOfUrl !== '' && typeOfIa !== '') {
         fullUrl = '' + headerRootUrl + headerEndpoint + '?' + typeOfUrl + '&' + typeOfIa;

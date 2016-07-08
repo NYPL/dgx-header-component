@@ -68,13 +68,15 @@ var MegaMenuFeatures = (function (_React$Component) {
 
       var _opts$donateWidget = opts.donateWidget;
       var donateWidget = _opts$donateWidget === undefined ? '' : _opts$donateWidget;
+      var _opts$donateWidgetUpcoming = opts.donateWidgetUpcoming;
+      var donateWidgetUpcoming = _opts$donateWidgetUpcoming === undefined ? '' : _opts$donateWidgetUpcoming;
       var _opts$findWidget = opts.findWidget;
       var findWidget = _opts$findWidget === undefined ? '' : _opts$findWidget;
 
       // Extract the first featured item to pass onto the widgets matching navId
       var widgetFeature = object[0].featuredItem;
 
-      if (this.props.navId === donateWidget) {
+      if (this.props.navId === donateWidget || this.props.navId === donateWidgetUpcoming) {
         return _react2['default'].createElement(_DonateWidgetDonateWidgetJs2['default'], {
           key: 'donateWidget',
           navId: this.props.navId,
@@ -109,8 +111,9 @@ var MegaMenuFeatures = (function (_React$Component) {
         'div',
         { className: this.props.className },
         this.renderFeatureitems(this.props.features, {
-          donateWidget: '1d9ea0ec-6ca3-4577-9dd1-e8de1f2a8bb1',
-          findWidget: 'df621833-4dd1-4223-83e5-6ad7f98ad26a'
+          donateWidget: 'ca83f064-e0be-4c05-8df3-9fa3b5dd6009',
+          donateWidgetUpcoming: '793f73d4-0ed8-458e-87de-896bee17043c',
+          findWidget: '1b4916f4-6723-44f0-bfae-112441527c4d'
         })
       );
     }

@@ -157,7 +157,7 @@ var NavMenu = (function (_React$Component) {
           _react2['default'].createElement(
             'ul',
             { className: this.props.className + '-List', id: 'NavMenu-List' },
-            this.renderNavMenu(this.props.items, ['df621833-4dd1-4223-83e5-6ad7f98ad26a'])
+            this.renderNavMenu(this.props.items, ['1b4916f4-6723-44f0-bfae-112441527c4d'])
           ),
           _react2['default'].createElement(_SearchButtonSearchButtonJs2['default'], { className: '' + this.props.className }),
           this.renderStickyNavItems(),

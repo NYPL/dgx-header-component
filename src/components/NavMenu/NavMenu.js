@@ -98,7 +98,7 @@ class NavMenu extends React.Component {
         <div className={`${this.props.className}-Wrapper ${mobileActiveClass}`}>
           <span className="MobileLogoText nypl-icon-logo-type"></span>
           <ul className={`${this.props.className}-List`} id="NavMenu-List">
-            {this.renderNavMenu(this.props.items, ['df621833-4dd1-4223-83e5-6ad7f98ad26a'])}
+            {this.renderNavMenu(this.props.items, ['1b4916f4-6723-44f0-bfae-112441527c4d'])}
           </ul>
           <SearchButton className={`${this.props.className}`} />
           {this.renderStickyNavItems()}

@@ -8,7 +8,6 @@ import {
   contains as _contains,
   isArray as _isArray,
 } from 'underscore';
-import appConfig from '../../appConfig.js';
 // Header Store
 import HeaderStore from '../../stores/HeaderStore.js';
 // Dependent Components
@@ -35,10 +34,6 @@ const styles = {
 };
 
 class NavMenu extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   /**
    * Generates the DOM for the Sticky Items that will
    * display when the Header is in sticky mode.
@@ -72,7 +67,7 @@ class NavMenu extends React.Component {
    * @returns {Object} React DOM.
    */
   renderNavMenu(items, exceptionList) {
-    let navItems = _isEmpty(items) ? appConfig.navTopLinks : items;
+    let navItems = items;
 
     if (_isArray(exceptionList) && !_isEmpty(exceptionList)) {
       navItems = _filter(navItems, (item) => item.id && !_contains(exceptionList, item.id));
@@ -103,7 +98,7 @@ class NavMenu extends React.Component {
         <div className={`${this.props.className}-Wrapper ${mobileActiveClass}`}>
           <span className="MobileLogoText nypl-icon-logo-type"></span>
           <ul className={`${this.props.className}-List`} id="NavMenu-List">
-            {this.renderNavMenu(this.props.items, ['df621833-4dd1-4223-83e5-6ad7f98ad26a'])}
+            {this.renderNavMenu(this.props.items, ['1b4916f4-6723-44f0-bfae-112441527c4d'])}
           </ul>
           <SearchButton className={`${this.props.className}`} />
           {this.renderStickyNavItems()}

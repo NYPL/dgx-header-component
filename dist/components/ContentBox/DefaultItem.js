@@ -66,17 +66,20 @@ var DefaultItem = (function (_React$Component) {
     key: 'featureDetails',
     value: function featureDetails(feature) {
       var person = this.personField(feature.person);
+      var date = feature.date;
+      var location = feature.location;
+      var description = feature.description;
 
-      if (feature.description) {
-        return this.extraFeatureDetails(feature.description, 'FeatureItem-Content-Desc');
+      if (description) {
+        return this.extraFeatureDetails(description, 'FeatureItem-Content-Desc');
       }
 
       return _react2['default'].createElement(
         'div',
         null,
-        this.extraFeatureDetails(feature.date, 'FeatureItem-Content-date'),
-        this.extraFeatureDetails(feature.location, 'FeatureItem-Content-location'),
-        this.extraFeatureDetails(person, 'FeatureItem-Content-person')
+        this.extraFeatureDetails(date, 'FeatureItem-Content-date'),
+        this.extraFeatureDetails(person, 'FeatureItem-Content-person'),
+        this.extraFeatureDetails(location, 'FeatureItem-Content-location')
       );
     }
   }, {

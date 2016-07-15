@@ -22,12 +22,14 @@ class MegaMenuFeatures extends React.Component {
 
     const {
       donateWidget = '',
+      donateWidgetUpcoming = '',
       findWidget = '',
     } = opts;
     // Extract the first featured item to pass onto the widgets matching navId
     const widgetFeature = object[0].featuredItem;
 
-    if (this.props.navId === donateWidget) {
+    if (this.props.navId === donateWidget ||
+      this.props.navId === donateWidgetUpcoming) {
       return (
         <DonateWidget
           key="donateWidget"
@@ -66,8 +68,9 @@ class MegaMenuFeatures extends React.Component {
         {this.renderFeatureitems(
           this.props.features,
           {
-            donateWidget: '1d9ea0ec-6ca3-4577-9dd1-e8de1f2a8bb1',
-            findWidget: 'df621833-4dd1-4223-83e5-6ad7f98ad26a',
+            donateWidget: 'ca83f064-e0be-4c05-8df3-9fa3b5dd6009',
+            donateWidgetUpcoming: '793f73d4-0ed8-458e-87de-896bee17043c',
+            findWidget: '1b4916f4-6723-44f0-bfae-112441527c4d',
           }
         )}
       </div>

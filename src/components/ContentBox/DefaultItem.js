@@ -31,16 +31,21 @@ class DefaultItem extends React.Component {
 
   featureDetails(feature) {
     const person = this.personField(feature.person);
+    const {
+      date,
+      location,
+      description,
+    } = feature;
 
-    if (feature.description) {
-      return this.extraFeatureDetails(feature.description, 'FeatureItem-Content-Desc');
+    if (description) {
+      return this.extraFeatureDetails(description, 'FeatureItem-Content-Desc');
     }
 
     return (
       <div>
-        {this.extraFeatureDetails(feature.date, 'FeatureItem-Content-date')}
-        {this.extraFeatureDetails(feature.location, 'FeatureItem-Content-location')}
+        {this.extraFeatureDetails(date, 'FeatureItem-Content-date')}
         {this.extraFeatureDetails(person, 'FeatureItem-Content-person')}
+        {this.extraFeatureDetails(location, 'FeatureItem-Content-location')}
       </div>
     );
   }

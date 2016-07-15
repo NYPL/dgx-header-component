@@ -10,10 +10,6 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _componentsHeaderHeaderJs = require('./components/Header/Header.js');
-
-var _componentsHeaderHeaderJs2 = _interopRequireDefault(_componentsHeaderHeaderJs);
-
 var _reactGa = require('react-ga');
 
 var _reactGa2 = _interopRequireDefault(_reactGa);
@@ -23,6 +19,8 @@ var _dgxReactGa = require('dgx-react-ga');
 var _dgxFeatureFlags = require('dgx-feature-flags');
 
 var _dgxFeatureFlags2 = _interopRequireDefault(_dgxFeatureFlags);
+
+var _componentsHeaderHeaderJs = require('./components/Header/Header.js');
 
 require('./styles/main.scss');
 
@@ -42,4 +40,4 @@ if (!window.dgxFeatureFlags) {
 /* app.jsx
  * Used for local development of React Components
  */
-_reactDom2['default'].render(_react2['default'].createElement(_componentsHeaderHeaderJs2['default'], { skipNav: { target: 'maincontent' } }), document.getElementById('app'));
+_reactDom2['default'].render(_react2['default'].createElement(_componentsHeaderHeaderJs.Header, { skipNav: { target: 'maincontent' }, env: 'local' }), document.getElementById('app'));

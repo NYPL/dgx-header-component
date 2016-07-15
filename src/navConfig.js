@@ -605,7 +605,7 @@ const upcoming = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: 'http://new-arrivals.nypl.org',
+          text: 'https://www.nypl.org/browse/new-arrivals/',
         },
       },
       name: {

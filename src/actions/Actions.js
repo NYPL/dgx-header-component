@@ -22,9 +22,6 @@ class Actions {
       headerRootUrl = appConfig.headerClientEnv.production;
     }
 
-    // Hard coding this for now.
-    headerRootUrl = appConfig.headerClientEnv.qa;
-
     // Concatenate the proper query params
     if (typeOfUrl !== '' && typeOfIa !== '') {
       fullUrl = `${headerRootUrl}${headerEndpoint}?${typeOfUrl}&${typeOfIa}`;

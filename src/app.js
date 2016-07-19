@@ -6,6 +6,10 @@ import FeatureFlags from 'dgx-feature-flags';
 import { Header } from './components/Header/Header.js';
 import './styles/main.scss';
 
+import a11y from 'react-a11y';
+
+a11y(React, { ReactDOM, includeSrcNode: true });
+
 // Use for testing GA events
 if (!window.ga) {
   console.log('Analytics not available - loading through React.');

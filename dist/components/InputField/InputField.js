@@ -39,6 +39,7 @@ var InputField = (function (_React$Component) {
     key: 'render',
     value: function render() {
       return _react2['default'].createElement('input', {
+        'aria-label': this.props.ariaLabel,
         id: this.props.id,
         lang: this.props.lang,
         type: this.props.type,
@@ -60,6 +61,7 @@ var InputField = (function (_React$Component) {
 })(_react2['default'].Component);
 
 InputField.propTypes = {
+  ariaLabel: _react2['default'].PropTypes.string,
   type: _react2['default'].PropTypes.string,
   lang: _react2['default'].PropTypes.string,
   id: _react2['default'].PropTypes.string,
@@ -77,6 +79,7 @@ InputField.propTypes = {
 };
 
 InputField.defaultProps = {
+  ariaLabel: '',
   type: 'text',
   lang: 'en',
   name: 'InputField'

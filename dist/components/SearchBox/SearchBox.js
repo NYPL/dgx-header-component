@@ -362,6 +362,7 @@ var SearchBox = (function (_React$Component) {
           'div',
           { className: _this2.props.className + '-Input-Option', key: i },
           _react2['default'].createElement(_InputFieldInputFieldJs2['default'], {
+            ariaLabel: element.value,
             type: 'radio',
             id: element.id,
             name: element.name,
@@ -435,6 +436,7 @@ var SearchBox = (function (_React$Component) {
                   null,
                   _react2['default'].createElement('span', { className: 'nypl-icon-magnifier-thin icon' }),
                   _react2['default'].createElement(_InputFieldInputFieldJs2['default'], {
+                    ariaLabel: 'Enter search keywords',
                     type: 'text',
                     id: this.props.id + '-Input-Keywords',
                     className: this.props.className + '-Input-Keywords ' + pulseAnimation,
@@ -464,11 +466,19 @@ var SearchBox = (function (_React$Component) {
             },
             mobileSubmitButtons
           ),
-          _react2['default'].createElement('button', {
-            id: this.props.className + '-Elements-SubmitButton',
-            className: 'nypl-icon-magnifier-fat ' + this.props.className + '-Elements-SubmitButton',
-            onClick: this._submitSearchRequest.bind(this, null)
-          })
+          _react2['default'].createElement(
+            'button',
+            {
+              id: this.props.className + '-Elements-SubmitButton',
+              className: 'nypl-icon-magnifier-fat ' + this.props.className + '-Elements-SubmitButton',
+              onClick: this._submitSearchRequest.bind(this, null)
+            },
+            _react2['default'].createElement(
+              'span',
+              { className: 'visuallyHidden' },
+              'Submit Search'
+            )
+          )
         )
       );
     }

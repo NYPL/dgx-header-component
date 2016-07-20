@@ -594,7 +594,7 @@ const upcoming = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: 'General Catalog',
+          text: 'Catalog',
         },
       },
       sort: 0,

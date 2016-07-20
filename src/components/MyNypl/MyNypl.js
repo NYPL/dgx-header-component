@@ -59,13 +59,13 @@ class MyNypl extends React.Component {
           </li>
           <li>
             <a
-              href={this.props.classicLink}
+              href={this.props.researchLink}
               style={styles.loginButtons}
-              className={`${this.props.className}-Classic-Btn`}
-              onClick={utils._trackHeader.bind(this, 'Log In', 'Classic')}
+              className={`${this.props.className}-Research-Btn`}
+              onClick={utils._trackHeader.bind(this, 'Log In', 'Research')}
             >
               <span className="nypl-icon-bldg icon"></span>
-              LOG INTO THE CLASSIC CATALOG
+              LOG INTO THE RESEARCH CATALOG
             </a>
           </li>
         </ul>
@@ -88,7 +88,7 @@ MyNypl.propTypes = {
   className: React.PropTypes.string,
   lang: React.PropTypes.string,
   catalogLink: React.PropTypes.string,
-  classicLink: React.PropTypes.string,
+  researchLink: React.PropTypes.string,
   infoLink: React.PropTypes.string,
 };
 
@@ -97,7 +97,7 @@ MyNypl.defaultProps = {
   className: 'MyNypl',
   lang: 'en',
   catalogLink: appConfig.myNyplLinks.catalog,
-  classicLink: appConfig.myNyplLinks.classic,
+  researchLink: appConfig.myNyplLinks.research,
   infoLink: appConfig.myNyplLinks.moreInfo,
 };
 

@@ -104,13 +104,13 @@ var MyNypl = (function (_React$Component) {
             _react2['default'].createElement(
               'a',
               {
-                href: this.props.classicLink,
+                href: this.props.researchLink,
                 style: styles.loginButtons,
-                className: this.props.className + '-Classic-Btn',
-                onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Log In', 'Classic')
+                className: this.props.className + '-Research-Btn',
+                onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Log In', 'Research')
               },
               _react2['default'].createElement('span', { className: 'nypl-icon-bldg icon' }),
-              'LOG INTO THE CLASSIC CATALOG'
+              'LOG INTO THE RESEARCH CATALOG'
             )
           )
         ),
@@ -136,7 +136,7 @@ MyNypl.propTypes = {
   className: _react2['default'].PropTypes.string,
   lang: _react2['default'].PropTypes.string,
   catalogLink: _react2['default'].PropTypes.string,
-  classicLink: _react2['default'].PropTypes.string,
+  researchLink: _react2['default'].PropTypes.string,
   infoLink: _react2['default'].PropTypes.string
 };
 
@@ -145,7 +145,7 @@ MyNypl.defaultProps = {
   className: 'MyNypl',
   lang: 'en',
   catalogLink: _appConfigJs2['default'].myNyplLinks.catalog,
-  classicLink: _appConfigJs2['default'].myNyplLinks.classic,
+  researchLink: _appConfigJs2['default'].myNyplLinks.research,
   infoLink: _appConfigJs2['default'].myNyplLinks.moreInfo
 };
 

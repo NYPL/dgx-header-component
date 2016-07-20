@@ -40,10 +40,11 @@ const styles = {
     textTransform: 'uppercase',
     textDecoration: 'underline',
   },
-  classicLinkWrapper: {
+  researchLinkWrapper: {
     borderLeft: '1.25px solid #b92b1a',
+    padding: '1.2em 0 1.75em',
   },
-  classicLinkLabel: {
+  researchLinkLabel: {
     width: '120px',
   },
   catalogLinkWrapper: {
@@ -66,7 +67,7 @@ class MobileMyNypl extends React.Component {
 
   render() {
     const catalogLinkClass = 'CatalogLink';
-    const classicLinkClass = 'ClassicLink';
+    const researchLinkClass = 'ResearchLink';
 
     return (
       <div className={this.props.className} style={styles.base}>
@@ -91,21 +92,21 @@ class MobileMyNypl extends React.Component {
           </span>
         </a>
         <a
-          href={this.props.classicLink}
-          className={classicLinkClass}
+          href={this.props.researchLink}
+          className={researchLinkClass}
           style={styles.links}
-          onClick={utils._trackHeader.bind(this, 'Mobile Log In', 'Classic')}
+          onClick={utils._trackHeader.bind(this, 'Mobile Log In', 'Research')}
         >
           <span
-            className={`${classicLinkClass}-Wrapper`}
-            style={[styles.wrapper, styles.classicLinkWrapper]}
+            className={`${researchLinkClass}-Wrapper`}
+            style={[styles.wrapper, styles.researchLinkWrapper]}
           >
-            <span className={`${classicLinkClass}-Icon nypl-icon-bldg`} style={styles.icon}></span>
+            <span className={`${researchLinkClass}-Icon nypl-icon-bldg`} style={styles.icon}></span>
             <span
-              className={`${classicLinkClass}-Label`}
-              style={[styles.label, styles.classicLinkLabel]}
+              className={`${researchLinkClass}-Label`}
+              style={[styles.label, styles.researchLinkLabel]}
             >
-              Log into the Classic Catalog
+              Log into the Research Catalog
             </span>
           </span>
         </a>
@@ -127,7 +128,7 @@ MobileMyNypl.propTypes = {
   lang: React.PropTypes.string,
   className: React.PropTypes.string,
   catalogLink: React.PropTypes.string,
-  classicLink: React.PropTypes.string,
+  researchLink: React.PropTypes.string,
   infoLink: React.PropTypes.string,
 };
 
@@ -135,7 +136,7 @@ MobileMyNypl.defaultProps = {
   lang: 'en',
   className: 'MobileMyNypl',
   catalogLink: appConfig.myNyplLinks.catalog,
-  classicLink: appConfig.myNyplLinks.classic,
+  researchLink: appConfig.myNyplLinks.research,
   infoLink: appConfig.myNyplLinks.moreInfo,
 };
 

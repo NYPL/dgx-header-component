@@ -46,4 +46,4 @@ if (!window.dgxFeatureFlags) {
 /* app.jsx
  * Used for local development of React Components
  */
-_reactDom2['default'].render(_react2['default'].createElement(_componentsHeaderHeaderJs.Header, { skipNav: { target: 'maincontent' }, env: 'local' }), document.getElementById('app'));
+_reactDom2['default'].render(_react2['default'].createElement(_componentsHeaderHeaderJs.Header, { skipNav: { target: 'maincontent' } }), document.getElementById('app'));

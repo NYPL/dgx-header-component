@@ -3,7 +3,7 @@ const config = {
   appName: 'NYPL React Header Component',
   port: 3001,
   webpackDevServerPort: 3000,
-  favIconPath: 'http://ux-static.nypl.org.s3-website-us-east-1.amazonaws.com/images/favicon.ico',
+  favIconPath: '//d2znry4lg8s0tq.cloudfront.net/images/favicon.ico',
   alertsApiUrl: 'https://refinery.nypl.org/api/nypl/ndo/v0.1/content/alerts?filter%5Bscope%5D=all',
   socialMediaLinks: {
     facebook: 'https://www.facebook.com/nypl',
@@ -39,7 +39,7 @@ const config = {
   },
   myNyplLinks: {
     catalog: 'https://browse.nypl.org/iii/encore/myaccount',
-    classic: 'https://catalog.nypl.org/patroninfo/top',
+    research: 'https://catalog.nypl.org/patroninfo/top',
     moreInfo: 'https://www.nypl.org/online-catalog-changes',
   },
 };

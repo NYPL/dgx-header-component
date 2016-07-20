@@ -68,10 +68,11 @@ var styles = {
     textTransform: 'uppercase',
     textDecoration: 'underline'
   },
-  classicLinkWrapper: {
-    borderLeft: '1.25px solid #b92b1a'
+  researchLinkWrapper: {
+    borderLeft: '1.25px solid #b92b1a',
+    padding: '1.2em 0 1.75em'
   },
-  classicLinkLabel: {
+  researchLinkLabel: {
     width: '120px'
   },
   catalogLinkWrapper: {
@@ -100,7 +101,7 @@ var MobileMyNypl = (function (_React$Component) {
     key: 'render',
     value: function render() {
       var catalogLinkClass = 'CatalogLink';
-      var classicLinkClass = 'ClassicLink';
+      var researchLinkClass = 'ResearchLink';
 
       return _react2['default'].createElement(
         'div',
@@ -133,25 +134,25 @@ var MobileMyNypl = (function (_React$Component) {
         _react2['default'].createElement(
           'a',
           {
-            href: this.props.classicLink,
-            className: classicLinkClass,
+            href: this.props.researchLink,
+            className: researchLinkClass,
             style: styles.links,
-            onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Mobile Log In', 'Classic')
+            onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Mobile Log In', 'Research')
           },
           _react2['default'].createElement(
             'span',
             {
-              className: classicLinkClass + '-Wrapper',
-              style: [styles.wrapper, styles.classicLinkWrapper]
+              className: researchLinkClass + '-Wrapper',
+              style: [styles.wrapper, styles.researchLinkWrapper]
             },
-            _react2['default'].createElement('span', { className: classicLinkClass + '-Icon nypl-icon-bldg', style: styles.icon }),
+            _react2['default'].createElement('span', { className: researchLinkClass + '-Icon nypl-icon-bldg', style: styles.icon }),
             _react2['default'].createElement(
               'span',
               {
-                className: classicLinkClass + '-Label',
-                style: [styles.label, styles.classicLinkLabel]
+                className: researchLinkClass + '-Label',
+                style: [styles.label, styles.researchLinkLabel]
               },
-              'Log into the Classic Catalog'
+              'Log into the Research Catalog'
             )
           )
         ),
@@ -177,7 +178,7 @@ MobileMyNypl.propTypes = {
   lang: _react2['default'].PropTypes.string,
   className: _react2['default'].PropTypes.string,
   catalogLink: _react2['default'].PropTypes.string,
-  classicLink: _react2['default'].PropTypes.string,
+  researchLink: _react2['default'].PropTypes.string,
   infoLink: _react2['default'].PropTypes.string
 };
 
@@ -185,7 +186,7 @@ MobileMyNypl.defaultProps = {
   lang: 'en',
   className: 'MobileMyNypl',
   catalogLink: _appConfigJs2['default'].myNyplLinks.catalog,
-  classicLink: _appConfigJs2['default'].myNyplLinks.classic,
+  researchLink: _appConfigJs2['default'].myNyplLinks.research,
   infoLink: _appConfigJs2['default'].myNyplLinks.moreInfo
 };
 

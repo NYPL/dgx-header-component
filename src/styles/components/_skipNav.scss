@@ -12,7 +12,11 @@
   z-index: 20;
 
   &:focus {
-  	outline: none;
-  	box-shadow: 0 0 7px rgba(39, 153, 197, 0.75);
+    outline: none;
+    box-shadow: 0 0 7px rgba(39, 153, 197, 0.75);
+  }
+
+  a {
+    display: block;
   }
 }

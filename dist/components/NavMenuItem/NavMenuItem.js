@@ -129,8 +129,6 @@ var NavMenuItem = (function (_React$Component) {
         _react2['default'].createElement(
           'span',
           {
-            onMouseEnter: this.activateHover,
-            onMouseLeave: this.deactivateHover,
             className: 'NavMenuItem-Link',
             id: this.props.navId ? 'NavMenuItem-Link-' + this.props.navId : 'NavMenuItem-Link'
           },
@@ -144,10 +142,8 @@ var NavMenuItem = (function (_React$Component) {
               }
             },
             this.props.label[this.props.lang].text
-          ),
-          megaMenuArrow
-        ),
-        megaMenu
+          )
+        )
       );
     }
   }]);

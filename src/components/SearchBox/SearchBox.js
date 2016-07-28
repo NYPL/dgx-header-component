@@ -63,8 +63,6 @@ class SearchBox extends React.Component {
     this._triggerSubmit = this._triggerSubmit.bind(this);
     // The fucntion to trigger validation animation for keywords input
     this._animationTimer = this._animationTimer.bind(this);
-    this._watchHoverIntentEnter = this._watchHoverIntentEnter.bind(this);
-    this._watchHoverIntentLeave = this._watchHoverIntentLeave.bind(this);
   }
 
   // Listen to the search button action changes in Store,
@@ -189,28 +187,6 @@ class SearchBox extends React.Component {
   }
 
   /**
-   * _watchHoverIntentEnter()
-   * If the lastActiveMenuItem passed as a prop
-   * matches the search by hover. Then fire the
-   * Action to store a reference to the lastActiveMenuItem as hoverSearch.
-   */
-  _watchHoverIntentEnter() {
-    if (this.state.actionValue === 'hoverSearch') {
-      Actions.setLastActiveMenuItem(this.state.actionValue);
-    }
-  }
-
-  /**
-   * _watchHoverIntentLeave()
-   * Sets the Store's lastActiveMenuItem
-   * property to an empty string when
-   * hovered out.
-   */
-  _watchHoverIntentLeave() {
-    Actions.setLastActiveMenuItem('');
-  }
-
-  /**
    * _setCatalogUrl(searchString, catalogBaseUrl)
    * Returns the final URL for the catalog search.
    */
@@ -281,11 +257,10 @@ class SearchBox extends React.Component {
   }
 
   render() {
-    // Set active class if search button is hovered or clicked
+    // Set active class if search button is clicked
     const classes = cx({
-      'active animateMegaMenuEnter fadeIn': this.state.actionValue === 'hoverSearch',
-      active: HeaderStore._getLastActiveMenuItem() === 'hoverSearch',
-      mobileActive: this.state.actionValue === 'clickSearch',
+      'active animateMegaMenuEnter fadeIn': this.props.active,
+      mobileActive: this.state.actionValue === 'clickSearch' && !this.props.active,
     });
     // Classes for keywords input fields to activate pulse animation
     const pulseAnimation = cx({
@@ -333,8 +308,6 @@ class SearchBox extends React.Component {
         id={this.props.id}
         className={`${this.props.className} ${classes}`}
         onKeyPress={this._triggerSubmit}
-        onMouseEnter={this._watchHoverIntentEnter}
-        onMouseLeave={this._watchHoverIntentLeave}
       >
         <div
           id={`${this.props.className}-Elements-Wrapper`}

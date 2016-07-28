@@ -23,6 +23,10 @@ var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
+var _reactOnclickout = require('react-onclickout');
+
+var _reactOnclickout2 = _interopRequireDefault(_reactOnclickout);
+
 // Import components
 
 var _ButtonsBasicButtonJs = require('../Buttons/BasicButton.js');
@@ -33,15 +37,11 @@ var _SearchBoxSearchBoxJs = require('../SearchBox/SearchBox.js');
 
 var _SearchBoxSearchBoxJs2 = _interopRequireDefault(_SearchBoxSearchBoxJs);
 
-// ALT Flux Store/Actions
+// ALT Flux Store
 
 var _storesHeaderStoreJs = require('../../stores/HeaderStore.js');
 
 var _storesHeaderStoreJs2 = _interopRequireDefault(_storesHeaderStoreJs);
-
-var _actionsActionsJs = require('../../actions/Actions.js');
-
-var _actionsActionsJs2 = _interopRequireDefault(_actionsActionsJs);
 
 // GA Utility Library
 
@@ -57,48 +57,58 @@ var SearchButton = (function (_React$Component) {
 
     _get(Object.getPrototypeOf(SearchButton.prototype), 'constructor', this).call(this, props);
 
-    this.activateHover = this.activateHover.bind(this);
-    this.deactivateHover = this.deactivateHover.bind(this);
+    this.state = {
+      active: false
+    };
+
+    this.handleOnClick = this.handleOnClick.bind(this);
+    this.handleOnClickOut = this.handleOnClickOut.bind(this);
   }
 
   /**
-   * Update the Store's searchButtonActionValue
-   * with hoverSearch after a set time delay.
+   * handleOnClick()
+   * Handles when the Search menu item is clicked.
    */
 
   _createClass(SearchButton, [{
-    key: 'activateHover',
-    value: function activateHover() {
-      this.hoverTimer = setTimeout(function () {
-        _actionsActionsJs2['default'].searchButtonActionValue('hoverSearch');
+    key: 'handleOnClick',
+    value: function handleOnClick(e) {
+      e.preventDefault();
+      if (this.state.active) {
+        this.handleOnClickOut();
+      } else {
+        this.setState({ active: true });
 
         // Fire GA event to track when the Search Menu is open
         _utilsUtilsJs2['default']._trackHeader('Search', 'Open Menu');
-      }, 80);
+      };
     }
 
     /**
-     * Clear the activateHover timer if it exists.
-     * Reset the Store's searchButtonActionValue to empty
-     * after a set time delay.
+     * handleOnClickOut()
+     * Handles closing the nav item.
      */
   }, {
-    key: 'deactivateHover',
-    value: function deactivateHover() {
-      clearTimeout(this.hoverTimer);
+    key: 'handleOnClickOut',
+    value: function handleOnClickOut() {
+      var _this = this;
+
+      if (this.state.active) {
+        _utilsUtilsJs2['default']._trackHeader('Search', 'Close Menu');
+      }
 
       setTimeout(function () {
-        _actionsActionsJs2['default'].searchButtonActionValue('');
+        _this.setState({ active: false });
       }, 250);
     }
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var rootClass = this.props.className;
       // Give active class if the button is activated by hover
-      var classes = (0, _classnames2['default'])({
-        active: _storesHeaderStoreJs2['default']._getSearchButtonActionValue() === 'hoverSearch' || _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === 'hoverSearch'
-      });
+      var classes = (0, _classnames2['default'])({ active: this.state.active });
       // Detect if the header is sticky
       var stickyStatus = (0, _classnames2['default'])({ isSticky: _storesHeaderStoreJs2['default'].getState().isSticky });
       var searchLabel = _react2['default'].createElement(
@@ -110,18 +120,24 @@ var SearchButton = (function (_React$Component) {
       return _react2['default'].createElement(
         'div',
         { className: rootClass + '-searchBox-Wrapper' },
-        _react2['default'].createElement(_ButtonsBasicButtonJs2['default'], {
-          onMouseEnter: this.activateHover,
-          onMouseLeave: this.deactivateHover,
-          id: rootClass + '-searchButton',
-          className: 'nypl-icon-magnifier-fat ' + rootClass + '-searchButton ' + classes + ' ' + stickyStatus,
-          name: 'Search Button',
-          label: searchLabel
-        }),
-        _react2['default'].createElement(_SearchBoxSearchBoxJs2['default'], {
-          id: rootClass + '-searchBox',
-          className: rootClass + '-searchBox'
-        })
+        _react2['default'].createElement(
+          _reactOnclickout2['default'],
+          { onClickOut: this.handleOnClickOut },
+          _react2['default'].createElement(_ButtonsBasicButtonJs2['default'], {
+            id: rootClass + '-searchButton',
+            className: 'nypl-icon-magnifier-fat ' + rootClass + '-searchButton ' + classes + ' ' + stickyStatus,
+            name: 'Search Button',
+            label: searchLabel,
+            onClick: function (e) {
+              return _this2.handleOnClick(e);
+            }
+          }),
+          _react2['default'].createElement(_SearchBoxSearchBoxJs2['default'], {
+            active: this.state.active,
+            id: rootClass + '-searchBox',
+            className: rootClass + '-searchBox'
+          })
+        )
       );
     }
   }]);

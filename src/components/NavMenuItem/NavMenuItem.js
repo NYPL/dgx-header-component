@@ -79,8 +79,6 @@ class NavMenuItem extends React.Component {
         className={this.props.className}
       >
         <span
-          onMouseEnter={this.activateHover}
-          onMouseLeave={this.deactivateHover}
           className="NavMenuItem-Link"
           id={(this.props.navId) ? `NavMenuItem-Link-${this.props.navId}` : 'NavMenuItem-Link'}
         >
@@ -93,9 +91,7 @@ class NavMenuItem extends React.Component {
           >
             {this.props.label[this.props.lang].text}
           </a>
-          {megaMenuArrow}
         </span>
-        {megaMenu}
       </li>
     );
   }

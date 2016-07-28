@@ -14,6 +14,7 @@ class InputField extends React.Component {
   render() {
     return (
       <input
+        aria-label={this.props.ariaLabel}
         id={this.props.id}
         lang={this.props.lang}
         type={this.props.type}
@@ -33,6 +34,7 @@ class InputField extends React.Component {
 }
 
 InputField.propTypes = {
+  ariaLabel: React.PropTypes.string,
   type: React.PropTypes.string,
   lang: React.PropTypes.string,
   id: React.PropTypes.string,
@@ -50,6 +52,7 @@ InputField.propTypes = {
 };
 
 InputField.defaultProps = {
+  ariaLabel: '',
   type: 'text',
   lang: 'en',
   name: 'InputField',

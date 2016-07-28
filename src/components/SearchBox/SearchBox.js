@@ -297,10 +297,11 @@ class SearchBox extends React.Component {
     const inputOptions = inputOptionData.map((element, i) =>
       <div className={`${this.props.className}-Input-Option`} key={i}>
         <InputField
+          ariaLabel={element.value}
           type="radio"
           id={element.id}
           name={element.name}
-          value = {element.value}
+          value={element.value}
           ref={element.ref}
           checked={this.state.searchOption === element.value}
           onChange={this._inputChange.bind(this, 'option')}
@@ -351,6 +352,7 @@ class SearchBox extends React.Component {
                 <label>
                   <span className="nypl-icon-magnifier-thin icon"></span>
                   <InputField
+                    ariaLabel="Enter search keywords"
                     type="text"
                     id={`${this.props.id}-Input-Keywords`}
                     className={`${this.props.className}-Input-Keywords ${pulseAnimation}`}
@@ -383,6 +385,7 @@ class SearchBox extends React.Component {
             className={`nypl-icon-magnifier-fat ${this.props.className}-Elements-SubmitButton`}
             onClick={this._submitSearchRequest.bind(this, null)}
           >
+            <span className="visuallyHidden">Submit Search</span>
           </button>
         </div>
       </div>

@@ -74,7 +74,10 @@ if (process.env.NODE_ENV !== 'development') {
     plugins: [
       new cleanBuild(['dist']),
       new ExtractTextPlugin('main.scss'),
-      new webpack.HotModuleReplacementPlugin()
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.DefinePlugin({
+        'loadA11y': process.env.loadA11y || false,
+      }),
     ],
     resolve: {
       extensions: ['', '.js', '.jsx', '.scss']

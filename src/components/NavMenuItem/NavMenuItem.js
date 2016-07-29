@@ -4,9 +4,6 @@ import cx from 'classnames';
 import utils from '../../utils/utils.js';
 // Alt Store
 import HeaderStore from '../../stores/HeaderStore.js';
-// NYPL Dependent React Components
-import MegaMenu from '../MegaMenu/MegaMenu.js';
-import MegaMenuArrow from '../MegaMenu/MegaMenuArrow.js';
 
 class NavMenuItem extends React.Component {
   constructor(props) {
@@ -51,25 +48,6 @@ class NavMenuItem extends React.Component {
       active: this.props.index === this.state.activeItem
         || HeaderStore._getLastActiveMenuItem() === this.props.navId,
     });
-    const megaMenuArrow = (this.props.subNav && this.props.features) ?
-      <MegaMenuArrow
-        navId={this.props.navId}
-        index={this.props.index}
-        currentActiveItem={this.state.activeItem}
-      /> : null;
-    const megaMenu = (this.props.subNav && this.props.features) ?
-      <MegaMenu
-        label={this.props.label}
-        lang={this.props.lang}
-        urlType={this.props.urlType}
-        items={this.props.subNav}
-        navId={this.props.navId}
-        features={this.props.features}
-        topLink={target}
-        index={this.props.index}
-        lastActiveMenuItem={this.state.lastActiveMenuItem}
-        currentActiveItem={this.state.activeItem}
-      /> : null;
 
     return (
       <li

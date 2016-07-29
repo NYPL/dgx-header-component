@@ -34,6 +34,16 @@ var _storesHeaderStoreJs = require('../../stores/HeaderStore.js');
 
 var _storesHeaderStoreJs2 = _interopRequireDefault(_storesHeaderStoreJs);
 
+// NYPL Dependent React Components
+
+var _MegaMenuMegaMenuJs = require('../MegaMenu/MegaMenu.js');
+
+var _MegaMenuMegaMenuJs2 = _interopRequireDefault(_MegaMenuMegaMenuJs);
+
+var _MegaMenuMegaMenuArrowJs = require('../MegaMenu/MegaMenuArrow.js');
+
+var _MegaMenuMegaMenuArrowJs2 = _interopRequireDefault(_MegaMenuMegaMenuArrowJs);
+
 var NavMenuItem = (function (_React$Component) {
   _inherits(NavMenuItem, _React$Component);
 
@@ -60,12 +70,14 @@ var NavMenuItem = (function (_React$Component) {
     value: function activateHover() {
       var _this = this;
 
-      this.hoverTimer = setTimeout(function () {
-        _this.setState({
-          lastActiveMenuItem: _this.props.navId,
-          activeItem: _this.props.index
-        });
-      }, 80);
+      if (this.props.cookie !== '1') {
+        this.hoverTimer = setTimeout(function () {
+          _this.setState({
+            lastActiveMenuItem: _this.props.navId,
+            activeItem: _this.props.index
+          });
+        }, 80);
+      }
     }
 
     /**
@@ -77,11 +89,13 @@ var NavMenuItem = (function (_React$Component) {
     value: function deactivateHover() {
       var _this2 = this;
 
-      clearTimeout(this.hoverTimer);
+      if (!this.props.cookie !== '1') {
+        clearTimeout(this.hoverTimer);
 
-      setTimeout(function () {
-        _this2.setState({ activeItem: null });
-      }, 250);
+        setTimeout(function () {
+          _this2.setState({ activeItem: null });
+        }, 250);
+      }
     }
   }, {
     key: 'render',
@@ -92,6 +106,25 @@ var NavMenuItem = (function (_React$Component) {
       var linkClass = (0, _classnames2['default'])({
         active: this.props.index === this.state.activeItem || _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === this.props.navId
       });
+      var cookie = this.props.cookie;
+
+      var megaMenuArrow = this.props.subNav && this.props.features && cookie !== '1' ? _react2['default'].createElement(_MegaMenuMegaMenuArrowJs2['default'], {
+        navId: this.props.navId,
+        index: this.props.index,
+        currentActiveItem: this.state.activeItem
+      }) : null;
+      var megaMenu = this.props.subNav && this.props.features && cookie !== '1' ? _react2['default'].createElement(_MegaMenuMegaMenuJs2['default'], {
+        label: this.props.label,
+        lang: this.props.lang,
+        urlType: this.props.urlType,
+        items: this.props.subNav,
+        navId: this.props.navId,
+        features: this.props.features,
+        topLink: target,
+        index: this.props.index,
+        lastActiveMenuItem: this.state.lastActiveMenuItem,
+        currentActiveItem: this.state.activeItem
+      }) : null;
 
       return _react2['default'].createElement(
         'li',
@@ -102,6 +135,8 @@ var NavMenuItem = (function (_React$Component) {
         _react2['default'].createElement(
           'span',
           {
+            onMouseEnter: this.activateHover,
+            onMouseLeave: this.deactivateHover,
             className: 'NavMenuItem-Link',
             id: this.props.navId ? 'NavMenuItem-Link-' + this.props.navId : 'NavMenuItem-Link'
           },
@@ -115,8 +150,10 @@ var NavMenuItem = (function (_React$Component) {
               }
             },
             this.props.label[this.props.lang].text
-          )
-        )
+          ),
+          megaMenuArrow
+        ),
+        megaMenu
       );
     }
   }]);
@@ -135,7 +172,8 @@ NavMenuItem.propTypes = {
   label: _react2['default'].PropTypes.object,
   subNav: _react2['default'].PropTypes.array,
   features: _react2['default'].PropTypes.array,
-  urlType: _react2['default'].PropTypes.string
+  urlType: _react2['default'].PropTypes.string,
+  cookie: _react2['default'].PropTypes.string
 };
 
 NavMenuItem.defaultProps = {
@@ -143,7 +181,8 @@ NavMenuItem.defaultProps = {
   root: '//www.nypl.org/',
   lang: 'en',
   className: 'NavMenuItem',
-  hoverTimer: null
+  hoverTimer: null,
+  cookie: '0'
 };
 
 exports['default'] = NavMenuItem;

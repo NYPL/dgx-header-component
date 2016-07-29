@@ -136,7 +136,8 @@ var NavMenu = (function (_React$Component) {
           features: item.features,
           subNav: item.subnav,
           key: index,
-          index: index
+          index: index,
+          cookie: _this.props.cookie
         });
       });
     }
@@ -174,12 +175,14 @@ NavMenu.propTypes = {
   lang: _react2['default'].PropTypes.string,
   className: _react2['default'].PropTypes.string,
   items: _react2['default'].PropTypes.array,
-  urlType: _react2['default'].PropTypes.string
+  urlType: _react2['default'].PropTypes.string,
+  cookie: _react2['default'].PropTypes.string
 };
 
 NavMenu.defaultProps = {
   lang: 'en',
-  className: 'NavMenu'
+  className: 'NavMenu',
+  cookie: '0'
 };
 
 exports['default'] = (0, _radium2['default'])(NavMenu);

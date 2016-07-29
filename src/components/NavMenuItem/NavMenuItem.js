@@ -4,6 +4,9 @@ import cx from 'classnames';
 import utils from '../../utils/utils.js';
 // Alt Store
 import HeaderStore from '../../stores/HeaderStore.js';
+// NYPL Dependent React Components
+import MegaMenu from '../MegaMenu/MegaMenu.js';
+import MegaMenuArrow from '../MegaMenu/MegaMenuArrow.js';
 
 class NavMenuItem extends React.Component {
   constructor(props) {
@@ -22,12 +25,14 @@ class NavMenuItem extends React.Component {
    * Sets the state's lastActiveMenuItem and activeItem after a given time delay.
    */
   activateHover() {
-    this.hoverTimer = setTimeout(() => {
-      this.setState({
-        lastActiveMenuItem: this.props.navId,
-        activeItem: this.props.index,
-      });
-    }, 80);
+    if (this.props.cookie !== '1') {
+      this.hoverTimer = setTimeout(() => {
+        this.setState({
+          lastActiveMenuItem: this.props.navId,
+          activeItem: this.props.index,
+        });
+      }, 80);
+    }
   }
 
   /**
@@ -35,11 +40,13 @@ class NavMenuItem extends React.Component {
    * Then removes the state's activeItem after a given time delay.
    */
   deactivateHover() {
-    clearTimeout(this.hoverTimer);
+    if (!this.props.cookie !== '1') {
+      clearTimeout(this.hoverTimer);
 
-    setTimeout(() => {
-      this.setState({ activeItem: null });
-    }, 250);
+      setTimeout(() => {
+        this.setState({ activeItem: null });
+      }, 250);
+    }
   }
 
   render() {
@@ -48,6 +55,27 @@ class NavMenuItem extends React.Component {
       active: this.props.index === this.state.activeItem
         || HeaderStore._getLastActiveMenuItem() === this.props.navId,
     });
+    const cookie = this.props.cookie;
+
+    const megaMenuArrow = (this.props.subNav && this.props.features && (cookie !== '1')) ?
+      <MegaMenuArrow
+        navId={this.props.navId}
+        index={this.props.index}
+        currentActiveItem={this.state.activeItem}
+      /> : null;
+    const megaMenu = (this.props.subNav && this.props.features && (cookie !== '1')) ?
+      <MegaMenu
+        label={this.props.label}
+        lang={this.props.lang}
+        urlType={this.props.urlType}
+        items={this.props.subNav}
+        navId={this.props.navId}
+        features={this.props.features}
+        topLink={target}
+        index={this.props.index}
+        lastActiveMenuItem={this.state.lastActiveMenuItem}
+        currentActiveItem={this.state.activeItem}
+      /> : null;
 
     return (
       <li
@@ -57,6 +85,8 @@ class NavMenuItem extends React.Component {
         className={this.props.className}
       >
         <span
+          onMouseEnter={this.activateHover}
+          onMouseLeave={this.deactivateHover}
           className="NavMenuItem-Link"
           id={(this.props.navId) ? `NavMenuItem-Link-${this.props.navId}` : 'NavMenuItem-Link'}
         >
@@ -69,7 +99,9 @@ class NavMenuItem extends React.Component {
           >
             {this.props.label[this.props.lang].text}
           </a>
+          {megaMenuArrow}
         </span>
+        {megaMenu}
       </li>
     );
   }
@@ -87,6 +119,7 @@ NavMenuItem.propTypes = {
   subNav: React.PropTypes.array,
   features: React.PropTypes.array,
   urlType: React.PropTypes.string,
+  cookie: React.PropTypes.string,
 };
 
 NavMenuItem.defaultProps = {
@@ -95,6 +128,7 @@ NavMenuItem.defaultProps = {
   lang: 'en',
   className: 'NavMenuItem',
   hoverTimer: null,
+  cookie: '0',
 };
 
 export default NavMenuItem;

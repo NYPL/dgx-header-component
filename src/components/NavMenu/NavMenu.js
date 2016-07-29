@@ -84,6 +84,7 @@ class NavMenu extends React.Component {
         subNav={item.subnav}
         key={index}
         index={index}
+        cookie={this.props.cookie}
       />
     );
   }
@@ -114,11 +115,13 @@ NavMenu.propTypes = {
   className: React.PropTypes.string,
   items: React.PropTypes.array,
   urlType: React.PropTypes.string,
+  cookie: React.PropTypes.string,
 };
 
 NavMenu.defaultProps = {
   lang: 'en',
   className: 'NavMenu',
+  cookie: '0',
 };
 
 export default Radium(NavMenu);

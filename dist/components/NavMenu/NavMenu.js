@@ -40,10 +40,6 @@ var _SearchButtonSearchButtonJs = require('../SearchButton/SearchButton.js');
 
 var _SearchButtonSearchButtonJs2 = _interopRequireDefault(_SearchButtonSearchButtonJs);
 
-var _SearchButtonSearchButtonHoverJs = require('../SearchButton/SearchButtonHover.js');
-
-var _SearchButtonSearchButtonHoverJs2 = _interopRequireDefault(_SearchButtonSearchButtonHoverJs);
-
 var _NavMenuItemNavMenuItemJs = require('../NavMenuItem/NavMenuItem.js');
 
 var _NavMenuItemNavMenuItemJs2 = _interopRequireDefault(_NavMenuItemNavMenuItemJs);
@@ -151,13 +147,6 @@ var NavMenu = (function (_React$Component) {
       var mobileActiveClass = (0, _classnames2['default'])({
         mobileActive: _storesHeaderStoreJs2['default']._getMobileMenuBtnValue() === 'mobileMenu'
       });
-      var searchButton = undefined;
-
-      if (this.props.cookie === '1') {
-        searchButton = _react2['default'].createElement(_SearchButtonSearchButtonJs2['default'], { className: '' + this.props.className });
-      } else {
-        searchButton = _react2['default'].createElement(_SearchButtonSearchButtonHoverJs2['default'], { className: '' + this.props.className });
-      }
 
       return _react2['default'].createElement(
         'nav',
@@ -171,7 +160,10 @@ var NavMenu = (function (_React$Component) {
             { className: this.props.className + '-List', id: 'NavMenu-List' },
             this.renderNavMenu(this.props.items, ['1b4916f4-6723-44f0-bfae-112441527c4d'])
           ),
-          searchButton,
+          _react2['default'].createElement(_SearchButtonSearchButtonJs2['default'], {
+            className: '' + this.props.className,
+            cookie: this.props.cookie
+          }),
           this.renderStickyNavItems(),
           _react2['default'].createElement(_NavMenuBottomButtonsNavMenuBottomButtonsJs2['default'], { className: 'MobileBottomButtons' })
         )

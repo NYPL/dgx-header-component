@@ -188,6 +188,7 @@ class MobileHeader extends React.Component {
           onClick={() => utils._trackHeader('Click', 'Mobile Locations Button')}
           className={`${this.props.className}-Locator nypl-icon-locator-large`}
         >
+          <span className="visuallyHidden">NYPL Locations</span>
         </a>
 
         <ReactTappable onTap={() => this.handleMenuBtnPress('clickSearch')}>

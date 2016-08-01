@@ -100,7 +100,6 @@ class MyNyplButton extends React.Component {
           style={[styles.base, this.props.style]}
         >
           <button
-            id="MyNyplButton"
             className={`MyNyplButton ${buttonClasses}`}
             onClick={this.handleClick}
             style={[styles.MyNyplButton, this.props.style]}

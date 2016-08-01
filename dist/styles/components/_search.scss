@@ -42,8 +42,9 @@
   // Override NYPL Base rule
   &:hover {
     border: none;
-    color: #78CCED;
-    @include transition(color .2s linear .2s, color .2s linear .2s);
+    // color: #78CCED;
+    // @include transition(color .2s linear .2s, color .2s linear .2s);
+    color: #1DA1D4;
   }
 
   /* ACTIVE STATE */

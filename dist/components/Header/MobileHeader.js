@@ -234,14 +234,22 @@ var MobileHeader = (function (_React$Component) {
             ref: 'MobileMyNyplButton'
           })
         ),
-        _react2['default'].createElement('a', {
-          style: styles.locatorIcon,
-          href: locatorUrl,
-          onClick: function () {
-            return _utilsUtilsJs2['default']._trackHeader('Click', 'Mobile Locations Button');
+        _react2['default'].createElement(
+          'a',
+          {
+            style: styles.locatorIcon,
+            href: locatorUrl,
+            onClick: function () {
+              return _utilsUtilsJs2['default']._trackHeader('Click', 'Mobile Locations Button');
+            },
+            className: this.props.className + '-Locator nypl-icon-locator-large'
           },
-          className: this.props.className + '-Locator nypl-icon-locator-large'
-        }),
+          _react2['default'].createElement(
+            'span',
+            { className: 'visuallyHidden' },
+            'NYPL Locations'
+          )
+        ),
         _react2['default'].createElement(
           _reactTappable2['default'],
           { onTap: function () {

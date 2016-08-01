@@ -25,12 +25,14 @@ class NavMenuItem extends React.Component {
    * Sets the state's lastActiveMenuItem and activeItem after a given time delay.
    */
   activateHover() {
-    this.hoverTimer = setTimeout(() => {
-      this.setState({
-        lastActiveMenuItem: this.props.navId,
-        activeItem: this.props.index,
-      });
-    }, 80);
+    if (this.props.cookie !== '1') {
+      this.hoverTimer = setTimeout(() => {
+        this.setState({
+          lastActiveMenuItem: this.props.navId,
+          activeItem: this.props.index,
+        });
+      }, 80);
+    }
   }
 
   /**
@@ -38,11 +40,13 @@ class NavMenuItem extends React.Component {
    * Then removes the state's activeItem after a given time delay.
    */
   deactivateHover() {
-    clearTimeout(this.hoverTimer);
+    if (!this.props.cookie !== '1') {
+      clearTimeout(this.hoverTimer);
 
-    setTimeout(() => {
-      this.setState({ activeItem: null });
-    }, 250);
+      setTimeout(() => {
+        this.setState({ activeItem: null });
+      }, 250);
+    }
   }
 
   render() {
@@ -51,13 +55,15 @@ class NavMenuItem extends React.Component {
       active: this.props.index === this.state.activeItem
         || HeaderStore._getLastActiveMenuItem() === this.props.navId,
     });
-    const megaMenuArrow = (this.props.subNav && this.props.features) ?
+    const cookie = this.props.cookie;
+
+    const megaMenuArrow = (this.props.subNav && this.props.features && (cookie !== '1')) ?
       <MegaMenuArrow
         navId={this.props.navId}
         index={this.props.index}
         currentActiveItem={this.state.activeItem}
       /> : null;
-    const megaMenu = (this.props.subNav && this.props.features) ?
+    const megaMenu = (this.props.subNav && this.props.features && (cookie !== '1')) ?
       <MegaMenu
         label={this.props.label}
         lang={this.props.lang}
@@ -113,6 +119,7 @@ NavMenuItem.propTypes = {
   subNav: React.PropTypes.array,
   features: React.PropTypes.array,
   urlType: React.PropTypes.string,
+  cookie: React.PropTypes.string,
 };
 
 NavMenuItem.defaultProps = {
@@ -121,6 +128,7 @@ NavMenuItem.defaultProps = {
   lang: 'en',
   className: 'NavMenuItem',
   hoverTimer: null,
+  cookie: '0',
 };
 
 export default NavMenuItem;

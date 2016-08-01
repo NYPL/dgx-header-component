@@ -190,6 +190,7 @@ class EmailSubscription extends React.Component {
               <InputField type="hidden" name="lid" value="1061" />
 
               <InputField
+                ariaLabel="Email Address Input"
                 className={`${formClass}-Input`}
                 type="email"
                 name="Email Address"
@@ -207,6 +208,7 @@ class EmailSubscription extends React.Component {
               <div className={`${formClass}-Submit`}>
                 <span className="nypl-icon-check-solo icon"></span>
                 <InputField
+                  ariaLabel="Sign up"
                   type="submit"
                   name="submit"
                   value="SIGN UP"

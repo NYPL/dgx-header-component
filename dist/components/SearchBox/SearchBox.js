@@ -346,11 +346,11 @@ var SearchBox = (function (_React$Component) {
 
       // Set active class if search button is hovered or clicked
       var classes = (0, _classnames2['default'])({
-        'active animateMegaMenuEnter fadeIn': this.state.actionValue === 'hoverSearch',
-        active: _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === 'hoverSearch',
-        mobileActive: this.state.actionValue === 'clickSearch'
+        'active animateMegaMenuEnter fadeIn': this.props.active || this.state.actionValue === 'hoverSearch',
+        mobileActive: this.state.actionValue === 'clickSearch' && !this.props.active
       });
       // Classes for keywords input fields to activate pulse animation
+      // active: HeaderStore._getLastActiveMenuItem() === 'hoverSearch',
       var pulseAnimation = (0, _classnames2['default'])({
         'keywords-pulse-fade-in': this.state.placeholderAnimation === 'initial',
         'keywords-pulse': this.state.placeholderAnimation === 'sequential'
@@ -362,6 +362,7 @@ var SearchBox = (function (_React$Component) {
           'div',
           { className: _this2.props.className + '-Input-Option', key: i },
           _react2['default'].createElement(_InputFieldInputFieldJs2['default'], {
+            ariaLabel: element.value,
             type: 'radio',
             id: element.id,
             name: element.name,
@@ -435,6 +436,7 @@ var SearchBox = (function (_React$Component) {
                   null,
                   _react2['default'].createElement('span', { className: 'nypl-icon-magnifier-thin icon' }),
                   _react2['default'].createElement(_InputFieldInputFieldJs2['default'], {
+                    ariaLabel: 'Enter search keywords',
                     type: 'text',
                     id: this.props.id + '-Input-Keywords',
                     className: this.props.className + '-Input-Keywords ' + pulseAnimation,
@@ -464,11 +466,19 @@ var SearchBox = (function (_React$Component) {
             },
             mobileSubmitButtons
           ),
-          _react2['default'].createElement('button', {
-            id: this.props.className + '-Elements-SubmitButton',
-            className: 'nypl-icon-magnifier-fat ' + this.props.className + '-Elements-SubmitButton',
-            onClick: this._submitSearchRequest.bind(this, null)
-          })
+          _react2['default'].createElement(
+            'button',
+            {
+              id: this.props.className + '-Elements-SubmitButton',
+              className: 'nypl-icon-magnifier-fat ' + this.props.className + '-Elements-SubmitButton',
+              onClick: this._submitSearchRequest.bind(this, null)
+            },
+            _react2['default'].createElement(
+              'span',
+              { className: 'visuallyHidden' },
+              'Submit Search'
+            )
+          )
         )
       );
     }

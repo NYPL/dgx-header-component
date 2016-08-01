@@ -256,6 +256,7 @@ var EmailSubscription = (function (_React$Component) {
               _react2['default'].createElement(_InputFieldInputFieldJs2['default'], { type: 'hidden', name: 'Email Type', value: 'HTML' }),
               _react2['default'].createElement(_InputFieldInputFieldJs2['default'], { type: 'hidden', name: 'lid', value: '1061' }),
               _react2['default'].createElement(_InputFieldInputFieldJs2['default'], {
+                ariaLabel: 'Email Address Input',
                 className: formClass + '-Input',
                 type: 'email',
                 name: 'Email Address',
@@ -279,6 +280,7 @@ var EmailSubscription = (function (_React$Component) {
                 { className: formClass + '-Submit' },
                 _react2['default'].createElement('span', { className: 'nypl-icon-check-solo icon' }),
                 _react2['default'].createElement(_InputFieldInputFieldJs2['default'], {
+                  ariaLabel: 'Sign up',
                   type: 'submit',
                   name: 'submit',
                   value: 'SIGN UP',

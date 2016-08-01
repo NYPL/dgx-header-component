@@ -44,7 +44,7 @@ class MyNypl extends React.Component {
 
   render() {
     return (
-      <div id={this.props.id} className={this.props.className}>
+      <div className={this.props.className}>
         <ul className={`${this.props.className}-Login-List`}>
           <li>
             <a
@@ -93,7 +93,6 @@ MyNypl.propTypes = {
 };
 
 MyNypl.defaultProps = {
-  id: 'MyNypl',
   className: 'MyNypl',
   lang: 'en',
   catalogLink: appConfig.myNyplLinks.catalog,

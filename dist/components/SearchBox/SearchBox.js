@@ -346,11 +346,11 @@ var SearchBox = (function (_React$Component) {
 
       // Set active class if search button is hovered or clicked
       var classes = (0, _classnames2['default'])({
-        'active animateMegaMenuEnter fadeIn': this.state.actionValue === 'hoverSearch',
-        active: _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === 'hoverSearch',
-        mobileActive: this.state.actionValue === 'clickSearch'
+        'active animateMegaMenuEnter fadeIn': this.props.active || this.state.actionValue === 'hoverSearch',
+        mobileActive: this.state.actionValue === 'clickSearch' && !this.props.active
       });
       // Classes for keywords input fields to activate pulse animation
+      // active: HeaderStore._getLastActiveMenuItem() === 'hoverSearch',
       var pulseAnimation = (0, _classnames2['default'])({
         'keywords-pulse-fade-in': this.state.placeholderAnimation === 'initial',
         'keywords-pulse': this.state.placeholderAnimation === 'sequential'

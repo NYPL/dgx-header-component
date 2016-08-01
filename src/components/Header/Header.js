@@ -343,6 +343,7 @@ class Header extends React.Component {
             lang={this.props.lang}
             items={this.state.headerData}
             urlType={this.props.urls}
+            cookie={this.state.cookie}
           />
         </div>
       </header>

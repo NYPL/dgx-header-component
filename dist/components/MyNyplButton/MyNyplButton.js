@@ -157,7 +157,6 @@ var MyNyplButton = (function (_React$Component) {
           _react2['default'].createElement(
             'button',
             {
-              id: 'MyNyplButton',
               className: 'MyNyplButton ' + buttonClasses,
               onClick: this.handleClick,
               style: [styles.MyNyplButton, this.props.style]

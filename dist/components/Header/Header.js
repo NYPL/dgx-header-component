@@ -425,7 +425,8 @@ var Header = (function (_React$Component) {
             className: headerClass + '-NavMenu',
             lang: this.props.lang,
             items: this.state.headerData,
-            urlType: this.props.urls
+            urlType: this.props.urls,
+            cookie: this.state.cookie
           })
         )
       );

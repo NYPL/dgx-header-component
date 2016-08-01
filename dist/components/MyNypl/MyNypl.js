@@ -79,7 +79,7 @@ var MyNypl = (function (_React$Component) {
     value: function render() {
       return _react2['default'].createElement(
         'div',
-        { id: this.props.id, className: this.props.className },
+        { className: this.props.className },
         _react2['default'].createElement(
           'ul',
           { className: this.props.className + '-Login-List' },
@@ -141,7 +141,6 @@ MyNypl.propTypes = {
 };
 
 MyNypl.defaultProps = {
-  id: 'MyNypl',
   className: 'MyNypl',
   lang: 'en',
   catalogLink: _appConfigJs2['default'].myNyplLinks.catalog,

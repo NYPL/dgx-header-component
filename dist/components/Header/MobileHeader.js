@@ -28,6 +28,8 @@ var _reactTappable2 = _interopRequireDefault(_reactTappable);
 
 var _dgxSvgIcons = require('dgx-svg-icons');
 
+var _underscore = require('underscore');
+
 // ALT FLUX
 
 var _storesHeaderStoreJs = require('../../stores/HeaderStore.js');
@@ -42,18 +44,38 @@ var _utilsUtilsJs = require('../../utils/utils.js');
 
 var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
 
+// NYPL Components
+
+var _MyNyplMobileMyNyplJs = require('../MyNypl/MobileMyNypl.js');
+
+var _MyNyplMobileMyNyplJs2 = _interopRequireDefault(_MyNyplMobileMyNyplJs);
+
 var styles = {
   base: {
     position: 'relative',
-    height: '59px',
-    textAlign: 'right'
+    height: '60px',
+    padding: 0,
+    margin: 0
+  },
+  list: {
+    margin: 0,
+    padding: 0,
+    listStyleType: 'none',
+    float: 'right'
+  },
+  listItem: {
+    display: 'inline-block',
+    padding: 0,
+    margin: 0
   },
   mobileLogo: {
     color: '#000',
-    position: 'absolute',
-    left: 10,
-    top: 8,
     textDecoration: 'none',
+    display: 'block',
+    width: '50px',
+    height: '50px',
+    float: 'left',
+    margin: '7px 0 0 10px',
     ':hover': {
       color: '#000'
     },
@@ -61,18 +83,16 @@ var styles = {
       color: '#000'
     }
   },
-  myNyplIcon: {
-    fontSize: '31px',
+  myNyplButton: {
     margin: 0,
-    padding: '14px',
+    padding: '13px',
     display: 'inline-block',
-    color: '#000'
+    border: 'none'
   },
   locatorIcon: {
     fontSize: '31px',
     margin: 0,
     padding: '14px',
-    display: 'inline-block',
     color: '#000'
   },
   searchIcon: {
@@ -97,9 +117,11 @@ var styles = {
     color: '#FFF',
     backgroundColor: '#2B2B2B'
   },
-  activeMyNyplIcon: {
-    color: '#FFF',
+  activeMyNyplButton: {
     backgroundColor: '#2B2B2B'
+  },
+  inactiveMyNyplButton: {
+    backgroundColor: '#FFF'
   }
 };
 
@@ -195,90 +217,134 @@ var MobileHeader = (function (_React$Component) {
       this.toggleMobileMenu(activeButton);
     }
   }, {
+    key: 'renderLogoLink',
+    value: function renderLogoLink() {
+      return _react2['default'].createElement(
+        'a',
+        {
+          style: styles.mobileLogo,
+          href: this.props.nyplRootUrl
+        },
+        _react2['default'].createElement(_dgxSvgIcons.LionLogoIcon, { ariaHidden: true, className: this.props.className + '-Logo' }),
+        _react2['default'].createElement(
+          'span',
+          { className: 'visuallyHidden' },
+          this.props.alt
+        )
+      );
+    }
+  }, {
+    key: 'renderMyNyplButton',
+    value: function renderMyNyplButton() {
+      var _this = this;
+
+      var mobileMyNyplButton = this.state.mobileMyNyplButton;
+      var myNyplClass = mobileMyNyplButton === 'clickMyNypl' ? ' active' : '';
+      return _react2['default'].createElement(
+        'li',
+        { style: styles.listItem },
+        _react2['default'].createElement(
+          _reactTappable2['default'],
+          {
+            onTap: function () {
+              return _this.handleMenuBtnPress('clickMyNypl');
+            },
+            ref: 'MobileMyNyplButton',
+            component: 'button',
+            className: this.props.className + '-MyNyplButton' + myNyplClass,
+            style: (0, _underscore.extend)(styles.myNyplButton, mobileMyNyplButton === 'clickMyNypl' ? styles.activeMyNyplButton : styles.inactiveMyNyplButton)
+          },
+          _react2['default'].createElement(
+            'span',
+            { className: 'visuallyHidden' },
+            'Log In'
+          ),
+          mobileMyNyplButton === 'clickMyNypl' ? _react2['default'].createElement(_dgxSvgIcons.XIcon, { ariaHidden: true, fill: '#FFF' }) : _react2['default'].createElement(_dgxSvgIcons.LoginIcon, { ariaHidden: true, fill: '#000' })
+        ),
+        _react2['default'].createElement(
+          'div',
+          { className: 'MobileMyNypl-Wrapper' + myNyplClass },
+          _react2['default'].createElement(_MyNyplMobileMyNyplJs2['default'], null)
+        )
+      );
+    }
+  }, {
     key: 'render',
     value: function render() {
-      var _this = this;
+      var _this2 = this;
 
       var activeButton = this.state.activeMobileButton;
       var searchButtonAction = this.state.searchButtonAction;
-      var mobileMyNyplButton = this.state.mobileMyNyplButton;
       var locatorUrl = this.props.locatorUrl || '//www.nypl.org/locations/map?nearme=true';
       var mobileSearchClass = searchButtonAction === 'clickSearch' ? 'active nypl-icon-solo-x' : 'nypl-icon-magnifier-thin';
       var mobileMenuClass = activeButton === 'mobileMenu' ? 'active nypl-icon-solo-x' : 'nypl-icon-burger-nav';
-      var mobileMyNyplClass = mobileMyNyplButton === 'clickMyNypl' ? 'active nypl-icon-solo-x' : 'nypl-icon-login';
 
       return _react2['default'].createElement(
         'div',
         { className: this.props.className, style: styles.base },
+        this.renderLogoLink(),
         _react2['default'].createElement(
-          'a',
-          {
-            style: styles.mobileLogo,
-            href: this.props.nyplRootUrl
-          },
-          _react2['default'].createElement(_dgxSvgIcons.LionLogoIcon, { className: this.props.className + '-Logo' }),
+          'ul',
+          { style: styles.list },
+          this.renderMyNyplButton(),
           _react2['default'].createElement(
-            'span',
-            { className: 'visuallyHidden' },
-            this.props.alt
-          )
-        ),
-        _react2['default'].createElement(
-          _reactTappable2['default'],
-          { onTap: function () {
-              return _this.handleMenuBtnPress('clickMyNypl');
-            } },
-          _react2['default'].createElement('span', {
-            style: [styles.myNyplIcon, mobileMyNyplButton === 'clickMyNypl' ? styles.activeMyNyplIcon : ''],
-            className: this.props.className + '-MyNyplButton ' + mobileMyNyplClass,
-            ref: 'MobileMyNyplButton'
-          })
-        ),
-        _react2['default'].createElement(
-          'a',
-          {
-            style: styles.locatorIcon,
-            href: locatorUrl,
-            onClick: function () {
-              return _utilsUtilsJs2['default']._trackHeader('Click', 'Mobile Locations Button');
-            },
-            className: this.props.className + '-Locator nypl-icon-locator-large'
-          },
-          _react2['default'].createElement(
-            'span',
-            { className: 'visuallyHidden' },
-            'NYPL Locations'
-          )
-        ),
-        _react2['default'].createElement(
-          _reactTappable2['default'],
-          { onTap: function () {
-              return _this.handleMenuBtnPress('clickSearch');
-            } },
-          _react2['default'].createElement(
-            'span',
-            {
-              style: [styles.searchIcon, searchButtonAction === 'clickSearch' ? styles.activeSearchIcon : ''],
-              className: this.props.className + '-SearchButton ' + mobileSearchClass,
-              ref: 'MobileSearchButton'
-            },
+            'li',
+            { style: styles.listItem },
             _react2['default'].createElement(
-              'div',
-              { className: 'visuallyHidden' },
-              'Search'
+              'a',
+              {
+                style: styles.locatorIcon,
+                href: locatorUrl,
+                onClick: function () {
+                  return _utilsUtilsJs2['default']._trackHeader('Click', 'Mobile Locations Button');
+                },
+                className: this.props.className + '-Locator nypl-icon-locator-large'
+              },
+              _react2['default'].createElement(
+                'span',
+                { className: 'visuallyHidden' },
+                'NYPL Locations'
+              )
+            )
+          ),
+          _react2['default'].createElement(
+            'li',
+            { style: styles.listItem },
+            _react2['default'].createElement(
+              _reactTappable2['default'],
+              { onTap: function () {
+                  return _this2.handleMenuBtnPress('clickSearch');
+                } },
+              _react2['default'].createElement(
+                'span',
+                {
+                  style: [styles.searchIcon, searchButtonAction === 'clickSearch' ? styles.activeSearchIcon : ''],
+                  className: this.props.className + '-SearchButton ' + mobileSearchClass,
+                  ref: 'MobileSearchButton'
+                },
+                _react2['default'].createElement(
+                  'div',
+                  { className: 'visuallyHidden' },
+                  'Search'
+                )
+              )
+            )
+          ),
+          _react2['default'].createElement(
+            'li',
+            { style: styles.listItem },
+            _react2['default'].createElement(
+              _reactTappable2['default'],
+              { onTap: function () {
+                  return _this2.handleMenuBtnPress('mobileMenu');
+                } },
+              _react2['default'].createElement('span', {
+                style: [styles.menuIcon, activeButton === 'mobileMenu' ? styles.activeMenuIcon : ''],
+                className: this.props.className + '-MenuButton ' + mobileMenuClass,
+                ref: 'MobileMenuButton'
+              })
             )
           )
-        ),
-        _react2['default'].createElement(
-          _reactTappable2['default'],
-          { onTap: function () {
-              return _this.handleMenuBtnPress('mobileMenu');
-            } },
-          _react2['default'].createElement('span', {
-            style: [styles.menuIcon, activeButton === 'mobileMenu' ? styles.activeMenuIcon : ''],
-            className: this.props.className + '-MenuButton ' + mobileMenuClass,
-            ref: 'MobileMenuButton'
-          })
         )
       );
     }

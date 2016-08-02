@@ -23,6 +23,13 @@
     text-decoration: none;
   }
 
+  // Accessibility outline rule
+  a, button {
+    &:focus {
+      outline: 3px auto #3b99fc;
+    }
+  }
+
   /* MOBILE HEADER
    * -------------
   */

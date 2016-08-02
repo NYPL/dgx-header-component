@@ -12,7 +12,6 @@ import {
 import HeaderStore from '../../stores/HeaderStore.js';
 // Dependent Components
 import SearchButton from '../SearchButton/SearchButton.js';
-import SearchButtonHover from '../SearchButton/SearchButtonHover.js';
 import NavMenuItem from '../NavMenuItem/NavMenuItem.js';
 import NavMenuBottomButtons from '../NavMenuBottomButtons/NavMenuBottomButtons.js';
 import DonateButton from '../DonateButton/DonateButton.js';
@@ -94,13 +93,6 @@ class NavMenu extends React.Component {
     const mobileActiveClass = cx({
       mobileActive: HeaderStore._getMobileMenuBtnValue() === 'mobileMenu',
     });
-    let searchButton;
-
-    if (this.props.cookie === '1') {
-      searchButton = <SearchButton className={`${this.props.className}`} />;
-    } else {
-      searchButton = <SearchButtonHover className={`${this.props.className}`} />;
-    }
 
     return (
       <nav className={this.props.className}>
@@ -109,7 +101,10 @@ class NavMenu extends React.Component {
           <ul className={`${this.props.className}-List`} id="NavMenu-List">
             {this.renderNavMenu(this.props.items, ['1b4916f4-6723-44f0-bfae-112441527c4d'])}
           </ul>
-          {searchButton}
+          <SearchButton
+            className={`${this.props.className}`}
+            cookie={this.props.cookie}
+          />
           {this.renderStickyNavItems()}
           <NavMenuBottomButtons className="MobileBottomButtons" />
         </div>

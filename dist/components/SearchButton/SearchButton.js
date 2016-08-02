@@ -43,6 +43,10 @@ var _storesHeaderStoreJs = require('../../stores/HeaderStore.js');
 
 var _storesHeaderStoreJs2 = _interopRequireDefault(_storesHeaderStoreJs);
 
+var _actionsActionsJs = require('../../actions/Actions.js');
+
+var _actionsActionsJs2 = _interopRequireDefault(_actionsActionsJs);
+
 // GA Utility Library
 
 var _utilsUtilsJs = require('../../utils/utils.js');
@@ -63,6 +67,8 @@ var SearchButton = (function (_React$Component) {
 
     this.handleOnClick = this.handleOnClick.bind(this);
     this.handleOnClickOut = this.handleOnClickOut.bind(this);
+    this.activateHover = this.activateHover.bind(this);
+    this.deactivateHover = this.deactivateHover.bind(this);
   }
 
   /**
@@ -74,14 +80,16 @@ var SearchButton = (function (_React$Component) {
     key: 'handleOnClick',
     value: function handleOnClick(e) {
       e.preventDefault();
-      if (this.state.active) {
-        this.handleOnClickOut();
-      } else {
-        this.setState({ active: true });
+      if (this.props.cookie === '1') {
+        if (this.state.active) {
+          this.handleOnClickOut();
+        } else {
+          this.setState({ active: true });
 
-        // Fire GA event to track when the Search Menu is open
-        _utilsUtilsJs2['default']._trackHeader('Search', 'Open Menu');
-      };
+          // Fire GA event to track when the Search Menu is open
+          _utilsUtilsJs2['default']._trackHeader('Search', 'Open Menu');
+        };
+      }
     }
 
     /**
@@ -93,13 +101,49 @@ var SearchButton = (function (_React$Component) {
     value: function handleOnClickOut() {
       var _this = this;
 
-      if (this.state.active) {
-        _utilsUtilsJs2['default']._trackHeader('Search', 'Close Menu');
-      }
+      if (this.props.cookie === '1') {
+        if (this.state.active) {
+          _utilsUtilsJs2['default']._trackHeader('Search', 'Close Menu');
+        }
 
-      setTimeout(function () {
-        _this.setState({ active: false });
-      }, 250);
+        setTimeout(function () {
+          _this.setState({ active: false });
+        }, 250);
+      }
+    }
+
+    /**
+     * Update the Store's searchButtonActionValue
+     * with hoverSearch after a set time delay.
+     */
+  }, {
+    key: 'activateHover',
+    value: function activateHover() {
+      if (this.props.cookie === '0') {
+        this.hoverTimer = setTimeout(function () {
+          _actionsActionsJs2['default'].searchButtonActionValue('hoverSearch');
+
+          // Fire GA event to track when the Search Menu is open
+          _utilsUtilsJs2['default']._trackHeader('Search', 'Open Menu');
+        }, 80);
+      }
+    }
+
+    /**
+     * Clear the activateHover timer if it exists.
+     * Reset the Store's searchButtonActionValue to empty
+     * after a set time delay.
+     */
+  }, {
+    key: 'deactivateHover',
+    value: function deactivateHover() {
+      if (this.props.cookie === '0') {
+        clearTimeout(this.hoverTimer);
+
+        setTimeout(function () {
+          _actionsActionsJs2['default'].searchButtonActionValue('');
+        }, 250);
+      }
     }
   }, {
     key: 'render',
@@ -108,7 +152,7 @@ var SearchButton = (function (_React$Component) {
 
       var rootClass = this.props.className;
       // Give active class if the button is activated by hover
-      var classes = (0, _classnames2['default'])({ active: this.state.active });
+      var classes = (0, _classnames2['default'])({ active: this.state.active || _storesHeaderStoreJs2['default']._getSearchButtonActionValue() === 'hoverSearch' || _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === 'hoverSearch' });
       // Detect if the header is sticky
       var stickyStatus = (0, _classnames2['default'])({ isSticky: _storesHeaderStoreJs2['default'].getState().isSticky });
       var searchLabel = _react2['default'].createElement(
@@ -124,6 +168,8 @@ var SearchButton = (function (_React$Component) {
           _reactOnclickout2['default'],
           { onClickOut: this.handleOnClickOut },
           _react2['default'].createElement(_ButtonsBasicButtonJs2['default'], {
+            onMouseEnter: this.activateHover,
+            onMouseLeave: this.deactivateHover,
             id: rootClass + '-searchButton',
             className: 'nypl-icon-magnifier-fat ' + rootClass + '-searchButton ' + classes + ' ' + stickyStatus,
             name: 'Search Button',

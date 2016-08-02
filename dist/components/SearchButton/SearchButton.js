@@ -119,7 +119,7 @@ var SearchButton = (function (_React$Component) {
   }, {
     key: 'activateHover',
     value: function activateHover() {
-      if (this.props.cookie === '0') {
+      if (this.props.cookie !== '1') {
         this.hoverTimer = setTimeout(function () {
           _actionsActionsJs2['default'].searchButtonActionValue('hoverSearch');
 
@@ -137,7 +137,7 @@ var SearchButton = (function (_React$Component) {
   }, {
     key: 'deactivateHover',
     value: function deactivateHover() {
-      if (this.props.cookie === '0') {
+      if (this.props.cookie !== '1') {
         clearTimeout(this.hoverTimer);
 
         setTimeout(function () {
@@ -152,7 +152,9 @@ var SearchButton = (function (_React$Component) {
 
       var rootClass = this.props.className;
       // Give active class if the button is activated by hover
-      var classes = (0, _classnames2['default'])({ active: this.state.active || _storesHeaderStoreJs2['default']._getSearchButtonActionValue() === 'hoverSearch' || _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === 'hoverSearch' });
+      var classes = (0, _classnames2['default'])({
+        active: this.state.active || _storesHeaderStoreJs2['default']._getSearchButtonActionValue() === 'hoverSearch' || _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === 'hoverSearch'
+      });
       // Detect if the header is sticky
       var stickyStatus = (0, _classnames2['default'])({ isSticky: _storesHeaderStoreJs2['default'].getState().isSticky });
       var searchLabel = _react2['default'].createElement(

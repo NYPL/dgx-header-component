@@ -64,7 +64,7 @@ class SearchButton extends React.Component {
    * with hoverSearch after a set time delay.
    */
   activateHover() {
-    if (this.props.cookie === '0') {
+    if (this.props.cookie !== '1') {
       this.hoverTimer = setTimeout(() => {
         Actions.searchButtonActionValue('hoverSearch');
 
@@ -80,7 +80,7 @@ class SearchButton extends React.Component {
    * after a set time delay.
    */
   deactivateHover() {
-    if (this.props.cookie === '0') {
+    if (this.props.cookie !== '1') {
       clearTimeout(this.hoverTimer);
 
       setTimeout(() => {
@@ -92,8 +92,11 @@ class SearchButton extends React.Component {
   render() {
     const rootClass = this.props.className;
     // Give active class if the button is activated by hover
-    const classes = cx({ active: this.state.active || HeaderStore._getSearchButtonActionValue() === 'hoverSearch' ||
-        HeaderStore._getLastActiveMenuItem() === 'hoverSearch'});
+    const classes = cx({
+      active: this.state.active ||
+        HeaderStore._getSearchButtonActionValue() === 'hoverSearch' ||
+        HeaderStore._getLastActiveMenuItem() === 'hoverSearch'
+    });
     // Detect if the header is sticky
     const stickyStatus = cx({ isSticky: HeaderStore.getState().isSticky });
     const searchLabel = (

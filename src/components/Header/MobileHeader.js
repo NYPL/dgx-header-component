@@ -182,8 +182,16 @@ class MobileHeader extends React.Component {
   }
 
   renderMyNyplButton() {
-    const mobileMyNyplButton = this.state.mobileMyNyplButton;
-    const myNyplClass = (mobileMyNyplButton === 'clickMyNypl') ? ' active' : '';
+    let myNyplClass = '';
+    let icon = <LoginIcon ariaHidden fill="#000" />;
+    let buttonStyles = styles.inactiveMyNyplButton;
+
+    if (this.state.mobileMyNyplButton === 'clickMyNypl') {
+      myNyplClass = ' active';
+      icon = <XIcon ariaHidden fill="#FFF" />;
+      buttonStyles = styles.activeMyNyplButton;
+    }
+
     return (
       <li style={styles.listItem}>
         <ReactTappable
@@ -191,20 +199,10 @@ class MobileHeader extends React.Component {
           ref="MobileMyNyplButton"
           component="button"
           className={`${this.props.className}-MyNyplButton${myNyplClass}`}
-          style={
-            _extend(
-              styles.myNyplButton,
-              (mobileMyNyplButton === 'clickMyNypl') ?
-                styles.activeMyNyplButton : styles.inactiveMyNyplButton
-            )
-          }
+          style={_extend(styles.myNyplButton, buttonStyles)}
         >
           <span className="visuallyHidden">Log In</span>
-          {
-            (mobileMyNyplButton === 'clickMyNypl') ?
-              <XIcon ariaHidden fill="#FFF" /> : <LoginIcon ariaHidden fill="#000" />
-          }
-
+          {icon}
         </ReactTappable>
         <div className={`MobileMyNypl-Wrapper${myNyplClass}`}>
           <MobileMyNypl />

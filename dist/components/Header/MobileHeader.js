@@ -238,8 +238,16 @@ var MobileHeader = (function (_React$Component) {
     value: function renderMyNyplButton() {
       var _this = this;
 
-      var mobileMyNyplButton = this.state.mobileMyNyplButton;
-      var myNyplClass = mobileMyNyplButton === 'clickMyNypl' ? ' active' : '';
+      var myNyplClass = '';
+      var icon = _react2['default'].createElement(_dgxSvgIcons.LoginIcon, { ariaHidden: true, fill: '#000' });
+      var buttonStyles = styles.inactiveMyNyplButton;
+
+      if (this.state.mobileMyNyplButton === 'clickMyNypl') {
+        myNyplClass = ' active';
+        icon = _react2['default'].createElement(_dgxSvgIcons.XIcon, { ariaHidden: true, fill: '#FFF' });
+        buttonStyles = styles.activeMyNyplButton;
+      }
+
       return _react2['default'].createElement(
         'li',
         { style: styles.listItem },
@@ -252,14 +260,14 @@ var MobileHeader = (function (_React$Component) {
             ref: 'MobileMyNyplButton',
             component: 'button',
             className: this.props.className + '-MyNyplButton' + myNyplClass,
-            style: (0, _underscore.extend)(styles.myNyplButton, mobileMyNyplButton === 'clickMyNypl' ? styles.activeMyNyplButton : styles.inactiveMyNyplButton)
+            style: (0, _underscore.extend)(styles.myNyplButton, buttonStyles)
           },
           _react2['default'].createElement(
             'span',
             { className: 'visuallyHidden' },
             'Log In'
           ),
-          mobileMyNyplButton === 'clickMyNypl' ? _react2['default'].createElement(_dgxSvgIcons.XIcon, { ariaHidden: true, fill: '#FFF' }) : _react2['default'].createElement(_dgxSvgIcons.LoginIcon, { ariaHidden: true, fill: '#000' })
+          icon
         ),
         _react2['default'].createElement(
           'div',

@@ -1,6 +1,7 @@
 import React from 'react';
 import Radium from 'radium';
 import ReactTappable from 'react-tappable';
+import FocusTrap from 'focus-trap-react';
 import {
   LionLogoIcon,
   LoginIcon,
@@ -99,7 +100,7 @@ class MobileHeader extends React.Component {
       mobileMyNyplButton: HeaderStore.getState().mobileMyNyplButton,
     };
 
-    this.handleMenuBtnPress = this.handleMenuBtnPress.bind(this);
+    this.closeMyNyplDialog = this.closeMyNyplDialog.bind(this);
   }
 
   componentDidMount() {
@@ -119,7 +120,7 @@ class MobileHeader extends React.Component {
   }
 
   /**
-   * toggleMobileMenu(activeButton)
+   * toggleMobileMenuButton(activeButton)
    * Verifies that the activeButton does not
    * match the HeaderStore's current value
    * and set's it as the param activeButton.
@@ -128,7 +129,7 @@ class MobileHeader extends React.Component {
    *
    * @param {String} activeButton
    */
-  toggleMobileMenu(activeButton) {
+  toggleMobileMenuButton(activeButton) {
     if (activeButton === 'clickSearch') {
       if (HeaderStore._getSearchButtonActionValue() !== activeButton) {
         Actions.searchButtonActionValue(activeButton);
@@ -147,13 +148,11 @@ class MobileHeader extends React.Component {
       }
     } else if (activeButton === 'clickMyNypl') {
       if (HeaderStore._getMobileMyNyplButtonValue() !== activeButton) {
-        Actions.toggleMyNyplVisible(true);
         Actions.setMobileMyNyplButtonValue(activeButton);
         Actions.searchButtonActionValue('');
         Actions.setMobileMenuButtonValue('');
       } else {
         Actions.setMobileMyNyplButtonValue('');
-        Actions.toggleMyNyplVisible(false);
       }
     }
 
@@ -161,12 +160,16 @@ class MobileHeader extends React.Component {
   }
 
   /**
-   * handleMenuBtnPress()
-   * Calls toggleMobileMenu()
-   * with the 'mobileMenu' as a param
+   * closeMyNyplDialog()
+   * Verifies the current state.mobileMyNyplButton matches
+   * 'clickMyNypl' and fires the Action method to reset.
+   * This is necessary for the FocusTrap component to execute
+   * the proper deactivateMethod for each dialog.
    */
-  handleMenuBtnPress(activeButton) {
-    this.toggleMobileMenu(activeButton);
+  closeMyNyplDialog() {
+    if (this.state.mobileMyNyplButton === 'clickMyNypl') {
+      Actions.setMobileMyNyplButtonValue('');
+    }
   }
 
   renderLogoLink() {
@@ -185,28 +188,39 @@ class MobileHeader extends React.Component {
     let myNyplClass = '';
     let icon = <LoginIcon ariaHidden fill="#000" />;
     let buttonStyles = styles.inactiveMyNyplButton;
+    let buttonLabel = 'Open Log In Dialog';
+    let dialogWindow = null;
 
     if (this.state.mobileMyNyplButton === 'clickMyNypl') {
       myNyplClass = ' active';
       icon = <XIcon ariaHidden fill="#FFF" />;
       buttonStyles = styles.activeMyNyplButton;
+      buttonLabel = 'Close Log In Dialog';
+      dialogWindow = (
+        <FocusTrap
+          className={`MobileMyNypl-Wrapper${myNyplClass}`}
+          focusTrapOptions={{
+            onDeactivate: this.closeMyNyplDialog,
+            clickOutsideDeactivates: true,
+          }}
+        >
+          <MobileMyNypl />
+        </FocusTrap>
+      );
     }
 
     return (
       <li style={styles.listItem}>
-        <ReactTappable
-          onTap={() => this.handleMenuBtnPress('clickMyNypl')}
+        <button
+          onClick={() => this.toggleMobileMenuButton('clickMyNypl')}
           ref="MobileMyNyplButton"
-          component="button"
           className={`${this.props.className}-MyNyplButton${myNyplClass}`}
           style={_extend(styles.myNyplButton, buttonStyles)}
         >
-          <span className="visuallyHidden">Log In</span>
+          <span className="visuallyHidden">{buttonLabel}</span>
           {icon}
-        </ReactTappable>
-        <div className={`MobileMyNypl-Wrapper${myNyplClass}`}>
-          <MobileMyNypl />
-        </div>
+        </button>
+        {dialogWindow}
       </li>
     );
   }
@@ -237,7 +251,7 @@ class MobileHeader extends React.Component {
           </li>
 
           <li style={styles.listItem}>
-            <ReactTappable onTap={() => this.handleMenuBtnPress('clickSearch')}>
+            <ReactTappable onTap={() => this.toggleMobileMenuButton('clickSearch')}>
               <span
                 style={[
                   styles.searchIcon,
@@ -252,7 +266,7 @@ class MobileHeader extends React.Component {
           </li>
 
           <li style={styles.listItem}>
-            <ReactTappable onTap={() => this.handleMenuBtnPress('mobileMenu')}>
+            <ReactTappable onTap={() => this.toggleMobileMenuButton('mobileMenu')}>
               <span
                 style={[
                   styles.menuIcon,

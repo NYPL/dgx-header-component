@@ -26,6 +26,10 @@ var _reactTappable = require('react-tappable');
 
 var _reactTappable2 = _interopRequireDefault(_reactTappable);
 
+var _focusTrapReact = require('focus-trap-react');
+
+var _focusTrapReact2 = _interopRequireDefault(_focusTrapReact);
+
 var _dgxSvgIcons = require('dgx-svg-icons');
 
 var _underscore = require('underscore');
@@ -139,7 +143,7 @@ var MobileHeader = (function (_React$Component) {
       mobileMyNyplButton: _storesHeaderStoreJs2['default'].getState().mobileMyNyplButton
     };
 
-    this.handleMenuBtnPress = this.handleMenuBtnPress.bind(this);
+    this.closeMyNyplDialog = this.closeMyNyplDialog.bind(this);
   }
 
   _createClass(MobileHeader, [{
@@ -163,7 +167,7 @@ var MobileHeader = (function (_React$Component) {
     }
 
     /**
-     * toggleMobileMenu(activeButton)
+     * toggleMobileMenuButton(activeButton)
      * Verifies that the activeButton does not
      * match the HeaderStore's current value
      * and set's it as the param activeButton.
@@ -173,8 +177,8 @@ var MobileHeader = (function (_React$Component) {
      * @param {String} activeButton
      */
   }, {
-    key: 'toggleMobileMenu',
-    value: function toggleMobileMenu(activeButton) {
+    key: 'toggleMobileMenuButton',
+    value: function toggleMobileMenuButton(activeButton) {
       if (activeButton === 'clickSearch') {
         if (_storesHeaderStoreJs2['default']._getSearchButtonActionValue() !== activeButton) {
           _actionsActionsJs2['default'].searchButtonActionValue(activeButton);
@@ -193,13 +197,11 @@ var MobileHeader = (function (_React$Component) {
         }
       } else if (activeButton === 'clickMyNypl') {
         if (_storesHeaderStoreJs2['default']._getMobileMyNyplButtonValue() !== activeButton) {
-          _actionsActionsJs2['default'].toggleMyNyplVisible(true);
           _actionsActionsJs2['default'].setMobileMyNyplButtonValue(activeButton);
           _actionsActionsJs2['default'].searchButtonActionValue('');
           _actionsActionsJs2['default'].setMobileMenuButtonValue('');
         } else {
           _actionsActionsJs2['default'].setMobileMyNyplButtonValue('');
-          _actionsActionsJs2['default'].toggleMyNyplVisible(false);
         }
       }
 
@@ -207,14 +209,18 @@ var MobileHeader = (function (_React$Component) {
     }
 
     /**
-     * handleMenuBtnPress()
-     * Calls toggleMobileMenu()
-     * with the 'mobileMenu' as a param
+     * closeMyNyplDialog()
+     * Verifies the current state.mobileMyNyplButton matches
+     * 'clickMyNypl' and fires the Action method to reset.
+     * This is necessary for the FocusTrap component to execute
+     * the proper deactivateMethod for each dialog.
      */
   }, {
-    key: 'handleMenuBtnPress',
-    value: function handleMenuBtnPress(activeButton) {
-      this.toggleMobileMenu(activeButton);
+    key: 'closeMyNyplDialog',
+    value: function closeMyNyplDialog() {
+      if (this.state.mobileMyNyplButton === 'clickMyNypl') {
+        _actionsActionsJs2['default'].setMobileMyNyplButtonValue('');
+      }
     }
   }, {
     key: 'renderLogoLink',
@@ -241,39 +247,48 @@ var MobileHeader = (function (_React$Component) {
       var myNyplClass = '';
       var icon = _react2['default'].createElement(_dgxSvgIcons.LoginIcon, { ariaHidden: true, fill: '#000' });
       var buttonStyles = styles.inactiveMyNyplButton;
+      var buttonLabel = 'Open Log In Dialog';
+      var dialogWindow = null;
 
       if (this.state.mobileMyNyplButton === 'clickMyNypl') {
         myNyplClass = ' active';
         icon = _react2['default'].createElement(_dgxSvgIcons.XIcon, { ariaHidden: true, fill: '#FFF' });
         buttonStyles = styles.activeMyNyplButton;
+        buttonLabel = 'Close Log In Dialog';
+        dialogWindow = _react2['default'].createElement(
+          _focusTrapReact2['default'],
+          {
+            className: 'MobileMyNypl-Wrapper' + myNyplClass,
+            focusTrapOptions: {
+              onDeactivate: this.closeMyNyplDialog,
+              clickOutsideDeactivates: true
+            }
+          },
+          _react2['default'].createElement(_MyNyplMobileMyNyplJs2['default'], null)
+        );
       }
 
       return _react2['default'].createElement(
         'li',
         { style: styles.listItem },
         _react2['default'].createElement(
-          _reactTappable2['default'],
+          'button',
           {
-            onTap: function () {
-              return _this.handleMenuBtnPress('clickMyNypl');
+            onClick: function () {
+              return _this.toggleMobileMenuButton('clickMyNypl');
             },
             ref: 'MobileMyNyplButton',
-            component: 'button',
             className: this.props.className + '-MyNyplButton' + myNyplClass,
             style: (0, _underscore.extend)(styles.myNyplButton, buttonStyles)
           },
           _react2['default'].createElement(
             'span',
             { className: 'visuallyHidden' },
-            'Log In'
+            buttonLabel
           ),
           icon
         ),
-        _react2['default'].createElement(
-          'div',
-          { className: 'MobileMyNypl-Wrapper' + myNyplClass },
-          _react2['default'].createElement(_MyNyplMobileMyNyplJs2['default'], null)
-        )
+        dialogWindow
       );
     }
   }, {
@@ -321,7 +336,7 @@ var MobileHeader = (function (_React$Component) {
             _react2['default'].createElement(
               _reactTappable2['default'],
               { onTap: function () {
-                  return _this2.handleMenuBtnPress('clickSearch');
+                  return _this2.toggleMobileMenuButton('clickSearch');
                 } },
               _react2['default'].createElement(
                 'span',
@@ -344,7 +359,7 @@ var MobileHeader = (function (_React$Component) {
             _react2['default'].createElement(
               _reactTappable2['default'],
               { onTap: function () {
-                  return _this2.handleMenuBtnPress('mobileMenu');
+                  return _this2.toggleMobileMenuButton('mobileMenu');
                 } },
               _react2['default'].createElement('span', {
                 style: [styles.menuIcon, activeButton === 'mobileMenu' ? styles.activeMenuIcon : ''],

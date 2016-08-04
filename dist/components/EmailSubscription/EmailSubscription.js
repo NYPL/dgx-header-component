@@ -58,7 +58,7 @@ var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
 
 var styles = {
   base: {
-    backgroundColor: '#1DA1D4',
+    backgroundColor: '#1B7FA7',
     padding: '0px',
     width: 'auto'
   },
@@ -70,7 +70,7 @@ var styles = {
     paddingLeft: '15px',
     width: '100px',
     fontSize: '12px',
-    backgroundColor: '#1DA1D4',
+    backgroundColor: '#1B7FA7',
     fontFamily: 'Kievit-Book'
   },
   tryAgainButton: {
@@ -80,7 +80,7 @@ var styles = {
     padding: '5px 15px 5px 5px',
     width: '90px',
     fontSize: '12px',
-    backgroundColor: '#1DA1D4',
+    backgroundColor: '#1B7FA7',
     fontFamily: 'Kievit-Book',
     marginTop: '25px'
   },

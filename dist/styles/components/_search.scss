@@ -42,15 +42,15 @@
   // Override NYPL Base rule
   &:hover {
     border: none;
-    // color: #78CCED;
+    // color: #FFFFFF;
     // @include transition(color .2s linear .2s, color .2s linear .2s);
-    color: #1DA1D4;
+    color: #1B7FA7;
   }
 
   /* ACTIVE STATE */
   &.active {
     background-color: $BG_MENU_SEARCH;
-    color: #78CCED;
+    color: #FFFFFF;
     @include transition(background-color .2s linear .2s, color .2s linear .2s);
     @include min-screen($TABLET_PORTRAIT_BP) {
       display: block;
@@ -68,7 +68,7 @@
     padding: 5px 18px 0 0;
 
     &.active {
-      color: #78CCED;
+      color: #FFFFFF;
       @include transition(color .2s linear .2s, color .2s linear .2s);
     }
   }
@@ -227,7 +227,7 @@
   }
 
   @include min-screen($TABLET_PORTRAIT_BP) {
-    background-color: #1DA1D4;
+    background-color: #1B7FA7;
     color: #FFFFFF;
     font-size: 47px;
     font-style: normal;
@@ -378,7 +378,7 @@
 
   .icon {
     display: inline-block;
-    color: #78CCED;
+    color: #FFFFFF;
     font-size: 30px;
     vertical-align: middle;
   }

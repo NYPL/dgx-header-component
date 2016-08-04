@@ -34,7 +34,7 @@ var _appConfigJs2 = _interopRequireDefault(_appConfigJs);
 
 var styles = {
   base: {
-    backgroundColor: '#1DA1D4',
+    backgroundColor: '#1B7FA7',
     padding: '0px',
     width: 'auto'
   },
@@ -59,7 +59,7 @@ var styles = {
     color: 'white',
     padding: '9px 10px 7px',
     fontSize: '12px',
-    backgroundColor: '#1DA1D4',
+    backgroundColor: '#1B7FA7',
     fontFamily: 'Kievit-Book',
     marginTop: '20px'
   }

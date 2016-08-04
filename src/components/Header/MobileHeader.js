@@ -4,6 +4,7 @@ import ReactTappable from 'react-tappable';
 import FocusTrap from 'focus-trap-react';
 import {
   LionLogoIcon,
+  LocatorIcon,
   LoginIcon,
   XIcon,
 } from 'dgx-svg-icons';
@@ -36,11 +37,14 @@ const styles = {
   mobileLogo: {
     color: '#000',
     textDecoration: 'none',
-    display: 'block',
-    width: '50px',
+    display: 'inline-block',
     height: '50px',
-    float: 'left',
-    margin: '7px 0 0 10px',
+    width: '50px',
+    position: 'absolute',
+    left: '10px',
+    top: '8px',
+    margin: 0,
+    padding: 0,
     ':hover': {
       color: '#000',
     },
@@ -54,10 +58,10 @@ const styles = {
     display: 'inline-block',
     border: 'none',
   },
-  locatorIcon: {
-    fontSize: '31px',
+  locationsLink: {
     margin: 0,
-    padding: '14px',
+    padding: '12px 13px',
+    display: 'inline-block',
     color: '#000',
   },
   searchIcon: {
@@ -177,9 +181,10 @@ class MobileHeader extends React.Component {
       <a
         style={styles.mobileLogo}
         href={this.props.nyplRootUrl}
+        aria-label={this.props.alt}
       >
-        <LionLogoIcon ariaHidden className={`${this.props.className}-Logo`} />
         <span className="visuallyHidden">{this.props.alt}</span>
+        <LionLogoIcon ariaHidden className={`${this.props.className}-Logo`} />
       </a>
     );
   }
@@ -202,6 +207,7 @@ class MobileHeader extends React.Component {
           focusTrapOptions={{
             onDeactivate: this.closeMyNyplDialog,
             clickOutsideDeactivates: true,
+            returnFocusOnDeactivate: false,
           }}
         >
           <MobileMyNypl />
@@ -211,16 +217,36 @@ class MobileHeader extends React.Component {
 
     return (
       <li style={styles.listItem}>
-        <button
-          onClick={() => this.toggleMobileMenuButton('clickMyNypl')}
+        <ReactTappable
+          onTap={() => this.toggleMobileMenuButton('clickMyNypl')}
           ref="MobileMyNyplButton"
+          component="button"
           className={`${this.props.className}-MyNyplButton${myNyplClass}`}
           style={_extend(styles.myNyplButton, buttonStyles)}
         >
           <span className="visuallyHidden">{buttonLabel}</span>
           {icon}
-        </button>
+        </ReactTappable>
         {dialogWindow}
+      </li>
+    );
+  }
+
+  renderLocationsLink() {
+    const locatorUrl = this.props.locatorUrl || '//www.nypl.org/locations/map?nearme=true';
+
+    return (
+      <li style={styles.listItem}>
+        <a
+          style={styles.locationsLink}
+          href={locatorUrl}
+          onClick={() => utils._trackHeader('Click', 'Mobile Locations Button')}
+          className={`${this.props.className}-Locator`}
+          aria-label="NYPL Locations Near Me"
+        >
+          <span className="visuallyHidden">NYPL Locations Near Me</span>
+          <LocatorIcon ariaHidden />
+        </a>
       </li>
     );
   }
@@ -228,7 +254,6 @@ class MobileHeader extends React.Component {
   render() {
     const activeButton = this.state.activeMobileButton;
     const searchButtonAction = this.state.searchButtonAction;
-    const locatorUrl = this.props.locatorUrl || '//www.nypl.org/locations/map?nearme=true';
     const mobileSearchClass = (searchButtonAction === 'clickSearch') ?
       'active nypl-icon-solo-x' : 'nypl-icon-magnifier-thin';
     const mobileMenuClass = (activeButton === 'mobileMenu') ?
@@ -239,16 +264,7 @@ class MobileHeader extends React.Component {
         {this.renderLogoLink()}
         <ul style={styles.list}>
           {this.renderMyNyplButton()}
-          <li style={styles.listItem}>
-            <a
-              style={styles.locatorIcon}
-              href={locatorUrl}
-              onClick={() => utils._trackHeader('Click', 'Mobile Locations Button')}
-              className={`${this.props.className}-Locator nypl-icon-locator-large`}
-            >
-              <span className="visuallyHidden">NYPL Locations</span>
-            </a>
-          </li>
+          {this.renderLocationsLink()}
 
           <li style={styles.listItem}>
             <ReactTappable onTap={() => this.toggleMobileMenuButton('clickSearch')}>

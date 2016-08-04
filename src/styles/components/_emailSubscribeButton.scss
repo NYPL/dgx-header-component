@@ -15,7 +15,7 @@
     letter-spacing: .04em;
 
     &.active {
-      background-color: #1980A9;
+      background-color: #135772;
       color: #FFF;
       @include transition(background-color .2s linear 0s, color .2s linear 0s);
 
@@ -158,12 +158,12 @@
       margin: 15px 0 0 0;
       width: 95%;
       font-size: 14.5px;
-      border: 3px solid #1DA1D4;
+      border: 3px solid #1B7FA7;
       color: #837e77;
       @include Kievit-Book-Italic;
 
       &:focus {
-        border: 3px solid #1980A9;
+        border: 3px solid #1B7FA7;
       }
     }
     &-Submit {

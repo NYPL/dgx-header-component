@@ -38,7 +38,7 @@ const styles = {
     left: '0',
     minWidth: '250px',
     minHeight: '190px',
-    backgroundColor: '#1DA1D4',
+    backgroundColor: '#1B7FA7',
     padding: '25px 30px',
   },
   hide: {

@@ -57,6 +57,7 @@
         font-size: 20px;
         @include Kievit-Book;
         font-weight: normal;
+        letter-spacing: .03em;
         line-height: 1.2em;
 
         &-BestNYPL {
@@ -68,7 +69,7 @@
 
     &-NewEmail {
       margin-top: 20px;
-      font-size: 12px;
+      font-size: 14px;
       text-transform: uppercase;
       @include Kievit-Book;
 

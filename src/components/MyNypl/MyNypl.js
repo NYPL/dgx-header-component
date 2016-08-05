@@ -17,13 +17,14 @@ const styles = {
     display: 'none',
   },
   catalogInfo: {
-    fontSize: '12px',
-    color: 'rgba(255, 255, 255, 0.5)',
+    fontSize: '14px',
+    color: '#FFFFFF',
     fontWeight: '200',
     position: 'absolute',
     bottom: '26px',
     right: '30px',
     textDecoration: 'underline',
+    letterSpacing: '.03em',
   },
   loginButtons: {
     display: 'inline-block',

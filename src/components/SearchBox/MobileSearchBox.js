@@ -142,6 +142,7 @@ class MobileSearchBox extends React.Component {
           onChange={this.handleSearchInputChange}
           required
           aria-required="true"
+          autoComplete="off"
         />
         <span className="nypl-icon-magnifier-thin icon"></span>
       </div>

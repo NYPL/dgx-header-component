@@ -6,6 +6,7 @@ import {
   LionLogoIcon,
   LocatorIcon,
   LoginIcon,
+  SearchIcon,
   XIcon,
 } from 'dgx-svg-icons';
 import { extend as _extend } from 'underscore';
@@ -15,6 +16,7 @@ import Actions from '../../actions/Actions.js';
 import utils from '../../utils/utils.js';
 // NYPL Components
 import MobileMyNypl from '../MyNypl/MobileMyNypl.js';
+import MobileSearchBox from '../SearchBox/MobileSearchBox.js';
 
 const styles = {
   base: {
@@ -32,9 +34,9 @@ const styles = {
   listItem: {
     display: 'inline-block',
     padding: 0,
-    margin: 0,
+    margin: '0 0 0 4px',
   },
-  mobileLogo: {
+  mobileLogoLink: {
     color: '#000',
     textDecoration: 'none',
     display: 'inline-block',
@@ -52,24 +54,43 @@ const styles = {
       color: '#000',
     },
   },
-  myNyplButton: {
-    margin: 0,
-    padding: '13px',
-    display: 'inline-block',
-    border: 'none',
-  },
   locationsLink: {
     margin: 0,
     padding: '12px 13px',
     display: 'inline-block',
     color: '#000',
   },
-  searchIcon: {
-    fontSize: '31px',
+  myNyplButton: {
     margin: 0,
-    padding: '14px',
+    padding: '13px',
     display: 'inline-block',
-    color: '#000',
+    border: 'none',
+  },
+  activeMyNyplButton: {
+    backgroundColor: '#2B2B2B',
+  },
+  inactiveMyNyplButton: {
+    backgroundColor: '#FFF',
+  },
+  searchButton: {
+    margin: 0,
+    padding: '13px',
+    display: 'inline-block',
+    border: 'none',
+  },
+  activeSearchButton: {
+    backgroundColor: '#29A1D2',
+  },
+  inactiveSearchButton: {
+    backgroundColor: '#FFF',
+  },
+  searchDialog: {
+    position: 'absolute',
+    margin: 0,
+    padding: 0,
+    left: 0,
+    width: '100%',
+    backgroundColor: '#29A1D2',
   },
   menuIcon: {
     fontSize: '31px',
@@ -78,19 +99,9 @@ const styles = {
     display: 'inline-block',
     color: '#000',
   },
-  activeSearchIcon: {
-    color: '#FFF',
-    backgroundColor: '#29A1D2',
-  },
   activeMenuIcon: {
     color: '#FFF',
     backgroundColor: '#2B2B2B',
-  },
-  activeMyNyplButton: {
-    backgroundColor: '#2B2B2B',
-  },
-  inactiveMyNyplButton: {
-    backgroundColor: '#FFF',
   },
 };
 
@@ -105,6 +116,7 @@ class MobileHeader extends React.Component {
     };
 
     this.closeMyNyplDialog = this.closeMyNyplDialog.bind(this);
+    this.closeSearchDialog = this.closeSearchDialog.bind(this);
   }
 
   componentDidMount() {
@@ -176,10 +188,16 @@ class MobileHeader extends React.Component {
     }
   }
 
+  closeSearchDialog() {
+    if (this.state.searchButtonAction === 'clickSearch') {
+      Actions.searchButtonActionValue('');
+    }
+  }
+
   renderLogoLink() {
     return (
       <a
-        style={styles.mobileLogo}
+        style={styles.mobileLogoLink}
         href={this.props.nyplRootUrl}
         aria-label={this.props.alt}
       >
@@ -204,11 +222,7 @@ class MobileHeader extends React.Component {
       dialogWindow = (
         <FocusTrap
           className={`MobileMyNypl-Wrapper${myNyplClass}`}
-          focusTrapOptions={{
-            onDeactivate: this.closeMyNyplDialog,
-            clickOutsideDeactivates: true,
-            returnFocusOnDeactivate: false,
-          }}
+          onDeactivate={this.closeMyNyplDialog}
         >
           <MobileMyNypl />
         </FocusTrap>
@@ -218,11 +232,11 @@ class MobileHeader extends React.Component {
     return (
       <li style={styles.listItem}>
         <ReactTappable
-          onTap={() => this.toggleMobileMenuButton('clickMyNypl')}
-          ref="MobileMyNyplButton"
-          component="button"
           className={`${this.props.className}-MyNyplButton${myNyplClass}`}
+          component="button"
+          ref="MobileMyNyplButton"
           style={_extend(styles.myNyplButton, buttonStyles)}
+          onTap={() => this.toggleMobileMenuButton('clickMyNypl')}
         >
           <span className="visuallyHidden">{buttonLabel}</span>
           {icon}
@@ -251,11 +265,52 @@ class MobileHeader extends React.Component {
     );
   }
 
+  renderSearchButton() {
+    let mobileSearchClass = '';
+    let icon = <SearchIcon ariaHidden />;
+    let buttonStyles = styles.inactiveSearchButton;
+    let buttonLabel = 'Open Search Dialog';
+    let dialogWindow = null;
+
+    if (this.state.searchButtonAction === 'clickSearch') {
+      mobileSearchClass = ' active';
+      icon = <XIcon ariaHidden fill="#FFF" />;
+      buttonStyles = styles.activeSearchButton;
+      buttonLabel = 'Close Search Dialog';
+      dialogWindow = (
+        <FocusTrap
+          className={`${this.props.className}-searchDialog`}
+          onDeactivate={this.closeSearchDialog}
+          initialFocus={`.${this.props.className}-searchForm-legend`}
+          style={styles.searchDialog}
+        >
+          <MobileSearchBox
+            className={`${this.props.className}-searchForm`}
+            type="mobile"
+          />
+        </FocusTrap>
+      );
+    }
+
+    return (
+      <li style={styles.listItem}>
+        <ReactTappable
+          className={`${this.props.className}-SearchButton${mobileSearchClass}`}
+          component="button"
+          ref="MobileSearchButton"
+          style={_extend(styles.searchButton, buttonStyles)}
+          onTap={() => this.toggleMobileMenuButton('clickSearch')}
+        >
+          <span className="visuallyHidden">{buttonLabel}</span>
+          {icon}
+        </ReactTappable>
+        {dialogWindow}
+      </li>
+    );
+  }
+
   render() {
     const activeButton = this.state.activeMobileButton;
-    const searchButtonAction = this.state.searchButtonAction;
-    const mobileSearchClass = (searchButtonAction === 'clickSearch') ?
-      'active nypl-icon-solo-x' : 'nypl-icon-magnifier-thin';
     const mobileMenuClass = (activeButton === 'mobileMenu') ?
       'active nypl-icon-solo-x' : 'nypl-icon-burger-nav';
 
@@ -265,21 +320,7 @@ class MobileHeader extends React.Component {
         <ul style={styles.list}>
           {this.renderMyNyplButton()}
           {this.renderLocationsLink()}
-
-          <li style={styles.listItem}>
-            <ReactTappable onTap={() => this.toggleMobileMenuButton('clickSearch')}>
-              <span
-                style={[
-                  styles.searchIcon,
-                  searchButtonAction === 'clickSearch' ? styles.activeSearchIcon : '',
-                ]}
-                className={`${this.props.className}-SearchButton ${mobileSearchClass}`}
-                ref="MobileSearchButton"
-              >
-                <div className="visuallyHidden">Search</div>
-              </span>
-            </ReactTappable>
-          </li>
+          {this.renderSearchButton()}
 
           <li style={styles.listItem}>
             <ReactTappable onTap={() => this.toggleMobileMenuButton('mobileMenu')}>

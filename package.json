@@ -45,7 +45,7 @@
     "dgx-feature-flags": "git+ssh://bitbucket.org/NYPL/dgx-feature-flags.git#master",
     "dgx-skip-navigation-link": "git+ssh://bitbucket.org/NYPL/dgx-skip-navigation-link.git#master",
     "dgx-svg-icons": "git+ssh://git@bitbucket.org/NYPL/dgx-svg-icons.git#master",
-    "focus-trap-react": "3.0.1",
+    "focus-trap-react": "2.1.1",
     "iso": "^4.1.0",
     "moment": "^2.10.6",
     "radium": "^0.13.5",

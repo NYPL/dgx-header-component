@@ -28,18 +28,18 @@ const inputOptionData = [
 ];
 
 // mobile submit button properties
-const mobileSubmitButtonData = [
-  {
-    columnClass: 'left-column',
-    value: 'catalog',
-    text: 'catalog',
-  },
-  {
-    columnClass: 'right-column',
-    value: 'website',
-    text: 'nypl.org',
-  },
-];
+// const mobileSubmitButtonData = [
+//   {
+//     columnClass: 'left-column',
+//     value: 'catalog',
+//     text: 'catalog',
+//   },
+//   {
+//     columnClass: 'right-column',
+//     value: 'website',
+//     text: 'nypl.org',
+//   },
+// ];
 
 class SearchBox extends React.Component {
   constructor(props) {
@@ -284,7 +284,7 @@ class SearchBox extends React.Component {
     // Set active class if search button is hovered or clicked
     const classes = cx({
       'active animateMegaMenuEnter fadeIn': this.props.active || (this.state.actionValue === 'hoverSearch'),
-      mobileActive: this.state.actionValue === 'clickSearch' && !this.props.active,
+      //mobileActive: this.state.actionValue === 'clickSearch' && !this.props.active,
       // active: HeaderStore._getLastActiveMenuItem() === 'hoverSearch',
     });
     // Classes for keywords input fields to activate pulse animation
@@ -316,17 +316,17 @@ class SearchBox extends React.Component {
     );
 
     // Render submit buttons for the mobile version
-    const mobileSubmitButtons = mobileSubmitButtonData.map((element, i) =>
-      <div
-        key={i}
-        className={`${this.props.className}-Mobile-Submit-Option ${element.columnClass}`}
-        value={element.value}
-        onClick={this._submitSearchRequest.bind(this, element.value)}
-      >
-        <span className="title">{element.text}</span>
-        <span className="nypl-icon-wedge-right icon"></span>
-      </div>
-    );
+    // const mobileSubmitButtons = mobileSubmitButtonData.map((element, i) =>
+    //   <div
+    //     key={i}
+    //     className={`${this.props.className}-Mobile-Submit-Option ${element.columnClass}`}
+    //     value={element.value}
+    //     onClick={this._submitSearchRequest.bind(this, element.value)}
+    //   >
+    //     <span className="title">{element.text}</span>
+    //     <span className="nypl-icon-wedge-right icon"></span>
+    //   </div>
+    // );
 
     return (
       <div
@@ -371,13 +371,6 @@ class SearchBox extends React.Component {
             >
               {inputOptions}
             </div>
-          </div>
-
-          <div
-            id={`${this.props.className}-Mobile-Submit`}
-            className={`${this.props.className}-Mobile-Submit`}
-          >
-            {mobileSubmitButtons}
           </div>
 
           <button

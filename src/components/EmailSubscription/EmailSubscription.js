@@ -76,6 +76,15 @@ class EmailSubscription extends React.Component {
     this.initForm = this.initForm.bind(this);
   }
 
+  componentDidUpdate() {
+    const emailAddressField = ReactDOM.findDOMNode(this.refs.emailAddressField);
+    if (this.props.isOpen) {
+      emailAddressField.focus();
+    } else {
+      emailAddressField.blur();
+    }
+  }
+
   initForm(e) {
     e.preventDefault();
     this.setState({
@@ -161,7 +170,7 @@ class EmailSubscription extends React.Component {
     if (!isLoading) {
       // The default view
       subscribeContent = (
-        <div>
+        <div role="dialog">
           <div className={`SubscribeMessageBox ${status}`}>
             <div className="SubscribeMessageBox-Eyebrow"></div>
             <div className="SubscribeMessageBox-Title">
@@ -202,12 +211,12 @@ class EmailSubscription extends React.Component {
               />
 
               <div className={`${formClass}-Error ${errorClass}`}>
-                <span className="nypl-icon-solo-x icon"></span>
+                <span className="nypl-icon-solo-x icon" aria-hidden="true"></span>
                 <span>Please enter a valid email address</span>
               </div>
 
               <div className={`${formClass}-Submit`}>
-                <span className="nypl-icon-check-solo icon"></span>
+                <span className="nypl-icon-check-solo icon" aria-hidden="true"></span>
                 <InputField
                   ariaLabel="Sign up"
                   type="submit"
@@ -269,7 +278,7 @@ class EmailSubscription extends React.Component {
             <div>Something isn&apos;t quite right.</div>
             <div>Please try again.</div>
             <a href="" onClick={this.initForm} style={styles.tryAgainButton}>
-              <span className="nypl-icon-arrow-left icon"></span>
+              <span className="nypl-icon-arrow-left icon" aria-hidden="true"></span>
               TRY AGAIN
             </a>
           </div>
@@ -318,6 +327,7 @@ EmailSubscription.propTypes = {
   policyUrl: React.PropTypes.string,
   subCenterUrl: React.PropTypes.string,
   style: React.PropTypes.object,
+  isOpen: React.PropTypes.bool,
 };
 
 EmailSubscription.defaultProps = {

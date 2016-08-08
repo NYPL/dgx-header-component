@@ -127,6 +127,16 @@ var EmailSubscription = (function (_React$Component) {
   }
 
   _createClass(EmailSubscription, [{
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      var emailAddressField = _reactDom2['default'].findDOMNode(this.refs.emailAddressField);
+      if (this.props.isOpen) {
+        emailAddressField.focus();
+      } else {
+        emailAddressField.blur();
+      }
+    }
+  }, {
     key: 'initForm',
     value: function initForm(e) {
       e.preventDefault();
@@ -214,7 +224,7 @@ var EmailSubscription = (function (_React$Component) {
         // The default view
         subscribeContent = _react2['default'].createElement(
           'div',
-          null,
+          { role: 'dialog' },
           _react2['default'].createElement(
             'div',
             { className: 'SubscribeMessageBox ' + status },
@@ -269,7 +279,7 @@ var EmailSubscription = (function (_React$Component) {
               _react2['default'].createElement(
                 'div',
                 { className: formClass + '-Error ' + errorClass },
-                _react2['default'].createElement('span', { className: 'nypl-icon-solo-x icon' }),
+                _react2['default'].createElement('span', { className: 'nypl-icon-solo-x icon', 'aria-hidden': 'true' }),
                 _react2['default'].createElement(
                   'span',
                   null,
@@ -279,7 +289,7 @@ var EmailSubscription = (function (_React$Component) {
               _react2['default'].createElement(
                 'div',
                 { className: formClass + '-Submit' },
-                _react2['default'].createElement('span', { className: 'nypl-icon-check-solo icon' }),
+                _react2['default'].createElement('span', { className: 'nypl-icon-check-solo icon', 'aria-hidden': 'true' }),
                 _react2['default'].createElement(_InputFieldInputFieldJs2['default'], {
                   ariaLabel: 'Sign up',
                   type: 'submit',
@@ -369,7 +379,7 @@ var EmailSubscription = (function (_React$Component) {
             _react2['default'].createElement(
               'a',
               { href: '', onClick: this.initForm, style: styles.tryAgainButton },
-              _react2['default'].createElement('span', { className: 'nypl-icon-arrow-left icon' }),
+              _react2['default'].createElement('span', { className: 'nypl-icon-arrow-left icon', 'aria-hidden': 'true' }),
               'TRY AGAIN'
             )
           );
@@ -425,7 +435,8 @@ EmailSubscription.propTypes = {
   placeholder: _react2['default'].PropTypes.string,
   policyUrl: _react2['default'].PropTypes.string,
   subCenterUrl: _react2['default'].PropTypes.string,
-  style: _react2['default'].PropTypes.object
+  style: _react2['default'].PropTypes.object,
+  isOpen: _react2['default'].PropTypes.bool
 };
 
 EmailSubscription.defaultProps = {

@@ -113,10 +113,14 @@ class MobileSearchBox extends React.Component {
         // TODO: Add logic to determine search based on radio controls
       }
 
-      // Fire GA event to track Search
-      utils._trackHeader('Search', gaSearchLabel);
-      // Go to the proper search page
-      window.location.assign(requestUrl);
+      // requestUrl && gaSearchLabel are now defined
+      // either by mobileControls or desktopControls
+      if (gaSearchLabel && requestUrl) {
+        // Fire GA event to track Search
+        utils._trackHeader('Search', gaSearchLabel);
+        // Go to the proper search page
+        window.location.assign(requestUrl);
+      }
     } else {
       // No search input has been entered
       this.setState({ placeholder: 'Please enter a search term.' });
@@ -124,7 +128,7 @@ class MobileSearchBox extends React.Component {
     }
   }
 
-  renderSearchInput() {
+  renderSearchInputField() {
     return (
       <div className={`${this.props.className}-inputBox`}>
         <label
@@ -144,7 +148,7 @@ class MobileSearchBox extends React.Component {
           aria-required="true"
           autoComplete="off"
         />
-        <span className="nypl-icon-magnifier-thin icon"></span>
+        <span className="nypl-icon-magnifier-thin icon" aria-hidden="true"></span>
       </div>
     );
   }
@@ -185,7 +189,7 @@ class MobileSearchBox extends React.Component {
           <legend className={`${this.props.className}-legend visuallyHidden`}>
             {this.props.legendText}
           </legend>
-          {this.renderSearchInput()}
+          {this.renderSearchInputField()}
           {(this.props.type === 'mobile') ?
             this.renderMobileControls() : null
           }

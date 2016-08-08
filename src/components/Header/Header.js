@@ -255,6 +255,25 @@ class Header extends React.Component {
     const mobileMyNyplClasses = cx({ active: showDialog });
     const skipNav = this.props.skipNav ?
       (<SkipNavigation {...this.props.skipNav} />) : '';
+    const gaPublicPreview = `
+      var docCookies = {
+        getItem: function (sKey) {
+          if (!sKey) { return null; }
+          return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+        }
+      };
+
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-1420324-122', 'auto');
+
+      if (docCookies.getItem(nyplpreview) === '1') {
+        ga('set', 'dimension1', "Public Preview");
+      }
+    `;
 
     return (
       <header
@@ -263,6 +282,9 @@ class Header extends React.Component {
         ref="nyplHeader"
         style={(isHeaderSticky) ? { height: `${headerHeight}px` } : null}
       >
+        <script
+          dangerouslySetInnerHTML={this.createMarkup(gaPublicPreview)}>
+        </script>
         {skipNav}
         <GlobalAlerts className={`${headerClass}-GlobalAlerts`} />
         <div className={`${headerClass}-Wrapper`}>

@@ -270,7 +270,7 @@ class Header extends React.Component {
 
       ga('create', 'UA-1420324-122', 'auto');
 
-      if (docCookies.getItem(nyplpreview) === '1') {
+      if (docCookies.getItem(nyplpreview) && docCookies.getItem(nyplpreview) === '1') {
         ga('set', 'dimension1', "Public Preview");
       }
     `;

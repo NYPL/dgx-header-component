@@ -63,15 +63,16 @@ var styles = {
     width: 'auto'
   },
   submitButton: {
-    marginTop: '50px',
-    border: '2px solid #fff',
-    color: 'white',
-    height: '38px',
-    paddingLeft: '15px',
-    width: '100px',
-    fontSize: '12px',
     backgroundColor: '#1B7FA7',
-    fontFamily: 'Kievit-Book'
+    border: '2px solid #FFF',
+    color: '#FFF',
+    fontFamily: 'Kievit-Book',
+    fontSize: '14px',
+    height: '38px',
+    letterSpacing: '.03em',
+    marginTop: '50px',
+    paddingLeft: '21px',
+    width: '100px'
   },
   tryAgainButton: {
     display: 'inline-block',
@@ -79,16 +80,16 @@ var styles = {
     color: 'white',
     padding: '5px 15px 5px 5px',
     width: '90px',
-    fontSize: '12px',
+    fontSize: '14px',
     backgroundColor: '#1B7FA7',
     fontFamily: 'Kievit-Book',
     marginTop: '25px'
   },
   privacyLink: {
     textDecoration: 'underline',
-    fontSize: '10px',
-    color: 'rgba(255, 255, 255, 0.5)',
-    fontWeight: '200',
+    fontSize: '12px',
+    color: '#FFF',
+    fontWeight: '400',
     textTransform: 'uppercase',
     position: 'absolute',
     bottom: '45px',
@@ -96,7 +97,7 @@ var styles = {
   },
   scLink: {
     textDecoration: 'underline',
-    fontSize: '11px',
+    fontSize: '12px',
     color: 'white',
     fontWeight: '200',
     textTransform: 'uppercase',

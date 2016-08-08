@@ -17,7 +17,7 @@ var _utilsUtilsJs = require('../../utils/utils.js');
 var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
 
 var defaultStyles = {
-  backgroundColor: '#E43534',
+  backgroundColor: '#E32B31',
   color: '#FFFFFF'
 };
 

@@ -18,10 +18,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _radium = require('radium');
-
-var _radium2 = _interopRequireDefault(_radium);
-
 var _reactTappable = require('react-tappable');
 
 var _reactTappable2 = _interopRequireDefault(_reactTappable);
@@ -130,18 +126,20 @@ var styles = {
     padding: 0,
     left: 0,
     width: '100%',
-    backgroundColor: '#29A1D2'
+    backgroundColor: '#29A1D2',
+    zIndex: '1000'
   },
-  menuIcon: {
-    fontSize: '31px',
+  menuButton: {
     margin: 0,
-    padding: '14px',
+    padding: '13px',
     display: 'inline-block',
-    color: '#000'
+    border: 'none'
   },
-  activeMenuIcon: {
-    color: '#FFF',
+  activeMenuButton: {
     backgroundColor: '#2B2B2B'
+  },
+  inactiveMenuButton: {
+    backgroundColor: '#FFF'
   }
 };
 
@@ -239,6 +237,14 @@ var MobileHeader = (function (_React$Component) {
         _actionsActionsJs2['default'].setMobileMyNyplButtonValue('');
       }
     }
+
+    /**
+     * closeSearchDialog()
+     * Verifies the current state.searchButtonAction matches
+     * 'clickSearch' and fires the Action method to reset.
+     * This is necessary for the FocusTrap component to execute
+     * the proper deactivateMethod for each dialog.
+     */
   }, {
     key: 'closeSearchDialog',
     value: function closeSearchDialog() {
@@ -246,6 +252,13 @@ var MobileHeader = (function (_React$Component) {
         _actionsActionsJs2['default'].searchButtonActionValue('');
       }
     }
+
+    /**
+    * renderLogoLink()
+    * Generates the DOM for the NYPL Logo Link.
+    * Uses SVG LionLogo icon & visuallyHidden label.
+    * @returns {Object} React DOM.
+    */
   }, {
     key: 'renderLogoLink',
     value: function renderLogoLink() {
@@ -264,6 +277,13 @@ var MobileHeader = (function (_React$Component) {
         _react2['default'].createElement(_dgxSvgIcons.LionLogoIcon, { ariaHidden: true, className: this.props.className + '-Logo' })
       );
     }
+
+    /**
+    * renderMyNyplButton()
+    * Generates the DOM for the MyNyplLogin button/dialog.
+    * Uses SVG icon & visuallyHidden label.
+    * @returns {Object} React DOM.
+    */
   }, {
     key: 'renderMyNyplButton',
     value: function renderMyNyplButton() {
@@ -314,6 +334,13 @@ var MobileHeader = (function (_React$Component) {
         dialogWindow
       );
     }
+
+    /**
+    * renderLocationsLink()
+    * Generates the DOM for the Locations link.
+    * Uses SVG icon & visuallyHidden label.
+    * @returns {Object} React DOM.
+    */
   }, {
     key: 'renderLocationsLink',
     value: function renderLocationsLink() {
@@ -338,17 +365,24 @@ var MobileHeader = (function (_React$Component) {
             { className: 'visuallyHidden' },
             'NYPL Locations Near Me'
           ),
-          _react2['default'].createElement(_dgxSvgIcons.LocatorIcon, { ariaHidden: true })
+          _react2['default'].createElement(_dgxSvgIcons.LocatorIcon, { ariaHidden: true, fill: '#000' })
         )
       );
     }
+
+    /**
+    * renderSearchButton()
+    * Generates the DOM for the Search button/dialog.
+    * Uses SVG icon & visuallyHidden label.
+    * @returns {Object} React DOM.
+    */
   }, {
     key: 'renderSearchButton',
     value: function renderSearchButton() {
       var _this2 = this;
 
       var mobileSearchClass = '';
-      var icon = _react2['default'].createElement(_dgxSvgIcons.SearchIcon, { ariaHidden: true });
+      var icon = _react2['default'].createElement(_dgxSvgIcons.SearchIcon, { ariaHidden: true, fill: '#000' });
       var buttonStyles = styles.inactiveSearchButton;
       var buttonLabel = 'Open Search Dialog';
       var dialogWindow = null;
@@ -397,14 +431,56 @@ var MobileHeader = (function (_React$Component) {
         dialogWindow
       );
     }
+
+    /**
+    * renderMenuButton()
+    * Generates the DOM for the Menu button
+    * Uses SVG icon & visuallyHidden label.
+    * @returns {Object} React DOM.
+    */
+  }, {
+    key: 'renderMenuButton',
+    value: function renderMenuButton() {
+      var _this3 = this;
+
+      var mobileMenuClass = '';
+      var icon = _react2['default'].createElement(_dgxSvgIcons.MenuIcon, { ariaHidden: true, fill: '#000' });
+      var buttonStyles = styles.inactiveMenuButton;
+      var buttonLabel = 'Open Menu Dialog';
+
+      if (this.state.activeMobileButton === 'mobileMenu') {
+        mobileMenuClass = ' active';
+        icon = _react2['default'].createElement(_dgxSvgIcons.XIcon, { ariaHidden: true, fill: '#FFF' });
+        buttonStyles = styles.activeMenuButton;
+        buttonLabel = 'Close Menu Dialog';
+      }
+
+      return _react2['default'].createElement(
+        'li',
+        { style: styles.listItem },
+        _react2['default'].createElement(
+          _reactTappable2['default'],
+          {
+            className: this.props.className + '-MenuButton' + mobileMenuClass,
+            component: 'button',
+            ref: 'MobileMenuButton',
+            style: (0, _underscore.extend)(styles.menuButton, buttonStyles),
+            onTap: function () {
+              return _this3.toggleMobileMenuButton('mobileMenu');
+            }
+          },
+          _react2['default'].createElement(
+            'span',
+            { className: 'visuallyHidden' },
+            buttonLabel
+          ),
+          icon
+        )
+      );
+    }
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
-
-      var activeButton = this.state.activeMobileButton;
-      var mobileMenuClass = activeButton === 'mobileMenu' ? 'active nypl-icon-solo-x' : 'nypl-icon-burger-nav';
-
       return _react2['default'].createElement(
         'div',
         { className: this.props.className, style: styles.base },
@@ -415,21 +491,7 @@ var MobileHeader = (function (_React$Component) {
           this.renderMyNyplButton(),
           this.renderLocationsLink(),
           this.renderSearchButton(),
-          _react2['default'].createElement(
-            'li',
-            { style: styles.listItem },
-            _react2['default'].createElement(
-              _reactTappable2['default'],
-              { onTap: function () {
-                  return _this3.toggleMobileMenuButton('mobileMenu');
-                } },
-              _react2['default'].createElement('span', {
-                style: [styles.menuIcon, activeButton === 'mobileMenu' ? styles.activeMenuIcon : ''],
-                className: this.props.className + '-MenuButton ' + mobileMenuClass,
-                ref: 'MobileMenuButton'
-              })
-            )
-          )
+          this.renderMenuButton()
         )
       );
     }
@@ -453,5 +515,5 @@ MobileHeader.defaultProps = {
   alt: 'The New York Public Library'
 };
 
-exports['default'] = (0, _radium2['default'])(MobileHeader);
+exports['default'] = MobileHeader;
 module.exports = exports['default'];

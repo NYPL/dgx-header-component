@@ -1,11 +1,11 @@
 import React from 'react';
-import Radium from 'radium';
 import ReactTappable from 'react-tappable';
 import FocusTrap from 'focus-trap-react';
 import {
   LionLogoIcon,
   LocatorIcon,
   LoginIcon,
+  MenuIcon,
   SearchIcon,
   XIcon,
 } from 'dgx-svg-icons';
@@ -91,17 +91,19 @@ const styles = {
     left: 0,
     width: '100%',
     backgroundColor: '#29A1D2',
+    zIndex: '1000',
   },
-  menuIcon: {
-    fontSize: '31px',
+  menuButton: {
     margin: 0,
-    padding: '14px',
+    padding: '13px',
     display: 'inline-block',
-    color: '#000',
+    border: 'none',
   },
-  activeMenuIcon: {
-    color: '#FFF',
+  activeMenuButton: {
     backgroundColor: '#2B2B2B',
+  },
+  inactiveMenuButton: {
+    backgroundColor: '#FFF',
   },
 };
 
@@ -188,12 +190,25 @@ class MobileHeader extends React.Component {
     }
   }
 
+  /**
+   * closeSearchDialog()
+   * Verifies the current state.searchButtonAction matches
+   * 'clickSearch' and fires the Action method to reset.
+   * This is necessary for the FocusTrap component to execute
+   * the proper deactivateMethod for each dialog.
+   */
   closeSearchDialog() {
     if (this.state.searchButtonAction === 'clickSearch') {
       Actions.searchButtonActionValue('');
     }
   }
 
+  /**
+  * renderLogoLink()
+  * Generates the DOM for the NYPL Logo Link.
+  * Uses SVG LionLogo icon & visuallyHidden label.
+  * @returns {Object} React DOM.
+  */
   renderLogoLink() {
     return (
       <a
@@ -207,6 +222,12 @@ class MobileHeader extends React.Component {
     );
   }
 
+  /**
+  * renderMyNyplButton()
+  * Generates the DOM for the MyNyplLogin button/dialog.
+  * Uses SVG icon & visuallyHidden label.
+  * @returns {Object} React DOM.
+  */
   renderMyNyplButton() {
     let myNyplClass = '';
     let icon = <LoginIcon ariaHidden fill="#000" />;
@@ -246,6 +267,12 @@ class MobileHeader extends React.Component {
     );
   }
 
+  /**
+  * renderLocationsLink()
+  * Generates the DOM for the Locations link.
+  * Uses SVG icon & visuallyHidden label.
+  * @returns {Object} React DOM.
+  */
   renderLocationsLink() {
     const locatorUrl = this.props.locatorUrl || '//www.nypl.org/locations/map?nearme=true';
 
@@ -259,15 +286,21 @@ class MobileHeader extends React.Component {
           aria-label="NYPL Locations Near Me"
         >
           <span className="visuallyHidden">NYPL Locations Near Me</span>
-          <LocatorIcon ariaHidden />
+          <LocatorIcon ariaHidden fill="#000" />
         </a>
       </li>
     );
   }
 
+  /**
+  * renderSearchButton()
+  * Generates the DOM for the Search button/dialog.
+  * Uses SVG icon & visuallyHidden label.
+  * @returns {Object} React DOM.
+  */
   renderSearchButton() {
     let mobileSearchClass = '';
-    let icon = <SearchIcon ariaHidden />;
+    let icon = <SearchIcon ariaHidden fill="#000" />;
     let buttonStyles = styles.inactiveSearchButton;
     let buttonLabel = 'Open Search Dialog';
     let dialogWindow = null;
@@ -309,11 +342,42 @@ class MobileHeader extends React.Component {
     );
   }
 
-  render() {
-    const activeButton = this.state.activeMobileButton;
-    const mobileMenuClass = (activeButton === 'mobileMenu') ?
-      'active nypl-icon-solo-x' : 'nypl-icon-burger-nav';
+  /**
+  * renderMenuButton()
+  * Generates the DOM for the Menu button
+  * Uses SVG icon & visuallyHidden label.
+  * @returns {Object} React DOM.
+  */
+  renderMenuButton() {
+    let mobileMenuClass = '';
+    let icon = <MenuIcon ariaHidden fill="#000" />;
+    let buttonStyles = styles.inactiveMenuButton;
+    let buttonLabel = 'Open Menu Dialog';
 
+    if (this.state.activeMobileButton === 'mobileMenu') {
+      mobileMenuClass = ' active';
+      icon = <XIcon ariaHidden fill="#FFF" />;
+      buttonStyles = styles.activeMenuButton;
+      buttonLabel = 'Close Menu Dialog';
+    }
+
+    return (
+      <li style={styles.listItem}>
+        <ReactTappable
+          className={`${this.props.className}-MenuButton${mobileMenuClass}`}
+          component="button"
+          ref="MobileMenuButton"
+          style={_extend(styles.menuButton, buttonStyles)}
+          onTap={() => this.toggleMobileMenuButton('mobileMenu')}
+        >
+          <span className="visuallyHidden">{buttonLabel}</span>
+          {icon}
+        </ReactTappable>
+      </li>
+    );
+  }
+
+  render() {
     return (
       <div className={this.props.className} style={styles.base}>
         {this.renderLogoLink()}
@@ -321,20 +385,7 @@ class MobileHeader extends React.Component {
           {this.renderMyNyplButton()}
           {this.renderLocationsLink()}
           {this.renderSearchButton()}
-
-          <li style={styles.listItem}>
-            <ReactTappable onTap={() => this.toggleMobileMenuButton('mobileMenu')}>
-              <span
-                style={[
-                  styles.menuIcon,
-                  activeButton === 'mobileMenu' ? styles.activeMenuIcon : '',
-                ]}
-                className={`${this.props.className}-MenuButton ${mobileMenuClass}`}
-                ref="MobileMenuButton"
-              >
-              </span>
-            </ReactTappable>
-          </li>
+          {this.renderMenuButton()}
         </ul>
       </div>
     );
@@ -356,4 +407,4 @@ MobileHeader.defaultProps = {
   alt: 'The New York Public Library',
 };
 
-export default Radium(MobileHeader);
+export default MobileHeader;

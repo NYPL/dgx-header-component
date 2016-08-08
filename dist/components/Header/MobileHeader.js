@@ -54,6 +54,10 @@ var _MyNyplMobileMyNyplJs = require('../MyNypl/MobileMyNypl.js');
 
 var _MyNyplMobileMyNyplJs2 = _interopRequireDefault(_MyNyplMobileMyNyplJs);
 
+var _SearchBoxMobileSearchBoxJs = require('../SearchBox/MobileSearchBox.js');
+
+var _SearchBoxMobileSearchBoxJs2 = _interopRequireDefault(_SearchBoxMobileSearchBoxJs);
+
 var styles = {
   base: {
     position: 'relative',
@@ -70,9 +74,9 @@ var styles = {
   listItem: {
     display: 'inline-block',
     padding: 0,
-    margin: 0
+    margin: '0 0 0 4px'
   },
-  mobileLogo: {
+  mobileLogoLink: {
     color: '#000',
     textDecoration: 'none',
     display: 'inline-block',
@@ -90,24 +94,43 @@ var styles = {
       color: '#000'
     }
   },
-  myNyplButton: {
-    margin: 0,
-    padding: '13px',
-    display: 'inline-block',
-    border: 'none'
-  },
   locationsLink: {
     margin: 0,
     padding: '12px 13px',
     display: 'inline-block',
     color: '#000'
   },
-  searchIcon: {
-    fontSize: '31px',
+  myNyplButton: {
     margin: 0,
-    padding: '14px',
+    padding: '13px',
     display: 'inline-block',
-    color: '#000'
+    border: 'none'
+  },
+  activeMyNyplButton: {
+    backgroundColor: '#2B2B2B'
+  },
+  inactiveMyNyplButton: {
+    backgroundColor: '#FFF'
+  },
+  searchButton: {
+    margin: 0,
+    padding: '13px',
+    display: 'inline-block',
+    border: 'none'
+  },
+  activeSearchButton: {
+    backgroundColor: '#29A1D2'
+  },
+  inactiveSearchButton: {
+    backgroundColor: '#FFF'
+  },
+  searchDialog: {
+    position: 'absolute',
+    margin: 0,
+    padding: 0,
+    left: 0,
+    width: '100%',
+    backgroundColor: '#29A1D2'
   },
   menuIcon: {
     fontSize: '31px',
@@ -116,19 +139,9 @@ var styles = {
     display: 'inline-block',
     color: '#000'
   },
-  activeSearchIcon: {
-    color: '#FFF',
-    backgroundColor: '#29A1D2'
-  },
   activeMenuIcon: {
     color: '#FFF',
     backgroundColor: '#2B2B2B'
-  },
-  activeMyNyplButton: {
-    backgroundColor: '#2B2B2B'
-  },
-  inactiveMyNyplButton: {
-    backgroundColor: '#FFF'
   }
 };
 
@@ -147,6 +160,7 @@ var MobileHeader = (function (_React$Component) {
     };
 
     this.closeMyNyplDialog = this.closeMyNyplDialog.bind(this);
+    this.closeSearchDialog = this.closeSearchDialog.bind(this);
   }
 
   _createClass(MobileHeader, [{
@@ -226,12 +240,19 @@ var MobileHeader = (function (_React$Component) {
       }
     }
   }, {
+    key: 'closeSearchDialog',
+    value: function closeSearchDialog() {
+      if (this.state.searchButtonAction === 'clickSearch') {
+        _actionsActionsJs2['default'].searchButtonActionValue('');
+      }
+    }
+  }, {
     key: 'renderLogoLink',
     value: function renderLogoLink() {
       return _react2['default'].createElement(
         'a',
         {
-          style: styles.mobileLogo,
+          style: styles.mobileLogoLink,
           href: this.props.nyplRootUrl,
           'aria-label': this.props.alt
         },
@@ -263,11 +284,7 @@ var MobileHeader = (function (_React$Component) {
           _focusTrapReact2['default'],
           {
             className: 'MobileMyNypl-Wrapper' + myNyplClass,
-            focusTrapOptions: {
-              onDeactivate: this.closeMyNyplDialog,
-              clickOutsideDeactivates: true,
-              returnFocusOnDeactivate: false
-            }
+            onDeactivate: this.closeMyNyplDialog
           },
           _react2['default'].createElement(_MyNyplMobileMyNyplJs2['default'], null)
         );
@@ -279,13 +296,13 @@ var MobileHeader = (function (_React$Component) {
         _react2['default'].createElement(
           _reactTappable2['default'],
           {
+            className: this.props.className + '-MyNyplButton' + myNyplClass,
+            component: 'button',
+            ref: 'MobileMyNyplButton',
+            style: (0, _underscore.extend)(styles.myNyplButton, buttonStyles),
             onTap: function () {
               return _this.toggleMobileMenuButton('clickMyNypl');
-            },
-            ref: 'MobileMyNyplButton',
-            component: 'button',
-            className: this.props.className + '-MyNyplButton' + myNyplClass,
-            style: (0, _underscore.extend)(styles.myNyplButton, buttonStyles)
+            }
           },
           _react2['default'].createElement(
             'span',
@@ -326,13 +343,66 @@ var MobileHeader = (function (_React$Component) {
       );
     }
   }, {
-    key: 'render',
-    value: function render() {
+    key: 'renderSearchButton',
+    value: function renderSearchButton() {
       var _this2 = this;
 
+      var mobileSearchClass = '';
+      var icon = _react2['default'].createElement(_dgxSvgIcons.SearchIcon, { ariaHidden: true });
+      var buttonStyles = styles.inactiveSearchButton;
+      var buttonLabel = 'Open Search Dialog';
+      var dialogWindow = null;
+
+      if (this.state.searchButtonAction === 'clickSearch') {
+        mobileSearchClass = ' active';
+        icon = _react2['default'].createElement(_dgxSvgIcons.XIcon, { ariaHidden: true, fill: '#FFF' });
+        buttonStyles = styles.activeSearchButton;
+        buttonLabel = 'Close Search Dialog';
+        dialogWindow = _react2['default'].createElement(
+          _focusTrapReact2['default'],
+          {
+            className: this.props.className + '-searchDialog',
+            onDeactivate: this.closeSearchDialog,
+            initialFocus: '.' + this.props.className + '-searchForm-legend',
+            style: styles.searchDialog
+          },
+          _react2['default'].createElement(_SearchBoxMobileSearchBoxJs2['default'], {
+            className: this.props.className + '-searchForm',
+            type: 'mobile'
+          })
+        );
+      }
+
+      return _react2['default'].createElement(
+        'li',
+        { style: styles.listItem },
+        _react2['default'].createElement(
+          _reactTappable2['default'],
+          {
+            className: this.props.className + '-SearchButton' + mobileSearchClass,
+            component: 'button',
+            ref: 'MobileSearchButton',
+            style: (0, _underscore.extend)(styles.searchButton, buttonStyles),
+            onTap: function () {
+              return _this2.toggleMobileMenuButton('clickSearch');
+            }
+          },
+          _react2['default'].createElement(
+            'span',
+            { className: 'visuallyHidden' },
+            buttonLabel
+          ),
+          icon
+        ),
+        dialogWindow
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this3 = this;
+
       var activeButton = this.state.activeMobileButton;
-      var searchButtonAction = this.state.searchButtonAction;
-      var mobileSearchClass = searchButtonAction === 'clickSearch' ? 'active nypl-icon-solo-x' : 'nypl-icon-magnifier-thin';
       var mobileMenuClass = activeButton === 'mobileMenu' ? 'active nypl-icon-solo-x' : 'nypl-icon-burger-nav';
 
       return _react2['default'].createElement(
@@ -344,36 +414,14 @@ var MobileHeader = (function (_React$Component) {
           { style: styles.list },
           this.renderMyNyplButton(),
           this.renderLocationsLink(),
+          this.renderSearchButton(),
           _react2['default'].createElement(
             'li',
             { style: styles.listItem },
             _react2['default'].createElement(
               _reactTappable2['default'],
               { onTap: function () {
-                  return _this2.toggleMobileMenuButton('clickSearch');
-                } },
-              _react2['default'].createElement(
-                'span',
-                {
-                  style: [styles.searchIcon, searchButtonAction === 'clickSearch' ? styles.activeSearchIcon : ''],
-                  className: this.props.className + '-SearchButton ' + mobileSearchClass,
-                  ref: 'MobileSearchButton'
-                },
-                _react2['default'].createElement(
-                  'div',
-                  { className: 'visuallyHidden' },
-                  'Search'
-                )
-              )
-            )
-          ),
-          _react2['default'].createElement(
-            'li',
-            { style: styles.listItem },
-            _react2['default'].createElement(
-              _reactTappable2['default'],
-              { onTap: function () {
-                  return _this2.toggleMobileMenuButton('mobileMenu');
+                  return _this3.toggleMobileMenuButton('mobileMenu');
                 } },
               _react2['default'].createElement('span', {
                 style: [styles.menuIcon, activeButton === 'mobileMenu' ? styles.activeMenuIcon : ''],

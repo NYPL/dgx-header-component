@@ -75,11 +75,14 @@ var styles = {
   mobileLogo: {
     color: '#000',
     textDecoration: 'none',
-    display: 'block',
-    width: '50px',
+    display: 'inline-block',
     height: '50px',
-    float: 'left',
-    margin: '7px 0 0 10px',
+    width: '50px',
+    position: 'absolute',
+    left: '10px',
+    top: '8px',
+    margin: 0,
+    padding: 0,
     ':hover': {
       color: '#000'
     },
@@ -93,10 +96,10 @@ var styles = {
     display: 'inline-block',
     border: 'none'
   },
-  locatorIcon: {
-    fontSize: '31px',
+  locationsLink: {
     margin: 0,
-    padding: '14px',
+    padding: '12px 13px',
+    display: 'inline-block',
     color: '#000'
   },
   searchIcon: {
@@ -229,14 +232,15 @@ var MobileHeader = (function (_React$Component) {
         'a',
         {
           style: styles.mobileLogo,
-          href: this.props.nyplRootUrl
+          href: this.props.nyplRootUrl,
+          'aria-label': this.props.alt
         },
-        _react2['default'].createElement(_dgxSvgIcons.LionLogoIcon, { ariaHidden: true, className: this.props.className + '-Logo' }),
         _react2['default'].createElement(
           'span',
           { className: 'visuallyHidden' },
           this.props.alt
-        )
+        ),
+        _react2['default'].createElement(_dgxSvgIcons.LionLogoIcon, { ariaHidden: true, className: this.props.className + '-Logo' })
       );
     }
   }, {
@@ -261,7 +265,8 @@ var MobileHeader = (function (_React$Component) {
             className: 'MobileMyNypl-Wrapper' + myNyplClass,
             focusTrapOptions: {
               onDeactivate: this.closeMyNyplDialog,
-              clickOutsideDeactivates: true
+              clickOutsideDeactivates: true,
+              returnFocusOnDeactivate: false
             }
           },
           _react2['default'].createElement(_MyNyplMobileMyNyplJs2['default'], null)
@@ -272,12 +277,13 @@ var MobileHeader = (function (_React$Component) {
         'li',
         { style: styles.listItem },
         _react2['default'].createElement(
-          'button',
+          _reactTappable2['default'],
           {
-            onClick: function () {
+            onTap: function () {
               return _this.toggleMobileMenuButton('clickMyNypl');
             },
             ref: 'MobileMyNyplButton',
+            component: 'button',
             className: this.props.className + '-MyNyplButton' + myNyplClass,
             style: (0, _underscore.extend)(styles.myNyplButton, buttonStyles)
           },
@@ -292,13 +298,40 @@ var MobileHeader = (function (_React$Component) {
       );
     }
   }, {
+    key: 'renderLocationsLink',
+    value: function renderLocationsLink() {
+      var locatorUrl = this.props.locatorUrl || '//www.nypl.org/locations/map?nearme=true';
+
+      return _react2['default'].createElement(
+        'li',
+        { style: styles.listItem },
+        _react2['default'].createElement(
+          'a',
+          {
+            style: styles.locationsLink,
+            href: locatorUrl,
+            onClick: function () {
+              return _utilsUtilsJs2['default']._trackHeader('Click', 'Mobile Locations Button');
+            },
+            className: this.props.className + '-Locator',
+            'aria-label': 'NYPL Locations Near Me'
+          },
+          _react2['default'].createElement(
+            'span',
+            { className: 'visuallyHidden' },
+            'NYPL Locations Near Me'
+          ),
+          _react2['default'].createElement(_dgxSvgIcons.LocatorIcon, { ariaHidden: true })
+        )
+      );
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
 
       var activeButton = this.state.activeMobileButton;
       var searchButtonAction = this.state.searchButtonAction;
-      var locatorUrl = this.props.locatorUrl || '//www.nypl.org/locations/map?nearme=true';
       var mobileSearchClass = searchButtonAction === 'clickSearch' ? 'active nypl-icon-solo-x' : 'nypl-icon-magnifier-thin';
       var mobileMenuClass = activeButton === 'mobileMenu' ? 'active nypl-icon-solo-x' : 'nypl-icon-burger-nav';
 
@@ -310,26 +343,7 @@ var MobileHeader = (function (_React$Component) {
           'ul',
           { style: styles.list },
           this.renderMyNyplButton(),
-          _react2['default'].createElement(
-            'li',
-            { style: styles.listItem },
-            _react2['default'].createElement(
-              'a',
-              {
-                style: styles.locatorIcon,
-                href: locatorUrl,
-                onClick: function () {
-                  return _utilsUtilsJs2['default']._trackHeader('Click', 'Mobile Locations Button');
-                },
-                className: this.props.className + '-Locator nypl-icon-locator-large'
-              },
-              _react2['default'].createElement(
-                'span',
-                { className: 'visuallyHidden' },
-                'NYPL Locations'
-              )
-            )
-          ),
+          this.renderLocationsLink(),
           _react2['default'].createElement(
             'li',
             { style: styles.listItem },

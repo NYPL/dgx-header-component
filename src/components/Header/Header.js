@@ -273,6 +273,8 @@ class Header extends React.Component {
       if (docCookies.getItem(nyplpreview) && docCookies.getItem(nyplpreview) === '1') {
         ga('set', 'dimension1', "Public Preview");
       }
+
+      ga('send', 'pageview');
     `;
 
     return (

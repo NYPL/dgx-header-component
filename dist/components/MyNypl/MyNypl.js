@@ -34,7 +34,7 @@ var _appConfigJs2 = _interopRequireDefault(_appConfigJs);
 
 var styles = {
   base: {
-    backgroundColor: '#1DA1D4',
+    backgroundColor: '#1B7FA7',
     padding: '0px',
     width: 'auto'
   },
@@ -45,23 +45,25 @@ var styles = {
     display: 'none'
   },
   catalogInfo: {
-    fontSize: '12px',
-    color: 'rgba(255, 255, 255, 0.5)',
-    fontWeight: '200',
-    position: 'absolute',
     bottom: '26px',
+    color: '#FFF',
+    fontSize: '14px',
+    fontWeight: '200',
+    letterSpacing: '.03em',
+    position: 'absolute',
     right: '30px',
     textDecoration: 'underline'
   },
   loginButtons: {
+    backgroundColor: '#1B7FA7',
+    border: '2px solid #FFF',
+    color: '#FFF',
     display: 'inline-block',
-    border: '2px solid #fff',
-    color: 'white',
-    padding: '9px 10px 7px',
-    fontSize: '12px',
-    backgroundColor: '#1DA1D4',
     fontFamily: 'Kievit-Book',
-    marginTop: '20px'
+    fontSize: '14px',
+    letterSpacing: '.03em',
+    marginTop: '20px',
+    padding: '9px 17px 7px'
   }
 };
 

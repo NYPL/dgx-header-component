@@ -35,7 +35,7 @@ const styles = {
     right: '0',
     width: '250px',
     minHeight: '210px',
-    backgroundColor: '#1DA1D4',
+    backgroundColor: '#1B7FA7',
     padding: '25px 30px',
   },
   hide: {

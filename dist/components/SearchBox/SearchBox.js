@@ -61,15 +61,18 @@ var inputOptionData = [{
 }];
 
 // mobile submit button properties
-var mobileSubmitButtonData = [{
-  columnClass: 'left-column',
-  value: 'catalog',
-  text: 'catalog'
-}, {
-  columnClass: 'right-column',
-  value: 'website',
-  text: 'nypl.org'
-}];
+// const mobileSubmitButtonData = [
+//   {
+//     columnClass: 'left-column',
+//     value: 'catalog',
+//     text: 'catalog',
+//   },
+//   {
+//     columnClass: 'right-column',
+//     value: 'website',
+//     text: 'nypl.org',
+//   },
+// ];
 
 var SearchBox = (function (_React$Component) {
   _inherits(SearchBox, _React$Component);
@@ -346,10 +349,10 @@ var SearchBox = (function (_React$Component) {
 
       // Set active class if search button is hovered or clicked
       var classes = (0, _classnames2['default'])({
-        'active animateMegaMenuEnter fadeIn': this.props.active || this.state.actionValue === 'hoverSearch',
-        mobileActive: this.state.actionValue === 'clickSearch' && !this.props.active
+        'active animateMegaMenuEnter fadeIn': this.props.active || this.state.actionValue === 'hoverSearch'
       });
       // Classes for keywords input fields to activate pulse animation
+      //mobileActive: this.state.actionValue === 'clickSearch' && !this.props.active,
       // active: HeaderStore._getLastActiveMenuItem() === 'hoverSearch',
       var pulseAnimation = (0, _classnames2['default'])({
         'keywords-pulse-fade-in': this.state.placeholderAnimation === 'initial',
@@ -383,23 +386,17 @@ var SearchBox = (function (_React$Component) {
       });
 
       // Render submit buttons for the mobile version
-      var mobileSubmitButtons = mobileSubmitButtonData.map(function (element, i) {
-        return _react2['default'].createElement(
-          'div',
-          {
-            key: i,
-            className: _this2.props.className + '-Mobile-Submit-Option ' + element.columnClass,
-            value: element.value,
-            onClick: _this2._submitSearchRequest.bind(_this2, element.value)
-          },
-          _react2['default'].createElement(
-            'span',
-            { className: 'title' },
-            element.text
-          ),
-          _react2['default'].createElement('span', { className: 'nypl-icon-wedge-right icon' })
-        );
-      });
+      // const mobileSubmitButtons = mobileSubmitButtonData.map((element, i) =>
+      //   <div
+      //     key={i}
+      //     className={`${this.props.className}-Mobile-Submit-Option ${element.columnClass}`}
+      //     value={element.value}
+      //     onClick={this._submitSearchRequest.bind(this, element.value)}
+      //   >
+      //     <span className="title">{element.text}</span>
+      //     <span className="nypl-icon-wedge-right icon"></span>
+      //   </div>
+      // );
 
       return _react2['default'].createElement(
         'div',
@@ -457,14 +454,6 @@ var SearchBox = (function (_React$Component) {
               },
               inputOptions
             )
-          ),
-          _react2['default'].createElement(
-            'div',
-            {
-              id: this.props.className + '-Mobile-Submit',
-              className: this.props.className + '-Mobile-Submit'
-            },
-            mobileSubmitButtons
           ),
           _react2['default'].createElement(
             'button',

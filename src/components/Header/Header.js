@@ -14,7 +14,6 @@ import DonateButton from '../DonateButton/DonateButton.js';
 import SimpleButton from '../Buttons/SimpleButton.js';
 import SubscribeButton from '../SubscribeButton/SubscribeButton.js';
 import MyNyplButton from '../MyNyplButton/MyNyplButton.js';
-import MobileMyNypl from '../MyNypl/MobileMyNypl.js';
 import NavMenu from '../NavMenu/NavMenu.js';
 import MobileHeader from './MobileHeader.js';
 import GlobalAlerts from '../GlobalAlerts/GlobalAlerts.js';
@@ -251,8 +250,6 @@ class Header extends React.Component {
     const headerHeight = this.state.headerHeight;
     const headerClass = this.props.className || 'Header';
     const headerClasses = cx(headerClass, { sticky: isHeaderSticky });
-    const showDialog = HeaderStore._getMobileMyNyplButtonValue();
-    const mobileMyNyplClasses = cx({ active: showDialog });
     const skipNav = this.props.skipNav ?
       (<SkipNavigation {...this.props.skipNav} />) : '';
 
@@ -275,9 +272,6 @@ class Header extends React.Component {
             nyplRootUrl={(this.props.urls === 'absolute') ? '//www.nypl.org' : '/'}
             ref="headerMobile"
           />
-          <div className={`MobileMyNypl-Wrapper ${mobileMyNyplClasses}`}>
-            <MobileMyNypl />
-          </div>
           <div
             className={`${headerClass}-TopWrapper`}
             style={styles.wrapper}

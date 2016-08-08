@@ -67,10 +67,6 @@ var _MyNyplButtonMyNyplButtonJs = require('../MyNyplButton/MyNyplButton.js');
 
 var _MyNyplButtonMyNyplButtonJs2 = _interopRequireDefault(_MyNyplButtonMyNyplButtonJs);
 
-var _MyNyplMobileMyNyplJs = require('../MyNypl/MobileMyNypl.js');
-
-var _MyNyplMobileMyNyplJs2 = _interopRequireDefault(_MyNyplMobileMyNyplJs);
-
 var _NavMenuNavMenuJs = require('../NavMenu/NavMenu.js');
 
 var _NavMenuNavMenuJs2 = _interopRequireDefault(_NavMenuNavMenuJs);
@@ -335,8 +331,6 @@ var Header = (function (_React$Component) {
       var headerHeight = this.state.headerHeight;
       var headerClass = this.props.className || 'Header';
       var headerClasses = (0, _classnames2['default'])(headerClass, { sticky: isHeaderSticky });
-      var showDialog = _storesHeaderStoreJs2['default']._getMobileMyNyplButtonValue();
-      var mobileMyNyplClasses = (0, _classnames2['default'])({ active: showDialog });
       var skipNav = this.props.skipNav ? _react2['default'].createElement(_dgxSkipNavigationLink2['default'], this.props.skipNav) : '';
 
       return _react2['default'].createElement(
@@ -358,11 +352,6 @@ var Header = (function (_React$Component) {
             nyplRootUrl: this.props.urls === 'absolute' ? '//www.nypl.org' : '/',
             ref: 'headerMobile'
           }),
-          _react2['default'].createElement(
-            'div',
-            { className: 'MobileMyNypl-Wrapper ' + mobileMyNyplClasses },
-            _react2['default'].createElement(_MyNyplMobileMyNyplJs2['default'], null)
-          ),
           _react2['default'].createElement(
             'div',
             {

@@ -110,14 +110,6 @@ class Header extends React.Component {
     window.addEventListener('scroll', this.handleStickyHeader, false);
   }
 
-  componentWillUnmount() {
-    HeaderStore.unlisten(this.onChange.bind(this));
-    FeatureFlags.store.unlisten(this.onChange.bind(this));
-
-    // Removing event listener to minimize garbage collection
-    window.removeEventListener('scroll', this.handleStickyHeader, false);
-  }
-
   componentDidUpdate(prevProps, prevState) {
     // Re-fetch the default/current IA /header-data endpoint if
     // the FeatureFlag 'header-upcoming-ia' has been deactivated.
@@ -127,6 +119,14 @@ class Header extends React.Component {
       prevState.featureFlags.get('header-upcoming-ia')) {
       Actions.fetchHeaderData(this.props.env, this.props.urls);
     }
+  }
+
+  componentWillUnmount() {
+    HeaderStore.unlisten(this.onChange.bind(this));
+    FeatureFlags.store.unlisten(this.onChange.bind(this));
+
+    // Removing event listener to minimize garbage collection
+    window.removeEventListener('scroll', this.handleStickyHeader, false);
   }
 
   onChange() {
@@ -169,6 +169,7 @@ class Header extends React.Component {
    * getWindowVerticallScroll()
    * returns the current window vertical
    * scroll position in pixels.
+   * @returns {number} - Vertical Scroll Position.
    */
   getWindowVerticalScroll() {
     return window.scrollY
@@ -300,7 +301,7 @@ class Header extends React.Component {
               />
               <SimpleButton
                 label="Get a Library Card"
-                target="//catalog.nypl.org/screens/selfregpick.html"
+                target="//www.nypl.org/library-card"
                 className="LibraryCardButton"
                 id="LibraryCardButton"
                 gaAction="Get a Library Card"

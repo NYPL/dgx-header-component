@@ -185,15 +185,6 @@ var Header = (function (_React$Component) {
       window.addEventListener('scroll', this.handleStickyHeader, false);
     }
   }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      _storesHeaderStoreJs2['default'].unlisten(this.onChange.bind(this));
-      _dgxFeatureFlags2['default'].store.unlisten(this.onChange.bind(this));
-
-      // Removing event listener to minimize garbage collection
-      window.removeEventListener('scroll', this.handleStickyHeader, false);
-    }
-  }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps, prevState) {
       // Re-fetch the default/current IA /header-data endpoint if
@@ -203,6 +194,15 @@ var Header = (function (_React$Component) {
       if (!this.state.featureFlags.get('header-upcoming-ia') && prevState.featureFlags.get('header-upcoming-ia')) {
         _actionsActionsJs2['default'].fetchHeaderData(this.props.env, this.props.urls);
       }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      _storesHeaderStoreJs2['default'].unlisten(this.onChange.bind(this));
+      _dgxFeatureFlags2['default'].store.unlisten(this.onChange.bind(this));
+
+      // Removing event listener to minimize garbage collection
+      window.removeEventListener('scroll', this.handleStickyHeader, false);
     }
   }, {
     key: 'onChange',
@@ -247,6 +247,7 @@ var Header = (function (_React$Component) {
      * getWindowVerticallScroll()
      * returns the current window vertical
      * scroll position in pixels.
+     * @returns {number} - Vertical Scroll Position.
      */
   }, {
     key: 'getWindowVerticalScroll',
@@ -381,7 +382,7 @@ var Header = (function (_React$Component) {
               }),
               _react2['default'].createElement(_ButtonsSimpleButtonJs2['default'], {
                 label: 'Get a Library Card',
-                target: '//catalog.nypl.org/screens/selfregpick.html',
+                target: '//www.nypl.org/library-card',
                 className: 'LibraryCardButton',
                 id: 'LibraryCardButton',
                 gaAction: 'Get a Library Card',

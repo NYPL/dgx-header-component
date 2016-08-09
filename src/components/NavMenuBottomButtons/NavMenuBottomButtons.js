@@ -1,5 +1,5 @@
 import React from 'react';
-import Radium from 'radium';
+import { extend as _extend } from 'underscore';
 import utils from '../../utils/utils.js';
 // Dependent NYPL React Component
 import DonateButton from '../DonateButton/DonateButton.js';
@@ -59,69 +59,73 @@ const styles = {
   },
 };
 
-class NavMenuBottomButtons extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+const NavMenuBottomButtons = ({
+  className,
+  libraryCardLink,
+  subscribeLink,
+}) => {
+  const libraryCardClass = 'LibraryCardLink';
+  const subscribeLinkClass = 'SubscribeLink';
 
-  render() {
-    const libraryCardClass = 'LibraryCardLink';
-    const subscribeLinkClass = 'SubscribeLink';
-
-    return (
-      <div className={this.props.className} style={styles.base}>
-        <a
-          href={this.props.libraryCardLink}
-          className={libraryCardClass}
-          style={styles.links}
-          onClick={utils._trackHeader.bind(this, 'Click', 'Mobile Bottom Buttons - Library Card')}
+  return (
+    <div className={className} style={styles.base}>
+      <a
+        href={libraryCardLink}
+        className={libraryCardClass}
+        style={styles.links}
+        onClick={() => utils._trackHeader('Click', 'Mobile Bottom Buttons - Library Card')}
+      >
+        <span
+          className={`${libraryCardClass}-Wrapper`}
+          style={_extend(styles.wrapper, styles.libraryCardLinkWrapper)}
         >
           <span
-            className={`${libraryCardClass}-Wrapper`}
-            style={[styles.wrapper, styles.libraryCardLinkWrapper]}
+            className={`${libraryCardClass}-Icon nypl-icon-card`}
+            style={styles.icon}
+            aria-hidden="true"
           >
-            <span className={`${libraryCardClass}-Icon nypl-icon-card`} style={styles.icon}></span>
-            <span
-              className={`${libraryCardClass}-Label`}
-              style={[styles.label, styles.libraryCardLinkLabel]}
-            >
-              Get a Library Card
-            </span>
           </span>
-        </a>
-        <a
-          href={this.props.subscribeLink}
-          className={subscribeLinkClass}
-          style={styles.links}
-          onClick={utils._trackHeader.bind(this, 'Click', 'Mobile Bottom Buttons - Email Updates')}
+          <span
+            className={`${libraryCardClass}-Label`}
+            style={_extend(styles.libraryCardLinkLabel, styles.label)}
+          >
+            Get a Library Card
+          </span>
+        </span>
+      </a>
+      <a
+        href={subscribeLink}
+        className={subscribeLinkClass}
+        style={styles.links}
+        onClick={() => utils._trackHeader('Click', 'Mobile Bottom Buttons - Email Updates')}
+      >
+        <span
+          className={`${subscribeLinkClass}-Wrapper`}
+          style={_extend(styles.wrapper, styles.subscribeLinkWrapper)}
         >
           <span
-            className={`${subscribeLinkClass}-Wrapper`}
-            style={[styles.wrapper, styles.subscribeLinkWrapper]}
+            className={`${subscribeLinkClass}-Icon nypl-icon-mail`}
+            style={styles.icon}
+            aria-hidden="true"
           >
-            <span
-              className={`${subscribeLinkClass}-Icon nypl-icon-mail`}
-              style={styles.icon}
-            >
-            </span>
-            <span
-              className={`${subscribeLinkClass}-Label`}
-              style={[styles.label, styles.subscribeLinkLabel]}
-            >
-              Get Email Updates
-            </span>
           </span>
-        </a>
-        <DonateButton
-          id="MobileNav-DonateButton"
-          className="DonateLink"
-          style={styles.donateLink}
-          gaLabel="Mobile Buttons Donate"
-        />
-      </div>
-    );
-  }
-}
+          <span
+            className={`${subscribeLinkClass}-Label`}
+            style={_extend(styles.subscribeLinkLabel, styles.label)}
+          >
+            Get Email Updates
+          </span>
+        </span>
+      </a>
+      <DonateButton
+        id="MobileNav-DonateButton"
+        className="DonateLink"
+        style={styles.donateLink}
+        gaLabel="Mobile Buttons Donate"
+      />
+    </div>
+  );
+};
 
 NavMenuBottomButtons.propTypes = {
   lang: React.PropTypes.string,
@@ -133,9 +137,9 @@ NavMenuBottomButtons.propTypes = {
 NavMenuBottomButtons.defaultProps = {
   lang: 'en',
   className: 'NavMenuBottomButtons',
-  libraryCardLink: '//catalog.nypl.org/screens/selfregpick.html',
+  libraryCardLink: '//www.nypl.org/library-card',
   subscribeLink: '//pages.email.nypl.org/page.aspx' +
     '?QS=3935619f7de112ef7250fe02b84fb2f9ab74e4ea015814b7',
 };
 
-export default Radium(NavMenuBottomButtons);
+export default NavMenuBottomButtons;

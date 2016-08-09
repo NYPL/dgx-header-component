@@ -234,8 +234,7 @@ var SubscribeButton = (function (_React$Component) {
         },
         _react2['default'].createElement(_EmailSubscriptionEmailSubscriptionJs2['default'], {
           list_id: '1061',
-          target: 'https://mailinglistapi.nypl.org',
-          isOpen: this.state.subscribeFormVisible
+          target: 'https://mailinglistapi.nypl.org'
         })
       ) : null;
     }

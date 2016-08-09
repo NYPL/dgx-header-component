@@ -435,8 +435,7 @@ EmailSubscription.propTypes = {
   placeholder: _react2['default'].PropTypes.string,
   policyUrl: _react2['default'].PropTypes.string,
   subCenterUrl: _react2['default'].PropTypes.string,
-  style: _react2['default'].PropTypes.object,
-  isOpen: _react2['default'].PropTypes.bool
+  style: _react2['default'].PropTypes.object
 };
 
 EmailSubscription.defaultProps = {

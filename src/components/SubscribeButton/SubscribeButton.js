@@ -177,7 +177,6 @@ class SubscribeButton extends React.Component {
         <EmailSubscription
           list_id="1061"
           target="https://mailinglistapi.nypl.org"
-          isOpen={this.state.subscribeFormVisible}
         />
       </div>
     ) : null;

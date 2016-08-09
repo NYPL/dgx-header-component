@@ -329,7 +329,6 @@ EmailSubscription.propTypes = {
   policyUrl: React.PropTypes.string,
   subCenterUrl: React.PropTypes.string,
   style: React.PropTypes.object,
-  isOpen: React.PropTypes.bool,
 };
 
 EmailSubscription.defaultProps = {

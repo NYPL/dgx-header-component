@@ -169,11 +169,9 @@ class SubscribeButton extends React.Component {
   }
 
   renderEmailDialog() {
-    const emailFormClasses = this.state.subscribeFormVisible ? 'active animatedFast fadeIn' : '';
-
-    return (
+    return this.state.subscribeFormVisible ? (
       <div
-        className={`EmailSubscription-Wrapper ${emailFormClasses}`}
+        className="EmailSubscription-Wrapper active animatedFast fadeIn"
         style={styles.EmailSubscribeForm}
       >
         <EmailSubscription
@@ -182,7 +180,7 @@ class SubscribeButton extends React.Component {
           isOpen={this.state.subscribeFormVisible}
         />
       </div>
-    );
+    ) : null;
   }
 
   render() {

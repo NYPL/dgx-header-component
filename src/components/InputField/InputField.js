@@ -1,37 +1,39 @@
 import React from 'react';
-import Radium from 'radium';
 
-const styles = {
-  base: {
-  },
-};
-
-class InputField extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <input
-        aria-label={this.props.ariaLabel}
-        id={this.props.id}
-        lang={this.props.lang}
-        type={this.props.type}
-        name={this.props.name}
-        value={this.props.value}
-        checked={this.props.checked}
-        maxLength={this.props.maxLength}
-        placeholder={this.props.placeholder}
-        className={this.props.className}
-        onClick={this.props.onClick}
-        onChange={this.props.onChange}
-        required={this.props.isRequired || false}
-        style={[styles.base, this.props.style]}
-      />
-    );
-  }
-}
+const InputField = ({
+  id,
+  className,
+  lang,
+  type,
+  name,
+  value,
+  checked,
+  maxLength,
+  placeholder,
+  onClick,
+  onChange,
+  isRequired,
+  style,
+  ariaLabel,
+}) => (
+  <input
+    id={id}
+    className={className}
+    lang={lang}
+    type={type}
+    name={name}
+    value={value}
+    checked={checked}
+    maxLength={maxLength}
+    placeholder={placeholder}
+    onClick={onClick}
+    onChange={onChange}
+    required={isRequired}
+    aria-required={isRequired}
+    aria-label={ariaLabel}
+    style={style}
+  />
+);
 
 InputField.propTypes = {
   ariaLabel: React.PropTypes.string,
@@ -52,10 +54,9 @@ InputField.propTypes = {
 };
 
 InputField.defaultProps = {
-  ariaLabel: '',
   type: 'text',
   lang: 'en',
   name: 'InputField',
 };
 
-export default Radium(InputField);
+export default InputField;

@@ -226,12 +226,10 @@ var SubscribeButton = (function (_React$Component) {
   }, {
     key: 'renderEmailDialog',
     value: function renderEmailDialog() {
-      var emailFormClasses = this.state.subscribeFormVisible ? 'active animatedFast fadeIn' : '';
-
-      return _react2['default'].createElement(
+      return this.state.subscribeFormVisible ? _react2['default'].createElement(
         'div',
         {
-          className: 'EmailSubscription-Wrapper ' + emailFormClasses,
+          className: 'EmailSubscription-Wrapper active animatedFast fadeIn',
           style: styles.EmailSubscribeForm
         },
         _react2['default'].createElement(_EmailSubscriptionEmailSubscriptionJs2['default'], {
@@ -239,7 +237,7 @@ var SubscribeButton = (function (_React$Component) {
           target: 'https://mailinglistapi.nypl.org',
           isOpen: this.state.subscribeFormVisible
         })
-      );
+      ) : null;
     }
   }, {
     key: 'render',

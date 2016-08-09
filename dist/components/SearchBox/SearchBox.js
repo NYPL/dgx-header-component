@@ -364,8 +364,8 @@ var SearchBox = (function (_React$Component) {
         return _react2['default'].createElement(
           'div',
           { className: _this2.props.className + '-Input-Option', key: i },
-          _react2['default'].createElement(_InputFieldInputFieldJs2['default'], {
-            ariaLabel: element.value,
+          _react2['default'].createElement('input', {
+            'aria-label': element.value,
             type: 'radio',
             id: element.id,
             name: element.name,
@@ -432,8 +432,8 @@ var SearchBox = (function (_React$Component) {
                   'label',
                   null,
                   _react2['default'].createElement('span', { className: 'nypl-icon-magnifier-thin icon' }),
-                  _react2['default'].createElement(_InputFieldInputFieldJs2['default'], {
-                    ariaLabel: 'Enter search keywords',
+                  _react2['default'].createElement('input', {
+                    'aria-label': 'Enter search keywords',
                     type: 'text',
                     id: this.props.id + '-Input-Keywords',
                     className: this.props.className + '-Input-Keywords ' + pulseAnimation,

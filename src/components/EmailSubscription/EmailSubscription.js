@@ -4,7 +4,6 @@ import axios from 'axios';
 import cx from 'classnames';
 import { extend as _extend } from 'underscore';
 import config from '../../appConfig.js';
-import InputField from '../InputField/InputField.js';
 import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWidget.js';
 import SubscribeMessageBox from './SubscribeMessageBox.js';
 import DotsLoader from '../Loaders/DotsLoader.js';
@@ -60,6 +59,22 @@ const styles = {
     right: '30px',
     letterSpacing: '0.03em',
   },
+  emailFormLabel: {
+    color: '#FFF',
+    margin: '15px 0 0 5px',
+    display: 'inline-block',
+  },
+  resubmitButton: {
+    borderTop: 'none',
+    borderLeft: 'none',
+    borderRight: 'none',
+    borderBottom: '2px solid #FFF',
+    color: '#FFF',
+    backgroundColor: 'transparent',
+    fontSize: '16px',
+    padding: '0 0 2px 0',
+    letterSpacing: '0.03em',
+  },
 };
 
 class EmailSubscription extends React.Component {
@@ -74,15 +89,6 @@ class EmailSubscription extends React.Component {
 
     this.validateForm = this.validateForm.bind(this);
     this.initForm = this.initForm.bind(this);
-  }
-
-  componentDidUpdate() {
-    const emailAddressField = ReactDOM.findDOMNode(this.refs.emailAddressField);
-    if (this.props.isOpen) {
-      emailAddressField.focus();
-    } else {
-      emailAddressField.blur();
-    }
   }
 
   initForm(e) {
@@ -101,7 +107,6 @@ class EmailSubscription extends React.Component {
   validateForm(e) {
     // Prevent re-direct, handle validation
     e.preventDefault();
-
     const userInput = ReactDOM.findDOMNode(this.refs.emailAddressField);
 
     if (!this.isValidEmail(userInput.value)) {
@@ -136,9 +141,7 @@ class EmailSubscription extends React.Component {
     const postUrl = `${url}/add-subscriber/${listid}`;
 
     // Display loader while processing finalizes.
-    this.setState({
-      formProcessing: true,
-    });
+    this.setState({ formProcessing: true });
 
     axios
       .post(postUrl, {
@@ -170,14 +173,12 @@ class EmailSubscription extends React.Component {
     if (!isLoading) {
       // The default view
       subscribeContent = (
-        <div role="dialog">
+        <div role="dialog" tabIndex="1">
           <div className={`SubscribeMessageBox ${status}`}>
             <div className="SubscribeMessageBox-Eyebrow"></div>
             <div className="SubscribeMessageBox-Title">
-              <label htmlFor={emailAddressField}>
-                Get the <span className="SubscribeMessageBox-Title-BestNYPL">
-                best of NYPL</span> in your inbox
-              </label>
+              Get the <span className="SubscribeMessageBox-Title-BestNYPL">
+              best of NYPL</span> in your inbox
             </div>
           </div>
 
@@ -192,22 +193,25 @@ class EmailSubscription extends React.Component {
             style={_extend(this.props.style, styles.base)}
           >
             <div className={`${formClass}-fields`}>
-              <InputField type="hidden" name="thx" value="http://pages.email.nypl.org/confirmation" />
-              <InputField type="hidden" name="err" value="http://pages.email.nypl.org/confirmation" />
-              <InputField type="hidden" name="SubAction" value="sub_add_update" />
-              <InputField type="hidden" name="MID" value="7000413" />
-              <InputField type="hidden" name="Email Type" value="HTML" />
-              <InputField type="hidden" name="lid" value="1061" />
-
-              <InputField
-                ariaLabel="Email Address Input"
+              <label
+                className={`${formClass}-label`}
+                style={styles.emailFormLabel}
+                htmlFor={emailAddressField}
+              >
+                Email Address
+              </label>
+              <input
+                aria-label="Enter your email address"
                 className={`${formClass}-Input`}
                 type="email"
                 name="Email Address"
                 placeholder={this.props.placeholder}
                 ref={emailAddressField}
                 id={emailAddressField}
-                isRequired
+                required
+                aria-required="true"
+                autoComplete="off"
+                autoFocus
               />
 
               <div className={`${formClass}-Error ${errorClass}`}>
@@ -217,16 +221,14 @@ class EmailSubscription extends React.Component {
 
               <div className={`${formClass}-Submit`}>
                 <span className="nypl-icon-check-solo icon" aria-hidden="true"></span>
-                <InputField
-                  ariaLabel="Sign up"
+                <input
+                  aria-label="Sign up"
                   type="submit"
                   name="submit"
                   value="SIGN UP"
                   style={styles.submitButton}
                 />
               </div>
-
-              <InputField type="hidden" name="Source Code" value="Homepage" />
             </div>
           </form>
         </div>);
@@ -240,16 +242,16 @@ class EmailSubscription extends React.Component {
               msg="Thank you for subscribing to our email updates."
             />
             <div className={`${this.props.className}-NewEmail`}>
-              <a href="" onClick={this.initForm}>
+              <button onClick={this.initForm} style={styles.resubmitButton}>
                 Enter another email address
-              </a>
+              </button>
             </div>
             <div className={`${this.props.className}-FollowUs`}>
               <p>Follow us:</p>
               <SocialMediaLinksWidget
                 className={`${this.props.className}-SocialMediaWidget`}
                 links={config.socialMediaLinks}
-                displayOnly={['facebook', 'twitter']}
+                displayOnlyList={['facebook', 'twitter']}
               />
             </div>
           </div>
@@ -262,9 +264,9 @@ class EmailSubscription extends React.Component {
           <div>
             <SubscribeMessageBox status={status} msg="Looks like you're already signed up!" />
             <div className={`${this.props.className}-NewEmail`}>
-              <a href="" onClick={this.initForm}>
+              <button style={styles.resubmitButton} onClick={this.initForm}>
                 Enter a different email address
-              </a>
+              </button>
             </div>
           </div>
         );

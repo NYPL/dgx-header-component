@@ -14,25 +14,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var _radium = require('radium');
-
-var _radium2 = _interopRequireDefault(_radium);
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _classnames = require('classnames');
+var _focusTrapReact = require('focus-trap-react');
 
-var _classnames2 = _interopRequireDefault(_classnames);
+var _focusTrapReact2 = _interopRequireDefault(_focusTrapReact);
 
 var _underscore = require('underscore');
 
-// Header Store
+// Header Store/Actions
 
 var _storesHeaderStoreJs = require('../../stores/HeaderStore.js');
 
 var _storesHeaderStoreJs2 = _interopRequireDefault(_storesHeaderStoreJs);
+
+var _actionsActionsJs = require('../../actions/Actions.js');
+
+var _actionsActionsJs2 = _interopRequireDefault(_actionsActionsJs);
 
 // Dependent Components
 
@@ -82,7 +82,19 @@ var NavMenu = (function (_React$Component) {
   }
 
   _createClass(NavMenu, [{
-    key: 'renderStickyNavItems',
+    key: 'closeMobileNavMenuDialog',
+
+    /**
+     * closeMobileNavMenuDialog()
+     * Verifies that the HeaderStore's mobileMenuButtonValue equals
+     * 'mobileMenu' then resets value with appropriate Action.
+     * Used in FocusTrap onDeactivate callback for A11Y users.
+     */
+    value: function closeMobileNavMenuDialog() {
+      if (_storesHeaderStoreJs2['default']._getMobileMenuBtnValue() === 'mobileMenu') {
+        _actionsActionsJs2['default'].setMobileMenuButtonValue('');
+      }
+    }
 
     /**
      * Generates the DOM for the Sticky Items that will
@@ -90,12 +102,13 @@ var NavMenu = (function (_React$Component) {
      * Adds the appropriate class based off the sticky value.
      * @returns {Object} React DOM.
      */
+  }, {
+    key: 'renderStickyNavItems',
     value: function renderStickyNavItems() {
-      var stickyClass = (0, _classnames2['default'])(this.props.className + '-stickyItems', { active: _storesHeaderStoreJs2['default']._getIsStickyValue() });
-
+      var stickyClass = _storesHeaderStoreJs2['default']._getIsStickyValue() ? ' active' : '';
       return _react2['default'].createElement(
         'div',
-        { className: stickyClass },
+        { className: this.props.className + '-stickyItems' + stickyClass },
         _react2['default'].createElement('span', { className: 'lineSeparator', style: styles.lineSeparator }),
         _react2['default'].createElement(_MyNyplButtonStickyMyNyplButtonJs2['default'], null),
         _react2['default'].createElement(_DonateButtonDonateButtonJs2['default'], {
@@ -144,17 +157,27 @@ var NavMenu = (function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var mobileActiveClass = (0, _classnames2['default'])({
-        mobileActive: _storesHeaderStoreJs2['default']._getMobileMenuBtnValue() === 'mobileMenu'
-      });
+      var _this2 = this;
+
+      var mobileActiveClass = _storesHeaderStoreJs2['default']._getMobileMenuBtnValue() === 'mobileMenu' ? ' mobileActive' : '';
 
       return _react2['default'].createElement(
-        'nav',
-        { className: this.props.className },
+        _focusTrapReact2['default'],
+        {
+          onDeactivate: function () {
+            return _this2.closeMobileNavMenuDialog();
+          },
+          className: this.props.className,
+          active: _storesHeaderStoreJs2['default']._getMobileMenuBtnValue() === 'mobileMenu'
+        },
         _react2['default'].createElement(
-          'div',
-          { className: this.props.className + '-Wrapper ' + mobileActiveClass },
-          _react2['default'].createElement('span', { className: 'MobileLogoText nypl-icon-logo-type' }),
+          'nav',
+          {
+            className: this.props.className + '-Wrapper' + mobileActiveClass,
+            role: 'navigation',
+            tabIndex: '0'
+          },
+          _react2['default'].createElement('span', { className: 'MobileLogoText nypl-icon-logo-type', 'aria-hidden': 'true' }),
           _react2['default'].createElement(
             'ul',
             { className: this.props.className + '-List', id: 'NavMenu-List' },
@@ -188,5 +211,5 @@ NavMenu.defaultProps = {
   cookie: '0'
 };
 
-exports['default'] = (0, _radium2['default'])(NavMenu);
+exports['default'] = NavMenu;
 module.exports = exports['default'];

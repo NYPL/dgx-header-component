@@ -85,16 +85,6 @@ function Utils() {
    * @param {label} String Label for GA event.
    */
   this._trackHeader = _dgxReactGa.ga._trackEvent('Global Header');
-
-  /**
-   * _trackPublicPreview(action, label)
-   * Track a GA click event, where action and label come from
-   * the higher level function call from _trackEvent().
-   *
-   * @param {action} String Action for GA event.
-   * @param {label} String Label for GA event.
-   */
-  this._trackPublicPreview = _dgxReactGa.ga._trackEvent('Public Preview');
 }
 
 exports['default'] = new Utils();

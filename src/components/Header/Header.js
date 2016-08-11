@@ -256,7 +256,6 @@ class Header extends React.Component {
   sendPublicPreviewGA() {
     if (this.state.cookie && this.state.cookie === '1') {
       reactGA._setPublicPreviewDimension();
-      reactGA._sendPublicPreviewDimension();
     }
   }
 

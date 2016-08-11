@@ -343,7 +343,6 @@ var Header = (function (_React$Component) {
     value: function sendPublicPreviewGA() {
       if (this.state.cookie && this.state.cookie === '1') {
         _dgxReactGa2['default']._setPublicPreviewDimension();
-        _dgxReactGa2['default']._sendPublicPreviewDimension();
       }
     }
   }, {

@@ -1,0 +1,112 @@
+.NavMenuItem {
+  &.stickyLogin {
+    display: none;
+
+    &.active {
+      display: inline-table;
+    }
+  }
+}
+
+.MyNyplButton,
+.StickyMyNyplButton {
+  @include Kievit-Bold;
+  @include border-radius(0px);
+  font-size: 13px;
+  color: #000;
+  letter-spacing: .04em;
+  background-color: transparent;
+
+  &.active {
+    background-color: #135772;
+    color: #FFF;
+    @include transition(background-color .2s linear 0s, color .2s linear 0s);
+
+    &:visited {
+      color: #FFF;
+    }
+  }
+
+  &:visited {
+    color: #000;
+  }
+
+  .icon {
+    @include opacity(0.8);
+  }
+}
+
+.MyNypl-Wrapper,
+.StickyMyNypl-Wrapper {
+  text-transform: none;
+  display: none;
+  box-sizing: content-box;
+
+  &.active {
+    display: block;
+  }
+
+  .MyNypl {
+    &-Links {
+      color: #fff;
+    }
+
+    &-Eyebrow {
+      border-top: 2px solid #FFF;
+      color: #fff;
+      margin-bottom: 10px;
+      width: 25px;
+    }
+    &-Title {
+      color: #fff;
+      font-size: 20px;
+      @include Kievit-Book;
+      font-weight: normal;
+      line-height: 1.2em;
+    }
+
+    &-Login-List {
+      text-align: left;
+      list-style: none;
+      padding: 0px;
+      margin: 0px;
+
+      li {
+        a {
+          border-radius: 28px;
+          box-sizing: content-box;
+        }
+      }
+    }
+
+    &-Catalog-Btn {
+      min-width: 170px;
+    }
+
+    &-Research-Btn {
+      min-width: 265px;
+    }
+
+    .icon {
+      font-size: 25px;
+      color: rgba(255, 255, 255, 0.6);
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+  }
+}
+
+.MobileMyNypl-Wrapper {
+  display: none;
+  position: absolute;
+  width: 100%;
+  z-index: 1000;
+
+  &.active {
+    display: block;
+
+    @include min-screen(769px) {
+      display: none;
+    }
+  }
+}

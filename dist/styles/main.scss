@@ -24,8 +24,8 @@
   }
 
   // Accessibility outline rule
-  a, button {
-    &:focus {
+  a, button, input {
+    &:focus, &::-moz-focus-inner {
       outline: 3px auto #3b99fc;
     }
   }

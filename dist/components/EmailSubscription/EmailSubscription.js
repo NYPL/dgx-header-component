@@ -36,10 +36,6 @@ var _appConfigJs = require('../../appConfig.js');
 
 var _appConfigJs2 = _interopRequireDefault(_appConfigJs);
 
-var _InputFieldInputFieldJs = require('../InputField/InputField.js');
-
-var _InputFieldInputFieldJs2 = _interopRequireDefault(_InputFieldInputFieldJs);
-
 var _SocialMediaLinksWidgetSocialMediaLinksWidgetJs = require('../SocialMediaLinksWidget/SocialMediaLinksWidget.js');
 
 var _SocialMediaLinksWidgetSocialMediaLinksWidgetJs2 = _interopRequireDefault(_SocialMediaLinksWidgetSocialMediaLinksWidgetJs);
@@ -105,6 +101,22 @@ var styles = {
     bottom: '68px',
     right: '30px',
     letterSpacing: '0.03em'
+  },
+  emailFormLabel: {
+    color: '#FFF',
+    margin: '15px 0 0 5px',
+    display: 'inline-block'
+  },
+  resubmitButton: {
+    borderTop: 'none',
+    borderLeft: 'none',
+    borderRight: 'none',
+    borderBottom: '2px solid #FFF',
+    color: '#FFF',
+    backgroundColor: 'transparent',
+    fontSize: '16px',
+    padding: '0 0 2px 0',
+    letterSpacing: '0.03em'
   }
 };
 
@@ -146,7 +158,6 @@ var EmailSubscription = (function (_React$Component) {
     value: function validateForm(e) {
       // Prevent re-direct, handle validation
       e.preventDefault();
-
       var userInput = _reactDom2['default'].findDOMNode(this.refs.emailAddressField);
 
       if (!this.isValidEmail(userInput.value)) {
@@ -181,9 +192,7 @@ var EmailSubscription = (function (_React$Component) {
       var postUrl = url + '/add-subscriber/' + listid;
 
       // Display loader while processing finalizes.
-      this.setState({
-        formProcessing: true
-      });
+      this.setState({ formProcessing: true });
 
       _axios2['default'].post(postUrl, {
         email: userEmail
@@ -214,7 +223,7 @@ var EmailSubscription = (function (_React$Component) {
         // The default view
         subscribeContent = _react2['default'].createElement(
           'div',
-          null,
+          { role: 'dialog', tabIndex: '1' },
           _react2['default'].createElement(
             'div',
             { className: 'SubscribeMessageBox ' + status },
@@ -222,17 +231,13 @@ var EmailSubscription = (function (_React$Component) {
             _react2['default'].createElement(
               'div',
               { className: 'SubscribeMessageBox-Title' },
+              'Get the ',
               _react2['default'].createElement(
-                'label',
-                { htmlFor: emailAddressField },
-                'Get the ',
-                _react2['default'].createElement(
-                  'span',
-                  { className: 'SubscribeMessageBox-Title-BestNYPL' },
-                  'best of NYPL'
-                ),
-                ' in your inbox'
-              )
+                'span',
+                { className: 'SubscribeMessageBox-Title-BestNYPL' },
+                'best of NYPL'
+              ),
+              ' in your inbox'
             )
           ),
           _react2['default'].createElement(
@@ -250,26 +255,32 @@ var EmailSubscription = (function (_React$Component) {
             _react2['default'].createElement(
               'div',
               { className: formClass + '-fields' },
-              _react2['default'].createElement(_InputFieldInputFieldJs2['default'], { type: 'hidden', name: 'thx', value: 'http://pages.email.nypl.org/confirmation' }),
-              _react2['default'].createElement(_InputFieldInputFieldJs2['default'], { type: 'hidden', name: 'err', value: 'http://pages.email.nypl.org/confirmation' }),
-              _react2['default'].createElement(_InputFieldInputFieldJs2['default'], { type: 'hidden', name: 'SubAction', value: 'sub_add_update' }),
-              _react2['default'].createElement(_InputFieldInputFieldJs2['default'], { type: 'hidden', name: 'MID', value: '7000413' }),
-              _react2['default'].createElement(_InputFieldInputFieldJs2['default'], { type: 'hidden', name: 'Email Type', value: 'HTML' }),
-              _react2['default'].createElement(_InputFieldInputFieldJs2['default'], { type: 'hidden', name: 'lid', value: '1061' }),
-              _react2['default'].createElement(_InputFieldInputFieldJs2['default'], {
-                ariaLabel: 'Email Address Input',
+              _react2['default'].createElement(
+                'label',
+                {
+                  className: formClass + '-label',
+                  style: styles.emailFormLabel,
+                  htmlFor: emailAddressField
+                },
+                'Email Address'
+              ),
+              _react2['default'].createElement('input', {
+                'aria-label': 'Enter your email address',
                 className: formClass + '-Input',
                 type: 'email',
                 name: 'Email Address',
                 placeholder: this.props.placeholder,
                 ref: emailAddressField,
                 id: emailAddressField,
-                isRequired: true
+                required: true,
+                'aria-required': 'true',
+                autoComplete: 'off',
+                autoFocus: true
               }),
               _react2['default'].createElement(
                 'div',
                 { className: formClass + '-Error ' + errorClass },
-                _react2['default'].createElement('span', { className: 'nypl-icon-solo-x icon' }),
+                _react2['default'].createElement('span', { className: 'nypl-icon-solo-x icon', 'aria-hidden': 'true' }),
                 _react2['default'].createElement(
                   'span',
                   null,
@@ -279,16 +290,15 @@ var EmailSubscription = (function (_React$Component) {
               _react2['default'].createElement(
                 'div',
                 { className: formClass + '-Submit' },
-                _react2['default'].createElement('span', { className: 'nypl-icon-check-solo icon' }),
-                _react2['default'].createElement(_InputFieldInputFieldJs2['default'], {
-                  ariaLabel: 'Sign up',
+                _react2['default'].createElement('span', { className: 'nypl-icon-check-solo icon', 'aria-hidden': 'true' }),
+                _react2['default'].createElement('input', {
+                  'aria-label': 'Sign up',
                   type: 'submit',
                   name: 'submit',
                   value: 'SIGN UP',
                   style: styles.submitButton
                 })
-              ),
-              _react2['default'].createElement(_InputFieldInputFieldJs2['default'], { type: 'hidden', name: 'Source Code', value: 'Homepage' })
+              )
             )
           )
         );
@@ -306,8 +316,8 @@ var EmailSubscription = (function (_React$Component) {
               'div',
               { className: this.props.className + '-NewEmail' },
               _react2['default'].createElement(
-                'a',
-                { href: '', onClick: this.initForm },
+                'button',
+                { onClick: this.initForm, style: styles.resubmitButton },
                 'Enter another email address'
               )
             ),
@@ -322,7 +332,7 @@ var EmailSubscription = (function (_React$Component) {
               _react2['default'].createElement(_SocialMediaLinksWidgetSocialMediaLinksWidgetJs2['default'], {
                 className: this.props.className + '-SocialMediaWidget',
                 links: _appConfigJs2['default'].socialMediaLinks,
-                displayOnly: ['facebook', 'twitter']
+                displayOnlyList: ['facebook', 'twitter']
               })
             )
           );
@@ -338,8 +348,8 @@ var EmailSubscription = (function (_React$Component) {
               'div',
               { className: this.props.className + '-NewEmail' },
               _react2['default'].createElement(
-                'a',
-                { href: '', onClick: this.initForm },
+                'button',
+                { style: styles.resubmitButton, onClick: this.initForm },
                 'Enter a different email address'
               )
             )
@@ -369,7 +379,7 @@ var EmailSubscription = (function (_React$Component) {
             _react2['default'].createElement(
               'a',
               { href: '', onClick: this.initForm, style: styles.tryAgainButton },
-              _react2['default'].createElement('span', { className: 'nypl-icon-arrow-left icon' }),
+              _react2['default'].createElement('span', { className: 'nypl-icon-arrow-left icon', 'aria-hidden': 'true' }),
               'TRY AGAIN'
             )
           );

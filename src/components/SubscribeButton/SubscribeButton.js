@@ -1,6 +1,5 @@
-import Radium from 'radium';
 import React from 'react';
-import cx from 'classnames';
+import { extend as _extend } from 'underscore';
 import ClickOutHandler from 'react-onclickout';
 import EmailSubscription from '../EmailSubscription/EmailSubscription.js';
 // Alt Store/Actions
@@ -14,16 +13,16 @@ const styles = {
   base: {
     position: 'relative',
   },
-  SubscribeButton: {
+  subscribeButton: {
     display: 'inline-block',
     padding: '10px 10px 10px 12px',
     verticalAlign: 'baseline',
   },
-  SubscribeLabel: {
+  subscribeLabel: {
     display: 'inline',
     verticalAlign: 'baseline',
   },
-  SubscribeIcon: {
+  subscribeIcon: {
     fontSize: '15px',
     verticalAlign: 'text-bottom',
     marginLeft: '3px',
@@ -57,10 +56,12 @@ class SubscribeButton extends React.Component {
 
     this.handleOnClickOut = this.handleOnClickOut.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleEscKey = this.handleEscKey.bind(this);
   }
 
   componentDidMount() {
     HeaderStore.listen(this.onChange.bind(this));
+    window.addEventListener('keydown', this.handleEscKey, false);
     // Make an axios call to the mailinglist API server to check it th server is working.
     // And determine the behavior of subscribe button based on the status of the server.
     this.callMailinglistApi();
@@ -68,6 +69,7 @@ class SubscribeButton extends React.Component {
 
   componentWillUnmount() {
     HeaderStore.unlisten(this.onChange.bind(this));
+    window.removeEventListener('keydown', this.handleEscKey, false);
   }
 
   /**
@@ -76,6 +78,12 @@ class SubscribeButton extends React.Component {
    */
   onChange() {
     this.setState({ subscribeFormVisible: HeaderStore._getSubscribeFormVisible() });
+  }
+
+  handleEscKey(e) {
+    if (e.key === 'Escape' || e.key === 'Esc' || e.keyCode === 27) {
+      this.handleOnClickOut();
+    }
   }
 
   /**
@@ -129,43 +137,60 @@ class SubscribeButton extends React.Component {
       });
   }
 
-  render() {
-    // Assign a variable to hold the reference of state boolean
-    const showDialog = this.state.subscribeFormVisible;
-    const buttonClasses = cx({ active: showDialog });
-    const emailFormClasses = cx({ 'active animatedFast fadeIn': showDialog });
-    const iconClass = cx({
-      'nypl-icon-solo-x': showDialog,
-      'nypl-icon-wedge-down': !showDialog,
-    });
+  renderEmailButton() {
+    let buttonClass = '';
+    let iconClass = 'nypl-icon-wedge-down';
 
+    if (this.state.subscribeFormVisible) {
+      iconClass = 'nypl-icon-solo-x';
+      buttonClass = 'active';
+    }
+
+    return (
+      <a
+        id="SubscribeButton"
+        className={`SubscribeButton ${buttonClass}`}
+        href={this.state.target}
+        onClick={this.handleClick}
+        style={styles.subscribeButton}
+        role={(this.state.target === '#') ? 'button' : null}
+      >
+        <span style={styles.subscribeLabel}>
+          {this.props.label}
+        </span>
+        <span
+          className={`${iconClass} icon`}
+          aria-hidden="true"
+          style={styles.subscribeIcon}
+        >
+        </span>
+      </a>
+    );
+  }
+
+  renderEmailDialog() {
+    return this.state.subscribeFormVisible ? (
+      <div
+        className="EmailSubscription-Wrapper active animatedFast fadeIn"
+        style={styles.EmailSubscribeForm}
+      >
+        <EmailSubscription
+          list_id="1061"
+          target="https://mailinglistapi.nypl.org"
+        />
+      </div>
+    ) : null;
+  }
+
+  render() {
     return (
       <ClickOutHandler onClickOut={this.handleOnClickOut}>
         <div
           className="SubscribeButton-Wrapper"
-          style={[styles.base, this.props.style]}
+          style={_extend(styles.base, this.props.style)}
         >
-          <a
-            id="SubscribeButton"
-            className={`SubscribeButton ${buttonClasses}`}
-            href={this.state.target}
-            onClick={this.handleClick}
-            style={styles.SubscribeButton}
-            role={(this.state.target === '#') ? 'button' : null}
-          >
-            <span style={styles.SubscribeLabel}>{this.props.label}</span>
-            <span className={`${iconClass} icon`} style={styles.SubscribeIcon}></span>
-          </a>
-
-          <div
-            className={`EmailSubscription-Wrapper ${emailFormClasses}`}
-            style={styles.EmailSubscribeForm}
-          >
-            <EmailSubscription
-              list_id="1061"
-              target="https://mailinglistapi.nypl.org"
-            />
-          </div>
+          {this.renderEmailButton()}
+          {this.renderEmailDialog()}
         </div>
       </ClickOutHandler>
     );
@@ -186,4 +211,4 @@ SubscribeButton.defaultProps = {
     '?QS=3935619f7de112ef7250fe02b84fb2f9ab74e4ea015814b7',
 };
 
-export default Radium(SubscribeButton);
+export default SubscribeButton;

@@ -296,8 +296,8 @@ class SearchBox extends React.Component {
     // Render radio buttons with their own properties
     const inputOptions = inputOptionData.map((element, i) =>
       <div className={`${this.props.className}-Input-Option`} key={i}>
-        <InputField
-          ariaLabel={element.value}
+        <input
+          aria-label={element.value}
           type="radio"
           id={element.id}
           name={element.name}
@@ -351,8 +351,8 @@ class SearchBox extends React.Component {
               <div className={`${this.props.className}-Input-Keywords-Border`}>
                 <label>
                   <span className="nypl-icon-magnifier-thin icon"></span>
-                  <InputField
-                    ariaLabel="Enter search keywords"
+                  <input
+                    aria-label="Enter search keywords"
                     type="text"
                     id={`${this.props.id}-Input-Keywords`}
                     className={`${this.props.className}-Input-Keywords ${pulseAnimation}`}

@@ -27,13 +27,13 @@ var _utilsUtilsJs = require('../../utils/utils.js');
 
 var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
 
-var MobileSearchBox = (function (_React$Component) {
-  _inherits(MobileSearchBox, _React$Component);
+var SearchBox = (function (_React$Component) {
+  _inherits(SearchBox, _React$Component);
 
-  function MobileSearchBox(props) {
-    _classCallCheck(this, MobileSearchBox);
+  function SearchBox(props) {
+    _classCallCheck(this, SearchBox);
 
-    _get(Object.getPrototypeOf(MobileSearchBox.prototype), 'constructor', this).call(this, props);
+    _get(Object.getPrototypeOf(SearchBox.prototype), 'constructor', this).call(this, props);
 
     this.state = {
       searchInput: '',
@@ -51,7 +51,7 @@ var MobileSearchBox = (function (_React$Component) {
    * Returns the final URL for the catalog search.
    */
 
-  _createClass(MobileSearchBox, [{
+  _createClass(SearchBox, [{
     key: 'setCatalogUrl',
     value: function setCatalogUrl(searchString, catalogBaseUrl) {
       var catalogUrl = catalogBaseUrl || '//www.nypl.org/search/apachesolr_search/';
@@ -349,10 +349,10 @@ var MobileSearchBox = (function (_React$Component) {
     }
   }]);
 
-  return MobileSearchBox;
+  return SearchBox;
 })(_react2['default'].Component);
 
-MobileSearchBox.propTypes = {
+SearchBox.propTypes = {
   lang: _react2['default'].PropTypes.string,
   className: _react2['default'].PropTypes.string.isRequired,
   type: _react2['default'].PropTypes.string,
@@ -360,11 +360,11 @@ MobileSearchBox.propTypes = {
   legendText: _react2['default'].PropTypes.string
 };
 
-MobileSearchBox.defaultProps = {
+SearchBox.defaultProps = {
   lang: 'en',
   placeholder: 'What would you like to find?',
   legendText: 'Enter a keyword, then choose to search either the catalog or the website'
 };
 
-exports['default'] = MobileSearchBox;
+exports['default'] = SearchBox;
 module.exports = exports['default'];

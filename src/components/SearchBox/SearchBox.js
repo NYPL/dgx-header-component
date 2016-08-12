@@ -4,7 +4,7 @@ import { SearchIcon } from 'dgx-svg-icons';
 // GA Utility Library
 import utils from '../../utils/utils.js';
 
-class MobileSearchBox extends React.Component {
+class SearchBox extends React.Component {
   constructor(props) {
     super(props);
 
@@ -263,7 +263,7 @@ class MobileSearchBox extends React.Component {
   }
 }
 
-MobileSearchBox.propTypes = {
+SearchBox.propTypes = {
   lang: React.PropTypes.string,
   className: React.PropTypes.string.isRequired,
   type: React.PropTypes.string,
@@ -271,10 +271,10 @@ MobileSearchBox.propTypes = {
   legendText: React.PropTypes.string,
 };
 
-MobileSearchBox.defaultProps = {
+SearchBox.defaultProps = {
   lang: 'en',
   placeholder: 'What would you like to find?',
   legendText: 'Enter a keyword, then choose to search either the catalog or the website',
 };
 
-export default MobileSearchBox;
+export default SearchBox;

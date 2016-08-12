@@ -95,6 +95,10 @@ var _dgxFeatureFlags = require('dgx-feature-flags');
 
 var _dgxFeatureFlags2 = _interopRequireDefault(_dgxFeatureFlags);
 
+var _dgxReactGa = require('dgx-react-ga');
+
+var _dgxReactGa2 = _interopRequireDefault(_dgxReactGa);
+
 // When minifying with Webpack, you can use this:
 // import '../../styles/main.scss';
 var styles = {
@@ -323,6 +327,19 @@ var Header = (function (_React$Component) {
         if (_storesHeaderStoreJs2['default']._getIsStickyValue()) {
           _actionsActionsJs2['default'].updateIsHeaderSticky(false);
         }
+      }
+    }
+
+    /**
+     * sendPublicPreviewGA()
+     * Verifies if the previewCookie has been set to '1' and
+     * send GA dimension.
+     */
+  }, {
+    key: 'sendPublicPreviewGA',
+    value: function sendPublicPreviewGA() {
+      if (this.state.cookie && this.state.cookie === '1') {
+        _dgxReactGa2['default']._setPublicPreviewDimension();
       }
     }
   }, {

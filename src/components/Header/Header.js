@@ -23,6 +23,8 @@ import utils from '../../utils/utils.js';
 // FeatureFlags Module
 import FeatureFlags from 'dgx-feature-flags';
 
+import reactGA from 'dgx-react-ga';
+
 // When minifying with Webpack, you can use this:
 // import '../../styles/main.scss';
 const styles = {
@@ -105,6 +107,10 @@ class Header extends React.Component {
     // Watch which FeatureFlag is called to fire
     // the proper client-side ajax call to populate the Header data state
     this.watchFeatureFlagHeaderCall();
+
+    // Read the cookie of "nyplpreview", if the cookie exists and its value is "1",
+    // set dimension1 with value of "Public Preview"
+    this.setPublicPreviewGA();
 
     // Listen to the scroll event for the sticky header.
     window.addEventListener('scroll', this.handleStickyHeader, false);
@@ -243,6 +249,17 @@ class Header extends React.Component {
       if (HeaderStore._getIsStickyValue()) {
         Actions.updateIsHeaderSticky(false);
       }
+    }
+  }
+
+  /**
+   * setPublicPreviewGA()
+   * Verify if the previewCookie has been set to '1' and
+   * set the public preview GA dimension.
+   */
+  setPublicPreviewGA() {
+    if (this.state.cookie && this.state.cookie === '1') {
+      reactGA.setDimension('dimension1', 'Public Preview');
     }
   }
 

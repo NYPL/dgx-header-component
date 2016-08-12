@@ -50,9 +50,9 @@ var _MyNyplMobileMyNyplJs = require('../MyNypl/MobileMyNypl.js');
 
 var _MyNyplMobileMyNyplJs2 = _interopRequireDefault(_MyNyplMobileMyNyplJs);
 
-var _SearchBoxMobileSearchBoxJs = require('../SearchBox/MobileSearchBox.js');
+var _SearchBoxSearchBoxJs = require('../SearchBox/SearchBox.js');
 
-var _SearchBoxMobileSearchBoxJs2 = _interopRequireDefault(_SearchBoxMobileSearchBoxJs);
+var _SearchBoxSearchBoxJs2 = _interopRequireDefault(_SearchBoxSearchBoxJs);
 
 var styles = {
   base: {
@@ -115,7 +115,7 @@ var styles = {
     border: 'none'
   },
   activeSearchButton: {
-    backgroundColor: '#29A1D2'
+    backgroundColor: '#1B7FA7'
   },
   inactiveSearchButton: {
     backgroundColor: '#FFF'
@@ -126,7 +126,7 @@ var styles = {
     padding: 0,
     left: 0,
     width: '100%',
-    backgroundColor: '#29A1D2',
+    backgroundColor: '#1B7FA7',
     zIndex: '1000'
   },
   menuButton: {
@@ -400,7 +400,7 @@ var MobileHeader = (function (_React$Component) {
             initialFocus: '.' + this.props.className + '-searchForm-legend',
             style: styles.searchDialog
           },
-          _react2['default'].createElement(_SearchBoxMobileSearchBoxJs2['default'], {
+          _react2['default'].createElement(_SearchBoxSearchBoxJs2['default'], {
             className: this.props.className + '-searchForm',
             type: 'mobile'
           })

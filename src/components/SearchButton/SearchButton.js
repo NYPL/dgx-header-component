@@ -24,8 +24,8 @@ class SearchButton extends React.Component {
   }
 
   /**
-   * handleOnClick()
-   * Handles when the Search button is clicked
+   * handleOnClick(e)
+   * Handles the event when the Search button is clicked
    */
   handleOnClick(e) {
     e.preventDefault();
@@ -63,7 +63,7 @@ class SearchButton extends React.Component {
    * with hoverSearch after a set time delay.
    */
   activateHover() {
-    // Only hanlde Hover Event if cookie is NOT set
+    // Only handle the hover event if the cookie is NOT set
     if (this.props.cookie !== '1') {
       this.hoverTimer = setTimeout(() => {
         Actions.searchButtonActionValue('hoverSearch');
@@ -79,7 +79,7 @@ class SearchButton extends React.Component {
    * after a set time delay.
    */
   deactivateHover() {
-    // Only hanlde Hover Event if cookie is NOT set
+    // Only handle the hover event if the cookie is NOT set
     if (this.props.cookie !== '1') {
       clearTimeout(this.hoverTimer);
 

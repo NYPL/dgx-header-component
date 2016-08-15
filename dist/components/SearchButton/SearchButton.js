@@ -68,8 +68,8 @@ var SearchButton = (function (_React$Component) {
   }
 
   /**
-   * handleOnClick()
-   * Handles when the Search button is clicked
+   * handleOnClick(e)
+   * Handles the event when the Search button is clicked
    */
 
   _createClass(SearchButton, [{
@@ -116,7 +116,7 @@ var SearchButton = (function (_React$Component) {
   }, {
     key: 'activateHover',
     value: function activateHover() {
-      // Only hanlde Hover Event if cookie is NOT set
+      // Only handle the hover event if the cookie is NOT set
       if (this.props.cookie !== '1') {
         this.hoverTimer = setTimeout(function () {
           _actionsActionsJs2['default'].searchButtonActionValue('hoverSearch');
@@ -134,7 +134,7 @@ var SearchButton = (function (_React$Component) {
   }, {
     key: 'deactivateHover',
     value: function deactivateHover() {
-      // Only hanlde Hover Event if cookie is NOT set
+      // Only handle the hover event if the cookie is NOT set
       if (this.props.cookie !== '1') {
         clearTimeout(this.hoverTimer);
 

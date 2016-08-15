@@ -91,7 +91,6 @@ var NavMenu = (function (_React$Component) {
      * Used in FocusTrap onDeactivate callback for A11Y users.
      */
     value: function closeMobileNavMenuDialog() {
-      console.log('close mobile nav menu clicked');
       if (_storesHeaderStoreJs2['default']._getMobileMenuBtnValue() === 'mobileMenu') {
         _actionsActionsJs2['default'].setMobileMenuButtonValue('');
       }

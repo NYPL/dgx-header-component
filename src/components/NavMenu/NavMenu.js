@@ -41,7 +41,6 @@ class NavMenu extends React.Component {
    * Used in FocusTrap onDeactivate callback for A11Y users.
    */
   closeMobileNavMenuDialog() {
-    console.log('close mobile nav menu clicked');
     if (HeaderStore._getMobileMenuBtnValue() === 'mobileMenu') {
       Actions.setMobileMenuButtonValue('');
     }

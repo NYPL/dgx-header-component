@@ -16,7 +16,7 @@ import Actions from '../../actions/Actions.js';
 import utils from '../../utils/utils.js';
 // NYPL Components
 import MobileMyNypl from '../MyNypl/MobileMyNypl.js';
-import MobileSearchBox from '../SearchBox/MobileSearchBox.js';
+import SearchBox from '../SearchBox/SearchBox.js';
 
 const styles = {
   base: {
@@ -79,7 +79,7 @@ const styles = {
     border: 'none',
   },
   activeSearchButton: {
-    backgroundColor: '#29A1D2',
+    backgroundColor: '#1B7FA7',
   },
   inactiveSearchButton: {
     backgroundColor: '#FFF',
@@ -90,7 +90,7 @@ const styles = {
     padding: 0,
     left: 0,
     width: '100%',
-    backgroundColor: '#29A1D2',
+    backgroundColor: '#1B7FA7',
     zIndex: '1000',
   },
   menuButton: {
@@ -317,7 +317,7 @@ class MobileHeader extends React.Component {
           initialFocus={`.${this.props.className}-searchForm-legend`}
           style={styles.searchDialog}
         >
-          <MobileSearchBox
+          <SearchBox
             className={`${this.props.className}-searchForm`}
             type="mobile"
           />

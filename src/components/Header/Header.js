@@ -23,7 +23,7 @@ import utils from '../../utils/utils.js';
 // FeatureFlags Module
 import FeatureFlags from 'dgx-feature-flags';
 
-import reactGA from 'dgx-react-ga';
+import { ga } from 'dgx-react-ga';
 
 // When minifying with Webpack, you can use this:
 // import '../../styles/main.scss';
@@ -259,7 +259,9 @@ class Header extends React.Component {
    */
   setPublicPreviewGA() {
     if (this.state.cookie && this.state.cookie === '1') {
-      reactGA.setDimension('dimension1', 'Public Preview');
+      ga.setDimension('dimension1', 'Public Preview');
+    } else {
+      ga.setDimension('dimension1', null);
     }
   }
 

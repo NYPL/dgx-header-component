@@ -29,9 +29,7 @@ var _reactOnclickout2 = _interopRequireDefault(_reactOnclickout);
 
 // Import components
 
-var _ButtonsBasicButtonJs = require('../Buttons/BasicButton.js');
-
-var _ButtonsBasicButtonJs2 = _interopRequireDefault(_ButtonsBasicButtonJs);
+var _dgxSvgIcons = require('dgx-svg-icons');
 
 var _SearchBoxSearchBoxJs = require('../SearchBox/SearchBox.js');
 
@@ -61,9 +59,7 @@ var SearchButton = (function (_React$Component) {
 
     _get(Object.getPrototypeOf(SearchButton.prototype), 'constructor', this).call(this, props);
 
-    this.state = {
-      active: false
-    };
+    this.state = { active: false };
 
     this.handleOnClick = this.handleOnClick.bind(this);
     this.handleOnClickOut = this.handleOnClickOut.bind(this);
@@ -72,43 +68,44 @@ var SearchButton = (function (_React$Component) {
   }
 
   /**
-   * handleOnClick()
-   * Handles when the Search menu item is clicked.
+   * handleOnClick(e)
+   * Handles the event when the Search button is clicked
    */
 
   _createClass(SearchButton, [{
     key: 'handleOnClick',
     value: function handleOnClick(e) {
       e.preventDefault();
+      // Only handle click event if cookie is set
       if (this.props.cookie === '1') {
         if (this.state.active) {
           this.handleOnClickOut();
         } else {
           this.setState({ active: true });
-
           // Fire GA event to track when the Search Menu is open
           _utilsUtilsJs2['default']._trackHeader('Search', 'Open Menu');
-        };
+        }
       }
     }
 
     /**
      * handleOnClickOut()
-     * Handles closing the nav item.
+     * Handles closing SearchBox via click event
      */
   }, {
     key: 'handleOnClickOut',
     value: function handleOnClickOut() {
       var _this = this;
 
+      // Only handle ClickOut events if cookie is SET
       if (this.props.cookie === '1') {
+        // Update active state only if ACTIVE is true
         if (this.state.active) {
           _utilsUtilsJs2['default']._trackHeader('Search', 'Close Menu');
+          setTimeout(function () {
+            _this.setState({ active: false });
+          }, 200);
         }
-
-        setTimeout(function () {
-          _this.setState({ active: false });
-        }, 250);
       }
     }
 
@@ -119,10 +116,10 @@ var SearchButton = (function (_React$Component) {
   }, {
     key: 'activateHover',
     value: function activateHover() {
+      // Only handle the hover event if the cookie is NOT set
       if (this.props.cookie !== '1') {
         this.hoverTimer = setTimeout(function () {
           _actionsActionsJs2['default'].searchButtonActionValue('hoverSearch');
-
           // Fire GA event to track when the Search Menu is open
           _utilsUtilsJs2['default']._trackHeader('Search', 'Open Menu');
         }, 80);
@@ -137,54 +134,92 @@ var SearchButton = (function (_React$Component) {
   }, {
     key: 'deactivateHover',
     value: function deactivateHover() {
+      // Only handle the hover event if the cookie is NOT set
       if (this.props.cookie !== '1') {
         clearTimeout(this.hoverTimer);
 
         setTimeout(function () {
           _actionsActionsJs2['default'].searchButtonActionValue('');
-        }, 250);
+          _utilsUtilsJs2['default']._trackHeader('Search', 'Close Menu');
+        }, 200);
       }
+    }
+
+    /**
+    * renderSearchButton()
+    * Generates the button DOM element for the Desktop Search Button.
+    * Uses SVG icon & label.
+    * @returns {Object} React DOM.
+    */
+  }, {
+    key: 'renderSearchButton',
+    value: function renderSearchButton() {
+      var _this2 = this;
+
+      var classes = (0, _classnames2['default'])({
+        active: this.state.active || _storesHeaderStoreJs2['default']._getSearchButtonActionValue() === 'hoverSearch' || _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === 'hoverSearch'
+      });
+      var stickyStatus = (0, _classnames2['default'])({ isSticky: _storesHeaderStoreJs2['default'].getState().isSticky });
+
+      return _react2['default'].createElement(
+        'button',
+        {
+          className: this.props.className + '-searchButton ' + classes + ' ' + stickyStatus,
+          id: this.props.className + '-searchButton',
+          name: 'Search Button',
+          onClick: function (e) {
+            return _this2.handleOnClick(e);
+          }
+        },
+        _react2['default'].createElement(
+          'span',
+          { className: this.props.className + '-searchButton-text' },
+          'Search'
+        ),
+        _react2['default'].createElement(_dgxSvgIcons.SearchIcon, {
+          className: this.props.className + '-searchButton-icon',
+          width: '20',
+          height: '20',
+          ariaHidden: true
+        })
+      );
+    }
+
+    /**
+    * renderSearchBox()
+    * Generates the DOM element for the Desktop Search Box.
+    * Verifies if isActive is TRUE and returns the proper DOM.
+    * @returns {Object} React DOM.
+    */
+  }, {
+    key: 'renderSearchBox',
+    value: function renderSearchBox() {
+      var isActive = this.state.active || _storesHeaderStoreJs2['default']._getSearchButtonActionValue() === 'hoverSearch' || _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === 'hoverSearch';
+      var sticky = (0, _classnames2['default'])({ isSticky: _storesHeaderStoreJs2['default'].getState().isSticky });
+
+      return isActive ? _react2['default'].createElement(
+        'div',
+        {
+          className: this.props.className + '-desktopSearchBox animatedFast fadeIn ' + sticky
+        },
+        _react2['default'].createElement(_SearchBoxSearchBoxJs2['default'], { className: 'desktopSearch-Form' })
+      ) : null;
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
-      var rootClass = this.props.className;
-      // Give active class if the button is activated by hover
-      var classes = (0, _classnames2['default'])({
-        active: this.state.active || _storesHeaderStoreJs2['default']._getSearchButtonActionValue() === 'hoverSearch' || _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === 'hoverSearch'
-      });
-      // Detect if the header is sticky
-      var stickyStatus = (0, _classnames2['default'])({ isSticky: _storesHeaderStoreJs2['default'].getState().isSticky });
-      var searchLabel = _react2['default'].createElement(
-        'span',
-        { className: rootClass + '-searchButton-text ' + classes + ' ' + stickyStatus },
-        'Search'
-      );
-
       return _react2['default'].createElement(
         'div',
-        { className: rootClass + '-searchBox-Wrapper' },
+        {
+          className: this.props.className + '-searchBox-Wrapper',
+          onMouseEnter: this.activateHover,
+          onMouseLeave: this.deactivateHover
+        },
         _react2['default'].createElement(
           _reactOnclickout2['default'],
           { onClickOut: this.handleOnClickOut },
-          _react2['default'].createElement(_ButtonsBasicButtonJs2['default'], {
-            onMouseEnter: this.activateHover,
-            onMouseLeave: this.deactivateHover,
-            id: rootClass + '-searchButton',
-            className: 'nypl-icon-magnifier-fat ' + rootClass + '-searchButton ' + classes + ' ' + stickyStatus,
-            name: 'Search Button',
-            label: searchLabel,
-            onClick: function (e) {
-              return _this2.handleOnClick(e);
-            }
-          }),
-          _react2['default'].createElement(_SearchBoxSearchBoxJs2['default'], {
-            active: this.state.active,
-            id: rootClass + '-searchBox',
-            className: rootClass + '-searchBox'
-          })
+          this.renderSearchButton(),
+          this.renderSearchBox()
         )
       );
     }
@@ -195,7 +230,8 @@ var SearchButton = (function (_React$Component) {
 
 SearchButton.propTypes = {
   lang: _react2['default'].PropTypes.string,
-  className: _react2['default'].PropTypes.string
+  className: _react2['default'].PropTypes.string,
+  cookie: _react2['default'].PropTypes.string
 };
 
 SearchButton.defaultProps = {
@@ -203,6 +239,5 @@ SearchButton.defaultProps = {
   className: 'NavMenu'
 };
 
-// Export the component
 exports['default'] = SearchButton;
 module.exports = exports['default'];

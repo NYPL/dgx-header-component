@@ -91,6 +91,7 @@ var NavMenu = (function (_React$Component) {
      * Used in FocusTrap onDeactivate callback for A11Y users.
      */
     value: function closeMobileNavMenuDialog() {
+      console.log('close mobile nav menu clicked');
       if (_storesHeaderStoreJs2['default']._getMobileMenuBtnValue() === 'mobileMenu') {
         _actionsActionsJs2['default'].setMobileMenuButtonValue('');
       }
@@ -168,6 +169,7 @@ var NavMenu = (function (_React$Component) {
             return _this2.closeMobileNavMenuDialog();
           },
           className: this.props.className,
+          clickOutsideDeactivates: true,
           active: _storesHeaderStoreJs2['default']._getMobileMenuBtnValue() === 'mobileMenu'
         },
         _react2['default'].createElement(

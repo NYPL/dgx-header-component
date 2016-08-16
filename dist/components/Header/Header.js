@@ -95,6 +95,8 @@ var _dgxFeatureFlags = require('dgx-feature-flags');
 
 var _dgxFeatureFlags2 = _interopRequireDefault(_dgxFeatureFlags);
 
+// Google Analytics Module
+
 var _dgxReactGa = require('dgx-react-ga');
 
 // When minifying with Webpack, you can use this:

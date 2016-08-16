@@ -22,7 +22,7 @@ import SkipNavigation from 'dgx-skip-navigation-link';
 import utils from '../../utils/utils.js';
 // FeatureFlags Module
 import FeatureFlags from 'dgx-feature-flags';
-
+// Google Analytics Module
 import { ga } from 'dgx-react-ga';
 
 // When minifying with Webpack, you can use this:

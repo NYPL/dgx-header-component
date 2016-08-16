@@ -14,7 +14,6 @@ import DonateButton from '../DonateButton/DonateButton.js';
 import SimpleButton from '../Buttons/SimpleButton.js';
 import SubscribeButton from '../SubscribeButton/SubscribeButton.js';
 import MyNyplButton from '../MyNyplButton/MyNyplButton.js';
-import MobileMyNypl from '../MyNypl/MobileMyNypl.js';
 import NavMenu from '../NavMenu/NavMenu.js';
 import MobileHeader from './MobileHeader.js';
 import GlobalAlerts from '../GlobalAlerts/GlobalAlerts.js';
@@ -23,6 +22,8 @@ import SkipNavigation from 'dgx-skip-navigation-link';
 import utils from '../../utils/utils.js';
 // FeatureFlags Module
 import FeatureFlags from 'dgx-feature-flags';
+// Google Analytics Module
+import { ga } from 'dgx-react-ga';
 
 // When minifying with Webpack, you can use this:
 // import '../../styles/main.scss';
@@ -72,7 +73,7 @@ const styles = {
     right: '0',
     width: '220px',
     minHeight: '130px',
-    backgroundColor: '#1DA1D4',
+    backgroundColor: '#1B7FA7',
     padding: '25px 30px',
   },
 };
@@ -107,16 +108,12 @@ class Header extends React.Component {
     // the proper client-side ajax call to populate the Header data state
     this.watchFeatureFlagHeaderCall();
 
+    // Read the cookie of "nyplpreview", if the cookie exists and its value is "1",
+    // set dimension1 with value of "Public Preview"
+    this.setPublicPreviewGA();
+
     // Listen to the scroll event for the sticky header.
     window.addEventListener('scroll', this.handleStickyHeader, false);
-  }
-
-  componentWillUnmount() {
-    HeaderStore.unlisten(this.onChange.bind(this));
-    FeatureFlags.store.unlisten(this.onChange.bind(this));
-
-    // Removing event listener to minimize garbage collection
-    window.removeEventListener('scroll', this.handleStickyHeader, false);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -128,6 +125,14 @@ class Header extends React.Component {
       prevState.featureFlags.get('header-upcoming-ia')) {
       Actions.fetchHeaderData(this.props.env, this.props.urls);
     }
+  }
+
+  componentWillUnmount() {
+    HeaderStore.unlisten(this.onChange.bind(this));
+    FeatureFlags.store.unlisten(this.onChange.bind(this));
+
+    // Removing event listener to minimize garbage collection
+    window.removeEventListener('scroll', this.handleStickyHeader, false);
   }
 
   onChange() {
@@ -170,6 +175,7 @@ class Header extends React.Component {
    * getWindowVerticallScroll()
    * returns the current window vertical
    * scroll position in pixels.
+   * @returns {number} - Vertical Scroll Position.
    */
   getWindowVerticalScroll() {
     return window.scrollY
@@ -246,13 +252,24 @@ class Header extends React.Component {
     }
   }
 
+  /**
+   * setPublicPreviewGA()
+   * Verify if the previewCookie has been set to '1' and
+   * set the public preview GA dimension.
+   */
+  setPublicPreviewGA() {
+    if (this.state.cookie && this.state.cookie === '1') {
+      ga.setDimension('dimension1', 'Public Preview');
+    } else {
+      ga.setDimension('dimension1', null);
+    }
+  }
+
   render() {
     const isHeaderSticky = this.state.isSticky;
     const headerHeight = this.state.headerHeight;
     const headerClass = this.props.className || 'Header';
     const headerClasses = cx(headerClass, { sticky: isHeaderSticky });
-    const showDialog = HeaderStore._getMobileMyNyplButtonValue();
-    const mobileMyNyplClasses = cx({ active: showDialog });
     const skipNav = this.props.skipNav ?
       (<SkipNavigation {...this.props.skipNav} />) : '';
 
@@ -275,9 +292,6 @@ class Header extends React.Component {
             nyplRootUrl={(this.props.urls === 'absolute') ? '//www.nypl.org' : '/'}
             ref="headerMobile"
           />
-          <div className={`MobileMyNypl-Wrapper ${mobileMyNyplClasses}`}>
-            <MobileMyNypl />
-          </div>
           <div
             className={`${headerClass}-TopWrapper`}
             style={styles.wrapper}
@@ -306,7 +320,7 @@ class Header extends React.Component {
               />
               <SimpleButton
                 label="Get a Library Card"
-                target="//catalog.nypl.org/screens/selfregpick.html"
+                target="//www.nypl.org/library-card"
                 className="LibraryCardButton"
                 id="LibraryCardButton"
                 gaAction="Get a Library Card"

@@ -3,7 +3,7 @@ import { extend as _extend } from 'underscore';
 import utils from '../../utils/utils.js';
 
 const defaultStyles = {
-  backgroundColor: '#E43534',
+  backgroundColor: '#E32B31',
   color: '#FFFFFF',
 };
 

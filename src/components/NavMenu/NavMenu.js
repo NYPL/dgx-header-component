@@ -1,6 +1,5 @@
-import Radium from 'radium';
 import React from 'react';
-import cx from 'classnames';
+import FocusTrap from 'focus-trap-react';
 import {
   map as _map,
   filter as _filter,
@@ -8,8 +7,9 @@ import {
   contains as _contains,
   isArray as _isArray,
 } from 'underscore';
-// Header Store
+// Header Store/Actions
 import HeaderStore from '../../stores/HeaderStore.js';
+import Actions from '../../actions/Actions.js';
 // Dependent Components
 import SearchButton from '../SearchButton/SearchButton.js';
 import NavMenuItem from '../NavMenuItem/NavMenuItem.js';
@@ -35,19 +35,26 @@ const styles = {
 
 class NavMenu extends React.Component {
   /**
+   * closeMobileNavMenuDialog()
+   * Verifies that the HeaderStore's mobileMenuButtonValue equals
+   * 'mobileMenu' then resets value with appropriate Action.
+   * Used in FocusTrap onDeactivate callback for A11Y users.
+   */
+  closeMobileNavMenuDialog() {
+    if (HeaderStore._getMobileMenuBtnValue() === 'mobileMenu') {
+      Actions.setMobileMenuButtonValue('');
+    }
+  }
+  /**
    * Generates the DOM for the Sticky Items that will
    * display when the Header is in sticky mode.
    * Adds the appropriate class based off the sticky value.
    * @returns {Object} React DOM.
    */
   renderStickyNavItems() {
-    const stickyClass = cx(
-      `${this.props.className}-stickyItems`,
-      { active: HeaderStore._getIsStickyValue() }
-    );
-
+    const stickyClass = HeaderStore._getIsStickyValue() ? ' active' : '';
     return (
-      <div className={stickyClass}>
+      <div className={`${this.props.className}-stickyItems${stickyClass}`}>
         <span className="lineSeparator" style={styles.lineSeparator}></span>
         <StickyMyNyplButton />
         <DonateButton
@@ -90,14 +97,22 @@ class NavMenu extends React.Component {
   }
 
   render() {
-    const mobileActiveClass = cx({
-      mobileActive: HeaderStore._getMobileMenuBtnValue() === 'mobileMenu',
-    });
+    const mobileActiveClass = HeaderStore._getMobileMenuBtnValue() === 'mobileMenu' ?
+      ' mobileActive' : '';
 
     return (
-      <nav className={this.props.className}>
-        <div className={`${this.props.className}-Wrapper ${mobileActiveClass}`}>
-          <span className="MobileLogoText nypl-icon-logo-type"></span>
+      <FocusTrap
+        onDeactivate={() => this.closeMobileNavMenuDialog()}
+        className={this.props.className}
+        clickOutsideDeactivates={true}
+        active={HeaderStore._getMobileMenuBtnValue() === 'mobileMenu'}
+      >
+        <nav
+          className={`${this.props.className}-Wrapper${mobileActiveClass}`}
+          role="navigation"
+          tabIndex="0"
+        >
+          <span className="MobileLogoText nypl-icon-logo-type" aria-hidden="true"></span>
           <ul className={`${this.props.className}-List`} id="NavMenu-List">
             {this.renderNavMenu(this.props.items, ['1b4916f4-6723-44f0-bfae-112441527c4d'])}
           </ul>
@@ -107,8 +122,8 @@ class NavMenu extends React.Component {
           />
           {this.renderStickyNavItems()}
           <NavMenuBottomButtons className="MobileBottomButtons" />
-        </div>
-      </nav>
+        </nav>
+      </FocusTrap>
     );
   }
 }
@@ -127,4 +142,4 @@ NavMenu.defaultProps = {
   cookie: '0',
 };
 
-export default Radium(NavMenu);
+export default NavMenu;

@@ -73,7 +73,7 @@ var styles = {
     right: '0',
     minWidth: '218px',
     minHeight: '185px',
-    backgroundColor: '#1DA1D4',
+    backgroundColor: '#1B7FA7',
     padding: '17px 30px'
   },
   hide: {

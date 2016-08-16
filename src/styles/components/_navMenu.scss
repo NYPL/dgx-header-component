@@ -14,7 +14,7 @@
 		bottom: inherit;
 	}
 
-	@import '_search';
+	@import '_desktopSearch';
 
 	&-stickyItems {
 		display: none;
@@ -155,10 +155,6 @@
 		  		&:visited, &:active, &:focus, &:hover {
 		  			text-decoration: none;
 		  			border: none;
-		  		}
-
-		  		&:focus {
-		  			outline: initial;
 		  		}
 
 		  		@include min-screen(769px) {

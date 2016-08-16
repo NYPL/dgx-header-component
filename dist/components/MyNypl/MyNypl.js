@@ -14,10 +14,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var _radium = require('radium');
-
-var _radium2 = _interopRequireDefault(_radium);
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -33,53 +29,54 @@ var _appConfigJs = require('../../appConfig.js');
 var _appConfigJs2 = _interopRequireDefault(_appConfigJs);
 
 var styles = {
-  base: {
-    backgroundColor: '#1DA1D4',
-    padding: '0px',
-    width: 'auto'
-  },
-  display: {
-    display: 'block'
-  },
-  hide: {
-    display: 'none'
-  },
   catalogInfo: {
-    fontSize: '12px',
-    color: 'rgba(255, 255, 255, 0.5)',
-    fontWeight: '200',
-    position: 'absolute',
     bottom: '26px',
+    color: '#FFF',
+    fontSize: '14px',
+    fontWeight: '200',
+    letterSpacing: '.03em',
+    position: 'absolute',
     right: '30px',
     textDecoration: 'underline'
   },
   loginButtons: {
+    backgroundColor: '#1B7FA7',
+    border: '2px solid #FFF',
+    color: '#FFF',
     display: 'inline-block',
-    border: '2px solid #fff',
-    color: 'white',
-    padding: '9px 10px 7px',
-    fontSize: '12px',
-    backgroundColor: '#1DA1D4',
     fontFamily: 'Kievit-Book',
-    marginTop: '20px'
+    fontSize: '14px',
+    letterSpacing: '.03em',
+    marginTop: '20px',
+    padding: '9px 17px 7px'
   }
 };
 
 var MyNypl = (function (_React$Component) {
   _inherits(MyNypl, _React$Component);
 
-  function MyNypl(props) {
+  function MyNypl() {
     _classCallCheck(this, MyNypl);
 
-    _get(Object.getPrototypeOf(MyNypl.prototype), 'constructor', this).call(this, props);
+    _get(Object.getPrototypeOf(MyNypl.prototype), 'constructor', this).apply(this, arguments);
   }
 
   _createClass(MyNypl, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.refs.catalogLink.focus();
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.refs.catalogLink.blur();
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2['default'].createElement(
         'div',
-        { className: this.props.className },
+        { className: this.props.className, role: 'dialog' },
         _react2['default'].createElement(
           'ul',
           { className: this.props.className + '-Login-List' },
@@ -89,10 +86,13 @@ var MyNypl = (function (_React$Component) {
             _react2['default'].createElement(
               'a',
               {
+                ref: 'catalogLink',
                 href: this.props.catalogLink,
                 style: styles.loginButtons,
                 className: this.props.className + '-Catalog-Btn',
-                onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Log In', 'Catalog')
+                onClick: function () {
+                  return _utilsUtilsJs2['default']._trackHeader('Log In', 'Catalog');
+                }
               },
               _react2['default'].createElement('span', { className: 'nypl-icon-login icon' }),
               'LOG INTO THE CATALOG'
@@ -107,7 +107,9 @@ var MyNypl = (function (_React$Component) {
                 href: this.props.researchLink,
                 style: styles.loginButtons,
                 className: this.props.className + '-Research-Btn',
-                onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Log In', 'Research')
+                onClick: function () {
+                  return _utilsUtilsJs2['default']._trackHeader('Log In', 'Research');
+                }
               },
               _react2['default'].createElement('span', { className: 'nypl-icon-bldg icon' }),
               'LOG INTO THE RESEARCH CATALOG'
@@ -119,7 +121,9 @@ var MyNypl = (function (_React$Component) {
           {
             href: this.props.infoLink,
             className: this.props.className + '-Catalog-Link',
-            onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Log In', 'Catalog Info'),
+            onClick: function () {
+              return _utilsUtilsJs2['default']._trackHeader('Log In', 'Catalog Info');
+            },
             style: styles.catalogInfo
           },
           'Catalog Info'
@@ -148,5 +152,5 @@ MyNypl.defaultProps = {
   infoLink: _appConfigJs2['default'].myNyplLinks.moreInfo
 };
 
-exports['default'] = (0, _radium2['default'])(MyNypl);
+exports['default'] = MyNypl;
 module.exports = exports['default'];

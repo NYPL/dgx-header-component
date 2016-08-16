@@ -1,5 +1,5 @@
 import React from 'react';
-import Radium from 'radium';
+import { extend as _extend } from 'underscore';
 // Config and Utility
 import utils from '../../utils/utils.js';
 import appConfig from '../../appConfig.js';
@@ -11,12 +11,14 @@ const styles = {
     padding: 0,
   },
   links: {
-    display: 'inline-table',
+    display: 'block',
     backgroundColor: '#E43534',
     color: '#FFF',
     padding: 0,
     margin: '60px 0 0 0',
     width: '50%',
+    minHeight: '90px',
+    float: 'left',
     textAlign: 'center',
     textDecoration: 'none',
   },
@@ -39,6 +41,7 @@ const styles = {
     fontSize: '18px',
     textTransform: 'uppercase',
     textDecoration: 'underline',
+    clear: 'both',
   },
   researchLinkWrapper: {
     borderLeft: '1.25px solid #b92b1a',
@@ -60,69 +63,73 @@ const styles = {
   },
 };
 
-class MobileMyNypl extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+const MobileMyNypl = ({
+  lang,
+  className,
+  catalogLink,
+  researchLink,
+  infoLink,
+}) => {
+  const catalogLinkClass = 'CatalogLink';
+  const researchLinkClass = 'ResearchLink';
 
-  render() {
-    const catalogLinkClass = 'CatalogLink';
-    const researchLinkClass = 'ResearchLink';
-
-    return (
-      <div className={this.props.className} style={styles.base}>
-        <a
-          href={this.props.catalogLink}
-          className={catalogLinkClass}
-          style={styles.links}
-          onClick={utils._trackHeader.bind(this, 'Mobile Log In', 'Catalog')}
+  return (
+    <div
+      className={className}
+      style={styles.base}
+      role="dialog"
+    >
+      <a
+        href={catalogLink}
+        className={catalogLinkClass}
+        style={styles.links}
+        onClick={() => utils._trackHeader('Mobile Log In', 'Catalog')}
+      >
+        <span
+          className={`${catalogLinkClass}-Wrapper`}
+          style={_extend(styles.wrapper, styles.catalogLinkWrapper)}
         >
-          <span
-            className={`${catalogLinkClass}-Wrapper`}
-            style={[styles.wrapper, styles.catalogLinkWrapper]}
-          >
-            <span className={`${catalogLinkClass}-Icon nypl-icon-login`} style={styles.icon}>
-            </span>
-            <span
-              className={`${catalogLinkClass}-Label`}
-              style={[styles.label, styles.catalogLinkLabel]}
-            >
-              Log into the Catalog
-            </span>
+          <span className={`${catalogLinkClass}-Icon nypl-icon-login`} style={styles.icon}>
           </span>
-        </a>
-        <a
-          href={this.props.researchLink}
-          className={researchLinkClass}
-          style={styles.links}
-          onClick={utils._trackHeader.bind(this, 'Mobile Log In', 'Research')}
-        >
           <span
-            className={`${researchLinkClass}-Wrapper`}
-            style={[styles.wrapper, styles.researchLinkWrapper]}
+            className={`${catalogLinkClass}-Label`}
+            style={_extend(styles.catalogLinkLabel, styles.label)}
           >
-            <span className={`${researchLinkClass}-Icon nypl-icon-bldg`} style={styles.icon}></span>
-            <span
-              className={`${researchLinkClass}-Label`}
-              style={[styles.label, styles.researchLinkLabel]}
-            >
-              Log into the Research Catalog
-            </span>
+            Log into the Catalog
           </span>
-        </a>
-        <a
-          className="Mobile-Catalog-Info"
-          href={this.props.infoLink}
-          lang={this.props.lang}
-          onClick={utils._trackHeader.bind(this, 'Mobile Log In', 'Catalog Info')}
-          style={[styles.catalogInfoLink]}
+        </span>
+      </a>
+      <a
+        href={researchLink}
+        className={researchLinkClass}
+        style={styles.links}
+        onClick={() => utils._trackHeader('Mobile Log In', 'Research')}
+      >
+        <span
+          className={`${researchLinkClass}-Wrapper`}
+          style={_extend(styles.wrapper, styles.researchLinkWrapper)}
         >
-          Catalog Info
-        </a>
-      </div>
-    );
-  }
-}
+          <span className={`${researchLinkClass}-Icon nypl-icon-bldg`} style={styles.icon}></span>
+          <span
+            className={`${researchLinkClass}-Label`}
+            style={_extend(styles.researchLinkLabel, styles.label)}
+          >
+            Log into the Research Catalog
+          </span>
+        </span>
+      </a>
+      <a
+        className="Mobile-Catalog-Info"
+        href={infoLink}
+        lang={lang}
+        onClick={() => utils._trackHeader('Mobile Log In', 'Catalog Info')}
+        style={styles.catalogInfoLink}
+      >
+        Catalog Info
+      </a>
+    </div>
+  );
+};
 
 MobileMyNypl.propTypes = {
   lang: React.PropTypes.string,
@@ -140,4 +147,4 @@ MobileMyNypl.defaultProps = {
   infoLink: appConfig.myNyplLinks.moreInfo,
 };
 
-export default Radium(MobileMyNypl);
+export default MobileMyNypl;

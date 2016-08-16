@@ -23,6 +23,13 @@
     text-decoration: none;
   }
 
+  // Accessibility outline rule
+  a, button, input {
+    &:focus, &::-moz-focus-inner {
+      outline: 3px auto #3b99fc;
+    }
+  }
+
   /* MOBILE HEADER
    * -------------
   */
@@ -39,6 +46,9 @@
       width: 45px;
       height: 45px;
     }
+
+    // Mobile Search
+    @import 'components/_mobileSearch';
   }
 
   &-Wrapper {
@@ -174,11 +184,23 @@
 
 
 /* CSS for Screen Reader Texts */
+// Taken from H5BP
 .visuallyHidden {
+  border: 0;
+  clip: rect(0 0 0 0);
   height: 1px;
-  left: -10000px;
-  overflow: hidden;
-  position: absolute;
-  top: auto;
   width: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+
+  &:focus, &:active {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+  }
 }

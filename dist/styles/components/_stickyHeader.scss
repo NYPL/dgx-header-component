@@ -85,7 +85,7 @@
 			&-searchButton {
 				&.isSticky {
 					font-size: 20px;
-					padding: 9px 10px 17.5px 10px;
+					padding: 9px 10px 10px 10px;
 
 					@include min-screen(860px) {
 						font-size: 22px;
@@ -94,24 +94,36 @@
 					@include min-screen(920px) {
 						padding: 8px 10px 14px 10px;
 					}
-
-					&:before {
-						border-bottom: 2px solid $BG_MENU_SEARCH;
-						margin-left: 0;
-						@include min-screen(920px) {
-							border: none;
-							margin-left: $SEARCH_ICON_OFFSET;
-						}
-					}
 				}
 
 				&-text {
-					&.isSticky {
-			      display: none;
-			      @include min-screen(920px) {
-			        display: inline-block;
-			      }
-			    }
+					display: none;
+		      @include min-screen(920px) {
+		        display: inline-block;
+		      }
+				}
+
+				&-icon {
+					position: relative;
+					display: inline-block;
+					width: 25px;
+					height: 25px;
+					right: inherit;
+					top: inherit;
+
+					@include min-screen(920px) {
+						position: absolute;
+						top: 12px;
+						right: 7px;
+						width: 20px;
+						height: 20px;
+					}
+				}
+			}
+
+			&-desktopSearchBox {
+				&.isSticky {
+					top: 50px;
 				}
 			}
 

@@ -67,10 +67,6 @@ var _MyNyplButtonMyNyplButtonJs = require('../MyNyplButton/MyNyplButton.js');
 
 var _MyNyplButtonMyNyplButtonJs2 = _interopRequireDefault(_MyNyplButtonMyNyplButtonJs);
 
-var _MyNyplMobileMyNyplJs = require('../MyNypl/MobileMyNypl.js');
-
-var _MyNyplMobileMyNyplJs2 = _interopRequireDefault(_MyNyplMobileMyNyplJs);
-
 var _NavMenuNavMenuJs = require('../NavMenu/NavMenu.js');
 
 var _NavMenuNavMenuJs2 = _interopRequireDefault(_NavMenuNavMenuJs);
@@ -98,6 +94,10 @@ var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
 var _dgxFeatureFlags = require('dgx-feature-flags');
 
 var _dgxFeatureFlags2 = _interopRequireDefault(_dgxFeatureFlags);
+
+// Google Analytics Module
+
+var _dgxReactGa = require('dgx-react-ga');
 
 // When minifying with Webpack, you can use this:
 // import '../../styles/main.scss';
@@ -185,17 +185,12 @@ var Header = (function (_React$Component) {
       // the proper client-side ajax call to populate the Header data state
       this.watchFeatureFlagHeaderCall();
 
+      // Read the cookie of "nyplpreview", if the cookie exists and its value is "1",
+      // set dimension1 with value of "Public Preview"
+      this.setPublicPreviewGA();
+
       // Listen to the scroll event for the sticky header.
       window.addEventListener('scroll', this.handleStickyHeader, false);
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      _storesHeaderStoreJs2['default'].unlisten(this.onChange.bind(this));
-      _dgxFeatureFlags2['default'].store.unlisten(this.onChange.bind(this));
-
-      // Removing event listener to minimize garbage collection
-      window.removeEventListener('scroll', this.handleStickyHeader, false);
     }
   }, {
     key: 'componentDidUpdate',
@@ -207,6 +202,15 @@ var Header = (function (_React$Component) {
       if (!this.state.featureFlags.get('header-upcoming-ia') && prevState.featureFlags.get('header-upcoming-ia')) {
         _actionsActionsJs2['default'].fetchHeaderData(this.props.env, this.props.urls);
       }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      _storesHeaderStoreJs2['default'].unlisten(this.onChange.bind(this));
+      _dgxFeatureFlags2['default'].store.unlisten(this.onChange.bind(this));
+
+      // Removing event listener to minimize garbage collection
+      window.removeEventListener('scroll', this.handleStickyHeader, false);
     }
   }, {
     key: 'onChange',
@@ -251,6 +255,7 @@ var Header = (function (_React$Component) {
      * getWindowVerticallScroll()
      * returns the current window vertical
      * scroll position in pixels.
+     * @returns {number} - Vertical Scroll Position.
      */
   }, {
     key: 'getWindowVerticalScroll',
@@ -328,6 +333,21 @@ var Header = (function (_React$Component) {
         }
       }
     }
+
+    /**
+     * setPublicPreviewGA()
+     * Verify if the previewCookie has been set to '1' and
+     * set the public preview GA dimension.
+     */
+  }, {
+    key: 'setPublicPreviewGA',
+    value: function setPublicPreviewGA() {
+      if (this.state.cookie && this.state.cookie === '1') {
+        _dgxReactGa.ga.setDimension('dimension1', 'Public Preview');
+      } else {
+        _dgxReactGa.ga.setDimension('dimension1', null);
+      }
+    }
   }, {
     key: 'render',
     value: function render() {
@@ -335,8 +355,6 @@ var Header = (function (_React$Component) {
       var headerHeight = this.state.headerHeight;
       var headerClass = this.props.className || 'Header';
       var headerClasses = (0, _classnames2['default'])(headerClass, { sticky: isHeaderSticky });
-      var showDialog = _storesHeaderStoreJs2['default']._getMobileMyNyplButtonValue();
-      var mobileMyNyplClasses = (0, _classnames2['default'])({ active: showDialog });
       var skipNav = this.props.skipNav ? _react2['default'].createElement(_dgxSkipNavigationLink2['default'], this.props.skipNav) : '';
 
       return _react2['default'].createElement(
@@ -358,11 +376,6 @@ var Header = (function (_React$Component) {
             nyplRootUrl: this.props.urls === 'absolute' ? '//www.nypl.org' : '/',
             ref: 'headerMobile'
           }),
-          _react2['default'].createElement(
-            'div',
-            { className: 'MobileMyNypl-Wrapper ' + mobileMyNyplClasses },
-            _react2['default'].createElement(_MyNyplMobileMyNyplJs2['default'], null)
-          ),
           _react2['default'].createElement(
             'div',
             {
@@ -392,7 +405,7 @@ var Header = (function (_React$Component) {
               }),
               _react2['default'].createElement(_ButtonsSimpleButtonJs2['default'], {
                 label: 'Get a Library Card',
-                target: '//catalog.nypl.org/screens/selfregpick.html',
+                target: '//www.nypl.org/library-card',
                 className: 'LibraryCardButton',
                 id: 'LibraryCardButton',
                 gaAction: 'Get a Library Card',

@@ -1,5 +1,4 @@
 import moment from 'moment';
-
 import { ga } from 'dgx-react-ga';
 
 function Utils() {
@@ -39,8 +38,8 @@ function Utils() {
             " " + start.getUTCDate() + ", " + start.getUTCFullYear() + ".";
             break;
           default:
-            dateString = months[start.getUTCMonth()] + " " + start.getUTCDate() + 
-              ", " + start.getUTCFullYear() + " - " + months[end.getUTCMonth()] + 
+            dateString = months[start.getUTCMonth()] + " " + start.getUTCDate() +
+              ", " + start.getUTCFullYear() + " - " + months[end.getUTCMonth()] +
               " " + end.getUTCDate() + ", " + end.getUTCFullYear() + ".";
         }
         return dateString;

@@ -4,23 +4,13 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _radium = require('radium');
-
-var _radium2 = _interopRequireDefault(_radium);
+var _underscore = require('underscore');
 
 // Config and Utility
 
@@ -39,12 +29,14 @@ var styles = {
     padding: 0
   },
   links: {
-    display: 'inline-table',
+    display: 'block',
     backgroundColor: '#E43534',
     color: '#FFF',
     padding: 0,
     margin: '60px 0 0 0',
     width: '50%',
+    minHeight: '90px',
+    float: 'left',
     textAlign: 'center',
     textDecoration: 'none'
   },
@@ -66,7 +58,8 @@ var styles = {
     padding: '35px',
     fontSize: '18px',
     textTransform: 'uppercase',
-    textDecoration: 'underline'
+    textDecoration: 'underline',
+    clear: 'both'
   },
   researchLinkWrapper: {
     borderLeft: '1.25px solid #b92b1a',
@@ -88,91 +81,92 @@ var styles = {
   }
 };
 
-var MobileMyNypl = (function (_React$Component) {
-  _inherits(MobileMyNypl, _React$Component);
+var MobileMyNypl = function MobileMyNypl(_ref) {
+  var lang = _ref.lang;
+  var className = _ref.className;
+  var catalogLink = _ref.catalogLink;
+  var researchLink = _ref.researchLink;
+  var infoLink = _ref.infoLink;
 
-  function MobileMyNypl(props) {
-    _classCallCheck(this, MobileMyNypl);
+  var catalogLinkClass = 'CatalogLink';
+  var researchLinkClass = 'ResearchLink';
 
-    _get(Object.getPrototypeOf(MobileMyNypl.prototype), 'constructor', this).call(this, props);
-  }
-
-  _createClass(MobileMyNypl, [{
-    key: 'render',
-    value: function render() {
-      var catalogLinkClass = 'CatalogLink';
-      var researchLinkClass = 'ResearchLink';
-
-      return _react2['default'].createElement(
-        'div',
-        { className: this.props.className, style: styles.base },
+  return _react2['default'].createElement(
+    'div',
+    {
+      className: className,
+      style: styles.base,
+      role: 'dialog'
+    },
+    _react2['default'].createElement(
+      'a',
+      {
+        href: catalogLink,
+        className: catalogLinkClass,
+        style: styles.links,
+        onClick: function () {
+          return _utilsUtilsJs2['default']._trackHeader('Mobile Log In', 'Catalog');
+        }
+      },
+      _react2['default'].createElement(
+        'span',
+        {
+          className: catalogLinkClass + '-Wrapper',
+          style: (0, _underscore.extend)(styles.wrapper, styles.catalogLinkWrapper)
+        },
+        _react2['default'].createElement('span', { className: catalogLinkClass + '-Icon nypl-icon-login', style: styles.icon }),
         _react2['default'].createElement(
-          'a',
+          'span',
           {
-            href: this.props.catalogLink,
-            className: catalogLinkClass,
-            style: styles.links,
-            onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Mobile Log In', 'Catalog')
+            className: catalogLinkClass + '-Label',
+            style: (0, _underscore.extend)(styles.catalogLinkLabel, styles.label)
           },
-          _react2['default'].createElement(
-            'span',
-            {
-              className: catalogLinkClass + '-Wrapper',
-              style: [styles.wrapper, styles.catalogLinkWrapper]
-            },
-            _react2['default'].createElement('span', { className: catalogLinkClass + '-Icon nypl-icon-login', style: styles.icon }),
-            _react2['default'].createElement(
-              'span',
-              {
-                className: catalogLinkClass + '-Label',
-                style: [styles.label, styles.catalogLinkLabel]
-              },
-              'Log into the Catalog'
-            )
-          )
-        ),
-        _react2['default'].createElement(
-          'a',
-          {
-            href: this.props.researchLink,
-            className: researchLinkClass,
-            style: styles.links,
-            onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Mobile Log In', 'Research')
-          },
-          _react2['default'].createElement(
-            'span',
-            {
-              className: researchLinkClass + '-Wrapper',
-              style: [styles.wrapper, styles.researchLinkWrapper]
-            },
-            _react2['default'].createElement('span', { className: researchLinkClass + '-Icon nypl-icon-bldg', style: styles.icon }),
-            _react2['default'].createElement(
-              'span',
-              {
-                className: researchLinkClass + '-Label',
-                style: [styles.label, styles.researchLinkLabel]
-              },
-              'Log into the Research Catalog'
-            )
-          )
-        ),
-        _react2['default'].createElement(
-          'a',
-          {
-            className: 'Mobile-Catalog-Info',
-            href: this.props.infoLink,
-            lang: this.props.lang,
-            onClick: _utilsUtilsJs2['default']._trackHeader.bind(this, 'Mobile Log In', 'Catalog Info'),
-            style: [styles.catalogInfoLink]
-          },
-          'Catalog Info'
+          'Log into the Catalog'
         )
-      );
-    }
-  }]);
-
-  return MobileMyNypl;
-})(_react2['default'].Component);
+      )
+    ),
+    _react2['default'].createElement(
+      'a',
+      {
+        href: researchLink,
+        className: researchLinkClass,
+        style: styles.links,
+        onClick: function () {
+          return _utilsUtilsJs2['default']._trackHeader('Mobile Log In', 'Research');
+        }
+      },
+      _react2['default'].createElement(
+        'span',
+        {
+          className: researchLinkClass + '-Wrapper',
+          style: (0, _underscore.extend)(styles.wrapper, styles.researchLinkWrapper)
+        },
+        _react2['default'].createElement('span', { className: researchLinkClass + '-Icon nypl-icon-bldg', style: styles.icon }),
+        _react2['default'].createElement(
+          'span',
+          {
+            className: researchLinkClass + '-Label',
+            style: (0, _underscore.extend)(styles.researchLinkLabel, styles.label)
+          },
+          'Log into the Research Catalog'
+        )
+      )
+    ),
+    _react2['default'].createElement(
+      'a',
+      {
+        className: 'Mobile-Catalog-Info',
+        href: infoLink,
+        lang: lang,
+        onClick: function () {
+          return _utilsUtilsJs2['default']._trackHeader('Mobile Log In', 'Catalog Info');
+        },
+        style: styles.catalogInfoLink
+      },
+      'Catalog Info'
+    )
+  );
+};
 
 MobileMyNypl.propTypes = {
   lang: _react2['default'].PropTypes.string,
@@ -190,5 +184,5 @@ MobileMyNypl.defaultProps = {
   infoLink: _appConfigJs2['default'].myNyplLinks.moreInfo
 };
 
-exports['default'] = (0, _radium2['default'])(MobileMyNypl);
+exports['default'] = MobileMyNypl;
 module.exports = exports['default'];

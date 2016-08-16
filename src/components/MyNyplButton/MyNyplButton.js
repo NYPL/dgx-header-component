@@ -1,6 +1,5 @@
-import Radium from 'radium';
 import React from 'react';
-import cx from 'classnames';
+import { extend as _extend } from 'underscore';
 import ClickOutHandler from 'react-onclickout';
 // Alt Store/Actions
 import HeaderStore from '../../stores/HeaderStore.js';
@@ -41,20 +40,31 @@ const styles = {
     backgroundColor: '#1B7FA7',
     padding: '25px 30px',
   },
-  hide: {
-    display: 'none',
-  },
-  show: {
-    display: 'block',
-  },
 };
 
 class MyNyplButton extends React.Component {
   constructor(props) {
     super(props);
-
     this.handleClick = this.handleClick.bind(this);
     this.handleOnClickOut = this.handleOnClickOut.bind(this);
+    this.handleEscKey = this.handleEscKey.bind(this);
+  }
+
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleEscKey, false);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleEscKey, false);
+  }
+  /**
+   * handleEscKey(e)
+   * Triggers the clickOut method if the ESC keyboard key is pressed.
+   */
+  handleEscKey(e) {
+    if (e.key === 'Escape' || e.key === 'Esc' || e.keyCode === 27) {
+      this.handleOnClickOut();
+    }
   }
 
   /**
@@ -82,37 +92,47 @@ class MyNyplButton extends React.Component {
     }
   }
 
-  render() {
-    // Assign a variable to hold the reference of state boolean
-    const showDialog = HeaderStore._getMyNyplVisible();
-    const buttonClasses = cx({ active: showDialog });
-    const myNyplClasses = cx({ 'active animatedFast fadeIn': showDialog });
-    const iconClass = cx({
-      'nypl-icon-solo-x': showDialog,
-      'nypl-icon-wedge-down': !showDialog,
-    });
+  renderMyNyplButton() {
+    let buttonClass = '';
+    let iconClass = 'nypl-icon-wedge-down';
 
+    if (HeaderStore._getMyNyplVisible()) {
+      buttonClass = 'active';
+      iconClass = 'nypl-icon-solo-x';
+    }
+
+    return (
+      <button
+        className={`MyNyplButton ${buttonClass}`}
+        onClick={this.handleClick}
+        style={_extend(styles.MyNyplButton, this.props.style)}
+      >
+        {this.props.label}
+        <span className={`${iconClass} icon`} style={styles.MyNyplIcon}></span>
+      </button>
+    );
+  }
+
+  renderMyNyplDialog() {
+    return (HeaderStore._getMyNyplVisible()) ? (
+      <div
+        className="MyNypl-Wrapper active animatedFast fadeIn"
+        style={styles.MyNyplWrapper}
+      >
+        <MyNypl />
+      </div>
+    ) : null;
+  }
+
+  render() {
     return (
       <ClickOutHandler onClickOut={this.handleOnClickOut}>
         <div
           className="MyNyplButton-Wrapper"
-          ref="MyNypl"
-          style={[styles.base, this.props.style]}
+          style={_extend(styles.base, this.props.style)}
         >
-          <button
-            className={`MyNyplButton ${buttonClasses}`}
-            onClick={this.handleClick}
-            style={[styles.MyNyplButton, this.props.style]}
-          >
-            {this.props.label}
-            <span className={`${iconClass} icon`} style={styles.MyNyplIcon}></span>
-          </button>
-          <div
-            className={`MyNypl-Wrapper ${myNyplClasses}`}
-            style={styles.MyNyplWrapper}
-          >
-            <MyNypl />
-          </div>
+          {this.renderMyNyplButton()}
+          {this.renderMyNyplDialog()}
         </div>
       </ClickOutHandler>
     );
@@ -130,4 +150,4 @@ MyNyplButton.defaultProps = {
   label: 'Log In',
 };
 
-export default Radium(MyNyplButton);
+export default MyNyplButton;

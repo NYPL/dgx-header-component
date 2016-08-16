@@ -14,17 +14,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var _radium = require('radium');
-
-var _radium2 = _interopRequireDefault(_radium);
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _classnames = require('classnames');
-
-var _classnames2 = _interopRequireDefault(_classnames);
+var _underscore = require('underscore');
 
 var _reactOnclickout = require('react-onclickout');
 
@@ -82,12 +76,6 @@ var styles = {
     minHeight: '190px',
     backgroundColor: '#1B7FA7',
     padding: '25px 30px'
-  },
-  hide: {
-    display: 'none'
-  },
-  show: {
-    display: 'block'
   }
 };
 
@@ -98,18 +86,40 @@ var MyNyplButton = (function (_React$Component) {
     _classCallCheck(this, MyNyplButton);
 
     _get(Object.getPrototypeOf(MyNyplButton.prototype), 'constructor', this).call(this, props);
-
     this.handleClick = this.handleClick.bind(this);
     this.handleOnClickOut = this.handleOnClickOut.bind(this);
+    this.handleEscKey = this.handleEscKey.bind(this);
   }
 
-  /**
-   * handleClick()
-   * Toggles the visibility of the form. Sends an Action
-   * that will dispatch an event to the Header Store.
-   */
-
   _createClass(MyNyplButton, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      window.addEventListener('keydown', this.handleEscKey, false);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      window.removeEventListener('keydown', this.handleEscKey, false);
+    }
+
+    /**
+     * handleEscKey(e)
+     * Triggers the clickOut method if the ESC keyboard key is pressed.
+     */
+  }, {
+    key: 'handleEscKey',
+    value: function handleEscKey(e) {
+      if (e.key === 'Escape' || e.key === 'Esc' || e.keyCode === 27) {
+        this.handleOnClickOut();
+      }
+    }
+
+    /**
+     * handleClick()
+     * Toggles the visibility of the form. Sends an Action
+     * that will dispatch an event to the Header Store.
+     */
+  }, {
     key: 'handleClick',
     value: function handleClick() {
       var visibleState = _storesHeaderStoreJs2['default']._getMyNyplVisible() ? 'Closed' : 'Open';
@@ -133,17 +143,42 @@ var MyNyplButton = (function (_React$Component) {
       }
     }
   }, {
+    key: 'renderMyNyplButton',
+    value: function renderMyNyplButton() {
+      var buttonClass = '';
+      var iconClass = 'nypl-icon-wedge-down';
+
+      if (_storesHeaderStoreJs2['default']._getMyNyplVisible()) {
+        buttonClass = 'active';
+        iconClass = 'nypl-icon-solo-x';
+      }
+
+      return _react2['default'].createElement(
+        'button',
+        {
+          className: 'MyNyplButton ' + buttonClass,
+          onClick: this.handleClick,
+          style: (0, _underscore.extend)(styles.MyNyplButton, this.props.style)
+        },
+        this.props.label,
+        _react2['default'].createElement('span', { className: iconClass + ' icon', style: styles.MyNyplIcon })
+      );
+    }
+  }, {
+    key: 'renderMyNyplDialog',
+    value: function renderMyNyplDialog() {
+      return _storesHeaderStoreJs2['default']._getMyNyplVisible() ? _react2['default'].createElement(
+        'div',
+        {
+          className: 'MyNypl-Wrapper active animatedFast fadeIn',
+          style: styles.MyNyplWrapper
+        },
+        _react2['default'].createElement(_MyNyplMyNyplJs2['default'], null)
+      ) : null;
+    }
+  }, {
     key: 'render',
     value: function render() {
-      // Assign a variable to hold the reference of state boolean
-      var showDialog = _storesHeaderStoreJs2['default']._getMyNyplVisible();
-      var buttonClasses = (0, _classnames2['default'])({ active: showDialog });
-      var myNyplClasses = (0, _classnames2['default'])({ 'active animatedFast fadeIn': showDialog });
-      var iconClass = (0, _classnames2['default'])({
-        'nypl-icon-solo-x': showDialog,
-        'nypl-icon-wedge-down': !showDialog
-      });
-
       return _react2['default'].createElement(
         _reactOnclickout2['default'],
         { onClickOut: this.handleOnClickOut },
@@ -151,27 +186,10 @@ var MyNyplButton = (function (_React$Component) {
           'div',
           {
             className: 'MyNyplButton-Wrapper',
-            ref: 'MyNypl',
-            style: [styles.base, this.props.style]
+            style: (0, _underscore.extend)(styles.base, this.props.style)
           },
-          _react2['default'].createElement(
-            'button',
-            {
-              className: 'MyNyplButton ' + buttonClasses,
-              onClick: this.handleClick,
-              style: [styles.MyNyplButton, this.props.style]
-            },
-            this.props.label,
-            _react2['default'].createElement('span', { className: iconClass + ' icon', style: styles.MyNyplIcon })
-          ),
-          _react2['default'].createElement(
-            'div',
-            {
-              className: 'MyNypl-Wrapper ' + myNyplClasses,
-              style: styles.MyNyplWrapper
-            },
-            _react2['default'].createElement(_MyNyplMyNyplJs2['default'], null)
-          )
+          this.renderMyNyplButton(),
+          this.renderMyNyplDialog()
         )
       );
     }
@@ -191,5 +209,5 @@ MyNyplButton.defaultProps = {
   label: 'Log In'
 };
 
-exports['default'] = (0, _radium2['default'])(MyNyplButton);
+exports['default'] = MyNyplButton;
 module.exports = exports['default'];

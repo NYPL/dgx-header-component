@@ -104,6 +104,7 @@ class NavMenu extends React.Component {
       <FocusTrap
         onDeactivate={() => this.closeMobileNavMenuDialog()}
         className={this.props.className}
+        clickOutsideDeactivates={true}
         active={HeaderStore._getMobileMenuBtnValue() === 'mobileMenu'}
       >
         <nav

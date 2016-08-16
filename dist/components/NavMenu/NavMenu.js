@@ -168,6 +168,7 @@ var NavMenu = (function (_React$Component) {
             return _this2.closeMobileNavMenuDialog();
           },
           className: this.props.className,
+          clickOutsideDeactivates: true,
           active: _storesHeaderStoreJs2['default']._getMobileMenuBtnValue() === 'mobileMenu'
         },
         _react2['default'].createElement(

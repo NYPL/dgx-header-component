@@ -185,6 +185,10 @@ var Header = (function (_React$Component) {
       // the proper client-side ajax call to populate the Header data state
       this.watchFeatureFlagHeaderCall();
 
+      // Read the cookie of "nyplpreview", if the cookie exists and its value is "1",
+      // set dimension1 with value of "Public Preview"
+      this.setPublicPreviewGA();
+
       // Listen to the scroll event for the sticky header.
       window.addEventListener('scroll', this.handleStickyHeader, false);
     }
@@ -331,15 +335,15 @@ var Header = (function (_React$Component) {
     }
 
     /**
-     * sendPublicPreviewGA()
-     * Verifies if the previewCookie has been set to '1' and
-     * send GA dimension.
+     * setPublicPreviewGA()
+     * Verify if the previewCookie has been set to '1' and
+     * set the public preview GA dimension.
      */
   }, {
-    key: 'sendPublicPreviewGA',
-    value: function sendPublicPreviewGA() {
+    key: 'setPublicPreviewGA',
+    value: function setPublicPreviewGA() {
       if (this.state.cookie && this.state.cookie === '1') {
-        _dgxReactGa2['default']._setPublicPreviewDimension();
+        _dgxReactGa2['default'].setDimension('dimension1', 'Public Preview');
       }
     }
   }, {

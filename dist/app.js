@@ -28,9 +28,9 @@ var _reactA11y = require('react-a11y');
 
 var _reactA11y2 = _interopRequireDefault(_reactA11y);
 
-if (loadA11y) {
-  (0, _reactA11y2['default'])(_react2['default'], { ReactDOM: _reactDom2['default'], includeSrcNode: true });
-}
+// if (loadA11y) {
+//   a11y(React, { ReactDOM, includeSrcNode: true });
+// }
 
 // Use for testing GA events
 if (!window.ga) {

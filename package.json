@@ -51,9 +51,9 @@
     "iso": "4.1.0",
     "moment": "2.10.6",
     "radium": "^0.13.5",
-    "react": "0.14.7",
+    "react": "0.14.8",
     "react-a11y": "0.3.3",
-    "react-dom": "0.14.7",
+    "react-dom": "0.14.8",
     "react-onclickout": "2.0.4",
     "react-tappable": "0.8.0",
     "underscore": "1.8.3"

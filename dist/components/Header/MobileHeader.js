@@ -101,7 +101,8 @@ var styles = {
     padding: '13px',
     display: 'inline-block',
     border: 'none',
-    lineHeight: 'normal'
+    lineHeight: 'normal',
+    verticalAlign: '0px'
   },
   activeMyNyplButton: {
     backgroundColor: '#2B2B2B'
@@ -114,7 +115,8 @@ var styles = {
     padding: '13px',
     display: 'inline-block',
     border: 'none',
-    lineHeight: 'normal'
+    lineHeight: 'normal',
+    verticalAlign: '0px'
   },
   activeSearchButton: {
     backgroundColor: '#1B7FA7'
@@ -136,7 +138,8 @@ var styles = {
     padding: '13px',
     display: 'inline-block',
     border: 'none',
-    lineHeight: 'normal'
+    lineHeight: 'normal',
+    verticalAlign: '0px'
   },
   activeMenuButton: {
     backgroundColor: '#2B2B2B'

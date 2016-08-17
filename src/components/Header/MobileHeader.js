@@ -66,6 +66,7 @@ const styles = {
     display: 'inline-block',
     border: 'none',
     lineHeight: 'normal',
+    verticalAlign: '0px',
   },
   activeMyNyplButton: {
     backgroundColor: '#2B2B2B',
@@ -79,6 +80,7 @@ const styles = {
     display: 'inline-block',
     border: 'none',
     lineHeight: 'normal',
+    verticalAlign: '0px',
   },
   activeSearchButton: {
     backgroundColor: '#1B7FA7',
@@ -101,6 +103,7 @@ const styles = {
     display: 'inline-block',
     border: 'none',
     lineHeight: 'normal',
+    verticalAlign: '0px',
   },
   activeMenuButton: {
     backgroundColor: '#2B2B2B',

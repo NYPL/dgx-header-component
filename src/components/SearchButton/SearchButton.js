@@ -50,9 +50,9 @@ class SearchButton extends React.Component {
     if (this.props.cookie === '1') {
       // Update active state only if ACTIVE is true
       if (this.state.active) {
-        utils._trackHeader('Search', 'Close Menu');
         setTimeout(() => {
           this.setState({ active: false });
+          utils._trackHeader('Search', 'Close Menu');
         }, 200);
       }
     }

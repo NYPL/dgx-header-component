@@ -17,6 +17,7 @@ class SearchBox extends React.Component {
 
     this.handleSearchInputChange = this.handleSearchInputChange.bind(this);
     this.handleSearchOptionChange = this.handleSearchOptionChange.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   /**
@@ -125,6 +126,14 @@ class SearchBox extends React.Component {
     return input !== '';
   }
 
+  handleKeyPress(e) {
+    if (e.key === 'Enter' || e.charCode === 13) {
+      if (this.props.type !== 'mobile') {
+        this.submitSearchRequest(null);
+      }
+    }
+  }
+
   handleSearchInputChange(event) {
     this.setState({ searchInput: event.target.value });
   }
@@ -142,16 +151,27 @@ class SearchBox extends React.Component {
     const catalogBaseUrl = '//www.nypl.org/search/apachesolr_search/';
 
     if (this.isSearchInputValid(searchInputValue)) {
-      if (searchType === 'catalog' || searchOptionValue === 'catalog') {
-        gaSearchLabel = 'Submit Catalog Search';
-        requestUrl = this.setEncoreUrl(searchInputValue, encoreBaseUrl, 'eng');
-      } else if (searchType === 'website' || searchOptionValue === 'website') {
-        gaSearchLabel = 'Submit Search';
-        requestUrl = this.setCatalogUrl(searchInputValue, catalogBaseUrl);
+      // Explicit checks for mobile search
+      if (this.props.type === 'mobile') {
+        if (searchType === 'catalog') {
+          gaSearchLabel = 'Submit Catalog Search';
+          requestUrl = this.setEncoreUrl(searchInputValue, encoreBaseUrl, 'eng');
+        } else if (searchType === 'website') {
+          gaSearchLabel = 'Submit Search';
+          requestUrl = this.setCatalogUrl(searchInputValue, catalogBaseUrl);
+        }
+      } else {
+        // Explicit checks for desktop search
+        if (searchOptionValue === 'catalog') {
+          gaSearchLabel = 'Submit Catalog Search';
+          requestUrl = this.setEncoreUrl(searchInputValue, encoreBaseUrl, 'eng');
+        } else if (searchOptionValue === 'website') {
+          gaSearchLabel = 'Submit Search';
+          requestUrl = this.setCatalogUrl(searchInputValue, catalogBaseUrl);
+        }
       }
 
-      // requestUrl && gaSearchLabel are now defined
-      // either by mobileControls or desktopControls
+      // Safety check to ensure a proper requestUrl has been defined.
       if (gaSearchLabel && requestUrl) {
         // Fire GA event to track Search
         utils._trackHeader('Search', gaSearchLabel);
@@ -184,6 +204,7 @@ class SearchBox extends React.Component {
           placeholder={this.state.placeholder}
           value={this.state.searchInput}
           onChange={this.handleSearchInputChange}
+          onKeyPress={this.handleKeyPress}
           required
           aria-required="true"
           autoComplete="off"
@@ -198,7 +219,6 @@ class SearchBox extends React.Component {
     return (
       <div className={`${this.props.className}-mobileControls`}>
         <button
-          type="submit"
           aria-label="Submit Catalog Search"
           onClick={() => this.submitSearchRequest('catalog')}
         >
@@ -206,7 +226,6 @@ class SearchBox extends React.Component {
           <span className="nypl-icon-wedge-right icon"></span>
         </button>
         <button
-          type="submit"
           aria-label="Submit NYPL Website Search"
           onClick={() => this.submitSearchRequest('website')}
         >

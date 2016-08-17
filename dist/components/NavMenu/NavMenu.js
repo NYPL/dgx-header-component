@@ -18,10 +18,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _focusTrapReact = require('focus-trap-react');
-
-var _focusTrapReact2 = _interopRequireDefault(_focusTrapReact);
-
 var _underscore = require('underscore');
 
 // Header Store/Actions
@@ -75,14 +71,30 @@ var styles = {
 var NavMenu = (function (_React$Component) {
   _inherits(NavMenu, _React$Component);
 
-  function NavMenu() {
+  function NavMenu(props) {
     _classCallCheck(this, NavMenu);
 
-    _get(Object.getPrototypeOf(NavMenu.prototype), 'constructor', this).apply(this, arguments);
+    _get(Object.getPrototypeOf(NavMenu.prototype), 'constructor', this).call(this, props);
+    this.handleEscKey = this.handleEscKey.bind(this);
   }
 
   _createClass(NavMenu, [{
-    key: 'closeMobileNavMenuDialog',
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      window.addEventListener('keydown', this.handleEscKey, false);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      window.removeEventListener('keydown', this.handleEscKey, false);
+    }
+  }, {
+    key: 'handleEscKey',
+    value: function handleEscKey(e) {
+      if (e.key === 'Escape' || e.key === 'Esc' || e.keyCode === 27) {
+        this.closeMobileNavMenuDialog();
+      }
+    }
 
     /**
      * closeMobileNavMenuDialog()
@@ -90,6 +102,8 @@ var NavMenu = (function (_React$Component) {
      * 'mobileMenu' then resets value with appropriate Action.
      * Used in FocusTrap onDeactivate callback for A11Y users.
      */
+  }, {
+    key: 'closeMobileNavMenuDialog',
     value: function closeMobileNavMenuDialog() {
       if (_storesHeaderStoreJs2['default']._getMobileMenuBtnValue() === 'mobileMenu') {
         _actionsActionsJs2['default'].setMobileMenuButtonValue('');
@@ -157,20 +171,11 @@ var NavMenu = (function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var mobileActiveClass = _storesHeaderStoreJs2['default']._getMobileMenuBtnValue() === 'mobileMenu' ? ' mobileActive' : '';
 
       return _react2['default'].createElement(
-        _focusTrapReact2['default'],
-        {
-          onDeactivate: function () {
-            return _this2.closeMobileNavMenuDialog();
-          },
-          className: this.props.className,
-          clickOutsideDeactivates: true,
-          active: _storesHeaderStoreJs2['default']._getMobileMenuBtnValue() === 'mobileMenu'
-        },
+        'div',
+        { className: this.props.className },
         _react2['default'].createElement(
           'nav',
           {

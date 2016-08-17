@@ -47,6 +47,12 @@
       height: 45px;
     }
 
+    ul {
+      button {
+        border-radius: 0;
+      }
+    }
+
     // Mobile Search
     @import 'components/_mobileSearch';
   }

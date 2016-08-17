@@ -23,8 +23,9 @@ const styles = {
     fontSize: '14px',
     height: '38px',
     letterSpacing: '.03em',
-    marginTop: '50px',
-    paddingLeft: '21px',
+    margin: '50px 0 0 0',
+    padding: '0 0 0 21px',
+    lineHeight: 'normal',
     width: '100px',
   },
   tryAgainButton: {

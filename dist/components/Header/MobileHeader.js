@@ -100,7 +100,8 @@ var styles = {
     margin: 0,
     padding: '13px',
     display: 'inline-block',
-    border: 'none'
+    border: 'none',
+    lineHeight: 'normal'
   },
   activeMyNyplButton: {
     backgroundColor: '#2B2B2B'
@@ -112,7 +113,8 @@ var styles = {
     margin: 0,
     padding: '13px',
     display: 'inline-block',
-    border: 'none'
+    border: 'none',
+    lineHeight: 'normal'
   },
   activeSearchButton: {
     backgroundColor: '#1B7FA7'
@@ -133,7 +135,8 @@ var styles = {
     margin: 0,
     padding: '13px',
     display: 'inline-block',
-    border: 'none'
+    border: 'none',
+    lineHeight: 'normal'
   },
   activeMenuButton: {
     backgroundColor: '#2B2B2B'

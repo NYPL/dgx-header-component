@@ -205,6 +205,8 @@
         margin: 0 20px 0 0;
         line-height: normal !important;
         @include border-radius(50%);
+        width: 72px;
+        height: 72px;
       }
     }
   }

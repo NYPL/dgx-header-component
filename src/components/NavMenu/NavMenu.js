@@ -1,5 +1,4 @@
 import React from 'react';
-import FocusTrap from 'focus-trap-react';
 import {
   map as _map,
   filter as _filter,
@@ -34,6 +33,25 @@ const styles = {
 };
 
 class NavMenu extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleEscKey = this.handleEscKey.bind(this);
+  }
+
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleEscKey, false);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleEscKey, false);
+  }
+
+  handleEscKey(e) {
+    if (e.key === 'Escape' || e.key === 'Esc' || e.keyCode === 27) {
+      this.closeMobileNavMenuDialog();
+    }
+  }
+
   /**
    * closeMobileNavMenuDialog()
    * Verifies that the HeaderStore's mobileMenuButtonValue equals
@@ -101,12 +119,7 @@ class NavMenu extends React.Component {
       ' mobileActive' : '';
 
     return (
-      <FocusTrap
-        onDeactivate={() => this.closeMobileNavMenuDialog()}
-        className={this.props.className}
-        clickOutsideDeactivates={true}
-        active={HeaderStore._getMobileMenuBtnValue() === 'mobileMenu'}
-      >
+      <div className={this.props.className}>
         <nav
           className={`${this.props.className}-Wrapper${mobileActiveClass}`}
           role="navigation"
@@ -122,7 +135,7 @@ class NavMenu extends React.Component {
           {this.renderStickyNavItems()}
           <NavMenuBottomButtons className="MobileBottomButtons" />
         </nav>
-      </FocusTrap>
+      </div>
     );
   }
 }

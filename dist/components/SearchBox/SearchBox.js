@@ -44,6 +44,7 @@ var SearchBox = (function (_React$Component) {
 
     this.handleSearchInputChange = this.handleSearchInputChange.bind(this);
     this.handleSearchOptionChange = this.handleSearchOptionChange.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   /**
@@ -164,6 +165,15 @@ var SearchBox = (function (_React$Component) {
       return input !== '';
     }
   }, {
+    key: 'handleKeyPress',
+    value: function handleKeyPress(e) {
+      if (e.key === 'Enter' || e.charCode === 13) {
+        if (this.props.type !== 'mobile') {
+          this.submitSearchRequest(null);
+        }
+      }
+    }
+  }, {
     key: 'handleSearchInputChange',
     value: function handleSearchInputChange(event) {
       this.setState({ searchInput: event.target.value });
@@ -184,16 +194,27 @@ var SearchBox = (function (_React$Component) {
       var catalogBaseUrl = '//www.nypl.org/search/apachesolr_search/';
 
       if (this.isSearchInputValid(searchInputValue)) {
-        if (searchType === 'catalog' || searchOptionValue === 'catalog') {
-          gaSearchLabel = 'Submit Catalog Search';
-          requestUrl = this.setEncoreUrl(searchInputValue, encoreBaseUrl, 'eng');
-        } else if (searchType === 'website' || searchOptionValue === 'website') {
-          gaSearchLabel = 'Submit Search';
-          requestUrl = this.setCatalogUrl(searchInputValue, catalogBaseUrl);
+        // Explicit checks for mobile search
+        if (this.props.type === 'mobile') {
+          if (searchType === 'catalog') {
+            gaSearchLabel = 'Submit Catalog Search';
+            requestUrl = this.setEncoreUrl(searchInputValue, encoreBaseUrl, 'eng');
+          } else if (searchType === 'website') {
+            gaSearchLabel = 'Submit Search';
+            requestUrl = this.setCatalogUrl(searchInputValue, catalogBaseUrl);
+          }
+        } else {
+          // Explicit checks for desktop search
+          if (searchOptionValue === 'catalog') {
+            gaSearchLabel = 'Submit Catalog Search';
+            requestUrl = this.setEncoreUrl(searchInputValue, encoreBaseUrl, 'eng');
+          } else if (searchOptionValue === 'website') {
+            gaSearchLabel = 'Submit Search';
+            requestUrl = this.setCatalogUrl(searchInputValue, catalogBaseUrl);
+          }
         }
 
-        // requestUrl && gaSearchLabel are now defined
-        // either by mobileControls or desktopControls
+        // Safety check to ensure a proper requestUrl has been defined.
         if (gaSearchLabel && requestUrl) {
           // Fire GA event to track Search
           _utilsUtilsJs2['default']._trackHeader('Search', gaSearchLabel);
@@ -230,6 +251,7 @@ var SearchBox = (function (_React$Component) {
           placeholder: this.state.placeholder,
           value: this.state.searchInput,
           onChange: this.handleSearchInputChange,
+          onKeyPress: this.handleKeyPress,
           required: true,
           'aria-required': 'true',
           autoComplete: 'off',
@@ -249,7 +271,6 @@ var SearchBox = (function (_React$Component) {
         _react2['default'].createElement(
           'button',
           {
-            type: 'submit',
             'aria-label': 'Submit Catalog Search',
             onClick: function () {
               return _this2.submitSearchRequest('catalog');
@@ -265,7 +286,6 @@ var SearchBox = (function (_React$Component) {
         _react2['default'].createElement(
           'button',
           {
-            type: 'submit',
             'aria-label': 'Submit NYPL Website Search',
             onClick: function () {
               return _this2.submitSearchRequest('website');

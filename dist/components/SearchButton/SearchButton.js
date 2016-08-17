@@ -101,9 +101,9 @@ var SearchButton = (function (_React$Component) {
       if (this.props.cookie === '1') {
         // Update active state only if ACTIVE is true
         if (this.state.active) {
-          _utilsUtilsJs2['default']._trackHeader('Search', 'Close Menu');
           setTimeout(function () {
             _this.setState({ active: false });
+            _utilsUtilsJs2['default']._trackHeader('Search', 'Close Menu');
           }, 200);
         }
       }

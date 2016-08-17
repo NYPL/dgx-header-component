@@ -22,13 +22,18 @@
   background-color: transparent;
   border: none;
   color: $BG_MENU_SEARCH;
-  padding: 10px 8px 12px;
+  padding: 10px 10px 12px;
   margin: 2px 0 0;
-  line-height: normal;
+  line-height: normal !important;
   white-space: normal !important;
+  @include border-radius(none);
   // Always display the search button after $TABLET_PORTRAIT_BP
   @include min-screen($TABLET_PORTRAIT_BP) {
     display: block;
+  }
+
+  &:hover {
+    border: none !important;
   }
 
   /* ACTIVE STATE */
@@ -54,7 +59,7 @@
   &-icon {
     display: inline-block;
     position: absolute;
-    right: 5px;
+    right: 8px;
     top: 8px;
     fill: $BG_MENU_SEARCH;
   }
@@ -106,17 +111,20 @@
         display: inline-block;
         font-size: 18px;
         margin: 0 0 10px 0;
+        padding: 0 !important;
       }
 
       input {
         display: block;
         border: none;
         @include Kievit-Light;
+        line-height: normal !important;
         font-style: normal;
         font-size: 22px;
         background-color: #FFF;
         color: #000;
-        height: 33px;
+        min-height: 33px;
+        height: 100%;
         padding: 10px 0 10px 10px;
         margin: 0;
         width: 85%;
@@ -125,6 +133,7 @@
         &:focus,
         &:active {
           outline: 3px auto #3b99fc;
+          box-shadow: none;
         }
       }
 
@@ -187,12 +196,14 @@
 
       button {
         position: absolute;
-        top: 70px;
+        top: 67px;
         right: 0px;
         background-color: transparent;
+        background: transparent;
         border: 2px solid #FFF;
         padding: 18px;
         margin: 0 20px 0 0;
+        line-height: normal !important;
         @include border-radius(50%);
       }
     }

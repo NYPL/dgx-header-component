@@ -35,6 +35,7 @@
 			position: absolute;
 			width: 100%;
 			z-index: 1000;
+			line-height: normal;
 
 			@include min-screen(769px) {
 				position: initial;
@@ -45,6 +46,7 @@
 			/* Displays NavMenu on Mobile with proper class on parent */
 			#NavMenu-List {
 				display: block;
+				line-height: normal;
 
 				@include min-screen(769px) {
 					display: inline-table;

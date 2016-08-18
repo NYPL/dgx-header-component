@@ -21,11 +21,13 @@ const styles = {
     float: 'left',
     textAlign: 'center',
     textDecoration: 'none',
+    lineHeight: 'normal',
   },
   label: {
     fontSize: '14px',
     textTransform: 'uppercase',
     display: 'inline-block',
+    margin: '0',
   },
   wrapper: {
     width: '100%',
@@ -48,7 +50,7 @@ const styles = {
     padding: '1.2em 0 1.75em',
   },
   researchLinkLabel: {
-    width: '120px',
+    width: '125px',
   },
   catalogLinkWrapper: {
     borderRight: '1.25px solid #b92b1a',

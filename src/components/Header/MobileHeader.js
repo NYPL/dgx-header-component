@@ -30,11 +30,13 @@ const styles = {
     padding: 0,
     listStyleType: 'none',
     float: 'right',
+    lineHeight: 'normal',
   },
   listItem: {
     display: 'inline-block',
     padding: 0,
     margin: '0 0 0 4px',
+    lineHeight: 'normal',
   },
   mobileLogoLink: {
     color: '#000',

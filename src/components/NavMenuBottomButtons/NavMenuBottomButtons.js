@@ -19,6 +19,7 @@ const styles = {
     width: '50%',
     textAlign: 'center',
     textDecoration: 'none',
+    lineHeight: 'normal',
   },
   label: {
     fontSize: '16px',
@@ -56,6 +57,7 @@ const styles = {
     textAlign: 'center',
     textTransform: 'uppercase',
     fontSize: '16px',
+    lineHeight: 'normal',
   },
 };
 

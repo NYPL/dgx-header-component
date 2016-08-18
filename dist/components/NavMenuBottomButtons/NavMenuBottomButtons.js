@@ -36,7 +36,8 @@ var styles = {
     margin: 0,
     width: '50%',
     textAlign: 'center',
-    textDecoration: 'none'
+    textDecoration: 'none',
+    lineHeight: 'normal'
   },
   label: {
     fontSize: '16px',
@@ -73,7 +74,8 @@ var styles = {
     width: '100%',
     textAlign: 'center',
     textTransform: 'uppercase',
-    fontSize: '16px'
+    fontSize: '16px',
+    lineHeight: 'normal'
   }
 };
 

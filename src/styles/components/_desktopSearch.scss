@@ -93,6 +93,7 @@
       border: none;
       padding: 0;
       margin: 0;
+      line-height: normal;
     }
 
     &-inputBox {
@@ -112,6 +113,7 @@
         font-size: 18px;
         margin: 0 0 10px 0;
         padding: 0 !important;
+        line-height: normal;
       }
 
       input {

@@ -1,14 +1,14 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _underscore = require('underscore');
 
 var _underscore2 = _interopRequireDefault(_underscore);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function ContentModel() {
   var _this = this;
@@ -25,10 +25,11 @@ function ContentModel() {
     image.type = data.type;
     try {
       var _data$attributes = data.attributes;
-      var _data$attributes$dateCreated = _data$attributes['date-created'];
-      var dateCreated = _data$attributes$dateCreated === undefined ? '' : _data$attributes$dateCreated;
-      var _data$attributes$uri$fullUri = _data$attributes.uri['full-uri'];
-      var uri = _data$attributes$uri$fullUri === undefined ? '' : _data$attributes$uri$fullUri;
+      var _data$attributes$date = _data$attributes['date-created'];
+      var dateCreated = _data$attributes$date === undefined ? '' : _data$attributes$date;
+      var _data$attributes$uri$ = _data$attributes.uri['full-uri'];
+      var uri = _data$attributes$uri$ === undefined ? '' : _data$attributes$uri$;
+
 
       image.created = dateCreated;
       image.uri = uri;
@@ -68,7 +69,7 @@ function ContentModel() {
     content.title = data.attributes.title;
     content.body = data.attributes.body;
 
-    content.authors = _underscore2['default'].map(data.authors, _this.authors);
+    content.authors = _underscore2.default.map(data.authors, _this.authors);
   };
 
   this.authors = function (data) {
@@ -147,5 +148,5 @@ function ContentModel() {
   };
 }
 
-exports['default'] = new ContentModel();
+exports.default = new ContentModel();
 module.exports = exports['default'];

@@ -1,7 +1,5 @@
 'use strict';
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -20,13 +18,15 @@ var _dgxFeatureFlags = require('dgx-feature-flags');
 
 var _dgxFeatureFlags2 = _interopRequireDefault(_dgxFeatureFlags);
 
-var _componentsHeaderHeaderJs = require('./components/Header/Header.js');
+var _Header = require('./components/Header/Header.js');
 
 require('./styles/main.scss');
 
 var _reactA11y = require('react-a11y');
 
 var _reactA11y2 = _interopRequireDefault(_reactA11y);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // if (loadA11y) {
 //   a11y(React, { ReactDOM, includeSrcNode: true });
@@ -37,15 +37,15 @@ if (!window.ga) {
   console.log('Analytics not available - loading through React.');
   var gaOpts = { debug: true };
   // Passing false to get the dev GA code.
-  _reactGa2['default'].initialize(_dgxReactGa.config.google.code(false), gaOpts);
+  _reactGa2.default.initialize(_dgxReactGa.config.google.code(false), gaOpts);
 }
 
 // Used to activate/deactivate AB tests on global namespace.
 if (!window.dgxFeatureFlags) {
-  window.dgxFeatureFlags = _dgxFeatureFlags2['default'].utils;
+  window.dgxFeatureFlags = _dgxFeatureFlags2.default.utils;
 }
 
 /* app.jsx
  * Used for local development of React Components
  */
-_reactDom2['default'].render(_react2['default'].createElement(_componentsHeaderHeaderJs.Header, { skipNav: { target: 'maincontent' } }), document.getElementById('app'));
+_reactDom2.default.render(_react2.default.createElement(_Header.Header, { skipNav: { target: 'maincontent' } }), document.getElementById('app'));

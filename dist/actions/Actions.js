@@ -1,14 +1,10 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _dgxAltCenter = require('dgx-alt-center');
 
@@ -18,15 +14,19 @@ var _axios = require('axios');
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _appConfigJs = require('../appConfig.js');
+var _appConfig = require('../appConfig.js');
 
-var _appConfigJs2 = _interopRequireDefault(_appConfigJs);
+var _appConfig2 = _interopRequireDefault(_appConfig);
 
-var _navConfigJs = require('../navConfig.js');
+var _navConfig = require('../navConfig.js');
 
-var _navConfigJs2 = _interopRequireDefault(_navConfigJs);
+var _navConfig2 = _interopRequireDefault(_navConfig);
 
-var Actions = (function () {
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Actions = function () {
   function Actions() {
     _classCallCheck(this, Actions);
   }
@@ -36,21 +36,21 @@ var Actions = (function () {
     value: function fetchHeaderData(environment, urlType, iaType) {
       var _this = this;
 
-      var headerRootUrl = undefined;
-      var fullUrl = undefined;
+      var headerRootUrl = void 0;
+      var fullUrl = void 0;
       var headerEndpoint = '/header-data';
       var typeOfUrl = urlType === 'absolute' ? 'urls=absolute' : '';
       var typeOfIa = iaType === 'upcoming' ? 'ia=upcoming' : '';
 
       // Set the proper URL to fetch the Header Data model.
       if (environment === 'development') {
-        headerRootUrl = _appConfigJs2['default'].headerClientEnv.development;
+        headerRootUrl = _appConfig2.default.headerClientEnv.development;
       } else if (environment === 'qa') {
-        headerRootUrl = _appConfigJs2['default'].headerClientEnv.qa;
+        headerRootUrl = _appConfig2.default.headerClientEnv.qa;
       } else if (environment === 'local') {
-        headerRootUrl = _appConfigJs2['default'].headerClientEnv.local;
+        headerRootUrl = _appConfig2.default.headerClientEnv.local;
       } else {
-        headerRootUrl = _appConfigJs2['default'].headerClientEnv.production;
+        headerRootUrl = _appConfig2.default.headerClientEnv.production;
       }
 
       // Concatenate the proper query params
@@ -65,16 +65,16 @@ var Actions = (function () {
       }
 
       // Fetch proper /header-data endpoint
-      _axios2['default'].get(fullUrl).then(function (result) {
+      _axios2.default.get(fullUrl).then(function (result) {
         _this.actions.updateHeaderData(result.data);
-      })['catch'](function (response) {
+      }).catch(function (response) {
         console.warn('Error on Axios GET request: ' + fullUrl);
 
         // Fallback Mode - Populate Header Items from config
         if (typeOfIa !== '') {
-          _this.actions.updateHeaderData(_navConfigJs2['default'].upcoming);
+          _this.actions.updateHeaderData(_navConfig2.default.upcoming);
         } else {
-          _this.actions.updateHeaderData(_navConfigJs2['default'].current);
+          _this.actions.updateHeaderData(_navConfig2.default.current);
         }
 
         if (response instanceof Error) {
@@ -142,7 +142,7 @@ var Actions = (function () {
   }]);
 
   return Actions;
-})();
+}();
 
-exports['default'] = _dgxAltCenter2['default'].createActions(Actions);
+exports.default = _dgxAltCenter2.default.createActions(Actions);
 module.exports = exports['default'];

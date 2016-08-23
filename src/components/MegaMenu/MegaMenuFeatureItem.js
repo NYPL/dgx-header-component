@@ -1,14 +1,9 @@
 import React from 'react';
 import cx from 'classnames';
-import { ContentModel}  from 'dgx-model-data';
-
+import { ContentModel } from 'dgx-model-data';
 import DefaultItem from '../ContentBox/DefaultItem.js';
 
 class MegaMenuFeatureItem extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const feature = this.props.feature;
     const classes = cx({

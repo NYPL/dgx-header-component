@@ -1,18 +1,10 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -24,29 +16,37 @@ var _reactOnclickout = require('react-onclickout');
 
 var _reactOnclickout2 = _interopRequireDefault(_reactOnclickout);
 
-var _EmailSubscriptionEmailSubscriptionJs = require('../EmailSubscription/EmailSubscription.js');
+var _EmailSubscription = require('../EmailSubscription/EmailSubscription.js');
 
-var _EmailSubscriptionEmailSubscriptionJs2 = _interopRequireDefault(_EmailSubscriptionEmailSubscriptionJs);
+var _EmailSubscription2 = _interopRequireDefault(_EmailSubscription);
 
-// Alt Store/Actions
+var _HeaderStore = require('../../stores/HeaderStore.js');
 
-var _storesHeaderStoreJs = require('../../stores/HeaderStore.js');
+var _HeaderStore2 = _interopRequireDefault(_HeaderStore);
 
-var _storesHeaderStoreJs2 = _interopRequireDefault(_storesHeaderStoreJs);
+var _Actions = require('../../actions/Actions.js');
 
-var _actionsActionsJs = require('../../actions/Actions.js');
-
-var _actionsActionsJs2 = _interopRequireDefault(_actionsActionsJs);
-
-// Utilities
+var _Actions2 = _interopRequireDefault(_Actions);
 
 var _axios = require('axios');
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _utilsUtilsJs = require('../../utils/utils.js');
+var _utils = require('../../utils/utils.js');
 
-var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
+var _utils2 = _interopRequireDefault(_utils);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// Alt Store/Actions
+
+// Utilities
+
 
 var styles = {
   base: {
@@ -84,28 +84,29 @@ var styles = {
   }
 };
 
-var SubscribeButton = (function (_React$Component) {
+var SubscribeButton = function (_React$Component) {
   _inherits(SubscribeButton, _React$Component);
 
   function SubscribeButton(props) {
     _classCallCheck(this, SubscribeButton);
 
-    _get(Object.getPrototypeOf(SubscribeButton.prototype), 'constructor', this).call(this, props);
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SubscribeButton).call(this, props));
 
-    this.state = {
-      subscribeFormVisible: _storesHeaderStoreJs2['default']._getSubscribeFormVisible(),
-      target: this.props.target
+    _this.state = {
+      subscribeFormVisible: _HeaderStore2.default._getSubscribeFormVisible(),
+      target: _this.props.target
     };
 
-    this.handleOnClickOut = this.handleOnClickOut.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.handleEscKey = this.handleEscKey.bind(this);
+    _this.handleOnClickOut = _this.handleOnClickOut.bind(_this);
+    _this.handleClick = _this.handleClick.bind(_this);
+    _this.handleEscKey = _this.handleEscKey.bind(_this);
+    return _this;
   }
 
   _createClass(SubscribeButton, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      _storesHeaderStoreJs2['default'].listen(this.onChange.bind(this));
+      _HeaderStore2.default.listen(this.onChange.bind(this));
       window.addEventListener('keydown', this.handleEscKey, false);
       // Make an axios call to the mailinglist API server to check it th server is working.
       // And determine the behavior of subscribe button based on the status of the server.
@@ -114,7 +115,7 @@ var SubscribeButton = (function (_React$Component) {
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      _storesHeaderStoreJs2['default'].unlisten(this.onChange.bind(this));
+      _HeaderStore2.default.unlisten(this.onChange.bind(this));
       window.removeEventListener('keydown', this.handleEscKey, false);
     }
 
@@ -122,10 +123,11 @@ var SubscribeButton = (function (_React$Component) {
      * onChange()
      * Updates the state of the form based off the Header Store.
      */
+
   }, {
     key: 'onChange',
     value: function onChange() {
-      this.setState({ subscribeFormVisible: _storesHeaderStoreJs2['default']._getSubscribeFormVisible() });
+      this.setState({ subscribeFormVisible: _HeaderStore2.default._getSubscribeFormVisible() });
     }
   }, {
     key: 'handleEscKey',
@@ -140,14 +142,15 @@ var SubscribeButton = (function (_React$Component) {
      * Toggles the visibility of the form. Sends an Action
      * that will dispatch an event to the Header Store.
      */
+
   }, {
     key: 'handleClick',
     value: function handleClick(e) {
       if (this.state.target === '#') {
         e.preventDefault();
         var visibleState = this.state.subscribeFormVisible ? 'Closed' : 'Open';
-        _actionsActionsJs2['default'].toggleSubscribeFormVisible(!this.state.subscribeFormVisible);
-        _utilsUtilsJs2['default']._trackHeader('Click', 'Subscribe - ' + visibleState);
+        _Actions2.default.toggleSubscribeFormVisible(!this.state.subscribeFormVisible);
+        _utils2.default._trackHeader('Click', 'Subscribe - ' + visibleState);
       }
     }
 
@@ -156,12 +159,13 @@ var SubscribeButton = (function (_React$Component) {
      * Handles closing the Subscribe form if it is
      * currently visible.
      */
+
   }, {
     key: 'handleOnClickOut',
     value: function handleOnClickOut() {
-      if (_storesHeaderStoreJs2['default']._getSubscribeFormVisible()) {
-        _actionsActionsJs2['default'].toggleSubscribeFormVisible(false);
-        _utilsUtilsJs2['default']._trackHeader('Click', 'Subscribe - Closed');
+      if (_HeaderStore2.default._getSubscribeFormVisible()) {
+        _Actions2.default.toggleSubscribeFormVisible(false);
+        _utils2.default._trackHeader('Click', 'Subscribe - Closed');
       }
     }
 
@@ -172,16 +176,17 @@ var SubscribeButton = (function (_React$Component) {
     * If the server doesn't work, the button will link to subscribe landing page
     * as a fallback.
     */
+
   }, {
     key: 'callMailinglistApi',
     value: function callMailinglistApi() {
-      var _this = this;
+      var _this2 = this;
 
-      _axios2['default'].get('https://mailinglistapi.nypl.org').then(function (response) {
+      _axios2.default.get('https://mailinglistapi.nypl.org').then(function (response) {
         if (response.status === 200 && response.status < 300) {
-          _this.setState({ target: '#' });
+          _this2.setState({ target: '#' });
         }
-      })['catch'](function (response) {
+      }).catch(function (response) {
         console.warn('Error on Axios GET request: https://mailinglistapi.nypl.org');
         if (response instanceof Error) {
           console.warn(response.message);
@@ -201,7 +206,7 @@ var SubscribeButton = (function (_React$Component) {
         buttonClass = 'active';
       }
 
-      return _react2['default'].createElement(
+      return _react2.default.createElement(
         'a',
         {
           id: 'SubscribeButton',
@@ -211,12 +216,12 @@ var SubscribeButton = (function (_React$Component) {
           style: styles.subscribeButton,
           role: this.state.target === '#' ? 'button' : null
         },
-        _react2['default'].createElement(
+        _react2.default.createElement(
           'span',
           { style: styles.subscribeLabel },
           this.props.label
         ),
-        _react2['default'].createElement('span', {
+        _react2.default.createElement('span', {
           className: iconClass + ' icon',
           'aria-hidden': 'true',
           style: styles.subscribeIcon
@@ -226,13 +231,13 @@ var SubscribeButton = (function (_React$Component) {
   }, {
     key: 'renderEmailDialog',
     value: function renderEmailDialog() {
-      return this.state.subscribeFormVisible ? _react2['default'].createElement(
+      return this.state.subscribeFormVisible ? _react2.default.createElement(
         'div',
         {
           className: 'EmailSubscription-Wrapper active animatedFast fadeIn',
           style: styles.EmailSubscribeForm
         },
-        _react2['default'].createElement(_EmailSubscriptionEmailSubscriptionJs2['default'], {
+        _react2.default.createElement(_EmailSubscription2.default, {
           list_id: '1061',
           target: 'https://mailinglistapi.nypl.org'
         })
@@ -241,10 +246,10 @@ var SubscribeButton = (function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      return _react2['default'].createElement(
-        _reactOnclickout2['default'],
+      return _react2.default.createElement(
+        _reactOnclickout2.default,
         { onClickOut: this.handleOnClickOut },
-        _react2['default'].createElement(
+        _react2.default.createElement(
           'div',
           {
             className: 'SubscribeButton-Wrapper',
@@ -258,13 +263,13 @@ var SubscribeButton = (function (_React$Component) {
   }]);
 
   return SubscribeButton;
-})(_react2['default'].Component);
+}(_react2.default.Component);
 
 SubscribeButton.propTypes = {
-  lang: _react2['default'].PropTypes.string,
-  label: _react2['default'].PropTypes.string,
-  target: _react2['default'].PropTypes.string,
-  style: _react2['default'].PropTypes.object
+  lang: _react2.default.PropTypes.string,
+  label: _react2.default.PropTypes.string,
+  target: _react2.default.PropTypes.string,
+  style: _react2.default.PropTypes.object
 };
 
 SubscribeButton.defaultProps = {
@@ -273,5 +278,5 @@ SubscribeButton.defaultProps = {
   target: 'http://pages.email.nypl.org/page.aspx' + '?QS=3935619f7de112ef7250fe02b84fb2f9ab74e4ea015814b7'
 };
 
-exports['default'] = SubscribeButton;
+exports.default = SubscribeButton;
 module.exports = exports['default'];

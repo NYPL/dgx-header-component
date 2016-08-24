@@ -383,7 +383,7 @@ Header.defaultProps = {
   env: 'production',
 };
 
-export default {
+export {
   Header,
   navConfig,
 };

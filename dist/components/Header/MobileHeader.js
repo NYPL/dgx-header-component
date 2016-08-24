@@ -1,18 +1,10 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -30,29 +22,37 @@ var _dgxSvgIcons = require('dgx-svg-icons');
 
 var _underscore = require('underscore');
 
+var _HeaderStore = require('../../stores/HeaderStore.js');
+
+var _HeaderStore2 = _interopRequireDefault(_HeaderStore);
+
+var _Actions = require('../../actions/Actions.js');
+
+var _Actions2 = _interopRequireDefault(_Actions);
+
+var _utils = require('../../utils/utils.js');
+
+var _utils2 = _interopRequireDefault(_utils);
+
+var _MobileMyNypl = require('../MyNypl/MobileMyNypl.js');
+
+var _MobileMyNypl2 = _interopRequireDefault(_MobileMyNypl);
+
+var _SearchBox = require('../SearchBox/SearchBox.js');
+
+var _SearchBox2 = _interopRequireDefault(_SearchBox);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 // ALT FLUX
-
-var _storesHeaderStoreJs = require('../../stores/HeaderStore.js');
-
-var _storesHeaderStoreJs2 = _interopRequireDefault(_storesHeaderStoreJs);
-
-var _actionsActionsJs = require('../../actions/Actions.js');
-
-var _actionsActionsJs2 = _interopRequireDefault(_actionsActionsJs);
-
-var _utilsUtilsJs = require('../../utils/utils.js');
-
-var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
 
 // NYPL Components
 
-var _MyNyplMobileMyNyplJs = require('../MyNypl/MobileMyNypl.js');
-
-var _MyNyplMobileMyNyplJs2 = _interopRequireDefault(_MyNyplMobileMyNyplJs);
-
-var _SearchBoxSearchBoxJs = require('../SearchBox/SearchBox.js');
-
-var _SearchBoxSearchBoxJs2 = _interopRequireDefault(_SearchBoxSearchBoxJs);
 
 var styles = {
   base: {
@@ -151,41 +151,42 @@ var styles = {
   }
 };
 
-var MobileHeader = (function (_React$Component) {
+var MobileHeader = function (_React$Component) {
   _inherits(MobileHeader, _React$Component);
 
   function MobileHeader(props) {
     _classCallCheck(this, MobileHeader);
 
-    _get(Object.getPrototypeOf(MobileHeader.prototype), 'constructor', this).call(this, props);
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MobileHeader).call(this, props));
 
-    this.state = {
-      activeMobileButton: _storesHeaderStoreJs2['default'].getState().activeMobileButton,
-      searchButtonAction: _storesHeaderStoreJs2['default'].getState().searchButtonAction,
-      mobileMyNyplButton: _storesHeaderStoreJs2['default'].getState().mobileMyNyplButton
+    _this.state = {
+      activeMobileButton: _HeaderStore2.default.getState().activeMobileButton,
+      searchButtonAction: _HeaderStore2.default.getState().searchButtonAction,
+      mobileMyNyplButton: _HeaderStore2.default.getState().mobileMyNyplButton
     };
 
-    this.closeMyNyplDialog = this.closeMyNyplDialog.bind(this);
-    this.closeSearchDialog = this.closeSearchDialog.bind(this);
+    _this.closeMyNyplDialog = _this.closeMyNyplDialog.bind(_this);
+    _this.closeSearchDialog = _this.closeSearchDialog.bind(_this);
+    return _this;
   }
 
   _createClass(MobileHeader, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      _storesHeaderStoreJs2['default'].listen(this.onChange.bind(this));
+      _HeaderStore2.default.listen(this.onChange.bind(this));
     }
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      _storesHeaderStoreJs2['default'].unlisten(this.onChange.bind(this));
+      _HeaderStore2.default.unlisten(this.onChange.bind(this));
     }
   }, {
     key: 'onChange',
     value: function onChange() {
       this.setState({
-        activeMobileButton: _storesHeaderStoreJs2['default'].getState().activeMobileButton,
-        searchButtonAction: _storesHeaderStoreJs2['default'].getState().searchButtonAction,
-        mobileMyNyplButton: _storesHeaderStoreJs2['default'].getState().mobileMyNyplButton
+        activeMobileButton: _HeaderStore2.default.getState().activeMobileButton,
+        searchButtonAction: _HeaderStore2.default.getState().searchButtonAction,
+        mobileMyNyplButton: _HeaderStore2.default.getState().mobileMyNyplButton
       });
     }
 
@@ -199,36 +200,37 @@ var MobileHeader = (function (_React$Component) {
      *
      * @param {String} activeButton
      */
+
   }, {
     key: 'toggleMobileMenuButton',
     value: function toggleMobileMenuButton(activeButton) {
       if (activeButton === 'clickSearch') {
-        if (_storesHeaderStoreJs2['default']._getSearchButtonActionValue() !== activeButton) {
-          _actionsActionsJs2['default'].searchButtonActionValue(activeButton);
-          _actionsActionsJs2['default'].setMobileMenuButtonValue('');
-          _actionsActionsJs2['default'].setMobileMyNyplButtonValue('');
+        if (_HeaderStore2.default._getSearchButtonActionValue() !== activeButton) {
+          _Actions2.default.searchButtonActionValue(activeButton);
+          _Actions2.default.setMobileMenuButtonValue('');
+          _Actions2.default.setMobileMyNyplButtonValue('');
         } else {
-          _actionsActionsJs2['default'].searchButtonActionValue('');
+          _Actions2.default.searchButtonActionValue('');
         }
       } else if (activeButton === 'mobileMenu') {
-        if (_storesHeaderStoreJs2['default']._getMobileMenuBtnValue() !== activeButton) {
-          _actionsActionsJs2['default'].setMobileMenuButtonValue(activeButton);
-          _actionsActionsJs2['default'].searchButtonActionValue('');
-          _actionsActionsJs2['default'].setMobileMyNyplButtonValue('');
+        if (_HeaderStore2.default._getMobileMenuBtnValue() !== activeButton) {
+          _Actions2.default.setMobileMenuButtonValue(activeButton);
+          _Actions2.default.searchButtonActionValue('');
+          _Actions2.default.setMobileMyNyplButtonValue('');
         } else {
-          _actionsActionsJs2['default'].setMobileMenuButtonValue('');
+          _Actions2.default.setMobileMenuButtonValue('');
         }
       } else if (activeButton === 'clickMyNypl') {
-        if (_storesHeaderStoreJs2['default']._getMobileMyNyplButtonValue() !== activeButton) {
-          _actionsActionsJs2['default'].setMobileMyNyplButtonValue(activeButton);
-          _actionsActionsJs2['default'].searchButtonActionValue('');
-          _actionsActionsJs2['default'].setMobileMenuButtonValue('');
+        if (_HeaderStore2.default._getMobileMyNyplButtonValue() !== activeButton) {
+          _Actions2.default.setMobileMyNyplButtonValue(activeButton);
+          _Actions2.default.searchButtonActionValue('');
+          _Actions2.default.setMobileMenuButtonValue('');
         } else {
-          _actionsActionsJs2['default'].setMobileMyNyplButtonValue('');
+          _Actions2.default.setMobileMyNyplButtonValue('');
         }
       }
 
-      _utilsUtilsJs2['default']._trackHeader('Click', 'Mobile ' + activeButton);
+      _utils2.default._trackHeader('Click', 'Mobile ' + activeButton);
     }
 
     /**
@@ -238,11 +240,12 @@ var MobileHeader = (function (_React$Component) {
      * This is necessary for the FocusTrap component to execute
      * the proper deactivateMethod for each dialog.
      */
+
   }, {
     key: 'closeMyNyplDialog',
     value: function closeMyNyplDialog() {
       if (this.state.mobileMyNyplButton === 'clickMyNypl') {
-        _actionsActionsJs2['default'].setMobileMyNyplButtonValue('');
+        _Actions2.default.setMobileMyNyplButtonValue('');
       }
     }
 
@@ -253,11 +256,12 @@ var MobileHeader = (function (_React$Component) {
      * This is necessary for the FocusTrap component to execute
      * the proper deactivateMethod for each dialog.
      */
+
   }, {
     key: 'closeSearchDialog',
     value: function closeSearchDialog() {
       if (this.state.searchButtonAction === 'clickSearch') {
-        _actionsActionsJs2['default'].searchButtonActionValue('');
+        _Actions2.default.searchButtonActionValue('');
       }
     }
 
@@ -267,22 +271,23 @@ var MobileHeader = (function (_React$Component) {
     * Uses SVG LionLogo icon & visuallyHidden label.
     * @returns {Object} React DOM.
     */
+
   }, {
     key: 'renderLogoLink',
     value: function renderLogoLink() {
-      return _react2['default'].createElement(
+      return _react2.default.createElement(
         'a',
         {
           style: styles.mobileLogoLink,
           href: this.props.nyplRootUrl,
           'aria-label': this.props.alt
         },
-        _react2['default'].createElement(
+        _react2.default.createElement(
           'span',
           { className: 'visuallyHidden' },
           this.props.alt
         ),
-        _react2['default'].createElement(_dgxSvgIcons.LionLogoIcon, { ariaHidden: true, className: this.props.className + '-Logo' })
+        _react2.default.createElement(_dgxSvgIcons.LionLogoIcon, { ariaHidden: true, className: this.props.className + '-Logo' })
       );
     }
 
@@ -292,47 +297,48 @@ var MobileHeader = (function (_React$Component) {
     * Uses SVG icon & visuallyHidden label.
     * @returns {Object} React DOM.
     */
+
   }, {
     key: 'renderMyNyplButton',
     value: function renderMyNyplButton() {
-      var _this = this;
+      var _this2 = this;
 
       var myNyplClass = '';
-      var icon = _react2['default'].createElement(_dgxSvgIcons.LoginIcon, { ariaHidden: true, fill: '#000' });
+      var icon = _react2.default.createElement(_dgxSvgIcons.LoginIcon, { ariaHidden: true, fill: '#000' });
       var buttonStyles = styles.inactiveMyNyplButton;
       var buttonLabel = 'Open Log In Dialog';
       var dialogWindow = null;
 
       if (this.state.mobileMyNyplButton === 'clickMyNypl') {
         myNyplClass = ' active';
-        icon = _react2['default'].createElement(_dgxSvgIcons.XIcon, { ariaHidden: true, fill: '#FFF' });
+        icon = _react2.default.createElement(_dgxSvgIcons.XIcon, { ariaHidden: true, fill: '#FFF' });
         buttonStyles = styles.activeMyNyplButton;
         buttonLabel = 'Close Log In Dialog';
-        dialogWindow = _react2['default'].createElement(
-          _focusTrapReact2['default'],
+        dialogWindow = _react2.default.createElement(
+          _focusTrapReact2.default,
           {
             className: 'MobileMyNypl-Wrapper' + myNyplClass,
             onDeactivate: this.closeMyNyplDialog
           },
-          _react2['default'].createElement(_MyNyplMobileMyNyplJs2['default'], null)
+          _react2.default.createElement(_MobileMyNypl2.default, null)
         );
       }
 
-      return _react2['default'].createElement(
+      return _react2.default.createElement(
         'li',
         { style: styles.listItem },
-        _react2['default'].createElement(
-          _reactTappable2['default'],
+        _react2.default.createElement(
+          _reactTappable2.default,
           {
             className: this.props.className + '-MyNyplButton' + myNyplClass,
             component: 'button',
             ref: 'MobileMyNyplButton',
             style: (0, _underscore.extend)(styles.myNyplButton, buttonStyles),
-            onTap: function () {
-              return _this.toggleMobileMenuButton('clickMyNypl');
+            onTap: function onTap() {
+              return _this2.toggleMobileMenuButton('clickMyNypl');
             }
           },
-          _react2['default'].createElement(
+          _react2.default.createElement(
             'span',
             { className: 'visuallyHidden' },
             buttonLabel
@@ -349,31 +355,32 @@ var MobileHeader = (function (_React$Component) {
     * Uses SVG icon & visuallyHidden label.
     * @returns {Object} React DOM.
     */
+
   }, {
     key: 'renderLocationsLink',
     value: function renderLocationsLink() {
       var locatorUrl = this.props.locatorUrl || '//www.nypl.org/locations/map?nearme=true';
 
-      return _react2['default'].createElement(
+      return _react2.default.createElement(
         'li',
         { style: styles.listItem },
-        _react2['default'].createElement(
+        _react2.default.createElement(
           'a',
           {
             style: styles.locationsLink,
             href: locatorUrl,
-            onClick: function () {
-              return _utilsUtilsJs2['default']._trackHeader('Click', 'Mobile Locations Button');
+            onClick: function onClick() {
+              return _utils2.default._trackHeader('Click', 'Mobile Locations Button');
             },
             className: this.props.className + '-Locator',
             'aria-label': 'NYPL Locations Near Me'
           },
-          _react2['default'].createElement(
+          _react2.default.createElement(
             'span',
             { className: 'visuallyHidden' },
             'NYPL Locations Near Me'
           ),
-          _react2['default'].createElement(_dgxSvgIcons.LocatorIcon, { ariaHidden: true, fill: '#000' })
+          _react2.default.createElement(_dgxSvgIcons.LocatorIcon, { ariaHidden: true, fill: '#000' })
         )
       );
     }
@@ -384,52 +391,53 @@ var MobileHeader = (function (_React$Component) {
     * Uses SVG icon & visuallyHidden label.
     * @returns {Object} React DOM.
     */
+
   }, {
     key: 'renderSearchButton',
     value: function renderSearchButton() {
-      var _this2 = this;
+      var _this3 = this;
 
       var mobileSearchClass = '';
-      var icon = _react2['default'].createElement(_dgxSvgIcons.SearchIcon, { ariaHidden: true, fill: '#000' });
+      var icon = _react2.default.createElement(_dgxSvgIcons.SearchIcon, { ariaHidden: true, fill: '#000' });
       var buttonStyles = styles.inactiveSearchButton;
       var buttonLabel = 'Open Search Dialog';
       var dialogWindow = null;
 
       if (this.state.searchButtonAction === 'clickSearch') {
         mobileSearchClass = ' active';
-        icon = _react2['default'].createElement(_dgxSvgIcons.XIcon, { ariaHidden: true, fill: '#FFF' });
+        icon = _react2.default.createElement(_dgxSvgIcons.XIcon, { ariaHidden: true, fill: '#FFF' });
         buttonStyles = styles.activeSearchButton;
         buttonLabel = 'Close Search Dialog';
-        dialogWindow = _react2['default'].createElement(
-          _focusTrapReact2['default'],
+        dialogWindow = _react2.default.createElement(
+          _focusTrapReact2.default,
           {
             className: this.props.className + '-searchDialog',
             onDeactivate: this.closeSearchDialog,
             initialFocus: '.' + this.props.className + '-searchForm-legend',
             style: styles.searchDialog
           },
-          _react2['default'].createElement(_SearchBoxSearchBoxJs2['default'], {
+          _react2.default.createElement(_SearchBox2.default, {
             className: this.props.className + '-searchForm',
             type: 'mobile'
           })
         );
       }
 
-      return _react2['default'].createElement(
+      return _react2.default.createElement(
         'li',
         { style: styles.listItem },
-        _react2['default'].createElement(
-          _reactTappable2['default'],
+        _react2.default.createElement(
+          _reactTappable2.default,
           {
             className: this.props.className + '-SearchButton' + mobileSearchClass,
             component: 'button',
             ref: 'MobileSearchButton',
             style: (0, _underscore.extend)(styles.searchButton, buttonStyles),
-            onTap: function () {
-              return _this2.toggleMobileMenuButton('clickSearch');
+            onTap: function onTap() {
+              return _this3.toggleMobileMenuButton('clickSearch');
             }
           },
-          _react2['default'].createElement(
+          _react2.default.createElement(
             'span',
             { className: 'visuallyHidden' },
             buttonLabel
@@ -446,38 +454,39 @@ var MobileHeader = (function (_React$Component) {
     * Uses SVG icon & visuallyHidden label.
     * @returns {Object} React DOM.
     */
+
   }, {
     key: 'renderMenuButton',
     value: function renderMenuButton() {
-      var _this3 = this;
+      var _this4 = this;
 
       var mobileMenuClass = '';
-      var icon = _react2['default'].createElement(_dgxSvgIcons.MenuIcon, { ariaHidden: true, fill: '#000' });
+      var icon = _react2.default.createElement(_dgxSvgIcons.MenuIcon, { ariaHidden: true, fill: '#000' });
       var buttonStyles = styles.inactiveMenuButton;
       var buttonLabel = 'Open Menu Dialog';
 
       if (this.state.activeMobileButton === 'mobileMenu') {
         mobileMenuClass = ' active';
-        icon = _react2['default'].createElement(_dgxSvgIcons.XIcon, { ariaHidden: true, fill: '#FFF' });
+        icon = _react2.default.createElement(_dgxSvgIcons.XIcon, { ariaHidden: true, fill: '#FFF' });
         buttonStyles = styles.activeMenuButton;
         buttonLabel = 'Close Menu Dialog';
       }
 
-      return _react2['default'].createElement(
+      return _react2.default.createElement(
         'li',
         { style: styles.listItem },
-        _react2['default'].createElement(
-          _reactTappable2['default'],
+        _react2.default.createElement(
+          _reactTappable2.default,
           {
             className: this.props.className + '-MenuButton' + mobileMenuClass,
             component: 'button',
             ref: 'MobileMenuButton',
             style: (0, _underscore.extend)(styles.menuButton, buttonStyles),
-            onTap: function () {
-              return _this3.toggleMobileMenuButton('mobileMenu');
+            onTap: function onTap() {
+              return _this4.toggleMobileMenuButton('mobileMenu');
             }
           },
-          _react2['default'].createElement(
+          _react2.default.createElement(
             'span',
             { className: 'visuallyHidden' },
             buttonLabel
@@ -489,11 +498,11 @@ var MobileHeader = (function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      return _react2['default'].createElement(
+      return _react2.default.createElement(
         'div',
         { className: this.props.className, style: styles.base },
         this.renderLogoLink(),
-        _react2['default'].createElement(
+        _react2.default.createElement(
           'ul',
           { style: styles.list },
           this.renderMyNyplButton(),
@@ -506,14 +515,14 @@ var MobileHeader = (function (_React$Component) {
   }]);
 
   return MobileHeader;
-})(_react2['default'].Component);
+}(_react2.default.Component);
 
 MobileHeader.propTypes = {
-  lang: _react2['default'].PropTypes.string,
-  className: _react2['default'].PropTypes.string,
-  locatorUrl: _react2['default'].PropTypes.string,
-  nyplRootUrl: _react2['default'].PropTypes.string,
-  alt: _react2['default'].PropTypes.string
+  lang: _react2.default.PropTypes.string,
+  className: _react2.default.PropTypes.string,
+  locatorUrl: _react2.default.PropTypes.string,
+  nyplRootUrl: _react2.default.PropTypes.string,
+  alt: _react2.default.PropTypes.string
 };
 
 MobileHeader.defaultProps = {
@@ -523,5 +532,5 @@ MobileHeader.defaultProps = {
   alt: 'The New York Public Library'
 };
 
-exports['default'] = MobileHeader;
+exports.default = MobileHeader;
 module.exports = exports['default'];

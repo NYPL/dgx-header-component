@@ -1,19 +1,10 @@
-// Import React libraries
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -27,50 +18,61 @@ var _reactOnclickout = require('react-onclickout');
 
 var _reactOnclickout2 = _interopRequireDefault(_reactOnclickout);
 
-// Import components
-
 var _dgxSvgIcons = require('dgx-svg-icons');
 
-var _SearchBoxSearchBoxJs = require('../SearchBox/SearchBox.js');
+var _SearchBox = require('../SearchBox/SearchBox.js');
 
-var _SearchBoxSearchBoxJs2 = _interopRequireDefault(_SearchBoxSearchBoxJs);
+var _SearchBox2 = _interopRequireDefault(_SearchBox);
+
+var _HeaderStore = require('../../stores/HeaderStore.js');
+
+var _HeaderStore2 = _interopRequireDefault(_HeaderStore);
+
+var _Actions = require('../../actions/Actions.js');
+
+var _Actions2 = _interopRequireDefault(_Actions);
+
+var _utils = require('../../utils/utils.js');
+
+var _utils2 = _interopRequireDefault(_utils);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // Import React libraries
+
+// Import components
 
 // ALT Flux Store
 
-var _storesHeaderStoreJs = require('../../stores/HeaderStore.js');
-
-var _storesHeaderStoreJs2 = _interopRequireDefault(_storesHeaderStoreJs);
-
-var _actionsActionsJs = require('../../actions/Actions.js');
-
-var _actionsActionsJs2 = _interopRequireDefault(_actionsActionsJs);
-
 // GA Utility Library
 
-var _utilsUtilsJs = require('../../utils/utils.js');
 
-var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
-
-var SearchButton = (function (_React$Component) {
+var SearchButton = function (_React$Component) {
   _inherits(SearchButton, _React$Component);
 
   function SearchButton(props) {
     _classCallCheck(this, SearchButton);
 
-    _get(Object.getPrototypeOf(SearchButton.prototype), 'constructor', this).call(this, props);
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SearchButton).call(this, props));
 
-    this.state = { active: false };
+    _this.state = { active: false };
 
-    this.handleOnClick = this.handleOnClick.bind(this);
-    this.handleOnClickOut = this.handleOnClickOut.bind(this);
-    this.activateHover = this.activateHover.bind(this);
-    this.deactivateHover = this.deactivateHover.bind(this);
+    _this.handleOnClick = _this.handleOnClick.bind(_this);
+    _this.handleOnClickOut = _this.handleOnClickOut.bind(_this);
+    _this.activateHover = _this.activateHover.bind(_this);
+    _this.deactivateHover = _this.deactivateHover.bind(_this);
+    return _this;
   }
 
   /**
    * handleOnClick(e)
    * Handles the event when the Search button is clicked
    */
+
 
   _createClass(SearchButton, [{
     key: 'handleOnClick',
@@ -83,7 +85,7 @@ var SearchButton = (function (_React$Component) {
         } else {
           this.setState({ active: true });
           // Fire GA event to track when the Search Menu is open
-          _utilsUtilsJs2['default']._trackHeader('Search', 'Open Menu');
+          _utils2.default._trackHeader('Search', 'Open Menu');
         }
       }
     }
@@ -92,18 +94,19 @@ var SearchButton = (function (_React$Component) {
      * handleOnClickOut()
      * Handles closing SearchBox via click event
      */
+
   }, {
     key: 'handleOnClickOut',
     value: function handleOnClickOut() {
-      var _this = this;
+      var _this2 = this;
 
       // Only handle ClickOut events if cookie is SET
       if (this.props.cookie === '1') {
         // Update active state only if ACTIVE is true
         if (this.state.active) {
           setTimeout(function () {
-            _this.setState({ active: false });
-            _utilsUtilsJs2['default']._trackHeader('Search', 'Close Menu');
+            _this2.setState({ active: false });
+            _utils2.default._trackHeader('Search', 'Close Menu');
           }, 200);
         }
       }
@@ -113,15 +116,16 @@ var SearchButton = (function (_React$Component) {
      * Update the Store's searchButtonActionValue
      * with hoverSearch after a set time delay.
      */
+
   }, {
     key: 'activateHover',
     value: function activateHover() {
       // Only handle the hover event if the cookie is NOT set
       if (this.props.cookie !== '1') {
         this.hoverTimer = setTimeout(function () {
-          _actionsActionsJs2['default'].searchButtonActionValue('hoverSearch');
+          _Actions2.default.searchButtonActionValue('hoverSearch');
           // Fire GA event to track when the Search Menu is open
-          _utilsUtilsJs2['default']._trackHeader('Search', 'Open Menu');
+          _utils2.default._trackHeader('Search', 'Open Menu');
         }, 80);
       }
     }
@@ -131,6 +135,7 @@ var SearchButton = (function (_React$Component) {
      * Reset the Store's searchButtonActionValue to empty
      * after a set time delay.
      */
+
   }, {
     key: 'deactivateHover',
     value: function deactivateHover() {
@@ -139,8 +144,8 @@ var SearchButton = (function (_React$Component) {
         clearTimeout(this.hoverTimer);
 
         setTimeout(function () {
-          _actionsActionsJs2['default'].searchButtonActionValue('');
-          _utilsUtilsJs2['default']._trackHeader('Search', 'Close Menu');
+          _Actions2.default.searchButtonActionValue('');
+          _utils2.default._trackHeader('Search', 'Close Menu');
         }, 200);
       }
     }
@@ -151,32 +156,33 @@ var SearchButton = (function (_React$Component) {
     * Uses SVG icon & label.
     * @returns {Object} React DOM.
     */
+
   }, {
     key: 'renderSearchButton',
     value: function renderSearchButton() {
-      var _this2 = this;
+      var _this3 = this;
 
-      var classes = (0, _classnames2['default'])({
-        active: this.state.active || _storesHeaderStoreJs2['default']._getSearchButtonActionValue() === 'hoverSearch' || _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === 'hoverSearch'
+      var classes = (0, _classnames2.default)({
+        active: this.state.active || _HeaderStore2.default._getSearchButtonActionValue() === 'hoverSearch' || _HeaderStore2.default._getLastActiveMenuItem() === 'hoverSearch'
       });
-      var stickyStatus = (0, _classnames2['default'])({ isSticky: _storesHeaderStoreJs2['default'].getState().isSticky });
+      var stickyStatus = (0, _classnames2.default)({ isSticky: _HeaderStore2.default.getState().isSticky });
 
-      return _react2['default'].createElement(
+      return _react2.default.createElement(
         'button',
         {
           className: this.props.className + '-searchButton ' + classes + ' ' + stickyStatus,
           id: this.props.className + '-searchButton',
           name: 'Search Button',
-          onClick: function (e) {
-            return _this2.handleOnClick(e);
+          onClick: function onClick(e) {
+            return _this3.handleOnClick(e);
           }
         },
-        _react2['default'].createElement(
+        _react2.default.createElement(
           'span',
           { className: this.props.className + '-searchButton-text' },
           'Search'
         ),
-        _react2['default'].createElement(_dgxSvgIcons.SearchIcon, {
+        _react2.default.createElement(_dgxSvgIcons.SearchIcon, {
           className: this.props.className + '-searchButton-icon',
           width: '20',
           height: '20',
@@ -191,32 +197,33 @@ var SearchButton = (function (_React$Component) {
     * Verifies if isActive is TRUE and returns the proper DOM.
     * @returns {Object} React DOM.
     */
+
   }, {
     key: 'renderSearchBox',
     value: function renderSearchBox() {
-      var isActive = this.state.active || _storesHeaderStoreJs2['default']._getSearchButtonActionValue() === 'hoverSearch' || _storesHeaderStoreJs2['default']._getLastActiveMenuItem() === 'hoverSearch';
-      var sticky = (0, _classnames2['default'])({ isSticky: _storesHeaderStoreJs2['default'].getState().isSticky });
+      var isActive = this.state.active || _HeaderStore2.default._getSearchButtonActionValue() === 'hoverSearch' || _HeaderStore2.default._getLastActiveMenuItem() === 'hoverSearch';
+      var sticky = (0, _classnames2.default)({ isSticky: _HeaderStore2.default.getState().isSticky });
 
-      return isActive ? _react2['default'].createElement(
+      return isActive ? _react2.default.createElement(
         'div',
         {
           className: this.props.className + '-desktopSearchBox animatedFast fadeIn ' + sticky
         },
-        _react2['default'].createElement(_SearchBoxSearchBoxJs2['default'], { className: 'desktopSearch-Form' })
+        _react2.default.createElement(_SearchBox2.default, { className: 'desktopSearch-Form' })
       ) : null;
     }
   }, {
     key: 'render',
     value: function render() {
-      return _react2['default'].createElement(
+      return _react2.default.createElement(
         'div',
         {
           className: this.props.className + '-searchBox-Wrapper',
           onMouseEnter: this.activateHover,
           onMouseLeave: this.deactivateHover
         },
-        _react2['default'].createElement(
-          _reactOnclickout2['default'],
+        _react2.default.createElement(
+          _reactOnclickout2.default,
           { onClickOut: this.handleOnClickOut },
           this.renderSearchButton(),
           this.renderSearchBox()
@@ -226,12 +233,12 @@ var SearchButton = (function (_React$Component) {
   }]);
 
   return SearchButton;
-})(_react2['default'].Component);
+}(_react2.default.Component);
 
 SearchButton.propTypes = {
-  lang: _react2['default'].PropTypes.string,
-  className: _react2['default'].PropTypes.string,
-  cookie: _react2['default'].PropTypes.string
+  lang: _react2.default.PropTypes.string,
+  className: _react2.default.PropTypes.string,
+  cookie: _react2.default.PropTypes.string
 };
 
 SearchButton.defaultProps = {
@@ -239,5 +246,5 @@ SearchButton.defaultProps = {
   className: 'NavMenu'
 };
 
-exports['default'] = SearchButton;
+exports.default = SearchButton;
 module.exports = exports['default'];

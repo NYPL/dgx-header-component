@@ -1,18 +1,10 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -32,13 +24,21 @@ var _axios = require('axios');
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _appConfigJs = require('../../appConfig.js');
+var _appConfig = require('../../appConfig.js');
 
-var _appConfigJs2 = _interopRequireDefault(_appConfigJs);
+var _appConfig2 = _interopRequireDefault(_appConfig);
 
-var _AlertsBoxAlertsBoxJs = require('../AlertsBox/AlertsBox.js');
+var _AlertsBox = require('../AlertsBox/AlertsBox.js');
 
-var _AlertsBoxAlertsBoxJs2 = _interopRequireDefault(_AlertsBoxAlertsBoxJs);
+var _AlertsBox2 = _interopRequireDefault(_AlertsBox);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var styles = {
   backgroundColor: '#fee24a',
@@ -48,19 +48,20 @@ var styles = {
   color: '#333333'
 };
 
-var GlobalAlerts = (function (_React$Component) {
+var GlobalAlerts = function (_React$Component) {
   _inherits(GlobalAlerts, _React$Component);
 
   function GlobalAlerts(props) {
     _classCallCheck(this, GlobalAlerts);
 
-    _get(Object.getPrototypeOf(GlobalAlerts.prototype), 'constructor', this).call(this, props);
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(GlobalAlerts).call(this, props));
 
-    this.state = {
+    _this.state = {
       globalAlerts: [],
       hideAlertsBox: false,
       animateAlertsBox: false
     };
+    return _this;
   }
 
   _createClass(GlobalAlerts, [{
@@ -77,15 +78,16 @@ var GlobalAlerts = (function (_React$Component) {
      * with a setTimeout to allow css transition.
      * NOTE: Disabled for now until further notice.
      */
+
   }, {
     key: 'closeAlertsBox',
     value: function closeAlertsBox() {
-      var _this = this;
+      var _this2 = this;
 
       this.setState({ animateAlertsBox: true });
 
       setTimeout(function () {
-        _this.setState({ hideAlertsBox: true });
+        _this2.setState({ hideAlertsBox: true });
       }, 400);
     }
 
@@ -94,17 +96,18 @@ var GlobalAlerts = (function (_React$Component) {
      * using axios, fetch the alerts data
      * and assign to state globalAlerts property.
      */
+
   }, {
     key: 'fetchGlobalAlerts',
     value: function fetchGlobalAlerts() {
-      var _this2 = this;
+      var _this3 = this;
 
-      _axios2['default'].get(_appConfigJs2['default'].alertsApiUrl).then(function (result) {
+      _axios2.default.get(_appConfig2.default.alertsApiUrl).then(function (result) {
         if (result.data && result.data.data) {
-          _this2.setState({ globalAlerts: result.data.data });
+          _this3.setState({ globalAlerts: result.data.data });
         }
-      })['catch'](function (response) {
-        console.warn('Error on Axios GET request: ' + _appConfigJs2['default'].alertsApiUrl);
+      }).catch(function (response) {
+        console.warn('Error on Axios GET request: ' + _appConfig2.default.alertsApiUrl);
         if (response instanceof Error) {
           console.warn(response.message);
         } else {
@@ -127,6 +130,7 @@ var GlobalAlerts = (function (_React$Component) {
      * @param {Array} data
      * @return {Array} Alerts
      */
+
   }, {
     key: 'filterCurrentClosingAlerts',
     value: function filterCurrentClosingAlerts(data) {
@@ -134,15 +138,15 @@ var GlobalAlerts = (function (_React$Component) {
         return [];
       }
 
-      var today = (0, _moment2['default'])();
-      var sDate = undefined;
-      var eDate = undefined;
+      var today = (0, _moment2.default)();
+      var sDate = void 0;
+      var eDate = void 0;
 
       return (0, _underscore.filter)(data, function (elem) {
         if (elem.attributes) {
           if (elem.attributes['display-date-start'] && elem.attributes['display-date-end']) {
-            sDate = (0, _moment2['default'])(elem.attributes['display-date-start']);
-            eDate = (0, _moment2['default'])(elem.attributes['display-date-end']);
+            sDate = (0, _moment2.default)(elem.attributes['display-date-start']);
+            eDate = (0, _moment2.default)(elem.attributes['display-date-end']);
 
             if (sDate.valueOf() <= today.valueOf() && eDate.valueOf() >= today.valueOf()) {
               return elem;
@@ -155,22 +159,22 @@ var GlobalAlerts = (function (_React$Component) {
     key: 'render',
     value: function render() {
       var currentGlobalAlerts = this.filterCurrentClosingAlerts(this.state.globalAlerts);
-      var classes = (0, _classnames2['default'])({
+      var classes = (0, _classnames2.default)({
         'animatedFast fadeOutUp': this.state.animateAlertsBox,
         hide: this.state.hideAlertsBox
       });
 
-      return currentGlobalAlerts && currentGlobalAlerts.length ? _react2['default'].createElement(
+      return currentGlobalAlerts && currentGlobalAlerts.length ? _react2.default.createElement(
         'div',
         {
           className: this.props.className + ' ' + classes,
           id: this.props.id,
           style: styles
         },
-        _react2['default'].createElement(
+        _react2.default.createElement(
           'div',
           { className: this.props.className + '-Wrapper' },
-          _react2['default'].createElement(_AlertsBoxAlertsBoxJs2['default'], {
+          _react2.default.createElement(_AlertsBox2.default, {
             alerts: currentGlobalAlerts,
             id: this.props.className + '-Box',
             className: this.props.className + '-Box'
@@ -181,12 +185,12 @@ var GlobalAlerts = (function (_React$Component) {
   }]);
 
   return GlobalAlerts;
-})(_react2['default'].Component);
+}(_react2.default.Component);
 
 GlobalAlerts.propTypes = {
-  lang: _react2['default'].PropTypes.string,
-  className: _react2['default'].PropTypes.string,
-  id: _react2['default'].PropTypes.string
+  lang: _react2.default.PropTypes.string,
+  className: _react2.default.PropTypes.string,
+  id: _react2.default.PropTypes.string
 };
 
 GlobalAlerts.defaultProps = {
@@ -195,5 +199,5 @@ GlobalAlerts.defaultProps = {
   id: 'GlobalAlerts'
 };
 
-exports['default'] = GlobalAlerts;
+exports.default = GlobalAlerts;
 module.exports = exports['default'];

@@ -1,0 +1,156 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _utils = require('../../utils/utils.js');
+
+var _utils2 = _interopRequireDefault(_utils);
+
+var _appConfig = require('../../appConfig.js');
+
+var _appConfig2 = _interopRequireDefault(_appConfig);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// Config and Utility Library
+
+
+var styles = {
+  catalogInfo: {
+    bottom: '26px',
+    color: '#FFF',
+    fontSize: '14px',
+    fontWeight: '200',
+    letterSpacing: '.03em',
+    position: 'absolute',
+    right: '30px',
+    textDecoration: 'underline'
+  },
+  loginButtons: {
+    backgroundColor: '#1B7FA7',
+    border: '2px solid #FFF',
+    color: '#FFF',
+    display: 'inline-block',
+    fontFamily: 'Kievit-Book',
+    fontSize: '14px',
+    letterSpacing: '.03em',
+    marginTop: '20px',
+    padding: '9px 17px 7px'
+  }
+};
+
+var MyNypl = function (_React$Component) {
+  _inherits(MyNypl, _React$Component);
+
+  function MyNypl() {
+    _classCallCheck(this, MyNypl);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(MyNypl).apply(this, arguments));
+  }
+
+  _createClass(MyNypl, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.refs.catalogLink.focus();
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.refs.catalogLink.blur();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: this.props.className, role: 'dialog' },
+        _react2.default.createElement(
+          'ul',
+          { className: this.props.className + '-Login-List' },
+          _react2.default.createElement(
+            'li',
+            null,
+            _react2.default.createElement(
+              'a',
+              {
+                ref: 'catalogLink',
+                href: this.props.catalogLink,
+                style: styles.loginButtons,
+                className: this.props.className + '-Catalog-Btn',
+                onClick: function onClick() {
+                  return _utils2.default._trackHeader('Log In', 'Catalog');
+                }
+              },
+              _react2.default.createElement('span', { className: 'nypl-icon-login icon' }),
+              'LOG INTO THE CATALOG'
+            )
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            _react2.default.createElement(
+              'a',
+              {
+                href: this.props.researchLink,
+                style: styles.loginButtons,
+                className: this.props.className + '-Research-Btn',
+                onClick: function onClick() {
+                  return _utils2.default._trackHeader('Log In', 'Research');
+                }
+              },
+              _react2.default.createElement('span', { className: 'nypl-icon-bldg icon' }),
+              'LOG INTO THE RESEARCH CATALOG'
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'a',
+          {
+            href: this.props.infoLink,
+            className: this.props.className + '-Catalog-Link',
+            onClick: function onClick() {
+              return _utils2.default._trackHeader('Log In', 'Catalog Info');
+            },
+            style: styles.catalogInfo
+          },
+          'Catalog Info'
+        )
+      );
+    }
+  }]);
+
+  return MyNypl;
+}(_react2.default.Component);
+
+MyNypl.propTypes = {
+  id: _react2.default.PropTypes.string,
+  className: _react2.default.PropTypes.string,
+  lang: _react2.default.PropTypes.string,
+  catalogLink: _react2.default.PropTypes.string,
+  researchLink: _react2.default.PropTypes.string,
+  infoLink: _react2.default.PropTypes.string
+};
+
+MyNypl.defaultProps = {
+  className: 'MyNypl',
+  lang: 'en',
+  catalogLink: _appConfig2.default.myNyplLinks.catalog,
+  researchLink: _appConfig2.default.myNyplLinks.research,
+  infoLink: _appConfig2.default.myNyplLinks.moreInfo
+};
+
+exports.default = MyNypl;
+module.exports = exports['default'];

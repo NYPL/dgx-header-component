@@ -6,10 +6,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _radium = require('radium');
-
-var _radium2 = _interopRequireDefault(_radium);
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -17,6 +13,8 @@ var _react2 = _interopRequireDefault(_react);
 var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
+
+var _underscore = require('underscore');
 
 var _reactOnclickout = require('react-onclickout');
 
@@ -142,7 +140,7 @@ var StickyMyNyplButton = function (_React$Component) {
           {
             className: 'MyNyplButton-Wrapper',
             ref: 'MyNypl',
-            style: [styles.base, this.props.style]
+            style: (0, _underscore.extend)(styles.base, this.props.style)
           },
           _react2.default.createElement(
             'button',
@@ -150,7 +148,7 @@ var StickyMyNyplButton = function (_React$Component) {
               id: 'MyNyplButton',
               className: 'MyNyplButton ' + buttonClasses,
               onClick: this.handleClick,
-              style: [styles.MyNyplButton, this.props.style]
+              style: (0, _underscore.extend)(styles.MyNyplButton, this.props.style)
             },
             _react2.default.createElement(
               'span',
@@ -190,5 +188,5 @@ StickyMyNyplButton.defaultProps = {
   label: 'Log In'
 };
 
-exports.default = (0, _radium2.default)(StickyMyNyplButton);
+exports.default = StickyMyNyplButton;
 module.exports = exports['default'];

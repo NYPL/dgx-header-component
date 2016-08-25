@@ -1,6 +1,6 @@
-import Radium from 'radium';
 import React from 'react';
 import cx from 'classnames';
+import { extend as _extend } from 'underscore';
 import ClickOutHandler from 'react-onclickout';
 import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
@@ -86,13 +86,13 @@ class StickyMyNyplButton extends React.Component {
         <div
           className="MyNyplButton-Wrapper"
           ref="MyNypl"
-          style={[styles.base, this.props.style]}
+          style={_extend(styles.base, this.props.style)}
         >
           <button
             id="MyNyplButton"
             className={`MyNyplButton ${buttonClasses}`}
             onClick={this.handleClick}
-            style={[styles.MyNyplButton, this.props.style]}
+            style={_extend(styles.MyNyplButton, this.props.style)}
           >
             <span className="visuallyHidden">
               {this.props.label}
@@ -126,4 +126,4 @@ StickyMyNyplButton.defaultProps = {
   label: 'Log In',
 };
 
-export default Radium(StickyMyNyplButton);
+export default StickyMyNyplButton;

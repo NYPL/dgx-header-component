@@ -1,5 +1,4 @@
 import React from 'react';
-import Radium from 'radium';
 
 const styles = {
   text: {
@@ -28,41 +27,35 @@ const styles = {
   },
 };
 
-class DotsLoader extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    const dots = [];
-
-    for (let i = 0; i < this.props.dots; i++) {
-      dots.push(
+const DotsLoader = ({ className, dots }) => {
+  const renderDots = (amount) => {
+    const dotsList = [];
+    for (let i = 0; i < amount; i++) {
+      dotsList.push(
         <li key={i} style={styles.dots}></li>
       );
     }
+    return dotsList;
+  };
 
-    return (
-      <div className={`${this.props.className}-Wrapper`}>
-        <span style={styles.text}>Loading</span>
-        <ul className={this.props.className} style={styles.list}>
-          {dots}
-        </ul>
-      </div>
-    );
-  }
-}
+  return (
+    <div className={`${className}-Wrapper`}>
+      <span style={styles.text}>Loading</span>
+      <ul className={className} style={styles.list}>
+        {renderDots(dots)}
+      </ul>
+    </div>
+  );
+};
 
 DotsLoader.propTypes = {
   className: React.PropTypes.string,
-  id: React.PropTypes.string,
   dots: React.PropTypes.number,
 };
 
 DotsLoader.defaultProps = {
   className: 'DotsLoader',
-  id: 'DotsLoader',
   dots: 3,
 };
 
-export default Radium(DotsLoader);
+export default DotsLoader;

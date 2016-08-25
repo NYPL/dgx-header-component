@@ -28,9 +28,9 @@ var _reactA11y2 = _interopRequireDefault(_reactA11y);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// if (loadA11y) {
-//   a11y(React, { ReactDOM, includeSrcNode: true });
-// }
+if (loadA11y) {
+  (0, _reactA11y2.default)(_react2.default, { ReactDOM: _reactDom2.default, includeSrcNode: true });
+}
 
 // Use for testing GA events
 if (!window.ga) {

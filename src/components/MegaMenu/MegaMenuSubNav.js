@@ -2,7 +2,6 @@ import React from 'react';
 import { map as _map, isEmpty as _isEmpty } from 'underscore';
 import config from '../../appConfig.js';
 import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWidget.js';
-import Radium from 'radium';
 import utils from '../../utils/utils.js';
 
 const styles = {
@@ -96,4 +95,4 @@ MegaMenuSubNav.defaultProps = {
   topLink: '#',
 };
 
-export default Radium(MegaMenuSubNav);
+export default MegaMenuSubNav;

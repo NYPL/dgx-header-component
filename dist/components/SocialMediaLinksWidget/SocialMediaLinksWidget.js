@@ -36,15 +36,15 @@ var SocialMediaLinksWidget = function (_React$Component) {
 
     _this.state = { linkClass: '' };
 
-    _this._handleOnMouseLeave = _this._handleOnMouseLeave.bind(_this);
-    _this._handleOnMouseEnter = _this._handleOnMouseEnter.bind(_this);
-    _this._trackHeader = _utils2.default._trackHeader.bind(_this);
+    _this.handleOnMouseLeave = _this.handleOnMouseLeave.bind(_this);
+    _this.handleOnMouseEnter = _this.handleOnMouseEnter.bind(_this);
+    _this.trackHeader = _utils2.default._trackHeader.bind(_this);
     return _this;
   }
 
   _createClass(SocialMediaLinksWidget, [{
-    key: '_generateLinksToDisplay',
-    value: function _generateLinksToDisplay(list, displayOnlyList) {
+    key: 'generateLinksToDisplay',
+    value: function generateLinksToDisplay(list, displayOnlyList) {
       var _this2 = this;
 
       var socialLinksList = displayOnlyList && displayOnlyList.length ? (0, _underscore.pick)(list, displayOnlyList) : list;
@@ -58,13 +58,13 @@ var SocialMediaLinksWidget = function (_React$Component) {
           _react2.default.createElement('a', {
             href: item,
             onClick: function onClick() {
-              return _this2._trackHeader('Click', 'Social Media - ' + key);
+              return _this2.trackHeader('Click', 'Social Media - ' + key);
             },
             className: _this2.props.className + '-Link ' + hoverClass,
             onMouseEnter: function onMouseEnter() {
-              return _this2._handleOnMouseEnter(key);
+              return _this2.handleOnMouseEnter(key);
             },
-            onMouseLeave: _this2._handleOnMouseLeave
+            onMouseLeave: _this2.handleOnMouseLeave
           })
         );
       });
@@ -79,8 +79,8 @@ var SocialMediaLinksWidget = function (_React$Component) {
      */
 
   }, {
-    key: '_handleOnMouseEnter',
-    value: function _handleOnMouseEnter(key) {
+    key: 'handleOnMouseEnter',
+    value: function handleOnMouseEnter(key) {
       this.setState({ linkClass: key });
     }
 
@@ -92,14 +92,14 @@ var SocialMediaLinksWidget = function (_React$Component) {
      */
 
   }, {
-    key: '_handleOnMouseLeave',
-    value: function _handleOnMouseLeave() {
+    key: 'handleOnMouseLeave',
+    value: function handleOnMouseLeave() {
       this.setState({ linkClass: '' });
     }
   }, {
     key: 'render',
     value: function render() {
-      var socialLinks = this._generateLinksToDisplay(this.props.links, this.props.displayOnlyList);
+      var socialLinks = this.generateLinksToDisplay(this.props.links, this.props.displayOnlyList);
 
       return _react2.default.createElement(
         'div',

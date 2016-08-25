@@ -31,10 +31,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var MegaMenuFeatureItem = function (_React$Component) {
   _inherits(MegaMenuFeatureItem, _React$Component);
 
-  function MegaMenuFeatureItem(props) {
+  function MegaMenuFeatureItem() {
     _classCallCheck(this, MegaMenuFeatureItem);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(MegaMenuFeatureItem).call(this, props));
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(MegaMenuFeatureItem).apply(this, arguments));
   }
 
   _createClass(MegaMenuFeatureItem, [{

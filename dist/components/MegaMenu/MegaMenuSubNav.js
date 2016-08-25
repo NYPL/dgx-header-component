@@ -20,10 +20,6 @@ var _SocialMediaLinksWidget = require('../SocialMediaLinksWidget/SocialMediaLink
 
 var _SocialMediaLinksWidget2 = _interopRequireDefault(_SocialMediaLinksWidget);
 
-var _radium = require('radium');
-
-var _radium2 = _interopRequireDefault(_radium);
-
 var _utils = require('../../utils/utils.js');
 
 var _utils2 = _interopRequireDefault(_utils);
@@ -150,5 +146,5 @@ MegaMenuSubNav.defaultProps = {
   topLink: '#'
 };
 
-exports.default = (0, _radium2.default)(MegaMenuSubNav);
+exports.default = MegaMenuSubNav;
 module.exports = exports['default'];

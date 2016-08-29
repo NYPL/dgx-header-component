@@ -159,7 +159,7 @@ var Header = function (_React$Component) {
   function Header(props) {
     _classCallCheck(this, Header);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Header).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
 
     _this.state = (0, _underscore.extend)({
       headerHeight: null,
@@ -433,7 +433,7 @@ var Header = function (_React$Component) {
                 style: styles.donateButton,
                 gaLabel: 'Header Top Links'
               }),
-              _dgxFeatureFlags2.default.store._isFeatureActive('shop-link') ? _react2.default.createElement(_SimpleButton2.default, {
+              _react2.default.createElement(_SimpleButton2.default, {
                 label: 'Shop',
                 target: 'http://shop.nypl.org',
                 className: 'shopTopLink',
@@ -441,7 +441,7 @@ var Header = function (_React$Component) {
                 gaAction: 'Shop',
                 gaLabel: 'Header Top Links',
                 style: styles.shopLink
-              }) : null
+              })
             )
           ),
           _react2.default.createElement(_NavMenu2.default, {

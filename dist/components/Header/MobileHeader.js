@@ -157,7 +157,7 @@ var MobileHeader = function (_React$Component) {
   function MobileHeader(props) {
     _classCallCheck(this, MobileHeader);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MobileHeader).call(this, props));
+    var _this = _possibleConstructorReturn(this, (MobileHeader.__proto__ || Object.getPrototypeOf(MobileHeader)).call(this, props));
 
     _this.state = {
       activeMobileButton: _HeaderStore2.default.getState().activeMobileButton,

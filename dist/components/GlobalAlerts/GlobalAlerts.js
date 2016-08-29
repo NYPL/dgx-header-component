@@ -54,7 +54,7 @@ var GlobalAlerts = function (_React$Component) {
   function GlobalAlerts(props) {
     _classCallCheck(this, GlobalAlerts);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(GlobalAlerts).call(this, props));
+    var _this = _possibleConstructorReturn(this, (GlobalAlerts.__proto__ || Object.getPrototypeOf(GlobalAlerts)).call(this, props));
 
     _this.state = {
       globalAlerts: [],

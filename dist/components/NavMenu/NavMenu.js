@@ -74,7 +74,7 @@ var NavMenu = function (_React$Component) {
   function NavMenu(props) {
     _classCallCheck(this, NavMenu);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NavMenu).call(this, props));
+    var _this = _possibleConstructorReturn(this, (NavMenu.__proto__ || Object.getPrototypeOf(NavMenu)).call(this, props));
 
     _this.handleEscKey = _this.handleEscKey.bind(_this);
     return _this;

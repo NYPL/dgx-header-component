@@ -58,7 +58,7 @@ var MyNypl = function (_React$Component) {
   function MyNypl() {
     _classCallCheck(this, MyNypl);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(MyNypl).apply(this, arguments));
+    return _possibleConstructorReturn(this, (MyNypl.__proto__ || Object.getPrototypeOf(MyNypl)).apply(this, arguments));
   }
 
   _createClass(MyNypl, [{

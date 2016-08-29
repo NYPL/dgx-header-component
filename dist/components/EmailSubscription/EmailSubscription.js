@@ -127,7 +127,7 @@ var EmailSubscription = function (_React$Component) {
   function EmailSubscription(props) {
     _classCallCheck(this, EmailSubscription);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(EmailSubscription).call(this, props));
+    var _this = _possibleConstructorReturn(this, (EmailSubscription.__proto__ || Object.getPrototypeOf(EmailSubscription)).call(this, props));
 
     _this.state = {
       formProcessing: false,

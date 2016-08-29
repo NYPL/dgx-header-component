@@ -28,7 +28,7 @@ var LocationFinder = function (_React$Component) {
   function LocationFinder(props) {
     _classCallCheck(this, LocationFinder);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(LocationFinder).call(this, props));
+    var _this = _possibleConstructorReturn(this, (LocationFinder.__proto__ || Object.getPrototypeOf(LocationFinder)).call(this, props));
 
     _this.state = {
       zipcode: null,

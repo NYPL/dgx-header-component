@@ -72,7 +72,7 @@ var NavMenuItem = function NavMenuItem(_ref) {
   // const target = this.props.target;
   // const linkClass = cx({
   //   active: this.props.index === this.state.activeItem
-  //     || HeaderStore._getLastActiveMenuItem() === this.props.navId,
+  //     || HeaderStore.getLastActiveMenuItem() === this.props.navId,
   // });
 
   // const cookie = this.props.cookie;

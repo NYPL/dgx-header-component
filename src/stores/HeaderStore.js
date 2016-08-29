@@ -18,14 +18,14 @@ class HeaderStore {
     });
 
     this.exportPublicMethods({
-      _getMobileMenuBtnValue: this._getMobileMenuBtnValue,
-      _getSearchButtonActionValue: this._getSearchButtonActionValue,
-      _getMobileMyNyplButtonValue: this._getMobileMyNyplButtonValue,
-      _getIsStickyValue: this._getIsStickyValue,
+      getMobileMenuBtnValue: this.getMobileMenuBtnValue,
+      getSearchButtonActionValue: this.getSearchButtonActionValue,
+      getMobileMyNyplButtonValue: this.getMobileMyNyplButtonValue,
+      getIsStickyValue: this.getIsStickyValue,
       // _getLastActiveMenuItem: this._getLastActiveMenuItem,
-      _getSubscribeFormVisible: this._getSubscribeFormVisible,
-      _getMyNyplVisible: this._getMyNyplVisible,
-      _getStickyMyNyplVisible: this._getStickyMyNyplVisible,
+      getSubscribeFormVisible: this.getSubscribeFormVisible,
+      getMyNyplVisible: this.getMyNyplVisible,
+      getStickyMyNyplVisible: this.getStickyMyNyplVisible,
     });
 
     this.state = {
@@ -48,7 +48,7 @@ class HeaderStore {
    * value.
    * @return {String}
    */
-  _getMobileMenuBtnValue() {
+  getMobileMenuBtnValue() {
     return this.state.activeMobileButton;
   }
 
@@ -58,7 +58,7 @@ class HeaderStore {
    * value.
    * @return {String}
    */
-  _getMobileMyNyplButtonValue() {
+  getMobileMyNyplButtonValue() {
     return this.state.mobileMyNyplButton;
   }
 
@@ -68,7 +68,7 @@ class HeaderStore {
    * value.
    * @return {Boolean} true/false
    */
-  _getSubscribeFormVisible() {
+  getSubscribeFormVisible() {
     return this.state.subscribeFormVisible;
   }
 
@@ -78,7 +78,7 @@ class HeaderStore {
    * value.
    * @return {Boolean} true/false
    */
-  _getMyNyplVisible() {
+  getMyNyplVisible() {
     return this.state.myNyplVisible;
   }
 
@@ -88,7 +88,7 @@ class HeaderStore {
    * value.
    * @return {Boolean} true/false
    */
-  _getStickyMyNyplVisible() {
+  getStickyMyNyplVisible() {
     return this.state.stickyLoginVisible;
   }
 
@@ -98,17 +98,17 @@ class HeaderStore {
    * value.
    * @return {String}
    */
-  _getSearchButtonActionValue() {
+  getSearchButtonActionValue() {
     return this.state.searchButtonAction;
   }
 
   /**
-   * _getIsStickyValue()
+   * getIsStickyValue()
    * returns the current state.isSticky value.
    *
    * @return {Boolean} true/false
    */
-  _getIsStickyValue() {
+  getIsStickyValue() {
     return this.state.isSticky;
   }
 

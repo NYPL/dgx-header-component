@@ -78,9 +78,9 @@ class Actions {
     this.dispatch(value);
   }
 
-  setLastActiveMenuItem(value) {
-    this.dispatch(value);
-  }
+  // setLastActiveMenuItem(value) {
+  //   this.dispatch(value);
+  // }
 
   searchButtonActionValue(actionValue) {
     this.dispatch(actionValue);

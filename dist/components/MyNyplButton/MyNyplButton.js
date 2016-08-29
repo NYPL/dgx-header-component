@@ -125,8 +125,8 @@ var MyNyplButton = function (_React$Component) {
   }, {
     key: 'handleClick',
     value: function handleClick() {
-      var visibleState = _HeaderStore2.default._getMyNyplVisible() ? 'Closed' : 'Open';
-      _Actions2.default.toggleMyNyplVisible(!_HeaderStore2.default._getMyNyplVisible());
+      var visibleState = _HeaderStore2.default.getMyNyplVisible() ? 'Closed' : 'Open';
+      _Actions2.default.toggleMyNyplVisible(!_HeaderStore2.default.getMyNyplVisible());
       _utils2.default._trackHeader('Log In', 'MyNyplButton - ' + visibleState);
     }
 
@@ -139,8 +139,8 @@ var MyNyplButton = function (_React$Component) {
   }, {
     key: 'handleOnClickOut',
     value: function handleOnClickOut() {
-      if (_HeaderStore2.default._getMyNyplVisible()) {
-        if (_HeaderStore2.default._getMobileMyNyplButtonValue() === '') {
+      if (_HeaderStore2.default.getMyNyplVisible()) {
+        if (_HeaderStore2.default.getMobileMyNyplButtonValue() === '') {
           _utils2.default._trackHeader('Log In', 'MyNyplButton - Closed');
         }
         _Actions2.default.toggleMyNyplVisible(false);
@@ -152,7 +152,7 @@ var MyNyplButton = function (_React$Component) {
       var buttonClass = '';
       var iconClass = 'nypl-icon-wedge-down';
 
-      if (_HeaderStore2.default._getMyNyplVisible()) {
+      if (_HeaderStore2.default.getMyNyplVisible()) {
         buttonClass = 'active';
         iconClass = 'nypl-icon-solo-x';
       }
@@ -171,7 +171,7 @@ var MyNyplButton = function (_React$Component) {
   }, {
     key: 'renderMyNyplDialog',
     value: function renderMyNyplDialog() {
-      return _HeaderStore2.default._getMyNyplVisible() ? _react2.default.createElement(
+      return _HeaderStore2.default.getMyNyplVisible() ? _react2.default.createElement(
         'div',
         {
           className: 'MyNypl-Wrapper active animatedFast fadeIn',

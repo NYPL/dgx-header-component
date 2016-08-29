@@ -37,14 +37,14 @@ var HeaderStore = function () {
     });
 
     this.exportPublicMethods({
-      _getMobileMenuBtnValue: this._getMobileMenuBtnValue,
-      _getSearchButtonActionValue: this._getSearchButtonActionValue,
-      _getMobileMyNyplButtonValue: this._getMobileMyNyplButtonValue,
-      _getIsStickyValue: this._getIsStickyValue,
+      getMobileMenuBtnValue: this.getMobileMenuBtnValue,
+      getSearchButtonActionValue: this.getSearchButtonActionValue,
+      getMobileMyNyplButtonValue: this.getMobileMyNyplButtonValue,
+      getIsStickyValue: this.getIsStickyValue,
       // _getLastActiveMenuItem: this._getLastActiveMenuItem,
-      _getSubscribeFormVisible: this._getSubscribeFormVisible,
-      _getMyNyplVisible: this._getMyNyplVisible,
-      _getStickyMyNyplVisible: this._getStickyMyNyplVisible
+      getSubscribeFormVisible: this.getSubscribeFormVisible,
+      getMyNyplVisible: this.getMyNyplVisible,
+      getStickyMyNyplVisible: this.getStickyMyNyplVisible
     });
 
     this.state = {
@@ -70,8 +70,8 @@ var HeaderStore = function () {
 
 
   _createClass(HeaderStore, [{
-    key: '_getMobileMenuBtnValue',
-    value: function _getMobileMenuBtnValue() {
+    key: 'getMobileMenuBtnValue',
+    value: function getMobileMenuBtnValue() {
       return this.state.activeMobileButton;
     }
 
@@ -83,8 +83,8 @@ var HeaderStore = function () {
      */
 
   }, {
-    key: '_getMobileMyNyplButtonValue',
-    value: function _getMobileMyNyplButtonValue() {
+    key: 'getMobileMyNyplButtonValue',
+    value: function getMobileMyNyplButtonValue() {
       return this.state.mobileMyNyplButton;
     }
 
@@ -96,8 +96,8 @@ var HeaderStore = function () {
      */
 
   }, {
-    key: '_getSubscribeFormVisible',
-    value: function _getSubscribeFormVisible() {
+    key: 'getSubscribeFormVisible',
+    value: function getSubscribeFormVisible() {
       return this.state.subscribeFormVisible;
     }
 
@@ -109,8 +109,8 @@ var HeaderStore = function () {
      */
 
   }, {
-    key: '_getMyNyplVisible',
-    value: function _getMyNyplVisible() {
+    key: 'getMyNyplVisible',
+    value: function getMyNyplVisible() {
       return this.state.myNyplVisible;
     }
 
@@ -122,8 +122,8 @@ var HeaderStore = function () {
      */
 
   }, {
-    key: '_getStickyMyNyplVisible',
-    value: function _getStickyMyNyplVisible() {
+    key: 'getStickyMyNyplVisible',
+    value: function getStickyMyNyplVisible() {
       return this.state.stickyLoginVisible;
     }
 
@@ -135,21 +135,21 @@ var HeaderStore = function () {
      */
 
   }, {
-    key: '_getSearchButtonActionValue',
-    value: function _getSearchButtonActionValue() {
+    key: 'getSearchButtonActionValue',
+    value: function getSearchButtonActionValue() {
       return this.state.searchButtonAction;
     }
 
     /**
-     * _getIsStickyValue()
+     * getIsStickyValue()
      * returns the current state.isSticky value.
      *
      * @return {Boolean} true/false
      */
 
   }, {
-    key: '_getIsStickyValue',
-    value: function _getIsStickyValue() {
+    key: 'getIsStickyValue',
+    value: function getIsStickyValue() {
       return this.state.isSticky;
     }
 

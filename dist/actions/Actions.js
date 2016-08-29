@@ -100,11 +100,11 @@ var Actions = function () {
     value: function setMobileMyNyplButtonValue(value) {
       this.dispatch(value);
     }
-  }, {
-    key: 'setLastActiveMenuItem',
-    value: function setLastActiveMenuItem(value) {
-      this.dispatch(value);
-    }
+
+    // setLastActiveMenuItem(value) {
+    //   this.dispatch(value);
+    // }
+
   }, {
     key: 'searchButtonActionValue',
     value: function searchButtonActionValue(actionValue) {

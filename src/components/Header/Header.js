@@ -239,7 +239,7 @@ class Header extends React.Component {
 
     if (windowVerticalDistance && headerHeight && (windowVerticalDistance > headerHeight)) {
       // Only update the value if sticky is false
-      if (!HeaderStore._getIsStickyValue()) {
+      if (!HeaderStore.getIsStickyValue()) {
         // Fire GA Event when Header is in Sticky Mode
         utils._trackHeader.bind(this, 'scroll', 'Sticky Header');
         // Update the isSticky flag
@@ -247,7 +247,7 @@ class Header extends React.Component {
       }
     } else {
       // Avoids re-assignment on each scroll by checking if it is already true
-      if (HeaderStore._getIsStickyValue()) {
+      if (HeaderStore.getIsStickyValue()) {
         Actions.updateIsHeaderSticky(false);
       }
     }

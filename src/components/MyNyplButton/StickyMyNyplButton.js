@@ -58,8 +58,8 @@ class StickyMyNyplButton extends React.Component {
    * that will dispatch an event to the HeaderStore.
    */
   handleClick() {
-    const visibleState = HeaderStore._getStickyMyNyplVisible() ? 'Closed' : 'Open';
-    Actions.toggleStickyMyNyplVisible(!HeaderStore._getStickyMyNyplVisible());
+    const visibleState = HeaderStore.getStickyMyNyplVisible() ? 'Closed' : 'Open';
+    Actions.toggleStickyMyNyplVisible(!HeaderStore.getStickyMyNyplVisible());
     utils._trackHeader('Log In', `StickyMyNyplButton - ${visibleState}`);
   }
 
@@ -69,7 +69,7 @@ class StickyMyNyplButton extends React.Component {
    * currently visible.
    */
   handleOnClickOut() {
-    if (HeaderStore._getStickyMyNyplVisible()) {
+    if (HeaderStore.getStickyMyNyplVisible()) {
       Actions.toggleStickyMyNyplVisible(false);
       utils._trackHeader('Log In', 'StickyMyNyplButton - Closed');
     }
@@ -77,7 +77,7 @@ class StickyMyNyplButton extends React.Component {
 
   render() {
     // Assign a variable to hold the reference of state boolean
-    const showDialog = HeaderStore._getStickyMyNyplVisible();
+    const showDialog = HeaderStore.getStickyMyNyplVisible();
     const buttonClasses = cx({ active: showDialog });
     const myNyplClasses = cx({ 'active animatedFast fadeIn': showDialog });
 

@@ -108,7 +108,7 @@ var NavMenu = function (_React$Component) {
   }, {
     key: 'closeMobileNavMenuDialog',
     value: function closeMobileNavMenuDialog() {
-      if (_HeaderStore2.default._getMobileMenuBtnValue() === 'mobileMenu') {
+      if (_HeaderStore2.default.getMobileMenuBtnValue() === 'mobileMenu') {
         _Actions2.default.setMobileMenuButtonValue('');
       }
     }
@@ -122,7 +122,7 @@ var NavMenu = function (_React$Component) {
   }, {
     key: 'renderStickyNavItems',
     value: function renderStickyNavItems() {
-      var stickyClass = _HeaderStore2.default._getIsStickyValue() ? ' active' : '';
+      var stickyClass = _HeaderStore2.default.getIsStickyValue() ? ' active' : '';
       return _react2.default.createElement(
         'div',
         { className: this.props.className + '-stickyItems' + stickyClass },
@@ -171,7 +171,7 @@ var NavMenu = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var mobileActiveClass = _HeaderStore2.default._getMobileMenuBtnValue() === 'mobileMenu' ? ' mobileActive' : '';
+      var mobileActiveClass = _HeaderStore2.default.getMobileMenuBtnValue() === 'mobileMenu' ? ' mobileActive' : '';
 
       return _react2.default.createElement(
         'div',

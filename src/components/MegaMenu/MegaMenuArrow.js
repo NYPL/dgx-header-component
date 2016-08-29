@@ -7,7 +7,7 @@ const MegaMenuArrow = ({ index, navId, currentActiveItem }) => {
   // Dynamic class assignment based on activeItem property matching current index.
   const classes = cx('NavMenuItem-Arrow nypl-icon-arrow-meganav-large', {
     'active animateMegaMenuArrowEnter fadeIn': index === currentActiveItem,
-    active: HeaderStore._getLastActiveMenuItem() === navId &&
+    active: HeaderStore.getLastActiveMenuItem() === navId &&
       index !== currentActiveItem,
   });
 

@@ -50,7 +50,7 @@ class SubscribeButton extends React.Component {
     super(props);
 
     this.state = {
-      subscribeFormVisible: HeaderStore._getSubscribeFormVisible(),
+      subscribeFormVisible: HeaderStore.getSubscribeFormVisible(),
       target: this.props.target,
     };
 
@@ -77,7 +77,7 @@ class SubscribeButton extends React.Component {
    * Updates the state of the form based off the Header Store.
    */
   onChange() {
-    this.setState({ subscribeFormVisible: HeaderStore._getSubscribeFormVisible() });
+    this.setState({ subscribeFormVisible: HeaderStore.getSubscribeFormVisible() });
   }
 
   handleEscKey(e) {
@@ -106,7 +106,7 @@ class SubscribeButton extends React.Component {
    * currently visible.
    */
   handleOnClickOut() {
-    if (HeaderStore._getSubscribeFormVisible()) {
+    if (HeaderStore.getSubscribeFormVisible()) {
       Actions.toggleSubscribeFormVisible(false);
       utils._trackHeader('Click', 'Subscribe - Closed');
     }

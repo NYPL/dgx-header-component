@@ -157,7 +157,7 @@ class MobileHeader extends React.Component {
    */
   toggleMobileMenuButton(activeButton) {
     if (activeButton === 'clickSearch') {
-      if (HeaderStore._getSearchButtonActionValue() !== activeButton) {
+      if (HeaderStore.getSearchButtonActionValue() !== activeButton) {
         Actions.searchButtonActionValue(activeButton);
         Actions.setMobileMenuButtonValue('');
         Actions.setMobileMyNyplButtonValue('');
@@ -165,7 +165,7 @@ class MobileHeader extends React.Component {
         Actions.searchButtonActionValue('');
       }
     } else if (activeButton === 'mobileMenu') {
-      if (HeaderStore._getMobileMenuBtnValue() !== activeButton) {
+      if (HeaderStore.getMobileMenuBtnValue() !== activeButton) {
         Actions.setMobileMenuButtonValue(activeButton);
         Actions.searchButtonActionValue('');
         Actions.setMobileMyNyplButtonValue('');
@@ -173,7 +173,7 @@ class MobileHeader extends React.Component {
         Actions.setMobileMenuButtonValue('');
       }
     } else if (activeButton === 'clickMyNypl') {
-      if (HeaderStore._getMobileMyNyplButtonValue() !== activeButton) {
+      if (HeaderStore.getMobileMyNyplButtonValue() !== activeButton) {
         Actions.setMobileMyNyplButtonValue(activeButton);
         Actions.searchButtonActionValue('');
         Actions.setMobileMenuButtonValue('');

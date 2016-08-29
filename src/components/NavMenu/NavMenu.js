@@ -59,7 +59,7 @@ class NavMenu extends React.Component {
    * Used in FocusTrap onDeactivate callback for A11Y users.
    */
   closeMobileNavMenuDialog() {
-    if (HeaderStore._getMobileMenuBtnValue() === 'mobileMenu') {
+    if (HeaderStore.getMobileMenuBtnValue() === 'mobileMenu') {
       Actions.setMobileMenuButtonValue('');
     }
   }
@@ -70,7 +70,7 @@ class NavMenu extends React.Component {
    * @returns {Object} React DOM.
    */
   renderStickyNavItems() {
-    const stickyClass = HeaderStore._getIsStickyValue() ? ' active' : '';
+    const stickyClass = HeaderStore.getIsStickyValue() ? ' active' : '';
     return (
       <div className={`${this.props.className}-stickyItems${stickyClass}`}>
         <span className="lineSeparator" style={styles.lineSeparator}></span>
@@ -111,7 +111,7 @@ class NavMenu extends React.Component {
   }
 
   render() {
-    const mobileActiveClass = HeaderStore._getMobileMenuBtnValue() === 'mobileMenu' ?
+    const mobileActiveClass = HeaderStore.getMobileMenuBtnValue() === 'mobileMenu' ?
       ' mobileActive' : '';
 
     return (

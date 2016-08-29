@@ -28,7 +28,7 @@ var DefaultItem = function (_React$Component) {
   function DefaultItem(props) {
     _classCallCheck(this, DefaultItem);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(DefaultItem).call(this, props));
+    var _this = _possibleConstructorReturn(this, (DefaultItem.__proto__ || Object.getPrototypeOf(DefaultItem)).call(this, props));
 
     _this._trackHeader = _utils2.default._trackHeader.bind(_this);
     _this.extraFeatureDetails = _this.extraFeatureDetails.bind(_this);

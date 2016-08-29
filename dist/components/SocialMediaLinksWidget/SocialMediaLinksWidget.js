@@ -32,7 +32,7 @@ var SocialMediaLinksWidget = function (_React$Component) {
   function SocialMediaLinksWidget(props) {
     _classCallCheck(this, SocialMediaLinksWidget);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SocialMediaLinksWidget).call(this, props));
+    var _this = _possibleConstructorReturn(this, (SocialMediaLinksWidget.__proto__ || Object.getPrototypeOf(SocialMediaLinksWidget)).call(this, props));
 
     _this.state = { linkClass: '' };
 

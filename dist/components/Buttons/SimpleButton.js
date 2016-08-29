@@ -28,7 +28,7 @@ var SimpleButton = function (_React$Component) {
   function SimpleButton(props) {
     _classCallCheck(this, SimpleButton);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SimpleButton).call(this, props));
+    var _this = _possibleConstructorReturn(this, (SimpleButton.__proto__ || Object.getPrototypeOf(SimpleButton)).call(this, props));
 
     _this.handleOnClick = _this.handleOnClick.bind(_this);
     return _this;

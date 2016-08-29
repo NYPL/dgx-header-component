@@ -1,7 +1,7 @@
 import React from 'react';
 import utils from '../../utils/utils.js';
 
-class SimpleButton extends React.Component {
+class SimpleLink extends React.Component {
   constructor(props) {
     super(props);
     this.handleOnClick = this.handleOnClick.bind(this);
@@ -28,7 +28,7 @@ class SimpleButton extends React.Component {
   }
 }
 
-SimpleButton.propTypes = {
+SimpleLink.propTypes = {
   id: React.PropTypes.string,
   ref: React.PropTypes.string,
   className: React.PropTypes.string,
@@ -41,13 +41,12 @@ SimpleButton.propTypes = {
   gaLabel: React.PropTypes.string,
 };
 
-SimpleButton.defaultProps = {
-  ref: 'SimpleButton',
-  className: 'SimpleButton',
-  label: 'Button',
+SimpleLink.defaultProps = {
+  className: 'simpleLink',
+  label: 'Link',
   lang: 'en',
   target: '#',
   onClick() {},
 };
 
-export default SimpleButton;
+export default SimpleLink;

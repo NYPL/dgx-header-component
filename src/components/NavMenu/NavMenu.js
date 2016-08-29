@@ -105,11 +105,7 @@ class NavMenu extends React.Component {
         target={item.link.en.text}
         urlType={this.props.urlType}
         navId={item.id}
-        features={item.features}
-        subNav={item.subnav}
         key={index}
-        index={index}
-        cookie={this.props.cookie}
       />
     );
   }
@@ -126,14 +122,19 @@ class NavMenu extends React.Component {
         >
           <span className="MobileLogoText nypl-icon-logo-type" aria-hidden="true"></span>
           <ul className={`${this.props.className}-List`} id="NavMenu-List">
-            {this.renderNavMenu(this.props.items, ['1b4916f4-6723-44f0-bfae-112441527c4d'])}
+            {this.renderNavMenu(this.props.items)}
           </ul>
           <SearchButton
             className={`${this.props.className}`}
             cookie={this.props.cookie}
           />
           {this.renderStickyNavItems()}
-          <NavMenuBottomButtons className="MobileBottomButtons" />
+          <NavMenuBottomButtons
+            className="MobileBottomButtons"
+            libraryCardLink={
+              (this.props.urlType === 'absolute') ? '//www.nypl.org/library-card' : '/library-card'
+            }
+          />
         </nav>
       </div>
     );

@@ -41,9 +41,9 @@ var _DonateButton = require('../DonateButton/DonateButton.js');
 
 var _DonateButton2 = _interopRequireDefault(_DonateButton);
 
-var _SimpleButton = require('../Buttons/SimpleButton.js');
+var _SimpleLink = require('../Links/SimpleLink.js');
 
-var _SimpleButton2 = _interopRequireDefault(_SimpleButton);
+var _SimpleLink2 = _interopRequireDefault(_SimpleLink);
 
 var _SubscribeButton = require('../SubscribeButton/SubscribeButton.js');
 
@@ -159,11 +159,12 @@ var Header = function (_React$Component) {
   function Header(props) {
     _classCallCheck(this, Header);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Header).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
 
     _this.state = (0, _underscore.extend)({
       headerHeight: null,
-      cookie: _this.getCookie('nyplpreview'),
+      navData: _this.props.navData,
+      // cookie: this.getCookie('nyplpreview'),
       featureFlags: _dgxFeatureFlags2.default.store.getState()
     }, _HeaderStore2.default.getState());
 
@@ -181,15 +182,15 @@ var Header = function (_React$Component) {
       this.setHeaderHeight();
 
       // Set which FeatureFlag is to be fired based off preview cookie
-      this.setFeatureFlagHeaderCall();
+      // this.setFeatureFlagHeaderCall();
 
       // Watch which FeatureFlag is called to fire
       // the proper client-side ajax call to populate the Header data state
-      this.watchFeatureFlagHeaderCall();
+      // this.watchFeatureFlagHeaderCall();
 
       // Read the cookie of "nyplpreview", if the cookie exists and its value is "1",
       // set dimension1 with value of "Public Preview"
-      this.setPublicPreviewGA();
+      // this.setPublicPreviewGA();
 
       // Listen to the scroll event for the sticky header.
       window.addEventListener('scroll', this.handleStickyHeader, false);
@@ -201,9 +202,10 @@ var Header = function (_React$Component) {
       // the FeatureFlag 'header-upcoming-ia' has been deactivated.
       // Used only as a fallback to deactivate a flag and set the
       // Header data to it's default IA.
-      if (!this.state.featureFlags.get('header-upcoming-ia') && prevState.featureFlags.get('header-upcoming-ia')) {
-        _Actions2.default.fetchHeaderData(this.props.env, this.props.urls);
-      }
+      // if (!this.state.featureFlags.get('header-upcoming-ia') &&
+      //   prevState.featureFlags.get('header-upcoming-ia')) {
+      //   Actions.fetchHeaderData(this.props.env, this.props.urlType);
+      // }
     }
   }, {
     key: 'componentWillUnmount',
@@ -219,7 +221,7 @@ var Header = function (_React$Component) {
     value: function onChange() {
       this.setState((0, _underscore.extend)({
         headerHeight: this.state.headerHeight,
-        cookie: this.state.cookie,
+        // cookie: this.state.cookie,
         featureFlags: _dgxFeatureFlags2.default.store.getState()
       }, _HeaderStore2.default.getState()));
     }
@@ -274,43 +276,40 @@ var Header = function (_React$Component) {
      * https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie/Simple_document.cookie_framework
      * @returns {string} - Cookie value.
      */
-
-  }, {
-    key: 'getCookie',
-    value: function getCookie(name) {
-      if (!name || typeof document === 'undefined' || !document.cookie) {
-        return null;
-      }
-      return decodeURIComponent(document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(name).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || null;
-    }
+    // getCookie(name) {
+    //   if (!name || typeof document === 'undefined' || !document.cookie) {
+    //     return null;
+    //   }
+    //   return decodeURIComponent(
+    //     document.cookie.replace(
+    //       new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(name).replace(/[\-\.\+\*]/g, '\\$&')
+    //         + '\\s*\\=\\s*([^;]*).*$)|^.*$'),
+    //       '$1'
+    //     )
+    //   ) || null;
+    // }
 
     /**
      * Verifies if the previewCookie has been set to '1' and
      * activates the appropriate FeatureFlag
      */
-
-  }, {
-    key: 'setFeatureFlagHeaderCall',
-    value: function setFeatureFlagHeaderCall() {
-      if (this.state.cookie && this.state.cookie === '1') {
-        _dgxFeatureFlags2.default.utils.activateFeature('header-upcoming-ia');
-      }
-    }
+    // setFeatureFlagHeaderCall() {
+    //   if (this.state.cookie && this.state.cookie === '1') {
+    //     FeatureFlags.utils.activateFeature('header-upcoming-ia');
+    //   }
+    // }
 
     /**
      * Checks if the FeatureFlag name passed is active or not and triggers
      * the appropriate Action to fetch the Header data.
      */
-
-  }, {
-    key: 'watchFeatureFlagHeaderCall',
-    value: function watchFeatureFlagHeaderCall() {
-      if (_dgxFeatureFlags2.default.store._isFeatureActive('header-upcoming-ia')) {
-        _Actions2.default.fetchHeaderData(this.props.env, this.props.urls, 'upcoming');
-      } else {
-        _Actions2.default.fetchHeaderData(this.props.env, this.props.urls);
-      }
-    }
+    // watchFeatureFlagHeaderCall() {
+    //   if (FeatureFlags.store._isFeatureActive('header-upcoming-ia')) {
+    //     Actions.fetchHeaderData(this.props.env, this.props.urlType, 'upcoming');
+    //   } else {
+    //     Actions.fetchHeaderData(this.props.env, this.props.urlType);
+    //   }
+    // }
 
     /**
      * handleStickyHeader()
@@ -348,16 +347,14 @@ var Header = function (_React$Component) {
      * Verify if the previewCookie has been set to '1' and
      * set the public preview GA dimension.
      */
+    // setPublicPreviewGA() {
+    //   if (this.state.cookie && this.state.cookie === '1') {
+    //     ga.setDimension('dimension1', 'Public Preview');
+    //   } else {
+    //     ga.setDimension('dimension1', null);
+    //   }
+    // }
 
-  }, {
-    key: 'setPublicPreviewGA',
-    value: function setPublicPreviewGA() {
-      if (this.state.cookie && this.state.cookie === '1') {
-        _dgxReactGa.ga.setDimension('dimension1', 'Public Preview');
-      } else {
-        _dgxReactGa.ga.setDimension('dimension1', null);
-      }
-    }
   }, {
     key: 'render',
     value: function render() {
@@ -382,8 +379,8 @@ var Header = function (_React$Component) {
           { className: headerClass + '-Wrapper' },
           _react2.default.createElement(_MobileHeader2.default, {
             className: headerClass + '-Mobile',
-            locatorUrl: this.props.urls === 'absolute' ? '//www.nypl.org/locations/map?nearme=true' : '/locations/map?nearme=true',
-            nyplRootUrl: this.props.urls === 'absolute' ? '//www.nypl.org' : '/',
+            locatorUrl: this.props.urlType === 'absolute' ? '//www.nypl.org/locations/map?nearme=true' : '/locations/map?nearme=true',
+            nyplRootUrl: this.props.urlType === 'absolute' ? '//www.nypl.org' : '/',
             ref: 'headerMobile'
           }),
           _react2.default.createElement(
@@ -395,7 +392,7 @@ var Header = function (_React$Component) {
             },
             _react2.default.createElement(_Logo2.default, {
               className: headerClass + '-Logo',
-              target: this.props.urls === 'absolute' ? '//www.nypl.org' : '/'
+              target: this.props.urlType === 'absolute' ? '//www.nypl.org' : '/'
             }),
             _react2.default.createElement(
               'div',
@@ -404,18 +401,18 @@ var Header = function (_React$Component) {
                 label: 'Log In',
                 refId: 'desktopLogin'
               }),
-              _react2.default.createElement(_SimpleButton2.default, {
+              _react2.default.createElement(_SimpleLink2.default, {
                 label: 'Locations',
-                target: this.props.urls === 'absolute' ? '//www.nypl.org/locations/map' : '/locations/map',
+                target: this.props.urlType === 'absolute' ? '//www.nypl.org/locations/map' : '/locations/map',
                 className: 'LocationsTopLink',
                 id: 'LocationsTopLink',
                 gaAction: 'Locations',
                 gaLabel: 'Header Top Links',
                 style: styles.locationsTopLink
               }),
-              _react2.default.createElement(_SimpleButton2.default, {
+              _react2.default.createElement(_SimpleLink2.default, {
                 label: 'Get a Library Card',
-                target: '//www.nypl.org/library-card',
+                target: this.props.urlType === 'absolute' ? '//www.nypl.org/library-card' : '/library-card',
                 className: 'LibraryCardButton',
                 id: 'LibraryCardButton',
                 gaAction: 'Get a Library Card',
@@ -433,7 +430,7 @@ var Header = function (_React$Component) {
                 style: styles.donateButton,
                 gaLabel: 'Header Top Links'
               }),
-              _dgxFeatureFlags2.default.store._isFeatureActive('shop-link') ? _react2.default.createElement(_SimpleButton2.default, {
+              _react2.default.createElement(_SimpleLink2.default, {
                 label: 'Shop',
                 target: 'http://shop.nypl.org',
                 className: 'shopTopLink',
@@ -441,15 +438,14 @@ var Header = function (_React$Component) {
                 gaAction: 'Shop',
                 gaLabel: 'Header Top Links',
                 style: styles.shopLink
-              }) : null
+              })
             )
           ),
           _react2.default.createElement(_NavMenu2.default, {
             className: headerClass + '-NavMenu',
             lang: this.props.lang,
-            items: this.state.headerData,
-            urlType: this.props.urls,
-            cookie: this.state.cookie
+            items: this.state.navData,
+            urlType: this.props.urlType
           })
         )
       );
@@ -463,9 +459,9 @@ Header.propTypes = {
   lang: _react2.default.PropTypes.string,
   className: _react2.default.PropTypes.string,
   id: _react2.default.PropTypes.string,
+  navData: _react2.default.PropTypes.array,
   skipNav: _react2.default.PropTypes.object,
-  urls: _react2.default.PropTypes.string,
-  env: _react2.default.PropTypes.string
+  urlType: _react2.default.PropTypes.string
 };
 
 Header.defaultProps = {
@@ -473,8 +469,7 @@ Header.defaultProps = {
   className: 'Header',
   id: 'nyplHeader',
   skipNav: null,
-  urls: '',
-  env: 'production'
+  urlType: ''
 };
 
 exports.Header = Header;

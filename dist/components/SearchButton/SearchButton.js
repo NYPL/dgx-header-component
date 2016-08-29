@@ -28,10 +28,6 @@ var _HeaderStore = require('../../stores/HeaderStore.js');
 
 var _HeaderStore2 = _interopRequireDefault(_HeaderStore);
 
-var _Actions = require('../../actions/Actions.js');
-
-var _Actions2 = _interopRequireDefault(_Actions);
-
 var _utils = require('../../utils/utils.js');
 
 var _utils2 = _interopRequireDefault(_utils);
@@ -48,6 +44,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 // ALT Flux Store
 
+// import Actions from '../../actions/Actions.js';
 // GA Utility Library
 
 
@@ -57,14 +54,14 @@ var SearchButton = function (_React$Component) {
   function SearchButton(props) {
     _classCallCheck(this, SearchButton);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SearchButton).call(this, props));
+    var _this = _possibleConstructorReturn(this, (SearchButton.__proto__ || Object.getPrototypeOf(SearchButton)).call(this, props));
 
     _this.state = { active: false };
 
     _this.handleOnClick = _this.handleOnClick.bind(_this);
     _this.handleOnClickOut = _this.handleOnClickOut.bind(_this);
-    _this.activateHover = _this.activateHover.bind(_this);
-    _this.deactivateHover = _this.deactivateHover.bind(_this);
+    // this.activateHover = this.activateHover.bind(this);
+    // this.deactivateHover = this.deactivateHover.bind(this);
     return _this;
   }
 
@@ -78,15 +75,12 @@ var SearchButton = function (_React$Component) {
     key: 'handleOnClick',
     value: function handleOnClick(e) {
       e.preventDefault();
-      // Only handle click event if cookie is set
-      if (this.props.cookie === '1') {
-        if (this.state.active) {
-          this.handleOnClickOut();
-        } else {
-          this.setState({ active: true });
-          // Fire GA event to track when the Search Menu is open
-          _utils2.default._trackHeader('Search', 'Open Menu');
-        }
+      if (this.state.active) {
+        this.handleOnClickOut();
+      } else {
+        this.setState({ active: true });
+        // Fire GA event to track when the Search Menu is open
+        _utils2.default._trackHeader('Search', 'Open Menu');
       }
     }
 
@@ -100,15 +94,12 @@ var SearchButton = function (_React$Component) {
     value: function handleOnClickOut() {
       var _this2 = this;
 
-      // Only handle ClickOut events if cookie is SET
-      if (this.props.cookie === '1') {
-        // Update active state only if ACTIVE is true
-        if (this.state.active) {
-          setTimeout(function () {
-            _this2.setState({ active: false });
-            _utils2.default._trackHeader('Search', 'Close Menu');
-          }, 200);
-        }
+      // Update active state only if ACTIVE is true
+      if (this.state.active) {
+        setTimeout(function () {
+          _this2.setState({ active: false });
+          _utils2.default._trackHeader('Search', 'Close Menu');
+        }, 200);
       }
     }
 
@@ -116,39 +107,33 @@ var SearchButton = function (_React$Component) {
      * Update the Store's searchButtonActionValue
      * with hoverSearch after a set time delay.
      */
-
-  }, {
-    key: 'activateHover',
-    value: function activateHover() {
-      // Only handle the hover event if the cookie is NOT set
-      if (this.props.cookie !== '1') {
-        this.hoverTimer = setTimeout(function () {
-          _Actions2.default.searchButtonActionValue('hoverSearch');
-          // Fire GA event to track when the Search Menu is open
-          _utils2.default._trackHeader('Search', 'Open Menu');
-        }, 80);
-      }
-    }
+    // activateHover() {
+    //   // Only handle the hover event if the cookie is NOT set
+    //   if (this.props.cookie !== '1') {
+    //     this.hoverTimer = setTimeout(() => {
+    //       Actions.searchButtonActionValue('hoverSearch');
+    //       // Fire GA event to track when the Search Menu is open
+    //       utils._trackHeader('Search', 'Open Menu');
+    //     }, 80);
+    //   }
+    // }
 
     /**
      * Clear the activateHover timer if it exists.
      * Reset the Store's searchButtonActionValue to empty
      * after a set time delay.
      */
-
-  }, {
-    key: 'deactivateHover',
-    value: function deactivateHover() {
-      // Only handle the hover event if the cookie is NOT set
-      if (this.props.cookie !== '1') {
-        clearTimeout(this.hoverTimer);
-
-        setTimeout(function () {
-          _Actions2.default.searchButtonActionValue('');
-          _utils2.default._trackHeader('Search', 'Close Menu');
-        }, 200);
-      }
-    }
+    // deactivateHover() {
+    //   // Only handle the hover event if the cookie is NOT set
+    //   if (this.props.cookie !== '1') {
+    //     clearTimeout(this.hoverTimer);
+    //
+    //     setTimeout(() => {
+    //       Actions.searchButtonActionValue('');
+    //       utils._trackHeader('Search', 'Close Menu');
+    //     }, 200);
+    //   }
+    // }
 
     /**
     * renderSearchButton()
@@ -162,15 +147,12 @@ var SearchButton = function (_React$Component) {
     value: function renderSearchButton() {
       var _this3 = this;
 
-      var classes = (0, _classnames2.default)({
-        active: this.state.active || _HeaderStore2.default._getSearchButtonActionValue() === 'hoverSearch' || _HeaderStore2.default._getLastActiveMenuItem() === 'hoverSearch'
-      });
-      var stickyStatus = (0, _classnames2.default)({ isSticky: _HeaderStore2.default.getState().isSticky });
+      var classes = (0, _classnames2.default)({ active: this.state.active, isSticky: _HeaderStore2.default.getState().isSticky });
 
       return _react2.default.createElement(
         'button',
         {
-          className: this.props.className + '-searchButton ' + classes + ' ' + stickyStatus,
+          className: this.props.className + '-searchButton ' + classes,
           id: this.props.className + '-searchButton',
           name: 'Search Button',
           onClick: function onClick(e) {
@@ -201,10 +183,9 @@ var SearchButton = function (_React$Component) {
   }, {
     key: 'renderSearchBox',
     value: function renderSearchBox() {
-      var isActive = this.state.active || _HeaderStore2.default._getSearchButtonActionValue() === 'hoverSearch' || _HeaderStore2.default._getLastActiveMenuItem() === 'hoverSearch';
       var sticky = (0, _classnames2.default)({ isSticky: _HeaderStore2.default.getState().isSticky });
 
-      return isActive ? _react2.default.createElement(
+      return this.state.active ? _react2.default.createElement(
         'div',
         {
           className: this.props.className + '-desktopSearchBox animatedFast fadeIn ' + sticky
@@ -218,9 +199,7 @@ var SearchButton = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         {
-          className: this.props.className + '-searchBox-Wrapper',
-          onMouseEnter: this.activateHover,
-          onMouseLeave: this.deactivateHover
+          className: this.props.className + '-searchBox-Wrapper'
         },
         _react2.default.createElement(
           _reactOnclickout2.default,
@@ -237,8 +216,7 @@ var SearchButton = function (_React$Component) {
 
 SearchButton.propTypes = {
   lang: _react2.default.PropTypes.string,
-  className: _react2.default.PropTypes.string,
-  cookie: _react2.default.PropTypes.string
+  className: _react2.default.PropTypes.string
 };
 
 SearchButton.defaultProps = {

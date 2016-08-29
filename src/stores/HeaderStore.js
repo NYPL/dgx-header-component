@@ -4,14 +4,14 @@ import Actions from '../actions/Actions.js';
 class HeaderStore {
   constructor() {
     this.bindListeners({
-      handleUpdateHeaderData: Actions.UPDATE_HEADER_DATA,
-      handleFetchHeaderData: Actions.FETCH_HEADER_DATA,
-      handleHeaderDataFailedFetch: Actions.FAILED_HEADER_DATA,
+      // handleUpdateHeaderData: Actions.UPDATE_HEADER_DATA,
+      // handleFetchHeaderData: Actions.FETCH_HEADER_DATA,
+      // handleHeaderDataFailedFetch: Actions.FAILED_HEADER_DATA,
       handleSetMobileMenuButtonValue: Actions.SET_MOBILE_MENU_BUTTON_VALUE,
       handleSetMobileMyNyplButtonValue: Actions.SET_MOBILE_MY_NYPL_BUTTON_VALUE,
       handleSearchButtonActionValue: Actions.SEARCH_BUTTON_ACTION_VALUE,
       handleUpdateIsHeaderSticky: Actions.UPDATE_IS_HEADER_STICKY,
-      handleSetLastActiveMenuItem: Actions.SET_LAST_ACTIVE_MENU_ITEM,
+      // handleSetLastActiveMenuItem: Actions.SET_LAST_ACTIVE_MENU_ITEM,
       handleToggleSubscribeFormVisible: Actions.TOGGLE_SUBSCRIBE_FORM_VISIBLE,
       handleToggleMyNyplVisible: Actions.TOGGLE_MY_NYPL_VISIBLE,
       handleToggleStickyMyNyplVisible: Actions.TOGGLE_STICKY_MY_NYPL_VISIBLE,
@@ -22,17 +22,17 @@ class HeaderStore {
       _getSearchButtonActionValue: this._getSearchButtonActionValue,
       _getMobileMyNyplButtonValue: this._getMobileMyNyplButtonValue,
       _getIsStickyValue: this._getIsStickyValue,
-      _getLastActiveMenuItem: this._getLastActiveMenuItem,
+      // _getLastActiveMenuItem: this._getLastActiveMenuItem,
       _getSubscribeFormVisible: this._getSubscribeFormVisible,
       _getMyNyplVisible: this._getMyNyplVisible,
       _getStickyMyNyplVisible: this._getStickyMyNyplVisible,
     });
 
     this.state = {
-      headerData: [],
-      errorMessage: null,
+      // headerData: [],
+      // errorMessage: null,
       isSticky: false,
-      lastActiveMenuItem: '',
+      // lastActiveMenuItem: '',
       activeMobileButton: '',
       searchButtonAction: '',
       mobileMyNyplButton: '',
@@ -118,21 +118,21 @@ class HeaderStore {
    * value.
    * @return {String}
    */
-  _getLastActiveMenuItem() {
-    return this.state.lastActiveMenuItem;
-  }
+  // _getLastActiveMenuItem() {
+  //   return this.state.lastActiveMenuItem;
+  // }
 
-  handleUpdateHeaderData(data) {
-    this.setState({ headerData: data });
-  }
-
-  handleFetchHeaderData() {
-    this.setState({ headerData: [] });
-  }
-
-  handleHeaderDataFailedFetch(errorMsg) {
-    this.setState({ errorMessage: errorMsg });
-  }
+  // handleUpdateHeaderData(data) {
+  //   this.setState({ headerData: data });
+  // }
+  //
+  // handleFetchHeaderData() {
+  //   this.setState({ headerData: [] });
+  // }
+  //
+  // handleHeaderDataFailedFetch(errorMsg) {
+  //   this.setState({ errorMessage: errorMsg });
+  // }
 
   handleSetMobileMenuButtonValue(currentActiveMobileButton) {
     this.setState({ activeMobileButton: currentActiveMobileButton });
@@ -151,9 +151,9 @@ class HeaderStore {
     this.setState({ isSticky: value });
   }
 
-  handleSetLastActiveMenuItem(value) {
-    this.setState({ lastActiveMenuItem: value });
-  }
+  // handleSetLastActiveMenuItem(value) {
+  //   this.setState({ lastActiveMenuItem: value });
+  // }
 
   handleToggleSubscribeFormVisible(value) {
     this.setState({ subscribeFormVisible: value });

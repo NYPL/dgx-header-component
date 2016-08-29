@@ -23,14 +23,14 @@ var HeaderStore = function () {
     _classCallCheck(this, HeaderStore);
 
     this.bindListeners({
-      handleUpdateHeaderData: _Actions2.default.UPDATE_HEADER_DATA,
-      handleFetchHeaderData: _Actions2.default.FETCH_HEADER_DATA,
-      handleHeaderDataFailedFetch: _Actions2.default.FAILED_HEADER_DATA,
+      // handleUpdateHeaderData: Actions.UPDATE_HEADER_DATA,
+      // handleFetchHeaderData: Actions.FETCH_HEADER_DATA,
+      // handleHeaderDataFailedFetch: Actions.FAILED_HEADER_DATA,
       handleSetMobileMenuButtonValue: _Actions2.default.SET_MOBILE_MENU_BUTTON_VALUE,
       handleSetMobileMyNyplButtonValue: _Actions2.default.SET_MOBILE_MY_NYPL_BUTTON_VALUE,
       handleSearchButtonActionValue: _Actions2.default.SEARCH_BUTTON_ACTION_VALUE,
       handleUpdateIsHeaderSticky: _Actions2.default.UPDATE_IS_HEADER_STICKY,
-      handleSetLastActiveMenuItem: _Actions2.default.SET_LAST_ACTIVE_MENU_ITEM,
+      // handleSetLastActiveMenuItem: Actions.SET_LAST_ACTIVE_MENU_ITEM,
       handleToggleSubscribeFormVisible: _Actions2.default.TOGGLE_SUBSCRIBE_FORM_VISIBLE,
       handleToggleMyNyplVisible: _Actions2.default.TOGGLE_MY_NYPL_VISIBLE,
       handleToggleStickyMyNyplVisible: _Actions2.default.TOGGLE_STICKY_MY_NYPL_VISIBLE
@@ -41,17 +41,17 @@ var HeaderStore = function () {
       _getSearchButtonActionValue: this._getSearchButtonActionValue,
       _getMobileMyNyplButtonValue: this._getMobileMyNyplButtonValue,
       _getIsStickyValue: this._getIsStickyValue,
-      _getLastActiveMenuItem: this._getLastActiveMenuItem,
+      // _getLastActiveMenuItem: this._getLastActiveMenuItem,
       _getSubscribeFormVisible: this._getSubscribeFormVisible,
       _getMyNyplVisible: this._getMyNyplVisible,
       _getStickyMyNyplVisible: this._getStickyMyNyplVisible
     });
 
     this.state = {
-      headerData: [],
-      errorMessage: null,
+      // headerData: [],
+      // errorMessage: null,
       isSticky: false,
-      lastActiveMenuItem: '',
+      // lastActiveMenuItem: '',
       activeMobileButton: '',
       searchButtonAction: '',
       mobileMyNyplButton: '',
@@ -159,27 +159,22 @@ var HeaderStore = function () {
      * value.
      * @return {String}
      */
+    // _getLastActiveMenuItem() {
+    //   return this.state.lastActiveMenuItem;
+    // }
 
-  }, {
-    key: '_getLastActiveMenuItem',
-    value: function _getLastActiveMenuItem() {
-      return this.state.lastActiveMenuItem;
-    }
-  }, {
-    key: 'handleUpdateHeaderData',
-    value: function handleUpdateHeaderData(data) {
-      this.setState({ headerData: data });
-    }
-  }, {
-    key: 'handleFetchHeaderData',
-    value: function handleFetchHeaderData() {
-      this.setState({ headerData: [] });
-    }
-  }, {
-    key: 'handleHeaderDataFailedFetch',
-    value: function handleHeaderDataFailedFetch(errorMsg) {
-      this.setState({ errorMessage: errorMsg });
-    }
+    // handleUpdateHeaderData(data) {
+    //   this.setState({ headerData: data });
+    // }
+    //
+    // handleFetchHeaderData() {
+    //   this.setState({ headerData: [] });
+    // }
+    //
+    // handleHeaderDataFailedFetch(errorMsg) {
+    //   this.setState({ errorMessage: errorMsg });
+    // }
+
   }, {
     key: 'handleSetMobileMenuButtonValue',
     value: function handleSetMobileMenuButtonValue(currentActiveMobileButton) {
@@ -203,11 +198,11 @@ var HeaderStore = function () {
     value: function handleUpdateIsHeaderSticky(value) {
       this.setState({ isSticky: value });
     }
-  }, {
-    key: 'handleSetLastActiveMenuItem',
-    value: function handleSetLastActiveMenuItem(value) {
-      this.setState({ lastActiveMenuItem: value });
-    }
+
+    // handleSetLastActiveMenuItem(value) {
+    //   this.setState({ lastActiveMenuItem: value });
+    // }
+
   }, {
     key: 'handleToggleSubscribeFormVisible',
     value: function handleToggleSubscribeFormVisible(value) {

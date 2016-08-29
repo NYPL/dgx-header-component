@@ -74,7 +74,7 @@ var NavMenu = function (_React$Component) {
   function NavMenu(props) {
     _classCallCheck(this, NavMenu);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NavMenu).call(this, props));
+    var _this = _possibleConstructorReturn(this, (NavMenu.__proto__ || Object.getPrototypeOf(NavMenu)).call(this, props));
 
     _this.handleEscKey = _this.handleEscKey.bind(_this);
     return _this;
@@ -164,11 +164,7 @@ var NavMenu = function (_React$Component) {
           target: item.link.en.text,
           urlType: _this2.props.urlType,
           navId: item.id,
-          features: item.features,
-          subNav: item.subnav,
-          key: index,
-          index: index,
-          cookie: _this2.props.cookie
+          key: index
         });
       });
     }
@@ -190,14 +186,17 @@ var NavMenu = function (_React$Component) {
           _react2.default.createElement(
             'ul',
             { className: this.props.className + '-List', id: 'NavMenu-List' },
-            this.renderNavMenu(this.props.items, ['1b4916f4-6723-44f0-bfae-112441527c4d'])
+            this.renderNavMenu(this.props.items)
           ),
           _react2.default.createElement(_SearchButton2.default, {
             className: '' + this.props.className,
             cookie: this.props.cookie
           }),
           this.renderStickyNavItems(),
-          _react2.default.createElement(_NavMenuBottomButtons2.default, { className: 'MobileBottomButtons' })
+          _react2.default.createElement(_NavMenuBottomButtons2.default, {
+            className: 'MobileBottomButtons',
+            libraryCardLink: this.props.urlType === 'absolute' ? '//www.nypl.org/library-card' : '/library-card'
+          })
         )
       );
     }

@@ -33,7 +33,7 @@ var SearchBox = function (_React$Component) {
   function SearchBox(props) {
     _classCallCheck(this, SearchBox);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SearchBox).call(this, props));
+    var _this = _possibleConstructorReturn(this, (SearchBox.__proto__ || Object.getPrototypeOf(SearchBox)).call(this, props));
 
     _this.state = {
       searchInput: '',

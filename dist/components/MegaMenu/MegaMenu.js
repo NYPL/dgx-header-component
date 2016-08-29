@@ -48,7 +48,7 @@ var MegaMenu = function (_React$Component) {
   function MegaMenu(props) {
     _classCallCheck(this, MegaMenu);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MegaMenu).call(this, props));
+    var _this = _possibleConstructorReturn(this, (MegaMenu.__proto__ || Object.getPrototypeOf(MegaMenu)).call(this, props));
 
     _this.watchHoverIntentEnter = _this.watchHoverIntentEnter.bind(_this);
     _this.watchHoverIntentLeave = _this.watchHoverIntentLeave.bind(_this);

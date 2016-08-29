@@ -45,7 +45,7 @@ var MegaMenuSubNav = function (_React$Component) {
   function MegaMenuSubNav() {
     _classCallCheck(this, MegaMenuSubNav);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(MegaMenuSubNav).apply(this, arguments));
+    return _possibleConstructorReturn(this, (MegaMenuSubNav.__proto__ || Object.getPrototypeOf(MegaMenuSubNav)).apply(this, arguments));
   }
 
   _createClass(MegaMenuSubNav, [{

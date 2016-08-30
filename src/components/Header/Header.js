@@ -80,7 +80,6 @@ class Header extends React.Component {
       {
         headerHeight: null,
         navData: this.props.navData,
-        featureFlags: FeatureFlags.store.getState(),
       },
       HeaderStore.getState()
     );
@@ -90,8 +89,6 @@ class Header extends React.Component {
 
   componentDidMount() {
     HeaderStore.listen(this.onChange.bind(this));
-    FeatureFlags.store.listen(this.onChange.bind(this));
-
     // Height needs to be set once the alerts (if any) are mounted.
     this.setHeaderHeight();
     // Listen to the scroll event for the sticky header.
@@ -100,8 +97,6 @@ class Header extends React.Component {
 
   componentWillUnmount() {
     HeaderStore.unlisten(this.onChange.bind(this));
-    FeatureFlags.store.unlisten(this.onChange.bind(this));
-
     // Removing event listener to minimize garbage collection
     window.removeEventListener('scroll', this.handleStickyHeader, false);
   }
@@ -111,7 +106,6 @@ class Header extends React.Component {
       _extend(
         {
           headerHeight: this.state.headerHeight,
-          featureFlags: FeatureFlags.store.getState(),
         },
         HeaderStore.getState()
       )

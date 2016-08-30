@@ -75,7 +75,7 @@ class MyNyplButton extends React.Component {
   handleClick() {
     const visibleState = HeaderStore.getMyNyplVisible() ? 'Closed' : 'Open';
     Actions.toggleMyNyplVisible(!HeaderStore.getMyNyplVisible());
-    utils._trackHeader('Log In', `MyNyplButton - ${visibleState}`);
+    utils.trackHeader('Log In', `MyNyplButton - ${visibleState}`);
   }
 
   /**
@@ -86,7 +86,7 @@ class MyNyplButton extends React.Component {
   handleOnClickOut() {
     if (HeaderStore.getMyNyplVisible()) {
       if (HeaderStore.getMobileMyNyplButtonValue() === '') {
-        utils._trackHeader('Log In', 'MyNyplButton - Closed');
+        utils.trackHeader('Log In', 'MyNyplButton - Closed');
       }
       Actions.toggleMyNyplVisible(false);
     }

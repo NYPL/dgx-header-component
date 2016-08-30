@@ -24,7 +24,7 @@ var Logo = function Logo(props) {
       className: props.className,
       href: props.target,
       onClick: function onClick() {
-        return _utils2.default._trackHeader('Click Logo', '');
+        return _utils2.default.trackHeader('Click Logo', '');
       },
       style: props.style
     },

@@ -23,14 +23,10 @@ var HeaderStore = function () {
     _classCallCheck(this, HeaderStore);
 
     this.bindListeners({
-      // handleUpdateHeaderData: Actions.UPDATE_HEADER_DATA,
-      // handleFetchHeaderData: Actions.FETCH_HEADER_DATA,
-      // handleHeaderDataFailedFetch: Actions.FAILED_HEADER_DATA,
       handleSetMobileMenuButtonValue: _Actions2.default.SET_MOBILE_MENU_BUTTON_VALUE,
       handleSetMobileMyNyplButtonValue: _Actions2.default.SET_MOBILE_MY_NYPL_BUTTON_VALUE,
       handleSearchButtonActionValue: _Actions2.default.SEARCH_BUTTON_ACTION_VALUE,
       handleUpdateIsHeaderSticky: _Actions2.default.UPDATE_IS_HEADER_STICKY,
-      // handleSetLastActiveMenuItem: Actions.SET_LAST_ACTIVE_MENU_ITEM,
       handleToggleSubscribeFormVisible: _Actions2.default.TOGGLE_SUBSCRIBE_FORM_VISIBLE,
       handleToggleMyNyplVisible: _Actions2.default.TOGGLE_MY_NYPL_VISIBLE,
       handleToggleStickyMyNyplVisible: _Actions2.default.TOGGLE_STICKY_MY_NYPL_VISIBLE
@@ -41,17 +37,13 @@ var HeaderStore = function () {
       getSearchButtonActionValue: this.getSearchButtonActionValue,
       getMobileMyNyplButtonValue: this.getMobileMyNyplButtonValue,
       getIsStickyValue: this.getIsStickyValue,
-      // _getLastActiveMenuItem: this._getLastActiveMenuItem,
       getSubscribeFormVisible: this.getSubscribeFormVisible,
       getMyNyplVisible: this.getMyNyplVisible,
       getStickyMyNyplVisible: this.getStickyMyNyplVisible
     });
 
     this.state = {
-      // headerData: [],
-      // errorMessage: null,
       isSticky: false,
-      // lastActiveMenuItem: '',
       activeMobileButton: '',
       searchButtonAction: '',
       mobileMyNyplButton: '',
@@ -62,7 +54,7 @@ var HeaderStore = function () {
   }
 
   /**
-   * _getMobileMenuBtnValue()
+   * getMobileMenuBtnValue()
    * returns the current state.activeMobileButton
    * value.
    * @return {String}
@@ -76,7 +68,7 @@ var HeaderStore = function () {
     }
 
     /**
-     * _getMobileMyNyplButtonValue()
+     * getMobileMyNyplButtonValue()
      * returns the current state.mobileMyNyplButton
      * value.
      * @return {String}
@@ -89,7 +81,7 @@ var HeaderStore = function () {
     }
 
     /**
-     * _getSubscribeFormVisible()
+     * getSubscribeFormVisible()
      * returns the current state.subscribeFormVisible
      * value.
      * @return {Boolean} true/false
@@ -102,7 +94,7 @@ var HeaderStore = function () {
     }
 
     /**
-     * _getMyNyplVisible()
+     * getMyNyplVisible()
      * returns the current state.myNYPLVisible
      * value.
      * @return {Boolean} true/false
@@ -115,7 +107,7 @@ var HeaderStore = function () {
     }
 
     /**
-     * _getStickyMyNyplVisible()
+     * getStickyMyNyplVisible()
      * returns the current state.stickyLoginVisible
      * value.
      * @return {Boolean} true/false
@@ -128,7 +120,7 @@ var HeaderStore = function () {
     }
 
     /**
-     * _getSearchButtonActionValue()
+     * getSearchButtonActionValue()
      * returns the current state.getSearchButtonActionValue
      * value.
      * @return {String}
@@ -152,29 +144,6 @@ var HeaderStore = function () {
     value: function getIsStickyValue() {
       return this.state.isSticky;
     }
-
-    /**
-     * _getLastActiveMenuItem()
-     * returns the current state.lastActiveMenuItem
-     * value.
-     * @return {String}
-     */
-    // _getLastActiveMenuItem() {
-    //   return this.state.lastActiveMenuItem;
-    // }
-
-    // handleUpdateHeaderData(data) {
-    //   this.setState({ headerData: data });
-    // }
-    //
-    // handleFetchHeaderData() {
-    //   this.setState({ headerData: [] });
-    // }
-    //
-    // handleHeaderDataFailedFetch(errorMsg) {
-    //   this.setState({ errorMessage: errorMsg });
-    // }
-
   }, {
     key: 'handleSetMobileMenuButtonValue',
     value: function handleSetMobileMenuButtonValue(currentActiveMobileButton) {
@@ -198,11 +167,6 @@ var HeaderStore = function () {
     value: function handleUpdateIsHeaderSticky(value) {
       this.setState({ isSticky: value });
     }
-
-    // handleSetLastActiveMenuItem(value) {
-    //   this.setState({ lastActiveMenuItem: value });
-    // }
-
   }, {
     key: 'handleToggleSubscribeFormVisible',
     value: function handleToggleSubscribeFormVisible(value) {

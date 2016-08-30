@@ -32,7 +32,7 @@ var DonateBox = function DonateBox(_ref) {
         {
           href: item.url,
           onClick: function onClick() {
-            return _utils2.default._trackHeader('Donate', 'Menu--' + item.amount);
+            return _utils2.default.trackHeader('Donate', 'Menu--' + item.amount);
           }
         },
         item.amount

@@ -15,7 +15,7 @@ const DonateBox = ({
       <li key={index}>
         <a
           href={item.url}
-          onClick={() => utils._trackHeader('Donate', `Menu--${item.amount}`)}
+          onClick={() => utils.trackHeader('Donate', `Menu--${item.amount}`)}
         >
           {item.amount}
         </a>

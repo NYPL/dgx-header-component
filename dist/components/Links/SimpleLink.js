@@ -37,7 +37,7 @@ var SimpleLink = function (_React$Component) {
   _createClass(SimpleLink, [{
     key: 'handleOnClick',
     value: function handleOnClick() {
-      _utils2.default._trackHeader(this.props.gaAction, this.props.gaLabel);
+      _utils2.default.trackHeader(this.props.gaAction, this.props.gaLabel);
       this.props.onClick();
     }
   }, {

@@ -306,7 +306,7 @@ var EmailSubscription = function (_React$Component) {
         );
 
         if (status === 'success') {
-          _utils2.default._trackHeader('Subscribe', 'Success');
+          _utils2.default.trackHeader('Subscribe', 'Success');
           subscribeContent = _react2.default.createElement(
             'div',
             null,
@@ -341,7 +341,7 @@ var EmailSubscription = function (_React$Component) {
         }
 
         if (status === 'exists') {
-          _utils2.default._trackHeader('Subscribe', 'Error -- already subscribed');
+          _utils2.default.trackHeader('Subscribe', 'Error -- already subscribed');
           subscribeContent = _react2.default.createElement(
             'div',
             null,
@@ -359,7 +359,7 @@ var EmailSubscription = function (_React$Component) {
         }
 
         if (status === 'error' || status === 'Internal Server Error') {
-          _utils2.default._trackHeader('Subscribe', 'Error');
+          _utils2.default.trackHeader('Subscribe', 'Error');
           subscribeContent = _react2.default.createElement(
             'div',
             { className: this.props.className + '-Misc-Error' },
@@ -399,7 +399,7 @@ var EmailSubscription = function (_React$Component) {
               className: this.props.className + '-sc-link',
               style: styles.scLink,
               onClick: function onClick() {
-                return _utils2.default._trackHeader('Subscribe', 'Subscription Center');
+                return _utils2.default.trackHeader('Subscribe', 'Subscription Center');
               }
             },
             'Subscription Center'

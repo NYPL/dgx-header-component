@@ -150,7 +150,7 @@ var SubscribeButton = function (_React$Component) {
         e.preventDefault();
         var visibleState = this.state.subscribeFormVisible ? 'Closed' : 'Open';
         _Actions2.default.toggleSubscribeFormVisible(!this.state.subscribeFormVisible);
-        _utils2.default._trackHeader('Click', 'Subscribe - ' + visibleState);
+        _utils2.default.trackHeader('Click', 'Subscribe - ' + visibleState);
       }
     }
 
@@ -165,7 +165,7 @@ var SubscribeButton = function (_React$Component) {
     value: function handleOnClickOut() {
       if (_HeaderStore2.default.getSubscribeFormVisible()) {
         _Actions2.default.toggleSubscribeFormVisible(false);
-        _utils2.default._trackHeader('Click', 'Subscribe - Closed');
+        _utils2.default.trackHeader('Click', 'Subscribe - Closed');
       }
     }
 

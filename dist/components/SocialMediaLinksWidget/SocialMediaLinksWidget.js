@@ -38,7 +38,7 @@ var SocialMediaLinksWidget = function (_React$Component) {
 
     _this.handleOnMouseLeave = _this.handleOnMouseLeave.bind(_this);
     _this.handleOnMouseEnter = _this.handleOnMouseEnter.bind(_this);
-    _this.trackHeader = _utils2.default._trackHeader.bind(_this);
+    _this.trackHeader = _utils2.default.trackHeader.bind(_this);
     return _this;
   }
 

@@ -257,7 +257,7 @@ var Header = function (_React$Component) {
         // Only update the value if sticky is false
         if (!_HeaderStore2.default.getIsStickyValue()) {
           // Fire GA Event when Header is in Sticky Mode
-          _utils2.default._trackHeader.bind(this, 'scroll', 'Sticky Header');
+          _utils2.default.trackHeader.bind(this, 'scroll', 'Sticky Header');
           // Update the isSticky flag
           _Actions2.default.updateIsHeaderSticky(true);
         }

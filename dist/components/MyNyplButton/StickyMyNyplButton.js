@@ -107,7 +107,7 @@ var StickyMyNyplButton = function (_React$Component) {
     value: function handleClick() {
       var visibleState = _HeaderStore2.default.getStickyMyNyplVisible() ? 'Closed' : 'Open';
       _Actions2.default.toggleStickyMyNyplVisible(!_HeaderStore2.default.getStickyMyNyplVisible());
-      _utils2.default._trackHeader('Log In', 'StickyMyNyplButton - ' + visibleState);
+      _utils2.default.trackHeader('Log In', 'StickyMyNyplButton - ' + visibleState);
     }
 
     /**
@@ -121,7 +121,7 @@ var StickyMyNyplButton = function (_React$Component) {
     value: function handleOnClickOut() {
       if (_HeaderStore2.default.getStickyMyNyplVisible()) {
         _Actions2.default.toggleStickyMyNyplVisible(false);
-        _utils2.default._trackHeader('Log In', 'StickyMyNyplButton - Closed');
+        _utils2.default.trackHeader('Log In', 'StickyMyNyplButton - Closed');
       }
     }
   }, {

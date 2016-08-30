@@ -77,7 +77,7 @@ var SearchButton = function (_React$Component) {
       } else {
         this.setState({ active: true });
         // Fire GA event to track when the Search Menu is open
-        _utils2.default._trackHeader('Search', 'Open Menu');
+        _utils2.default.trackHeader('Search', 'Open Menu');
       }
     }
 
@@ -95,7 +95,7 @@ var SearchButton = function (_React$Component) {
       if (this.state.active) {
         setTimeout(function () {
           _this2.setState({ active: false });
-          _utils2.default._trackHeader('Search', 'Close Menu');
+          _utils2.default.trackHeader('Search', 'Close Menu');
         }, 200);
       }
     }

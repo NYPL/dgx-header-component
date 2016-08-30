@@ -182,7 +182,7 @@ class MobileHeader extends React.Component {
       }
     }
 
-    utils._trackHeader('Click', `Mobile ${activeButton}`);
+    utils.trackHeader('Click', `Mobile ${activeButton}`);
   }
 
   /**
@@ -289,7 +289,7 @@ class MobileHeader extends React.Component {
         <a
           style={styles.locationsLink}
           href={locatorUrl}
-          onClick={() => utils._trackHeader('Click', 'Mobile Locations Button')}
+          onClick={() => utils.trackHeader('Click', 'Mobile Locations Button')}
           className={`${this.props.className}-Locator`}
           aria-label="NYPL Locations Near Me"
         >

@@ -44,7 +44,7 @@ var NavMenuItem = function NavMenuItem(_ref) {
         className: 'NavMenuItem-Link',
         id: navId ? 'NavMenuItem-Link-' + navId : 'NavMenuItem-Link',
         onClick: function onClick() {
-          return _utils2.default._trackHeader('Go to...', '' + label[lang].text);
+          return _utils2.default.trackHeader('Go to...', '' + label[lang].text);
         }
       },
       label[lang].text

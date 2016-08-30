@@ -8,7 +8,7 @@ class SimpleLink extends React.Component {
   }
 
   handleOnClick() {
-    utils._trackHeader(this.props.gaAction, this.props.gaLabel);
+    utils.trackHeader(this.props.gaAction, this.props.gaLabel);
     this.props.onClick();
   }
 

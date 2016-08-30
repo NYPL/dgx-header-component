@@ -91,7 +91,7 @@ var MyNypl = function (_React$Component) {
                 style: styles.loginButtons,
                 className: this.props.className + '-Catalog-Btn',
                 onClick: function onClick() {
-                  return _utils2.default._trackHeader('Log In', 'Catalog');
+                  return _utils2.default.trackHeader('Log In', 'Catalog');
                 }
               },
               _react2.default.createElement('span', { className: 'nypl-icon-login icon' }),
@@ -108,7 +108,7 @@ var MyNypl = function (_React$Component) {
                 style: styles.loginButtons,
                 className: this.props.className + '-Research-Btn',
                 onClick: function onClick() {
-                  return _utils2.default._trackHeader('Log In', 'Research');
+                  return _utils2.default.trackHeader('Log In', 'Research');
                 }
               },
               _react2.default.createElement('span', { className: 'nypl-icon-bldg icon' }),
@@ -122,7 +122,7 @@ var MyNypl = function (_React$Component) {
             href: this.props.infoLink,
             className: this.props.className + '-Catalog-Link',
             onClick: function onClick() {
-              return _utils2.default._trackHeader('Log In', 'Catalog Info');
+              return _utils2.default.trackHeader('Log In', 'Catalog Info');
             },
             style: styles.catalogInfo
           },

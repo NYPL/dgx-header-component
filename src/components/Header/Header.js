@@ -171,7 +171,7 @@ class Header extends React.Component {
       // Only update the value if sticky is false
       if (!HeaderStore.getIsStickyValue()) {
         // Fire GA Event when Header is in Sticky Mode
-        utils._trackHeader.bind(this, 'scroll', 'Sticky Header');
+        utils.trackHeader.bind(this, 'scroll', 'Sticky Header');
         // Update the isSticky flag
         Actions.updateIsHeaderSticky(true);
       }

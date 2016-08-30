@@ -96,7 +96,7 @@ class SubscribeButton extends React.Component {
       e.preventDefault();
       const visibleState = this.state.subscribeFormVisible ? 'Closed' : 'Open';
       Actions.toggleSubscribeFormVisible(!this.state.subscribeFormVisible);
-      utils._trackHeader('Click', `Subscribe - ${visibleState}`);
+      utils.trackHeader('Click', `Subscribe - ${visibleState}`);
     }
   }
 
@@ -108,7 +108,7 @@ class SubscribeButton extends React.Component {
   handleOnClickOut() {
     if (HeaderStore.getSubscribeFormVisible()) {
       Actions.toggleSubscribeFormVisible(false);
-      utils._trackHeader('Click', 'Subscribe - Closed');
+      utils.trackHeader('Click', 'Subscribe - Closed');
     }
   }
 

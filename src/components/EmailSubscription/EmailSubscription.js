@@ -235,7 +235,7 @@ class EmailSubscription extends React.Component {
         </div>);
 
       if (status === 'success') {
-        utils._trackHeader('Subscribe', 'Success');
+        utils.trackHeader('Subscribe', 'Success');
         subscribeContent = (
           <div>
             <SubscribeMessageBox
@@ -260,7 +260,7 @@ class EmailSubscription extends React.Component {
       }
 
       if (status === 'exists') {
-        utils._trackHeader('Subscribe', 'Error -- already subscribed');
+        utils.trackHeader('Subscribe', 'Error -- already subscribed');
         subscribeContent = (
           <div>
             <SubscribeMessageBox status={status} msg="Looks like you're already signed up!" />
@@ -274,7 +274,7 @@ class EmailSubscription extends React.Component {
       }
 
       if (status === 'error' || status === 'Internal Server Error') {
-        utils._trackHeader('Subscribe', 'Error');
+        utils.trackHeader('Subscribe', 'Error');
         subscribeContent = (
           <div className={`${this.props.className}-Misc-Error`}>
             <div>Hmm...</div>
@@ -296,7 +296,7 @@ class EmailSubscription extends React.Component {
             href={this.props.subCenterUrl}
             className={`${this.props.className}-sc-link`}
             style={styles.scLink}
-            onClick={() => utils._trackHeader('Subscribe', 'Subscription Center')}
+            onClick={() => utils.trackHeader('Subscribe', 'Subscription Center')}
           >
             Subscription Center
           </a>

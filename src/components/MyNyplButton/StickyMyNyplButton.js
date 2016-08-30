@@ -60,7 +60,7 @@ class StickyMyNyplButton extends React.Component {
   handleClick() {
     const visibleState = HeaderStore.getStickyMyNyplVisible() ? 'Closed' : 'Open';
     Actions.toggleStickyMyNyplVisible(!HeaderStore.getStickyMyNyplVisible());
-    utils._trackHeader('Log In', `StickyMyNyplButton - ${visibleState}`);
+    utils.trackHeader('Log In', `StickyMyNyplButton - ${visibleState}`);
   }
 
   /**
@@ -71,7 +71,7 @@ class StickyMyNyplButton extends React.Component {
   handleOnClickOut() {
     if (HeaderStore.getStickyMyNyplVisible()) {
       Actions.toggleStickyMyNyplVisible(false);
-      utils._trackHeader('Log In', 'StickyMyNyplButton - Closed');
+      utils.trackHeader('Log In', 'StickyMyNyplButton - Closed');
     }
   }
 

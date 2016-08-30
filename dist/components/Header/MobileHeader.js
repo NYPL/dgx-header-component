@@ -230,7 +230,7 @@ var MobileHeader = function (_React$Component) {
         }
       }
 
-      _utils2.default._trackHeader('Click', 'Mobile ' + activeButton);
+      _utils2.default.trackHeader('Click', 'Mobile ' + activeButton);
     }
 
     /**
@@ -370,7 +370,7 @@ var MobileHeader = function (_React$Component) {
             style: styles.locationsLink,
             href: locatorUrl,
             onClick: function onClick() {
-              return _utils2.default._trackHeader('Click', 'Mobile Locations Button');
+              return _utils2.default.trackHeader('Click', 'Mobile Locations Button');
             },
             className: this.props.className + '-Locator',
             'aria-label': 'NYPL Locations Near Me'

@@ -31,7 +31,7 @@ class SearchButton extends React.Component {
     } else {
       this.setState({ active: true });
       // Fire GA event to track when the Search Menu is open
-      utils._trackHeader('Search', 'Open Menu');
+      utils.trackHeader('Search', 'Open Menu');
     }
   }
 
@@ -44,7 +44,7 @@ class SearchButton extends React.Component {
     if (this.state.active) {
       setTimeout(() => {
         this.setState({ active: false });
-        utils._trackHeader('Search', 'Close Menu');
+        utils.trackHeader('Search', 'Close Menu');
       }, 200);
     }
   }

@@ -106,7 +106,7 @@ var MobileMyNypl = function MobileMyNypl(_ref) {
         className: catalogLinkClass,
         style: styles.links,
         onClick: function onClick() {
-          return _utils2.default._trackHeader('Mobile Log In', 'Catalog');
+          return _utils2.default.trackHeader('Mobile Log In', 'Catalog');
         }
       },
       _react2.default.createElement(
@@ -133,7 +133,7 @@ var MobileMyNypl = function MobileMyNypl(_ref) {
         className: researchLinkClass,
         style: styles.links,
         onClick: function onClick() {
-          return _utils2.default._trackHeader('Mobile Log In', 'Research');
+          return _utils2.default.trackHeader('Mobile Log In', 'Research');
         }
       },
       _react2.default.createElement(
@@ -160,7 +160,7 @@ var MobileMyNypl = function MobileMyNypl(_ref) {
         href: infoLink,
         lang: lang,
         onClick: function onClick() {
-          return _utils2.default._trackHeader('Mobile Log In', 'Catalog Info');
+          return _utils2.default.trackHeader('Mobile Log In', 'Catalog Info');
         },
         style: styles.catalogInfoLink
       },

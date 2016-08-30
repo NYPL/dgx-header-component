@@ -35,7 +35,7 @@ var DonateButton = function DonateButton(_ref) {
       className: className,
       href: target,
       onClick: function onClick() {
-        return _utils2.default._trackHeader('Donate', gaLabel);
+        return _utils2.default.trackHeader('Donate', gaLabel);
       },
       style: (0, _underscore.extend)(style, defaultStyles)
     },

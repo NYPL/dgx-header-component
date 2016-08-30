@@ -28,7 +28,7 @@ const NavMenuItem = ({
         href={(urlType === 'absolute') ? target : convertUrlRelative(target)}
         className="NavMenuItem-Link"
         id={(navId) ? `NavMenuItem-Link-${navId}` : 'NavMenuItem-Link'}
-        onClick={() => utils._trackHeader('Go to...', `${label[lang].text}`)}
+        onClick={() => utils.trackHeader('Go to...', `${label[lang].text}`)}
       >
         {label[lang].text}
       </a>

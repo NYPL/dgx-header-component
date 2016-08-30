@@ -73,7 +73,7 @@ var MegaMenuSubNav = function (_React$Component) {
             {
               href: target,
               onClick: function onClick() {
-                return _utils2.default._trackHeader('Go to...', _this2.props.label[_this2.props.lang].text + '--' + m.name[_this2.props.lang].text);
+                return _utils2.default.trackHeader('Go to...', _this2.props.label[_this2.props.lang].text + '--' + m.name[_this2.props.lang].text);
               }
             },
             m.name[_this2.props.lang].text
@@ -114,7 +114,7 @@ var MegaMenuSubNav = function (_React$Component) {
               style: styles.topLink,
               href: this.props.topLink,
               onClick: function onClick() {
-                return _utils2.default._trackHeader('Go to...', 'SubNav Title--' + _this3.props.label[_this3.props.lang].text);
+                return _utils2.default.trackHeader('Go to...', 'SubNav Title--' + _this3.props.label[_this3.props.lang].text);
               }
             },
             this.props.label[this.props.lang].text

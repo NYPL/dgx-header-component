@@ -11,7 +11,7 @@ class SocialMediaLinksWidget extends React.Component {
 
     this.handleOnMouseLeave = this.handleOnMouseLeave.bind(this);
     this.handleOnMouseEnter = this.handleOnMouseEnter.bind(this);
-    this.trackHeader = utils._trackHeader.bind(this);
+    this.trackHeader = utils.trackHeader.bind(this);
   }
 
   generateLinksToDisplay(list, displayOnlyList) {

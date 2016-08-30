@@ -30,7 +30,7 @@ var DefaultItem = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (DefaultItem.__proto__ || Object.getPrototypeOf(DefaultItem)).call(this, props));
 
-    _this._trackHeader = _utils2.default._trackHeader.bind(_this);
+    _this.trackHeader = _utils2.default.trackHeader.bind(_this);
     _this.extraFeatureDetails = _this.extraFeatureDetails.bind(_this);
     _this.personField = _this.personField.bind(_this);
     _this.imageElem = _this.imageElem.bind(_this);
@@ -102,7 +102,7 @@ var DefaultItem = function (_React$Component) {
         {
           href: feature.link,
           className: this.props.className,
-          onClick: _utils2.default._trackHeader.bind(this, 'FeatureItem', this.props.navLabel + ' - ' + feature.title)
+          onClick: _utils2.default.trackHeader.bind(this, 'FeatureItem', this.props.navLabel + ' - ' + feature.title)
         },
         _react2.default.createElement(
           'div',

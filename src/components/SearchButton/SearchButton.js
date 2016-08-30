@@ -7,7 +7,6 @@ import { SearchIcon } from 'dgx-svg-icons';
 import SearchBox from '../SearchBox/SearchBox.js';
 // ALT Flux Store
 import HeaderStore from '../../stores/HeaderStore.js';
-import Actions from '../../actions/Actions.js';
 // GA Utility Library
 import utils from '../../utils/utils.js';
 
@@ -19,8 +18,6 @@ class SearchButton extends React.Component {
 
     this.handleOnClick = this.handleOnClick.bind(this);
     this.handleOnClickOut = this.handleOnClickOut.bind(this);
-    this.activateHover = this.activateHover.bind(this);
-    this.deactivateHover = this.deactivateHover.bind(this);
   }
 
   /**
@@ -29,15 +26,12 @@ class SearchButton extends React.Component {
    */
   handleOnClick(e) {
     e.preventDefault();
-    // Only handle click event if cookie is set
-    if (this.props.cookie === '1') {
-      if (this.state.active) {
-        this.handleOnClickOut();
-      } else {
-        this.setState({ active: true });
-        // Fire GA event to track when the Search Menu is open
-        utils._trackHeader('Search', 'Open Menu');
-      }
+    if (this.state.active) {
+      this.handleOnClickOut();
+    } else {
+      this.setState({ active: true });
+      // Fire GA event to track when the Search Menu is open
+      utils.trackHeader('Search', 'Open Menu');
     }
   }
 
@@ -46,46 +40,11 @@ class SearchButton extends React.Component {
    * Handles closing SearchBox via click event
    */
   handleOnClickOut() {
-    // Only handle ClickOut events if cookie is SET
-    if (this.props.cookie === '1') {
-      // Update active state only if ACTIVE is true
-      if (this.state.active) {
-        setTimeout(() => {
-          this.setState({ active: false });
-          utils._trackHeader('Search', 'Close Menu');
-        }, 200);
-      }
-    }
-  }
-
-  /**
-   * Update the Store's searchButtonActionValue
-   * with hoverSearch after a set time delay.
-   */
-  activateHover() {
-    // Only handle the hover event if the cookie is NOT set
-    if (this.props.cookie !== '1') {
-      this.hoverTimer = setTimeout(() => {
-        Actions.searchButtonActionValue('hoverSearch');
-        // Fire GA event to track when the Search Menu is open
-        utils._trackHeader('Search', 'Open Menu');
-      }, 80);
-    }
-  }
-
-  /**
-   * Clear the activateHover timer if it exists.
-   * Reset the Store's searchButtonActionValue to empty
-   * after a set time delay.
-   */
-  deactivateHover() {
-    // Only handle the hover event if the cookie is NOT set
-    if (this.props.cookie !== '1') {
-      clearTimeout(this.hoverTimer);
-
+    // Update active state only if ACTIVE is true
+    if (this.state.active) {
       setTimeout(() => {
-        Actions.searchButtonActionValue('');
-        utils._trackHeader('Search', 'Close Menu');
+        this.setState({ active: false });
+        utils.trackHeader('Search', 'Close Menu');
       }, 200);
     }
   }
@@ -97,16 +56,11 @@ class SearchButton extends React.Component {
   * @returns {Object} React DOM.
   */
   renderSearchButton() {
-    const classes = cx({
-      active: this.state.active ||
-        HeaderStore._getSearchButtonActionValue() === 'hoverSearch' ||
-        HeaderStore._getLastActiveMenuItem() === 'hoverSearch'
-    });
-    const stickyStatus = cx({ isSticky: HeaderStore.getState().isSticky });
+    const classes = cx({ active: this.state.active, isSticky: HeaderStore.getState().isSticky });
 
     return (
       <button
-        className={`${this.props.className}-searchButton ${classes} ${stickyStatus}`}
+        className={`${this.props.className}-searchButton ${classes}`}
         id={`${this.props.className}-searchButton`}
         name="Search Button"
         onClick={(e) => this.handleOnClick(e)}
@@ -131,13 +85,9 @@ class SearchButton extends React.Component {
   * @returns {Object} React DOM.
   */
   renderSearchBox() {
-    const isActive = (this.state.active ||
-      HeaderStore._getSearchButtonActionValue() === 'hoverSearch' ||
-      HeaderStore._getLastActiveMenuItem() === 'hoverSearch'
-    );
     const sticky = cx({ isSticky: HeaderStore.getState().isSticky });
 
-    return (isActive) ? (
+    return (this.state.active) ? (
       <div
         className={`${this.props.className}-desktopSearchBox animatedFast fadeIn ${sticky}`}
       >
@@ -148,11 +98,7 @@ class SearchButton extends React.Component {
 
   render() {
     return (
-      <div
-        className={`${this.props.className}-searchBox-Wrapper`}
-        onMouseEnter={this.activateHover}
-        onMouseLeave={this.deactivateHover}
-      >
+      <div className={`${this.props.className}-searchBox-Wrapper`}>
         <ClickOutHandler onClickOut={this.handleOnClickOut}>
           {this.renderSearchButton()}
           {this.renderSearchBox()}
@@ -165,7 +111,6 @@ class SearchButton extends React.Component {
 SearchButton.propTypes = {
   lang: React.PropTypes.string,
   className: React.PropTypes.string,
-  cookie: React.PropTypes.string,
 };
 
 SearchButton.defaultProps = {

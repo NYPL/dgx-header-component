@@ -157,7 +157,7 @@ class MobileHeader extends React.Component {
    */
   toggleMobileMenuButton(activeButton) {
     if (activeButton === 'clickSearch') {
-      if (HeaderStore._getSearchButtonActionValue() !== activeButton) {
+      if (HeaderStore.getSearchButtonActionValue() !== activeButton) {
         Actions.searchButtonActionValue(activeButton);
         Actions.setMobileMenuButtonValue('');
         Actions.setMobileMyNyplButtonValue('');
@@ -165,7 +165,7 @@ class MobileHeader extends React.Component {
         Actions.searchButtonActionValue('');
       }
     } else if (activeButton === 'mobileMenu') {
-      if (HeaderStore._getMobileMenuBtnValue() !== activeButton) {
+      if (HeaderStore.getMobileMenuBtnValue() !== activeButton) {
         Actions.setMobileMenuButtonValue(activeButton);
         Actions.searchButtonActionValue('');
         Actions.setMobileMyNyplButtonValue('');
@@ -173,7 +173,7 @@ class MobileHeader extends React.Component {
         Actions.setMobileMenuButtonValue('');
       }
     } else if (activeButton === 'clickMyNypl') {
-      if (HeaderStore._getMobileMyNyplButtonValue() !== activeButton) {
+      if (HeaderStore.getMobileMyNyplButtonValue() !== activeButton) {
         Actions.setMobileMyNyplButtonValue(activeButton);
         Actions.searchButtonActionValue('');
         Actions.setMobileMenuButtonValue('');
@@ -182,7 +182,7 @@ class MobileHeader extends React.Component {
       }
     }
 
-    utils._trackHeader('Click', `Mobile ${activeButton}`);
+    utils.trackHeader('Click', `Mobile ${activeButton}`);
   }
 
   /**
@@ -289,7 +289,7 @@ class MobileHeader extends React.Component {
         <a
           style={styles.locationsLink}
           href={locatorUrl}
-          onClick={() => utils._trackHeader('Click', 'Mobile Locations Button')}
+          onClick={() => utils.trackHeader('Click', 'Mobile Locations Button')}
           className={`${this.props.className}-Locator`}
           aria-label="NYPL Locations Near Me"
         >

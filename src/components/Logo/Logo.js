@@ -7,7 +7,7 @@ const Logo = (props) =>
     id={props.id}
     className={props.className}
     href={props.target}
-    onClick={() => utils._trackHeader('Click Logo', '')}
+    onClick={() => utils.trackHeader('Click Logo', '')}
     style={props.style}
   >
     <LionLogoWithText />

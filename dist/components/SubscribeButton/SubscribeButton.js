@@ -93,7 +93,7 @@ var SubscribeButton = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (SubscribeButton.__proto__ || Object.getPrototypeOf(SubscribeButton)).call(this, props));
 
     _this.state = {
-      subscribeFormVisible: _HeaderStore2.default._getSubscribeFormVisible(),
+      subscribeFormVisible: _HeaderStore2.default.getSubscribeFormVisible(),
       target: _this.props.target
     };
 
@@ -127,7 +127,7 @@ var SubscribeButton = function (_React$Component) {
   }, {
     key: 'onChange',
     value: function onChange() {
-      this.setState({ subscribeFormVisible: _HeaderStore2.default._getSubscribeFormVisible() });
+      this.setState({ subscribeFormVisible: _HeaderStore2.default.getSubscribeFormVisible() });
     }
   }, {
     key: 'handleEscKey',
@@ -150,7 +150,7 @@ var SubscribeButton = function (_React$Component) {
         e.preventDefault();
         var visibleState = this.state.subscribeFormVisible ? 'Closed' : 'Open';
         _Actions2.default.toggleSubscribeFormVisible(!this.state.subscribeFormVisible);
-        _utils2.default._trackHeader('Click', 'Subscribe - ' + visibleState);
+        _utils2.default.trackHeader('Click', 'Subscribe - ' + visibleState);
       }
     }
 
@@ -163,9 +163,9 @@ var SubscribeButton = function (_React$Component) {
   }, {
     key: 'handleOnClickOut',
     value: function handleOnClickOut() {
-      if (_HeaderStore2.default._getSubscribeFormVisible()) {
+      if (_HeaderStore2.default.getSubscribeFormVisible()) {
         _Actions2.default.toggleSubscribeFormVisible(false);
-        _utils2.default._trackHeader('Click', 'Subscribe - Closed');
+        _utils2.default.trackHeader('Click', 'Subscribe - Closed');
       }
     }
 

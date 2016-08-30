@@ -75,7 +75,7 @@ const NavMenuBottomButtons = ({
         href={libraryCardLink}
         className={libraryCardClass}
         style={styles.links}
-        onClick={() => utils._trackHeader('Click', 'Mobile Bottom Buttons - Library Card')}
+        onClick={() => utils.trackHeader('Click', 'Mobile Bottom Buttons - Library Card')}
       >
         <span
           className={`${libraryCardClass}-Wrapper`}
@@ -99,7 +99,7 @@ const NavMenuBottomButtons = ({
         href={subscribeLink}
         className={subscribeLinkClass}
         style={styles.links}
-        onClick={() => utils._trackHeader('Click', 'Mobile Bottom Buttons - Email Updates')}
+        onClick={() => utils.trackHeader('Click', 'Mobile Bottom Buttons - Email Updates')}
       >
         <span
           className={`${subscribeLinkClass}-Wrapper`}

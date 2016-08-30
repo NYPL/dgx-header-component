@@ -31,12 +31,6 @@ const config = {
       amount: 'Other',
     },
   ],
-  headerClientEnv: {
-    local: 'http://localhost:3001',
-    development: 'https://dev-header.nypl.org',
-    qa: 'https://qa-header.nypl.org',
-    production: 'https://header.nypl.org',
-  },
   myNyplLinks: {
     catalog: 'https://browse.nypl.org/iii/encore/myaccount',
     research: 'https://catalog.nypl.org/patroninfo/top',

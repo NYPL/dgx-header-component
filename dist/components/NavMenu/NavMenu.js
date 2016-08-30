@@ -108,7 +108,7 @@ var NavMenu = function (_React$Component) {
   }, {
     key: 'closeMobileNavMenuDialog',
     value: function closeMobileNavMenuDialog() {
-      if (_HeaderStore2.default._getMobileMenuBtnValue() === 'mobileMenu') {
+      if (_HeaderStore2.default.getMobileMenuBtnValue() === 'mobileMenu') {
         _Actions2.default.setMobileMenuButtonValue('');
       }
     }
@@ -122,7 +122,7 @@ var NavMenu = function (_React$Component) {
   }, {
     key: 'renderStickyNavItems',
     value: function renderStickyNavItems() {
-      var stickyClass = _HeaderStore2.default._getIsStickyValue() ? ' active' : '';
+      var stickyClass = _HeaderStore2.default.getIsStickyValue() ? ' active' : '';
       return _react2.default.createElement(
         'div',
         { className: this.props.className + '-stickyItems' + stickyClass },
@@ -164,18 +164,14 @@ var NavMenu = function (_React$Component) {
           target: item.link.en.text,
           urlType: _this2.props.urlType,
           navId: item.id,
-          features: item.features,
-          subNav: item.subnav,
-          key: index,
-          index: index,
-          cookie: _this2.props.cookie
+          key: index
         });
       });
     }
   }, {
     key: 'render',
     value: function render() {
-      var mobileActiveClass = _HeaderStore2.default._getMobileMenuBtnValue() === 'mobileMenu' ? ' mobileActive' : '';
+      var mobileActiveClass = _HeaderStore2.default.getMobileMenuBtnValue() === 'mobileMenu' ? ' mobileActive' : '';
 
       return _react2.default.createElement(
         'div',
@@ -190,14 +186,16 @@ var NavMenu = function (_React$Component) {
           _react2.default.createElement(
             'ul',
             { className: this.props.className + '-List', id: 'NavMenu-List' },
-            this.renderNavMenu(this.props.items, ['1b4916f4-6723-44f0-bfae-112441527c4d'])
+            this.renderNavMenu(this.props.items)
           ),
           _react2.default.createElement(_SearchButton2.default, {
-            className: '' + this.props.className,
-            cookie: this.props.cookie
+            className: this.props.className
           }),
           this.renderStickyNavItems(),
-          _react2.default.createElement(_NavMenuBottomButtons2.default, { className: 'MobileBottomButtons' })
+          _react2.default.createElement(_NavMenuBottomButtons2.default, {
+            className: 'MobileBottomButtons',
+            libraryCardLink: this.props.urlType === 'absolute' ? '//www.nypl.org/library-card' : '/library-card'
+          })
         )
       );
     }

@@ -77,14 +77,14 @@ function Utils() {
   };
 
   /**
-   * _trackHeader(action, label)
+   * trackHeader(action, label)
    * Track a GA click event, where action and label come from
    * the higher level function call from _trackEvent().
    *
    * @param {action} String Action for GA event.
    * @param {label} String Label for GA event.
    */
-  this._trackHeader = _dgxReactGa.ga._trackEvent('Global Header');
+  this.trackHeader = _dgxReactGa.ga._trackEvent('Global Header');
 }
 
 exports.default = new Utils();

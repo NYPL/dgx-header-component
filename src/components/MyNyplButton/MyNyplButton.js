@@ -73,9 +73,9 @@ class MyNyplButton extends React.Component {
    * that will dispatch an event to the Header Store.
    */
   handleClick() {
-    const visibleState = HeaderStore._getMyNyplVisible() ? 'Closed' : 'Open';
-    Actions.toggleMyNyplVisible(!HeaderStore._getMyNyplVisible());
-    utils._trackHeader('Log In', `MyNyplButton - ${visibleState}`);
+    const visibleState = HeaderStore.getMyNyplVisible() ? 'Closed' : 'Open';
+    Actions.toggleMyNyplVisible(!HeaderStore.getMyNyplVisible());
+    utils.trackHeader('Log In', `MyNyplButton - ${visibleState}`);
   }
 
   /**
@@ -84,9 +84,9 @@ class MyNyplButton extends React.Component {
    * currently visible.
    */
   handleOnClickOut() {
-    if (HeaderStore._getMyNyplVisible()) {
-      if (HeaderStore._getMobileMyNyplButtonValue() === '') {
-        utils._trackHeader('Log In', 'MyNyplButton - Closed');
+    if (HeaderStore.getMyNyplVisible()) {
+      if (HeaderStore.getMobileMyNyplButtonValue() === '') {
+        utils.trackHeader('Log In', 'MyNyplButton - Closed');
       }
       Actions.toggleMyNyplVisible(false);
     }
@@ -96,7 +96,7 @@ class MyNyplButton extends React.Component {
     let buttonClass = '';
     let iconClass = 'nypl-icon-wedge-down';
 
-    if (HeaderStore._getMyNyplVisible()) {
+    if (HeaderStore.getMyNyplVisible()) {
       buttonClass = 'active';
       iconClass = 'nypl-icon-solo-x';
     }
@@ -114,7 +114,7 @@ class MyNyplButton extends React.Component {
   }
 
   renderMyNyplDialog() {
-    return (HeaderStore._getMyNyplVisible()) ? (
+    return (HeaderStore.getMyNyplVisible()) ? (
       <div
         className="MyNypl-Wrapper active animatedFast fadeIn"
         style={styles.MyNyplWrapper}

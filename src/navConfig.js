@@ -1,4 +1,4 @@
-const current = [
+const previous = [
   {
     id: 'c2793eb2-9ac2-4696-82f2-2730763a4f0d',
     slug: 'browse',
@@ -560,7 +560,7 @@ const current = [
   },
 ];
 
-const upcoming = [
+const current = [
   {
     id: '488afdf5-7a3c-4cee-8c89-1667be3032f7',
     slug: 'booksmusicdvds',
@@ -1234,6 +1234,6 @@ const upcoming = [
 
 
 export default {
+  previous,
   current,
-  upcoming,
 };

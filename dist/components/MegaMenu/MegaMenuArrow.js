@@ -26,7 +26,7 @@ var MegaMenuArrow = function MegaMenuArrow(_ref) {
   // Dynamic class assignment based on activeItem property matching current index.
   var classes = (0, _classnames2.default)('NavMenuItem-Arrow nypl-icon-arrow-meganav-large', {
     'active animateMegaMenuArrowEnter fadeIn': index === currentActiveItem,
-    active: _HeaderStore2.default._getLastActiveMenuItem() === navId && index !== currentActiveItem
+    active: _HeaderStore2.default.getLastActiveMenuItem() === navId && index !== currentActiveItem
   });
 
   return _react2.default.createElement('span', { className: 'NavMenuItem-Arrow-' + navId + ' ' + classes });

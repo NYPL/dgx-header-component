@@ -205,7 +205,7 @@ var MobileHeader = function (_React$Component) {
     key: 'toggleMobileMenuButton',
     value: function toggleMobileMenuButton(activeButton) {
       if (activeButton === 'clickSearch') {
-        if (_HeaderStore2.default._getSearchButtonActionValue() !== activeButton) {
+        if (_HeaderStore2.default.getSearchButtonActionValue() !== activeButton) {
           _Actions2.default.searchButtonActionValue(activeButton);
           _Actions2.default.setMobileMenuButtonValue('');
           _Actions2.default.setMobileMyNyplButtonValue('');
@@ -213,7 +213,7 @@ var MobileHeader = function (_React$Component) {
           _Actions2.default.searchButtonActionValue('');
         }
       } else if (activeButton === 'mobileMenu') {
-        if (_HeaderStore2.default._getMobileMenuBtnValue() !== activeButton) {
+        if (_HeaderStore2.default.getMobileMenuBtnValue() !== activeButton) {
           _Actions2.default.setMobileMenuButtonValue(activeButton);
           _Actions2.default.searchButtonActionValue('');
           _Actions2.default.setMobileMyNyplButtonValue('');
@@ -221,7 +221,7 @@ var MobileHeader = function (_React$Component) {
           _Actions2.default.setMobileMenuButtonValue('');
         }
       } else if (activeButton === 'clickMyNypl') {
-        if (_HeaderStore2.default._getMobileMyNyplButtonValue() !== activeButton) {
+        if (_HeaderStore2.default.getMobileMyNyplButtonValue() !== activeButton) {
           _Actions2.default.setMobileMyNyplButtonValue(activeButton);
           _Actions2.default.searchButtonActionValue('');
           _Actions2.default.setMobileMenuButtonValue('');
@@ -230,7 +230,7 @@ var MobileHeader = function (_React$Component) {
         }
       }
 
-      _utils2.default._trackHeader('Click', 'Mobile ' + activeButton);
+      _utils2.default.trackHeader('Click', 'Mobile ' + activeButton);
     }
 
     /**
@@ -370,7 +370,7 @@ var MobileHeader = function (_React$Component) {
             style: styles.locationsLink,
             href: locatorUrl,
             onClick: function onClick() {
-              return _utils2.default._trackHeader('Click', 'Mobile Locations Button');
+              return _utils2.default.trackHeader('Click', 'Mobile Locations Button');
             },
             className: this.props.className + '-Locator',
             'aria-label': 'NYPL Locations Near Me'

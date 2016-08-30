@@ -1,16 +1,16 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
 var _underscore = require('underscore');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var AlertsBox = function AlertsBox(_ref) {
   var className = _ref.className;
@@ -21,14 +21,14 @@ var AlertsBox = function AlertsBox(_ref) {
 
   var alertItems = (0, _underscore.map)(alerts, function (item, index) {
     var alertDescription = item.attributes['alert-text'][lang];
-    return _react2['default'].createElement('div', {
+    return _react2.default.createElement('div', {
       key: index,
       className: className + '-Item',
       dangerouslySetInnerHTML: { __html: alertDescription.text }
     });
   });
 
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     'div',
     {
       className: className,
@@ -40,11 +40,11 @@ var AlertsBox = function AlertsBox(_ref) {
 };
 
 AlertsBox.propTypes = {
-  id: _react2['default'].PropTypes.string,
-  className: _react2['default'].PropTypes.string,
-  lang: _react2['default'].PropTypes.string,
-  style: _react2['default'].PropTypes.object,
-  alerts: _react2['default'].PropTypes.array
+  id: _react2.default.PropTypes.string,
+  className: _react2.default.PropTypes.string,
+  lang: _react2.default.PropTypes.string,
+  style: _react2.default.PropTypes.object,
+  alerts: _react2.default.PropTypes.array
 };
 
 AlertsBox.defaultProps = {
@@ -53,5 +53,5 @@ AlertsBox.defaultProps = {
   id: 'AlertsBox'
 };
 
-exports['default'] = AlertsBox;
+exports.default = AlertsBox;
 module.exports = exports['default'];

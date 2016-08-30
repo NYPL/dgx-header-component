@@ -19,7 +19,7 @@
       "email": "rafaelhernandez@nypl.org"
     },
     {
-      "name": "Kang-Ting Peng",
+      "name": "Kang Peng",
       "email": "kangtingpeng@nypl.org"
     },
     {
@@ -48,9 +48,7 @@
     "dgx-skip-navigation-link": "git+ssh://git@bitbucket.org/NYPL/dgx-skip-navigation-link.git#master",
     "dgx-svg-icons": "git+ssh://git@bitbucket.org/NYPL/dgx-svg-icons.git#master",
     "focus-trap-react": "2.1.1",
-    "iso": "4.1.0",
     "moment": "2.10.6",
-    "radium": "^0.13.5",
     "react": "0.14.8",
     "react-a11y": "0.3.3",
     "react-dom": "0.14.8",
@@ -59,8 +57,12 @@
     "underscore": "1.8.3"
   },
   "devDependencies": {
-    "babel-core": "5.8.30",
-    "babel-loader": "5.3.2",
+    "babel-cli": "6.11.4",
+    "babel-core": "6.5.2",
+    "babel-loader": "6.2.3",
+    "babel-plugin-add-module-exports": "0.2.1",
+    "babel-preset-es2015": "6.5.0",
+    "babel-preset-react": "6.5.0",
     "clean-webpack-plugin": "0.1.3",
     "css-loader": "0.23.1",
     "dgx-model-data": "git+ssh://git@bitbucket.org/NYPL/dgx-model-data.git#master",

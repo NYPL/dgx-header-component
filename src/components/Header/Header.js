@@ -338,18 +338,15 @@ class Header extends React.Component {
                 style={styles.donateButton}
                 gaLabel="Header Top Links"
               />
-              {
-                FeatureFlags.store._isFeatureActive('shop-link') ?
-                  <SimpleButton
-                    label="Shop"
-                    target="http://shop.nypl.org"
-                    className="shopTopLink"
-                    id="shopTopLink"
-                    gaAction="Shop"
-                    gaLabel="Header Top Links"
-                    style={styles.shopLink}
-                  /> : null
-              }
+              <SimpleButton
+                label="Shop"
+                target="http://shop.nypl.org"
+                className="shopTopLink"
+                id="shopTopLink"
+                gaAction="Shop"
+                gaLabel="Header Top Links"
+                style={styles.shopLink}
+              />
             </div>
           </div>
           <NavMenu
@@ -383,7 +380,7 @@ Header.defaultProps = {
   env: 'production',
 };
 
-export default {
+export {
   Header,
   navConfig,
 };

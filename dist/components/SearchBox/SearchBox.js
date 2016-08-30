@@ -1,19 +1,10 @@
-// Import React libraries
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -21,36 +12,47 @@ var _react2 = _interopRequireDefault(_react);
 
 var _dgxSvgIcons = require('dgx-svg-icons');
 
+var _utils = require('../../utils/utils.js');
+
+var _utils2 = _interopRequireDefault(_utils);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // Import React libraries
+
 // GA Utility Library
 
-var _utilsUtilsJs = require('../../utils/utils.js');
 
-var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
-
-var SearchBox = (function (_React$Component) {
+var SearchBox = function (_React$Component) {
   _inherits(SearchBox, _React$Component);
 
   function SearchBox(props) {
     _classCallCheck(this, SearchBox);
 
-    _get(Object.getPrototypeOf(SearchBox.prototype), 'constructor', this).call(this, props);
+    var _this = _possibleConstructorReturn(this, (SearchBox.__proto__ || Object.getPrototypeOf(SearchBox)).call(this, props));
 
-    this.state = {
+    _this.state = {
       searchInput: '',
       searchOption: 'catalog',
-      placeholder: this.props.placeholder,
+      placeholder: _this.props.placeholder,
       placeholderAnimation: null
     };
 
-    this.handleSearchInputChange = this.handleSearchInputChange.bind(this);
-    this.handleSearchOptionChange = this.handleSearchOptionChange.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
+    _this.handleSearchInputChange = _this.handleSearchInputChange.bind(_this);
+    _this.handleSearchOptionChange = _this.handleSearchOptionChange.bind(_this);
+    _this.handleKeyPress = _this.handleKeyPress.bind(_this);
+    return _this;
   }
 
   /**
    * setCatalogUrl(searchString, catalogBaseUrl)
    * Returns the final URL for the catalog search.
    */
+
 
   _createClass(SearchBox, [{
     key: 'setCatalogUrl',
@@ -70,13 +72,14 @@ var SearchBox = (function (_React$Component) {
       * base encore root url. An optional scope and
       * language may be concatenated as well.
       */
+
   }, {
     key: 'setEncoreUrl',
     value: function setEncoreUrl(searchInput, baseUrl, language, scopeString) {
       var searchTerm = this.encoreEncodeSearchString(searchInput);
       var rootUrl = baseUrl || 'http://browse.nypl.org/iii/encore/search/';
       var defaultLang = language ? '?lang=' + language : '';
-      var finalEncoreUrl = undefined;
+      var finalEncoreUrl = void 0;
 
       if (searchTerm) {
         finalEncoreUrl = this.encoreAddScope(rootUrl, searchTerm, scopeString) + defaultLang;
@@ -91,6 +94,7 @@ var SearchBox = (function (_React$Component) {
     * If no scope is set, adds the required string to
     * be returned as the final url.
     */
+
   }, {
     key: 'encoreAddScope',
     value: function encoreAddScope(baseUrl, searchString, scopeString) {
@@ -103,6 +107,7 @@ var SearchBox = (function (_React$Component) {
      * encoded using base64 - these chars are "=","/", "\", "?"
      * character : base64 encoded
      */
+
   }, {
     key: 'encoreEncodeSearchString',
     value: function encoreEncodeSearchString(string) {
@@ -113,8 +118,8 @@ var SearchBox = (function (_React$Component) {
         '?': 'Pw=='
       };
       var encodedString = string;
-      var charRegExString = undefined;
-      var base64Regex = undefined;
+      var charRegExString = void 0;
+      var base64Regex = void 0;
 
       Object.keys(base64EncMap).forEach(function (specialChar) {
         charRegExString = specialChar.replace(/([\.\*\+\?\^\=\!\:\$\{\}\(\)\|\[\]\/\\])/g, '\\$1');
@@ -127,7 +132,7 @@ var SearchBox = (function (_React$Component) {
   }, {
     key: 'animationTimer',
     value: function animationTimer() {
-      var _this = this;
+      var _this2 = this;
 
       var frame = 0;
       // Decide which CSS animation is going to perform
@@ -144,7 +149,7 @@ var SearchBox = (function (_React$Component) {
         // Remove the class to stop the animation after 0.1s
         if (frame > 1) {
           clearInterval(animation);
-          _this.setState({ placeholderAnimation: null });
+          _this2.setState({ placeholderAnimation: null });
         }
       }, 100);
     }
@@ -186,8 +191,8 @@ var SearchBox = (function (_React$Component) {
   }, {
     key: 'submitSearchRequest',
     value: function submitSearchRequest(searchType) {
-      var requestUrl = undefined;
-      var gaSearchLabel = undefined;
+      var requestUrl = void 0;
+      var gaSearchLabel = void 0;
       var searchInputValue = this.state.searchInput;
       var searchOptionValue = this.state.searchOption;
       var encoreBaseUrl = 'http://browse.nypl.org/iii/encore/search/';
@@ -217,7 +222,7 @@ var SearchBox = (function (_React$Component) {
         // Safety check to ensure a proper requestUrl has been defined.
         if (gaSearchLabel && requestUrl) {
           // Fire GA event to track Search
-          _utilsUtilsJs2['default']._trackHeader('Search', gaSearchLabel);
+          _utils2.default._trackHeader('Search', gaSearchLabel);
           // Go to the proper search page
           window.location.assign(requestUrl);
         }
@@ -233,10 +238,10 @@ var SearchBox = (function (_React$Component) {
     key: 'renderSearchInputField',
     value: function renderSearchInputField() {
       var animationClass = this.getAnimationClass();
-      return _react2['default'].createElement(
+      return _react2.default.createElement(
         'div',
         { className: this.props.className + '-inputBox ' + animationClass },
-        _react2['default'].createElement(
+        _react2.default.createElement(
           'label',
           {
             className: this.props.type === 'mobile' ? 'visuallyHidden' : '',
@@ -244,7 +249,7 @@ var SearchBox = (function (_React$Component) {
           },
           'Enter Search Keyword'
         ),
-        _react2['default'].createElement('input', {
+        _react2.default.createElement('input', {
           id: this.props.className + '-searchInput',
           type: 'text',
           ref: 'headerSearchInputField',
@@ -257,58 +262,58 @@ var SearchBox = (function (_React$Component) {
           autoComplete: 'off',
           autoFocus: true
         }),
-        _react2['default'].createElement('span', { className: 'nypl-icon-magnifier-thin icon', 'aria-hidden': 'true' })
+        _react2.default.createElement('span', { className: 'nypl-icon-magnifier-thin icon', 'aria-hidden': 'true' })
       );
     }
   }, {
     key: 'renderMobileControls',
     value: function renderMobileControls() {
-      var _this2 = this;
+      var _this3 = this;
 
-      return _react2['default'].createElement(
+      return _react2.default.createElement(
         'div',
         { className: this.props.className + '-mobileControls' },
-        _react2['default'].createElement(
+        _react2.default.createElement(
           'button',
           {
             'aria-label': 'Submit Catalog Search',
-            onClick: function () {
-              return _this2.submitSearchRequest('catalog');
+            onClick: function onClick() {
+              return _this3.submitSearchRequest('catalog');
             }
           },
-          _react2['default'].createElement(
+          _react2.default.createElement(
             'span',
             { className: 'label' },
             'CATALOG'
           ),
-          _react2['default'].createElement('span', { className: 'nypl-icon-wedge-right icon' })
+          _react2.default.createElement('span', { className: 'nypl-icon-wedge-right icon' })
         ),
-        _react2['default'].createElement(
+        _react2.default.createElement(
           'button',
           {
             'aria-label': 'Submit NYPL Website Search',
-            onClick: function () {
-              return _this2.submitSearchRequest('website');
+            onClick: function onClick() {
+              return _this3.submitSearchRequest('website');
             }
           },
-          _react2['default'].createElement(
+          _react2.default.createElement(
             'span',
             { className: 'label' },
             'NYPL.ORG'
           ),
-          _react2['default'].createElement('span', { className: 'nypl-icon-wedge-right icon' })
+          _react2.default.createElement('span', { className: 'nypl-icon-wedge-right icon' })
         )
       );
     }
   }, {
     key: 'renderDesktopControls',
     value: function renderDesktopControls() {
-      var _this3 = this;
+      var _this4 = this;
 
-      return _react2['default'].createElement(
+      return _react2.default.createElement(
         'div',
         { className: this.props.className + '-desktopControls' },
-        _react2['default'].createElement('input', {
+        _react2.default.createElement('input', {
           type: 'radio',
           name: 'catalogSearch',
           id: 'catalogSearch',
@@ -316,12 +321,12 @@ var SearchBox = (function (_React$Component) {
           checked: this.state.searchOption === 'catalog',
           onChange: this.handleSearchOptionChange
         }),
-        _react2['default'].createElement(
+        _react2.default.createElement(
           'label',
           { htmlFor: 'catalogSearch', className: 'catalogOption' },
           'Search the Catalog'
         ),
-        _react2['default'].createElement('input', {
+        _react2.default.createElement('input', {
           type: 'radio',
           name: 'websiteSearch',
           id: 'websiteSearch',
@@ -329,35 +334,35 @@ var SearchBox = (function (_React$Component) {
           checked: this.state.searchOption === 'website',
           onChange: this.handleSearchOptionChange
         }),
-        _react2['default'].createElement(
+        _react2.default.createElement(
           'label',
           { htmlFor: 'websiteSearch', className: 'websiteOption' },
           'Search NYPL.org'
         ),
-        _react2['default'].createElement(
+        _react2.default.createElement(
           'button',
-          { type: 'submit', onClick: function () {
-              return _this3.submitSearchRequest(null);
+          { type: 'submit', onClick: function onClick() {
+              return _this4.submitSearchRequest(null);
             } },
-          _react2['default'].createElement(
+          _react2.default.createElement(
             'span',
             { className: 'visuallyHidden' },
             'Search'
           ),
-          _react2['default'].createElement(_dgxSvgIcons.SearchIcon, { ariaHidden: true, fill: '#FFF' })
+          _react2.default.createElement(_dgxSvgIcons.SearchIcon, { ariaHidden: true, fill: '#FFF' })
         )
       );
     }
   }, {
     key: 'render',
     value: function render() {
-      return _react2['default'].createElement(
+      return _react2.default.createElement(
         'div',
         { className: this.props.className, role: 'dialog' },
-        _react2['default'].createElement(
+        _react2.default.createElement(
           'fieldset',
           null,
-          _react2['default'].createElement(
+          _react2.default.createElement(
             'legend',
             { className: this.props.className + '-legend visuallyHidden' },
             this.props.legendText
@@ -370,14 +375,14 @@ var SearchBox = (function (_React$Component) {
   }]);
 
   return SearchBox;
-})(_react2['default'].Component);
+}(_react2.default.Component);
 
 SearchBox.propTypes = {
-  lang: _react2['default'].PropTypes.string,
-  className: _react2['default'].PropTypes.string.isRequired,
-  type: _react2['default'].PropTypes.string,
-  placeholder: _react2['default'].PropTypes.string,
-  legendText: _react2['default'].PropTypes.string
+  lang: _react2.default.PropTypes.string,
+  className: _react2.default.PropTypes.string.isRequired,
+  type: _react2.default.PropTypes.string,
+  placeholder: _react2.default.PropTypes.string,
+  legendText: _react2.default.PropTypes.string
 };
 
 SearchBox.defaultProps = {
@@ -386,5 +391,5 @@ SearchBox.defaultProps = {
   legendText: 'Enter a keyword, then choose to search either the catalog or the website'
 };
 
-exports['default'] = SearchBox;
+exports.default = SearchBox;
 module.exports = exports['default'];

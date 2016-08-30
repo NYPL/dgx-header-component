@@ -1,14 +1,14 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var BasicButton = function BasicButton(_ref) {
   var id = _ref.id;
@@ -19,7 +19,7 @@ var BasicButton = function BasicButton(_ref) {
   var onMouseLeave = _ref.onMouseLeave;
   var style = _ref.style;
   var label = _ref.label;
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     'button',
     {
       id: id,
@@ -35,15 +35,15 @@ var BasicButton = function BasicButton(_ref) {
 };
 
 BasicButton.propTypes = {
-  id: _react2['default'].PropTypes.string,
-  className: _react2['default'].PropTypes.string,
-  name: _react2['default'].PropTypes.string,
-  label: _react2['default'].PropTypes.object,
-  lang: _react2['default'].PropTypes.string,
-  onClick: _react2['default'].PropTypes.func,
-  onMouseEnter: _react2['default'].PropTypes.func,
-  onMouseLeave: _react2['default'].PropTypes.func,
-  style: _react2['default'].PropTypes.object
+  id: _react2.default.PropTypes.string,
+  className: _react2.default.PropTypes.string,
+  name: _react2.default.PropTypes.string,
+  label: _react2.default.PropTypes.object,
+  lang: _react2.default.PropTypes.string,
+  onClick: _react2.default.PropTypes.func,
+  onMouseEnter: _react2.default.PropTypes.func,
+  onMouseLeave: _react2.default.PropTypes.func,
+  style: _react2.default.PropTypes.object
 };
 
 BasicButton.defaultProps = {
@@ -52,5 +52,5 @@ BasicButton.defaultProps = {
   lang: 'en'
 };
 
-exports['default'] = BasicButton;
+exports.default = BasicButton;
 module.exports = exports['default'];

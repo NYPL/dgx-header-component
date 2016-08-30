@@ -90,7 +90,7 @@ var SubscribeButton = function (_React$Component) {
   function SubscribeButton(props) {
     _classCallCheck(this, SubscribeButton);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SubscribeButton).call(this, props));
+    var _this = _possibleConstructorReturn(this, (SubscribeButton.__proto__ || Object.getPrototypeOf(SubscribeButton)).call(this, props));
 
     _this.state = {
       subscribeFormVisible: _HeaderStore2.default._getSubscribeFormVisible(),

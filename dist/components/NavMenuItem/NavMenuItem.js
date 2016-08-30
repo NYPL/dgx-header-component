@@ -50,7 +50,7 @@ var NavMenuItem = function (_React$Component) {
   function NavMenuItem(props) {
     _classCallCheck(this, NavMenuItem);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NavMenuItem).call(this, props));
+    var _this = _possibleConstructorReturn(this, (NavMenuItem.__proto__ || Object.getPrototypeOf(NavMenuItem)).call(this, props));
 
     _this.state = {
       activeItem: null,

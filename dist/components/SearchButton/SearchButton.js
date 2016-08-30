@@ -57,7 +57,7 @@ var SearchButton = function (_React$Component) {
   function SearchButton(props) {
     _classCallCheck(this, SearchButton);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SearchButton).call(this, props));
+    var _this = _possibleConstructorReturn(this, (SearchButton.__proto__ || Object.getPrototypeOf(SearchButton)).call(this, props));
 
     _this.state = { active: false };
 

@@ -88,7 +88,7 @@ var StickyMyNyplButton = function (_React$Component) {
   function StickyMyNyplButton(props) {
     _classCallCheck(this, StickyMyNyplButton);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(StickyMyNyplButton).call(this, props));
+    var _this = _possibleConstructorReturn(this, (StickyMyNyplButton.__proto__ || Object.getPrototypeOf(StickyMyNyplButton)).call(this, props));
 
     _this.handleClick = _this.handleClick.bind(_this);
     _this.handleOnClickOut = _this.handleOnClickOut.bind(_this);

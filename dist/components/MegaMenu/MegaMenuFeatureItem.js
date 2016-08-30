@@ -34,7 +34,7 @@ var MegaMenuFeatureItem = function (_React$Component) {
   function MegaMenuFeatureItem() {
     _classCallCheck(this, MegaMenuFeatureItem);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(MegaMenuFeatureItem).apply(this, arguments));
+    return _possibleConstructorReturn(this, (MegaMenuFeatureItem.__proto__ || Object.getPrototypeOf(MegaMenuFeatureItem)).apply(this, arguments));
   }
 
   _createClass(MegaMenuFeatureItem, [{

@@ -73,7 +73,7 @@
 
 				&-Link {
 					font-size: 16px;
-					padding: 4px 0 2px;
+					padding: 3px 0 2px;
 
 					@include min-screen(860px) {
 						font-size: 18px;
@@ -122,7 +122,7 @@
 
 			&-desktopSearchBox {
 				&.isSticky {
-					top: 50px;
+					top: 49px;
 				}
 			}
 

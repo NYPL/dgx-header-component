@@ -30,7 +30,7 @@ if (!window.dgxFeatureFlags) {
 ReactDOM.render(
   <Header
     skipNav={{ target: 'maincontent' }}
-    navData={navConfig.upcoming}
+    navData={navConfig.current}
   />,
   document.getElementById('app')
 );

@@ -20,8 +20,6 @@ import GlobalAlerts from '../GlobalAlerts/GlobalAlerts.js';
 import SkipNavigation from 'dgx-skip-navigation-link';
 // Utility Library
 import utils from '../../utils/utils.js';
-// FeatureFlags Module
-import FeatureFlags from 'dgx-feature-flags';
 
 const styles = {
   wrapper: {

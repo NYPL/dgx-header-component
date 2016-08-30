@@ -73,10 +73,6 @@ var _utils = require('../../utils/utils.js');
 
 var _utils2 = _interopRequireDefault(_utils);
 
-var _dgxFeatureFlags = require('dgx-feature-flags');
-
-var _dgxFeatureFlags2 = _interopRequireDefault(_dgxFeatureFlags);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -92,8 +88,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // NYPL Components
 
 // Utility Library
-
-// FeatureFlags Module
 
 
 var styles = {
@@ -158,7 +152,7 @@ var Header = function (_React$Component) {
     _this.state = (0, _underscore.extend)({
       headerHeight: null,
       navData: _this.props.navData,
-      featureFlags: _dgxFeatureFlags2.default.store.getState()
+      featureFlags: FeatureFlags.store.getState()
     }, _HeaderStore2.default.getState());
 
     _this.handleStickyHeader = _this.handleStickyHeader.bind(_this);
@@ -169,7 +163,7 @@ var Header = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       _HeaderStore2.default.listen(this.onChange.bind(this));
-      _dgxFeatureFlags2.default.store.listen(this.onChange.bind(this));
+      FeatureFlags.store.listen(this.onChange.bind(this));
 
       // Height needs to be set once the alerts (if any) are mounted.
       this.setHeaderHeight();
@@ -180,7 +174,7 @@ var Header = function (_React$Component) {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
       _HeaderStore2.default.unlisten(this.onChange.bind(this));
-      _dgxFeatureFlags2.default.store.unlisten(this.onChange.bind(this));
+      FeatureFlags.store.unlisten(this.onChange.bind(this));
 
       // Removing event listener to minimize garbage collection
       window.removeEventListener('scroll', this.handleStickyHeader, false);
@@ -190,7 +184,7 @@ var Header = function (_React$Component) {
     value: function onChange() {
       this.setState((0, _underscore.extend)({
         headerHeight: this.state.headerHeight,
-        featureFlags: _dgxFeatureFlags2.default.store.getState()
+        featureFlags: FeatureFlags.store.getState()
       }, _HeaderStore2.default.getState()));
     }
 

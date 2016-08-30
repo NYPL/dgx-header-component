@@ -12,7 +12,7 @@ const styles = {
   },
   links: {
     display: 'block',
-    backgroundColor: '#E43534',
+    backgroundColor: '#E32B31',
     color: '#FFF',
     padding: 0,
     margin: '60px 0 0 0',

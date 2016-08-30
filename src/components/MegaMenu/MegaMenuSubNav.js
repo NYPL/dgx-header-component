@@ -2,7 +2,6 @@ import React from 'react';
 import { map as _map, isEmpty as _isEmpty } from 'underscore';
 import config from '../../appConfig.js';
 import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWidget.js';
-import Radium from 'radium';
 import utils from '../../utils/utils.js';
 
 const styles = {
@@ -30,7 +29,7 @@ class MegaMenuSubNav extends React.Component {
           <a
             href={target}
             onClick={() =>
-              utils._trackHeader(
+              utils.trackHeader(
                 'Go to...',
                 `${this.props.label[this.props.lang].text}--${m.name[this.props.lang].text}`
               )
@@ -65,7 +64,7 @@ class MegaMenuSubNav extends React.Component {
             style={styles.topLink}
             href={this.props.topLink}
             onClick={() =>
-              utils._trackHeader(
+              utils.trackHeader(
                 'Go to...',
                 `SubNav Title--${this.props.label[this.props.lang].text}`
               )
@@ -96,4 +95,4 @@ MegaMenuSubNav.defaultProps = {
   topLink: '#',
 };
 
-export default Radium(MegaMenuSubNav);
+export default MegaMenuSubNav;

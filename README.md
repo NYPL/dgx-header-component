@@ -26,16 +26,18 @@ $ loadA11y=true npm start
 
 - `lang`: Language. Not used, but provided for future internationalization (String, default: "en")
 
-- `env`: API environment established to request the Header Data on the client-side. Possible values: `production`, `qa` and `development`. (String, default: "production")
+- `urlType`: Type of URL's to be established for all link elements. If empty, it will utilize `relative` URL's by default. If `absolute` URL's are required, initialize the Header component as follows (String, default: ""):
 
 ```sh
-  <Header env='development' />
+  <Header urlType='absolute' /> // Sets all URLs to absolute
+  <Header /> // Sets all URLs to relative
 ```
 
-- `urls`: Type of URL's to be established for all link elements. If empty, it will utilize `relative` URL's by default. If `absolute` URL's are required, initialize the Header component as follows (String, default: ""):
+- `navData`: Array containing all navigation links. This is required in order to populate the Header navigation. (Array, default: [])
 
 ```sh
-  <Header urls='absolute' />
+  import { Header, navConfig } from 'dgx-header-component';
+  <Header navData={navConfig.current} />
 ```
 
 - `skipNav`: Props to be passed to the `SkipNavigation` component. If these are
@@ -44,10 +46,10 @@ $ loadA11y=true npm start
   null)
 
   For example, to generate a header that has a skip navigation that targets the id
-`#topcontent`:
+`#topContent`:
 
 ```sh
-  <Header skipNav={{ target: 'topcontent' }} />
+  <Header skipNav={{ target: 'topContent' }} />
 ```
 
 ## Accessibility
@@ -61,5 +63,5 @@ read by screen readers. When using a visual browser, the first press of the TAB
 key should focus the skip navigation link which will reveal it visually.
 
 If the target of the link is not naturally focusable, as a div is not, it should
-be given a tabindex of −1. This allows the element to receive programmatic focus
+be given a tab-index of −1. This allows the element to receive programmatic focus
 while being ignored during normal navigation flow.

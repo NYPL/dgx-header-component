@@ -1,6 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var config = {
@@ -31,12 +31,6 @@ var config = {
     url: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form&amt=0&s_src=FRQ16ZZ_TNN&s_subsrc=other',
     amount: 'Other'
   }],
-  headerClientEnv: {
-    local: 'http://localhost:3001',
-    development: 'https://dev-header.nypl.org',
-    qa: 'https://qa-header.nypl.org',
-    production: 'https://header.nypl.org'
-  },
   myNyplLinks: {
     catalog: 'https://browse.nypl.org/iii/encore/myaccount',
     research: 'https://catalog.nypl.org/patroninfo/top',
@@ -44,5 +38,5 @@ var config = {
   }
 };
 
-exports['default'] = config;
+exports.default = config;
 module.exports = exports['default'];

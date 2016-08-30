@@ -1,10 +1,8 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _react = require('react');
 
@@ -12,16 +10,17 @@ var _react2 = _interopRequireDefault(_react);
 
 var _underscore = require('underscore');
 
+var _utils = require('../../utils/utils.js');
+
+var _utils2 = _interopRequireDefault(_utils);
+
+var _appConfig = require('../../appConfig.js');
+
+var _appConfig2 = _interopRequireDefault(_appConfig);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 // Config and Utility
-
-var _utilsUtilsJs = require('../../utils/utils.js');
-
-var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
-
-var _appConfigJs = require('../../appConfig.js');
-
-var _appConfigJs2 = _interopRequireDefault(_appConfigJs);
-
 var styles = {
   base: {
     backgroundColor: '#2B2B2B',
@@ -30,7 +29,7 @@ var styles = {
   },
   links: {
     display: 'block',
-    backgroundColor: '#E43534',
+    backgroundColor: '#E32B31',
     color: '#FFF',
     padding: 0,
     margin: '60px 0 0 0',
@@ -93,31 +92,31 @@ var MobileMyNypl = function MobileMyNypl(_ref) {
   var catalogLinkClass = 'CatalogLink';
   var researchLinkClass = 'ResearchLink';
 
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     'div',
     {
       className: className,
       style: styles.base,
       role: 'dialog'
     },
-    _react2['default'].createElement(
+    _react2.default.createElement(
       'a',
       {
         href: catalogLink,
         className: catalogLinkClass,
         style: styles.links,
-        onClick: function () {
-          return _utilsUtilsJs2['default']._trackHeader('Mobile Log In', 'Catalog');
+        onClick: function onClick() {
+          return _utils2.default.trackHeader('Mobile Log In', 'Catalog');
         }
       },
-      _react2['default'].createElement(
+      _react2.default.createElement(
         'span',
         {
           className: catalogLinkClass + '-Wrapper',
           style: (0, _underscore.extend)(styles.wrapper, styles.catalogLinkWrapper)
         },
-        _react2['default'].createElement('span', { className: catalogLinkClass + '-Icon nypl-icon-login', style: styles.icon }),
-        _react2['default'].createElement(
+        _react2.default.createElement('span', { className: catalogLinkClass + '-Icon nypl-icon-login', style: styles.icon }),
+        _react2.default.createElement(
           'span',
           {
             className: catalogLinkClass + '-Label',
@@ -127,24 +126,24 @@ var MobileMyNypl = function MobileMyNypl(_ref) {
         )
       )
     ),
-    _react2['default'].createElement(
+    _react2.default.createElement(
       'a',
       {
         href: researchLink,
         className: researchLinkClass,
         style: styles.links,
-        onClick: function () {
-          return _utilsUtilsJs2['default']._trackHeader('Mobile Log In', 'Research');
+        onClick: function onClick() {
+          return _utils2.default.trackHeader('Mobile Log In', 'Research');
         }
       },
-      _react2['default'].createElement(
+      _react2.default.createElement(
         'span',
         {
           className: researchLinkClass + '-Wrapper',
           style: (0, _underscore.extend)(styles.wrapper, styles.researchLinkWrapper)
         },
-        _react2['default'].createElement('span', { className: researchLinkClass + '-Icon nypl-icon-bldg', style: styles.icon }),
-        _react2['default'].createElement(
+        _react2.default.createElement('span', { className: researchLinkClass + '-Icon nypl-icon-bldg', style: styles.icon }),
+        _react2.default.createElement(
           'span',
           {
             className: researchLinkClass + '-Label',
@@ -154,14 +153,14 @@ var MobileMyNypl = function MobileMyNypl(_ref) {
         )
       )
     ),
-    _react2['default'].createElement(
+    _react2.default.createElement(
       'a',
       {
         className: 'Mobile-Catalog-Info',
         href: infoLink,
         lang: lang,
-        onClick: function () {
-          return _utilsUtilsJs2['default']._trackHeader('Mobile Log In', 'Catalog Info');
+        onClick: function onClick() {
+          return _utils2.default.trackHeader('Mobile Log In', 'Catalog Info');
         },
         style: styles.catalogInfoLink
       },
@@ -171,20 +170,20 @@ var MobileMyNypl = function MobileMyNypl(_ref) {
 };
 
 MobileMyNypl.propTypes = {
-  lang: _react2['default'].PropTypes.string,
-  className: _react2['default'].PropTypes.string,
-  catalogLink: _react2['default'].PropTypes.string,
-  researchLink: _react2['default'].PropTypes.string,
-  infoLink: _react2['default'].PropTypes.string
+  lang: _react2.default.PropTypes.string,
+  className: _react2.default.PropTypes.string,
+  catalogLink: _react2.default.PropTypes.string,
+  researchLink: _react2.default.PropTypes.string,
+  infoLink: _react2.default.PropTypes.string
 };
 
 MobileMyNypl.defaultProps = {
   lang: 'en',
   className: 'MobileMyNypl',
-  catalogLink: _appConfigJs2['default'].myNyplLinks.catalog,
-  researchLink: _appConfigJs2['default'].myNyplLinks.research,
-  infoLink: _appConfigJs2['default'].myNyplLinks.moreInfo
+  catalogLink: _appConfig2.default.myNyplLinks.catalog,
+  researchLink: _appConfig2.default.myNyplLinks.research,
+  infoLink: _appConfig2.default.myNyplLinks.moreInfo
 };
 
-exports['default'] = MobileMyNypl;
+exports.default = MobileMyNypl;
 module.exports = exports['default'];

@@ -1,9 +1,9 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var current = [{
+var previous = [{
   id: 'c2793eb2-9ac2-4696-82f2-2730763a4f0d',
   slug: 'browse',
   type: 'header-item',
@@ -557,7 +557,7 @@ var current = [{
   }]
 }];
 
-var upcoming = [{
+var current = [{
   id: '488afdf5-7a3c-4cee-8c89-1667be3032f7',
   slug: 'booksmusicdvds',
   type: 'header-item',
@@ -1221,8 +1221,8 @@ var upcoming = [{
   }]
 }];
 
-exports['default'] = {
-  current: current,
-  upcoming: upcoming
+exports.default = {
+  previous: previous,
+  current: current
 };
 module.exports = exports['default'];

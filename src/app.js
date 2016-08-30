@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import ga from 'react-ga';
 import { config } from 'dgx-react-ga';
 import FeatureFlags from 'dgx-feature-flags';
-import { Header } from './components/Header/Header.js';
+import { Header, navConfig } from './components/Header/Header.js';
 import './styles/main.scss';
 import a11y from 'react-a11y';
 
-// if (loadA11y) {
-//   a11y(React, { ReactDOM, includeSrcNode: true });
-// }
+if (loadA11y) {
+  a11y(React, { ReactDOM, includeSrcNode: true });
+}
 
 // Use for testing GA events
 if (!window.ga) {
@@ -28,6 +28,9 @@ if (!window.dgxFeatureFlags) {
  * Used for local development of React Components
  */
 ReactDOM.render(
-  <Header skipNav={{ target: 'maincontent' }} />,
+  <Header
+    skipNav={{ target: 'maincontent' }}
+    navData={navConfig.current}
+  />,
   document.getElementById('app')
 );

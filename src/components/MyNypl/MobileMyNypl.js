@@ -12,7 +12,7 @@ const styles = {
   },
   links: {
     display: 'block',
-    backgroundColor: '#E43534',
+    backgroundColor: '#E32B31',
     color: '#FFF',
     padding: 0,
     margin: '60px 0 0 0',
@@ -85,7 +85,7 @@ const MobileMyNypl = ({
         href={catalogLink}
         className={catalogLinkClass}
         style={styles.links}
-        onClick={() => utils._trackHeader('Mobile Log In', 'Catalog')}
+        onClick={() => utils.trackHeader('Mobile Log In', 'Catalog')}
       >
         <span
           className={`${catalogLinkClass}-Wrapper`}
@@ -105,7 +105,7 @@ const MobileMyNypl = ({
         href={researchLink}
         className={researchLinkClass}
         style={styles.links}
-        onClick={() => utils._trackHeader('Mobile Log In', 'Research')}
+        onClick={() => utils.trackHeader('Mobile Log In', 'Research')}
       >
         <span
           className={`${researchLinkClass}-Wrapper`}
@@ -124,7 +124,7 @@ const MobileMyNypl = ({
         className="Mobile-Catalog-Info"
         href={infoLink}
         lang={lang}
-        onClick={() => utils._trackHeader('Mobile Log In', 'Catalog Info')}
+        onClick={() => utils.trackHeader('Mobile Log In', 'Catalog Info')}
         style={styles.catalogInfoLink}
       >
         Catalog Info

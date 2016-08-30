@@ -9,12 +9,12 @@ class SocialMediaLinksWidget extends React.Component {
 
     this.state = { linkClass: '' };
 
-    this._handleOnMouseLeave = this._handleOnMouseLeave.bind(this);
-    this._handleOnMouseEnter = this._handleOnMouseEnter.bind(this);
-    this._trackHeader = utils._trackHeader.bind(this);
+    this.handleOnMouseLeave = this.handleOnMouseLeave.bind(this);
+    this.handleOnMouseEnter = this.handleOnMouseEnter.bind(this);
+    this.trackHeader = utils.trackHeader.bind(this);
   }
 
-  _generateLinksToDisplay(list, displayOnlyList) {
+  generateLinksToDisplay(list, displayOnlyList) {
     const socialLinksList = (displayOnlyList && displayOnlyList.length) ?
       _pick(list, displayOnlyList) : list;
 
@@ -26,10 +26,10 @@ class SocialMediaLinksWidget extends React.Component {
         <li key={key} className={`${this.props.className}-ListItem`}>
           <a
             href={item}
-            onClick={() => this._trackHeader('Click', `Social Media - ${key}`)}
+            onClick={() => this.trackHeader('Click', `Social Media - ${key}`)}
             className={`${this.props.className}-Link ${hoverClass}`}
-            onMouseEnter={() => this._handleOnMouseEnter(key)}
-            onMouseLeave={this._handleOnMouseLeave}
+            onMouseEnter={() => this.handleOnMouseEnter(key)}
+            onMouseLeave={this.handleOnMouseLeave}
           >
           </a>
         </li>
@@ -44,7 +44,7 @@ class SocialMediaLinksWidget extends React.Component {
    *
    * @param {String} key
    */
-  _handleOnMouseEnter(key) {
+  handleOnMouseEnter(key) {
     this.setState({ linkClass: key });
   }
 
@@ -54,12 +54,12 @@ class SocialMediaLinksWidget extends React.Component {
    * object property to an empty string.
    *
    */
-  _handleOnMouseLeave() {
+  handleOnMouseLeave() {
     this.setState({ linkClass: '' });
   }
 
   render() {
-    const socialLinks = this._generateLinksToDisplay(this.props.links, this.props.displayOnlyList);
+    const socialLinks = this.generateLinksToDisplay(this.props.links, this.props.displayOnlyList);
 
     return (
       <div className={this.props.className}>

@@ -10,15 +10,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _classnames = require('classnames');
+var _utils = require('../../utils/utils.js');
 
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _dgxModelData = require('dgx-model-data');
-
-var _DefaultItem = require('../ContentBox/DefaultItem.js');
-
-var _DefaultItem2 = _interopRequireDefault(_DefaultItem);
+var _utils2 = _interopRequireDefault(_utils);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28,49 +22,65 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var MegaMenuFeatureItem = function (_React$Component) {
-  _inherits(MegaMenuFeatureItem, _React$Component);
+var SimpleLink = function (_React$Component) {
+  _inherits(SimpleLink, _React$Component);
 
-  function MegaMenuFeatureItem() {
-    _classCallCheck(this, MegaMenuFeatureItem);
+  function SimpleLink(props) {
+    _classCallCheck(this, SimpleLink);
 
-    return _possibleConstructorReturn(this, (MegaMenuFeatureItem.__proto__ || Object.getPrototypeOf(MegaMenuFeatureItem)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (SimpleLink.__proto__ || Object.getPrototypeOf(SimpleLink)).call(this, props));
+
+    _this.handleOnClick = _this.handleOnClick.bind(_this);
+    return _this;
   }
 
-  _createClass(MegaMenuFeatureItem, [{
+  _createClass(SimpleLink, [{
+    key: 'handleOnClick',
+    value: function handleOnClick() {
+      _utils2.default.trackHeader(this.props.gaAction, this.props.gaLabel);
+      this.props.onClick();
+    }
+  }, {
     key: 'render',
     value: function render() {
-      var feature = this.props.feature;
-      var classes = (0, _classnames2.default)({
-        'with-image': feature && feature.images,
-        'without-image': !feature || !feature.images
-      });
-      var contentObj = _dgxModelData.ContentModel.featureItem(feature, this.props.lang);
-      var featuredItem = _react2.default.createElement(_DefaultItem2.default, {
-        feature: contentObj,
-        className: this.props.className,
-        classes: classes,
-        navLabel: this.props.navLabel
-      });
-
-      return featuredItem;
+      return _react2.default.createElement(
+        'a',
+        {
+          ref: this.props.ref,
+          id: this.props.id,
+          className: this.props.className,
+          href: this.props.target,
+          onClick: this.handleOnClick,
+          style: this.props.style
+        },
+        this.props.label
+      );
     }
   }]);
 
-  return MegaMenuFeatureItem;
+  return SimpleLink;
 }(_react2.default.Component);
 
-MegaMenuFeatureItem.propTypes = {
-  lang: _react2.default.PropTypes.string,
+SimpleLink.propTypes = {
+  id: _react2.default.PropTypes.string,
+  ref: _react2.default.PropTypes.string,
   className: _react2.default.PropTypes.string,
-  feature: _react2.default.PropTypes.object,
-  navLabel: _react2.default.PropTypes.string
+  lang: _react2.default.PropTypes.string,
+  style: _react2.default.PropTypes.object,
+  target: _react2.default.PropTypes.string,
+  label: _react2.default.PropTypes.string,
+  onClick: _react2.default.PropTypes.func,
+  gaAction: _react2.default.PropTypes.string,
+  gaLabel: _react2.default.PropTypes.string
 };
 
-MegaMenuFeatureItem.defaultProps = {
+SimpleLink.defaultProps = {
+  className: 'simpleLink',
+  label: 'Link',
   lang: 'en',
-  className: 'MegaMenu-FeatureItem'
+  target: '#',
+  onClick: function onClick() {}
 };
 
-exports.default = MegaMenuFeatureItem;
+exports.default = SimpleLink;
 module.exports = exports['default'];

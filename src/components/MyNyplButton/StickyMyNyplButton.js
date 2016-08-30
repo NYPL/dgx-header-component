@@ -1,6 +1,6 @@
-import Radium from 'radium';
 import React from 'react';
 import cx from 'classnames';
+import { extend as _extend } from 'underscore';
 import ClickOutHandler from 'react-onclickout';
 import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
@@ -58,9 +58,9 @@ class StickyMyNyplButton extends React.Component {
    * that will dispatch an event to the HeaderStore.
    */
   handleClick() {
-    const visibleState = HeaderStore._getStickyMyNyplVisible() ? 'Closed' : 'Open';
-    Actions.toggleStickyMyNyplVisible(!HeaderStore._getStickyMyNyplVisible());
-    utils._trackHeader('Log In', `StickyMyNyplButton - ${visibleState}`);
+    const visibleState = HeaderStore.getStickyMyNyplVisible() ? 'Closed' : 'Open';
+    Actions.toggleStickyMyNyplVisible(!HeaderStore.getStickyMyNyplVisible());
+    utils.trackHeader('Log In', `StickyMyNyplButton - ${visibleState}`);
   }
 
   /**
@@ -69,15 +69,15 @@ class StickyMyNyplButton extends React.Component {
    * currently visible.
    */
   handleOnClickOut() {
-    if (HeaderStore._getStickyMyNyplVisible()) {
+    if (HeaderStore.getStickyMyNyplVisible()) {
       Actions.toggleStickyMyNyplVisible(false);
-      utils._trackHeader('Log In', 'StickyMyNyplButton - Closed');
+      utils.trackHeader('Log In', 'StickyMyNyplButton - Closed');
     }
   }
 
   render() {
     // Assign a variable to hold the reference of state boolean
-    const showDialog = HeaderStore._getStickyMyNyplVisible();
+    const showDialog = HeaderStore.getStickyMyNyplVisible();
     const buttonClasses = cx({ active: showDialog });
     const myNyplClasses = cx({ 'active animatedFast fadeIn': showDialog });
 
@@ -86,13 +86,13 @@ class StickyMyNyplButton extends React.Component {
         <div
           className="MyNyplButton-Wrapper"
           ref="MyNypl"
-          style={[styles.base, this.props.style]}
+          style={_extend(styles.base, this.props.style)}
         >
           <button
             id="MyNyplButton"
             className={`MyNyplButton ${buttonClasses}`}
             onClick={this.handleClick}
-            style={[styles.MyNyplButton, this.props.style]}
+            style={_extend(styles.MyNyplButton, this.props.style)}
           >
             <span className="visuallyHidden">
               {this.props.label}
@@ -126,4 +126,4 @@ StickyMyNyplButton.defaultProps = {
   label: 'Log In',
 };
 
-export default Radium(StickyMyNyplButton);
+export default StickyMyNyplButton;

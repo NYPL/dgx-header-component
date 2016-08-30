@@ -11,7 +11,7 @@ import Actions from '../../actions/Actions.js';
 // NYPL Components
 import Logo from '../Logo/Logo.js';
 import DonateButton from '../DonateButton/DonateButton.js';
-import SimpleButton from '../Buttons/SimpleButton.js';
+import SimpleLink from '../Links/SimpleLink.js';
 import SubscribeButton from '../SubscribeButton/SubscribeButton.js';
 import MyNyplButton from '../MyNyplButton/MyNyplButton.js';
 import NavMenu from '../NavMenu/NavMenu.js';
@@ -20,13 +20,7 @@ import GlobalAlerts from '../GlobalAlerts/GlobalAlerts.js';
 import SkipNavigation from 'dgx-skip-navigation-link';
 // Utility Library
 import utils from '../../utils/utils.js';
-// FeatureFlags Module
-import FeatureFlags from 'dgx-feature-flags';
-// Google Analytics Module
-import { ga } from 'dgx-react-ga';
 
-// When minifying with Webpack, you can use this:
-// import '../../styles/main.scss';
 const styles = {
   wrapper: {
     position: 'relative',
@@ -85,8 +79,7 @@ class Header extends React.Component {
     this.state = _extend(
       {
         headerHeight: null,
-        cookie: this.getCookie('nyplpreview'),
-        featureFlags: FeatureFlags.store.getState(),
+        navData: this.props.navData,
       },
       HeaderStore.getState()
     );
@@ -96,41 +89,14 @@ class Header extends React.Component {
 
   componentDidMount() {
     HeaderStore.listen(this.onChange.bind(this));
-    FeatureFlags.store.listen(this.onChange.bind(this));
-
     // Height needs to be set once the alerts (if any) are mounted.
     this.setHeaderHeight();
-
-    // Set which FeatureFlag is to be fired based off preview cookie
-    this.setFeatureFlagHeaderCall();
-
-    // Watch which FeatureFlag is called to fire
-    // the proper client-side ajax call to populate the Header data state
-    this.watchFeatureFlagHeaderCall();
-
-    // Read the cookie of "nyplpreview", if the cookie exists and its value is "1",
-    // set dimension1 with value of "Public Preview"
-    this.setPublicPreviewGA();
-
     // Listen to the scroll event for the sticky header.
     window.addEventListener('scroll', this.handleStickyHeader, false);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    // Re-fetch the default/current IA /header-data endpoint if
-    // the FeatureFlag 'header-upcoming-ia' has been deactivated.
-    // Used only as a fallback to deactivate a flag and set the
-    // Header data to it's default IA.
-    if (!this.state.featureFlags.get('header-upcoming-ia') &&
-      prevState.featureFlags.get('header-upcoming-ia')) {
-      Actions.fetchHeaderData(this.props.env, this.props.urls);
-    }
-  }
-
   componentWillUnmount() {
     HeaderStore.unlisten(this.onChange.bind(this));
-    FeatureFlags.store.unlisten(this.onChange.bind(this));
-
     // Removing event listener to minimize garbage collection
     window.removeEventListener('scroll', this.handleStickyHeader, false);
   }
@@ -140,8 +106,6 @@ class Header extends React.Component {
       _extend(
         {
           headerHeight: this.state.headerHeight,
-          cookie: this.state.cookie,
-          featureFlags: FeatureFlags.store.getState(),
         },
         HeaderStore.getState()
       )
@@ -184,47 +148,6 @@ class Header extends React.Component {
   }
 
   /**
-   * Returns the value for the given cookie name.
-   * If the cookie doesn't exist a null value will be returned.
-   * https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie/Simple_document.cookie_framework
-   * @returns {string} - Cookie value.
-   */
-  getCookie(name) {
-    if (!name || typeof document === 'undefined' || !document.cookie) {
-      return null;
-    }
-    return decodeURIComponent(
-      document.cookie.replace(
-        new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(name).replace(/[\-\.\+\*]/g, '\\$&')
-          + '\\s*\\=\\s*([^;]*).*$)|^.*$'),
-        '$1'
-      )
-    ) || null;
-  }
-
-  /**
-   * Verifies if the previewCookie has been set to '1' and
-   * activates the appropriate FeatureFlag
-   */
-  setFeatureFlagHeaderCall() {
-    if (this.state.cookie && this.state.cookie === '1') {
-      FeatureFlags.utils.activateFeature('header-upcoming-ia');
-    }
-  }
-
-  /**
-   * Checks if the FeatureFlag name passed is active or not and triggers
-   * the appropriate Action to fetch the Header data.
-   */
-  watchFeatureFlagHeaderCall() {
-    if (FeatureFlags.store._isFeatureActive('header-upcoming-ia')) {
-      Actions.fetchHeaderData(this.props.env, this.props.urls, 'upcoming');
-    } else {
-      Actions.fetchHeaderData(this.props.env, this.props.urls);
-    }
-  }
-
-  /**
    * handleStickyHeader()
    * Executes Actions.updateIsHeaderSticky()
    * with the proper boolean value to update the
@@ -238,30 +161,17 @@ class Header extends React.Component {
 
     if (windowVerticalDistance && headerHeight && (windowVerticalDistance > headerHeight)) {
       // Only update the value if sticky is false
-      if (!HeaderStore._getIsStickyValue()) {
+      if (!HeaderStore.getIsStickyValue()) {
         // Fire GA Event when Header is in Sticky Mode
-        utils._trackHeader.bind(this, 'scroll', 'Sticky Header');
+        utils.trackHeader.bind(this, 'scroll', 'Sticky Header');
         // Update the isSticky flag
         Actions.updateIsHeaderSticky(true);
       }
     } else {
       // Avoids re-assignment on each scroll by checking if it is already true
-      if (HeaderStore._getIsStickyValue()) {
+      if (HeaderStore.getIsStickyValue()) {
         Actions.updateIsHeaderSticky(false);
       }
-    }
-  }
-
-  /**
-   * setPublicPreviewGA()
-   * Verify if the previewCookie has been set to '1' and
-   * set the public preview GA dimension.
-   */
-  setPublicPreviewGA() {
-    if (this.state.cookie && this.state.cookie === '1') {
-      ga.setDimension('dimension1', 'Public Preview');
-    } else {
-      ga.setDimension('dimension1', null);
     }
   }
 
@@ -286,10 +196,10 @@ class Header extends React.Component {
           <MobileHeader
             className={`${headerClass}-Mobile`}
             locatorUrl={
-              (this.props.urls === 'absolute') ?
+              (this.props.urlType === 'absolute') ?
                 '//www.nypl.org/locations/map?nearme=true' : '/locations/map?nearme=true'
             }
-            nyplRootUrl={(this.props.urls === 'absolute') ? '//www.nypl.org' : '/'}
+            nyplRootUrl={(this.props.urlType === 'absolute') ? '//www.nypl.org' : '/'}
             ref="headerMobile"
           />
           <div
@@ -299,17 +209,17 @@ class Header extends React.Component {
           >
             <Logo
               className={`${headerClass}-Logo`}
-              target={(this.props.urls === 'absolute') ? '//www.nypl.org' : '/'}
+              target={(this.props.urlType === 'absolute') ? '//www.nypl.org' : '/'}
             />
             <div className={`${headerClass}-Buttons`} style={styles.topButtons}>
               <MyNyplButton
                 label="Log In"
                 refId="desktopLogin"
               />
-              <SimpleButton
+              <SimpleLink
                 label="Locations"
                 target={
-                  (this.props.urls === 'absolute') ?
+                  (this.props.urlType === 'absolute') ?
                     '//www.nypl.org/locations/map' : '/locations/map'
                 }
                 className="LocationsTopLink"
@@ -318,9 +228,12 @@ class Header extends React.Component {
                 gaLabel="Header Top Links"
                 style={styles.locationsTopLink}
               />
-              <SimpleButton
+              <SimpleLink
                 label="Get a Library Card"
-                target="//www.nypl.org/library-card"
+                target={
+                  (this.props.urlType === 'absolute') ?
+                    '//www.nypl.org/library-card' : '/library-card'
+                }
                 className="LibraryCardButton"
                 id="LibraryCardButton"
                 gaAction="Get a Library Card"
@@ -338,26 +251,22 @@ class Header extends React.Component {
                 style={styles.donateButton}
                 gaLabel="Header Top Links"
               />
-              {
-                FeatureFlags.store._isFeatureActive('shop-link') ?
-                  <SimpleButton
-                    label="Shop"
-                    target="http://shop.nypl.org"
-                    className="shopTopLink"
-                    id="shopTopLink"
-                    gaAction="Shop"
-                    gaLabel="Header Top Links"
-                    style={styles.shopLink}
-                  /> : null
-              }
+              <SimpleLink
+                label="Shop"
+                target="http://shop.nypl.org"
+                className="shopTopLink"
+                id="shopTopLink"
+                gaAction="Shop"
+                gaLabel="Header Top Links"
+                style={styles.shopLink}
+              />
             </div>
           </div>
           <NavMenu
             className={`${headerClass}-NavMenu`}
             lang={this.props.lang}
-            items={this.state.headerData}
-            urlType={this.props.urls}
-            cookie={this.state.cookie}
+            items={this.state.navData}
+            urlType={this.props.urlType}
           />
         </div>
       </header>
@@ -369,9 +278,9 @@ Header.propTypes = {
   lang: React.PropTypes.string,
   className: React.PropTypes.string,
   id: React.PropTypes.string,
+  navData: React.PropTypes.array,
   skipNav: React.PropTypes.object,
-  urls: React.PropTypes.string,
-  env: React.PropTypes.string,
+  urlType: React.PropTypes.string,
 };
 
 Header.defaultProps = {
@@ -379,11 +288,10 @@ Header.defaultProps = {
   className: 'Header',
   id: 'nyplHeader',
   skipNav: null,
-  urls: '',
-  env: 'production',
+  urlType: '',
 };
 
-export default {
+export {
   Header,
   navConfig,
 };

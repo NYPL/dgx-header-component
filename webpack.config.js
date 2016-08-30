@@ -32,7 +32,10 @@ if (process.env.NODE_ENV !== 'development') {
         {
           test: /\.jsx?$/,
           exclude: /(node_modules|bower_components)/,
-          loaders: ['babel']
+          loaders: ['babel'],
+          query: {
+            presets: ['es2015', 'react']
+          },
         },
         {
           test: /\.scss$/,
@@ -76,7 +79,7 @@ if (process.env.NODE_ENV !== 'development') {
       new ExtractTextPlugin('main.scss'),
       new webpack.HotModuleReplacementPlugin(),
       new webpack.DefinePlugin({
-        'loadA11y': process.env.loadA11y || false,
+        loadA11y: process.env.loadA11y || false,
       }),
     ],
     resolve: {
@@ -87,7 +90,10 @@ if (process.env.NODE_ENV !== 'development') {
         {
           test: /\.jsx?$/,
           exclude: /(node_modules|bower_components)/,
-          loaders: ['react-hot', 'babel']
+          loader: ['babel'],
+          query: {
+            presets: ['react', 'es2015']
+          }
         },
         {
           test: /\.scss$/,

@@ -174,7 +174,7 @@ class SearchBox extends React.Component {
       // Safety check to ensure a proper requestUrl has been defined.
       if (gaSearchLabel && requestUrl) {
         // Fire GA event to track Search
-        utils._trackHeader('Search', gaSearchLabel);
+        utils.trackHeader('Search', gaSearchLabel);
         // Go to the proper search page
         window.location.assign(requestUrl);
       }

@@ -1,10 +1,8 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _react = require('react');
 
@@ -12,15 +10,15 @@ var _react2 = _interopRequireDefault(_react);
 
 var _underscore = require('underscore');
 
-var _utilsUtilsJs = require('../../utils/utils.js');
+var _utils = require('../../utils/utils.js');
 
-var _utilsUtilsJs2 = _interopRequireDefault(_utilsUtilsJs);
+var _utils2 = _interopRequireDefault(_utils);
 
-// Dependent NYPL React Component
+var _DonateButton = require('../DonateButton/DonateButton.js');
 
-var _DonateButtonDonateButtonJs = require('../DonateButton/DonateButton.js');
+var _DonateButton2 = _interopRequireDefault(_DonateButton);
 
-var _DonateButtonDonateButtonJs2 = _interopRequireDefault(_DonateButtonDonateButtonJs);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var styles = {
   base: {
@@ -78,6 +76,8 @@ var styles = {
     lineHeight: 'normal'
   }
 };
+// Dependent NYPL React Component
+
 
 var NavMenuBottomButtons = function NavMenuBottomButtons(_ref) {
   var className = _ref.className;
@@ -87,31 +87,31 @@ var NavMenuBottomButtons = function NavMenuBottomButtons(_ref) {
   var libraryCardClass = 'LibraryCardLink';
   var subscribeLinkClass = 'SubscribeLink';
 
-  return _react2['default'].createElement(
+  return _react2.default.createElement(
     'div',
     { className: className, style: styles.base },
-    _react2['default'].createElement(
+    _react2.default.createElement(
       'a',
       {
         href: libraryCardLink,
         className: libraryCardClass,
         style: styles.links,
-        onClick: function () {
-          return _utilsUtilsJs2['default']._trackHeader('Click', 'Mobile Bottom Buttons - Library Card');
+        onClick: function onClick() {
+          return _utils2.default.trackHeader('Click', 'Mobile Bottom Buttons - Library Card');
         }
       },
-      _react2['default'].createElement(
+      _react2.default.createElement(
         'span',
         {
           className: libraryCardClass + '-Wrapper',
           style: (0, _underscore.extend)(styles.wrapper, styles.libraryCardLinkWrapper)
         },
-        _react2['default'].createElement('span', {
+        _react2.default.createElement('span', {
           className: libraryCardClass + '-Icon nypl-icon-card',
           style: styles.icon,
           'aria-hidden': 'true'
         }),
-        _react2['default'].createElement(
+        _react2.default.createElement(
           'span',
           {
             className: libraryCardClass + '-Label',
@@ -121,28 +121,28 @@ var NavMenuBottomButtons = function NavMenuBottomButtons(_ref) {
         )
       )
     ),
-    _react2['default'].createElement(
+    _react2.default.createElement(
       'a',
       {
         href: subscribeLink,
         className: subscribeLinkClass,
         style: styles.links,
-        onClick: function () {
-          return _utilsUtilsJs2['default']._trackHeader('Click', 'Mobile Bottom Buttons - Email Updates');
+        onClick: function onClick() {
+          return _utils2.default.trackHeader('Click', 'Mobile Bottom Buttons - Email Updates');
         }
       },
-      _react2['default'].createElement(
+      _react2.default.createElement(
         'span',
         {
           className: subscribeLinkClass + '-Wrapper',
           style: (0, _underscore.extend)(styles.wrapper, styles.subscribeLinkWrapper)
         },
-        _react2['default'].createElement('span', {
+        _react2.default.createElement('span', {
           className: subscribeLinkClass + '-Icon nypl-icon-mail',
           style: styles.icon,
           'aria-hidden': 'true'
         }),
-        _react2['default'].createElement(
+        _react2.default.createElement(
           'span',
           {
             className: subscribeLinkClass + '-Label',
@@ -152,7 +152,7 @@ var NavMenuBottomButtons = function NavMenuBottomButtons(_ref) {
         )
       )
     ),
-    _react2['default'].createElement(_DonateButtonDonateButtonJs2['default'], {
+    _react2.default.createElement(_DonateButton2.default, {
       id: 'MobileNav-DonateButton',
       className: 'DonateLink',
       style: styles.donateLink,
@@ -162,10 +162,10 @@ var NavMenuBottomButtons = function NavMenuBottomButtons(_ref) {
 };
 
 NavMenuBottomButtons.propTypes = {
-  lang: _react2['default'].PropTypes.string,
-  className: _react2['default'].PropTypes.string,
-  libraryCardLink: _react2['default'].PropTypes.string,
-  subscribeLink: _react2['default'].PropTypes.string
+  lang: _react2.default.PropTypes.string,
+  className: _react2.default.PropTypes.string,
+  libraryCardLink: _react2.default.PropTypes.string,
+  subscribeLink: _react2.default.PropTypes.string
 };
 
 NavMenuBottomButtons.defaultProps = {
@@ -175,5 +175,5 @@ NavMenuBottomButtons.defaultProps = {
   subscribeLink: '//pages.email.nypl.org/page.aspx' + '?QS=3935619f7de112ef7250fe02b84fb2f9ab74e4ea015814b7'
 };
 
-exports['default'] = NavMenuBottomButtons;
+exports.default = NavMenuBottomButtons;
 module.exports = exports['default'];

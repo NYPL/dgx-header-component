@@ -125,8 +125,7 @@ class NavMenu extends React.Component {
             {this.renderNavMenu(this.props.items)}
           </ul>
           <SearchButton
-            className={`${this.props.className}`}
-            cookie={this.props.cookie}
+            className={this.props.className}
           />
           {this.renderStickyNavItems()}
           <NavMenuBottomButtons

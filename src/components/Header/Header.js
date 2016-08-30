@@ -22,11 +22,7 @@ import SkipNavigation from 'dgx-skip-navigation-link';
 import utils from '../../utils/utils.js';
 // FeatureFlags Module
 import FeatureFlags from 'dgx-feature-flags';
-// Google Analytics Module
-import { ga } from 'dgx-react-ga';
 
-// When minifying with Webpack, you can use this:
-// import '../../styles/main.scss';
 const styles = {
   wrapper: {
     position: 'relative',
@@ -86,7 +82,6 @@ class Header extends React.Component {
       {
         headerHeight: null,
         navData: this.props.navData,
-        // cookie: this.getCookie('nyplpreview'),
         featureFlags: FeatureFlags.store.getState(),
       },
       HeaderStore.getState()
@@ -101,31 +96,8 @@ class Header extends React.Component {
 
     // Height needs to be set once the alerts (if any) are mounted.
     this.setHeaderHeight();
-
-    // Set which FeatureFlag is to be fired based off preview cookie
-    // this.setFeatureFlagHeaderCall();
-
-    // Watch which FeatureFlag is called to fire
-    // the proper client-side ajax call to populate the Header data state
-    // this.watchFeatureFlagHeaderCall();
-
-    // Read the cookie of "nyplpreview", if the cookie exists and its value is "1",
-    // set dimension1 with value of "Public Preview"
-    // this.setPublicPreviewGA();
-
     // Listen to the scroll event for the sticky header.
     window.addEventListener('scroll', this.handleStickyHeader, false);
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    // Re-fetch the default/current IA /header-data endpoint if
-    // the FeatureFlag 'header-upcoming-ia' has been deactivated.
-    // Used only as a fallback to deactivate a flag and set the
-    // Header data to it's default IA.
-    // if (!this.state.featureFlags.get('header-upcoming-ia') &&
-    //   prevState.featureFlags.get('header-upcoming-ia')) {
-    //   Actions.fetchHeaderData(this.props.env, this.props.urlType);
-    // }
   }
 
   componentWillUnmount() {
@@ -141,7 +113,6 @@ class Header extends React.Component {
       _extend(
         {
           headerHeight: this.state.headerHeight,
-          // cookie: this.state.cookie,
           featureFlags: FeatureFlags.store.getState(),
         },
         HeaderStore.getState()
@@ -185,47 +156,6 @@ class Header extends React.Component {
   }
 
   /**
-   * Returns the value for the given cookie name.
-   * If the cookie doesn't exist a null value will be returned.
-   * https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie/Simple_document.cookie_framework
-   * @returns {string} - Cookie value.
-   */
-  // getCookie(name) {
-  //   if (!name || typeof document === 'undefined' || !document.cookie) {
-  //     return null;
-  //   }
-  //   return decodeURIComponent(
-  //     document.cookie.replace(
-  //       new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(name).replace(/[\-\.\+\*]/g, '\\$&')
-  //         + '\\s*\\=\\s*([^;]*).*$)|^.*$'),
-  //       '$1'
-  //     )
-  //   ) || null;
-  // }
-
-  /**
-   * Verifies if the previewCookie has been set to '1' and
-   * activates the appropriate FeatureFlag
-   */
-  // setFeatureFlagHeaderCall() {
-  //   if (this.state.cookie && this.state.cookie === '1') {
-  //     FeatureFlags.utils.activateFeature('header-upcoming-ia');
-  //   }
-  // }
-
-  /**
-   * Checks if the FeatureFlag name passed is active or not and triggers
-   * the appropriate Action to fetch the Header data.
-   */
-  // watchFeatureFlagHeaderCall() {
-  //   if (FeatureFlags.store._isFeatureActive('header-upcoming-ia')) {
-  //     Actions.fetchHeaderData(this.props.env, this.props.urlType, 'upcoming');
-  //   } else {
-  //     Actions.fetchHeaderData(this.props.env, this.props.urlType);
-  //   }
-  // }
-
-  /**
    * handleStickyHeader()
    * Executes Actions.updateIsHeaderSticky()
    * with the proper boolean value to update the
@@ -252,19 +182,6 @@ class Header extends React.Component {
       }
     }
   }
-
-  /**
-   * setPublicPreviewGA()
-   * Verify if the previewCookie has been set to '1' and
-   * set the public preview GA dimension.
-   */
-  // setPublicPreviewGA() {
-  //   if (this.state.cookie && this.state.cookie === '1') {
-  //     ga.setDimension('dimension1', 'Public Preview');
-  //   } else {
-  //     ga.setDimension('dimension1', null);
-  //   }
-  // }
 
   render() {
     const isHeaderSticky = this.state.isSticky;

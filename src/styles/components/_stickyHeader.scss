@@ -72,12 +72,11 @@
 				}
 
 				&-Link {
-					& > a {
-						font-size: 16px;
+					font-size: 16px;
+					padding: 4px 0 2px;
 
-						@include min-screen(860px) {
-							font-size: 18px;
-						}
+					@include min-screen(860px) {
+						font-size: 18px;
 					}
 				}
 			}
@@ -113,8 +112,8 @@
 
 					@include min-screen(920px) {
 						position: absolute;
-						bottom: 17px;
-						right: 7px;
+						bottom: 18.5px;
+						right: 8px;
 						width: 20px;
 						height: 20px;
 					}
@@ -123,7 +122,7 @@
 
 			&-desktopSearchBox {
 				&.isSticky {
-					top: 47px;
+					top: 50px;
 				}
 			}
 

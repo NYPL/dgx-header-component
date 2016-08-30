@@ -77,8 +77,6 @@ var _dgxFeatureFlags = require('dgx-feature-flags');
 
 var _dgxFeatureFlags2 = _interopRequireDefault(_dgxFeatureFlags);
 
-var _dgxReactGa = require('dgx-react-ga');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -97,11 +95,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 // FeatureFlags Module
 
-// Google Analytics Module
 
-
-// When minifying with Webpack, you can use this:
-// import '../../styles/main.scss';
 var styles = {
   wrapper: {
     position: 'relative'
@@ -164,7 +158,6 @@ var Header = function (_React$Component) {
     _this.state = (0, _underscore.extend)({
       headerHeight: null,
       navData: _this.props.navData,
-      // cookie: this.getCookie('nyplpreview'),
       featureFlags: _dgxFeatureFlags2.default.store.getState()
     }, _HeaderStore2.default.getState());
 
@@ -180,32 +173,8 @@ var Header = function (_React$Component) {
 
       // Height needs to be set once the alerts (if any) are mounted.
       this.setHeaderHeight();
-
-      // Set which FeatureFlag is to be fired based off preview cookie
-      // this.setFeatureFlagHeaderCall();
-
-      // Watch which FeatureFlag is called to fire
-      // the proper client-side ajax call to populate the Header data state
-      // this.watchFeatureFlagHeaderCall();
-
-      // Read the cookie of "nyplpreview", if the cookie exists and its value is "1",
-      // set dimension1 with value of "Public Preview"
-      // this.setPublicPreviewGA();
-
       // Listen to the scroll event for the sticky header.
       window.addEventListener('scroll', this.handleStickyHeader, false);
-    }
-  }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate(prevProps, prevState) {
-      // Re-fetch the default/current IA /header-data endpoint if
-      // the FeatureFlag 'header-upcoming-ia' has been deactivated.
-      // Used only as a fallback to deactivate a flag and set the
-      // Header data to it's default IA.
-      // if (!this.state.featureFlags.get('header-upcoming-ia') &&
-      //   prevState.featureFlags.get('header-upcoming-ia')) {
-      //   Actions.fetchHeaderData(this.props.env, this.props.urlType);
-      // }
     }
   }, {
     key: 'componentWillUnmount',
@@ -221,7 +190,6 @@ var Header = function (_React$Component) {
     value: function onChange() {
       this.setState((0, _underscore.extend)({
         headerHeight: this.state.headerHeight,
-        // cookie: this.state.cookie,
         featureFlags: _dgxFeatureFlags2.default.store.getState()
       }, _HeaderStore2.default.getState()));
     }
@@ -271,47 +239,6 @@ var Header = function (_React$Component) {
     }
 
     /**
-     * Returns the value for the given cookie name.
-     * If the cookie doesn't exist a null value will be returned.
-     * https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie/Simple_document.cookie_framework
-     * @returns {string} - Cookie value.
-     */
-    // getCookie(name) {
-    //   if (!name || typeof document === 'undefined' || !document.cookie) {
-    //     return null;
-    //   }
-    //   return decodeURIComponent(
-    //     document.cookie.replace(
-    //       new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(name).replace(/[\-\.\+\*]/g, '\\$&')
-    //         + '\\s*\\=\\s*([^;]*).*$)|^.*$'),
-    //       '$1'
-    //     )
-    //   ) || null;
-    // }
-
-    /**
-     * Verifies if the previewCookie has been set to '1' and
-     * activates the appropriate FeatureFlag
-     */
-    // setFeatureFlagHeaderCall() {
-    //   if (this.state.cookie && this.state.cookie === '1') {
-    //     FeatureFlags.utils.activateFeature('header-upcoming-ia');
-    //   }
-    // }
-
-    /**
-     * Checks if the FeatureFlag name passed is active or not and triggers
-     * the appropriate Action to fetch the Header data.
-     */
-    // watchFeatureFlagHeaderCall() {
-    //   if (FeatureFlags.store._isFeatureActive('header-upcoming-ia')) {
-    //     Actions.fetchHeaderData(this.props.env, this.props.urlType, 'upcoming');
-    //   } else {
-    //     Actions.fetchHeaderData(this.props.env, this.props.urlType);
-    //   }
-    // }
-
-    /**
      * handleStickyHeader()
      * Executes Actions.updateIsHeaderSticky()
      * with the proper boolean value to update the
@@ -341,20 +268,6 @@ var Header = function (_React$Component) {
         }
       }
     }
-
-    /**
-     * setPublicPreviewGA()
-     * Verify if the previewCookie has been set to '1' and
-     * set the public preview GA dimension.
-     */
-    // setPublicPreviewGA() {
-    //   if (this.state.cookie && this.state.cookie === '1') {
-    //     ga.setDimension('dimension1', 'Public Preview');
-    //   } else {
-    //     ga.setDimension('dimension1', null);
-    //   }
-    // }
-
   }, {
     key: 'render',
     value: function render() {

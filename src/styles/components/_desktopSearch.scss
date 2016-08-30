@@ -23,7 +23,7 @@
   border: none;
   color: $BG_MENU_SEARCH;
   padding: 10px 10px 12px;
-  margin: 2px 0 0;
+  margin: 3px 0 0;
   line-height: normal !important;
   white-space: normal !important;
   @include border-radius(none);
@@ -53,7 +53,7 @@
     font-size: 19px;
     line-height: 1em;
     padding: 0 20px 0 0;
-    border-bottom: 2px solid $BG_MENU_SEARCH;
+    border-bottom: 3px solid $BG_MENU_SEARCH;
   }
 
   &-icon {

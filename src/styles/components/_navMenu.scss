@@ -97,7 +97,7 @@
   	margin: 0;
   	list-style-type: none;
   	text-align: right;
-  	vertical-align: 0px;
+  	vertical-align: middle;
 
   	@include min-screen(769px) {
   		margin: 0;
@@ -116,30 +116,14 @@
   			display: inline-block;
   			padding: 0;
   			line-height: normal !important;
-  			margin: 0 0 0 10px;
+  			margin: 0 0 0 15px;
 
   			&:first-child {
   				margin-left: 0px;
   			}
 		  }
 
-  		@include min-screen(1025px) {
-  			margin: 0 0 0 8px;
-  		}
-
-			// &.DonateButtonItem {
-		  // 	display: none;
-			//
-		  // 	@include min-screen(769px) {
-		  // 		display: inline-block;
-		  // 		margin-left: 10px;
-		  // 	}
-			//
-	  	// 	@include min-screen(1025px) {
-	  	// 		margin-left: 7px;
-	  	// 	}
-		  // }
-
+			// <a> tag for each top level NavMenu item
 			&-Link {
 	  		position: relative;
 	  		display: inline-block;
@@ -153,369 +137,26 @@
 	  			cursor: pointer;
 	  		}
 
-	  		&:visited, &:active, &:focus, &:hover {
+	  		&:visited,
+				&:active,
+				&:focus,
+				&:hover {
 	  			text-decoration: none;
-	  			border: none;
 	  		}
 
 	  		@include min-screen(769px) {
   				color: #000;
-  				padding: 0px 4px;
+					padding: 2px 0;
+					border-bottom: 3px solid transparent;
+					@include transition(border-color .1s linear .025s);
+
+					&:active,
+					&:hover,
+					&:focus {
+						border-color: $libraryRed;
+					}
 	  		}
-
-  			@include min-screen(1025px) {
-  				padding: 0px 7px;
-  			}
 	  	}
-
-			// TODO: REMOVE ON COMPLETION OF MEGAMENU REMOVAL
-	  	// &-Arrow {
-	  	// 	display: none;
-	  	// 	font-size: 25px;
-	  	// 	position: absolute;
-	  	// 	left: 30%;
-	  	// 	z-index: 999;
-			// 	color: $DEFAULT_MENU_BG_COLOR; //Default arrow color
-			//
-	  	// 	@include min-screen(769px) {
-	  	// 		top: 20px;
-	  	// 	}
-			//
-	  	// 	@include min-screen(1025px) {
-	  	// 		top: 18px;
-	  	// 	}
-			//
-			// 	/* Arrow Assignment for Tablets and up */
-			// 	@include min-screen(769px) {
-			// 		&.active {
-			// 			display: block;
-			// 		}
-			//
-		  // 		/* BROWSE OR Books/Music/DVDs */
-		  // 		// OLD IA
-		  // 		&-29a4b824-e084-4771-aafc-52b3586c5e49,
-		  // 		// CURRENT IA
-		  // 		&-c2793eb2-9ac2-4696-82f2-2730763a4f0d,
-		  // 		// UPCOMING IA
-		  // 		&-488afdf5-7a3c-4cee-8c89-1667be3032f7 {
-			//   		&.active {
-			//   			color: $BG_MENU_BROWSE_LEFT;
-			//
-			// 				@include min-screen(972px) {
-			// 					color:$BG_MENU_BROWSE_RIGHT;
-			// 				}
-			//   		}
-		  // 		}
-			//
-		  // 		/* LEARN OR EDUCATION */
-		  // 		// OLD IA
-		  // 		&-925d1fa9-1138-403c-9990-38861902b02d,
-		  // 		// Current IA
-		  // 		&-73005d44-0754-4f16-bc51-4b3d0ca96e9c,
-		  // 		// Upcoming IA
-		  // 		&-17eb88cf-08cb-4b08-89bb-f835c3c032b1 {
-			//   		&.active {
-			//   			color: $BG_MENU_LEARN_RIGHT;
-			//   		}
-		  // 		}
-			//
-		  // 		/* ATTEND OR EVENTS */
-		  // 		// Old IA
-		  // 		&-851ed351-08f5-43f0-9011-9c317f85f0ca,
-		  // 		// Current IA
-		  // 		&-9c3b8da4-8114-4b7f-be5d-aa87257578db,
-		  // 		// Upcoming IA
-		  // 		&-1a56e236-b251-477c-b87c-9b6588aad6b8 {
-			//   		&.active {
-			//   			color: $BG_MENU_ATTEND_RIGHT;
-			//   		}
-		  // 		}
-			//
-		  // 		/* FIND US */
-		  // 		// Old IA
-		  // 		&-df621833-4dd1-4223-83e5-6ad7f98ad26a,
-		  // 		// Current IA
-		  // 		&-1b4916f4-6723-44f0-bfae-112441527c4d {
-			//   		&.active {
-			//   			color: $BG_MENU_FINDUS_RIGHT;
-			//   		}
-		  // 		}
-			//
-			// 		/* CONNECT */
-			// 		// Old IA
-			// 		&-88d29fd3-16a0-4b93-8f28-244f781817da,
-			// 		// Upcoming IA
-			// 		&-a77fd2d8-dc15-45b3-bee6-13e76375ffe8 {
-			// 			&.active {
-			//   			color: $BG_MENU_FINDUS_RIGHT;
-			//   		}
-			// 		}
-			//
-		  // 		/* RESEARCH */
-		  // 		// Old IA
-		  // 		&-4bd4f525-3f5c-4c45-b7a7-0ee6bbd301e9,
-		  // 		// Current IA
-		  // 		&-c1585704-8a24-40bc-8416-5ae579b047d9,
-		  // 		// Upcoming IA
-		  // 		&-4a8ee293-2e42-4f3f-8f62-8ab9d11a688a {
-			//   		&.active {
-			//   			color: $BG_MENU_RESEARCH_LEFT;
-			//
-			// 				@include min-screen(830px) {
-			// 					color: $BG_MENU_RESEARCH_RIGHT;
-			// 				}
-			//   		}
-		  // 		}
-			//
-		  // 		/* GIVE */
-		  // 		// Old IA
-		  // 		&-1d9ea0ec-6ca3-4577-9dd1-e8de1f2a8bb1,
-		  // 		// Current IA
-		  // 		&-ca83f064-e0be-4c05-8df3-9fa3b5dd6009,
-		  // 		// Upcoming IA
-		  // 		&-793f73d4-0ed8-458e-87de-896bee17043c {
-			//   		&.active {
-			//   			color: $BG_MENU_GIVE_RIGHT;
-			//   		}
-		  // 		}
-			//
-			//   	/* GET HELP */
-			//   	// Old IA
-			//   	&-13d95ad5-f117-4415-ba2c-5c0b9618984d,
-			//   	// Current IA
-			//   	&-4b439e81-48a0-4b0a-959f-ec9591addb3a,
-			//   	// Upcoming IA
-			//   	&-ca639f96-6d00-4dd4-b0c4-33f1653f6b2c {
-			//   		&.active {
-			//   			color: $BG_MENU_HELP_RIGHT;
-			//   		}
-			//   	}
-			// 	}
-	  	// }
   	}
-
-  	/* MegaMenu Rules */
-		// TODO: REMOVE ON COMPLETION OF MEGAMENU REMOVAL
-	  // .MegaMenu {
-	  // 	display: none;
-	  // 	color: #FFFFFF;
-	  // 	width: 100%;
-  	// 	position: absolute;
-	  // 	left: 0;
-		//
-	  // 	/* Only display MegaMenu's on  Tablet and up */
-	  // 	&.active {
-		//
-	  // 		@include min-screen(769px) {
-	  // 			display: block;
-	  // 			top: 47px;
-	  // 			z-index: 999;
-	  // 		}
-		//
-	  // 		@include min-screen(1025px) {
-	  // 			top: 44px;
-	  // 		}
-	  // 	}
-		//
-	  // 	&-LeftBgWrapper {
-		// 		width: 50%;
-		// 		position: absolute;
-		// 		left: 0;
-		// 		z-index: 0;
-		//
-		// 		@include min-screen(769px) {
-		// 			min-height: $MAIN_MENU_TABLET_HEIGHT;
-		// 		}
-		//
-		// 		@include min-screen(1025px) {
-		// 			min-height: $MAIN_MENU_DESKTOP_HEIGHT;
-		// 		}
-	  // 	}
-		//
-	  // 	&-Wrapper {
-	  // 		width: 100%;
-		//   	display: block;
-		//   	margin: 0 auto;
-		//   	max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
-		//   	z-index: 1;
-		//   	position: relative;
-		//
-		// 		@include min-screen(769px) {
-		// 			min-height: $MAIN_MENU_TABLET_HEIGHT;
-		// 		}
-		//
-		// 		@include min-screen(1025px) {
-		// 			min-height: $MAIN_MENU_DESKTOP_HEIGHT;
-		// 		}
-	  // 	}
-		//
-	  // 	&-SubNavWrapper {
-	  // 		position: absolute;
-	  // 		display: block;
-	  // 		margin: 0;
-	  // 		padding: 0;
-		//
-	  // 		@include min-screen(769px) {
-	  // 			width: 280px;
-	  // 			min-height: $MAIN_MENU_TABLET_HEIGHT;
-	  // 		}
-		//
-	  // 		@include min-screen(1025px) {
-	  // 			width: 310px;
-	  // 			min-height: $MAIN_MENU_DESKTOP_HEIGHT;
-	  // 		}
-	  // 	}
-		//
-	  // 	&-SubNav {
-	  // 		position: absolute;
-	  // 		right: $LEFT_NAV_RIGHT_MARGIN;
-	  // 		text-align: left;
-		//
-	  // 		@include min-screen(769px) {
-	  // 			width: 200px;
-	  // 		}
-		//
-	  // 		@include min-screen(1025px) {
-	  // 			width: 180px;
-	  // 		}
-		//
-	  // 		a {
-	  // 			color: #FFFFFF;
-	  // 		}
-		//
-	  // 		h2 {
-	  // 			color: #FFFFFF;
-	  // 			border-top: 2px solid #FFFFFF;
-	  // 			margin: 35px 0 0px;
-	  // 			padding: 12px 0 30px;
-		// 			font-weight: 400;
-		// 			font-size: 22px;
-	  // 		}
-		//
-	  // 		& > ul {
-	  // 			margin: 0;
-	  // 			padding: 0;
-	  // 			list-style-type: none;
-		//
-	  // 			li {
-	  // 				margin: 5px 0px 12px 0;
-	  // 				display: block;
-	  // 				padding: 0;
-	  // 				line-height: 1.25em;
-		//
-	  // 				&:first-child {
-	  // 					margin-top: 0px;
-	  // 				}
-		//
-	  // 				a {
-	  // 					font-size: 16.5px;
-	  // 					margin: 0;
-	  // 					padding: 0;
-	  // 					display: block;
-	  // 				}
-	  // 			}
-	  // 		}
-		//
-	  // 		&-SocialMediaWidget {
-	  // 			padding: 2px;
-	  // 			margin: 15px 0 0 0;
-		//
-	  // 			ul {
-	  // 				list-style-type: none;
-	  // 				margin: 0;
-	  // 				padding: 0;
-		//
-	  // 				li {
-	  // 					display: inline-block;
-	  // 					margin: 0 10px 0 0;
-	  // 					line-height: 0;
-		//
-	  // 					&:last-child {
-	  // 						margin-right: 0;
-	  // 					}
-		//
-	  // 					a {
-	  // 						text-decoration: none;
-	  // 						display: block;
-	  // 						font-size: 45px;
-	  // 					}
-	  // 				}
-	  // 			}
-	  // 		}
-	  // 	}
-		//
-	  // 	&-FeaturesWrapper {
-	  // 		display: block;
-	  // 		width: auto;
-	  // 		padding: 0;
-	  // 		text-align: left;
-		//
-	  // 		@include min-screen(769px) {
-	  // 			margin: 0 20px 0 280px;
-		// 			min-height: $MAIN_MENU_TABLET_HEIGHT;
-	  // 		}
-		//
-	  // 		@include min-screen(1025px) {
-	  // 			margin: 0 20px 0 310px;
-	  // 			min-height: $MAIN_MENU_DESKTOP_HEIGHT;
-	  // 		}
-	  // 	}
-		//
-	  // 	&-Features {
-	  // 		display: block;
-	  // 		margin: 0;
-	  // 		padding: 0;
-	  // 		width: 100%;
-	  // 		height: 100%;
-	  // 	}
-		//
-	  // 	&-FeatureItem {
-	  // 		display: inline-table;
-	  // 		width: 50%;
-	  // 		height: 100%;
-	  // 		margin: 0;
-	  // 		padding: 0;
-		//
-		// 		&-Wrapper {
-		// 			display: block;
-		// 			position: relative;
-		// 			top: 50px;
-		//
-		// 			@include min-screen(769px) {
-		// 				margin: 0 0 0 31px;
-		// 			}
-		//
-		// 			@include min-screen(1140px) {
-		// 				margin: 0 0 0 $RIGHT_NAV_CONTAINER_LEFT_MARGIN;
-		// 			}
-		// 		}
-	  // 	}
-	  // }
-		//
-	  // @import '_megaMenuColors';
 	}
-
-	/* FEATURE ITEM
-	 * --------------
-	 * Specific SASS rules for
-	 * this reusable feature item
-	 * content box within the Header
-	*/
-	// @import '_featureItem';
-
-
-	/* FIND US WIDGET
-	 * --------------
-	 * Specific SASS rules for
-	 * this widget within the Header.
-	*/
-	// @import '_findUsWidget';
-
-
-	/* DONATE WIDGET
-	 * --------------
-	 * Specific SASS rules for
-	 * this widget within the Header.
-	*/
-	// @import '_donateWidget';
 }

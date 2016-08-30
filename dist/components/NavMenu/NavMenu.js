@@ -189,8 +189,7 @@ var NavMenu = function (_React$Component) {
             this.renderNavMenu(this.props.items)
           ),
           _react2.default.createElement(_SearchButton2.default, {
-            className: '' + this.props.className,
-            cookie: this.props.cookie
+            className: this.props.className
           }),
           this.renderStickyNavItems(),
           _react2.default.createElement(_NavMenuBottomButtons2.default, {

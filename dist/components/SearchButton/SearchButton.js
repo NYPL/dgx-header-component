@@ -44,7 +44,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 // ALT Flux Store
 
-// import Actions from '../../actions/Actions.js';
 // GA Utility Library
 
 
@@ -60,8 +59,6 @@ var SearchButton = function (_React$Component) {
 
     _this.handleOnClick = _this.handleOnClick.bind(_this);
     _this.handleOnClickOut = _this.handleOnClickOut.bind(_this);
-    // this.activateHover = this.activateHover.bind(this);
-    // this.deactivateHover = this.deactivateHover.bind(this);
     return _this;
   }
 
@@ -102,38 +99,6 @@ var SearchButton = function (_React$Component) {
         }, 200);
       }
     }
-
-    /**
-     * Update the Store's searchButtonActionValue
-     * with hoverSearch after a set time delay.
-     */
-    // activateHover() {
-    //   // Only handle the hover event if the cookie is NOT set
-    //   if (this.props.cookie !== '1') {
-    //     this.hoverTimer = setTimeout(() => {
-    //       Actions.searchButtonActionValue('hoverSearch');
-    //       // Fire GA event to track when the Search Menu is open
-    //       utils._trackHeader('Search', 'Open Menu');
-    //     }, 80);
-    //   }
-    // }
-
-    /**
-     * Clear the activateHover timer if it exists.
-     * Reset the Store's searchButtonActionValue to empty
-     * after a set time delay.
-     */
-    // deactivateHover() {
-    //   // Only handle the hover event if the cookie is NOT set
-    //   if (this.props.cookie !== '1') {
-    //     clearTimeout(this.hoverTimer);
-    //
-    //     setTimeout(() => {
-    //       Actions.searchButtonActionValue('');
-    //       utils._trackHeader('Search', 'Close Menu');
-    //     }, 200);
-    //   }
-    // }
 
     /**
     * renderSearchButton()
@@ -198,9 +163,7 @@ var SearchButton = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        {
-          className: this.props.className + '-searchBox-Wrapper'
-        },
+        { className: this.props.className + '-searchBox-Wrapper' },
         _react2.default.createElement(
           _reactOnclickout2.default,
           { onClickOut: this.handleOnClickOut },

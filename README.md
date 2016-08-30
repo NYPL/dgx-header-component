@@ -35,6 +35,11 @@ $ loadA11y=true npm start
 
 - `navData`: Array containing all navigation links. This is required in order to populate the Header navigation. (Array, default: [])
 
+```sh
+  import { Header, navConfig } from 'dgx-header-component';
+  <Header navData={navConfig.current} />
+```
+
 - `skipNav`: Props to be passed to the `SkipNavigation` component. If these are
   not supplied the skip navigation link will not be output. It will also not be
   output if the props are not sufficient for the component (Object, default:

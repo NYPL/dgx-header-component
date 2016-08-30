@@ -151,8 +151,7 @@ var Header = function (_React$Component) {
 
     _this.state = (0, _underscore.extend)({
       headerHeight: null,
-      navData: _this.props.navData,
-      featureFlags: FeatureFlags.store.getState()
+      navData: _this.props.navData
     }, _HeaderStore2.default.getState());
 
     _this.handleStickyHeader = _this.handleStickyHeader.bind(_this);
@@ -163,8 +162,6 @@ var Header = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       _HeaderStore2.default.listen(this.onChange.bind(this));
-      FeatureFlags.store.listen(this.onChange.bind(this));
-
       // Height needs to be set once the alerts (if any) are mounted.
       this.setHeaderHeight();
       // Listen to the scroll event for the sticky header.
@@ -174,8 +171,6 @@ var Header = function (_React$Component) {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
       _HeaderStore2.default.unlisten(this.onChange.bind(this));
-      FeatureFlags.store.unlisten(this.onChange.bind(this));
-
       // Removing event listener to minimize garbage collection
       window.removeEventListener('scroll', this.handleStickyHeader, false);
     }
@@ -183,8 +178,7 @@ var Header = function (_React$Component) {
     key: 'onChange',
     value: function onChange() {
       this.setState((0, _underscore.extend)({
-        headerHeight: this.state.headerHeight,
-        featureFlags: FeatureFlags.store.getState()
+        headerHeight: this.state.headerHeight
       }, _HeaderStore2.default.getState()));
     }
 

@@ -84,7 +84,7 @@ function Utils() {
    * @param {action} String Action for GA event.
    * @param {label} String Label for GA event.
    */
-  this.trackHeader = _dgxReactGa.ga._trackEvent('Global Header');
+  this.trackHeader = _dgxReactGa.gaUtils.trackEvent('Global Header');
 }
 
 exports.default = new Utils();

@@ -46,7 +46,7 @@ class MyNypl extends React.Component {
               href={this.props.catalogLink}
               style={styles.loginButtons}
               className={`${this.props.className}-Catalog-Btn`}
-              onClick={() => utils._trackHeader('Log In', 'Catalog')}
+              onClick={() => utils.trackHeader('Log In', 'Catalog')}
             >
               <span className="nypl-icon-login icon"></span>
               LOG INTO THE CATALOG
@@ -57,7 +57,7 @@ class MyNypl extends React.Component {
               href={this.props.researchLink}
               style={styles.loginButtons}
               className={`${this.props.className}-Research-Btn`}
-              onClick={() => utils._trackHeader('Log In', 'Research')}
+              onClick={() => utils.trackHeader('Log In', 'Research')}
             >
               <span className="nypl-icon-bldg icon"></span>
               LOG INTO THE RESEARCH CATALOG
@@ -68,7 +68,7 @@ class MyNypl extends React.Component {
         <a
           href={this.props.infoLink}
           className={`${this.props.className}-Catalog-Link`}
-          onClick={() => utils._trackHeader('Log In', 'Catalog Info')}
+          onClick={() => utils.trackHeader('Log In', 'Catalog Info')}
           style={styles.catalogInfo}
         >
           Catalog Info

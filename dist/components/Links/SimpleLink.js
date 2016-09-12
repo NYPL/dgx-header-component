@@ -22,22 +22,22 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var SimpleButton = function (_React$Component) {
-  _inherits(SimpleButton, _React$Component);
+var SimpleLink = function (_React$Component) {
+  _inherits(SimpleLink, _React$Component);
 
-  function SimpleButton(props) {
-    _classCallCheck(this, SimpleButton);
+  function SimpleLink(props) {
+    _classCallCheck(this, SimpleLink);
 
-    var _this = _possibleConstructorReturn(this, (SimpleButton.__proto__ || Object.getPrototypeOf(SimpleButton)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (SimpleLink.__proto__ || Object.getPrototypeOf(SimpleLink)).call(this, props));
 
     _this.handleOnClick = _this.handleOnClick.bind(_this);
     return _this;
   }
 
-  _createClass(SimpleButton, [{
+  _createClass(SimpleLink, [{
     key: 'handleOnClick',
     value: function handleOnClick() {
-      _utils2.default._trackHeader(this.props.gaAction, this.props.gaLabel);
+      _utils2.default.trackHeader(this.props.gaAction, this.props.gaLabel);
       this.props.onClick();
     }
   }, {
@@ -58,10 +58,10 @@ var SimpleButton = function (_React$Component) {
     }
   }]);
 
-  return SimpleButton;
+  return SimpleLink;
 }(_react2.default.Component);
 
-SimpleButton.propTypes = {
+SimpleLink.propTypes = {
   id: _react2.default.PropTypes.string,
   ref: _react2.default.PropTypes.string,
   className: _react2.default.PropTypes.string,
@@ -74,14 +74,13 @@ SimpleButton.propTypes = {
   gaLabel: _react2.default.PropTypes.string
 };
 
-SimpleButton.defaultProps = {
-  ref: 'SimpleButton',
-  className: 'SimpleButton',
-  label: 'Button',
+SimpleLink.defaultProps = {
+  className: 'simpleLink',
+  label: 'Link',
   lang: 'en',
   target: '#',
   onClick: function onClick() {}
 };
 
-exports.default = SimpleButton;
+exports.default = SimpleLink;
 module.exports = exports['default'];

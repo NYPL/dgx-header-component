@@ -4,35 +4,27 @@ import Actions from '../actions/Actions.js';
 class HeaderStore {
   constructor() {
     this.bindListeners({
-      handleUpdateHeaderData: Actions.UPDATE_HEADER_DATA,
-      handleFetchHeaderData: Actions.FETCH_HEADER_DATA,
-      handleHeaderDataFailedFetch: Actions.FAILED_HEADER_DATA,
       handleSetMobileMenuButtonValue: Actions.SET_MOBILE_MENU_BUTTON_VALUE,
       handleSetMobileMyNyplButtonValue: Actions.SET_MOBILE_MY_NYPL_BUTTON_VALUE,
       handleSearchButtonActionValue: Actions.SEARCH_BUTTON_ACTION_VALUE,
       handleUpdateIsHeaderSticky: Actions.UPDATE_IS_HEADER_STICKY,
-      handleSetLastActiveMenuItem: Actions.SET_LAST_ACTIVE_MENU_ITEM,
       handleToggleSubscribeFormVisible: Actions.TOGGLE_SUBSCRIBE_FORM_VISIBLE,
       handleToggleMyNyplVisible: Actions.TOGGLE_MY_NYPL_VISIBLE,
       handleToggleStickyMyNyplVisible: Actions.TOGGLE_STICKY_MY_NYPL_VISIBLE,
     });
 
     this.exportPublicMethods({
-      _getMobileMenuBtnValue: this._getMobileMenuBtnValue,
-      _getSearchButtonActionValue: this._getSearchButtonActionValue,
-      _getMobileMyNyplButtonValue: this._getMobileMyNyplButtonValue,
-      _getIsStickyValue: this._getIsStickyValue,
-      _getLastActiveMenuItem: this._getLastActiveMenuItem,
-      _getSubscribeFormVisible: this._getSubscribeFormVisible,
-      _getMyNyplVisible: this._getMyNyplVisible,
-      _getStickyMyNyplVisible: this._getStickyMyNyplVisible,
+      getMobileMenuBtnValue: this.getMobileMenuBtnValue,
+      getSearchButtonActionValue: this.getSearchButtonActionValue,
+      getMobileMyNyplButtonValue: this.getMobileMyNyplButtonValue,
+      getIsStickyValue: this.getIsStickyValue,
+      getSubscribeFormVisible: this.getSubscribeFormVisible,
+      getMyNyplVisible: this.getMyNyplVisible,
+      getStickyMyNyplVisible: this.getStickyMyNyplVisible,
     });
 
     this.state = {
-      headerData: [],
-      errorMessage: null,
       isSticky: false,
-      lastActiveMenuItem: '',
       activeMobileButton: '',
       searchButtonAction: '',
       mobileMyNyplButton: '',
@@ -43,95 +35,73 @@ class HeaderStore {
   }
 
   /**
-   * _getMobileMenuBtnValue()
+   * getMobileMenuBtnValue()
    * returns the current state.activeMobileButton
    * value.
    * @return {String}
    */
-  _getMobileMenuBtnValue() {
+  getMobileMenuBtnValue() {
     return this.state.activeMobileButton;
   }
 
   /**
-   * _getMobileMyNyplButtonValue()
+   * getMobileMyNyplButtonValue()
    * returns the current state.mobileMyNyplButton
    * value.
    * @return {String}
    */
-  _getMobileMyNyplButtonValue() {
+  getMobileMyNyplButtonValue() {
     return this.state.mobileMyNyplButton;
   }
 
   /**
-   * _getSubscribeFormVisible()
+   * getSubscribeFormVisible()
    * returns the current state.subscribeFormVisible
    * value.
    * @return {Boolean} true/false
    */
-  _getSubscribeFormVisible() {
+  getSubscribeFormVisible() {
     return this.state.subscribeFormVisible;
   }
 
   /**
-   * _getMyNyplVisible()
+   * getMyNyplVisible()
    * returns the current state.myNYPLVisible
    * value.
    * @return {Boolean} true/false
    */
-  _getMyNyplVisible() {
+  getMyNyplVisible() {
     return this.state.myNyplVisible;
   }
 
   /**
-   * _getStickyMyNyplVisible()
+   * getStickyMyNyplVisible()
    * returns the current state.stickyLoginVisible
    * value.
    * @return {Boolean} true/false
    */
-  _getStickyMyNyplVisible() {
+  getStickyMyNyplVisible() {
     return this.state.stickyLoginVisible;
   }
 
   /**
-   * _getSearchButtonActionValue()
+   * getSearchButtonActionValue()
    * returns the current state.getSearchButtonActionValue
    * value.
    * @return {String}
    */
-  _getSearchButtonActionValue() {
+  getSearchButtonActionValue() {
     return this.state.searchButtonAction;
   }
 
   /**
-   * _getIsStickyValue()
+   * getIsStickyValue()
    * returns the current state.isSticky value.
    *
    * @return {Boolean} true/false
    */
-  _getIsStickyValue() {
+  getIsStickyValue() {
     return this.state.isSticky;
-  }
-
-  /**
-   * _getLastActiveMenuItem()
-   * returns the current state.lastActiveMenuItem
-   * value.
-   * @return {String}
-   */
-  _getLastActiveMenuItem() {
-    return this.state.lastActiveMenuItem;
-  }
-
-  handleUpdateHeaderData(data) {
-    this.setState({ headerData: data });
-  }
-
-  handleFetchHeaderData() {
-    this.setState({ headerData: [] });
-  }
-
-  handleHeaderDataFailedFetch(errorMsg) {
-    this.setState({ errorMessage: errorMsg });
   }
 
   handleSetMobileMenuButtonValue(currentActiveMobileButton) {
@@ -149,10 +119,6 @@ class HeaderStore {
 
   handleUpdateIsHeaderSticky(value) {
     this.setState({ isSticky: value });
-  }
-
-  handleSetLastActiveMenuItem(value) {
-    this.setState({ lastActiveMenuItem: value });
   }
 
   handleToggleSubscribeFormVisible(value) {

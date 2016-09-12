@@ -97,7 +97,7 @@ var NavMenuBottomButtons = function NavMenuBottomButtons(_ref) {
         className: libraryCardClass,
         style: styles.links,
         onClick: function onClick() {
-          return _utils2.default._trackHeader('Click', 'Mobile Bottom Buttons - Library Card');
+          return _utils2.default.trackHeader('Click', 'Mobile Bottom Buttons - Library Card');
         }
       },
       _react2.default.createElement(
@@ -128,7 +128,7 @@ var NavMenuBottomButtons = function NavMenuBottomButtons(_ref) {
         className: subscribeLinkClass,
         style: styles.links,
         onClick: function onClick() {
-          return _utils2.default._trackHeader('Click', 'Mobile Bottom Buttons - Email Updates');
+          return _utils2.default.trackHeader('Click', 'Mobile Bottom Buttons - Email Updates');
         }
       },
       _react2.default.createElement(

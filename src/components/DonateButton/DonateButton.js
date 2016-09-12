@@ -12,7 +12,7 @@ const DonateButton = ({ id, className, target, label, gaLabel, style }) => (
     id={id}
     className={className}
     href={target}
-    onClick={() => utils._trackHeader('Donate', gaLabel)}
+    onClick={() => utils.trackHeader('Donate', gaLabel)}
     style={_extend(style, defaultStyles)}
   >
     {label}

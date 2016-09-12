@@ -29,7 +29,7 @@ class MegaMenuSubNav extends React.Component {
           <a
             href={target}
             onClick={() =>
-              utils._trackHeader(
+              utils.trackHeader(
                 'Go to...',
                 `${this.props.label[this.props.lang].text}--${m.name[this.props.lang].text}`
               )
@@ -64,7 +64,7 @@ class MegaMenuSubNav extends React.Component {
             style={styles.topLink}
             href={this.props.topLink}
             onClick={() =>
-              utils._trackHeader(
+              utils.trackHeader(
                 'Go to...',
                 `SubNav Title--${this.props.label[this.props.lang].text}`
               )

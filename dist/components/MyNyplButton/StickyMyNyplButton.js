@@ -105,9 +105,9 @@ var StickyMyNyplButton = function (_React$Component) {
   _createClass(StickyMyNyplButton, [{
     key: 'handleClick',
     value: function handleClick() {
-      var visibleState = _HeaderStore2.default._getStickyMyNyplVisible() ? 'Closed' : 'Open';
-      _Actions2.default.toggleStickyMyNyplVisible(!_HeaderStore2.default._getStickyMyNyplVisible());
-      _utils2.default._trackHeader('Log In', 'StickyMyNyplButton - ' + visibleState);
+      var visibleState = _HeaderStore2.default.getStickyMyNyplVisible() ? 'Closed' : 'Open';
+      _Actions2.default.toggleStickyMyNyplVisible(!_HeaderStore2.default.getStickyMyNyplVisible());
+      _utils2.default.trackHeader('Log In', 'StickyMyNyplButton - ' + visibleState);
     }
 
     /**
@@ -119,16 +119,16 @@ var StickyMyNyplButton = function (_React$Component) {
   }, {
     key: 'handleOnClickOut',
     value: function handleOnClickOut() {
-      if (_HeaderStore2.default._getStickyMyNyplVisible()) {
+      if (_HeaderStore2.default.getStickyMyNyplVisible()) {
         _Actions2.default.toggleStickyMyNyplVisible(false);
-        _utils2.default._trackHeader('Log In', 'StickyMyNyplButton - Closed');
+        _utils2.default.trackHeader('Log In', 'StickyMyNyplButton - Closed');
       }
     }
   }, {
     key: 'render',
     value: function render() {
       // Assign a variable to hold the reference of state boolean
-      var showDialog = _HeaderStore2.default._getStickyMyNyplVisible();
+      var showDialog = _HeaderStore2.default.getStickyMyNyplVisible();
       var buttonClasses = (0, _classnames2.default)({ active: showDialog });
       var myNyplClasses = (0, _classnames2.default)({ 'active animatedFast fadeIn': showDialog });
 

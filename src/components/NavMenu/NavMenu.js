@@ -59,7 +59,7 @@ class NavMenu extends React.Component {
    * Used in FocusTrap onDeactivate callback for A11Y users.
    */
   closeMobileNavMenuDialog() {
-    if (HeaderStore._getMobileMenuBtnValue() === 'mobileMenu') {
+    if (HeaderStore.getMobileMenuBtnValue() === 'mobileMenu') {
       Actions.setMobileMenuButtonValue('');
     }
   }
@@ -70,7 +70,7 @@ class NavMenu extends React.Component {
    * @returns {Object} React DOM.
    */
   renderStickyNavItems() {
-    const stickyClass = HeaderStore._getIsStickyValue() ? ' active' : '';
+    const stickyClass = HeaderStore.getIsStickyValue() ? ' active' : '';
     return (
       <div className={`${this.props.className}-stickyItems${stickyClass}`}>
         <span className="lineSeparator" style={styles.lineSeparator}></span>
@@ -105,17 +105,13 @@ class NavMenu extends React.Component {
         target={item.link.en.text}
         urlType={this.props.urlType}
         navId={item.id}
-        features={item.features}
-        subNav={item.subnav}
         key={index}
-        index={index}
-        cookie={this.props.cookie}
       />
     );
   }
 
   render() {
-    const mobileActiveClass = HeaderStore._getMobileMenuBtnValue() === 'mobileMenu' ?
+    const mobileActiveClass = HeaderStore.getMobileMenuBtnValue() === 'mobileMenu' ?
       ' mobileActive' : '';
 
     return (
@@ -126,14 +122,18 @@ class NavMenu extends React.Component {
         >
           <span className="MobileLogoText nypl-icon-logo-type" aria-hidden="true"></span>
           <ul className={`${this.props.className}-List`} id="NavMenu-List">
-            {this.renderNavMenu(this.props.items, ['1b4916f4-6723-44f0-bfae-112441527c4d'])}
+            {this.renderNavMenu(this.props.items)}
           </ul>
           <SearchButton
-            className={`${this.props.className}`}
-            cookie={this.props.cookie}
+            className={this.props.className}
           />
           {this.renderStickyNavItems()}
-          <NavMenuBottomButtons className="MobileBottomButtons" />
+          <NavMenuBottomButtons
+            className="MobileBottomButtons"
+            libraryCardLink={
+              (this.props.urlType === 'absolute') ? '//www.nypl.org/library-card' : '/library-card'
+            }
+          />
         </nav>
       </div>
     );

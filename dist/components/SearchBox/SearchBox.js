@@ -222,7 +222,7 @@ var SearchBox = function (_React$Component) {
         // Safety check to ensure a proper requestUrl has been defined.
         if (gaSearchLabel && requestUrl) {
           // Fire GA event to track Search
-          _utils2.default._trackHeader('Search', gaSearchLabel);
+          _utils2.default.trackHeader('Search', gaSearchLabel);
           // Go to the proper search page
           window.location.assign(requestUrl);
         }

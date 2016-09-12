@@ -4,7 +4,7 @@ import utils from '../../utils/utils.js';
 class DefaultItem extends React.Component {
   constructor(props) {
     super(props);
-    this._trackHeader = utils._trackHeader.bind(this);
+    this.trackHeader = utils.trackHeader.bind(this);
     this.extraFeatureDetails = this.extraFeatureDetails.bind(this);
     this.personField = this.personField.bind(this);
     this.imageElem = this.imageElem.bind(this);
@@ -64,7 +64,7 @@ class DefaultItem extends React.Component {
       <a
         href={feature.link}
         className={this.props.className}
-        onClick={utils._trackHeader
+        onClick={utils.trackHeader
           .bind(this, 'FeatureItem', `${this.props.navLabel} - ${feature.title}`)}
       >
         <div className={`${this.props.className}-Wrapper`}>

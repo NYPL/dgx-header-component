@@ -8,10 +8,6 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactGa = require('react-ga');
-
-var _reactGa2 = _interopRequireDefault(_reactGa);
-
 var _dgxReactGa = require('dgx-react-ga');
 
 var _dgxFeatureFlags = require('dgx-feature-flags');
@@ -37,7 +33,7 @@ if (!window.ga) {
   console.log('Analytics not available - loading through React.');
   var gaOpts = { debug: true };
   // Passing false to get the dev GA code.
-  _reactGa2.default.initialize(_dgxReactGa.config.google.code(false), gaOpts);
+  _dgxReactGa.ga.initialize(_dgxReactGa.config.google.code(false), gaOpts);
 }
 
 // Used to activate/deactivate AB tests on global namespace.

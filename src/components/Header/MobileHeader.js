@@ -253,7 +253,7 @@ class MobileHeader extends React.Component {
           className={`MobileMyNypl-Wrapper${myNyplClass}`}
           onDeactivate={this.closeMyNyplDialog}
         >
-          <MobileMyNypl />
+          <MobileMyNypl isLogin={this.props.isLogin} />
         </FocusTrap>
       );
     }
@@ -406,6 +406,7 @@ MobileHeader.propTypes = {
   locatorUrl: React.PropTypes.string,
   nyplRootUrl: React.PropTypes.string,
   alt: React.PropTypes.string,
+  isLogin: React.PropTypes.bool,
 };
 
 MobileHeader.defaultProps = {

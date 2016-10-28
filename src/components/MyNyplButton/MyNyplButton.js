@@ -74,6 +74,7 @@ class MyNyplButton extends React.Component {
    */
   handleClick() {
     const visibleState = HeaderStore.getMyNyplVisible() ? 'Closed' : 'Open';
+
     Actions.toggleMyNyplVisible(!HeaderStore.getMyNyplVisible());
     utils.trackHeader('Log In', `MyNyplButton - ${visibleState}`);
   }
@@ -113,13 +114,13 @@ class MyNyplButton extends React.Component {
     );
   }
 
-  renderMyNyplDialog() {
+  renderMyNyplDialog(isLogin) {
     return (HeaderStore.getMyNyplVisible()) ? (
       <div
         className="MyNypl-Wrapper active animatedFast fadeIn"
         style={styles.MyNyplWrapper}
       >
-        <MyNypl />
+        <MyNypl isLogin={isLogin} />
       </div>
     ) : null;
   }
@@ -132,7 +133,7 @@ class MyNyplButton extends React.Component {
           style={_extend(styles.base, this.props.style)}
         >
           {this.renderMyNyplButton()}
-          {this.renderMyNyplDialog()}
+          {this.renderMyNyplDialog(this.props.isLogin)}
         </div>
       </ClickOutHandler>
     );
@@ -143,6 +144,7 @@ MyNyplButton.propTypes = {
   lang: React.PropTypes.string,
   label: React.PropTypes.string,
   style: React.PropTypes.object,
+  isLogin: React.PropTypes.bool,
 };
 
 MyNyplButton.defaultProps = {

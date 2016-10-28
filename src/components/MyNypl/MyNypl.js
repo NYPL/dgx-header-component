@@ -37,6 +37,10 @@ class MyNypl extends React.Component {
   }
 
   render() {
+    const catalogLinkLabel = (this.props.isLogin) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
+    const researchCatalogLinkLabel = (this.props.isLogin) ? 'GO TO THE RESEARCH CATALOG' :
+      'LOG INTO THE RESEARCH CATALOG';
+
     return (
       <div className={this.props.className} role="dialog">
         <ul className={`${this.props.className}-Login-List`}>
@@ -49,7 +53,7 @@ class MyNypl extends React.Component {
               onClick={() => utils.trackHeader('Log In', 'Catalog')}
             >
               <span className="nypl-icon-login icon"></span>
-              LOG INTO THE CATALOG
+              {catalogLinkLabel}
             </a>
           </li>
           <li>
@@ -60,7 +64,7 @@ class MyNypl extends React.Component {
               onClick={() => utils.trackHeader('Log In', 'Research')}
             >
               <span className="nypl-icon-bldg icon"></span>
-              LOG INTO THE RESEARCH CATALOG
+              {researchCatalogLinkLabel}
             </a>
           </li>
         </ul>
@@ -85,6 +89,7 @@ MyNypl.propTypes = {
   catalogLink: React.PropTypes.string,
   researchLink: React.PropTypes.string,
   infoLink: React.PropTypes.string,
+  isLogin: React.PropTypes.bool,
 };
 
 MyNypl.defaultProps = {

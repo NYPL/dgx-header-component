@@ -71,9 +71,13 @@ const MobileMyNypl = ({
   catalogLink,
   researchLink,
   infoLink,
+  isLogin,
 }) => {
   const catalogLinkClass = 'CatalogLink';
   const researchLinkClass = 'ResearchLink';
+  const catalogLinkLabel = (isLogin) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
+  const researchCatalogLinkLabel = (isLogin) ? 'GO TO THE RESEARCH CATALOG' :
+    'LOG INTO THE RESEARCH CATALOG';
 
   return (
     <div
@@ -97,7 +101,7 @@ const MobileMyNypl = ({
             className={`${catalogLinkClass}-Label`}
             style={_extend(styles.catalogLinkLabel, styles.label)}
           >
-            Log into the Catalog
+            {catalogLinkLabel}
           </span>
         </span>
       </a>
@@ -116,7 +120,7 @@ const MobileMyNypl = ({
             className={`${researchLinkClass}-Label`}
             style={_extend(styles.researchLinkLabel, styles.label)}
           >
-            Log into the Research Catalog
+            {researchCatalogLinkLabel}
           </span>
         </span>
       </a>
@@ -139,6 +143,7 @@ MobileMyNypl.propTypes = {
   catalogLink: React.PropTypes.string,
   researchLink: React.PropTypes.string,
   infoLink: React.PropTypes.string,
+  isLogin: React.PropTypes.bool,
 };
 
 MobileMyNypl.defaultProps = {

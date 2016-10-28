@@ -80,6 +80,7 @@ class Header extends React.Component {
       {
         headerHeight: null,
         navData: this.props.navData,
+        loginCookie: null,
       },
       HeaderStore.getState()
     );
@@ -93,6 +94,9 @@ class Header extends React.Component {
     this.setHeaderHeight();
     // Listen to the scroll event for the sticky header.
     window.addEventListener('scroll', this.handleStickyHeader, false);
+
+    // Set nyplIdentity cookie to the state.
+    this.setLoginCookie();
   }
 
   componentWillUnmount() {
@@ -106,10 +110,19 @@ class Header extends React.Component {
       _extend(
         {
           headerHeight: this.state.headerHeight,
+          loginCookie: this.state.loginCookie,
         },
         HeaderStore.getState()
       )
     );
+  }
+
+  /**
+   * setLoginCookie()
+   * Updates the state loginCookie property
+   */
+  setLoginCookie() {
+    this.setState({ loginCookie: utils.getCookie('nyplIdentity') });
   }
 
   /**
@@ -182,6 +195,7 @@ class Header extends React.Component {
     const headerClasses = cx(headerClass, { sticky: isHeaderSticky });
     const skipNav = this.props.skipNav ?
       (<SkipNavigation {...this.props.skipNav} />) : '';
+    const isLogin = this.state.loginCookie !== null;
 
     return (
       <header
@@ -200,6 +214,7 @@ class Header extends React.Component {
                 '//www.nypl.org/locations/map?nearme=true' : '/locations/map?nearme=true'
             }
             nyplRootUrl={(this.props.urlType === 'absolute') ? '//www.nypl.org' : '/'}
+            isLogin={isLogin}
             ref="headerMobile"
           />
           <div
@@ -215,6 +230,7 @@ class Header extends React.Component {
               <MyNyplButton
                 label="Log In"
                 refId="desktopLogin"
+                isLogin={isLogin}
               />
               <SimpleLink
                 label="Locations"
@@ -267,6 +283,7 @@ class Header extends React.Component {
             lang={this.props.lang}
             items={this.state.navData}
             urlType={this.props.urlType}
+            isLogin={isLogin}
           />
         </div>
       </header>

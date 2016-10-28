@@ -90,6 +90,25 @@ function Utils() {
    * @param {label} String Label for GA event.
    */
   this.trackHeader = gaUtils.trackEvent('Global Header');
+
+  /**
+   * getCookie(sKey)
+   * Get a cookie based on its name.
+   *
+   * @param {sKey} String Name of the cookie to be looked up.
+   */
+  this.getCookie = (sKey) => {
+    if (!sKey) { return null; }
+
+    return decodeURIComponent(
+      document.cookie.replace(
+        new RegExp(
+          `(?:(?:^|.*;)\\s*${encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&')}` +
+          '\\s*\\=\\s*([^;]*).*$)|^.*$'
+        ), '$1'
+      )
+    ) || null;
+  };
 }
 
 export default new Utils();

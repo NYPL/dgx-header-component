@@ -17,8 +17,8 @@ var iconStyles = {
 };
 
 var FindUsFeature = function FindUsFeature(_ref) {
-  var className = _ref.className;
-  var urlType = _ref.urlType;
+  var className = _ref.className,
+      urlType = _ref.urlType;
 
   var url = urlType === 'absolute' ? '//www.nypl.org/locations' : '/locations';
   return _react2.default.createElement(

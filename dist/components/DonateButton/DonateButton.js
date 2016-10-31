@@ -22,12 +22,12 @@ var defaultStyles = {
 };
 
 var DonateButton = function DonateButton(_ref) {
-  var id = _ref.id;
-  var className = _ref.className;
-  var target = _ref.target;
-  var label = _ref.label;
-  var gaLabel = _ref.gaLabel;
-  var style = _ref.style;
+  var id = _ref.id,
+      className = _ref.className,
+      target = _ref.target,
+      label = _ref.label,
+      gaLabel = _ref.gaLabel,
+      style = _ref.style;
   return _react2.default.createElement(
     'a',
     {
@@ -55,7 +55,7 @@ DonateButton.propTypes = {
 DonateButton.defaultProps = {
   label: 'Donate',
   className: 'DonateButton',
-  target: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form&JServSessionIdr003=dwcz55yj27.app304a&s_src=FRQ14ZZ_SWBN'
+  target: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form&JServSessionIdr003=dwcz55yj27.app304a'
 };
 
 exports.default = DonateButton;

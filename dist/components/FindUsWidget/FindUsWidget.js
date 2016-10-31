@@ -19,10 +19,10 @@ var _MegaMenuFeatureItem2 = _interopRequireDefault(_MegaMenuFeatureItem);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var FindUsWidget = function FindUsWidget(_ref) {
-  var className = _ref.className;
-  var featuredItem = _ref.featuredItem;
-  var navLabel = _ref.navLabel;
-  var urlType = _ref.urlType;
+  var className = _ref.className,
+      featuredItem = _ref.featuredItem,
+      navLabel = _ref.navLabel,
+      urlType = _ref.urlType;
   return _react2.default.createElement(
     'div',
     { className: className },

@@ -13,11 +13,11 @@ var _underscore = require('underscore');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var AlertsBox = function AlertsBox(_ref) {
-  var className = _ref.className;
-  var id = _ref.id;
-  var lang = _ref.lang;
-  var style = _ref.style;
-  var alerts = _ref.alerts;
+  var className = _ref.className,
+      id = _ref.id,
+      lang = _ref.lang,
+      style = _ref.style,
+      alerts = _ref.alerts;
 
   var alertItems = (0, _underscore.map)(alerts, function (item, index) {
     var alertDescription = item.attributes['alert-text'][lang];

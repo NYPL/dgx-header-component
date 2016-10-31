@@ -195,7 +195,11 @@ var Header = function (_React$Component) {
   }, {
     key: 'setLoginCookie',
     value: function setLoginCookie() {
-      this.setState({ loginCookie: _utils2.default.getCookie('nyplIdentity') });
+      if (_utils2.default.hasCookie('nyplIdentity')) {
+        this.setState({ loginCookie: _utils2.default.getCookie('nyplIdentity') });
+      } else {
+        this.setState({ loginCookie: null });
+      }
     }
 
     /**

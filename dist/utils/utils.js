@@ -99,6 +99,20 @@ function Utils() {
 
     return decodeURIComponent(document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || null;
   };
+
+  /**
+   * hasCookie(sKey)
+   * See if a specific cookie.
+   *
+   * @param {sKey} String Name of the cookie to be looked up.
+   */
+  this.hasCookie = function (sKey) {
+    if (!sKey) {
+      return false;
+    }
+
+    return new RegExp('(?:^|;\\s*)' + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=').test(document.cookie);
+  };
 }
 
 exports.default = new Utils();

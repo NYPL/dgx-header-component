@@ -109,6 +109,21 @@ function Utils() {
       )
     ) || null;
   };
+
+  /**
+   * hasCookie(sKey)
+   * See if a specific cookie.
+   *
+   * @param {sKey} String Name of the cookie to be looked up.
+   */
+  this.hasCookie = (sKey) => {
+    if (!sKey) { return false; }
+
+    return (
+      new RegExp('(?:^|;\\s*)' + encodeURIComponent(sKey)
+        .replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\='))
+        .test(document.cookie);
+  };
 }
 
 export default new Utils();

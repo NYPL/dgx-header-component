@@ -122,7 +122,11 @@ class Header extends React.Component {
    * Updates the state loginCookie property
    */
   setLoginCookie() {
-    this.setState({ loginCookie: utils.getCookie('nyplIdentity') });
+    if (utils.hasCookie('nyplIdentity')) {
+      this.setState({ loginCookie: utils.getCookie('nyplIdentity') });
+    } else {
+      this.setState({ loginCookie: null });
+    }
   }
 
   /**

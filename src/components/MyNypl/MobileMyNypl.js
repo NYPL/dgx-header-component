@@ -35,7 +35,7 @@ const styles = {
     margin: '0',
     padding: '1.75em 0',
   },
-  catalogInfoLink: {
+  logoutLink: {
     display: 'block',
     color: '#fff',
     textAlign: 'center',
@@ -70,7 +70,7 @@ const MobileMyNypl = ({
   className,
   catalogLink,
   researchLink,
-  infoLink,
+  logoutLink,
   isLogin,
 }) => {
   const catalogLinkClass = 'CatalogLink';
@@ -126,12 +126,12 @@ const MobileMyNypl = ({
       </a>
       <a
         className="Mobile-Catalog-Info"
-        href={infoLink}
+        href={logoutLink}
         lang={lang}
-        onClick={() => utils.trackHeader('Mobile Log In', 'Catalog Info')}
-        style={styles.catalogInfoLink}
+        onClick={() => utils.trackHeader('Mobile Log In', 'Log Out')}
+        style={styles.logoutLink}
       >
-        Catalog Info
+        Log Out
       </a>
     </div>
   );
@@ -142,7 +142,7 @@ MobileMyNypl.propTypes = {
   className: React.PropTypes.string,
   catalogLink: React.PropTypes.string,
   researchLink: React.PropTypes.string,
-  infoLink: React.PropTypes.string,
+  logoutLink: React.PropTypes.string,
   isLogin: React.PropTypes.bool,
 };
 
@@ -151,7 +151,7 @@ MobileMyNypl.defaultProps = {
   className: 'MobileMyNypl',
   catalogLink: appConfig.myNyplLinks.catalog,
   researchLink: appConfig.myNyplLinks.research,
-  infoLink: appConfig.myNyplLinks.moreInfo,
+  logoutLink: appConfig.myNyplLinks.logoutLink,
 };
 
 export default MobileMyNypl;

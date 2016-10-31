@@ -34,7 +34,7 @@ const config = {
   myNyplLinks: {
     catalog: 'https://browse.nypl.org/iii/encore/myaccount',
     research: 'https://catalog.nypl.org/patroninfo/top',
-    moreInfo: 'https://www.nypl.org/online-catalog-changes',
+    logoutLink: 'https://isso.nypl.org/auth/logout',
   },
 };
 

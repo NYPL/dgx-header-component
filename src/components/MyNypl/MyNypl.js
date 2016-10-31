@@ -4,7 +4,7 @@ import utils from '../../utils/utils.js';
 import appConfig from '../../appConfig.js';
 
 const styles = {
-  catalogInfo: {
+  logoutLink: {
     bottom: '26px',
     color: '#FFF',
     fontSize: '14px',
@@ -70,12 +70,12 @@ class MyNypl extends React.Component {
         </ul>
 
         <a
-          href={this.props.infoLink}
+          href={this.props.logoutLink}
           className={`${this.props.className}-Catalog-Link`}
           onClick={() => utils.trackHeader('Log In', 'Catalog Info')}
-          style={styles.catalogInfo}
+          style={styles.logoutLink}
         >
-          Catalog Info
+          Log Out
         </a>
       </div>
     );
@@ -88,7 +88,7 @@ MyNypl.propTypes = {
   lang: React.PropTypes.string,
   catalogLink: React.PropTypes.string,
   researchLink: React.PropTypes.string,
-  infoLink: React.PropTypes.string,
+  logoutLink: React.PropTypes.string,
   isLogin: React.PropTypes.bool,
 };
 
@@ -97,7 +97,7 @@ MyNypl.defaultProps = {
   lang: 'en',
   catalogLink: appConfig.myNyplLinks.catalog,
   researchLink: appConfig.myNyplLinks.research,
-  infoLink: appConfig.myNyplLinks.moreInfo,
+  logoutLink: appConfig.myNyplLinks.logoutLink,
 };
 
 export default MyNypl;

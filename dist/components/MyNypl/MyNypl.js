@@ -72,6 +72,22 @@ var MyNypl = function (_React$Component) {
       this.refs.catalogLink.blur();
     }
   }, {
+    key: 'renderLogoutLink',
+    value: function renderLogoutLink() {
+      return this.props.isLogin ? _react2.default.createElement(
+        'a',
+        {
+          href: this.props.logoutLink,
+          className: this.props.className + '-Catalog-Link',
+          onClick: function onClick() {
+            return _utils2.default.trackHeader('Log In', 'Catalog Info');
+          },
+          style: styles.logoutLink
+        },
+        'Log Out'
+      ) : null;
+    }
+  }, {
     key: 'render',
     value: function render() {
       var catalogLinkLabel = this.props.isLogin ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
@@ -119,18 +135,7 @@ var MyNypl = function (_React$Component) {
             )
           )
         ),
-        _react2.default.createElement(
-          'a',
-          {
-            href: this.props.logoutLink,
-            className: this.props.className + '-Catalog-Link',
-            onClick: function onClick() {
-              return _utils2.default.trackHeader('Log In', 'Catalog Info');
-            },
-            style: styles.logoutLink
-          },
-          'Log Out'
-        )
+        this.renderLogoutLink()
       );
     }
   }]);

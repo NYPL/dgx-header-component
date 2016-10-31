@@ -65,77 +65,76 @@ const styles = {
   },
 };
 
-const MobileMyNypl = ({
-  lang,
-  className,
-  catalogLink,
-  researchLink,
-  logoutLink,
-  isLogin,
-}) => {
-  const catalogLinkClass = 'CatalogLink';
-  const researchLinkClass = 'ResearchLink';
-  const catalogLinkLabel = (isLogin) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
-  const researchCatalogLinkLabel = (isLogin) ? 'GO TO THE RESEARCH CATALOG' :
-    'LOG INTO THE RESEARCH CATALOG';
-
-  return (
-    <div
-      className={className}
-      style={styles.base}
-      role="dialog"
-    >
+class MobileMyNypl extends React.Component {
+  renderLogoutLink() {
+    return (this.props.isLogin) ?
       <a
-        href={catalogLink}
-        className={catalogLinkClass}
-        style={styles.links}
-        onClick={() => utils.trackHeader('Mobile Log In', 'Catalog')}
-      >
-        <span
-          className={`${catalogLinkClass}-Wrapper`}
-          style={_extend(styles.wrapper, styles.catalogLinkWrapper)}
-        >
-          <span className={`${catalogLinkClass}-Icon nypl-icon-login`} style={styles.icon}>
-          </span>
-          <span
-            className={`${catalogLinkClass}-Label`}
-            style={_extend(styles.catalogLinkLabel, styles.label)}
-          >
-            {catalogLinkLabel}
-          </span>
-        </span>
-      </a>
-      <a
-        href={researchLink}
-        className={researchLinkClass}
-        style={styles.links}
-        onClick={() => utils.trackHeader('Mobile Log In', 'Research')}
-      >
-        <span
-          className={`${researchLinkClass}-Wrapper`}
-          style={_extend(styles.wrapper, styles.researchLinkWrapper)}
-        >
-          <span className={`${researchLinkClass}-Icon nypl-icon-bldg`} style={styles.icon}></span>
-          <span
-            className={`${researchLinkClass}-Label`}
-            style={_extend(styles.researchLinkLabel, styles.label)}
-          >
-            {researchCatalogLinkLabel}
-          </span>
-        </span>
-      </a>
-      <a
-        className="Mobile-Catalog-Info"
-        href={logoutLink}
-        lang={lang}
-        onClick={() => utils.trackHeader('Mobile Log In', 'Log Out')}
+        href={this.props.logoutLink}
+        className={`${this.props.className}-Catalog-Link`}
+        onClick={() => utils.trackHeader('Log In', 'Catalog Info')}
         style={styles.logoutLink}
       >
         Log Out
-      </a>
-    </div>
-  );
-};
+      </a> : <div style={styles.logoutLink}></div>;
+  }
+
+  render() {
+    const catalogLinkClass = 'CatalogLink';
+    const researchLinkClass = 'ResearchLink';
+    const catalogLinkLabel = (this.props.isLogin) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
+    const researchCatalogLinkLabel = (this.props.isLogin) ? 'GO TO THE RESEARCH CATALOG' :
+      'LOG INTO THE RESEARCH CATALOG';
+
+    return (
+      <div
+        className={this.props.className}
+        style={styles.base}
+        role="dialog"
+      >
+        <a
+          href={this.props.catalogLink}
+          className={catalogLinkClass}
+          style={styles.links}
+          onClick={() => utils.trackHeader('Mobile Log In', 'Catalog')}
+        >
+          <span
+            className={`${catalogLinkClass}-Wrapper`}
+            style={_extend(styles.wrapper, styles.catalogLinkWrapper)}
+          >
+            <span className={`${catalogLinkClass}-Icon nypl-icon-login`} style={styles.icon}>
+            </span>
+            <span
+              className={`${catalogLinkClass}-Label`}
+              style={_extend(styles.catalogLinkLabel, styles.label)}
+            >
+              {catalogLinkLabel}
+            </span>
+          </span>
+        </a>
+        <a
+          href={this.props.researchLink}
+          className={researchLinkClass}
+          style={styles.links}
+          onClick={() => utils.trackHeader('Mobile Log In', 'Research')}
+        >
+          <span
+            className={`${researchLinkClass}-Wrapper`}
+            style={_extend(styles.wrapper, styles.researchLinkWrapper)}
+          >
+            <span className={`${researchLinkClass}-Icon nypl-icon-bldg`} style={styles.icon}></span>
+            <span
+              className={`${researchLinkClass}-Label`}
+              style={_extend(styles.researchLinkLabel, styles.label)}
+            >
+              {researchCatalogLinkLabel}
+            </span>
+          </span>
+        </a>
+        {this.renderLogoutLink()}
+      </div>
+    );
+  }
+}
 
 MobileMyNypl.propTypes = {
   lang: React.PropTypes.string,

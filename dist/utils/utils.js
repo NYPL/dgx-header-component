@@ -114,8 +114,16 @@ function Utils() {
     return new RegExp('(?:^|;\\s*)' + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=').test(document.cookie);
   };
 
-  this.getPatronData = function (cookie) {
-    console.log(cookie);
+  /**
+   * getLoginData(cookie, cb)
+   * Handle the cookie from log in and make api calls with the callback function passed in.
+   *
+   * @param {cookie} String The cookie returned.
+   * @param {cb} Function The function passed in to make api calls.
+   */
+  this.getLoginData = function (cookie, cb) {
+    console.log(JSON.parse(cookie).access_token);
+    cb();
   };
 }
 

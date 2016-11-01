@@ -125,8 +125,16 @@ function Utils() {
         .test(document.cookie);
   };
 
-  this.getPatronData = (cookie) => {
-    console.log(cookie);
+  /**
+   * getLoginData(cookie, cb)
+   * Handle the cookie from log in and make api calls with the callback function passed in.
+   *
+   * @param {cookie} String The cookie returned.
+   * @param {cb} Function The function passed in to make api calls.
+   */
+  this.getLoginData = (cookie, cb) => {
+    console.log(JSON.parse(cookie).access_token);
+    cb();
   };
 }
 

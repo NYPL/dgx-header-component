@@ -19,11 +19,19 @@ var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
+var _axios = require('axios');
+
+var _axios2 = _interopRequireDefault(_axios);
+
 var _underscore = require('underscore');
 
 var _navConfig = require('../../navConfig.js');
 
 var _navConfig2 = _interopRequireDefault(_navConfig);
+
+var _appConfig = require('../../appConfig.js');
+
+var _appConfig2 = _interopRequireDefault(_appConfig);
 
 var _HeaderStore = require('../../stores/HeaderStore.js');
 
@@ -152,7 +160,8 @@ var Header = function (_React$Component) {
     _this.state = (0, _underscore.extend)({
       headerHeight: null,
       navData: _this.props.navData,
-      loginCookie: null
+      loginCookie: null,
+      patronData: {}
     }, _HeaderStore2.default.getState());
 
     _this.handleStickyHeader = _this.handleStickyHeader.bind(_this);
@@ -199,7 +208,7 @@ var Header = function (_React$Component) {
         var loginCookie = _utils2.default.getCookie('nyplIdentity');
 
         this.setState({ loginCookie: loginCookie });
-        _utils2.default.getPatronData(loginCookie);
+        this.fetchPatronData(loginCookie);
       } else {
         this.setState({ loginCookie: null });
       }
@@ -250,6 +259,42 @@ var Header = function (_React$Component) {
     }
 
     /**
+     * fetchPatronData(cookie)
+     * Gets the patron's data based on the cookie,
+     * and updates it to the state.
+     * @param {cookie} - The cookie returned from log in.
+     */
+
+  }, {
+    key: 'fetchPatronData',
+    value: function fetchPatronData(cookie) {
+      var _this3 = this;
+
+      var decodedToken = JSON.parse(cookie).access_token;
+      var endpoint = '' + _appConfig2.default.patronApiUrl + decodedToken;
+
+      _utils2.default.getLoginData(cookie, function () {
+        _axios2.default.get(endpoint).then(function (result) {
+          if (result.data && result.data.data) {
+            _this3.setState({ patronName: result.data.data.patron.names[0] });
+          }
+        }).catch(function (response) {
+          console.warn('Error on Axios GET request: ' + endpoint);
+          if (response instanceof Error) {
+            console.warn(response.message);
+          } else {
+            // The request was made, but the server responded with a status code
+            // that falls out of the range of 2xx
+            console.warn(response.data);
+            console.warn(response.status);
+            console.warn(response.headers);
+            console.warn(response.config);
+          }
+        });
+      });
+    }
+
+    /**
      * handleStickyHeader()
      * Executes Actions.updateIsHeaderSticky()
      * with the proper boolean value to update the
@@ -289,7 +334,7 @@ var Header = function (_React$Component) {
       var skipNav = this.props.skipNav ? _react2.default.createElement(_dgxSkipNavigationLink2.default, this.props.skipNav) : '';
       var isLogin = this.state.loginCookie !== null;
 
-      console.log('this is place log in links!');
+      console.log(this.state.patronName);
 
       return _react2.default.createElement(
         'header',

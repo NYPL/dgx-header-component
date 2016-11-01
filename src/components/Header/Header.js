@@ -2,9 +2,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';
+import axios from 'axios';
 import { extend as _extend } from 'underscore';
 // Nav Config
 import navConfig from '../../navConfig.js';
+import config from '../../appConfig.js';
 // ALT Flux
 import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
@@ -81,6 +83,7 @@ class Header extends React.Component {
         headerHeight: null,
         navData: this.props.navData,
         loginCookie: null,
+        patronData: {},
       },
       HeaderStore.getState()
     );
@@ -125,8 +128,8 @@ class Header extends React.Component {
     if (utils.hasCookie('nyplIdentity')) {
       const loginCookie = utils.getCookie('nyplIdentity');
 
-      this.setState({ loginCookie: loginCookie });
-      utils.getPatronData(loginCookie);
+      this.setState({ loginCookie });
+      this.fetchPatronData(loginCookie);
     } else {
       this.setState({ loginCookie: null });
     }
@@ -168,6 +171,40 @@ class Header extends React.Component {
   }
 
   /**
+   * fetchPatronData(cookie)
+   * Gets the patron's data based on the cookie,
+   * and updates it to the state.
+   * @param {cookie} - The cookie returned from log in.
+   */
+  fetchPatronData(cookie) {
+    const decodedToken = JSON.parse(cookie).access_token;
+    const endpoint = `${config.patronApiUrl}${decodedToken}`;
+
+    utils.getLoginData(cookie, () => {
+      axios
+        .get(endpoint)
+        .then(result => {
+          if (result.data && result.data.data) {
+            this.setState({ patronName: result.data.data.patron.names[0] });
+          }
+        })
+        .catch(response => {
+          console.warn(`Error on Axios GET request: ${endpoint}`);
+          if (response instanceof Error) {
+            console.warn(response.message);
+          } else {
+            // The request was made, but the server responded with a status code
+            // that falls out of the range of 2xx
+            console.warn(response.data);
+            console.warn(response.status);
+            console.warn(response.headers);
+            console.warn(response.config);
+          }
+        });
+    });
+  }
+
+  /**
    * handleStickyHeader()
    * Executes Actions.updateIsHeaderSticky()
    * with the proper boolean value to update the
@@ -204,7 +241,7 @@ class Header extends React.Component {
       (<SkipNavigation {...this.props.skipNav} />) : '';
     const isLogin = this.state.loginCookie !== null;
 
-    console.log('this is place log in links!');
+    console.log(this.state.patronName);
 
     return (
       <header

@@ -36,6 +36,7 @@ const config = {
     research: 'https://isso.nypl.org/auth/login?redirect_uri=https://catalog.nypl.org/patroninfo/top',
     logoutLink: 'https://isso.nypl.org/auth/logout',
   },
+  patronApiUrl: 'https://api.nypltech.org/api/v0.1/auth/patron/tokens/',
 };
 
 export default config;

@@ -196,7 +196,10 @@ var Header = function (_React$Component) {
     key: 'setLoginCookie',
     value: function setLoginCookie() {
       if (_utils2.default.hasCookie('nyplIdentity')) {
-        this.setState({ loginCookie: _utils2.default.getCookie('nyplIdentity') });
+        var loginCookie = _utils2.default.getCookie('nyplIdentity');
+
+        this.setState({ loginCookie: loginCookie });
+        _utils2.default.getPatronData(loginCookie);
       } else {
         this.setState({ loginCookie: null });
       }
@@ -285,6 +288,8 @@ var Header = function (_React$Component) {
       var headerClasses = (0, _classnames2.default)(headerClass, { sticky: isHeaderSticky });
       var skipNav = this.props.skipNav ? _react2.default.createElement(_dgxSkipNavigationLink2.default, this.props.skipNav) : '';
       var isLogin = this.state.loginCookie !== null;
+
+      console.log('this is place log in links!');
 
       return _react2.default.createElement(
         'header',

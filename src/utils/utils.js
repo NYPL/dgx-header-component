@@ -124,6 +124,10 @@ function Utils() {
         .replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\='))
         .test(document.cookie);
   };
+
+  this.getPatronData = (cookie) => {
+    console.log(cookie);
+  };
 }
 
 export default new Utils();

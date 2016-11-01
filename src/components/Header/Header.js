@@ -123,7 +123,10 @@ class Header extends React.Component {
    */
   setLoginCookie() {
     if (utils.hasCookie('nyplIdentity')) {
-      this.setState({ loginCookie: utils.getCookie('nyplIdentity') });
+      const loginCookie = utils.getCookie('nyplIdentity');
+
+      this.setState({ loginCookie: loginCookie });
+      utils.getPatronData(loginCookie);
     } else {
       this.setState({ loginCookie: null });
     }
@@ -200,6 +203,8 @@ class Header extends React.Component {
     const skipNav = this.props.skipNav ?
       (<SkipNavigation {...this.props.skipNav} />) : '';
     const isLogin = this.state.loginCookie !== null;
+
+    console.log('this is place log in links!');
 
     return (
       <header

@@ -113,6 +113,10 @@ function Utils() {
 
     return new RegExp('(?:^|;\\s*)' + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=').test(document.cookie);
   };
+
+  this.getPatronData = function (cookie) {
+    console.log(cookie);
+  };
 }
 
 exports.default = new Utils();

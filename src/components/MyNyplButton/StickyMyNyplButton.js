@@ -22,6 +22,14 @@ const styles = {
     lineHeight: 'normal',
     outline: 'none',
   },
+  patronInitial: {
+    color: 'green',
+    display: 'inline-block',
+    fontSize: '1.4em',
+    lineHeight: 'normal',
+    margin: '0',
+    verticalAlign: '6px',
+  },
   MyNyplIcon: {
     fontSize: '15px',
     verticalAlign: 'text-bottom',
@@ -80,6 +88,8 @@ class StickyMyNyplButton extends React.Component {
     const showDialog = HeaderStore.getStickyMyNyplVisible();
     const buttonClasses = cx({ active: showDialog });
     const myNyplClasses = cx({ 'active animatedFast fadeIn': showDialog });
+    const patronInitial = (this.props.patronInitial) ?
+      (<p style={styles.patronInitial}>{this.props.patronInitial}</p>) : null;
 
     return (
       <ClickOutHandler onClickOut={this.handleOnClickOut}>
@@ -97,6 +107,7 @@ class StickyMyNyplButton extends React.Component {
             <span className="visuallyHidden">
               {this.props.label}
             </span>
+            {patronInitial}
             <LoginIcon
               width="25"
               height="25"
@@ -120,6 +131,7 @@ StickyMyNyplButton.propTypes = {
   label: React.PropTypes.string,
   style: React.PropTypes.object,
   isLogin: React.PropTypes.bool,
+  patronInitial: React.PropTypes.string,
 };
 
 StickyMyNyplButton.defaultProps = {

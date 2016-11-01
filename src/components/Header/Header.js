@@ -339,6 +339,7 @@ class Header extends React.Component {
             items={this.state.navData}
             urlType={this.props.urlType}
             isLogin={isLogin}
+            patronInitial={this.state.patronInitial}
           />
         </div>
       </header>

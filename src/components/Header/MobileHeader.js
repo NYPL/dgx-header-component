@@ -258,7 +258,8 @@ class MobileHeader extends React.Component {
   */
   renderMyNyplButton() {
     let myNyplClass = '';
-    let icon = <LoginIcon ariaHidden fill="#000" />;
+    const loginColor = (this.props.isLogin) ? 'green' : '#000';
+    let icon = <LoginIcon ariaHidden fill={loginColor} />;
     let buttonStyles = styles.inactiveMyNyplButton;
     let buttonLabel = 'Open Log In Dialog';
     let dialogWindow = null;

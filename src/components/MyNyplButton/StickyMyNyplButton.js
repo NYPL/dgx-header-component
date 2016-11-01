@@ -90,6 +90,7 @@ class StickyMyNyplButton extends React.Component {
     const myNyplClasses = cx({ 'active animatedFast fadeIn': showDialog });
     const patronInitial = (this.props.patronInitial) ?
       (<p style={styles.patronInitial}>{this.props.patronInitial}</p>) : null;
+    const LoginIconColor = (this.props.isLogin) ? 'green' : '#333';
 
     return (
       <ClickOutHandler onClickOut={this.handleOnClickOut}>
@@ -111,7 +112,7 @@ class StickyMyNyplButton extends React.Component {
             <LoginIcon
               width="25"
               height="25"
-              fill={showDialog ? '#FFF' : '#333'}
+              fill={showDialog ? '#FFF' : LoginIconColor}
             />
           </button>
           <div

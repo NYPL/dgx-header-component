@@ -10,6 +10,8 @@ var _moment2 = _interopRequireDefault(_moment);
 
 var _dgxReactGa = require('dgx-react-ga');
 
+var _underscore = require('underscore');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Utils() {
@@ -122,8 +124,26 @@ function Utils() {
    * @param {cb} Function The function passed in to make api calls.
    */
   this.getLoginData = function (cookie, cb) {
-    console.log(JSON.parse(cookie).access_token);
     cb();
+  };
+
+  /**
+   * getPatronName (name)
+   * Model the returned patron name data to get a string of the full name
+   * and a string of the initial.
+   *
+   * @param {name} String The name data returned.
+   * @return Object The object contains the modeled patron name and initial.
+   */
+  this.getPatronName = function (name) {
+    var nameArray = name.replace(/ /g, '').split(',').reverse();
+    var initialArray = (0, _underscore.map)(nameArray, function (item) {
+      return item.charAt(0);
+    });
+    var patronName = nameArray.join(' ');
+    var patronInitial = initialArray.join('');
+
+    return { name: patronName, initial: patronInitial };
   };
 }
 

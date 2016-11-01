@@ -83,7 +83,8 @@ class Header extends React.Component {
         headerHeight: null,
         navData: this.props.navData,
         loginCookie: null,
-        patronData: {},
+        patronName: '',
+        patronInitial: '',
       },
       HeaderStore.getState()
     );
@@ -114,6 +115,7 @@ class Header extends React.Component {
         {
           headerHeight: this.state.headerHeight,
           loginCookie: this.state.loginCookie,
+          patronNameObject: this.state.patronNameObject,
         },
         HeaderStore.getState()
       )
@@ -185,7 +187,14 @@ class Header extends React.Component {
         .get(endpoint)
         .then(result => {
           if (result.data && result.data.data) {
-            this.setState({ patronName: result.data.data.patron.names[0] });
+            // Calls utils.getPatronName to model the returned patron name
+            const patronNameObject = utils.getPatronName(result.data.data.patron.names[0]);
+
+            this.setState(
+              { patronName: patronNameObject.name,
+                patronInitial: patronNameObject.initial,
+              }
+            );
           }
         })
         .catch(response => {
@@ -241,8 +250,6 @@ class Header extends React.Component {
       (<SkipNavigation {...this.props.skipNav} />) : '';
     const isLogin = this.state.loginCookie !== null;
 
-    console.log(this.state.patronName);
-
     return (
       <header
         id={this.props.id}
@@ -261,6 +268,7 @@ class Header extends React.Component {
             }
             nyplRootUrl={(this.props.urlType === 'absolute') ? '//www.nypl.org' : '/'}
             isLogin={isLogin}
+            patronInitial={this.state.patronInitial}
             ref="headerMobile"
           />
           <div

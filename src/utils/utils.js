@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { gaUtils } from 'dgx-react-ga';
+import {map as _map } from 'underscore';
 
 function Utils() {
   this.formatDate = (startDate, endDate) => {
@@ -133,8 +134,24 @@ function Utils() {
    * @param {cb} Function The function passed in to make api calls.
    */
   this.getLoginData = (cookie, cb) => {
-    console.log(JSON.parse(cookie).access_token);
     cb();
+  };
+
+  /**
+   * getPatronName (name)
+   * Model the returned patron name data to get a string of the full name
+   * and a string of the initial.
+   *
+   * @param {name} String The name data returned.
+   * @return Object The object contains the modeled patron name and initial.
+   */
+  this.getPatronName = (name) => {
+    const nameArray = name.replace(/ /g, '').split(',').reverse();
+    const initialArray = _map(nameArray, (item) => item.charAt(0));
+    const patronName = nameArray.join(' ');
+    const patronInitial = initialArray.join('');
+
+    return { name: patronName, initial: patronInitial };
   };
 }
 

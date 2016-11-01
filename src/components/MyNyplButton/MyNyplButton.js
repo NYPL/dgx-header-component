@@ -96,6 +96,9 @@ class MyNyplButton extends React.Component {
   renderMyNyplButton() {
     let buttonClass = '';
     let iconClass = 'nypl-icon-wedge-down';
+    const icon = (this.props.isLogin) ? null :
+      (<span className={`${iconClass} icon`} style={styles.MyNyplIcon}></span>);
+    const buttonColorClass = (this.props.isLogin) ? 'loginColor' : '';
 
     if (HeaderStore.getMyNyplVisible()) {
       buttonClass = 'active';
@@ -104,12 +107,12 @@ class MyNyplButton extends React.Component {
 
     return (
       <button
-        className={`MyNyplButton ${buttonClass}`}
+        className={`MyNyplButton ${buttonClass} ${buttonColorClass}`}
         onClick={this.handleClick}
         style={_extend(styles.MyNyplButton, this.props.style)}
       >
         {this.props.label}
-        <span className={`${iconClass} icon`} style={styles.MyNyplIcon}></span>
+        {icon}
       </button>
     );
   }

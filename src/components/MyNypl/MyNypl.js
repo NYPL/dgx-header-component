@@ -5,14 +5,17 @@ import appConfig from '../../appConfig.js';
 
 const styles = {
   logoutLink: {
-    bottom: '26px',
-    color: '#FFF',
+    backgroundColor: '#FFF',
+    border: '10px solid #FFF',
+    borderRadius: '27px',
+    bottom: '15px',
+    color: '#1B7FA7',
     fontSize: '14px',
     fontWeight: '200',
     letterSpacing: '.03em',
+    padding: '3px 20px',
     position: 'absolute',
     right: '30px',
-    textDecoration: 'underline',
   },
   loginButtons: {
     backgroundColor: '#1B7FA7',
@@ -41,7 +44,7 @@ class MyNypl extends React.Component {
       <a
         href={this.props.logoutLink}
         className={`${this.props.className}-Catalog-Link`}
-        onClick={() => utils.trackHeader('Log In', 'Catalog Info')}
+        onClick={() => utils.trackHeader('My NYPL', 'Log Out')}
         style={styles.logoutLink}
       >
         Log Out

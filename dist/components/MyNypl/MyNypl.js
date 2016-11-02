@@ -30,14 +30,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var styles = {
   logoutLink: {
-    bottom: '26px',
-    color: '#FFF',
+    backgroundColor: '#FFF',
+    border: '10px solid #FFF',
+    borderRadius: '27px',
+    bottom: '15px',
+    color: '#1B7FA7',
     fontSize: '14px',
     fontWeight: '200',
     letterSpacing: '.03em',
+    padding: '3px 20px',
     position: 'absolute',
-    right: '30px',
-    textDecoration: 'underline'
+    right: '30px'
   },
   loginButtons: {
     backgroundColor: '#1B7FA7',
@@ -80,7 +83,7 @@ var MyNypl = function (_React$Component) {
           href: this.props.logoutLink,
           className: this.props.className + '-Catalog-Link',
           onClick: function onClick() {
-            return _utils2.default.trackHeader('Log In', 'Catalog Info');
+            return _utils2.default.trackHeader('My NYPL', 'Log Out');
           },
           style: styles.logoutLink
         },

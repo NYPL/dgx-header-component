@@ -2,6 +2,7 @@ import React from 'react';
 // Config and Utility Library
 import utils from '../../utils/utils.js';
 import appConfig from '../../appConfig.js';
+import FeatureFlags from 'dgx-feature-flags';
 
 const styles = {
   logoutLink: {
@@ -31,12 +32,26 @@ const styles = {
 };
 
 class MyNypl extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isOauthLogin: FeatureFlags.store._getImmutableState().get('oauth-login'),
+    };
+  }
+
   componentDidMount() {
     this.refs.catalogLink.focus();
   }
 
   componentWillUnmount() {
     this.refs.catalogLink.blur();
+  }
+
+  onChange() {
+    this.setState({
+      isOauthLogin: FeatureFlags.store._getImmutableState().get('oauth-login'),
+    });
   }
 
   renderLogoutLink() {
@@ -55,8 +70,10 @@ class MyNypl extends React.Component {
     const catalogLinkLabel = (this.props.isLogin) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
     const researchCatalogLinkLabel = (this.props.isLogin) ? 'GO TO THE RESEARCH CATALOG' :
       'LOG INTO THE RESEARCH CATALOG';
-    const catalogLink = (this.props.isLogin) ? this.props.catalogLink : this.props.loginCatalogLink;
-    const researchLink = (this.props.isLogin) ? this.props.researchLink : this.props.loginResearchLink;
+    const catalogLink = (!this.state.isOauthLogin || this.props.isLogin) ?
+      this.props.catalogLink : this.props.loginCatalogLink;
+    const researchLink = (!this.state.isOauthLogin || this.props.isLogin) ?
+      this.props.researchLink : this.props.loginResearchLink;
 
     return (
       <div className={this.props.className} role="dialog">
@@ -98,6 +115,8 @@ MyNypl.propTypes = {
   lang: React.PropTypes.string,
   catalogLink: React.PropTypes.string,
   researchLink: React.PropTypes.string,
+  loginCatalogLink: React.PropTypes.string,
+  loginResearchLink: React.PropTypes.string,
   logoutLink: React.PropTypes.string,
   isLogin: React.PropTypes.bool,
 };

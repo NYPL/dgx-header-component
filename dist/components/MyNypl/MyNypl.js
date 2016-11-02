@@ -18,6 +18,10 @@ var _appConfig = require('../../appConfig.js');
 
 var _appConfig2 = _interopRequireDefault(_appConfig);
 
+var _dgxFeatureFlags = require('dgx-feature-flags');
+
+var _dgxFeatureFlags2 = _interopRequireDefault(_dgxFeatureFlags);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -58,10 +62,15 @@ var styles = {
 var MyNypl = function (_React$Component) {
   _inherits(MyNypl, _React$Component);
 
-  function MyNypl() {
+  function MyNypl(props) {
     _classCallCheck(this, MyNypl);
 
-    return _possibleConstructorReturn(this, (MyNypl.__proto__ || Object.getPrototypeOf(MyNypl)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (MyNypl.__proto__ || Object.getPrototypeOf(MyNypl)).call(this, props));
+
+    _this.state = {
+      isOauthLogin: _dgxFeatureFlags2.default.store._getImmutableState().get('oauth-login')
+    };
+    return _this;
   }
 
   _createClass(MyNypl, [{
@@ -73,6 +82,13 @@ var MyNypl = function (_React$Component) {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
       this.refs.catalogLink.blur();
+    }
+  }, {
+    key: 'onChange',
+    value: function onChange() {
+      this.setState({
+        isOauthLogin: _dgxFeatureFlags2.default.store._getImmutableState().get('oauth-login')
+      });
     }
   }, {
     key: 'renderLogoutLink',
@@ -95,8 +111,8 @@ var MyNypl = function (_React$Component) {
     value: function render() {
       var catalogLinkLabel = this.props.isLogin ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
       var researchCatalogLinkLabel = this.props.isLogin ? 'GO TO THE RESEARCH CATALOG' : 'LOG INTO THE RESEARCH CATALOG';
-      var catalogLink = this.props.isLogin ? this.props.catalogLink : this.props.loginCatalogLink;
-      var researchLink = this.props.isLogin ? this.props.researchLink : this.props.loginResearchLink;
+      var catalogLink = !this.state.isOauthLogin || this.props.isLogin ? this.props.catalogLink : this.props.loginCatalogLink;
+      var researchLink = !this.state.isOauthLogin || this.props.isLogin ? this.props.researchLink : this.props.loginResearchLink;
 
       return _react2.default.createElement(
         'div',
@@ -154,6 +170,8 @@ MyNypl.propTypes = {
   lang: _react2.default.PropTypes.string,
   catalogLink: _react2.default.PropTypes.string,
   researchLink: _react2.default.PropTypes.string,
+  loginCatalogLink: _react2.default.PropTypes.string,
+  loginResearchLink: _react2.default.PropTypes.string,
   logoutLink: _react2.default.PropTypes.string,
   isLogin: _react2.default.PropTypes.bool
 };

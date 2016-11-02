@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { gaUtils } from 'dgx-react-ga';
-import {map as _map } from 'underscore';
+import { map as _map } from 'underscore';
 
 function Utils() {
   this.formatDate = (startDate, endDate) => {
@@ -121,8 +121,8 @@ function Utils() {
     if (!sKey) { return false; }
 
     return (
-      new RegExp('(?:^|;\\s*)' + encodeURIComponent(sKey)
-        .replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\='))
+      new RegExp(`(?:^|;\\s*)${encodeURIComponent(sKey)
+        .replace(/[\-\.\+\*]/g, '\\$&')}\\s*\\=`))
         .test(document.cookie);
   };
 

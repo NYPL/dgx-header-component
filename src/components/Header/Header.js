@@ -190,11 +190,10 @@ class Header extends React.Component {
             // Calls utils.getPatronName to model the returned patron name
             const patronNameObject = utils.getPatronName(result.data.data.patron.names[0]);
 
-            this.setState(
-              { patronName: patronNameObject.name,
-                patronInitial: patronNameObject.initial,
-              }
-            );
+            this.setState({
+              patronName: patronNameObject.name,
+              patronInitial: patronNameObject.initial,
+            });
           }
         })
         .catch(response => {

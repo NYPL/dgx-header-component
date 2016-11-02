@@ -204,8 +204,8 @@ var Header = function (_React$Component) {
   }, {
     key: 'setLoginCookie',
     value: function setLoginCookie() {
-      if (_utils2.default.hasCookie('nyplIdentity')) {
-        var loginCookie = _utils2.default.getCookie('nyplIdentity');
+      if (_utils2.default.hasCookie('nyplIdentityPatron')) {
+        var loginCookie = _utils2.default.getCookie('nyplIdentityPatron');
 
         this.setState({ loginCookie: loginCookie });
         this.fetchPatronData(loginCookie);

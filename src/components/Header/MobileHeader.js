@@ -245,7 +245,7 @@ class MobileHeader extends React.Component {
   renderPatronInitial() {
     const initial = this.props.patronInitial;
 
-    return (initial) ? (
+    return (initial && this.state.mobileMyNyplButton !== 'clickMyNypl') ? (
       <p style={styles.patronInitial}>{initial}</p>
     ) : null;
   }

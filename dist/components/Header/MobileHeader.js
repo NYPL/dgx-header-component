@@ -309,7 +309,7 @@ var MobileHeader = function (_React$Component) {
     value: function renderPatronInitial() {
       var initial = this.props.patronInitial;
 
-      return initial ? _react2.default.createElement(
+      return initial && this.state.mobileMyNyplButton !== 'clickMyNypl' ? _react2.default.createElement(
         'p',
         { style: styles.patronInitial },
         initial
@@ -329,7 +329,8 @@ var MobileHeader = function (_React$Component) {
       var _this2 = this;
 
       var myNyplClass = '';
-      var icon = _react2.default.createElement(_dgxSvgIcons.LoginIcon, { ariaHidden: true, fill: '#000' });
+      var loginColor = this.props.isLogin ? 'green' : '#000';
+      var icon = _react2.default.createElement(_dgxSvgIcons.LoginIcon, { ariaHidden: true, fill: loginColor });
       var buttonStyles = styles.inactiveMyNyplButton;
       var buttonLabel = 'Open Log In Dialog';
       var dialogWindow = null;

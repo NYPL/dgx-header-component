@@ -60,6 +60,13 @@ var styles = {
     lineHeight: 'normal',
     outline: 'none'
   },
+  patronInitial: {
+    display: 'inline-block',
+    fontSize: '1.4em',
+    lineHeight: 'normal',
+    margin: '0',
+    verticalAlign: '6px'
+  },
   MyNyplIcon: {
     fontSize: '15px',
     verticalAlign: 'text-bottom',
@@ -131,6 +138,13 @@ var StickyMyNyplButton = function (_React$Component) {
       var showDialog = _HeaderStore2.default.getStickyMyNyplVisible();
       var buttonClasses = (0, _classnames2.default)({ active: showDialog });
       var myNyplClasses = (0, _classnames2.default)({ 'active animatedFast fadeIn': showDialog });
+      var patronInitialClass = showDialog ? '' : 'loginColor';
+      var patronInitial = this.props.patronInitial ? _react2.default.createElement(
+        'p',
+        { style: styles.patronInitial, className: patronInitialClass },
+        this.props.patronInitial
+      ) : null;
+      var LoginIconColor = this.props.isLogin ? 'green' : '#333';
 
       return _react2.default.createElement(
         _reactOnclickout2.default,
@@ -155,10 +169,11 @@ var StickyMyNyplButton = function (_React$Component) {
               { className: 'visuallyHidden' },
               this.props.label
             ),
+            patronInitial,
             _react2.default.createElement(_dgxSvgIcons.LoginIcon, {
               width: '25',
               height: '25',
-              fill: showDialog ? '#FFF' : '#333'
+              fill: showDialog ? '#FFF' : LoginIconColor
             })
           ),
           _react2.default.createElement(
@@ -181,7 +196,8 @@ StickyMyNyplButton.propTypes = {
   lang: _react2.default.PropTypes.string,
   label: _react2.default.PropTypes.string,
   style: _react2.default.PropTypes.object,
-  isLogin: _react2.default.PropTypes.bool
+  isLogin: _react2.default.PropTypes.bool,
+  patronInitial: _react2.default.PropTypes.string
 };
 
 StickyMyNyplButton.defaultProps = {

@@ -23,7 +23,6 @@ const styles = {
     outline: 'none',
   },
   patronInitial: {
-    color: 'green',
     display: 'inline-block',
     fontSize: '1.4em',
     lineHeight: 'normal',
@@ -88,8 +87,9 @@ class StickyMyNyplButton extends React.Component {
     const showDialog = HeaderStore.getStickyMyNyplVisible();
     const buttonClasses = cx({ active: showDialog });
     const myNyplClasses = cx({ 'active animatedFast fadeIn': showDialog });
+    const patronInitialClass = (showDialog) ? '' : 'loginColor';
     const patronInitial = (this.props.patronInitial) ?
-      (<p style={styles.patronInitial}>{this.props.patronInitial}</p>) : null;
+      (<p style={styles.patronInitial} className={patronInitialClass}>{this.props.patronInitial}</p>) : null;
     const LoginIconColor = (this.props.isLogin) ? 'green' : '#333';
 
     return (

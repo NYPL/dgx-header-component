@@ -281,7 +281,8 @@ var Header = function (_React$Component) {
             // Calls utils.getPatronName to model the returned patron name
             var patronNameObject = _utils2.default.getPatronName(result.data.data.patron.names[0]);
 
-            _this3.setState({ patronName: patronNameObject.name,
+            _this3.setState({
+              patronName: patronNameObject.name,
               patronInitial: patronNameObject.initial
             });
           }

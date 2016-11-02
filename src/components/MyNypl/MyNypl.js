@@ -7,7 +7,7 @@ const styles = {
   logoutLink: {
     backgroundColor: '#FFF',
     border: '10px solid #FFF',
-    borderRadius: '27px',
+    borderRadius: '20px',
     bottom: '15px',
     color: '#1B7FA7',
     fontSize: '14px',

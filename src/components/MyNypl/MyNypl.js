@@ -75,6 +75,8 @@ class MyNypl extends React.Component {
     const researchLink = (!this.state.isOauthLogin || this.props.isLogin) ?
       this.props.researchLink : this.props.loginResearchLink;
 
+    console.log(FeatureFlags.store._getImmutableState().get('oauth-login'));
+
     return (
       <div className={this.props.className} role="dialog">
         <ul className={`${this.props.className}-Login-List`}>

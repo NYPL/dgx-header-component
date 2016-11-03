@@ -114,6 +114,8 @@ var MyNypl = function (_React$Component) {
       var catalogLink = !this.state.isOauthLogin || this.props.isLogin ? this.props.catalogLink : this.props.loginCatalogLink;
       var researchLink = !this.state.isOauthLogin || this.props.isLogin ? this.props.researchLink : this.props.loginResearchLink;
 
+      console.log(_dgxFeatureFlags2.default.store._getImmutableState().get('oauth-login'));
+
       return _react2.default.createElement(
         'div',
         { className: this.props.className, role: 'dialog' },

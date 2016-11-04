@@ -222,7 +222,7 @@ MobileMyNypl.defaultProps = {
   loginResearchLink: _appConfig2.default.loginMyNyplLinks.research,
   catalogLink: _appConfig2.default.myNyplLinks.catalog,
   researchLink: _appConfig2.default.myNyplLinks.research,
-  logoutLink: _appConfig2.default.myNyplLinks.logoutLink
+  logoutLink: _appConfig2.default.loginMyNyplLinks.logoutLink
 };
 
 exports.default = MobileMyNypl;

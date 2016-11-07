@@ -25,10 +25,6 @@ var _navConfig = require('../../navConfig.js');
 
 var _navConfig2 = _interopRequireDefault(_navConfig);
 
-var _appConfig = require('../../appConfig.js');
-
-var _appConfig2 = _interopRequireDefault(_appConfig);
-
 var _HeaderStore = require('../../stores/HeaderStore.js');
 
 var _HeaderStore2 = _interopRequireDefault(_HeaderStore);

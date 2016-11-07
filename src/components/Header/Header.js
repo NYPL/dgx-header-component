@@ -5,7 +5,6 @@ import cx from 'classnames';
 import { extend as _extend } from 'underscore';
 // Nav Config
 import navConfig from '../../navConfig.js';
-import config from '../../appConfig.js';
 // ALT Flux
 import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';

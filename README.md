@@ -4,7 +4,7 @@ This repository is for the header component used in React applications at NYPL.
 
 ### Version
 
-1.4.2
+1.4.3
 
 ### App Installation
 
@@ -138,5 +138,5 @@ $ NODE_ENV=production npm start
 
 ### CHANGE LOG
 
-#### v1.4.2
+#### v1.4.3
 > Updated all Header donation URLs

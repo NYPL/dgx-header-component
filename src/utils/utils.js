@@ -1,6 +1,8 @@
 import moment from 'moment';
 import { gaUtils } from 'dgx-react-ga';
 import { map as _map } from 'underscore';
+import axios from 'axios';
+import config from './../appConfig.js';
 
 function Utils() {
   this.formatDate = (startDate, endDate) => {
@@ -134,18 +136,62 @@ function Utils() {
    * @param {cb} Function The function passed in to make api calls.
    */
   this.getLoginData = (cookie, cb) => {
-    cb();
+    const decodedToken = JSON.parse(cookie).access_token;
+    const endpoint = `${config.patronApiUrl}${decodedToken}`;
+
+    axios
+      .get(endpoint)
+      .then(cb)
+      .catch(response => {
+        console.warn(`Error on Axios GET request: ${endpoint}`);
+        if (response instanceof Error) {
+          console.warn(response.message);
+        } else {
+          // The request was made, but the server responded with a status code
+          // that falls out of the range of 2xx
+          console.warn(response.data);
+          console.warn(response.status);
+          console.warn(response.headers);
+          console.warn(response.config);
+        }
+      });
   };
 
   /**
-   * getPatronName (name)
+   * extractPatronName(data)
+   * Dig in the returned patron data to extract the patron's name.
+   *
+   * @param {data} Object The returned patron data.
+   */
+  this.extractPatronName = (data) => {
+    try {
+      const {
+        data: {
+          patron: {
+            names: [patronName],
+          },
+        },
+      } = data;
+
+      return patronName;
+    } catch (e) {
+      return null;
+    }
+  };
+
+  /**
+   * modelPatronName (name)
    * Model the returned patron name data to get a string of the full name
    * and a string of the initial.
    *
    * @param {name} String The name data returned.
    * @return Object The object contains the modeled patron name and initial.
    */
-  this.getPatronName = (name) => {
+  this.modelPatronName = (name) => {
+    if (!name) {
+      return { name: '', initial: '' };
+    }
+
     const nameArray = name.replace(/ /g, '').split(',').reverse();
     const initialArray = _map(nameArray, (item) => item.charAt(0));
     const patronName = nameArray.join(' ');

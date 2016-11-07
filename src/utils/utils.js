@@ -136,6 +136,28 @@ function Utils() {
     console.log(JSON.parse(cookie).access_token);
     cb();
   };
+
+  /**
+   * modelPatronName(data)
+   * Model the returned patron data to extract the patron's name.
+   *
+   * @param {data} Object The returned patron data.
+   */
+  this.modelPatronName = (data) => {
+    try {
+      const {
+        data: {
+          patron: {
+            names: [patronName],
+          },
+        },
+      } = data;
+
+      return patronName;
+    } catch (e) {
+      return null;
+    }
+  };
 }
 
 export default new Utils();

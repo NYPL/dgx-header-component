@@ -276,7 +276,7 @@ var Header = function (_React$Component) {
       _utils2.default.getLoginData(cookie, function () {
         _axios2.default.get(endpoint).then(function (result) {
           if (result.data && result.data.data) {
-            _this3.setState({ patronName: result.data.data.patron.names[0] });
+            _this3.setState({ patronName: _utils2.default.modelPatronName(result.data) });
           }
         }).catch(function (response) {
           console.warn('Error on Axios GET request: ' + endpoint);

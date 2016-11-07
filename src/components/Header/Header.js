@@ -185,7 +185,7 @@ class Header extends React.Component {
         .get(endpoint)
         .then(result => {
           if (result.data && result.data.data) {
-            this.setState({ patronName: result.data.data.patron.names[0] });
+            this.setState({ patronName: utils.modelPatronName(result.data) });
           }
         })
         .catch(response => {

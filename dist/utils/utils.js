@@ -12,6 +12,14 @@ var _moment2 = _interopRequireDefault(_moment);
 
 var _dgxReactGa = require('dgx-react-ga');
 
+var _axios = require('axios');
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _appConfig = require('./../appConfig.js');
+
+var _appConfig2 = _interopRequireDefault(_appConfig);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Utils() {
@@ -125,7 +133,23 @@ function Utils() {
    */
   this.getLoginData = function (cookie, cb) {
     console.log(JSON.parse(cookie).access_token);
-    cb();
+
+    var decodedToken = JSON.parse(cookie).access_token;
+    var endpoint = '' + _appConfig2.default.patronApiUrl + decodedToken;
+
+    _axios2.default.get(endpoint).then(cb).catch(function (response) {
+      console.warn('Error on Axios GET request: ' + endpoint);
+      if (response instanceof Error) {
+        console.warn(response.message);
+      } else {
+        // The request was made, but the server responded with a status code
+        // that falls out of the range of 2xx
+        console.warn(response.data);
+        console.warn(response.status);
+        console.warn(response.headers);
+        console.warn(response.config);
+      }
+    });
   };
 
   /**

@@ -2,7 +2,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';
-import axios from 'axios';
 import { extend as _extend } from 'underscore';
 // Nav Config
 import navConfig from '../../navConfig.js';
@@ -83,7 +82,7 @@ class Header extends React.Component {
         headerHeight: null,
         navData: this.props.navData,
         loginCookie: null,
-        patronData: {},
+        patronName: null,
       },
       HeaderStore.getState()
     );
@@ -172,35 +171,15 @@ class Header extends React.Component {
 
   /**
    * fetchPatronData(cookie)
-   * Gets the patron's data based on the cookie,
-   * and updates it to the state.
+   * Executes utils.getLoginData to fetch patron's data based on the cookie.
+   * Updates the state with the results.
    * @param {cookie} - The cookie returned from log in.
    */
   fetchPatronData(cookie) {
-    const decodedToken = JSON.parse(cookie).access_token;
-    const endpoint = `${config.patronApiUrl}${decodedToken}`;
-
-    utils.getLoginData(cookie, () => {
-      axios
-        .get(endpoint)
-        .then(result => {
-          if (result.data && result.data.data) {
-            this.setState({ patronName: utils.modelPatronName(result.data) });
-          }
-        })
-        .catch(response => {
-          console.warn(`Error on Axios GET request: ${endpoint}`);
-          if (response instanceof Error) {
-            console.warn(response.message);
-          } else {
-            // The request was made, but the server responded with a status code
-            // that falls out of the range of 2xx
-            console.warn(response.data);
-            console.warn(response.status);
-            console.warn(response.headers);
-            console.warn(response.config);
-          }
-        });
+    utils.getLoginData(cookie, result => {
+      if (result.data && result.data.data) {
+        this.setState({ patronName: utils.modelPatronName(result.data) });
+      }
     });
   }
 

@@ -60,18 +60,18 @@ var MegaMenuFeatures = function (_React$Component) {
     value: function renderFeatureitems(object) {
       var _this2 = this;
 
-      var opts = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
       if ((0, _underscore.isEmpty)(object)) {
         return null;
       }
 
-      var _opts$donateWidget = opts.donateWidget;
-      var donateWidget = _opts$donateWidget === undefined ? '' : _opts$donateWidget;
-      var _opts$donateWidgetUpc = opts.donateWidgetUpcoming;
-      var donateWidgetUpcoming = _opts$donateWidgetUpc === undefined ? '' : _opts$donateWidgetUpc;
-      var _opts$findWidget = opts.findWidget;
-      var findWidget = _opts$findWidget === undefined ? '' : _opts$findWidget;
+      var _opts$donateWidget = opts.donateWidget,
+          donateWidget = _opts$donateWidget === undefined ? '' : _opts$donateWidget,
+          _opts$donateWidgetUpc = opts.donateWidgetUpcoming,
+          donateWidgetUpcoming = _opts$donateWidgetUpc === undefined ? '' : _opts$donateWidgetUpc,
+          _opts$findWidget = opts.findWidget,
+          findWidget = _opts$findWidget === undefined ? '' : _opts$findWidget;
       // Extract the first featured item to pass onto the widgets matching navId
 
       var widgetFeature = object[0].featuredItem;

@@ -19,10 +19,10 @@ var _MegaMenuFeatureItem2 = _interopRequireDefault(_MegaMenuFeatureItem);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var DonateWidget = function DonateWidget(_ref) {
-  var className = _ref.className;
-  var featuredItem = _ref.featuredItem;
-  var donationLinks = _ref.donationLinks;
-  var navLabel = _ref.navLabel;
+  var className = _ref.className,
+      featuredItem = _ref.featuredItem,
+      donationLinks = _ref.donationLinks,
+      navLabel = _ref.navLabel;
   return _react2.default.createElement(
     'div',
     { className: className },

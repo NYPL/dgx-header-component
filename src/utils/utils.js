@@ -89,8 +89,8 @@ function Utils() {
    * Track a GA click event, where action and label come from
    * the higher level function call from _trackEvent().
    *
-   * @param {action} String Action for GA event.
-   * @param {label} String Label for GA event.
+   * @param {String} action - Action for GA event.
+   * @param {String} label - Label for GA event.
    */
   this.trackHeader = gaUtils.trackEvent('Global Header');
 
@@ -98,7 +98,7 @@ function Utils() {
    * getCookie(sKey)
    * Get a cookie based on its name.
    *
-   * @param {sKey} String Name of the cookie to be looked up.
+   * @param {String} sKey - Name of the cookie to be looked up.
    */
   this.getCookie = (sKey) => {
     if (!sKey) { return null; }
@@ -117,7 +117,7 @@ function Utils() {
    * hasCookie(sKey)
    * See if a specific cookie.
    *
-   * @param {sKey} String Name of the cookie to be looked up.
+   * @param {String} sKey - Name of the cookie to be looked up.
    */
   this.hasCookie = (sKey) => {
     if (!sKey) { return false; }
@@ -132,8 +132,8 @@ function Utils() {
    * getLoginData(cookie, cb)
    * Handle the cookie from log in and make api calls with the callback function passed in.
    *
-   * @param {cookie} String The cookie returned.
-   * @param {cb} Function The function passed in to make api calls.
+   * @param {String} cookie - The cookie returned.
+   * @param {Function} cb - The callback function passed in.
    */
   this.getLoginData = (cookie, cb) => {
     const decodedToken = JSON.parse(cookie).access_token;
@@ -161,7 +161,7 @@ function Utils() {
    * extractPatronName(data)
    * Dig in the returned patron data to extract the patron's name.
    *
-   * @param {data} Object The returned patron data.
+   * @param {Object} data - The returned patron data.
    */
   this.extractPatronName = (data) => {
     try {
@@ -184,8 +184,8 @@ function Utils() {
    * Model the returned patron name data to get a string of the full name
    * and a string of the initial.
    *
-   * @param {name} String The name data returned.
-   * @return Object The object contains the modeled patron name and initial.
+   * @param {String} name - The name data returned.
+   * @return {Object} The object contains the modeled patron name and initial.
    */
   this.modelPatronName = (name) => {
     if (!name) {

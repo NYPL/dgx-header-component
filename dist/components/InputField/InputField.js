@@ -11,20 +11,20 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var InputField = function InputField(_ref) {
-  var id = _ref.id;
-  var className = _ref.className;
-  var lang = _ref.lang;
-  var type = _ref.type;
-  var name = _ref.name;
-  var value = _ref.value;
-  var checked = _ref.checked;
-  var maxLength = _ref.maxLength;
-  var placeholder = _ref.placeholder;
-  var onClick = _ref.onClick;
-  var onChange = _ref.onChange;
-  var isRequired = _ref.isRequired;
-  var style = _ref.style;
-  var ariaLabel = _ref.ariaLabel;
+  var id = _ref.id,
+      className = _ref.className,
+      lang = _ref.lang,
+      type = _ref.type,
+      name = _ref.name,
+      value = _ref.value,
+      checked = _ref.checked,
+      maxLength = _ref.maxLength,
+      placeholder = _ref.placeholder,
+      onClick = _ref.onClick,
+      onChange = _ref.onChange,
+      isRequired = _ref.isRequired,
+      style = _ref.style,
+      ariaLabel = _ref.ariaLabel;
   return _react2.default.createElement('input', {
     id: id,
     className: className,

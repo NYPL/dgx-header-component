@@ -38,8 +38,8 @@ var styles = {
 };
 
 var DotsLoader = function DotsLoader(_ref) {
-  var className = _ref.className;
-  var dots = _ref.dots;
+  var className = _ref.className,
+      dots = _ref.dots;
 
   var renderDots = function renderDots(amount) {
     var dotsList = [];

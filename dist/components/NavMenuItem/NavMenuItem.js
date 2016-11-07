@@ -15,12 +15,12 @@ var _utils2 = _interopRequireDefault(_utils);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var NavMenuItem = function NavMenuItem(_ref) {
-  var className = _ref.className;
-  var label = _ref.label;
-  var lang = _ref.lang;
-  var navId = _ref.navId;
-  var target = _ref.target;
-  var urlType = _ref.urlType;
+  var className = _ref.className,
+      label = _ref.label,
+      lang = _ref.lang,
+      navId = _ref.navId,
+      target = _ref.target,
+      urlType = _ref.urlType;
 
   var convertUrlRelative = function convertUrlRelative(url) {
     if (typeof url !== 'string') {

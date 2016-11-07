@@ -19,9 +19,9 @@ var _HeaderStore2 = _interopRequireDefault(_HeaderStore);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var MegaMenuArrow = function MegaMenuArrow(_ref) {
-  var index = _ref.index;
-  var navId = _ref.navId;
-  var currentActiveItem = _ref.currentActiveItem;
+  var index = _ref.index,
+      navId = _ref.navId,
+      currentActiveItem = _ref.currentActiveItem;
 
   // Dynamic class assignment based on activeItem property matching current index.
   var classes = (0, _classnames2.default)('NavMenuItem-Arrow nypl-icon-arrow-meganav-large', {

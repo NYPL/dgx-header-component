@@ -83,11 +83,11 @@ var styles = {
 };
 
 var MobileMyNypl = function MobileMyNypl(_ref) {
-  var lang = _ref.lang;
-  var className = _ref.className;
-  var catalogLink = _ref.catalogLink;
-  var researchLink = _ref.researchLink;
-  var infoLink = _ref.infoLink;
+  var lang = _ref.lang,
+      className = _ref.className,
+      catalogLink = _ref.catalogLink,
+      researchLink = _ref.researchLink,
+      infoLink = _ref.infoLink;
 
   var catalogLinkClass = 'CatalogLink';
   var researchLinkClass = 'ResearchLink';

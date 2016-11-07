@@ -80,9 +80,9 @@ var styles = {
 
 
 var NavMenuBottomButtons = function NavMenuBottomButtons(_ref) {
-  var className = _ref.className;
-  var libraryCardLink = _ref.libraryCardLink;
-  var subscribeLink = _ref.subscribeLink;
+  var className = _ref.className,
+      libraryCardLink = _ref.libraryCardLink,
+      subscribeLink = _ref.subscribeLink;
 
   var libraryCardClass = 'LibraryCardLink';
   var subscribeLinkClass = 'SubscribeLink';

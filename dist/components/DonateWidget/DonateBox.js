@@ -15,11 +15,11 @@ var _utils2 = _interopRequireDefault(_utils);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var DonateBox = function DonateBox(_ref) {
-  var className = _ref.className;
-  var tag = _ref.tag;
-  var title = _ref.title;
-  var desc = _ref.desc;
-  var donationLinks = _ref.donationLinks;
+  var className = _ref.className,
+      tag = _ref.tag,
+      title = _ref.title,
+      desc = _ref.desc,
+      donationLinks = _ref.donationLinks;
 
   // Enforce limit to 4 links as per design.
   var donationLinksList = donationLinks.slice(0, 4);

@@ -11,9 +11,9 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var SubscribeMessageBox = function SubscribeMessageBox(_ref) {
-  var className = _ref.className;
-  var status = _ref.status;
-  var msg = _ref.msg;
+  var className = _ref.className,
+      status = _ref.status,
+      msg = _ref.msg;
   return _react2.default.createElement(
     'div',
     { className: className + ' ' + status },

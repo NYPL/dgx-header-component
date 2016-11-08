@@ -25,6 +25,8 @@ var _appConfig2 = _interopRequireDefault(_appConfig);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Utils() {
+  var _this = this;
+
   this.formatDate = function (startDate, endDate) {
     var formattedDate = void 0,
         numDaysBetween = function numDaysBetween(start, end) {
@@ -99,6 +101,16 @@ function Utils() {
   this.trackHeader = _dgxReactGa.gaUtils.trackEvent('Global Header');
 
   /**
+   * encodeURI(sKey)
+   * Enocode the cookie response.
+   *
+   * @param {sKey} String Name of the cookie to be looked up.
+   */
+  this.encodeURI = function (sKey) {
+    return encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&');
+  };
+
+  /**
    * getCookie(sKey)
    * Get a cookie based on its name.
    *
@@ -109,7 +121,7 @@ function Utils() {
       return null;
     }
 
-    return decodeURIComponent(document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || null;
+    return decodeURIComponent(document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + _this.encodeURI(sKey) + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || null;
   };
 
   /**
@@ -123,7 +135,7 @@ function Utils() {
       return false;
     }
 
-    return new RegExp('(?:^|;\\s*)' + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=').test(document.cookie);
+    return new RegExp('(?:^|;\\s*)' + _this.encodeURI(sKey) + '\\s*\\=').test(document.cookie);
   };
 
   /**

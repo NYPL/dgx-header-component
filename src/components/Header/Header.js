@@ -224,7 +224,7 @@ class Header extends React.Component {
     const headerClasses = cx(headerClass, { sticky: isHeaderSticky });
     const skipNav = this.props.skipNav ?
       (<SkipNavigation {...this.props.skipNav} />) : '';
-    const isLogin = this.state.loginCookie !== null;
+    const isLogin = !!this.state.loginCookie;
 
     return (
       <header

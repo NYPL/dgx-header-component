@@ -96,9 +96,9 @@ class MyNyplButton extends React.Component {
   renderMyNyplButton() {
     let buttonClass = '';
     let iconClass = 'nypl-icon-wedge-down';
-    const icon = (this.props.isLogin) ? null :
+    const icon = (this.props.isLoggedIn) ? null :
       (<span className={`${iconClass} icon`} style={styles.MyNyplIcon}></span>);
-    const buttonColorClass = (this.props.isLogin) ? 'loginColor' : '';
+    const buttonColorClass = (this.props.isLoggedIn) ? 'loginColor' : '';
 
     if (HeaderStore.getMyNyplVisible()) {
       buttonClass = 'active';
@@ -117,13 +117,13 @@ class MyNyplButton extends React.Component {
     );
   }
 
-  renderMyNyplDialog(isLogin) {
+  renderMyNyplDialog(isLoggedIn) {
     return (HeaderStore.getMyNyplVisible()) ? (
       <div
         className="MyNypl-Wrapper active animatedFast fadeIn"
         style={styles.MyNyplWrapper}
       >
-        <MyNypl isLogin={isLogin} />
+        <MyNypl isLoggedIn={isLoggedIn} />
       </div>
     ) : null;
   }
@@ -136,7 +136,7 @@ class MyNyplButton extends React.Component {
           style={_extend(styles.base, this.props.style)}
         >
           {this.renderMyNyplButton()}
-          {this.renderMyNyplDialog(this.props.isLogin)}
+          {this.renderMyNyplDialog(this.props.isLoggedIn)}
         </div>
       </ClickOutHandler>
     );
@@ -147,7 +147,7 @@ MyNyplButton.propTypes = {
   lang: React.PropTypes.string,
   label: React.PropTypes.string,
   style: React.PropTypes.object,
-  isLogin: React.PropTypes.bool,
+  isLoggedIn: React.PropTypes.bool,
 };
 
 MyNyplButton.defaultProps = {

@@ -112,7 +112,7 @@ var MobileMyNypl = function (_React$Component) {
   _createClass(MobileMyNypl, [{
     key: 'renderLogoutLink',
     value: function renderLogoutLink() {
-      return this.props.isLogin ? _react2.default.createElement(
+      return this.props.isLoggedIn ? _react2.default.createElement(
         'a',
         {
           href: this.props.logoutLink,
@@ -130,10 +130,10 @@ var MobileMyNypl = function (_React$Component) {
     value: function render() {
       var catalogLinkClass = 'CatalogLink';
       var researchLinkClass = 'ResearchLink';
-      var catalogLink = !this.state.isOauthLogin || this.props.isLogin ? this.props.catalogLink : this.props.loginCatalogLink;
-      var researchLink = !this.state.isOauthLogin || this.props.isLogin ? this.props.researchLink : this.props.loginResearchLink;
-      var catalogLinkLabel = this.props.isLogin ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
-      var researchCatalogLinkLabel = this.props.isLogin ? 'GO TO THE RESEARCH CATALOG' : 'LOG INTO THE RESEARCH CATALOG';
+      var catalogLink = !this.state.isOauthLogin || this.props.isLoggedIn ? this.props.catalogLink : this.props.loginCatalogLink;
+      var researchLink = !this.state.isOauthLogin || this.props.isLoggedIn ? this.props.researchLink : this.props.loginResearchLink;
+      var catalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
+      var researchCatalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE RESEARCH CATALOG' : 'LOG INTO THE RESEARCH CATALOG';
 
       return _react2.default.createElement(
         'div',
@@ -212,7 +212,7 @@ MobileMyNypl.propTypes = {
   loginCatalogLink: _react2.default.PropTypes.string,
   loginResearchLink: _react2.default.PropTypes.string,
   logoutLink: _react2.default.PropTypes.string,
-  isLogin: _react2.default.PropTypes.bool
+  isLoggedIn: _react2.default.PropTypes.bool
 };
 
 MobileMyNypl.defaultProps = {

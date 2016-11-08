@@ -56,7 +56,7 @@ class MyNypl extends React.Component {
   }
 
   renderLogoutLink() {
-    return (this.props.isLogin) ?
+    return (this.props.isLoggedIn) ?
       <a
         href={this.props.logoutLink}
         className={`${this.props.className}-Catalog-Link`}
@@ -68,12 +68,12 @@ class MyNypl extends React.Component {
   }
 
   render() {
-    const catalogLinkLabel = (this.props.isLogin) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
-    const researchCatalogLinkLabel = (this.props.isLogin) ? 'GO TO THE RESEARCH CATALOG' :
+    const catalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
+    const researchCatalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE RESEARCH CATALOG' :
       'LOG INTO THE RESEARCH CATALOG';
-    const catalogLink = (!this.state.isOauthLogin || this.props.isLogin) ?
+    const catalogLink = (!this.state.isOauthLogin || this.props.isLoggedIn) ?
       this.props.catalogLink : this.props.loginCatalogLink;
-    const researchLink = (!this.state.isOauthLogin || this.props.isLogin) ?
+    const researchLink = (!this.state.isOauthLogin || this.props.isLoggedIn) ?
       this.props.researchLink : this.props.loginResearchLink;
 
     return (
@@ -119,7 +119,7 @@ MyNypl.propTypes = {
   loginCatalogLink: React.PropTypes.string,
   loginResearchLink: React.PropTypes.string,
   logoutLink: React.PropTypes.string,
-  isLogin: React.PropTypes.bool,
+  isLoggedIn: React.PropTypes.bool,
 };
 
 MyNypl.defaultProps = {

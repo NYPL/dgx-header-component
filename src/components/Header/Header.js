@@ -224,7 +224,7 @@ class Header extends React.Component {
     const headerClasses = cx(headerClass, { sticky: isHeaderSticky });
     const skipNav = this.props.skipNav ?
       (<SkipNavigation {...this.props.skipNav} />) : '';
-    const isLogin = !!this.state.loginCookie;
+    const isLoggedIn = !!this.state.loginCookie;
     const myNyplButtonLabel = this.state.patronName || 'Log In';
 
     return (
@@ -244,7 +244,7 @@ class Header extends React.Component {
                 '//www.nypl.org/locations/map?nearme=true' : '/locations/map?nearme=true'
             }
             nyplRootUrl={(this.props.urlType === 'absolute') ? '//www.nypl.org' : '/'}
-            isLogin={isLogin}
+            isLoggedIn={isLoggedIn}
             patronInitial={this.state.patronInitial}
             ref="headerMobile"
           />
@@ -261,7 +261,7 @@ class Header extends React.Component {
               <MyNyplButton
                 label={myNyplButtonLabel}
                 refId="desktopLogin"
-                isLogin={isLogin}
+                isLoggedIn={isLoggedIn}
               />
               <SimpleLink
                 label="Locations"
@@ -314,7 +314,7 @@ class Header extends React.Component {
             lang={this.props.lang}
             items={this.state.navData}
             urlType={this.props.urlType}
-            isLogin={isLogin}
+            isLoggedIn={isLoggedIn}
             patronInitial={this.state.patronInitial}
           />
         </div>

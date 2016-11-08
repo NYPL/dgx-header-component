@@ -258,7 +258,7 @@ class MobileHeader extends React.Component {
   */
   renderMyNyplButton() {
     let myNyplClass = '';
-    const loginColor = (this.props.isLogin) ? 'green' : '#000';
+    const loginColor = (this.props.isLoggedIn) ? 'green' : '#000';
     let icon = <LoginIcon ariaHidden fill={loginColor} />;
     let buttonStyles = styles.inactiveMyNyplButton;
     let buttonLabel = 'Open Log In Dialog';
@@ -274,7 +274,7 @@ class MobileHeader extends React.Component {
           className={`MobileMyNypl-Wrapper${myNyplClass}`}
           onDeactivate={this.closeMyNyplDialog}
         >
-          <MobileMyNypl isLogin={this.props.isLogin} />
+          <MobileMyNypl isLoggedIn={this.props.isLoggedIn} />
         </FocusTrap>
       );
     }
@@ -428,7 +428,7 @@ MobileHeader.propTypes = {
   locatorUrl: React.PropTypes.string,
   nyplRootUrl: React.PropTypes.string,
   alt: React.PropTypes.string,
-  isLogin: React.PropTypes.bool,
+  isLoggedIn: React.PropTypes.bool,
   patronInitial: React.PropTypes.string,
 };
 

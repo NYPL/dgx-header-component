@@ -329,7 +329,7 @@ var MobileHeader = function (_React$Component) {
       var _this2 = this;
 
       var myNyplClass = '';
-      var loginColor = this.props.isLogin ? 'green' : '#000';
+      var loginColor = this.props.isLoggedIn ? 'green' : '#000';
       var icon = _react2.default.createElement(_dgxSvgIcons.LoginIcon, { ariaHidden: true, fill: loginColor });
       var buttonStyles = styles.inactiveMyNyplButton;
       var buttonLabel = 'Open Log In Dialog';
@@ -346,7 +346,7 @@ var MobileHeader = function (_React$Component) {
             className: 'MobileMyNypl-Wrapper' + myNyplClass,
             onDeactivate: this.closeMyNyplDialog
           },
-          _react2.default.createElement(_MobileMyNypl2.default, { isLogin: this.props.isLogin })
+          _react2.default.createElement(_MobileMyNypl2.default, { isLoggedIn: this.props.isLoggedIn })
         );
       }
 
@@ -550,7 +550,7 @@ MobileHeader.propTypes = {
   locatorUrl: _react2.default.PropTypes.string,
   nyplRootUrl: _react2.default.PropTypes.string,
   alt: _react2.default.PropTypes.string,
-  isLogin: _react2.default.PropTypes.bool,
+  isLoggedIn: _react2.default.PropTypes.bool,
   patronInitial: _react2.default.PropTypes.string
 };
 

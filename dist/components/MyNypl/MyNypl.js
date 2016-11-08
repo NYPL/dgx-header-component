@@ -94,7 +94,7 @@ var MyNypl = function (_React$Component) {
   }, {
     key: 'renderLogoutLink',
     value: function renderLogoutLink() {
-      return this.props.isLogin ? _react2.default.createElement(
+      return this.props.isLoggedIn ? _react2.default.createElement(
         'a',
         {
           href: this.props.logoutLink,
@@ -110,10 +110,10 @@ var MyNypl = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var catalogLinkLabel = this.props.isLogin ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
-      var researchCatalogLinkLabel = this.props.isLogin ? 'GO TO THE RESEARCH CATALOG' : 'LOG INTO THE RESEARCH CATALOG';
-      var catalogLink = !this.state.isOauthLogin || this.props.isLogin ? this.props.catalogLink : this.props.loginCatalogLink;
-      var researchLink = !this.state.isOauthLogin || this.props.isLogin ? this.props.researchLink : this.props.loginResearchLink;
+      var catalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
+      var researchCatalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE RESEARCH CATALOG' : 'LOG INTO THE RESEARCH CATALOG';
+      var catalogLink = !this.state.isOauthLogin || this.props.isLoggedIn ? this.props.catalogLink : this.props.loginCatalogLink;
+      var researchLink = !this.state.isOauthLogin || this.props.isLoggedIn ? this.props.researchLink : this.props.loginResearchLink;
 
       return _react2.default.createElement(
         'div',
@@ -174,7 +174,7 @@ MyNypl.propTypes = {
   loginCatalogLink: _react2.default.PropTypes.string,
   loginResearchLink: _react2.default.PropTypes.string,
   logoutLink: _react2.default.PropTypes.string,
-  isLogin: _react2.default.PropTypes.bool
+  isLoggedIn: _react2.default.PropTypes.bool
 };
 
 MyNypl.defaultProps = {

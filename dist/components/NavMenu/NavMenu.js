@@ -127,7 +127,7 @@ var NavMenu = function (_React$Component) {
         'div',
         { className: this.props.className + '-stickyItems' + stickyClass },
         _react2.default.createElement('span', { className: 'lineSeparator', style: styles.lineSeparator }),
-        _react2.default.createElement(_StickyMyNyplButton2.default, { isLogin: this.props.isLogin, patronInitial: this.props.patronInitial }),
+        _react2.default.createElement(_StickyMyNyplButton2.default, { isLoggedIn: this.props.isLoggedIn, patronInitial: this.props.patronInitial }),
         _react2.default.createElement(_DonateButton2.default, {
           id: 'Collapsed-DonateButton',
           style: styles.donateButton,
@@ -209,7 +209,7 @@ NavMenu.propTypes = {
   className: _react2.default.PropTypes.string,
   items: _react2.default.PropTypes.array,
   urlType: _react2.default.PropTypes.string,
-  isLogin: _react2.default.PropTypes.bool,
+  isLoggedIn: _react2.default.PropTypes.bool,
   patronInitial: _react2.default.PropTypes.string
 };
 

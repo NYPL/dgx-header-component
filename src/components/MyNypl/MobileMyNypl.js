@@ -76,7 +76,7 @@ class MobileMyNypl extends React.Component {
   }
 
   renderLogoutLink() {
-    return (this.props.isLogin) ?
+    return (this.props.isLoggedIn) ?
       <a
         href={this.props.logoutLink}
         className={`${this.props.className}-Catalog-Link`}
@@ -90,12 +90,12 @@ class MobileMyNypl extends React.Component {
   render() {
     const catalogLinkClass = 'CatalogLink';
     const researchLinkClass = 'ResearchLink';
-    const catalogLink = (!this.state.isOauthLogin || this.props.isLogin) ?
+    const catalogLink = (!this.state.isOauthLogin || this.props.isLoggedIn) ?
       this.props.catalogLink : this.props.loginCatalogLink;
-    const researchLink = (!this.state.isOauthLogin || this.props.isLogin) ?
+    const researchLink = (!this.state.isOauthLogin || this.props.isLoggedIn) ?
       this.props.researchLink : this.props.loginResearchLink;
-    const catalogLinkLabel = (this.props.isLogin) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
-    const researchCatalogLinkLabel = (this.props.isLogin) ? 'GO TO THE RESEARCH CATALOG' :
+    const catalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
+    const researchCatalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE RESEARCH CATALOG' :
       'LOG INTO THE RESEARCH CATALOG';
 
     return (
@@ -157,7 +157,7 @@ MobileMyNypl.propTypes = {
   loginCatalogLink: React.PropTypes.string,
   loginResearchLink: React.PropTypes.string,
   logoutLink: React.PropTypes.string,
-  isLogin: React.PropTypes.bool,
+  isLoggedIn: React.PropTypes.bool,
 };
 
 MobileMyNypl.defaultProps = {

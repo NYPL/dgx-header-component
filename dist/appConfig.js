@@ -32,10 +32,11 @@ var config = {
     amount: 'Other'
   }],
   myNyplLinks: {
-    catalog: 'https://browse.nypl.org/iii/encore/myaccount',
-    research: 'https://catalog.nypl.org/patroninfo/top',
+    catalog: 'https://isso.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount',
+    research: 'https://isso.nypl.org/auth/login?redirect_uri=https://catalog.nypl.org/patroninfo/top',
     logoutLink: 'https://isso.nypl.org/auth/logout'
-  }
+  },
+  patronApiUrl: 'https://api.nypltech.org/api/v0.1/auth/patron/tokens/'
 };
 
 exports.default = config;

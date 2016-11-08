@@ -36,6 +36,18 @@ class MyNypl extends React.Component {
     this.refs.catalogLink.blur();
   }
 
+  renderLogoutLink() {
+    return (this.props.isLogin) ?
+      <a
+        href={this.props.logoutLink}
+        className={`${this.props.className}-Catalog-Link`}
+        onClick={() => utils.trackHeader('Log In', 'Catalog Info')}
+        style={styles.logoutLink}
+      >
+        Log Out
+      </a> : null;
+  }
+
   render() {
     const catalogLinkLabel = (this.props.isLogin) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
     const researchCatalogLinkLabel = (this.props.isLogin) ? 'GO TO THE RESEARCH CATALOG' :
@@ -69,14 +81,7 @@ class MyNypl extends React.Component {
           </li>
         </ul>
 
-        <a
-          href={this.props.logoutLink}
-          className={`${this.props.className}-Catalog-Link`}
-          onClick={() => utils.trackHeader('Log In', 'Catalog Info')}
-          style={styles.logoutLink}
-        >
-          Log Out
-        </a>
+        {this.renderLogoutLink()}
       </div>
     );
   }

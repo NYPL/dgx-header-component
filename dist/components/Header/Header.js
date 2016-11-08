@@ -152,7 +152,8 @@ var Header = function (_React$Component) {
     _this.state = (0, _underscore.extend)({
       headerHeight: null,
       navData: _this.props.navData,
-      loginCookie: null
+      loginCookie: null,
+      patronName: null
     }, _HeaderStore2.default.getState());
 
     _this.handleStickyHeader = _this.handleStickyHeader.bind(_this);
@@ -195,8 +196,11 @@ var Header = function (_React$Component) {
   }, {
     key: 'setLoginCookie',
     value: function setLoginCookie() {
-      if (_utils2.default.hasCookie('nyplIdentity')) {
-        this.setState({ loginCookie: _utils2.default.getCookie('nyplIdentity') });
+      if (_utils2.default.hasCookie('nyplIdentityPatron')) {
+        var loginCookie = _utils2.default.getCookie('nyplIdentityPatron');
+
+        this.setState({ loginCookie: loginCookie });
+        this.fetchPatronData(loginCookie);
       } else {
         this.setState({ loginCookie: null });
       }
@@ -247,6 +251,25 @@ var Header = function (_React$Component) {
     }
 
     /**
+     * fetchPatronData(cookie)
+     * Executes utils.getLoginData to fetch patron's data based on the cookie.
+     * Updates the state with the results.
+     * @param {cookie} - The cookie returned from log in.
+     */
+
+  }, {
+    key: 'fetchPatronData',
+    value: function fetchPatronData(cookie) {
+      var _this3 = this;
+
+      _utils2.default.getLoginData(cookie, function (result) {
+        if (result.data && result.data.data) {
+          _this3.setState({ patronName: _utils2.default.modelPatronName(result.data) });
+        }
+      });
+    }
+
+    /**
      * handleStickyHeader()
      * Executes Actions.updateIsHeaderSticky()
      * with the proper boolean value to update the
@@ -285,6 +308,8 @@ var Header = function (_React$Component) {
       var headerClasses = (0, _classnames2.default)(headerClass, { sticky: isHeaderSticky });
       var skipNav = this.props.skipNav ? _react2.default.createElement(_dgxSkipNavigationLink2.default, this.props.skipNav) : '';
       var isLogin = !!this.state.loginCookie;
+
+      console.log(this.state.patronName);
 
       return _react2.default.createElement(
         'header',

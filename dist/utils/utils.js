@@ -4,11 +4,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
 
 var _dgxReactGa = require('dgx-react-ga');
+
+var _axios = require('axios');
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _appConfig = require('./../appConfig.js');
+
+var _appConfig2 = _interopRequireDefault(_appConfig);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -124,6 +134,51 @@ function Utils() {
     }
 
     return new RegExp('(?:^|;\\s*)' + _this.encodeURI(sKey) + '\\s*\\=').test(document.cookie);
+  };
+
+  /**
+   * getLoginData(cookie, cb)
+   * Handle the cookie from log in and make api calls with the callback function passed in.
+   *
+   * @param {cookie} String The cookie returned.
+   * @param {cb} Function The function passed in to make api calls.
+   */
+  this.getLoginData = function (cookie, cb) {
+    console.log(JSON.parse(cookie).access_token);
+
+    var decodedToken = JSON.parse(cookie).access_token;
+    var endpoint = '' + _appConfig2.default.patronApiUrl + decodedToken;
+
+    _axios2.default.get(endpoint).then(cb).catch(function (response) {
+      console.warn('Error on Axios GET request: ' + endpoint);
+      if (response instanceof Error) {
+        console.warn(response.message);
+      } else {
+        // The request was made, but the server responded with a status code
+        // that falls out of the range of 2xx
+        console.warn(response.data);
+        console.warn(response.status);
+        console.warn(response.headers);
+        console.warn(response.config);
+      }
+    });
+  };
+
+  /**
+   * modelPatronName(data)
+   * Model the returned patron data to extract the patron's name.
+   *
+   * @param {data} Object The returned patron data.
+   */
+  this.modelPatronName = function (data) {
+    try {
+      var _data$data$patron$nam = _slicedToArray(data.data.patron.names, 1),
+          patronName = _data$data$patron$nam[0];
+
+      return patronName;
+    } catch (e) {
+      return null;
+    }
   };
 }
 

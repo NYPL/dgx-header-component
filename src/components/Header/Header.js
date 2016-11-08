@@ -81,6 +81,7 @@ class Header extends React.Component {
         headerHeight: null,
         navData: this.props.navData,
         loginCookie: null,
+        patronName: null,
       },
       HeaderStore.getState()
     );
@@ -122,8 +123,11 @@ class Header extends React.Component {
    * Updates the state loginCookie property
    */
   setLoginCookie() {
-    if (utils.hasCookie('nyplIdentity')) {
-      this.setState({ loginCookie: utils.getCookie('nyplIdentity') });
+    if (utils.hasCookie('nyplIdentityPatron')) {
+      const loginCookie = utils.getCookie('nyplIdentityPatron');
+
+      this.setState({ loginCookie });
+      this.fetchPatronData(loginCookie);
     } else {
       this.setState({ loginCookie: null });
     }
@@ -165,6 +169,20 @@ class Header extends React.Component {
   }
 
   /**
+   * fetchPatronData(cookie)
+   * Executes utils.getLoginData to fetch patron's data based on the cookie.
+   * Updates the state with the results.
+   * @param {cookie} - The cookie returned from log in.
+   */
+  fetchPatronData(cookie) {
+    utils.getLoginData(cookie, result => {
+      if (result.data && result.data.data) {
+        this.setState({ patronName: utils.modelPatronName(result.data) });
+      }
+    });
+  }
+
+  /**
    * handleStickyHeader()
    * Executes Actions.updateIsHeaderSticky()
    * with the proper boolean value to update the
@@ -200,6 +218,8 @@ class Header extends React.Component {
     const skipNav = this.props.skipNav ?
       (<SkipNavigation {...this.props.skipNav} />) : '';
     const isLogin = !!this.state.loginCookie;
+
+    console.log(this.state.patronName);
 
     return (
       <header

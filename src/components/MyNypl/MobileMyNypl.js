@@ -71,7 +71,7 @@ class MobileMyNypl extends React.Component {
       <a
         href={this.props.logoutLink}
         className={`${this.props.className}-Catalog-Link`}
-        onClick={() => utils.trackHeader('Log In', 'Catalog Info')}
+        onClick={() => utils.trackHeader('My NYPL', 'Log Out')}
         style={styles.logoutLink}
       >
         Log Out

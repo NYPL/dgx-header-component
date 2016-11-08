@@ -4,7 +4,7 @@ This repository is for the header component used in React applications at NYPL.
 
 ### Version
 
-1.4.0
+1.4.2
 
 ### App Installation
 
@@ -135,3 +135,8 @@ $ NODE_ENV=production npm start
 3. Commit your changes - `git commit -am 'Description of feature'`.
 4. Push the branch - `git push origin new-feature`.
 5. Create a new Pull Request.
+
+### CHANGE LOG
+
+#### v1.4.2
+> Updated all Header donation URLs

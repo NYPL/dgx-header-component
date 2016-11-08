@@ -19,19 +19,11 @@ var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _axios = require('axios');
-
-var _axios2 = _interopRequireDefault(_axios);
-
 var _underscore = require('underscore');
 
 var _navConfig = require('../../navConfig.js');
 
 var _navConfig2 = _interopRequireDefault(_navConfig);
-
-var _appConfig = require('../../appConfig.js');
-
-var _appConfig2 = _interopRequireDefault(_appConfig);
 
 var _HeaderStore = require('../../stores/HeaderStore.js');
 
@@ -262,8 +254,8 @@ var Header = function (_React$Component) {
 
     /**
      * fetchPatronData(cookie)
-     * Gets the patron's data based on the cookie,
-     * and updates it to the state.
+     * Executes utils.getLoginData to fetch patron's data based on the cookie.
+     * Updates the state with the results.
      * @param {cookie} - The cookie returned from log in.
      */
 
@@ -272,33 +264,15 @@ var Header = function (_React$Component) {
     value: function fetchPatronData(cookie) {
       var _this3 = this;
 
-      var decodedToken = JSON.parse(cookie).access_token;
-      var endpoint = '' + _appConfig2.default.patronApiUrl + decodedToken;
+      _utils2.default.getLoginData(cookie, function (result) {
+        if (result.data && result.data.data) {
+          var patronNameObject = _utils2.default.modelPatronName(_utils2.default.extractPatronName(result.data));
 
-      _utils2.default.getLoginData(cookie, function () {
-        _axios2.default.get(endpoint).then(function (result) {
-          if (result.data && result.data.data) {
-            // Calls utils.getPatronName to model the returned patron name
-            var patronNameObject = _utils2.default.getPatronName(result.data.data.patron.names[0]);
-
-            _this3.setState({
-              patronName: patronNameObject.name,
-              patronInitial: patronNameObject.initial
-            });
-          }
-        }).catch(function (response) {
-          console.warn('Error on Axios GET request: ' + endpoint);
-          if (response instanceof Error) {
-            console.warn(response.message);
-          } else {
-            // The request was made, but the server responded with a status code
-            // that falls out of the range of 2xx
-            console.warn(response.data);
-            console.warn(response.status);
-            console.warn(response.headers);
-            console.warn(response.config);
-          }
-        });
+          _this3.setState({
+            patronName: patronNameObject.name,
+            patronInitial: patronNameObject.initial
+          });
+        }
       });
     }
 
@@ -340,7 +314,7 @@ var Header = function (_React$Component) {
       var headerClass = this.props.className || 'Header';
       var headerClasses = (0, _classnames2.default)(headerClass, { sticky: isHeaderSticky });
       var skipNav = this.props.skipNav ? _react2.default.createElement(_dgxSkipNavigationLink2.default, this.props.skipNav) : '';
-      var isLogin = this.state.loginCookie !== null;
+      var isLogin = !!this.state.loginCookie;
       var myNyplButtonLabel = this.state.patronName || 'Log In';
 
       return _react2.default.createElement(

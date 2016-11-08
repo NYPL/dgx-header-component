@@ -1,6 +1,8 @@
 import moment from 'moment';
 import { gaUtils } from 'dgx-react-ga';
 import { map as _map } from 'underscore';
+import axios from 'axios';
+import config from './../appConfig.js';
 
 function Utils() {
   this.formatDate = (startDate, endDate) => {
@@ -87,26 +89,33 @@ function Utils() {
    * Track a GA click event, where action and label come from
    * the higher level function call from _trackEvent().
    *
-   * @param {action} String Action for GA event.
-   * @param {label} String Label for GA event.
+   * @param {String} action - Action for GA event.
+   * @param {String} label - Label for GA event.
    */
   this.trackHeader = gaUtils.trackEvent('Global Header');
+
+  /**
+   * encodeURI(sKey)
+   * Enocode the cookie response.
+   *
+   * @param {sKey} String Name of the cookie to be looked up.
+   */
+  this.encodeURI = (sKey) => {
+    return encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&');
+  };
 
   /**
    * getCookie(sKey)
    * Get a cookie based on its name.
    *
-   * @param {sKey} String Name of the cookie to be looked up.
+   * @param {String} sKey - Name of the cookie to be looked up.
    */
   this.getCookie = (sKey) => {
     if (!sKey) { return null; }
 
     return decodeURIComponent(
       document.cookie.replace(
-        new RegExp(
-          `(?:(?:^|.*;)\\s*${encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&')}` +
-          '\\s*\\=\\s*([^;]*).*$)|^.*$'
-        ), '$1'
+        new RegExp(`(?:(?:^|.*;)\\s*${this.encodeURI(sKey)}\\s*\\=\\s*([^;]*).*$)|^.*$`), '$1'
       )
     ) || null;
   };
@@ -115,37 +124,80 @@ function Utils() {
    * hasCookie(sKey)
    * See if a specific cookie.
    *
-   * @param {sKey} String Name of the cookie to be looked up.
+   * @param {String} sKey - Name of the cookie to be looked up.
    */
   this.hasCookie = (sKey) => {
     if (!sKey) { return false; }
 
     return (
-      new RegExp(`(?:^|;\\s*)${encodeURIComponent(sKey)
-        .replace(/[\-\.\+\*]/g, '\\$&')}\\s*\\=`))
-        .test(document.cookie);
+      new RegExp(`(?:^|;\\s*)${this.encodeURI(sKey)}\\s*\\=`)
+    ).test(document.cookie);
   };
 
   /**
    * getLoginData(cookie, cb)
    * Handle the cookie from log in and make api calls with the callback function passed in.
    *
-   * @param {cookie} String The cookie returned.
-   * @param {cb} Function The function passed in to make api calls.
+   * @param {String} cookie - The cookie returned.
+   * @param {Function} cb - The callback function passed in.
    */
   this.getLoginData = (cookie, cb) => {
-    cb();
+    const decodedToken = JSON.parse(cookie).access_token;
+    const endpoint = `${config.patronApiUrl}${decodedToken}`;
+
+    axios
+      .get(endpoint)
+      .then(cb)
+      .catch(response => {
+        console.warn(`Error on Axios GET request: ${endpoint}`);
+        if (response instanceof Error) {
+          console.warn(response.message);
+        } else {
+          // The request was made, but the server responded with a status code
+          // that falls out of the range of 2xx
+          console.warn(response.data);
+          console.warn(response.status);
+          console.warn(response.headers);
+          console.warn(response.config);
+        }
+      });
   };
 
   /**
-   * getPatronName (name)
+   * extractPatronName(data)
+   * Dig in the returned patron data to extract the patron's name.
+   *
+   * @param {Object} data - The returned patron data.
+   */
+  this.extractPatronName = (data) => {
+    try {
+      const {
+        data: {
+          patron: {
+            names: [patronName],
+          },
+        },
+      } = data;
+
+      return patronName;
+    } catch (e) {
+      return null;
+    }
+  };
+
+  /**
+   * modelPatronName (name)
    * Model the returned patron name data to get a string of the full name
    * and a string of the initial.
    *
-   * @param {name} String The name data returned.
-   * @return Object The object contains the modeled patron name and initial.
+   * @param {String} name - The name data returned.
+   * @return {Object} The object contains the modeled patron name and initial.
    */
-  this.getPatronName = (name) => {
+  this.modelPatronName = (name) => {
+    if (!name) {
+      return { name: '', initial: '' };
+    }
+
     const nameArray = name.replace(/ /g, '').split(',').reverse();
     const initialArray = _map(nameArray, (item) => item.charAt(0));
     const patronName = nameArray.join(' ');

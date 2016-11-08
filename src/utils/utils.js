@@ -95,6 +95,16 @@ function Utils() {
   this.trackHeader = gaUtils.trackEvent('Global Header');
 
   /**
+   * encodeURI(sKey)
+   * Enocode the cookie response.
+   *
+   * @param {sKey} String Name of the cookie to be looked up.
+   */
+  this.encodeURI = (sKey) => {
+    return encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&');
+  };
+
+  /**
    * getCookie(sKey)
    * Get a cookie based on its name.
    *
@@ -105,10 +115,7 @@ function Utils() {
 
     return decodeURIComponent(
       document.cookie.replace(
-        new RegExp(
-          `(?:(?:^|.*;)\\s*${encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&')}` +
-          '\\s*\\=\\s*([^;]*).*$)|^.*$'
-        ), '$1'
+        new RegExp(`(?:(?:^|.*;)\\s*${this.encodeURI(sKey)}\\s*\\=\\s*([^;]*).*$)|^.*$`), '$1'
       )
     ) || null;
   };
@@ -123,9 +130,8 @@ function Utils() {
     if (!sKey) { return false; }
 
     return (
-      new RegExp('(?:^|;\\s*)' + encodeURIComponent(sKey)
-        .replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\='))
-        .test(document.cookie);
+      new RegExp(`(?:^|;\\s*)${this.encodeURI(sKey)}\\s*\\=`)
+    ).test(document.cookie);
   };
 
   /**

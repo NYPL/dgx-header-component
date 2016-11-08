@@ -307,7 +307,7 @@ var Header = function (_React$Component) {
       var headerClass = this.props.className || 'Header';
       var headerClasses = (0, _classnames2.default)(headerClass, { sticky: isHeaderSticky });
       var skipNav = this.props.skipNav ? _react2.default.createElement(_dgxSkipNavigationLink2.default, this.props.skipNav) : '';
-      var isLogin = this.state.loginCookie !== null;
+      var isLogin = !!this.state.loginCookie;
 
       console.log(this.state.patronName);
 

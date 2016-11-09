@@ -152,6 +152,8 @@ var MyNyplButton = function (_React$Component) {
     value: function renderMyNyplButton() {
       var buttonClass = '';
       var iconClass = 'nypl-icon-wedge-down';
+      var icon = this.props.isLogin ? null : _react2.default.createElement('span', { className: iconClass + ' icon', style: styles.MyNyplIcon });
+      var buttonColorClass = this.props.isLogin ? 'loginColor' : '';
 
       if (_HeaderStore2.default.getMyNyplVisible()) {
         buttonClass = 'active';
@@ -161,12 +163,12 @@ var MyNyplButton = function (_React$Component) {
       return _react2.default.createElement(
         'button',
         {
-          className: 'MyNyplButton ' + buttonClass,
+          className: 'MyNyplButton ' + buttonClass + ' ' + buttonColorClass,
           onClick: this.handleClick,
           style: (0, _underscore.extend)(styles.MyNyplButton, this.props.style)
         },
         this.props.label,
-        _react2.default.createElement('span', { className: iconClass + ' icon', style: styles.MyNyplIcon })
+        icon
       );
     }
   }, {

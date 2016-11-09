@@ -30,14 +30,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var styles = {
   logoutLink: {
-    bottom: '26px',
-    color: '#FFF',
+    backgroundColor: '#FFF',
+    border: '10px solid #FFF',
+    borderRadius: '20px',
+    bottom: '15px',
+    color: '#1B7FA7',
     fontSize: '14px',
     fontWeight: '200',
     letterSpacing: '.03em',
+    padding: '3px 20px',
     position: 'absolute',
-    right: '30px',
-    textDecoration: 'underline'
+    right: '30px'
   },
   loginButtons: {
     backgroundColor: '#1B7FA7',
@@ -80,7 +83,7 @@ var MyNypl = function (_React$Component) {
           href: this.props.logoutLink,
           className: this.props.className + '-Catalog-Link',
           onClick: function onClick() {
-            return _utils2.default.trackHeader('Log In', 'Catalog Info');
+            return _utils2.default.trackHeader('My NYPL', 'Log Out');
           },
           style: styles.logoutLink
         },
@@ -92,6 +95,8 @@ var MyNypl = function (_React$Component) {
     value: function render() {
       var catalogLinkLabel = this.props.isLogin ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
       var researchCatalogLinkLabel = this.props.isLogin ? 'GO TO THE RESEARCH CATALOG' : 'LOG INTO THE RESEARCH CATALOG';
+      var catalogLink = this.props.isLogin ? this.props.catalogLink : this.props.loginCatalogLink;
+      var researchLink = this.props.isLogin ? this.props.researchLink : this.props.loginResearchLink;
 
       return _react2.default.createElement(
         'div',
@@ -106,7 +111,7 @@ var MyNypl = function (_React$Component) {
               'a',
               {
                 ref: 'catalogLink',
-                href: this.props.catalogLink,
+                href: catalogLink,
                 style: styles.loginButtons,
                 className: this.props.className + '-Catalog-Btn',
                 onClick: function onClick() {
@@ -123,7 +128,7 @@ var MyNypl = function (_React$Component) {
             _react2.default.createElement(
               'a',
               {
-                href: this.props.researchLink,
+                href: researchLink,
                 style: styles.loginButtons,
                 className: this.props.className + '-Research-Btn',
                 onClick: function onClick() {
@@ -156,9 +161,11 @@ MyNypl.propTypes = {
 MyNypl.defaultProps = {
   className: 'MyNypl',
   lang: 'en',
+  loginCatalogLink: _appConfig2.default.loginMyNyplLinks.catalog,
+  loginResearchLink: _appConfig2.default.loginMyNyplLinks.research,
   catalogLink: _appConfig2.default.myNyplLinks.catalog,
   researchLink: _appConfig2.default.myNyplLinks.research,
-  logoutLink: _appConfig2.default.myNyplLinks.logoutLink
+  logoutLink: _appConfig2.default.loginMyNyplLinks.logoutLink
 };
 
 exports.default = MyNypl;

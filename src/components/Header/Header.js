@@ -225,6 +225,7 @@ class Header extends React.Component {
     const skipNav = this.props.skipNav ?
       (<SkipNavigation {...this.props.skipNav} />) : '';
     const isLogin = !!this.state.loginCookie;
+    const myNyplButtonLabel = this.state.patronName || 'Log In';
 
     return (
       <header
@@ -258,7 +259,7 @@ class Header extends React.Component {
             />
             <div className={`${headerClass}-Buttons`} style={styles.topButtons}>
               <MyNyplButton
-                label="Log In"
+                label={myNyplButtonLabel}
                 refId="desktopLogin"
                 isLogin={isLogin}
               />
@@ -314,6 +315,7 @@ class Header extends React.Component {
             items={this.state.navData}
             urlType={this.props.urlType}
             isLogin={isLogin}
+            patronInitial={this.state.patronInitial}
           />
         </div>
       </header>

@@ -315,6 +315,7 @@ var Header = function (_React$Component) {
       var headerClasses = (0, _classnames2.default)(headerClass, { sticky: isHeaderSticky });
       var skipNav = this.props.skipNav ? _react2.default.createElement(_dgxSkipNavigationLink2.default, this.props.skipNav) : '';
       var isLogin = !!this.state.loginCookie;
+      var myNyplButtonLabel = this.state.patronName || 'Log In';
 
       return _react2.default.createElement(
         'header',
@@ -352,7 +353,7 @@ var Header = function (_React$Component) {
               'div',
               { className: headerClass + '-Buttons', style: styles.topButtons },
               _react2.default.createElement(_MyNyplButton2.default, {
-                label: 'Log In',
+                label: myNyplButtonLabel,
                 refId: 'desktopLogin',
                 isLogin: isLogin
               }),
@@ -401,7 +402,8 @@ var Header = function (_React$Component) {
             lang: this.props.lang,
             items: this.state.navData,
             urlType: this.props.urlType,
-            isLogin: isLogin
+            isLogin: isLogin,
+            patronInitial: this.state.patronInitial
           })
         )
       );

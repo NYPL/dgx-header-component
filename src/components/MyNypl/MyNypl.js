@@ -5,14 +5,17 @@ import appConfig from '../../appConfig.js';
 
 const styles = {
   logoutLink: {
-    bottom: '26px',
-    color: '#FFF',
+    backgroundColor: '#FFF',
+    border: '10px solid #FFF',
+    borderRadius: '20px',
+    bottom: '15px',
+    color: '#1B7FA7',
     fontSize: '14px',
     fontWeight: '200',
     letterSpacing: '.03em',
+    padding: '3px 20px',
     position: 'absolute',
     right: '30px',
-    textDecoration: 'underline',
   },
   loginButtons: {
     backgroundColor: '#1B7FA7',
@@ -41,7 +44,7 @@ class MyNypl extends React.Component {
       <a
         href={this.props.logoutLink}
         className={`${this.props.className}-Catalog-Link`}
-        onClick={() => utils.trackHeader('Log In', 'Catalog Info')}
+        onClick={() => utils.trackHeader('My NYPL', 'Log Out')}
         style={styles.logoutLink}
       >
         Log Out
@@ -52,6 +55,8 @@ class MyNypl extends React.Component {
     const catalogLinkLabel = (this.props.isLogin) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
     const researchCatalogLinkLabel = (this.props.isLogin) ? 'GO TO THE RESEARCH CATALOG' :
       'LOG INTO THE RESEARCH CATALOG';
+    const catalogLink = (this.props.isLogin) ? this.props.catalogLink : this.props.loginCatalogLink;
+    const researchLink = (this.props.isLogin) ? this.props.researchLink : this.props.loginResearchLink;
 
     return (
       <div className={this.props.className} role="dialog">
@@ -59,7 +64,7 @@ class MyNypl extends React.Component {
           <li>
             <a
               ref="catalogLink"
-              href={this.props.catalogLink}
+              href={catalogLink}
               style={styles.loginButtons}
               className={`${this.props.className}-Catalog-Btn`}
               onClick={() => utils.trackHeader('Log In', 'Catalog')}
@@ -70,7 +75,7 @@ class MyNypl extends React.Component {
           </li>
           <li>
             <a
-              href={this.props.researchLink}
+              href={researchLink}
               style={styles.loginButtons}
               className={`${this.props.className}-Research-Btn`}
               onClick={() => utils.trackHeader('Log In', 'Research')}
@@ -100,9 +105,11 @@ MyNypl.propTypes = {
 MyNypl.defaultProps = {
   className: 'MyNypl',
   lang: 'en',
+  loginCatalogLink: appConfig.loginMyNyplLinks.catalog,
+  loginResearchLink: appConfig.loginMyNyplLinks.research,
   catalogLink: appConfig.myNyplLinks.catalog,
   researchLink: appConfig.myNyplLinks.research,
-  logoutLink: appConfig.myNyplLinks.logoutLink,
+  logoutLink: appConfig.loginMyNyplLinks.logoutLink,
 };
 
 export default MyNypl;

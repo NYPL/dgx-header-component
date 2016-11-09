@@ -71,7 +71,7 @@ const styles = {
     verticalAlign: '0px',
   },
   patronInitial: {
-    color: 'green',
+    color: '#497629',
     display: 'inline-block',
     fontSize: '1.8em',
     lineHeight: 'normal',
@@ -245,7 +245,7 @@ class MobileHeader extends React.Component {
   renderPatronInitial() {
     const initial = this.props.patronInitial;
 
-    return (initial) ? (
+    return (initial && this.state.mobileMyNyplButton !== 'clickMyNypl') ? (
       <p style={styles.patronInitial}>{initial}</p>
     ) : null;
   }
@@ -258,7 +258,8 @@ class MobileHeader extends React.Component {
   */
   renderMyNyplButton() {
     let myNyplClass = '';
-    let icon = <LoginIcon ariaHidden fill="#000" />;
+    const loginColor = (this.props.isLogin) ? '#497629' : '#000';
+    let icon = <LoginIcon ariaHidden fill={loginColor} />;
     let buttonStyles = styles.inactiveMyNyplButton;
     let buttonLabel = 'Open Log In Dialog';
     let dialogWindow = null;

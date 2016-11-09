@@ -74,7 +74,7 @@ class NavMenu extends React.Component {
     return (
       <div className={`${this.props.className}-stickyItems${stickyClass}`}>
         <span className="lineSeparator" style={styles.lineSeparator}></span>
-        <StickyMyNyplButton isLogin={this.props.isLogin} />
+        <StickyMyNyplButton isLogin={this.props.isLogin} patronInitial={this.props.patronInitial} />
         <DonateButton
           id="Collapsed-DonateButton"
           style={styles.donateButton}
@@ -146,6 +146,7 @@ NavMenu.propTypes = {
   items: React.PropTypes.array,
   urlType: React.PropTypes.string,
   isLogin: React.PropTypes.bool,
+  patronInitial: React.PropTypes.string,
 };
 
 NavMenu.defaultProps = {

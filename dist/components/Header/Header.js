@@ -153,7 +153,8 @@ var Header = function (_React$Component) {
       headerHeight: null,
       navData: _this.props.navData,
       loginCookie: null,
-      patronName: null
+      patronName: '',
+      patronInitial: ''
     }, _HeaderStore2.default.getState());
 
     _this.handleStickyHeader = _this.handleStickyHeader.bind(_this);
@@ -184,7 +185,8 @@ var Header = function (_React$Component) {
     value: function onChange() {
       this.setState((0, _underscore.extend)({
         headerHeight: this.state.headerHeight,
-        loginCookie: this.state.loginCookie
+        loginCookie: this.state.loginCookie,
+        patronNameObject: this.state.patronNameObject
       }, _HeaderStore2.default.getState()));
     }
 
@@ -264,7 +266,12 @@ var Header = function (_React$Component) {
 
       _utils2.default.getLoginData(cookie, function (result) {
         if (result.data && result.data.data) {
-          _this3.setState({ patronName: _utils2.default.modelPatronName(result.data) });
+          var patronNameObject = _utils2.default.modelPatronName(_utils2.default.extractPatronName(result.data));
+
+          _this3.setState({
+            patronName: patronNameObject.name,
+            patronInitial: patronNameObject.initial
+          });
         }
       });
     }
@@ -309,8 +316,6 @@ var Header = function (_React$Component) {
       var skipNav = this.props.skipNav ? _react2.default.createElement(_dgxSkipNavigationLink2.default, this.props.skipNav) : '';
       var isLogin = !!this.state.loginCookie;
 
-      console.log(this.state.patronName);
-
       return _react2.default.createElement(
         'header',
         {
@@ -329,6 +334,7 @@ var Header = function (_React$Component) {
             locatorUrl: this.props.urlType === 'absolute' ? '//www.nypl.org/locations/map?nearme=true' : '/locations/map?nearme=true',
             nyplRootUrl: this.props.urlType === 'absolute' ? '//www.nypl.org' : '/',
             isLogin: isLogin,
+            patronInitial: this.state.patronInitial,
             ref: 'headerMobile'
           }),
           _react2.default.createElement(

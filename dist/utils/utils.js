@@ -12,6 +12,8 @@ var _moment2 = _interopRequireDefault(_moment);
 
 var _dgxReactGa = require('dgx-react-ga');
 
+var _underscore = require('underscore');
+
 var _axios = require('axios');
 
 var _axios2 = _interopRequireDefault(_axios);
@@ -93,8 +95,8 @@ function Utils() {
    * Track a GA click event, where action and label come from
    * the higher level function call from _trackEvent().
    *
-   * @param {action} String Action for GA event.
-   * @param {label} String Label for GA event.
+   * @param {string} action - Action for GA event.
+   * @param {string} label - Label for GA event.
    */
   this.trackHeader = _dgxReactGa.gaUtils.trackEvent('Global Header');
 
@@ -102,7 +104,7 @@ function Utils() {
    * encodeURI(sKey)
    * Enocode the cookie response.
    *
-   * @param {sKey} String Name of the cookie to be looked up.
+   * @param {string} sKey -  The name of the cookie to be looked up.
    */
   this.encodeURI = function (sKey) {
     return encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&');
@@ -112,7 +114,7 @@ function Utils() {
    * getCookie(sKey)
    * Get a cookie based on its name.
    *
-   * @param {sKey} String Name of the cookie to be looked up.
+   * @param {string} sKey - The name of the cookie to be looked up.
    */
   this.getCookie = function (sKey) {
     if (!sKey) {
@@ -126,7 +128,7 @@ function Utils() {
    * hasCookie(sKey)
    * See if a specific cookie.
    *
-   * @param {sKey} String Name of the cookie to be looked up.
+   * @param {string} sKey - The name of the cookie to be looked up.
    */
   this.hasCookie = function (sKey) {
     if (!sKey) {
@@ -140,12 +142,10 @@ function Utils() {
    * getLoginData(cookie, cb)
    * Handle the cookie from log in and make api calls with the callback function passed in.
    *
-   * @param {cookie} String The cookie returned.
-   * @param {cb} Function The function passed in to make api calls.
+   * @param {string} cookie - The cookie returned.
+   * @param {function(result: Object)} cb - The callback function passed in.
    */
   this.getLoginData = function (cookie, cb) {
-    console.log(JSON.parse(cookie).access_token);
-
     var decodedToken = JSON.parse(cookie).access_token;
     var endpoint = '' + _appConfig2.default.patronApiUrl + decodedToken;
 
@@ -165,12 +165,12 @@ function Utils() {
   };
 
   /**
-   * modelPatronName(data)
-   * Model the returned patron data to extract the patron's name.
+   * extractPatronName(data)
+   * Dig in the returned patron data to extract the patron's name.
    *
-   * @param {data} Object The returned patron data.
+   * @param {Object} data - The returned patron data.
    */
-  this.modelPatronName = function (data) {
+  this.extractPatronName = function (data) {
     try {
       var _data$data$patron$nam = _slicedToArray(data.data.patron.names, 1),
           patronName = _data$data$patron$nam[0];
@@ -179,6 +179,29 @@ function Utils() {
     } catch (e) {
       return null;
     }
+  };
+
+  /**
+   * modelPatronName (name)
+   * Model the returned patron name data to get a string of the full name
+   * and a string of the initial.
+   *
+   * @param {string} name - The name data returned.
+   * @return {Object} The object contains the modeled patron name and initial.
+   */
+  this.modelPatronName = function (name) {
+    if (!name) {
+      return { name: '', initial: '' };
+    }
+
+    var nameArray = name.replace(/ /g, '').split(',').reverse();
+    var initialArray = (0, _underscore.map)(nameArray, function (item) {
+      return item.charAt(0);
+    });
+    var patronName = nameArray.join(' ');
+    var patronInitial = initialArray.join('');
+
+    return { name: patronName, initial: patronInitial };
   };
 }
 

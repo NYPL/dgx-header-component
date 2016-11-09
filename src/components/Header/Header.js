@@ -81,7 +81,8 @@ class Header extends React.Component {
         headerHeight: null,
         navData: this.props.navData,
         loginCookie: null,
-        patronName: null,
+        patronName: '',
+        patronInitial: '',
       },
       HeaderStore.getState()
     );
@@ -112,6 +113,7 @@ class Header extends React.Component {
         {
           headerHeight: this.state.headerHeight,
           loginCookie: this.state.loginCookie,
+          patronNameObject: this.state.patronNameObject,
         },
         HeaderStore.getState()
       )
@@ -177,7 +179,12 @@ class Header extends React.Component {
   fetchPatronData(cookie) {
     utils.getLoginData(cookie, result => {
       if (result.data && result.data.data) {
-        this.setState({ patronName: utils.modelPatronName(result.data) });
+        const patronNameObject = utils.modelPatronName(utils.extractPatronName(result.data));
+
+        this.setState({
+          patronName: patronNameObject.name,
+          patronInitial: patronNameObject.initial,
+        });
       }
     });
   }
@@ -219,8 +226,6 @@ class Header extends React.Component {
       (<SkipNavigation {...this.props.skipNav} />) : '';
     const isLogin = !!this.state.loginCookie;
 
-    console.log(this.state.patronName);
-
     return (
       <header
         id={this.props.id}
@@ -239,6 +244,7 @@ class Header extends React.Component {
             }
             nyplRootUrl={(this.props.urlType === 'absolute') ? '//www.nypl.org' : '/'}
             isLogin={isLogin}
+            patronInitial={this.state.patronInitial}
             ref="headerMobile"
           />
           <div

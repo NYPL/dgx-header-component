@@ -70,6 +70,14 @@ const styles = {
     lineHeight: 'normal',
     verticalAlign: '0px',
   },
+  patronInitial: {
+    color: 'green',
+    display: 'inline-block',
+    fontSize: '1.8em',
+    lineHeight: 'normal',
+    margin: '0 5px 0 0',
+    verticalAlign: '8px',
+  },
   activeMyNyplButton: {
     backgroundColor: '#2B2B2B',
   },
@@ -231,6 +239,18 @@ class MobileHeader extends React.Component {
   }
 
   /**
+  * renderPatronInitial()
+  * render the patron's initial on mobile header if has logged in.
+  */
+  renderPatronInitial() {
+    const initial = this.props.patronInitial;
+
+    return (initial) ? (
+      <p style={styles.patronInitial}>{initial}</p>
+    ) : null;
+  }
+
+  /**
   * renderMyNyplButton()
   * Generates the DOM for the MyNyplLogin button/dialog.
   * Uses SVG icon & visuallyHidden label.
@@ -268,6 +288,7 @@ class MobileHeader extends React.Component {
           onTap={() => this.toggleMobileMenuButton('clickMyNypl')}
         >
           <span className="visuallyHidden">{buttonLabel}</span>
+          {this.renderPatronInitial()}
           {icon}
         </ReactTappable>
         {dialogWindow}
@@ -407,6 +428,7 @@ MobileHeader.propTypes = {
   nyplRootUrl: React.PropTypes.string,
   alt: React.PropTypes.string,
   isLogin: React.PropTypes.bool,
+  patronInitial: React.PropTypes.string,
 };
 
 MobileHeader.defaultProps = {

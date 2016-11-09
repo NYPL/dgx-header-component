@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { gaUtils } from 'dgx-react-ga';
+import { map as _map } from 'underscore';
 import axios from 'axios';
-
 import config from './../appConfig.js';
 
 function Utils() {
@@ -89,8 +89,8 @@ function Utils() {
    * Track a GA click event, where action and label come from
    * the higher level function call from _trackEvent().
    *
-   * @param {action} String Action for GA event.
-   * @param {label} String Label for GA event.
+   * @param {string} action - Action for GA event.
+   * @param {string} label - Label for GA event.
    */
   this.trackHeader = gaUtils.trackEvent('Global Header');
 
@@ -98,7 +98,7 @@ function Utils() {
    * encodeURI(sKey)
    * Enocode the cookie response.
    *
-   * @param {sKey} String Name of the cookie to be looked up.
+   * @param {string} sKey -  The name of the cookie to be looked up.
    */
   this.encodeURI = (sKey) => {
     return encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&');
@@ -108,7 +108,7 @@ function Utils() {
    * getCookie(sKey)
    * Get a cookie based on its name.
    *
-   * @param {sKey} String Name of the cookie to be looked up.
+   * @param {string} sKey - The name of the cookie to be looked up.
    */
   this.getCookie = (sKey) => {
     if (!sKey) { return null; }
@@ -124,7 +124,7 @@ function Utils() {
    * hasCookie(sKey)
    * See if a specific cookie.
    *
-   * @param {sKey} String Name of the cookie to be looked up.
+   * @param {string} sKey - The name of the cookie to be looked up.
    */
   this.hasCookie = (sKey) => {
     if (!sKey) { return false; }
@@ -138,12 +138,10 @@ function Utils() {
    * getLoginData(cookie, cb)
    * Handle the cookie from log in and make api calls with the callback function passed in.
    *
-   * @param {cookie} String The cookie returned.
-   * @param {cb} Function The function passed in to make api calls.
+   * @param {string} cookie - The cookie returned.
+   * @param {function(result: Object)} cb - The callback function passed in.
    */
   this.getLoginData = (cookie, cb) => {
-    console.log(JSON.parse(cookie).access_token);
-
     const decodedToken = JSON.parse(cookie).access_token;
     const endpoint = `${config.patronApiUrl}${decodedToken}`;
 
@@ -166,12 +164,12 @@ function Utils() {
   };
 
   /**
-   * modelPatronName(data)
-   * Model the returned patron data to extract the patron's name.
+   * extractPatronName(data)
+   * Dig in the returned patron data to extract the patron's name.
    *
-   * @param {data} Object The returned patron data.
+   * @param {Object} data - The returned patron data.
    */
-  this.modelPatronName = (data) => {
+  this.extractPatronName = (data) => {
     try {
       const {
         data: {
@@ -185,6 +183,27 @@ function Utils() {
     } catch (e) {
       return null;
     }
+  };
+
+  /**
+   * modelPatronName (name)
+   * Model the returned patron name data to get a string of the full name
+   * and a string of the initial.
+   *
+   * @param {string} name - The name data returned.
+   * @return {Object} The object contains the modeled patron name and initial.
+   */
+  this.modelPatronName = (name) => {
+    if (!name) {
+      return { name: '', initial: '' };
+    }
+
+    const nameArray = name.replace(/ /g, '').split(',').reverse();
+    const initialArray = _map(nameArray, (item) => item.charAt(0));
+    const patronName = nameArray.join(' ');
+    const patronInitial = initialArray.join('');
+
+    return { name: patronName, initial: patronInitial };
   };
 }
 

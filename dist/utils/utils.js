@@ -95,8 +95,8 @@ function Utils() {
    * Track a GA click event, where action and label come from
    * the higher level function call from _trackEvent().
    *
-   * @param {String} action - Action for GA event.
-   * @param {String} label - Label for GA event.
+   * @param {string} action - Action for GA event.
+   * @param {string} label - Label for GA event.
    */
   this.trackHeader = _dgxReactGa.gaUtils.trackEvent('Global Header');
 
@@ -104,7 +104,7 @@ function Utils() {
    * encodeURI(sKey)
    * Enocode the cookie response.
    *
-   * @param {sKey} String Name of the cookie to be looked up.
+   * @param {string} sKey -  The name of the cookie to be looked up.
    */
   this.encodeURI = function (sKey) {
     return encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&');
@@ -114,7 +114,7 @@ function Utils() {
    * getCookie(sKey)
    * Get a cookie based on its name.
    *
-   * @param {String} sKey - Name of the cookie to be looked up.
+   * @param {string} sKey - The name of the cookie to be looked up.
    */
   this.getCookie = function (sKey) {
     if (!sKey) {
@@ -128,7 +128,7 @@ function Utils() {
    * hasCookie(sKey)
    * See if a specific cookie.
    *
-   * @param {String} sKey - Name of the cookie to be looked up.
+   * @param {string} sKey - The name of the cookie to be looked up.
    */
   this.hasCookie = function (sKey) {
     if (!sKey) {
@@ -142,8 +142,8 @@ function Utils() {
    * getLoginData(cookie, cb)
    * Handle the cookie from log in and make api calls with the callback function passed in.
    *
-   * @param {String} cookie - The cookie returned.
-   * @param {Function} cb - The callback function passed in.
+   * @param {string} cookie - The cookie returned.
+   * @param {function(result: Object)} cb - The callback function passed in.
    */
   this.getLoginData = function (cookie, cb) {
     var decodedToken = JSON.parse(cookie).access_token;
@@ -186,7 +186,7 @@ function Utils() {
    * Model the returned patron name data to get a string of the full name
    * and a string of the initial.
    *
-   * @param {String} name - The name data returned.
+   * @param {string} name - The name data returned.
    * @return {Object} The object contains the modeled patron name and initial.
    */
   this.modelPatronName = function (name) {

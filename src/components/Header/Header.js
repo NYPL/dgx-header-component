@@ -2,9 +2,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';
-import { extend as _extend } from 'underscore';
+import { extend as _extend, map as _map } from 'underscore';
+import FeatureFlags from 'dgx-feature-flags';
 // Nav Config
 import navConfig from '../../navConfig.js';
+import featureFlagConfig from '../../featureFlagConfig.js';
 // ALT Flux
 import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
@@ -83,6 +85,7 @@ class Header extends React.Component {
         loginCookie: null,
         patronName: '',
         patronInitial: '',
+        featureFlagCookies: [],
       },
       HeaderStore.getState()
     );
@@ -99,6 +102,8 @@ class Header extends React.Component {
 
     // Set nyplIdentity cookie to the state.
     this.setLoginCookie();
+
+    this.setFeatureFlagCookies(featureFlagConfig.featureFlagCookies);
   }
 
   componentWillUnmount() {
@@ -135,6 +140,19 @@ class Header extends React.Component {
     }
   }
 
+  setFeatureFlagCookies(cookieArray) {
+    const array = [];
+
+    _map(cookieArray, (item) => {
+      if (utils.hasCookie(item)) {
+        array.push(item);
+        this.setState({ featureFlagCookies: array });
+      }
+    });
+
+    this.activateFeatureFlags(array);
+  }
+
   /**
    * getHeaderHeight()
    * returns the Height of the Header DOM
@@ -168,6 +186,17 @@ class Header extends React.Component {
     return window.scrollY
       || window.pageYOffset
       || document.documentElement.scrollTop;
+  }
+
+  activateFeatureFlags(featureFlagCookies) {
+    _map(featureFlagCookies, (item) => {
+      const featureFlag = item
+        .replace(/([a-z])([A-Z])/g, '$1 $2')
+        .replace(/[A-Z]/g, (str) => str.toLowerCase())
+        .replace(/\s/g, '-');
+
+      FeatureFlags.utils.activateFeature(featureFlag);
+    });
   }
 
   /**

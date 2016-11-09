@@ -21,17 +21,9 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 var _underscore = require('underscore');
 
-var _dgxFeatureFlags = require('dgx-feature-flags');
-
-var _dgxFeatureFlags2 = _interopRequireDefault(_dgxFeatureFlags);
-
 var _navConfig = require('../../navConfig.js');
 
 var _navConfig2 = _interopRequireDefault(_navConfig);
-
-var _featureFlagConfig = require('../../featureFlagConfig.js');
-
-var _featureFlagConfig2 = _interopRequireDefault(_featureFlagConfig);
 
 var _HeaderStore = require('../../stores/HeaderStore.js');
 
@@ -162,8 +154,7 @@ var Header = function (_React$Component) {
       navData: _this.props.navData,
       loginCookie: null,
       patronName: '',
-      patronInitial: '',
-      featureFlagCookies: []
+      patronInitial: ''
     }, _HeaderStore2.default.getState());
 
     _this.handleStickyHeader = _this.handleStickyHeader.bind(_this);
@@ -181,8 +172,6 @@ var Header = function (_React$Component) {
 
       // Set nyplIdentity cookie to the state.
       this.setLoginCookie();
-
-      this.setFeatureFlagCookies(_featureFlagConfig2.default.featureFlagCookies);
     }
   }, {
     key: 'componentWillUnmount',
@@ -218,22 +207,6 @@ var Header = function (_React$Component) {
         this.setState({ loginCookie: null });
       }
     }
-  }, {
-    key: 'setFeatureFlagCookies',
-    value: function setFeatureFlagCookies(cookieArray) {
-      var _this2 = this;
-
-      var array = [];
-
-      (0, _underscore.map)(cookieArray, function (item) {
-        if (_utils2.default.hasCookie(item)) {
-          array.push(item);
-          _this2.setState({ featureFlagCookies: array });
-        }
-      });
-
-      this.activateFeatureFlags(array);
-    }
 
     /**
      * getHeaderHeight()
@@ -257,11 +230,11 @@ var Header = function (_React$Component) {
   }, {
     key: 'setHeaderHeight',
     value: function setHeaderHeight() {
-      var _this3 = this;
+      var _this2 = this;
 
       if (!this.state.headerHeight) {
         setTimeout(function () {
-          _this3.setState({ headerHeight: _this3.getHeaderHeight() });
+          _this2.setState({ headerHeight: _this2.getHeaderHeight() });
         }, 500);
       }
     }
@@ -278,17 +251,6 @@ var Header = function (_React$Component) {
     value: function getWindowVerticalScroll() {
       return window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
     }
-  }, {
-    key: 'activateFeatureFlags',
-    value: function activateFeatureFlags(featureFlagCookies) {
-      (0, _underscore.map)(featureFlagCookies, function (item) {
-        var featureFlag = item.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/[A-Z]/g, function (str) {
-          return str.toLowerCase();
-        }).replace(/\s/g, '-');
-
-        _dgxFeatureFlags2.default.utils.activateFeature(featureFlag);
-      });
-    }
 
     /**
      * fetchPatronData(cookie)
@@ -300,13 +262,13 @@ var Header = function (_React$Component) {
   }, {
     key: 'fetchPatronData',
     value: function fetchPatronData(cookie) {
-      var _this4 = this;
+      var _this3 = this;
 
       _utils2.default.getLoginData(cookie, function (result) {
         if (result.data && result.data.data) {
           var patronNameObject = _utils2.default.modelPatronName(_utils2.default.extractPatronName(result.data));
 
-          _this4.setState({
+          _this3.setState({
             patronName: patronNameObject.name,
             patronInitial: patronNameObject.initial
           });

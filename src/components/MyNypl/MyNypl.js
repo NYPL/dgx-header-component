@@ -32,27 +32,12 @@ const styles = {
 };
 
 class MyNypl extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isOauthLogin: FeatureFlags.store._getImmutableState().get('oauth-login'),
-    };
-  }
-
   componentDidMount() {
     this.refs.catalogLink.focus();
   }
 
   componentWillUnmount() {
     this.refs.catalogLink.blur();
-  }
-
-  onChange() {
-    console.log('let us change');
-    this.setState({
-      isOauthLogin: FeatureFlags.store._getImmutableState().get('oauth-login'),
-    });
   }
 
   renderLogoutLink() {
@@ -68,12 +53,13 @@ class MyNypl extends React.Component {
   }
 
   render() {
+    const isOauthLogin = FeatureFlags.store._getImmutableState().get('oauth-login');
     const catalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
     const researchCatalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE RESEARCH CATALOG' :
       'LOG INTO THE RESEARCH CATALOG';
-    const catalogLink = (!this.state.isOauthLogin || this.props.isLoggedIn) ?
+    const catalogLink = (!isOauthLogin || this.props.isLoggedIn) ?
       this.props.catalogLink : this.props.loginCatalogLink;
-    const researchLink = (!this.state.isOauthLogin || this.props.isLoggedIn) ?
+    const researchLink = (!isOauthLogin || this.props.isLoggedIn) ?
       this.props.researchLink : this.props.loginResearchLink;
 
     return (

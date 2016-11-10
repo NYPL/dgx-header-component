@@ -62,15 +62,10 @@ var styles = {
 var MyNypl = function (_React$Component) {
   _inherits(MyNypl, _React$Component);
 
-  function MyNypl(props) {
+  function MyNypl() {
     _classCallCheck(this, MyNypl);
 
-    var _this = _possibleConstructorReturn(this, (MyNypl.__proto__ || Object.getPrototypeOf(MyNypl)).call(this, props));
-
-    _this.state = {
-      isOauthLogin: _dgxFeatureFlags2.default.store._getImmutableState().get('oauth-login')
-    };
-    return _this;
+    return _possibleConstructorReturn(this, (MyNypl.__proto__ || Object.getPrototypeOf(MyNypl)).apply(this, arguments));
   }
 
   _createClass(MyNypl, [{
@@ -82,14 +77,6 @@ var MyNypl = function (_React$Component) {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
       this.refs.catalogLink.blur();
-    }
-  }, {
-    key: 'onChange',
-    value: function onChange() {
-      console.log('let us change');
-      this.setState({
-        isOauthLogin: _dgxFeatureFlags2.default.store._getImmutableState().get('oauth-login')
-      });
     }
   }, {
     key: 'renderLogoutLink',
@@ -110,10 +97,11 @@ var MyNypl = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var isOauthLogin = _dgxFeatureFlags2.default.store._getImmutableState().get('oauth-login');
       var catalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
       var researchCatalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE RESEARCH CATALOG' : 'LOG INTO THE RESEARCH CATALOG';
-      var catalogLink = !this.state.isOauthLogin || this.props.isLoggedIn ? this.props.catalogLink : this.props.loginCatalogLink;
-      var researchLink = !this.state.isOauthLogin || this.props.isLoggedIn ? this.props.researchLink : this.props.loginResearchLink;
+      var catalogLink = !isOauthLogin || this.props.isLoggedIn ? this.props.catalogLink : this.props.loginCatalogLink;
+      var researchLink = !isOauthLogin || this.props.isLoggedIn ? this.props.researchLink : this.props.loginResearchLink;
 
       return _react2.default.createElement(
         'div',

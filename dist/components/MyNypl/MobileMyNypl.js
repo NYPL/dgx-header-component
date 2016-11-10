@@ -20,10 +20,6 @@ var _appConfig = require('../../appConfig.js');
 
 var _appConfig2 = _interopRequireDefault(_appConfig);
 
-var _dgxFeatureFlags = require('dgx-feature-flags');
-
-var _dgxFeatureFlags2 = _interopRequireDefault(_dgxFeatureFlags);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -98,15 +94,10 @@ var styles = {
 var MobileMyNypl = function (_React$Component) {
   _inherits(MobileMyNypl, _React$Component);
 
-  function MobileMyNypl(props) {
+  function MobileMyNypl() {
     _classCallCheck(this, MobileMyNypl);
 
-    var _this = _possibleConstructorReturn(this, (MobileMyNypl.__proto__ || Object.getPrototypeOf(MobileMyNypl)).call(this, props));
-
-    _this.state = {
-      isOauthLogin: _dgxFeatureFlags2.default.store._getImmutableState().get('OauthLogin')
-    };
-    return _this;
+    return _possibleConstructorReturn(this, (MobileMyNypl.__proto__ || Object.getPrototypeOf(MobileMyNypl)).apply(this, arguments));
   }
 
   _createClass(MobileMyNypl, [{
@@ -130,8 +121,8 @@ var MobileMyNypl = function (_React$Component) {
     value: function render() {
       var catalogLinkClass = 'CatalogLink';
       var researchLinkClass = 'ResearchLink';
-      var catalogLink = !this.state.isOauthLogin || this.props.isLoggedIn ? this.props.catalogLink : this.props.loginCatalogLink;
-      var researchLink = !this.state.isOauthLogin || this.props.isLoggedIn ? this.props.researchLink : this.props.loginResearchLink;
+      var catalogLink = !this.props.isOauthLoginActivated || this.props.isLoggedIn ? this.props.catalogLink : this.props.loginCatalogLink;
+      var researchLink = !this.props.isOauthLoginActivated || this.props.isLoggedIn ? this.props.researchLink : this.props.loginResearchLink;
       var catalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
       var researchCatalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE RESEARCH CATALOG' : 'LOG INTO THE RESEARCH CATALOG';
 
@@ -212,7 +203,8 @@ MobileMyNypl.propTypes = {
   loginCatalogLink: _react2.default.PropTypes.string,
   loginResearchLink: _react2.default.PropTypes.string,
   logoutLink: _react2.default.PropTypes.string,
-  isLoggedIn: _react2.default.PropTypes.bool
+  isLoggedIn: _react2.default.PropTypes.bool,
+  isOauthLoginActivated: _react2.default.PropTypes.bool
 };
 
 MobileMyNypl.defaultProps = {

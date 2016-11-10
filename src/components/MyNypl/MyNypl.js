@@ -2,7 +2,6 @@ import React from 'react';
 // Config and Utility Library
 import utils from '../../utils/utils.js';
 import appConfig from '../../appConfig.js';
-import FeatureFlags from 'dgx-feature-flags';
 
 const styles = {
   logoutLink: {
@@ -53,13 +52,12 @@ class MyNypl extends React.Component {
   }
 
   render() {
-    const featureFlagOauthLogin = FeatureFlags.store._getImmutableState().get('OauthLogin');
     const catalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
     const researchCatalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE RESEARCH CATALOG' :
       'LOG INTO THE RESEARCH CATALOG';
-    const catalogLink = (!featureFlagOauthLogin || this.props.isLoggedIn) ?
+    const catalogLink = (!this.props.isOauthLoginActivated || this.props.isLoggedIn) ?
       this.props.catalogLink : this.props.loginCatalogLink;
-    const researchLink = (!featureFlagOauthLogin || this.props.isLoggedIn) ?
+    const researchLink = (!this.props.isOauthLoginActivated || this.props.isLoggedIn) ?
       this.props.researchLink : this.props.loginResearchLink;
 
     return (
@@ -106,6 +104,7 @@ MyNypl.propTypes = {
   loginResearchLink: React.PropTypes.string,
   logoutLink: React.PropTypes.string,
   isLoggedIn: React.PropTypes.bool,
+  isOauthLoginActivated: React.PropTypes.bool,
 };
 
 MyNypl.defaultProps = {

@@ -162,7 +162,8 @@ var Header = function (_React$Component) {
       navData: _this.props.navData,
       loginCookie: null,
       patronName: '',
-      patronInitial: ''
+      patronInitial: '',
+      isOauthLoginActivated: _dgxFeatureFlags2.default.store._getImmutableState().get('OauthLogin')
     }, _HeaderStore2.default.getState());
 
     _this.handleStickyHeader = _this.handleStickyHeader.bind(_this);
@@ -197,7 +198,8 @@ var Header = function (_React$Component) {
       this.setState((0, _underscore.extend)({
         headerHeight: this.state.headerHeight,
         loginCookie: this.state.loginCookie,
-        patronNameObject: this.state.patronNameObject
+        patronNameObject: this.state.patronNameObject,
+        isOauthLoginActivated: _dgxFeatureFlags2.default.store._getImmutableState().get('OauthLogin')
       }, _HeaderStore2.default.getState()));
     }
 
@@ -217,25 +219,6 @@ var Header = function (_React$Component) {
       } else {
         this.setState({ loginCookie: null });
       }
-    }
-
-    /**
-     * checkFeatureFlagCookies(cookieArray)
-     * Check if the cookies exist. If they do, activate the function to enable
-     * indicating feature flags.
-     * @param {string[]} - cookieArray 
-     */
-
-  }, {
-    key: 'checkFeatureFlagCookies',
-    value: function checkFeatureFlagCookies(cookieArray) {
-      var _this2 = this;
-
-      (0, _underscore.map)(cookieArray, function (item) {
-        if (_utils2.default.hasCookie(item)) {
-          _this2.activateFeatureFlags(item);
-        }
-      });
     }
 
     /**
@@ -260,11 +243,11 @@ var Header = function (_React$Component) {
   }, {
     key: 'setHeaderHeight',
     value: function setHeaderHeight() {
-      var _this3 = this;
+      var _this2 = this;
 
       if (!this.state.headerHeight) {
         setTimeout(function () {
-          _this3.setState({ headerHeight: _this3.getHeaderHeight() });
+          _this2.setState({ headerHeight: _this2.getHeaderHeight() });
         }, 500);
       }
     }
@@ -280,6 +263,25 @@ var Header = function (_React$Component) {
     key: 'getWindowVerticalScroll',
     value: function getWindowVerticalScroll() {
       return window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+    }
+
+    /**
+     * checkFeatureFlagCookies(cookieArray)
+     * Check if the cookies exist. If they do, activate the function to enable
+     * indicating feature flags.
+     * @param {string[]} cookieArray - The array of the cookies that are set in the configuartion.
+     */
+
+  }, {
+    key: 'checkFeatureFlagCookies',
+    value: function checkFeatureFlagCookies(cookieArray) {
+      var _this3 = this;
+
+      (0, _underscore.map)(cookieArray, function (item) {
+        if (_utils2.default.hasCookie(item)) {
+          _this3.activateFeatureFlags(item);
+        }
+      });
     }
 
     /**
@@ -359,6 +361,7 @@ var Header = function (_React$Component) {
       var headerClasses = (0, _classnames2.default)(headerClass, { sticky: isHeaderSticky });
       var skipNav = this.props.skipNav ? _react2.default.createElement(_dgxSkipNavigationLink2.default, this.props.skipNav) : '';
       var isLoggedIn = !!this.state.loginCookie;
+      var isOauthLoginActivated = !!this.state.isOauthLoginActivated;
       var myNyplButtonLabel = this.state.patronName || 'Log In';
 
       return _react2.default.createElement(
@@ -379,6 +382,7 @@ var Header = function (_React$Component) {
             locatorUrl: this.props.urlType === 'absolute' ? '//www.nypl.org/locations/map?nearme=true' : '/locations/map?nearme=true',
             nyplRootUrl: this.props.urlType === 'absolute' ? '//www.nypl.org' : '/',
             isLoggedIn: isLoggedIn,
+            isOauthLoginActivated: isOauthLoginActivated,
             patronInitial: this.state.patronInitial,
             ref: 'headerMobile'
           }),
@@ -399,7 +403,8 @@ var Header = function (_React$Component) {
               _react2.default.createElement(_MyNyplButton2.default, {
                 label: myNyplButtonLabel,
                 refId: 'desktopLogin',
-                isLoggedIn: isLoggedIn
+                isLoggedIn: isLoggedIn,
+                isOauthLoginActivated: isOauthLoginActivated
               }),
               _react2.default.createElement(_SimpleLink2.default, {
                 label: 'Locations',
@@ -447,7 +452,8 @@ var Header = function (_React$Component) {
             items: this.state.navData,
             urlType: this.props.urlType,
             isLoggedIn: isLoggedIn,
-            patronInitial: this.state.patronInitial
+            patronInitial: this.state.patronInitial,
+            isOauthLoginActivated: isOauthLoginActivated
           })
         )
       );

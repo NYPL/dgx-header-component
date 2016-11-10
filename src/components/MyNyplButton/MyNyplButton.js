@@ -117,13 +117,16 @@ class MyNyplButton extends React.Component {
     );
   }
 
-  renderMyNyplDialog(isLoggedIn) {
+  renderMyNyplDialog() {
     return (HeaderStore.getMyNyplVisible()) ? (
       <div
         className="MyNypl-Wrapper active animatedFast fadeIn"
         style={styles.MyNyplWrapper}
       >
-        <MyNypl isLoggedIn={isLoggedIn} />
+        <MyNypl
+          isLoggedIn={this.props.isLoggedIn}
+          isOauthLoginActivated={this.props.isOauthLoginActivated}
+        />
       </div>
     ) : null;
   }
@@ -136,7 +139,7 @@ class MyNyplButton extends React.Component {
           style={_extend(styles.base, this.props.style)}
         >
           {this.renderMyNyplButton()}
-          {this.renderMyNyplDialog(this.props.isLoggedIn)}
+          {this.renderMyNyplDialog()}
         </div>
       </ClickOutHandler>
     );
@@ -148,6 +151,7 @@ MyNyplButton.propTypes = {
   label: React.PropTypes.string,
   style: React.PropTypes.object,
   isLoggedIn: React.PropTypes.bool,
+  isOauthLoginActivated: React.PropTypes.bool,
 };
 
 MyNyplButton.defaultProps = {

@@ -90,11 +90,9 @@ class StickyMyNyplButton extends React.Component {
     const myNyplClasses = cx({ 'active animatedFast fadeIn': showDialog });
     const patronInitialClass = (showDialog) ? '' : 'loginColor';
     const patronInitial = (this.props.patronInitial) ?
-      (
-        <p style={styles.patronInitial} className={patronInitialClass}>
-          {this.props.patronInitial}
-        </p>
-      ) : null;
+      <p style={styles.patronInitial} className={patronInitialClass}>
+        {this.props.patronInitial}
+      </p> : null;
     const LoginIconColor = (this.props.isLoggedIn) ? '#497629' : '#333';
 
     return (
@@ -124,7 +122,10 @@ class StickyMyNyplButton extends React.Component {
             className={`StickyMyNypl-Wrapper ${myNyplClasses}`}
             style={styles.MyNyplWrapper}
           >
-            <MyNypl isLoggedIn={this.props.isLoggedIn} />
+            <MyNypl
+              isLoggedIn={this.props.isLoggedIn}
+              isOauthLoginActivated={this.props.isOauthLoginActivated}
+            />
           </div>
         </div>
       </ClickOutHandler>
@@ -137,6 +138,7 @@ StickyMyNyplButton.propTypes = {
   label: React.PropTypes.string,
   style: React.PropTypes.object,
   isLoggedIn: React.PropTypes.bool,
+  isOauthLoginActivated: React.PropTypes.bool,
   patronInitial: React.PropTypes.string,
 };
 

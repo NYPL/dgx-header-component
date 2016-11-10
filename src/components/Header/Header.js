@@ -85,6 +85,7 @@ class Header extends React.Component {
         loginCookie: null,
         patronName: '',
         patronInitial: '',
+        isOauthLoginActivated: FeatureFlags.store._getImmutableState().get('OauthLogin'),
       },
       HeaderStore.getState()
     );
@@ -119,6 +120,7 @@ class Header extends React.Component {
           headerHeight: this.state.headerHeight,
           loginCookie: this.state.loginCookie,
           patronNameObject: this.state.patronNameObject,
+          isOauthLoginActivated: FeatureFlags.store._getImmutableState().get('OauthLogin'),
         },
         HeaderStore.getState()
       )
@@ -255,6 +257,7 @@ class Header extends React.Component {
     const skipNav = this.props.skipNav ?
       (<SkipNavigation {...this.props.skipNav} />) : '';
     const isLoggedIn = !!this.state.loginCookie;
+    const isOauthLoginActivated = !!this.state.isOauthLoginActivated;
     const myNyplButtonLabel = this.state.patronName || 'Log In';
 
     return (
@@ -275,6 +278,7 @@ class Header extends React.Component {
             }
             nyplRootUrl={(this.props.urlType === 'absolute') ? '//www.nypl.org' : '/'}
             isLoggedIn={isLoggedIn}
+            isOauthLoginActivated={isOauthLoginActivated}
             patronInitial={this.state.patronInitial}
             ref="headerMobile"
           />
@@ -292,6 +296,7 @@ class Header extends React.Component {
                 label={myNyplButtonLabel}
                 refId="desktopLogin"
                 isLoggedIn={isLoggedIn}
+                isOauthLoginActivated={isOauthLoginActivated}
               />
               <SimpleLink
                 label="Locations"
@@ -346,6 +351,7 @@ class Header extends React.Component {
             urlType={this.props.urlType}
             isLoggedIn={isLoggedIn}
             patronInitial={this.state.patronInitial}
+            isOauthLoginActivated={isOauthLoginActivated}
           />
         </div>
       </header>

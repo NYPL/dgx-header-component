@@ -173,14 +173,17 @@ var MyNyplButton = function (_React$Component) {
     }
   }, {
     key: 'renderMyNyplDialog',
-    value: function renderMyNyplDialog(isLoggedIn) {
+    value: function renderMyNyplDialog() {
       return _HeaderStore2.default.getMyNyplVisible() ? _react2.default.createElement(
         'div',
         {
           className: 'MyNypl-Wrapper active animatedFast fadeIn',
           style: styles.MyNyplWrapper
         },
-        _react2.default.createElement(_MyNypl2.default, { isLoggedIn: isLoggedIn })
+        _react2.default.createElement(_MyNypl2.default, {
+          isLoggedIn: this.props.isLoggedIn,
+          isOauthLoginActivated: this.props.isOauthLoginActivated
+        })
       ) : null;
     }
   }, {
@@ -196,7 +199,7 @@ var MyNyplButton = function (_React$Component) {
             style: (0, _underscore.extend)(styles.base, this.props.style)
           },
           this.renderMyNyplButton(),
-          this.renderMyNyplDialog(this.props.isLoggedIn)
+          this.renderMyNyplDialog()
         )
       );
     }
@@ -209,7 +212,8 @@ MyNyplButton.propTypes = {
   lang: _react2.default.PropTypes.string,
   label: _react2.default.PropTypes.string,
   style: _react2.default.PropTypes.object,
-  isLoggedIn: _react2.default.PropTypes.bool
+  isLoggedIn: _react2.default.PropTypes.bool,
+  isOauthLoginActivated: _react2.default.PropTypes.bool
 };
 
 MyNyplButton.defaultProps = {

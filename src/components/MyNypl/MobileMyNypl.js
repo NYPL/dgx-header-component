@@ -71,7 +71,7 @@ class MobileMyNypl extends React.Component {
     super(props);
 
     this.state = {
-      isOauthLogin: FeatureFlags.store._getImmutableState().get('oauth-login'),
+      isOauthLogin: FeatureFlags.store._getImmutableState().get('OauthLogin'),
     };
   }
 

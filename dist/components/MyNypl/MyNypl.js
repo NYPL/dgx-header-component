@@ -68,7 +68,7 @@ var MyNypl = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (MyNypl.__proto__ || Object.getPrototypeOf(MyNypl)).call(this, props));
 
     _this.state = {
-      isOauthLogin: _dgxFeatureFlags2.default.store._getImmutableState().get('oauth-login')
+      isOauthLogin: _dgxFeatureFlags2.default.store._getImmutableState().get('OauthLogin')
     };
     return _this;
   }
@@ -88,7 +88,7 @@ var MyNypl = function (_React$Component) {
     value: function onChange() {
       console.log('let us change');
       this.setState({
-        isOauthLogin: _dgxFeatureFlags2.default.store._getImmutableState().get('oauth-login')
+        isOauthLogin: _dgxFeatureFlags2.default.store._getImmutableState().get('OauthLogin')
       });
     }
   }, {
@@ -114,6 +114,8 @@ var MyNypl = function (_React$Component) {
       var researchCatalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE RESEARCH CATALOG' : 'LOG INTO THE RESEARCH CATALOG';
       var catalogLink = !this.state.isOauthLogin || this.props.isLoggedIn ? this.props.catalogLink : this.props.loginCatalogLink;
       var researchLink = !this.state.isOauthLogin || this.props.isLoggedIn ? this.props.researchLink : this.props.loginResearchLink;
+
+      console.log(this.state.isOauthLogin);
 
       return _react2.default.createElement(
         'div',

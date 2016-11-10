@@ -113,6 +113,7 @@ var StickyMyNyplButton = function (_React$Component) {
     key: 'handleClick',
     value: function handleClick() {
       var visibleState = _HeaderStore2.default.getStickyMyNyplVisible() ? 'Closed' : 'Open';
+
       _Actions2.default.toggleStickyMyNyplVisible(!_HeaderStore2.default.getStickyMyNyplVisible());
       _utils2.default.trackHeader('Log In', 'StickyMyNyplButton - ' + visibleState);
     }

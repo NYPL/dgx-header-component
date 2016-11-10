@@ -36,7 +36,7 @@ class MyNypl extends React.Component {
     super(props);
 
     this.state = {
-      isOauthLogin: FeatureFlags.store._getImmutableState().get('oauth-login'),
+      isOauthLogin: FeatureFlags.store._getImmutableState().get('OauthLogin'),
     };
   }
 
@@ -51,7 +51,7 @@ class MyNypl extends React.Component {
   onChange() {
     console.log('let us change');
     this.setState({
-      isOauthLogin: FeatureFlags.store._getImmutableState().get('oauth-login'),
+      isOauthLogin: FeatureFlags.store._getImmutableState().get('OauthLogin'),
     });
   }
 
@@ -75,6 +75,8 @@ class MyNypl extends React.Component {
       this.props.catalogLink : this.props.loginCatalogLink;
     const researchLink = (!this.state.isOauthLogin || this.props.isLoggedIn) ?
       this.props.researchLink : this.props.loginResearchLink;
+
+    console.log(this.state.isOauthLogin);
 
     return (
       <div className={this.props.className} role="dialog">

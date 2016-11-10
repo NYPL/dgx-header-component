@@ -104,7 +104,7 @@ var MobileMyNypl = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (MobileMyNypl.__proto__ || Object.getPrototypeOf(MobileMyNypl)).call(this, props));
 
     _this.state = {
-      isOauthLogin: _dgxFeatureFlags2.default.store._getImmutableState().get('oauth-login')
+      isOauthLogin: _dgxFeatureFlags2.default.store._getImmutableState().get('OauthLogin')
     };
     return _this;
   }

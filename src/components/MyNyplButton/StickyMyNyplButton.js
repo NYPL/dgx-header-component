@@ -66,6 +66,7 @@ class StickyMyNyplButton extends React.Component {
    */
   handleClick() {
     const visibleState = HeaderStore.getStickyMyNyplVisible() ? 'Closed' : 'Open';
+
     Actions.toggleStickyMyNyplVisible(!HeaderStore.getStickyMyNyplVisible());
     utils.trackHeader('Log In', `StickyMyNyplButton - ${visibleState}`);
   }
@@ -89,7 +90,11 @@ class StickyMyNyplButton extends React.Component {
     const myNyplClasses = cx({ 'active animatedFast fadeIn': showDialog });
     const patronInitialClass = (showDialog) ? '' : 'loginColor';
     const patronInitial = (this.props.patronInitial) ?
-      (<p style={styles.patronInitial} className={patronInitialClass}>{this.props.patronInitial}</p>) : null;
+      (
+        <p style={styles.patronInitial} className={patronInitialClass}>
+          {this.props.patronInitial}
+        </p>
+      ) : null;
     const LoginIconColor = (this.props.isLoggedIn) ? 'green' : '#333';
 
     return (

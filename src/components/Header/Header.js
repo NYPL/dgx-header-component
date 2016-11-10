@@ -191,9 +191,9 @@ class Header extends React.Component {
   activateFeatureFlags(featureFlagCookies) {
     _map(featureFlagCookies, (item) => {
       const featureFlag = item
-        .replace(/([a-z])([A-Z])/g, '$1 $2')
-        .replace(/[A-Z]/g, (str) => str.toLowerCase())
-        .replace(/\s/g, '-');
+        .replace('nyplFeatureFlag', '');
+        // .replace(/[A-Z]/g, (str) => str.toLowerCase())
+        // .replace(/\s/g, '-');
 
       FeatureFlags.utils.activateFeature(featureFlag);
     });

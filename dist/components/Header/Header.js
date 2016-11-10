@@ -282,9 +282,9 @@ var Header = function (_React$Component) {
     key: 'activateFeatureFlags',
     value: function activateFeatureFlags(featureFlagCookies) {
       (0, _underscore.map)(featureFlagCookies, function (item) {
-        var featureFlag = item.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/[A-Z]/g, function (str) {
-          return str.toLowerCase();
-        }).replace(/\s/g, '-');
+        var featureFlag = item.replace('nyplFeatureFlag', '');
+        // .replace(/[A-Z]/g, (str) => str.toLowerCase())
+        // .replace(/\s/g, '-');
 
         _dgxFeatureFlags2.default.utils.activateFeature(featureFlag);
       });

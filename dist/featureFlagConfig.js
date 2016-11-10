@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var FeatureFlagConfig = {
-  featureFlagCookies: ['oauthLogin', 'test2', 'test3']
+  featureFlagCookies: ['nyplFeatureFlagOauthLogin']
 };
 
 exports.default = FeatureFlagConfig;

@@ -71,7 +71,7 @@ const styles = {
     verticalAlign: '0px',
   },
   patronInitial: {
-    color: 'green',
+    color: '#497629',
     display: 'inline-block',
     fontSize: '1.8em',
     lineHeight: 'normal',
@@ -258,7 +258,7 @@ class MobileHeader extends React.Component {
   */
   renderMyNyplButton() {
     let myNyplClass = '';
-    const loginColor = (this.props.isLoggedIn) ? 'green' : '#000';
+    const loginColor = (this.props.isLogin) ? '#497629' : '#000';
     let icon = <LoginIcon ariaHidden fill={loginColor} />;
     let buttonStyles = styles.inactiveMyNyplButton;
     let buttonLabel = 'Open Log In Dialog';

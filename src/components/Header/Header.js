@@ -85,7 +85,6 @@ class Header extends React.Component {
         loginCookie: null,
         patronName: '',
         patronInitial: '',
-        featureFlagCookies: [],
       },
       HeaderStore.getState()
     );
@@ -100,10 +99,11 @@ class Header extends React.Component {
     // Listen to the scroll event for the sticky header.
     window.addEventListener('scroll', this.handleStickyHeader, false);
 
-    // Set nyplIdentity cookie to the state.
+    // Set nyplIdentityPatron cookie to the state.
     this.setLoginCookie();
 
-    this.setFeatureFlagCookies(featureFlagConfig.featureFlagCookies);
+    // Set feature flag cookies to the state
+    this.checkFeatureFlagCookies(featureFlagConfig.featureFlagCookies);
   }
 
   componentWillUnmount() {
@@ -138,19 +138,6 @@ class Header extends React.Component {
     } else {
       this.setState({ loginCookie: null });
     }
-  }
-
-  setFeatureFlagCookies(cookieArray) {
-    const array = [];
-
-    _map(cookieArray, (item) => {
-      if (utils.hasCookie(item)) {
-        array.push(item);
-        this.setState({ featureFlagCookies: array });
-      }
-    });
-
-    this.activateFeatureFlags(array);
   }
 
   /**
@@ -189,17 +176,28 @@ class Header extends React.Component {
   }
 
   /**
-   * activateFeatureFlags(featureFlagCookies)
-   * Activate the feature flags that are indicated in the cookies.
-   * @param {string[]} - featureFlagCookies - The array consists of the feature flag names.
+   * checkFeatureFlagCookies(cookieArray)
+   * Check if the cookies exist. If they do, activate the function to enable
+   * indicating feature flags.
+   * @param {string[]} cookieArray - The array of the cookies that are set in the configuartion.
    */
-  activateFeatureFlags(featureFlagCookies) {
-    _map(featureFlagCookies, (item) => {
-      const featureFlag = item
-        .replace('nyplFeatureFlag', '');
-
-      FeatureFlags.utils.activateFeature(featureFlag);
+  checkFeatureFlagCookies(cookieArray) {
+    _map(cookieArray, (item) => {
+      if (utils.hasCookie(item)) {
+        this.activateFeatureFlags(item);
+      }
     });
+  }
+
+  /**
+   * activateFeatureFlags(name)
+   * Activate the feature flag that are indicated in the cookie.
+   * @param {string} name - The feature flag's name.
+   */
+  activateFeatureFlags(name) {
+    const featureFlag = name.replace('nyplFeatureFlag', '');
+
+    FeatureFlags.utils.activateFeature(featureFlag);
   }
 
   /**

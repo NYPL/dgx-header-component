@@ -162,8 +162,7 @@ var Header = function (_React$Component) {
       navData: _this.props.navData,
       loginCookie: null,
       patronName: '',
-      patronInitial: '',
-      featureFlagCookies: []
+      patronInitial: ''
     }, _HeaderStore2.default.getState());
 
     _this.handleStickyHeader = _this.handleStickyHeader.bind(_this);
@@ -179,10 +178,11 @@ var Header = function (_React$Component) {
       // Listen to the scroll event for the sticky header.
       window.addEventListener('scroll', this.handleStickyHeader, false);
 
-      // Set nyplIdentity cookie to the state.
+      // Set nyplIdentityPatron cookie to the state.
       this.setLoginCookie();
 
-      this.setFeatureFlagCookies(_featureFlagConfig2.default.featureFlagCookies);
+      // Set feature flag cookies to the state
+      this.checkFeatureFlagCookies(_featureFlagConfig2.default.featureFlagCookies);
     }
   }, {
     key: 'componentWillUnmount',
@@ -218,21 +218,24 @@ var Header = function (_React$Component) {
         this.setState({ loginCookie: null });
       }
     }
-  }, {
-    key: 'setFeatureFlagCookies',
-    value: function setFeatureFlagCookies(cookieArray) {
-      var _this2 = this;
 
-      var array = [];
+    /**
+     * checkFeatureFlagCookies(cookieArray)
+     * Check if the cookies exist. If they do, activate the function to enable
+     * indicating feature flags.
+     * @param {string[]} - cookieArray 
+     */
+
+  }, {
+    key: 'checkFeatureFlagCookies',
+    value: function checkFeatureFlagCookies(cookieArray) {
+      var _this2 = this;
 
       (0, _underscore.map)(cookieArray, function (item) {
         if (_utils2.default.hasCookie(item)) {
-          array.push(item);
-          _this2.setState({ featureFlagCookies: array });
+          _this2.activateFeatureFlags(item);
         }
       });
-
-      this.activateFeatureFlags(array);
     }
 
     /**
@@ -280,19 +283,17 @@ var Header = function (_React$Component) {
     }
 
     /**
-     * activateFeatureFlags(featureFlagCookies)
-     * Activate the feature flags that are indicated in the cookies.
-     * @param {string[]} - featureFlagCookies - The array consists of the feature flag names.
+     * activateFeatureFlags(name)
+     * Activate the feature flag that are indicated in the cookie.
+     * @param {string} name - The feature flag's name.
      */
 
   }, {
     key: 'activateFeatureFlags',
-    value: function activateFeatureFlags(featureFlagCookies) {
-      (0, _underscore.map)(featureFlagCookies, function (item) {
-        var featureFlag = item.replace('nyplFeatureFlag', '');
+    value: function activateFeatureFlags(name) {
+      var featureFlag = name.replace('nyplFeatureFlag', '');
 
-        _dgxFeatureFlags2.default.utils.activateFeature(featureFlag);
-      });
+      _dgxFeatureFlags2.default.utils.activateFeature(featureFlag);
     }
 
     /**

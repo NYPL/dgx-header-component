@@ -145,7 +145,7 @@ var StickyMyNyplButton = function (_React$Component) {
         { style: styles.patronInitial, className: patronInitialClass },
         this.props.patronInitial
       ) : null;
-      var LoginIconColor = this.props.isLoggedIn ? 'green' : '#333';
+      var LoginIconColor = this.props.isLoggedIn ? '#497629' : '#333';
 
       return _react2.default.createElement(
         _reactOnclickout2.default,

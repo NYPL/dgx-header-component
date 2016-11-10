@@ -95,7 +95,7 @@ class StickyMyNyplButton extends React.Component {
           {this.props.patronInitial}
         </p>
       ) : null;
-    const LoginIconColor = (this.props.isLoggedIn) ? 'green' : '#333';
+    const LoginIconColor = (this.props.isLoggedIn) ? '#497629' : '#333';
 
     return (
       <ClickOutHandler onClickOut={this.handleOnClickOut}>

@@ -188,12 +188,15 @@ class Header extends React.Component {
       || document.documentElement.scrollTop;
   }
 
+  /**
+   * activateFeatureFlags(featureFlagCookies)
+   * Activate the feature flags that are indicated in the cookies.
+   * @param {string[]} - featureFlagCookies - The array consists of the feature flag names.
+   */
   activateFeatureFlags(featureFlagCookies) {
     _map(featureFlagCookies, (item) => {
       const featureFlag = item
         .replace('nyplFeatureFlag', '');
-        // .replace(/[A-Z]/g, (str) => str.toLowerCase())
-        // .replace(/\s/g, '-');
 
       FeatureFlags.utils.activateFeature(featureFlag);
     });

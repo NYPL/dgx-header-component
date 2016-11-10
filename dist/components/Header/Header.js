@@ -278,13 +278,18 @@ var Header = function (_React$Component) {
     value: function getWindowVerticalScroll() {
       return window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
     }
+
+    /**
+     * activateFeatureFlags(featureFlagCookies)
+     * Activate the feature flags that are indicated in the cookies.
+     * @param {string[]} - featureFlagCookies - The array consists of the feature flag names.
+     */
+
   }, {
     key: 'activateFeatureFlags',
     value: function activateFeatureFlags(featureFlagCookies) {
       (0, _underscore.map)(featureFlagCookies, function (item) {
         var featureFlag = item.replace('nyplFeatureFlag', '');
-        // .replace(/[A-Z]/g, (str) => str.toLowerCase())
-        // .replace(/\s/g, '-');
 
         _dgxFeatureFlags2.default.utils.activateFeature(featureFlag);
       });

@@ -32,27 +32,12 @@ const styles = {
 };
 
 class MyNypl extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isOauthLogin: FeatureFlags.store._getImmutableState().get('OauthLogin'),
-    };
-  }
-
   componentDidMount() {
     this.refs.catalogLink.focus();
   }
 
   componentWillUnmount() {
     this.refs.catalogLink.blur();
-  }
-
-  onChange() {
-    console.log('let us change');
-    this.setState({
-      isOauthLogin: FeatureFlags.store._getImmutableState().get('OauthLogin'),
-    });
   }
 
   renderLogoutLink() {
@@ -68,15 +53,14 @@ class MyNypl extends React.Component {
   }
 
   render() {
+    const featureFlagOauthLogin = FeatureFlags.store._getImmutableState().get('OauthLogin');
     const catalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
     const researchCatalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE RESEARCH CATALOG' :
       'LOG INTO THE RESEARCH CATALOG';
-    const catalogLink = (!this.state.isOauthLogin || this.props.isLoggedIn) ?
+    const catalogLink = (!featureFlagOauthLogin || this.props.isLoggedIn) ?
       this.props.catalogLink : this.props.loginCatalogLink;
-    const researchLink = (!this.state.isOauthLogin || this.props.isLoggedIn) ?
+    const researchLink = (!featureFlagOauthLogin || this.props.isLoggedIn) ?
       this.props.researchLink : this.props.loginResearchLink;
-
-    console.log(this.state.isOauthLogin);
 
     return (
       <div className={this.props.className} role="dialog">

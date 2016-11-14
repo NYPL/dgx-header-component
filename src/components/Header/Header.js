@@ -85,7 +85,9 @@ class Header extends React.Component {
         loginCookie: null,
         patronName: '',
         patronInitial: '',
-        isOauthLoginActivated: FeatureFlags.store._getImmutableState().get('OauthLogin'),
+        isFeatureFlagsActivated: {
+          OauthLogin: FeatureFlags.store._getImmutableState().get('OauthLogin'),
+        },
       },
       HeaderStore.getState()
     );
@@ -104,7 +106,7 @@ class Header extends React.Component {
     this.setLoginCookie();
 
     // Set feature flag cookies to the state
-    this.checkFeatureFlagCookies(featureFlagConfig.featureFlagCookies);
+    this.checkFeatureFlagActivated(featureFlagConfig.featureFlagList);
   }
 
   componentWillUnmount() {
@@ -120,7 +122,9 @@ class Header extends React.Component {
           headerHeight: this.state.headerHeight,
           loginCookie: this.state.loginCookie,
           patronNameObject: this.state.patronNameObject,
-          isOauthLoginActivated: FeatureFlags.store._getImmutableState().get('OauthLogin'),
+          isFeatureFlagsActivated: {
+            OauthLogin: FeatureFlags.store._getImmutableState().get('OauthLogin'),
+          },
         },
         HeaderStore.getState()
       )
@@ -178,17 +182,29 @@ class Header extends React.Component {
   }
 
   /**
-   * checkFeatureFlagCookies(cookieArray)
-   * Check if the cookies exist. If they do, activate the function to enable
-   * indicating feature flags.
-   * @param {string[]} cookieArray - The array of the cookies that are set in the configuartion.
+   * checkFeatureFlagActivated(featureFlagList)
+   * Check if the feature flags have been set. If they have not, activate the function to check
+   * if there're the related cookies are set.
+   * @param {string[]} featureFlagList - The list of the feature flags we want to set.
    */
-  checkFeatureFlagCookies(cookieArray) {
-    _map(cookieArray, (item) => {
-      if (utils.hasCookie(item)) {
-        this.activateFeatureFlags(item);
+  checkFeatureFlagActivated(featureFlagList) {
+    _map(featureFlagList, (item) => {
+      if (!this.state.isFeatureFlagsActivated[item]) {
+        this.checkFeatureFlagCookie(item);
       }
     });
+  }
+
+  /**
+   * checkFeatureFlagCookie(name)
+   * Check if the cookie exist. If they do, activate the function to enable
+   * the indicated feature flags.
+   * @param {string} name - The name of the cookie.
+   */
+  checkFeatureFlagCookie(name) {
+    if (utils.hasCookie(`nyplFeatureFlag${name}`)) {
+      this.activateFeatureFlag(name);
+    }
   }
 
   /**
@@ -196,10 +212,8 @@ class Header extends React.Component {
    * Activate the feature flag that are indicated in the cookie.
    * @param {string} name - The feature flag's name.
    */
-  activateFeatureFlags(name) {
-    const featureFlag = name.replace('nyplFeatureFlag', '');
-
-    FeatureFlags.utils.activateFeature(featureFlag);
+  activateFeatureFlag(name) {
+    FeatureFlags.utils.activateFeature(name);
   }
 
   /**
@@ -257,7 +271,7 @@ class Header extends React.Component {
     const skipNav = this.props.skipNav ?
       (<SkipNavigation {...this.props.skipNav} />) : '';
     const isLoggedIn = !!this.state.loginCookie;
-    const isOauthLoginActivated = !!this.state.isOauthLoginActivated;
+    const isOauthLoginActivated = !!this.state.isFeatureFlagsActivated.OauthLogin;
     const myNyplButtonLabel = this.state.patronName || 'Log In';
 
     return (

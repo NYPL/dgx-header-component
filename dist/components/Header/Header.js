@@ -163,7 +163,9 @@ var Header = function (_React$Component) {
       loginCookie: null,
       patronName: '',
       patronInitial: '',
-      isOauthLoginActivated: _dgxFeatureFlags2.default.store._getImmutableState().get('OauthLogin')
+      isFeatureFlagsActivated: {
+        OauthLogin: _dgxFeatureFlags2.default.store._getImmutableState().get('OauthLogin')
+      }
     }, _HeaderStore2.default.getState());
 
     _this.handleStickyHeader = _this.handleStickyHeader.bind(_this);
@@ -183,7 +185,7 @@ var Header = function (_React$Component) {
       this.setLoginCookie();
 
       // Set feature flag cookies to the state
-      this.checkFeatureFlagCookies(_featureFlagConfig2.default.featureFlagCookies);
+      this.checkFeatureFlagActivated(_featureFlagConfig2.default.featureFlagList);
     }
   }, {
     key: 'componentWillUnmount',
@@ -199,7 +201,9 @@ var Header = function (_React$Component) {
         headerHeight: this.state.headerHeight,
         loginCookie: this.state.loginCookie,
         patronNameObject: this.state.patronNameObject,
-        isOauthLoginActivated: _dgxFeatureFlags2.default.store._getImmutableState().get('OauthLogin')
+        isFeatureFlagsActivated: {
+          OauthLogin: _dgxFeatureFlags2.default.store._getImmutableState().get('OauthLogin')
+        }
       }, _HeaderStore2.default.getState()));
     }
 
@@ -266,22 +270,37 @@ var Header = function (_React$Component) {
     }
 
     /**
-     * checkFeatureFlagCookies(cookieArray)
-     * Check if the cookies exist. If they do, activate the function to enable
-     * indicating feature flags.
-     * @param {string[]} cookieArray - The array of the cookies that are set in the configuartion.
+     * checkFeatureFlagActivated(featureFlagList)
+     * Check if the feature flags have been set. If they have not, activate the function to check
+     * if there're the related cookies are set.
+     * @param {string[]} featureFlagList - The list of the feature flags we want to set.
      */
 
   }, {
-    key: 'checkFeatureFlagCookies',
-    value: function checkFeatureFlagCookies(cookieArray) {
+    key: 'checkFeatureFlagActivated',
+    value: function checkFeatureFlagActivated(featureFlagList) {
       var _this3 = this;
 
-      (0, _underscore.map)(cookieArray, function (item) {
-        if (_utils2.default.hasCookie(item)) {
-          _this3.activateFeatureFlags(item);
+      (0, _underscore.map)(featureFlagList, function (item) {
+        if (!_this3.state.isFeatureFlagsActivated[item]) {
+          _this3.checkFeatureFlagCookie(item);
         }
       });
+    }
+
+    /**
+     * checkFeatureFlagCookie(name)
+     * Check if the cookie exist. If they do, activate the function to enable
+     * the indicated feature flags.
+     * @param {string} name - The name of the cookie.
+     */
+
+  }, {
+    key: 'checkFeatureFlagCookie',
+    value: function checkFeatureFlagCookie(name) {
+      if (_utils2.default.hasCookie('nyplFeatureFlag' + name)) {
+        this.activateFeatureFlag(name);
+      }
     }
 
     /**
@@ -291,11 +310,9 @@ var Header = function (_React$Component) {
      */
 
   }, {
-    key: 'activateFeatureFlags',
-    value: function activateFeatureFlags(name) {
-      var featureFlag = name.replace('nyplFeatureFlag', '');
-
-      _dgxFeatureFlags2.default.utils.activateFeature(featureFlag);
+    key: 'activateFeatureFlag',
+    value: function activateFeatureFlag(name) {
+      _dgxFeatureFlags2.default.utils.activateFeature(name);
     }
 
     /**
@@ -361,7 +378,7 @@ var Header = function (_React$Component) {
       var headerClasses = (0, _classnames2.default)(headerClass, { sticky: isHeaderSticky });
       var skipNav = this.props.skipNav ? _react2.default.createElement(_dgxSkipNavigationLink2.default, this.props.skipNav) : '';
       var isLoggedIn = !!this.state.loginCookie;
-      var isOauthLoginActivated = !!this.state.isOauthLoginActivated;
+      var isOauthLoginActivated = !!this.state.isFeatureFlagsActivated.OauthLogin;
       var myNyplButtonLabel = this.state.patronName || 'Log In';
 
       return _react2.default.createElement(

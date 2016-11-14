@@ -1,6 +1,6 @@
 const FeatureFlagConfig = {
-  featureFlagCookies: [
-    'nyplFeatureFlagOauthLogin',
+  featureFlagList: [
+    'OauthLogin',
   ],
 };
 

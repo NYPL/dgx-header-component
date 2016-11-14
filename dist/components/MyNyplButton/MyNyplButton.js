@@ -151,8 +151,9 @@ var MyNyplButton = function (_React$Component) {
     key: 'renderMyNyplButton',
     value: function renderMyNyplButton() {
       var buttonClass = '';
-      var iconClass = 'nypl-icon-wedge-down';
-      var icon = this.props.isLoggedIn ? null : _react2.default.createElement('span', { className: iconClass + ' icon', style: styles.MyNyplIcon });
+      var iconClass = _HeaderStore2.default.getMyNyplVisible() ? 'nypl-icon-solo-x' : 'nypl-icon-wedge-down';
+      // const icon = (this.props.isLoggedIn) ? null :
+      var icon = _react2.default.createElement('span', { className: iconClass + ' icon', style: styles.MyNyplIcon });
       var buttonColorClass = this.props.isLoggedIn ? 'loginColor' : '';
 
       if (_HeaderStore2.default.getMyNyplVisible()) {
@@ -181,6 +182,7 @@ var MyNyplButton = function (_React$Component) {
           style: styles.MyNyplWrapper
         },
         _react2.default.createElement(_MyNypl2.default, {
+          patronName: this.props.patronName,
           isLoggedIn: this.props.isLoggedIn,
           isOauthLoginActivated: this.props.isOauthLoginActivated
         })
@@ -213,7 +215,8 @@ MyNyplButton.propTypes = {
   label: _react2.default.PropTypes.string,
   style: _react2.default.PropTypes.object,
   isLoggedIn: _react2.default.PropTypes.bool,
-  isOauthLoginActivated: _react2.default.PropTypes.bool
+  isOauthLoginActivated: _react2.default.PropTypes.bool,
+  patronName: _react2.default.PropTypes.string
 };
 
 MyNyplButton.defaultProps = {

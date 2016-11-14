@@ -64,7 +64,14 @@
       font-weight: normal;
       line-height: 1.2em;
     }
-
+    &-Patron-Name {
+      color: #fff;
+      @include Kievit-Book;
+      font-weight: normal;
+      letter-spacing: .03em;
+      line-height: 1.2em;
+      margin: 0;
+    }
     &-Login-List {
       text-align: left;
       list-style: none;

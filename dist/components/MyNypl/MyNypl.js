@@ -102,6 +102,12 @@ var MyNypl = function (_React$Component) {
         'div',
         { className: this.props.className, role: 'dialog' },
         _react2.default.createElement(
+          'p',
+          { className: this.props.className + '-Patron-Name' },
+          'HELLO, ',
+          this.props.patronName
+        ),
+        _react2.default.createElement(
           'ul',
           { className: this.props.className + '-Login-List' },
           _react2.default.createElement(
@@ -158,7 +164,8 @@ MyNypl.propTypes = {
   loginResearchLink: _react2.default.PropTypes.string,
   logoutLink: _react2.default.PropTypes.string,
   isLoggedIn: _react2.default.PropTypes.bool,
-  isOauthLoginActivated: _react2.default.PropTypes.bool
+  isOauthLoginActivated: _react2.default.PropTypes.bool,
+  patronName: _react2.default.PropTypes.string
 };
 
 MyNypl.defaultProps = {

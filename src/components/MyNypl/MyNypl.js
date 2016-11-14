@@ -62,6 +62,7 @@ class MyNypl extends React.Component {
 
     return (
       <div className={this.props.className} role="dialog">
+        <p className={`${this.props.className}-Patron-Name`}>HELLO, {this.props.patronName}</p>
         <ul className={`${this.props.className}-Login-List`}>
           <li>
             <a
@@ -105,6 +106,7 @@ MyNypl.propTypes = {
   logoutLink: React.PropTypes.string,
   isLoggedIn: React.PropTypes.bool,
   isOauthLoginActivated: React.PropTypes.bool,
+  patronName: React.PropTypes.string,
 };
 
 MyNypl.defaultProps = {

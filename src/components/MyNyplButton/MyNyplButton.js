@@ -95,9 +95,8 @@ class MyNyplButton extends React.Component {
 
   renderMyNyplButton() {
     let buttonClass = '';
-    let iconClass = 'nypl-icon-wedge-down';
-    const icon = (this.props.isLoggedIn) ? null :
-      (<span className={`${iconClass} icon`} style={styles.MyNyplIcon}></span>);
+    let iconClass = (HeaderStore.getMyNyplVisible()) ? 'nypl-icon-solo-x' : 'nypl-icon-wedge-down';
+    const icon = (<span className={`${iconClass} icon`} style={styles.MyNyplIcon}></span>);
     const buttonColorClass = (this.props.isLoggedIn) ? 'loginColor' : '';
 
     if (HeaderStore.getMyNyplVisible()) {
@@ -124,6 +123,7 @@ class MyNyplButton extends React.Component {
         style={styles.MyNyplWrapper}
       >
         <MyNypl
+          patronName={this.props.patronName}
           isLoggedIn={this.props.isLoggedIn}
           isOauthLoginActivated={this.props.isOauthLoginActivated}
         />
@@ -152,6 +152,7 @@ MyNyplButton.propTypes = {
   style: React.PropTypes.object,
   isLoggedIn: React.PropTypes.bool,
   isOauthLoginActivated: React.PropTypes.bool,
+  patronName: React.PropTypes.string,
 };
 
 MyNyplButton.defaultProps = {

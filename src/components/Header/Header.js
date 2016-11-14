@@ -272,7 +272,7 @@ class Header extends React.Component {
       (<SkipNavigation {...this.props.skipNav} />) : '';
     const isLoggedIn = !!this.state.loginCookie;
     const isOauthLoginActivated = !!this.state.isFeatureFlagsActivated.OauthLogin;
-    const myNyplButtonLabel = this.state.patronName || 'Log In';
+    const myNyplButtonLabel = (this.state.patronName) ? 'You are logged in' : 'Log In';
 
     return (
       <header
@@ -311,6 +311,7 @@ class Header extends React.Component {
                 refId="desktopLogin"
                 isLoggedIn={isLoggedIn}
                 isOauthLoginActivated={isOauthLoginActivated}
+                patronName={this.state.patronName}
               />
               <SimpleLink
                 label="Locations"

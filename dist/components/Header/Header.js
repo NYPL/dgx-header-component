@@ -379,7 +379,7 @@ var Header = function (_React$Component) {
       var skipNav = this.props.skipNav ? _react2.default.createElement(_dgxSkipNavigationLink2.default, this.props.skipNav) : '';
       var isLoggedIn = !!this.state.loginCookie;
       var isOauthLoginActivated = !!this.state.isFeatureFlagsActivated.OauthLogin;
-      var myNyplButtonLabel = this.state.patronName || 'Log In';
+      var myNyplButtonLabel = this.state.patronName ? 'You are logged in' : 'Log In';
 
       return _react2.default.createElement(
         'header',
@@ -421,7 +421,8 @@ var Header = function (_React$Component) {
                 label: myNyplButtonLabel,
                 refId: 'desktopLogin',
                 isLoggedIn: isLoggedIn,
-                isOauthLoginActivated: isOauthLoginActivated
+                isOauthLoginActivated: isOauthLoginActivated,
+                patronName: this.state.patronName
               }),
               _react2.default.createElement(_SimpleLink2.default, {
                 label: 'Locations',

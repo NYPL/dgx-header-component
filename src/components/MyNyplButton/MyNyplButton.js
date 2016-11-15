@@ -95,20 +95,16 @@ class MyNyplButton extends React.Component {
   }
 
   renderLoginIcon() {
-    const loginIconClass = 'loggedIn';
+    const loginIconClass = 'iconLoggedIn';
     const active = (HeaderStore.getMyNyplVisible()) ? ' active' : '';
 
-    if(!this.props.isLoggedIn) {
+    if (!this.props.isLoggedIn) {
       return null;
     }
 
-    if ((HeaderStore.getMyNyplVisible())) {
-
-    }
-
     return (
-      <span className={`MyNyplButton ${loginIconClass}-wrapper`}>
-        <LoginIconSolid className={`MyNyplButton ${loginIconClass}${active}`}/>
+      <span className={`MyNyplButton-IconWrapper ${loginIconClass}`}>
+        <LoginIconSolid className={`MyNyplButton ${loginIconClass}${active}`} />
       </span>
     );
   }

@@ -71,6 +71,7 @@
       letter-spacing: .03em;
       line-height: 1.2em;
       margin: 0;
+      text-align: left;
     }
     &-Login-List {
       text-align: left;
@@ -133,16 +134,34 @@
   }
 }
 
-.loggedIn {
-  fill: #497629;
-  height: 20px;
-  left: 142px;
-  position: absolute;
-  top: 7px;
+.StickyMyNyplButton {
+  &.icon {
+    fill: #FFF;
+    stroke: #000;
+    stroke-width: 2px;
+  }
+  &.iconLoggedIn {
+    fill: #497629;
+  }
+  &.active {
+    fill: #FFF;
+    opacity: 1;
+    stroke: none;
+  }
+}
+
+.MyNyplButton {
+  &.iconLoggedIn {
+    fill: #497629;
+    height: 20px;
+    left: 142px;
+    position: absolute;
+    top: 7px;
+  }
   &.active {
     fill: #FFF;
   }
-  &-wrapper {
+  &-IconWrapper {
     margin: 0 0 0 22px;
   }
 }

@@ -75,6 +75,20 @@ var MyNypl = function (_React$Component) {
       this.refs.catalogLink.blur();
     }
   }, {
+    key: 'renderGreeting',
+    value: function renderGreeting() {
+      if (!this.props.patronName) {
+        return null;
+      }
+
+      return _react2.default.createElement(
+        'p',
+        { className: this.props.className + '-Patron-Name' },
+        'HELLO, ',
+        this.props.patronName
+      );
+    }
+  }, {
     key: 'renderLogoutLink',
     value: function renderLogoutLink() {
       return this.props.isLoggedIn ? _react2.default.createElement(
@@ -101,12 +115,7 @@ var MyNypl = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         { className: this.props.className, role: 'dialog' },
-        _react2.default.createElement(
-          'p',
-          { className: this.props.className + '-Patron-Name' },
-          'HELLO, ',
-          this.props.patronName
-        ),
+        this.renderGreeting(),
         _react2.default.createElement(
           'ul',
           { className: this.props.className + '-Login-List' },

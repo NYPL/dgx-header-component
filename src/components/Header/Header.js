@@ -365,7 +365,7 @@ class Header extends React.Component {
             items={this.state.navData}
             urlType={this.props.urlType}
             isLoggedIn={isLoggedIn}
-            patronInitial={this.state.patronInitial}
+            patronName={this.state.patronName}
             isOauthLoginActivated={isOauthLoginActivated}
           />
         </div>

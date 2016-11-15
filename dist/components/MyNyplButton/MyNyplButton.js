@@ -152,18 +152,16 @@ var MyNyplButton = function (_React$Component) {
   }, {
     key: 'renderLoginIcon',
     value: function renderLoginIcon() {
-      var loginIconClass = 'loggedIn';
+      var loginIconClass = 'iconLoggedIn';
       var active = _HeaderStore2.default.getMyNyplVisible() ? ' active' : '';
 
       if (!this.props.isLoggedIn) {
         return null;
       }
 
-      if (_HeaderStore2.default.getMyNyplVisible()) {}
-
       return _react2.default.createElement(
         'span',
-        { className: 'MyNyplButton ' + loginIconClass + '-wrapper' },
+        { className: 'MyNyplButton-IconWrapper ' + loginIconClass },
         _react2.default.createElement(_dgxSvgIcons.LoginIconSolid, { className: 'MyNyplButton ' + loginIconClass + active })
       );
     }

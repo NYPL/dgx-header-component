@@ -39,6 +39,18 @@ class MyNypl extends React.Component {
     this.refs.catalogLink.blur();
   }
 
+  renderGreeting() {
+    if (!this.props.patronName) {
+      return null;
+    }
+
+    return (
+      <p className={`${this.props.className}-Patron-Name`}>
+        HELLO, {this.props.patronName}
+      </p>
+    );
+  }
+
   renderLogoutLink() {
     return (this.props.isLoggedIn) ?
       <a
@@ -62,7 +74,7 @@ class MyNypl extends React.Component {
 
     return (
       <div className={this.props.className} role="dialog">
-        <p className={`${this.props.className}-Patron-Name`}>HELLO, {this.props.patronName}</p>
+       {this.renderGreeting()}
         <ul className={`${this.props.className}-Login-List`}>
           <li>
             <a

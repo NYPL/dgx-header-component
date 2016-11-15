@@ -129,7 +129,7 @@ var NavMenu = function (_React$Component) {
         _react2.default.createElement('span', { className: 'lineSeparator', style: styles.lineSeparator }),
         _react2.default.createElement(_StickyMyNyplButton2.default, {
           isLoggedIn: this.props.isLoggedIn,
-          patronInitial: this.props.patronInitial,
+          patronName: this.props.patronName,
           isOauthLoginActivated: this.props.isOauthLoginActivated
         }),
         _react2.default.createElement(_DonateButton2.default, {
@@ -215,7 +215,8 @@ NavMenu.propTypes = {
   urlType: _react2.default.PropTypes.string,
   isLoggedIn: _react2.default.PropTypes.bool,
   isOauthLoginActivated: _react2.default.PropTypes.bool,
-  patronInitial: _react2.default.PropTypes.string
+  patronInitial: _react2.default.PropTypes.string,
+  patronName: _react2.default.PropTypes.string
 };
 
 NavMenu.defaultProps = {

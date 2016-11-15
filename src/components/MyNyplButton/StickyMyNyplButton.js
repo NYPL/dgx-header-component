@@ -6,7 +6,7 @@ import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
 import utils from '../../utils/utils.js';
 import MyNypl from '../MyNypl/MyNypl.js';
-import { LoginIcon } from 'dgx-svg-icons';
+import { LoginIconSolid } from 'dgx-svg-icons';
 
 const styles = {
   base: {
@@ -22,13 +22,6 @@ const styles = {
     lineHeight: 'normal',
     outline: 'none',
   },
-  patronInitial: {
-    display: 'inline-block',
-    fontSize: '1.4em',
-    lineHeight: 'normal',
-    margin: '0',
-    verticalAlign: '6px',
-  },
   MyNyplIcon: {
     fontSize: '15px',
     verticalAlign: 'text-bottom',
@@ -39,7 +32,7 @@ const styles = {
     position: 'absolute',
     right: '0',
     minWidth: '218px',
-    minHeight: '185px',
+    minHeight: '210px',
     backgroundColor: '#1B7FA7',
     padding: '17px 30px',
   },
@@ -88,12 +81,8 @@ class StickyMyNyplButton extends React.Component {
     const showDialog = HeaderStore.getStickyMyNyplVisible();
     const buttonClasses = cx({ active: showDialog });
     const myNyplClasses = cx({ 'active animatedFast fadeIn': showDialog });
-    const patronInitialClass = (showDialog) ? '' : 'loginColor';
-    const patronInitial = (this.props.patronInitial) ?
-      <p style={styles.patronInitial} className={patronInitialClass}>
-        {this.props.patronInitial}
-      </p> : null;
-    const LoginIconColor = (this.props.isLoggedIn) ? '#497629' : '#333';
+    const loginIconClass = (this.props.isLoggedIn) ? 'iconLoggedIn' : 'icon';
+    const active = (showDialog) ? ' active' : '';
 
     return (
       <ClickOutHandler onClickOut={this.handleOnClickOut}>
@@ -111,12 +100,7 @@ class StickyMyNyplButton extends React.Component {
             <span className="visuallyHidden">
               {this.props.label}
             </span>
-            {patronInitial}
-            <LoginIcon
-              width="25"
-              height="25"
-              fill={showDialog ? '#FFF' : LoginIconColor}
-            />
+            <LoginIconSolid className={`StickyMyNyplButton ${loginIconClass}${active}`} />
           </button>
           <div
             className={`StickyMyNypl-Wrapper ${myNyplClasses}`}
@@ -125,6 +109,7 @@ class StickyMyNyplButton extends React.Component {
             <MyNypl
               isLoggedIn={this.props.isLoggedIn}
               isOauthLoginActivated={this.props.isOauthLoginActivated}
+              patronName={this.props.patronName}
             />
           </div>
         </div>
@@ -139,7 +124,7 @@ StickyMyNyplButton.propTypes = {
   style: React.PropTypes.object,
   isLoggedIn: React.PropTypes.bool,
   isOauthLoginActivated: React.PropTypes.bool,
-  patronInitial: React.PropTypes.string,
+  patronName: React.PropTypes.string,
 };
 
 StickyMyNyplButton.defaultProps = {

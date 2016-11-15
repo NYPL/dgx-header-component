@@ -1,6 +1,7 @@
 import React from 'react';
 import { extend as _extend } from 'underscore';
 import ClickOutHandler from 'react-onclickout';
+import { LoginIconSolid } from 'dgx-svg-icons';
 // Alt Store/Actions
 import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
@@ -93,6 +94,25 @@ class MyNyplButton extends React.Component {
     }
   }
 
+  renderLoginIcon() {
+    const loginIconClass = 'loggedIn';
+    const active = (HeaderStore.getMyNyplVisible()) ? ' active' : '';
+
+    if(!this.props.isLoggedIn) {
+      return null;
+    }
+
+    if ((HeaderStore.getMyNyplVisible())) {
+
+    }
+
+    return (
+      <span className={`MyNyplButton ${loginIconClass}-wrapper`}>
+        <LoginIconSolid className={`MyNyplButton ${loginIconClass}${active}`}/>
+      </span>
+    );
+  }
+
   renderMyNyplButton() {
     let buttonClass = '';
     let iconClass = (HeaderStore.getMyNyplVisible()) ? 'nypl-icon-solo-x' : 'nypl-icon-wedge-down';
@@ -111,6 +131,7 @@ class MyNyplButton extends React.Component {
         style={_extend(styles.MyNyplButton, this.props.style)}
       >
         {this.props.label}
+        {this.renderLoginIcon()}
         {icon}
       </button>
     );

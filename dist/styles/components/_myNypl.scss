@@ -123,3 +123,26 @@
   color: #497629;
 }
 
+.notLoggedIn {
+  height: 20px;
+  left: 54px;
+  position: absolute;
+  top: 7px;
+  &-wrapper {
+    margin: 0 0 0 22px;
+  }
+}
+
+.loggedIn {
+  fill: #497629;
+  height: 20px;
+  left: 142px;
+  position: absolute;
+  top: 7px;
+  &.active {
+    fill: #FFF;
+  }
+  &-wrapper {
+    margin: 0 0 0 22px;
+  }
+}

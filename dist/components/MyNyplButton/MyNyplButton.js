@@ -16,6 +16,8 @@ var _reactOnclickout = require('react-onclickout');
 
 var _reactOnclickout2 = _interopRequireDefault(_reactOnclickout);
 
+var _dgxSvgIcons = require('dgx-svg-icons');
+
 var _HeaderStore = require('../../stores/HeaderStore.js');
 
 var _HeaderStore2 = _interopRequireDefault(_HeaderStore);
@@ -148,11 +150,28 @@ var MyNyplButton = function (_React$Component) {
       }
     }
   }, {
+    key: 'renderLoginIcon',
+    value: function renderLoginIcon() {
+      var loginIconClass = 'loggedIn';
+      var active = _HeaderStore2.default.getMyNyplVisible() ? ' active' : '';
+
+      if (!this.props.isLoggedIn) {
+        return null;
+      }
+
+      if (_HeaderStore2.default.getMyNyplVisible()) {}
+
+      return _react2.default.createElement(
+        'span',
+        { className: 'MyNyplButton ' + loginIconClass + '-wrapper' },
+        _react2.default.createElement(_dgxSvgIcons.LoginIconSolid, { className: 'MyNyplButton ' + loginIconClass + active })
+      );
+    }
+  }, {
     key: 'renderMyNyplButton',
     value: function renderMyNyplButton() {
       var buttonClass = '';
       var iconClass = _HeaderStore2.default.getMyNyplVisible() ? 'nypl-icon-solo-x' : 'nypl-icon-wedge-down';
-      // const icon = (this.props.isLoggedIn) ? null :
       var icon = _react2.default.createElement('span', { className: iconClass + ' icon', style: styles.MyNyplIcon });
       var buttonColorClass = this.props.isLoggedIn ? 'loginColor' : '';
 
@@ -169,6 +188,7 @@ var MyNyplButton = function (_React$Component) {
           style: (0, _underscore.extend)(styles.MyNyplButton, this.props.style)
         },
         this.props.label,
+        this.renderLoginIcon(),
         icon
       );
     }

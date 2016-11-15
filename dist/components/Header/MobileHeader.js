@@ -303,18 +303,13 @@ var MobileHeader = function (_React$Component) {
     * renderPatronInitial()
     * render the patron's initial on mobile header if has logged in.
     */
+    // renderPatronInitial() {
+    //   const initial = this.props.patronInitial;
 
-  }, {
-    key: 'renderPatronInitial',
-    value: function renderPatronInitial() {
-      var initial = this.props.patronInitial;
-
-      return initial && this.state.mobileMyNyplButton !== 'clickMyNypl' ? _react2.default.createElement(
-        'p',
-        { style: styles.patronInitial },
-        initial
-      ) : null;
-    }
+    //   return (initial && this.state.mobileMyNyplButton !== 'clickMyNypl') ? (
+    //     <p style={styles.patronInitial}>{initial}</p>
+    //   ) : null;
+    // }
 
     /**
     * renderMyNyplButton()
@@ -329,8 +324,8 @@ var MobileHeader = function (_React$Component) {
       var _this2 = this;
 
       var myNyplClass = '';
-      var loginColor = this.props.isLoggedIn ? '#497629' : '#000';
-      var icon = _react2.default.createElement(_dgxSvgIcons.LoginIcon, { ariaHidden: true, fill: loginColor });
+      var loginIconClass = this.props.isLoggedIn ? 'iconLoggedIn' : 'icon';
+      var icon = _react2.default.createElement(_dgxSvgIcons.LoginIconSolid, { className: 'MobileMyNypl-' + loginIconClass });
       var buttonStyles = styles.inactiveMyNyplButton;
       var buttonLabel = 'Open Log In Dialog';
       var dialogWindow = null;
@@ -348,7 +343,8 @@ var MobileHeader = function (_React$Component) {
           },
           _react2.default.createElement(_MobileMyNypl2.default, {
             isLoggedIn: this.props.isLoggedIn,
-            isOauthLoginActivated: this.props.isOauthLoginActivated
+            isOauthLoginActivated: this.props.isOauthLoginActivated,
+            patronName: this.props.patronName
           })
         );
       }
@@ -372,7 +368,6 @@ var MobileHeader = function (_React$Component) {
             { className: 'visuallyHidden' },
             buttonLabel
           ),
-          this.renderPatronInitial(),
           icon
         ),
         dialogWindow
@@ -555,7 +550,7 @@ MobileHeader.propTypes = {
   alt: _react2.default.PropTypes.string,
   isLoggedIn: _react2.default.PropTypes.bool,
   isOauthLoginActivated: _react2.default.PropTypes.bool,
-  patronInitial: _react2.default.PropTypes.string
+  patronName: _react2.default.PropTypes.string
 };
 
 MobileHeader.defaultProps = {

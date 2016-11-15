@@ -4,8 +4,8 @@ import FocusTrap from 'focus-trap-react';
 import {
   LionLogoIcon,
   LocatorIcon,
-  LoginIcon,
   MenuIcon,
+  LoginIconSolid,
   SearchIcon,
   XIcon,
 } from 'dgx-svg-icons';
@@ -242,13 +242,13 @@ class MobileHeader extends React.Component {
   * renderPatronInitial()
   * render the patron's initial on mobile header if has logged in.
   */
-  renderPatronInitial() {
-    const initial = this.props.patronInitial;
+  // renderPatronInitial() {
+  //   const initial = this.props.patronInitial;
 
-    return (initial && this.state.mobileMyNyplButton !== 'clickMyNypl') ? (
-      <p style={styles.patronInitial}>{initial}</p>
-    ) : null;
-  }
+  //   return (initial && this.state.mobileMyNyplButton !== 'clickMyNypl') ? (
+  //     <p style={styles.patronInitial}>{initial}</p>
+  //   ) : null;
+  // }
 
   /**
   * renderMyNyplButton()
@@ -258,8 +258,8 @@ class MobileHeader extends React.Component {
   */
   renderMyNyplButton() {
     let myNyplClass = '';
-    const loginColor = (this.props.isLoggedIn) ? '#497629' : '#000';
-    let icon = <LoginIcon ariaHidden fill={loginColor} />;
+    const loginIconClass = (this.props.isLoggedIn) ? 'iconLoggedIn' : 'icon';
+    let icon = <LoginIconSolid className={`MobileMyNypl-${loginIconClass}`} />;
     let buttonStyles = styles.inactiveMyNyplButton;
     let buttonLabel = 'Open Log In Dialog';
     let dialogWindow = null;
@@ -277,6 +277,7 @@ class MobileHeader extends React.Component {
           <MobileMyNypl
             isLoggedIn={this.props.isLoggedIn}
             isOauthLoginActivated={this.props.isOauthLoginActivated}
+            patronName={this.props.patronName}
           />
         </FocusTrap>
       );
@@ -292,7 +293,6 @@ class MobileHeader extends React.Component {
           onTap={() => this.toggleMobileMenuButton('clickMyNypl')}
         >
           <span className="visuallyHidden">{buttonLabel}</span>
-          {this.renderPatronInitial()}
           {icon}
         </ReactTappable>
         {dialogWindow}
@@ -433,7 +433,7 @@ MobileHeader.propTypes = {
   alt: React.PropTypes.string,
   isLoggedIn: React.PropTypes.bool,
   isOauthLoginActivated: React.PropTypes.bool,
-  patronInitial: React.PropTypes.string,
+  patronName: React.PropTypes.string,
 };
 
 MobileHeader.defaultProps = {

@@ -165,3 +165,25 @@
     margin: 0 0 0 22px;
   }
 }
+
+.MobileMyNypl {
+  &-Greeting {
+    box-sizing: content-box;
+    color: #FFF;
+    text-align: center;
+    padding: 22px 0 0 0;
+    position: absolute;
+    width: 100%;
+    p {
+      margin: 0;
+    }
+  }
+  &-icon {
+    fill: #FFF;
+    stroke: #000;
+    stroke-width: 2px;
+  }
+  &-iconLoggedIn {
+    fill: #497629;
+  }
+}

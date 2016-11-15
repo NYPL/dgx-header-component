@@ -400,7 +400,7 @@ var Header = function (_React$Component) {
             nyplRootUrl: this.props.urlType === 'absolute' ? '//www.nypl.org' : '/',
             isLoggedIn: isLoggedIn,
             isOauthLoginActivated: isOauthLoginActivated,
-            patronInitial: this.state.patronInitial,
+            patronName: this.state.patronName,
             ref: 'headerMobile'
           }),
           _react2.default.createElement(

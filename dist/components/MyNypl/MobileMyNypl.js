@@ -117,6 +117,20 @@ var MobileMyNypl = function (_React$Component) {
       ) : _react2.default.createElement('div', { style: styles.logoutLink });
     }
   }, {
+    key: 'renderGreeting',
+    value: function renderGreeting() {
+      return this.props.isLoggedIn ? _react2.default.createElement(
+        'div',
+        { className: this.props.className + '-Greeting' },
+        _react2.default.createElement(
+          'p',
+          null,
+          'HELLO, ',
+          this.props.patronName
+        )
+      ) : null;
+    }
+  }, {
     key: 'render',
     value: function render() {
       var catalogLinkClass = 'CatalogLink';
@@ -133,6 +147,7 @@ var MobileMyNypl = function (_React$Component) {
           style: styles.base,
           role: 'dialog'
         },
+        this.renderGreeting(),
         _react2.default.createElement(
           'a',
           {
@@ -204,7 +219,8 @@ MobileMyNypl.propTypes = {
   loginResearchLink: _react2.default.PropTypes.string,
   logoutLink: _react2.default.PropTypes.string,
   isLoggedIn: _react2.default.PropTypes.bool,
-  isOauthLoginActivated: _react2.default.PropTypes.bool
+  isOauthLoginActivated: _react2.default.PropTypes.bool,
+  patronName: _react2.default.PropTypes.string
 };
 
 MobileMyNypl.defaultProps = {

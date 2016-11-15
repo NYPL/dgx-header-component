@@ -78,6 +78,15 @@ class MobileMyNypl extends React.Component {
       </a> : <div style={styles.logoutLink}></div>;
   }
 
+  renderGreeting() {
+    return (this.props.isLoggedIn) ?
+      <div className={`${this.props.className}-Greeting`}>
+        <p>
+          HELLO, {this.props.patronName}
+        </p>
+      </div> : null;
+  }
+
   render() {
     const catalogLinkClass = 'CatalogLink';
     const researchLinkClass = 'ResearchLink';
@@ -95,6 +104,7 @@ class MobileMyNypl extends React.Component {
         style={styles.base}
         role="dialog"
       >
+        {this.renderGreeting()}
         <a
           href={catalogLink}
           className={catalogLinkClass}
@@ -150,6 +160,7 @@ MobileMyNypl.propTypes = {
   logoutLink: React.PropTypes.string,
   isLoggedIn: React.PropTypes.bool,
   isOauthLoginActivated: React.PropTypes.bool,
+  patronName: React.PropTypes.string,
 };
 
 MobileMyNypl.defaultProps = {

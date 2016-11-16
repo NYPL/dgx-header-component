@@ -85,6 +85,7 @@ class Header extends React.Component {
         loginCookie: null,
         patronName: '',
         patronInitial: '',
+        patronDataReceived: false,
         isFeatureFlagsActivated: {
           OauthLogin: FeatureFlags.store._getImmutableState().get('OauthLogin'),
         },
@@ -121,7 +122,9 @@ class Header extends React.Component {
         {
           headerHeight: this.state.headerHeight,
           loginCookie: this.state.loginCookie,
-          patronNameObject: this.state.patronNameObject,
+          patronName: this.state.patronName,
+          patronInitial: this.state.patronInitial,
+          patronDataReceived: this.state.patronDataReceived,
           isFeatureFlagsActivated: {
             OauthLogin: FeatureFlags.store._getImmutableState().get('OauthLogin'),
           },
@@ -130,6 +133,7 @@ class Header extends React.Component {
       )
     );
   }
+
 
   /**
    * setLoginCookie()
@@ -230,6 +234,7 @@ class Header extends React.Component {
         this.setState({
           patronName: patronNameObject.name,
           patronInitial: patronNameObject.initial,
+          patronDataReceived: true,
         });
       }
     });
@@ -270,7 +275,7 @@ class Header extends React.Component {
     const headerClasses = cx(headerClass, { sticky: isHeaderSticky });
     const skipNav = this.props.skipNav ?
       (<SkipNavigation {...this.props.skipNav} />) : '';
-    const isLoggedIn = !!this.state.loginCookie;
+    const isLoggedIn = !!this.state.patronDataReceived;
     const isOauthLoginActivated = !!this.state.isFeatureFlagsActivated.OauthLogin;
     const myNyplButtonLabel = (this.state.patronName) ? 'You are logged in' : 'Log In';
 

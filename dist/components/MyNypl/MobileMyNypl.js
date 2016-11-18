@@ -102,6 +102,11 @@ var MobileMyNypl = function (_React$Component) {
 
   _createClass(MobileMyNypl, [{
     key: 'renderLogoutLink',
+
+    /**
+     * renderLogoutLink()
+     * Returns the log out button if the patron has been logged in.
+     */
     value: function renderLogoutLink() {
       return this.props.isLoggedIn ? _react2.default.createElement(
         'a',
@@ -116,6 +121,12 @@ var MobileMyNypl = function (_React$Component) {
         'Log Out'
       ) : _react2.default.createElement('div', { style: styles.logoutLink });
     }
+
+    /**
+     * renderGreeting()
+     * Returns the patron's name in the drop down menu if it exists.
+     */
+
   }, {
     key: 'renderGreeting',
     value: function renderGreeting() {

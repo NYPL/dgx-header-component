@@ -149,6 +149,12 @@ var MyNyplButton = function (_React$Component) {
         _Actions2.default.toggleMyNyplVisible(false);
       }
     }
+
+    /**
+     * renderLoginIcon()
+     * Returns log in icon based on the stayts of the state.
+     */
+
   }, {
     key: 'renderLoginIcon',
     value: function renderLoginIcon() {
@@ -165,13 +171,19 @@ var MyNyplButton = function (_React$Component) {
         _react2.default.createElement(_dgxSvgIcons.LoginIconSolid, { className: 'MyNyplButton ' + loginIconClass + active })
       );
     }
+
+    /**
+     * renderMyNyplButton()
+     * Returns MyNypl button and it's icon based on the log in and the click status.
+     */
+
   }, {
     key: 'renderMyNyplButton',
     value: function renderMyNyplButton() {
       var buttonClass = '';
       var iconClass = _HeaderStore2.default.getMyNyplVisible() ? 'nypl-icon-solo-x' : 'nypl-icon-wedge-down';
       var icon = _react2.default.createElement('span', { className: iconClass + ' icon', style: styles.MyNyplIcon });
-      var buttonColorClass = this.props.isLoggedIn ? 'loginColor' : '';
+      var buttonColorClass = this.props.isLoggedIn ? 'loggedInButtonColor' : '';
 
       if (_HeaderStore2.default.getMyNyplVisible()) {
         buttonClass = 'active';

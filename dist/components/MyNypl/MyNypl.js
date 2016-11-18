@@ -74,6 +74,12 @@ var MyNypl = function (_React$Component) {
     value: function componentWillUnmount() {
       this.refs.catalogLink.blur();
     }
+
+    /**
+     * renderGreeting()
+     * Returns the patron's name in the drop down menu if it exists.
+     */
+
   }, {
     key: 'renderGreeting',
     value: function renderGreeting() {
@@ -88,6 +94,12 @@ var MyNypl = function (_React$Component) {
         this.props.patronName
       );
     }
+
+    /**
+     * renderLogoutLink()
+     * Returns the log out button if the patron has been logged in.
+     */
+
   }, {
     key: 'renderLogoutLink',
     value: function renderLogoutLink() {

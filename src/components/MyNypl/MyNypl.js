@@ -39,6 +39,10 @@ class MyNypl extends React.Component {
     this.refs.catalogLink.blur();
   }
 
+  /**
+   * renderGreeting()
+   * Returns the patron's name in the drop down menu if it exists.
+   */
   renderGreeting() {
     if (!this.props.patronName) {
       return null;
@@ -51,6 +55,10 @@ class MyNypl extends React.Component {
     );
   }
 
+  /**
+   * renderLogoutLink()
+   * Returns the log out button if the patron has been logged in.
+   */
   renderLogoutLink() {
     return (this.props.isLoggedIn) ?
       <a

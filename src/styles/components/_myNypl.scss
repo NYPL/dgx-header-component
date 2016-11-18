@@ -120,11 +120,11 @@
   }
 }
 
-.loginColor {
+.loggedInButtonColor {
   color: #497629;
 }
 
-.notLoggedIn {
+/*.notLoggedIn {
   height: 20px;
   left: 54px;
   position: absolute;
@@ -132,21 +132,25 @@
   &-wrapper {
     margin: 0 0 0 22px;
   }
-}
+}*/
 
-.StickyMyNyplButton {
-  &.icon {
-    fill: #FFF;
-    stroke: #000;
-    stroke-width: 2px;
-  }
-  &.iconLoggedIn {
-    fill: #497629;
-  }
+.LoginIcon {
+  fill: #FFF;
+  stroke: #000;
+  stroke-width: 2px;
+
   &.active {
-    fill: #FFF;
-    opacity: 1;
     stroke: none;
+  }
+
+  &-loggedIn {
+    fill: #497629;
+    stroke: none;
+
+    &.active {
+      fill: #FFF;
+      opacity: 1;
+    }
   }
 }
 

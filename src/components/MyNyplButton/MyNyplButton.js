@@ -94,6 +94,10 @@ class MyNyplButton extends React.Component {
     }
   }
 
+  /**
+   * renderLoginIcon()
+   * Returns log in icon based on the stayts of the state.
+   */
   renderLoginIcon() {
     const loginIconClass = 'iconLoggedIn';
     const active = (HeaderStore.getMyNyplVisible()) ? ' active' : '';
@@ -109,11 +113,15 @@ class MyNyplButton extends React.Component {
     );
   }
 
+  /**
+   * renderMyNyplButton()
+   * Returns MyNypl button and it's icon based on the log in and the click status.
+   */
   renderMyNyplButton() {
     let buttonClass = '';
     let iconClass = (HeaderStore.getMyNyplVisible()) ? 'nypl-icon-solo-x' : 'nypl-icon-wedge-down';
     const icon = (<span className={`${iconClass} icon`} style={styles.MyNyplIcon}></span>);
-    const buttonColorClass = (this.props.isLoggedIn) ? 'loginColor' : '';
+    const buttonColorClass = (this.props.isLoggedIn) ? 'loggedInButtonColor' : '';
 
     if (HeaderStore.getMyNyplVisible()) {
       buttonClass = 'active';

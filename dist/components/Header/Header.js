@@ -272,7 +272,7 @@ var Header = function (_React$Component) {
     /**
      * checkFeatureFlagActivated(featureFlagList)
      * Check if the feature flags have been set. If they have not, activate the function to check
-     * if there're the related cookies are set.
+     * if the related cookies are set.
      * @param {string[]} featureFlagList - The list of the feature flags we want to set.
      */
 

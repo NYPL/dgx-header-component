@@ -2,7 +2,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';
-import { extend as _extend, map as _map } from 'underscore';
+import {
+  extend as _extend,
+  map as _map,
+} from 'underscore';
 import FeatureFlags from 'dgx-feature-flags';
 // Nav Config
 import navConfig from '../../navConfig.js';
@@ -184,7 +187,7 @@ class Header extends React.Component {
   /**
    * checkFeatureFlagActivated(featureFlagList)
    * Check if the feature flags have been set. If they have not, activate the function to check
-   * if there're the related cookies are set.
+   * if the related cookies are set.
    * @param {string[]} featureFlagList - The list of the feature flags we want to set.
    */
   checkFeatureFlagActivated(featureFlagList) {

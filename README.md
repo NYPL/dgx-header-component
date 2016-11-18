@@ -130,46 +130,8 @@ $ NODE_ENV=production npm start
 
 ### Using Feature Flags
 
-Feature flags help us moderate user studies for the coming new updates and keep the stable version of the header at the same time. By enabling specific feature flags, the user may interact with the new fucntions and interfaces, while by disabling it, the user goes back to use the exsisting released version.
-
-The applications that want to use feature flags need to install the feature flag module first. And then depending on the way we want to toggle feature flags, some functions need to be added in the entry js file.
-
-Below is a possible way to execute feature flags by the dev tool of the browser.
-
-1. To install fature flags, have this line in the package.json and execute npm install.
-
-```sh
-"dgx-feature-flags": "git+https://git@bitbucket.org/NYPL/dgx-feature-flags.git#master"
-```
-
-2. In the entry js file of the application we like to have feature flags, import the feature flags module we just installed.
-
-One possible way in ES6 style could be,
-
-```sh
-import FeatureFlags from 'dgx-feature-flags';
-```
-
-3. Expose feature flag to the browser. Have these lines of codes in the same entry js file.
-
-```sh
-if (!window.dgxFeatureFlags) {
-  window.dgxFeatureFlags = FeatureFlags.utils;
-}
-```
-
-4. Run the application. Open the dev tool of your browser. In console, type the line below and press enter to enable the feature flag.
-
-```sh
-dgxFeatureFlags.activateFeature([Your feature flag's name here. It should be a string.])
-```
-On the other hand, type
-
-```sh
-dgxFeatureFlags.deactivateFeature([Your feature flag's name here. It should be a string.])
-```
-
-to disable the feature flag.
+Please go to NYPL/dgx-feature-flags repository for the step-by-step instruction.
+https://bitbucket.org/NYPL/dgx-feature-flags
 
 ### Contribute
 

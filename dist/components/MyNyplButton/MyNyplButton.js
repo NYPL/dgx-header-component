@@ -152,7 +152,7 @@ var MyNyplButton = function (_React$Component) {
 
     /**
      * renderLoginIcon()
-     * Returns log in icon based on the stayts of the state.
+     * Returns log in icon based on the status of the state.
      */
 
   }, {
@@ -173,7 +173,7 @@ var MyNyplButton = function (_React$Component) {
 
     /**
      * renderMyNyplButton()
-     * Returns MyNypl button and it's icon based on the log in and the click status.
+     * Returns MyNypl button and its icon based on the log in and the click status.
      */
 
   }, {

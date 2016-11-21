@@ -300,18 +300,6 @@ var MobileHeader = function (_React$Component) {
     }
 
     /**
-    * renderPatronInitial()
-    * render the patron's initial on mobile header if has logged in.
-    */
-    // renderPatronInitial() {
-    //   const initial = this.props.patronInitial;
-
-    //   return (initial && this.state.mobileMyNyplButton !== 'clickMyNypl') ? (
-    //     <p style={styles.patronInitial}>{initial}</p>
-    //   ) : null;
-    // }
-
-    /**
     * renderMyNyplButton()
     * Generates the DOM for the MyNyplLogin button/dialog.
     * Uses SVG icon & visuallyHidden label.
@@ -324,8 +312,8 @@ var MobileHeader = function (_React$Component) {
       var _this2 = this;
 
       var myNyplClass = '';
-      var loginIconClass = this.props.isLoggedIn ? 'iconLoggedIn' : 'icon';
-      var icon = _react2.default.createElement(_dgxSvgIcons.LoginIconSolid, { className: 'MobileMyNypl-' + loginIconClass });
+      var loginIconClass = this.props.isLoggedIn ? '-loggedIn' : '';
+      var icon = _react2.default.createElement(_dgxSvgIcons.LoginIconSolid, { className: 'MobileMyNypl LoginIcon' + loginIconClass });
       var buttonStyles = styles.inactiveMyNyplButton;
       var buttonLabel = 'Open Log In Dialog';
       var dialogWindow = null;

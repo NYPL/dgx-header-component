@@ -17,6 +17,10 @@
   letter-spacing: .04em;
   background-color: transparent;
 
+  &.loggedIn {
+    color: #497629;
+  }
+
   &.active {
     background-color: #135772;
     color: #FFF;
@@ -120,20 +124,6 @@
   }
 }
 
-.loggedInButtonColor {
-  color: #497629;
-}
-
-/*.notLoggedIn {
-  height: 20px;
-  left: 54px;
-  position: absolute;
-  top: 7px;
-  &-wrapper {
-    margin: 0 0 0 22px;
-  }
-}*/
-
 .LoginIcon {
   fill: #FFF;
   stroke: #000;
@@ -155,15 +145,13 @@
 }
 
 .MyNyplButton {
-  &.iconLoggedIn {
-    fill: #497629;
-    height: 20px;
-    left: 142px;
-    position: absolute;
-    top: 7px;
-  }
-  &.active {
-    fill: #FFF;
+  &.LoginIcon {
+    &-loggedIn {
+      height: 20px;
+      left: 143px;
+      position: absolute;
+      top: 7px;
+    }
   }
   &-IconWrapper {
     margin: 0 0 0 22px;
@@ -181,13 +169,5 @@
     p {
       margin: 0;
     }
-  }
-  &-icon {
-    fill: #FFF;
-    stroke: #000;
-    stroke-width: 2px;
-  }
-  &-iconLoggedIn {
-    fill: #497629;
   }
 }

@@ -158,7 +158,6 @@ var MyNyplButton = function (_React$Component) {
   }, {
     key: 'renderLoginIcon',
     value: function renderLoginIcon() {
-      var loginIconClass = 'iconLoggedIn';
       var active = _HeaderStore2.default.getMyNyplVisible() ? ' active' : '';
 
       if (!this.props.isLoggedIn) {
@@ -167,8 +166,8 @@ var MyNyplButton = function (_React$Component) {
 
       return _react2.default.createElement(
         'span',
-        { className: 'MyNyplButton-IconWrapper ' + loginIconClass },
-        _react2.default.createElement(_dgxSvgIcons.LoginIconSolid, { className: 'MyNyplButton ' + loginIconClass + active })
+        { className: 'MyNyplButton-IconWrapper' },
+        _react2.default.createElement(_dgxSvgIcons.LoginIconSolid, { className: 'MyNyplButton LoginIcon-loggedIn' + active })
       );
     }
 
@@ -183,7 +182,7 @@ var MyNyplButton = function (_React$Component) {
       var buttonClass = '';
       var iconClass = _HeaderStore2.default.getMyNyplVisible() ? 'nypl-icon-solo-x' : 'nypl-icon-wedge-down';
       var icon = _react2.default.createElement('span', { className: iconClass + ' icon', style: styles.MyNyplIcon });
-      var buttonColorClass = this.props.isLoggedIn ? 'loggedInButtonColor' : '';
+      var labelColorClass = this.props.isLoggedIn ? 'loggedIn' : '';
 
       if (_HeaderStore2.default.getMyNyplVisible()) {
         buttonClass = 'active';
@@ -193,7 +192,7 @@ var MyNyplButton = function (_React$Component) {
       return _react2.default.createElement(
         'button',
         {
-          className: 'MyNyplButton ' + buttonClass + ' ' + buttonColorClass,
+          className: 'MyNyplButton ' + buttonClass + ' ' + labelColorClass,
           onClick: this.handleClick,
           style: (0, _underscore.extend)(styles.MyNyplButton, this.props.style)
         },

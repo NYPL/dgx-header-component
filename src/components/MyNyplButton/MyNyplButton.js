@@ -99,7 +99,6 @@ class MyNyplButton extends React.Component {
    * Returns log in icon based on the stayts of the state.
    */
   renderLoginIcon() {
-    const loginIconClass = 'iconLoggedIn';
     const active = (HeaderStore.getMyNyplVisible()) ? ' active' : '';
 
     if (!this.props.isLoggedIn) {
@@ -107,8 +106,8 @@ class MyNyplButton extends React.Component {
     }
 
     return (
-      <span className={`MyNyplButton-IconWrapper ${loginIconClass}`}>
-        <LoginIconSolid className={`MyNyplButton ${loginIconClass}${active}`} />
+      <span className="MyNyplButton-IconWrapper">
+        <LoginIconSolid className={`MyNyplButton LoginIcon-loggedIn${active}`} />
       </span>
     );
   }
@@ -121,7 +120,7 @@ class MyNyplButton extends React.Component {
     let buttonClass = '';
     let iconClass = (HeaderStore.getMyNyplVisible()) ? 'nypl-icon-solo-x' : 'nypl-icon-wedge-down';
     const icon = (<span className={`${iconClass} icon`} style={styles.MyNyplIcon}></span>);
-    const buttonColorClass = (this.props.isLoggedIn) ? 'loggedInButtonColor' : '';
+    const labelColorClass = (this.props.isLoggedIn) ? 'loggedIn' : '';
 
     if (HeaderStore.getMyNyplVisible()) {
       buttonClass = 'active';
@@ -130,7 +129,7 @@ class MyNyplButton extends React.Component {
 
     return (
       <button
-        className={`MyNyplButton ${buttonClass} ${buttonColorClass}`}
+        className={`MyNyplButton ${buttonClass} ${labelColorClass}`}
         onClick={this.handleClick}
         style={_extend(styles.MyNyplButton, this.props.style)}
       >

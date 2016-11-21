@@ -81,7 +81,7 @@ class StickyMyNyplButton extends React.Component {
     const showDialog = HeaderStore.getStickyMyNyplVisible();
     const buttonClasses = cx({ active: showDialog });
     const myNyplClasses = cx({ 'active animatedFast fadeIn': showDialog });
-    const loginIconClass = (this.props.isLoggedIn) ? 'LoginIcon-loggedIn' : 'LoginIcon';
+    const loginIconClass = (this.props.isLoggedIn) ? '-loggedIn' : '';
     const active = (showDialog) ? ' active' : '';
 
     return (
@@ -100,7 +100,7 @@ class StickyMyNyplButton extends React.Component {
             <span className="visuallyHidden">
               {this.props.label}
             </span>
-            <LoginIconSolid className={`StickyMyNyplButton ${loginIconClass}${active}`} />
+            <LoginIconSolid className={`StickyMyNyplButton LoginIcon${loginIconClass}${active}`} />
           </button>
           <div
             className={`StickyMyNypl-Wrapper ${myNyplClasses}`}

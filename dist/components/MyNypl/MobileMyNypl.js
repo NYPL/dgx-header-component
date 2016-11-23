@@ -102,6 +102,11 @@ var MobileMyNypl = function (_React$Component) {
 
   _createClass(MobileMyNypl, [{
     key: 'renderLogoutLink',
+
+    /**
+     * renderLogoutLink()
+     * Returns the log out button if the patron has been logged in.
+     */
     value: function renderLogoutLink() {
       return this.props.isLoggedIn ? _react2.default.createElement(
         'a',
@@ -115,6 +120,26 @@ var MobileMyNypl = function (_React$Component) {
         },
         'Log Out'
       ) : _react2.default.createElement('div', { style: styles.logoutLink });
+    }
+
+    /**
+     * renderGreeting()
+     * Returns the patron's name in the drop down menu if it exists.
+     */
+
+  }, {
+    key: 'renderGreeting',
+    value: function renderGreeting() {
+      return this.props.isLoggedIn ? _react2.default.createElement(
+        'div',
+        { className: this.props.className + '-Greeting' },
+        _react2.default.createElement(
+          'p',
+          null,
+          'HELLO, ',
+          this.props.patronName
+        )
+      ) : null;
     }
   }, {
     key: 'render',
@@ -133,6 +158,7 @@ var MobileMyNypl = function (_React$Component) {
           style: styles.base,
           role: 'dialog'
         },
+        this.renderGreeting(),
         _react2.default.createElement(
           'a',
           {
@@ -204,7 +230,8 @@ MobileMyNypl.propTypes = {
   loginResearchLink: _react2.default.PropTypes.string,
   logoutLink: _react2.default.PropTypes.string,
   isLoggedIn: _react2.default.PropTypes.bool,
-  isOauthLoginActivated: _react2.default.PropTypes.bool
+  isOauthLoginActivated: _react2.default.PropTypes.bool,
+  patronName: _react2.default.PropTypes.string
 };
 
 MobileMyNypl.defaultProps = {

@@ -74,6 +74,32 @@ var MyNypl = function (_React$Component) {
     value: function componentWillUnmount() {
       this.refs.catalogLink.blur();
     }
+
+    /**
+     * renderGreeting()
+     * Returns the patron's name in the drop down menu if it exists.
+     */
+
+  }, {
+    key: 'renderGreeting',
+    value: function renderGreeting() {
+      if (!this.props.patronName) {
+        return null;
+      }
+
+      return _react2.default.createElement(
+        'p',
+        { className: this.props.className + '-Patron-Name' },
+        'HELLO, ',
+        this.props.patronName
+      );
+    }
+
+    /**
+     * renderLogoutLink()
+     * Returns the log out button if the patron has been logged in.
+     */
+
   }, {
     key: 'renderLogoutLink',
     value: function renderLogoutLink() {
@@ -101,6 +127,7 @@ var MyNypl = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         { className: this.props.className, role: 'dialog' },
+        this.renderGreeting(),
         _react2.default.createElement(
           'ul',
           { className: this.props.className + '-Login-List' },
@@ -158,7 +185,8 @@ MyNypl.propTypes = {
   loginResearchLink: _react2.default.PropTypes.string,
   logoutLink: _react2.default.PropTypes.string,
   isLoggedIn: _react2.default.PropTypes.bool,
-  isOauthLoginActivated: _react2.default.PropTypes.bool
+  isOauthLoginActivated: _react2.default.PropTypes.bool,
+  patronName: _react2.default.PropTypes.string
 };
 
 MyNypl.defaultProps = {

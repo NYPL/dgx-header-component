@@ -60,13 +60,6 @@ var styles = {
     lineHeight: 'normal',
     outline: 'none'
   },
-  patronInitial: {
-    display: 'inline-block',
-    fontSize: '1.4em',
-    lineHeight: 'normal',
-    margin: '0',
-    verticalAlign: '6px'
-  },
   MyNyplIcon: {
     fontSize: '15px',
     verticalAlign: 'text-bottom',
@@ -77,7 +70,7 @@ var styles = {
     position: 'absolute',
     right: '0',
     minWidth: '218px',
-    minHeight: '185px',
+    minHeight: '210px',
     backgroundColor: '#1B7FA7',
     padding: '17px 30px'
   },
@@ -139,13 +132,8 @@ var StickyMyNyplButton = function (_React$Component) {
       var showDialog = _HeaderStore2.default.getStickyMyNyplVisible();
       var buttonClasses = (0, _classnames2.default)({ active: showDialog });
       var myNyplClasses = (0, _classnames2.default)({ 'active animatedFast fadeIn': showDialog });
-      var patronInitialClass = showDialog ? '' : 'loginColor';
-      var patronInitial = this.props.patronInitial ? _react2.default.createElement(
-        'p',
-        { style: styles.patronInitial, className: patronInitialClass },
-        this.props.patronInitial
-      ) : null;
-      var LoginIconColor = this.props.isLoggedIn ? '#497629' : '#333';
+      var loginIconClass = this.props.isLoggedIn ? '-loggedIn' : '';
+      var active = showDialog ? ' active' : '';
 
       return _react2.default.createElement(
         _reactOnclickout2.default,
@@ -170,12 +158,7 @@ var StickyMyNyplButton = function (_React$Component) {
               { className: 'visuallyHidden' },
               this.props.label
             ),
-            patronInitial,
-            _react2.default.createElement(_dgxSvgIcons.LoginIcon, {
-              width: '25',
-              height: '25',
-              fill: showDialog ? '#FFF' : LoginIconColor
-            })
+            _react2.default.createElement(_dgxSvgIcons.LoginIconSolid, { className: 'StickyMyNyplButton LoginIcon' + loginIconClass + active })
           ),
           _react2.default.createElement(
             'div',
@@ -185,7 +168,8 @@ var StickyMyNyplButton = function (_React$Component) {
             },
             _react2.default.createElement(_MyNypl2.default, {
               isLoggedIn: this.props.isLoggedIn,
-              isOauthLoginActivated: this.props.isOauthLoginActivated
+              isOauthLoginActivated: this.props.isOauthLoginActivated,
+              patronName: this.props.patronName
             })
           )
         )
@@ -202,7 +186,7 @@ StickyMyNyplButton.propTypes = {
   style: _react2.default.PropTypes.object,
   isLoggedIn: _react2.default.PropTypes.bool,
   isOauthLoginActivated: _react2.default.PropTypes.bool,
-  patronInitial: _react2.default.PropTypes.string
+  patronName: _react2.default.PropTypes.string
 };
 
 StickyMyNyplButton.defaultProps = {

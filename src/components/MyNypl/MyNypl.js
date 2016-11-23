@@ -39,6 +39,26 @@ class MyNypl extends React.Component {
     this.refs.catalogLink.blur();
   }
 
+  /**
+   * renderGreeting()
+   * Returns the patron's name in the drop down menu if it exists.
+   */
+  renderGreeting() {
+    if (!this.props.patronName) {
+      return null;
+    }
+
+    return (
+      <p className={`${this.props.className}-Patron-Name`}>
+        HELLO, {this.props.patronName}
+      </p>
+    );
+  }
+
+  /**
+   * renderLogoutLink()
+   * Returns the log out button if the patron has been logged in.
+   */
   renderLogoutLink() {
     return (this.props.isLoggedIn) ?
       <a
@@ -62,6 +82,7 @@ class MyNypl extends React.Component {
 
     return (
       <div className={this.props.className} role="dialog">
+       {this.renderGreeting()}
         <ul className={`${this.props.className}-Login-List`}>
           <li>
             <a
@@ -105,6 +126,7 @@ MyNypl.propTypes = {
   logoutLink: React.PropTypes.string,
   isLoggedIn: React.PropTypes.bool,
   isOauthLoginActivated: React.PropTypes.bool,
+  patronName: React.PropTypes.string,
 };
 
 MyNypl.defaultProps = {

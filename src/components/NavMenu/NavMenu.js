@@ -76,7 +76,7 @@ class NavMenu extends React.Component {
         <span className="lineSeparator" style={styles.lineSeparator}></span>
         <StickyMyNyplButton
           isLoggedIn={this.props.isLoggedIn}
-          patronInitial={this.props.patronInitial}
+          patronName={this.props.patronName}
           isOauthLoginActivated={this.props.isOauthLoginActivated}
         />
         <DonateButton
@@ -152,6 +152,7 @@ NavMenu.propTypes = {
   isLoggedIn: React.PropTypes.bool,
   isOauthLoginActivated: React.PropTypes.bool,
   patronInitial: React.PropTypes.string,
+  patronName: React.PropTypes.string,
 };
 
 NavMenu.defaultProps = {

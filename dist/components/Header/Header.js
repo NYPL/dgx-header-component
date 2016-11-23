@@ -163,6 +163,7 @@ var Header = function (_React$Component) {
       loginCookie: null,
       patronName: '',
       patronInitial: '',
+      patronDataReceived: false,
       isFeatureFlagsActivated: {
         OauthLogin: _dgxFeatureFlags2.default.store._getImmutableState().get('OauthLogin')
       }
@@ -200,7 +201,9 @@ var Header = function (_React$Component) {
       this.setState((0, _underscore.extend)({
         headerHeight: this.state.headerHeight,
         loginCookie: this.state.loginCookie,
-        patronNameObject: this.state.patronNameObject,
+        patronName: this.state.patronName,
+        patronInitial: this.state.patronInitial,
+        patronDataReceived: this.state.patronDataReceived,
         isFeatureFlagsActivated: {
           OauthLogin: _dgxFeatureFlags2.default.store._getImmutableState().get('OauthLogin')
         }
@@ -333,7 +336,8 @@ var Header = function (_React$Component) {
 
           _this4.setState({
             patronName: patronNameObject.name,
-            patronInitial: patronNameObject.initial
+            patronInitial: patronNameObject.initial,
+            patronDataReceived: true
           });
         }
       });
@@ -377,9 +381,9 @@ var Header = function (_React$Component) {
       var headerClass = this.props.className || 'Header';
       var headerClasses = (0, _classnames2.default)(headerClass, { sticky: isHeaderSticky });
       var skipNav = this.props.skipNav ? _react2.default.createElement(_dgxSkipNavigationLink2.default, this.props.skipNav) : '';
-      var isLoggedIn = !!this.state.loginCookie;
+      var isLoggedIn = !!this.state.patronDataReceived;
       var isOauthLoginActivated = !!this.state.isFeatureFlagsActivated.OauthLogin;
-      var myNyplButtonLabel = this.state.patronName || 'Log In';
+      var myNyplButtonLabel = this.state.patronName ? 'You are logged in' : 'Log In';
 
       return _react2.default.createElement(
         'header',
@@ -400,7 +404,7 @@ var Header = function (_React$Component) {
             nyplRootUrl: this.props.urlType === 'absolute' ? '//www.nypl.org' : '/',
             isLoggedIn: isLoggedIn,
             isOauthLoginActivated: isOauthLoginActivated,
-            patronInitial: this.state.patronInitial,
+            patronName: this.state.patronName,
             ref: 'headerMobile'
           }),
           _react2.default.createElement(
@@ -421,7 +425,8 @@ var Header = function (_React$Component) {
                 label: myNyplButtonLabel,
                 refId: 'desktopLogin',
                 isLoggedIn: isLoggedIn,
-                isOauthLoginActivated: isOauthLoginActivated
+                isOauthLoginActivated: isOauthLoginActivated,
+                patronName: this.state.patronName
               }),
               _react2.default.createElement(_SimpleLink2.default, {
                 label: 'Locations',
@@ -469,7 +474,7 @@ var Header = function (_React$Component) {
             items: this.state.navData,
             urlType: this.props.urlType,
             isLoggedIn: isLoggedIn,
-            patronInitial: this.state.patronInitial,
+            patronName: this.state.patronName,
             isOauthLoginActivated: isOauthLoginActivated
           })
         )

@@ -3,6 +3,7 @@ import { extend as _extend } from 'underscore';
 // Config and Utility
 import utils from '../../utils/utils.js';
 import appConfig from '../../appConfig.js';
+import FeatureFlags from 'dgx-feature-flags';
 
 const styles = {
   base: {
@@ -66,8 +67,16 @@ const styles = {
 };
 
 class MobileMyNypl extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isOauthLogin: FeatureFlags.store._getImmutableState().get('oauth-login'),
+    };
+  }
+
   renderLogoutLink() {
-    return (this.props.isLogin) ?
+    return (this.props.isLoggedIn) ?
       <a
         href={this.props.logoutLink}
         className={`${this.props.className}-Catalog-Link`}
@@ -81,8 +90,12 @@ class MobileMyNypl extends React.Component {
   render() {
     const catalogLinkClass = 'CatalogLink';
     const researchLinkClass = 'ResearchLink';
-    const catalogLinkLabel = (this.props.isLogin) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
-    const researchCatalogLinkLabel = (this.props.isLogin) ? 'GO TO THE RESEARCH CATALOG' :
+    const catalogLink = (!this.state.isOauthLogin || this.props.isLoggedIn) ?
+      this.props.catalogLink : this.props.loginCatalogLink;
+    const researchLink = (!this.state.isOauthLogin || this.props.isLoggedIn) ?
+      this.props.researchLink : this.props.loginResearchLink;
+    const catalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
+    const researchCatalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE RESEARCH CATALOG' :
       'LOG INTO THE RESEARCH CATALOG';
 
     return (
@@ -92,7 +105,7 @@ class MobileMyNypl extends React.Component {
         role="dialog"
       >
         <a
-          href={this.props.catalogLink}
+          href={catalogLink}
           className={catalogLinkClass}
           style={styles.links}
           onClick={() => utils.trackHeader('Mobile Log In', 'Catalog')}
@@ -112,7 +125,7 @@ class MobileMyNypl extends React.Component {
           </span>
         </a>
         <a
-          href={this.props.researchLink}
+          href={researchLink}
           className={researchLinkClass}
           style={styles.links}
           onClick={() => utils.trackHeader('Mobile Log In', 'Research')}
@@ -141,16 +154,20 @@ MobileMyNypl.propTypes = {
   className: React.PropTypes.string,
   catalogLink: React.PropTypes.string,
   researchLink: React.PropTypes.string,
+  loginCatalogLink: React.PropTypes.string,
+  loginResearchLink: React.PropTypes.string,
   logoutLink: React.PropTypes.string,
-  isLogin: React.PropTypes.bool,
+  isLoggedIn: React.PropTypes.bool,
 };
 
 MobileMyNypl.defaultProps = {
   lang: 'en',
   className: 'MobileMyNypl',
+  loginCatalogLink: appConfig.loginMyNyplLinks.catalog,
+  loginResearchLink: appConfig.loginMyNyplLinks.research,
   catalogLink: appConfig.myNyplLinks.catalog,
   researchLink: appConfig.myNyplLinks.research,
-  logoutLink: appConfig.myNyplLinks.logoutLink,
+  logoutLink: appConfig.loginMyNyplLinks.logoutLink,
 };
 
 export default MobileMyNypl;

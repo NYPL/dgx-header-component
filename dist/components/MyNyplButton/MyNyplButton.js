@@ -152,8 +152,8 @@ var MyNyplButton = function (_React$Component) {
     value: function renderMyNyplButton() {
       var buttonClass = '';
       var iconClass = 'nypl-icon-wedge-down';
-      var icon = this.props.isLogin ? null : _react2.default.createElement('span', { className: iconClass + ' icon', style: styles.MyNyplIcon });
-      var buttonColorClass = this.props.isLogin ? 'loginColor' : '';
+      var icon = this.props.isLoggedIn ? null : _react2.default.createElement('span', { className: iconClass + ' icon', style: styles.MyNyplIcon });
+      var buttonColorClass = this.props.isLoggedIn ? 'loginColor' : '';
 
       if (_HeaderStore2.default.getMyNyplVisible()) {
         buttonClass = 'active';
@@ -173,14 +173,14 @@ var MyNyplButton = function (_React$Component) {
     }
   }, {
     key: 'renderMyNyplDialog',
-    value: function renderMyNyplDialog(isLogin) {
+    value: function renderMyNyplDialog(isLoggedIn) {
       return _HeaderStore2.default.getMyNyplVisible() ? _react2.default.createElement(
         'div',
         {
           className: 'MyNypl-Wrapper active animatedFast fadeIn',
           style: styles.MyNyplWrapper
         },
-        _react2.default.createElement(_MyNypl2.default, { isLogin: isLogin })
+        _react2.default.createElement(_MyNypl2.default, { isLoggedIn: isLoggedIn })
       ) : null;
     }
   }, {
@@ -196,7 +196,7 @@ var MyNyplButton = function (_React$Component) {
             style: (0, _underscore.extend)(styles.base, this.props.style)
           },
           this.renderMyNyplButton(),
-          this.renderMyNyplDialog(this.props.isLogin)
+          this.renderMyNyplDialog(this.props.isLoggedIn)
         )
       );
     }
@@ -209,7 +209,7 @@ MyNyplButton.propTypes = {
   lang: _react2.default.PropTypes.string,
   label: _react2.default.PropTypes.string,
   style: _react2.default.PropTypes.object,
-  isLogin: _react2.default.PropTypes.bool
+  isLoggedIn: _react2.default.PropTypes.bool
 };
 
 MyNyplButton.defaultProps = {

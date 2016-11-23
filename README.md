@@ -128,6 +128,11 @@ $ npm run babel-build
 $ NODE_ENV=production npm start
 ```
 
+### Using Feature Flags
+
+Please go to NYPL/dgx-feature-flags repository for the step-by-step instruction.
+https://bitbucket.org/NYPL/dgx-feature-flags
+
 ### Contribute
 
 1. Fork this repo.

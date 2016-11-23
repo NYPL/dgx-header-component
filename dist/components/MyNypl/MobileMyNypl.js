@@ -20,6 +20,10 @@ var _appConfig = require('../../appConfig.js');
 
 var _appConfig2 = _interopRequireDefault(_appConfig);
 
+var _dgxFeatureFlags = require('dgx-feature-flags');
+
+var _dgxFeatureFlags2 = _interopRequireDefault(_dgxFeatureFlags);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -94,16 +98,21 @@ var styles = {
 var MobileMyNypl = function (_React$Component) {
   _inherits(MobileMyNypl, _React$Component);
 
-  function MobileMyNypl() {
+  function MobileMyNypl(props) {
     _classCallCheck(this, MobileMyNypl);
 
-    return _possibleConstructorReturn(this, (MobileMyNypl.__proto__ || Object.getPrototypeOf(MobileMyNypl)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (MobileMyNypl.__proto__ || Object.getPrototypeOf(MobileMyNypl)).call(this, props));
+
+    _this.state = {
+      isOauthLogin: _dgxFeatureFlags2.default.store._getImmutableState().get('oauth-login')
+    };
+    return _this;
   }
 
   _createClass(MobileMyNypl, [{
     key: 'renderLogoutLink',
     value: function renderLogoutLink() {
-      return this.props.isLogin ? _react2.default.createElement(
+      return this.props.isLoggedIn ? _react2.default.createElement(
         'a',
         {
           href: this.props.logoutLink,
@@ -121,8 +130,10 @@ var MobileMyNypl = function (_React$Component) {
     value: function render() {
       var catalogLinkClass = 'CatalogLink';
       var researchLinkClass = 'ResearchLink';
-      var catalogLinkLabel = this.props.isLogin ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
-      var researchCatalogLinkLabel = this.props.isLogin ? 'GO TO THE RESEARCH CATALOG' : 'LOG INTO THE RESEARCH CATALOG';
+      var catalogLink = !this.state.isOauthLogin || this.props.isLoggedIn ? this.props.catalogLink : this.props.loginCatalogLink;
+      var researchLink = !this.state.isOauthLogin || this.props.isLoggedIn ? this.props.researchLink : this.props.loginResearchLink;
+      var catalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
+      var researchCatalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE RESEARCH CATALOG' : 'LOG INTO THE RESEARCH CATALOG';
 
       return _react2.default.createElement(
         'div',
@@ -134,7 +145,7 @@ var MobileMyNypl = function (_React$Component) {
         _react2.default.createElement(
           'a',
           {
-            href: this.props.catalogLink,
+            href: catalogLink,
             className: catalogLinkClass,
             style: styles.links,
             onClick: function onClick() {
@@ -161,7 +172,7 @@ var MobileMyNypl = function (_React$Component) {
         _react2.default.createElement(
           'a',
           {
-            href: this.props.researchLink,
+            href: researchLink,
             className: researchLinkClass,
             style: styles.links,
             onClick: function onClick() {
@@ -198,16 +209,20 @@ MobileMyNypl.propTypes = {
   className: _react2.default.PropTypes.string,
   catalogLink: _react2.default.PropTypes.string,
   researchLink: _react2.default.PropTypes.string,
+  loginCatalogLink: _react2.default.PropTypes.string,
+  loginResearchLink: _react2.default.PropTypes.string,
   logoutLink: _react2.default.PropTypes.string,
-  isLogin: _react2.default.PropTypes.bool
+  isLoggedIn: _react2.default.PropTypes.bool
 };
 
 MobileMyNypl.defaultProps = {
   lang: 'en',
   className: 'MobileMyNypl',
+  loginCatalogLink: _appConfig2.default.loginMyNyplLinks.catalog,
+  loginResearchLink: _appConfig2.default.loginMyNyplLinks.research,
   catalogLink: _appConfig2.default.myNyplLinks.catalog,
   researchLink: _appConfig2.default.myNyplLinks.research,
-  logoutLink: _appConfig2.default.myNyplLinks.logoutLink
+  logoutLink: _appConfig2.default.loginMyNyplLinks.logoutLink
 };
 
 exports.default = MobileMyNypl;

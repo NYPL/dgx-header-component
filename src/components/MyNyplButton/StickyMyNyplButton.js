@@ -119,7 +119,7 @@ class StickyMyNyplButton extends React.Component {
             className={`StickyMyNypl-Wrapper ${myNyplClasses}`}
             style={styles.MyNyplWrapper}
           >
-            <MyNypl isLogin={this.props.isLogin} />
+            <MyNypl isLoggedIn={this.props.isLoggedIn} />
           </div>
         </div>
       </ClickOutHandler>
@@ -131,7 +131,7 @@ StickyMyNyplButton.propTypes = {
   lang: React.PropTypes.string,
   label: React.PropTypes.string,
   style: React.PropTypes.object,
-  isLogin: React.PropTypes.bool,
+  isLoggedIn: React.PropTypes.bool,
   patronInitial: React.PropTypes.string,
 };
 

@@ -314,7 +314,7 @@ var Header = function (_React$Component) {
       var headerClass = this.props.className || 'Header';
       var headerClasses = (0, _classnames2.default)(headerClass, { sticky: isHeaderSticky });
       var skipNav = this.props.skipNav ? _react2.default.createElement(_dgxSkipNavigationLink2.default, this.props.skipNav) : '';
-      var isLogin = !!this.state.loginCookie;
+      var isLoggedIn = !!this.state.loginCookie;
       var myNyplButtonLabel = this.state.patronName || 'Log In';
 
       return _react2.default.createElement(
@@ -334,7 +334,7 @@ var Header = function (_React$Component) {
             className: headerClass + '-Mobile',
             locatorUrl: this.props.urlType === 'absolute' ? '//www.nypl.org/locations/map?nearme=true' : '/locations/map?nearme=true',
             nyplRootUrl: this.props.urlType === 'absolute' ? '//www.nypl.org' : '/',
-            isLogin: isLogin,
+            isLoggedIn: isLoggedIn,
             patronInitial: this.state.patronInitial,
             ref: 'headerMobile'
           }),
@@ -355,7 +355,7 @@ var Header = function (_React$Component) {
               _react2.default.createElement(_MyNyplButton2.default, {
                 label: myNyplButtonLabel,
                 refId: 'desktopLogin',
-                isLogin: isLogin
+                isLoggedIn: isLoggedIn
               }),
               _react2.default.createElement(_SimpleLink2.default, {
                 label: 'Locations',
@@ -402,7 +402,7 @@ var Header = function (_React$Component) {
             lang: this.props.lang,
             items: this.state.navData,
             urlType: this.props.urlType,
-            isLogin: isLogin,
+            isLoggedIn: isLoggedIn,
             patronInitial: this.state.patronInitial
           })
         )

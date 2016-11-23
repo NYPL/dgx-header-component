@@ -182,7 +182,7 @@ var StickyMyNyplButton = function (_React$Component) {
               className: 'StickyMyNypl-Wrapper ' + myNyplClasses,
               style: styles.MyNyplWrapper
             },
-            _react2.default.createElement(_MyNypl2.default, { isLogin: this.props.isLogin })
+            _react2.default.createElement(_MyNypl2.default, { isLoggedIn: this.props.isLoggedIn })
           )
         )
       );
@@ -196,7 +196,7 @@ StickyMyNyplButton.propTypes = {
   lang: _react2.default.PropTypes.string,
   label: _react2.default.PropTypes.string,
   style: _react2.default.PropTypes.object,
-  isLogin: _react2.default.PropTypes.bool,
+  isLoggedIn: _react2.default.PropTypes.bool,
   patronInitial: _react2.default.PropTypes.string
 };
 

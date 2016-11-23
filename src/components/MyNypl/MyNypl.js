@@ -2,7 +2,6 @@ import React from 'react';
 // Config and Utility Library
 import utils from '../../utils/utils.js';
 import appConfig from '../../appConfig.js';
-import FeatureFlags from 'dgx-feature-flags';
 
 const styles = {
   logoutLink: {
@@ -40,6 +39,26 @@ class MyNypl extends React.Component {
     this.refs.catalogLink.blur();
   }
 
+  /**
+   * renderGreeting()
+   * Returns the patron's name in the drop down menu if it exists.
+   */
+  renderGreeting() {
+    if (!this.props.patronName) {
+      return null;
+    }
+
+    return (
+      <p className={`${this.props.className}-Patron-Name`}>
+        HELLO, {this.props.patronName}
+      </p>
+    );
+  }
+
+  /**
+   * renderLogoutLink()
+   * Returns the log out button if the patron has been logged in.
+   */
   renderLogoutLink() {
     return (this.props.isLoggedIn) ?
       <a
@@ -53,17 +72,17 @@ class MyNypl extends React.Component {
   }
 
   render() {
-    const isOauthLogin = FeatureFlags.store._getImmutableState().get('oauth-login');
     const catalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
     const researchCatalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE RESEARCH CATALOG' :
       'LOG INTO THE RESEARCH CATALOG';
-    const catalogLink = (!isOauthLogin || this.props.isLoggedIn) ?
+    const catalogLink = (!this.props.isOauthLoginActivated || this.props.isLoggedIn) ?
       this.props.catalogLink : this.props.loginCatalogLink;
-    const researchLink = (!isOauthLogin || this.props.isLoggedIn) ?
+    const researchLink = (!this.props.isOauthLoginActivated || this.props.isLoggedIn) ?
       this.props.researchLink : this.props.loginResearchLink;
 
     return (
       <div className={this.props.className} role="dialog">
+       {this.renderGreeting()}
         <ul className={`${this.props.className}-Login-List`}>
           <li>
             <a
@@ -106,6 +125,8 @@ MyNypl.propTypes = {
   loginResearchLink: React.PropTypes.string,
   logoutLink: React.PropTypes.string,
   isLoggedIn: React.PropTypes.bool,
+  isOauthLoginActivated: React.PropTypes.bool,
+  patronName: React.PropTypes.string,
 };
 
 MyNypl.defaultProps = {

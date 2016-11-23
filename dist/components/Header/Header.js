@@ -21,9 +21,17 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 var _underscore = require('underscore');
 
+var _dgxFeatureFlags = require('dgx-feature-flags');
+
+var _dgxFeatureFlags2 = _interopRequireDefault(_dgxFeatureFlags);
+
 var _navConfig = require('../../navConfig.js');
 
 var _navConfig2 = _interopRequireDefault(_navConfig);
+
+var _featureFlagConfig = require('../../featureFlagConfig.js');
+
+var _featureFlagConfig2 = _interopRequireDefault(_featureFlagConfig);
 
 var _HeaderStore = require('../../stores/HeaderStore.js');
 
@@ -154,7 +162,11 @@ var Header = function (_React$Component) {
       navData: _this.props.navData,
       loginCookie: null,
       patronName: '',
-      patronInitial: ''
+      patronInitial: '',
+      patronDataReceived: false,
+      isFeatureFlagsActivated: {
+        OauthLogin: _dgxFeatureFlags2.default.store._getImmutableState().get('OauthLogin')
+      }
     }, _HeaderStore2.default.getState());
 
     _this.handleStickyHeader = _this.handleStickyHeader.bind(_this);
@@ -170,8 +182,11 @@ var Header = function (_React$Component) {
       // Listen to the scroll event for the sticky header.
       window.addEventListener('scroll', this.handleStickyHeader, false);
 
-      // Set nyplIdentity cookie to the state.
+      // Set nyplIdentityPatron cookie to the state.
       this.setLoginCookie();
+
+      // Set feature flag cookies to the state
+      this.checkFeatureFlagActivated(_featureFlagConfig2.default.featureFlagList);
     }
   }, {
     key: 'componentWillUnmount',
@@ -186,7 +201,12 @@ var Header = function (_React$Component) {
       this.setState((0, _underscore.extend)({
         headerHeight: this.state.headerHeight,
         loginCookie: this.state.loginCookie,
-        patronNameObject: this.state.patronNameObject
+        patronName: this.state.patronName,
+        patronInitial: this.state.patronInitial,
+        patronDataReceived: this.state.patronDataReceived,
+        isFeatureFlagsActivated: {
+          OauthLogin: _dgxFeatureFlags2.default.store._getImmutableState().get('OauthLogin')
+        }
       }, _HeaderStore2.default.getState()));
     }
 
@@ -253,6 +273,52 @@ var Header = function (_React$Component) {
     }
 
     /**
+     * checkFeatureFlagActivated(featureFlagList)
+     * Check if the feature flags have been set. If they have not, activate the function to check
+     * if the related cookies are set.
+     * @param {string[]} featureFlagList - The list of the feature flags we want to set.
+     */
+
+  }, {
+    key: 'checkFeatureFlagActivated',
+    value: function checkFeatureFlagActivated(featureFlagList) {
+      var _this3 = this;
+
+      (0, _underscore.map)(featureFlagList, function (item) {
+        if (!_this3.state.isFeatureFlagsActivated[item]) {
+          _this3.checkFeatureFlagCookie(item);
+        }
+      });
+    }
+
+    /**
+     * checkFeatureFlagCookie(name)
+     * Check if the cookie exist. If they do, activate the function to enable
+     * the indicated feature flags.
+     * @param {string} name - The name of the cookie.
+     */
+
+  }, {
+    key: 'checkFeatureFlagCookie',
+    value: function checkFeatureFlagCookie(name) {
+      if (_utils2.default.hasCookie('nyplFeatureFlag' + name)) {
+        this.activateFeatureFlag(name);
+      }
+    }
+
+    /**
+     * activateFeatureFlags(name)
+     * Activate the feature flag that are indicated in the cookie.
+     * @param {string} name - The feature flag's name.
+     */
+
+  }, {
+    key: 'activateFeatureFlag',
+    value: function activateFeatureFlag(name) {
+      _dgxFeatureFlags2.default.utils.activateFeature(name);
+    }
+
+    /**
      * fetchPatronData(cookie)
      * Executes utils.getLoginData to fetch patron's data based on the cookie.
      * Updates the state with the results.
@@ -262,15 +328,16 @@ var Header = function (_React$Component) {
   }, {
     key: 'fetchPatronData',
     value: function fetchPatronData(cookie) {
-      var _this3 = this;
+      var _this4 = this;
 
       _utils2.default.getLoginData(cookie, function (result) {
         if (result.data && result.data.data) {
           var patronNameObject = _utils2.default.modelPatronName(_utils2.default.extractPatronName(result.data));
 
-          _this3.setState({
+          _this4.setState({
             patronName: patronNameObject.name,
-            patronInitial: patronNameObject.initial
+            patronInitial: patronNameObject.initial,
+            patronDataReceived: true
           });
         }
       });
@@ -314,8 +381,9 @@ var Header = function (_React$Component) {
       var headerClass = this.props.className || 'Header';
       var headerClasses = (0, _classnames2.default)(headerClass, { sticky: isHeaderSticky });
       var skipNav = this.props.skipNav ? _react2.default.createElement(_dgxSkipNavigationLink2.default, this.props.skipNav) : '';
-      var isLoggedIn = !!this.state.loginCookie;
-      var myNyplButtonLabel = this.state.patronName || 'Log In';
+      var isLoggedIn = !!this.state.patronDataReceived;
+      var isOauthLoginActivated = !!this.state.isFeatureFlagsActivated.OauthLogin;
+      var myNyplButtonLabel = this.state.patronName ? 'You are logged in' : 'Log In';
 
       return _react2.default.createElement(
         'header',
@@ -335,7 +403,8 @@ var Header = function (_React$Component) {
             locatorUrl: this.props.urlType === 'absolute' ? '//www.nypl.org/locations/map?nearme=true' : '/locations/map?nearme=true',
             nyplRootUrl: this.props.urlType === 'absolute' ? '//www.nypl.org' : '/',
             isLoggedIn: isLoggedIn,
-            patronInitial: this.state.patronInitial,
+            isOauthLoginActivated: isOauthLoginActivated,
+            patronName: this.state.patronName,
             ref: 'headerMobile'
           }),
           _react2.default.createElement(
@@ -355,7 +424,9 @@ var Header = function (_React$Component) {
               _react2.default.createElement(_MyNyplButton2.default, {
                 label: myNyplButtonLabel,
                 refId: 'desktopLogin',
-                isLoggedIn: isLoggedIn
+                isLoggedIn: isLoggedIn,
+                isOauthLoginActivated: isOauthLoginActivated,
+                patronName: this.state.patronName
               }),
               _react2.default.createElement(_SimpleLink2.default, {
                 label: 'Locations',
@@ -403,7 +474,8 @@ var Header = function (_React$Component) {
             items: this.state.navData,
             urlType: this.props.urlType,
             isLoggedIn: isLoggedIn,
-            patronInitial: this.state.patronInitial
+            patronName: this.state.patronName,
+            isOauthLoginActivated: isOauthLoginActivated
           })
         )
       );

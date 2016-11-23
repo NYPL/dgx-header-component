@@ -44,7 +44,7 @@
     "dgx-feature-flags": "git+https://git@bitbucket.org/NYPL/dgx-feature-flags.git#master",
     "dgx-react-ga": "git+https://git@bitbucket.org/NYPL/dgx-react-ga.git#master",
     "dgx-skip-navigation-link": "git+https://git@bitbucket.org/NYPL/dgx-skip-navigation-link.git#master",
-    "dgx-svg-icons": "git+https://git@bitbucket.org/NYPL/dgx-svg-icons.git#master",
+    "dgx-svg-icons": "git+https://git@bitbucket.org/NYPL/dgx-svg-icons.git#new-login-icon",
     "focus-trap-react": "2.1.1",
     "moment": "2.10.6",
     "react": "0.14.8",

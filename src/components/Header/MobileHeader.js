@@ -4,8 +4,8 @@ import FocusTrap from 'focus-trap-react';
 import {
   LionLogoIcon,
   LocatorIcon,
-  LoginIcon,
   MenuIcon,
+  LoginIconSolid,
   SearchIcon,
   XIcon,
 } from 'dgx-svg-icons';
@@ -239,18 +239,6 @@ class MobileHeader extends React.Component {
   }
 
   /**
-  * renderPatronInitial()
-  * render the patron's initial on mobile header if has logged in.
-  */
-  renderPatronInitial() {
-    const initial = this.props.patronInitial;
-
-    return (initial && this.state.mobileMyNyplButton !== 'clickMyNypl') ? (
-      <p style={styles.patronInitial}>{initial}</p>
-    ) : null;
-  }
-
-  /**
   * renderMyNyplButton()
   * Generates the DOM for the MyNyplLogin button/dialog.
   * Uses SVG icon & visuallyHidden label.
@@ -258,8 +246,8 @@ class MobileHeader extends React.Component {
   */
   renderMyNyplButton() {
     let myNyplClass = '';
-    const loginColor = (this.props.isLogin) ? '#497629' : '#000';
-    let icon = <LoginIcon ariaHidden fill={loginColor} />;
+    const loginIconClass = (this.props.isLoggedIn) ? '-loggedIn' : '';
+    let icon = <LoginIconSolid className={`MobileMyNypl LoginIcon${loginIconClass}`} />;
     let buttonStyles = styles.inactiveMyNyplButton;
     let buttonLabel = 'Open Log In Dialog';
     let dialogWindow = null;
@@ -274,7 +262,11 @@ class MobileHeader extends React.Component {
           className={`MobileMyNypl-Wrapper${myNyplClass}`}
           onDeactivate={this.closeMyNyplDialog}
         >
-          <MobileMyNypl isLoggedIn={this.props.isLoggedIn} />
+          <MobileMyNypl
+            isLoggedIn={this.props.isLoggedIn}
+            isOauthLoginActivated={this.props.isOauthLoginActivated}
+            patronName={this.props.patronName}
+          />
         </FocusTrap>
       );
     }
@@ -289,7 +281,6 @@ class MobileHeader extends React.Component {
           onTap={() => this.toggleMobileMenuButton('clickMyNypl')}
         >
           <span className="visuallyHidden">{buttonLabel}</span>
-          {this.renderPatronInitial()}
           {icon}
         </ReactTappable>
         {dialogWindow}
@@ -429,7 +420,8 @@ MobileHeader.propTypes = {
   nyplRootUrl: React.PropTypes.string,
   alt: React.PropTypes.string,
   isLoggedIn: React.PropTypes.bool,
-  patronInitial: React.PropTypes.string,
+  isOauthLoginActivated: React.PropTypes.bool,
+  patronName: React.PropTypes.string,
 };
 
 MobileHeader.defaultProps = {

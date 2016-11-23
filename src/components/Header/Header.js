@@ -2,9 +2,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';
-import { extend as _extend } from 'underscore';
+import {
+  extend as _extend,
+  map as _map,
+} from 'underscore';
+import FeatureFlags from 'dgx-feature-flags';
 // Nav Config
 import navConfig from '../../navConfig.js';
+import featureFlagConfig from '../../featureFlagConfig.js';
 // ALT Flux
 import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
@@ -83,6 +88,10 @@ class Header extends React.Component {
         loginCookie: null,
         patronName: '',
         patronInitial: '',
+        patronDataReceived: false,
+        isFeatureFlagsActivated: {
+          OauthLogin: FeatureFlags.store._getImmutableState().get('OauthLogin'),
+        },
       },
       HeaderStore.getState()
     );
@@ -97,8 +106,11 @@ class Header extends React.Component {
     // Listen to the scroll event for the sticky header.
     window.addEventListener('scroll', this.handleStickyHeader, false);
 
-    // Set nyplIdentity cookie to the state.
+    // Set nyplIdentityPatron cookie to the state.
     this.setLoginCookie();
+
+    // Set feature flag cookies to the state
+    this.checkFeatureFlagActivated(featureFlagConfig.featureFlagList);
   }
 
   componentWillUnmount() {
@@ -113,12 +125,18 @@ class Header extends React.Component {
         {
           headerHeight: this.state.headerHeight,
           loginCookie: this.state.loginCookie,
-          patronNameObject: this.state.patronNameObject,
+          patronName: this.state.patronName,
+          patronInitial: this.state.patronInitial,
+          patronDataReceived: this.state.patronDataReceived,
+          isFeatureFlagsActivated: {
+            OauthLogin: FeatureFlags.store._getImmutableState().get('OauthLogin'),
+          },
         },
         HeaderStore.getState()
       )
     );
   }
+
 
   /**
    * setLoginCookie()
@@ -171,6 +189,41 @@ class Header extends React.Component {
   }
 
   /**
+   * checkFeatureFlagActivated(featureFlagList)
+   * Check if the feature flags have been set. If they have not, activate the function to check
+   * if the related cookies are set.
+   * @param {string[]} featureFlagList - The list of the feature flags we want to set.
+   */
+  checkFeatureFlagActivated(featureFlagList) {
+    _map(featureFlagList, (item) => {
+      if (!this.state.isFeatureFlagsActivated[item]) {
+        this.checkFeatureFlagCookie(item);
+      }
+    });
+  }
+
+  /**
+   * checkFeatureFlagCookie(name)
+   * Check if the cookie exist. If they do, activate the function to enable
+   * the indicated feature flags.
+   * @param {string} name - The name of the cookie.
+   */
+  checkFeatureFlagCookie(name) {
+    if (utils.hasCookie(`nyplFeatureFlag${name}`)) {
+      this.activateFeatureFlag(name);
+    }
+  }
+
+  /**
+   * activateFeatureFlags(name)
+   * Activate the feature flag that are indicated in the cookie.
+   * @param {string} name - The feature flag's name.
+   */
+  activateFeatureFlag(name) {
+    FeatureFlags.utils.activateFeature(name);
+  }
+
+  /**
    * fetchPatronData(cookie)
    * Executes utils.getLoginData to fetch patron's data based on the cookie.
    * Updates the state with the results.
@@ -184,6 +237,7 @@ class Header extends React.Component {
         this.setState({
           patronName: patronNameObject.name,
           patronInitial: patronNameObject.initial,
+          patronDataReceived: true,
         });
       }
     });
@@ -224,8 +278,9 @@ class Header extends React.Component {
     const headerClasses = cx(headerClass, { sticky: isHeaderSticky });
     const skipNav = this.props.skipNav ?
       (<SkipNavigation {...this.props.skipNav} />) : '';
-    const isLoggedIn = !!this.state.loginCookie;
-    const myNyplButtonLabel = this.state.patronName || 'Log In';
+    const isLoggedIn = !!this.state.patronDataReceived;
+    const isOauthLoginActivated = !!this.state.isFeatureFlagsActivated.OauthLogin;
+    const myNyplButtonLabel = (this.state.patronName) ? 'You are logged in' : 'Log In';
 
     return (
       <header
@@ -245,7 +300,8 @@ class Header extends React.Component {
             }
             nyplRootUrl={(this.props.urlType === 'absolute') ? '//www.nypl.org' : '/'}
             isLoggedIn={isLoggedIn}
-            patronInitial={this.state.patronInitial}
+            isOauthLoginActivated={isOauthLoginActivated}
+            patronName={this.state.patronName}
             ref="headerMobile"
           />
           <div
@@ -262,6 +318,8 @@ class Header extends React.Component {
                 label={myNyplButtonLabel}
                 refId="desktopLogin"
                 isLoggedIn={isLoggedIn}
+                isOauthLoginActivated={isOauthLoginActivated}
+                patronName={this.state.patronName}
               />
               <SimpleLink
                 label="Locations"
@@ -315,7 +373,8 @@ class Header extends React.Component {
             items={this.state.navData}
             urlType={this.props.urlType}
             isLoggedIn={isLoggedIn}
-            patronInitial={this.state.patronInitial}
+            patronName={this.state.patronName}
+            isOauthLoginActivated={isOauthLoginActivated}
           />
         </div>
       </header>

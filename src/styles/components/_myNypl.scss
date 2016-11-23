@@ -17,6 +17,10 @@
   letter-spacing: .04em;
   background-color: transparent;
 
+  &.loggedIn {
+    color: #497629;
+  }
+
   &.active {
     background-color: #135772;
     color: #FFF;
@@ -64,7 +68,15 @@
       font-weight: normal;
       line-height: 1.2em;
     }
-
+    &-Patron-Name {
+      color: #fff;
+      @include Kievit-Book;
+      font-weight: normal;
+      letter-spacing: .03em;
+      line-height: 1.2em;
+      margin: 0;
+      text-align: left;
+    }
     &-Login-List {
       text-align: left;
       list-style: none;
@@ -112,7 +124,50 @@
   }
 }
 
-.loginColor {
-  color: #497629;
+.LoginIcon {
+  fill: #FFF;
+  stroke: #000;
+  stroke-width: 2px;
+
+  &.active {
+    stroke: none;
+  }
+
+  &-loggedIn {
+    fill: #497629;
+    stroke: none;
+
+    &.active {
+      fill: #FFF;
+      opacity: 1;
+    }
+  }
 }
 
+.MyNyplButton {
+  &.LoginIcon {
+    &-loggedIn {
+      height: 20px;
+      left: 143px;
+      position: absolute;
+      top: 7px;
+    }
+  }
+  &-IconWrapper {
+    margin: 0 0 0 22px;
+  }
+}
+
+.MobileMyNypl {
+  &-Greeting {
+    box-sizing: content-box;
+    color: #FFF;
+    text-align: center;
+    padding: 22px 0 0 0;
+    position: absolute;
+    width: 100%;
+    p {
+      margin: 0;
+    }
+  }
+}

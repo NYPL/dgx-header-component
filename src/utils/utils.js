@@ -200,7 +200,7 @@ function Utils() {
 
     const nameArray = name.replace(/ /g, '').split(',').reverse();
     const initialArray = _map(nameArray, (item) => item.charAt(0));
-    const patronName = nameArray.join(' ');
+    const patronName = nameArray[0];
     const patronInitial = initialArray.join('');
 
     return { name: patronName, initial: patronInitial };

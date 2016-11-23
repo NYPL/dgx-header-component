@@ -3,7 +3,6 @@ import { extend as _extend } from 'underscore';
 // Config and Utility
 import utils from '../../utils/utils.js';
 import appConfig from '../../appConfig.js';
-import FeatureFlags from 'dgx-feature-flags';
 
 const styles = {
   base: {
@@ -67,14 +66,10 @@ const styles = {
 };
 
 class MobileMyNypl extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isOauthLogin: FeatureFlags.store._getImmutableState().get('oauth-login'),
-    };
-  }
-
+  /**
+   * renderLogoutLink()
+   * Returns the log out button if the patron has been logged in.
+   */
   renderLogoutLink() {
     return (this.props.isLoggedIn) ?
       <a
@@ -87,12 +82,25 @@ class MobileMyNypl extends React.Component {
       </a> : <div style={styles.logoutLink}></div>;
   }
 
+  /**
+   * renderGreeting()
+   * Returns the patron's name in the drop down menu if it exists.
+   */
+  renderGreeting() {
+    return (this.props.isLoggedIn) ?
+      <div className={`${this.props.className}-Greeting`}>
+        <p>
+          HELLO, {this.props.patronName}
+        </p>
+      </div> : null;
+  }
+
   render() {
     const catalogLinkClass = 'CatalogLink';
     const researchLinkClass = 'ResearchLink';
-    const catalogLink = (!this.state.isOauthLogin || this.props.isLoggedIn) ?
+    const catalogLink = (!this.props.isOauthLoginActivated || this.props.isLoggedIn) ?
       this.props.catalogLink : this.props.loginCatalogLink;
-    const researchLink = (!this.state.isOauthLogin || this.props.isLoggedIn) ?
+    const researchLink = (!this.props.isOauthLoginActivated || this.props.isLoggedIn) ?
       this.props.researchLink : this.props.loginResearchLink;
     const catalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
     const researchCatalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE RESEARCH CATALOG' :
@@ -104,6 +112,7 @@ class MobileMyNypl extends React.Component {
         style={styles.base}
         role="dialog"
       >
+        {this.renderGreeting()}
         <a
           href={catalogLink}
           className={catalogLinkClass}
@@ -158,6 +167,8 @@ MobileMyNypl.propTypes = {
   loginResearchLink: React.PropTypes.string,
   logoutLink: React.PropTypes.string,
   isLoggedIn: React.PropTypes.bool,
+  isOauthLoginActivated: React.PropTypes.bool,
+  patronName: React.PropTypes.string,
 };
 
 MobileMyNypl.defaultProps = {

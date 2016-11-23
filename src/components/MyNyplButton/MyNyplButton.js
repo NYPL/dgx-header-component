@@ -1,6 +1,7 @@
 import React from 'react';
 import { extend as _extend } from 'underscore';
 import ClickOutHandler from 'react-onclickout';
+import { LoginIconSolid } from 'dgx-svg-icons';
 // Alt Store/Actions
 import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
@@ -93,12 +94,33 @@ class MyNyplButton extends React.Component {
     }
   }
 
+  /**
+   * renderLoginIcon()
+   * Returns log in icon based on the status of the state.
+   */
+  renderLoginIcon() {
+    const active = (HeaderStore.getMyNyplVisible()) ? ' active' : '';
+
+    if (!this.props.isLoggedIn) {
+      return null;
+    }
+
+    return (
+      <span className="MyNyplButton-IconWrapper">
+        <LoginIconSolid className={`MyNyplButton LoginIcon-loggedIn${active}`} />
+      </span>
+    );
+  }
+
+  /**
+   * renderMyNyplButton()
+   * Returns MyNypl button and its icon based on the log in and the click status.
+   */
   renderMyNyplButton() {
     let buttonClass = '';
-    let iconClass = 'nypl-icon-wedge-down';
-    const icon = (this.props.isLoggedIn) ? null :
-      (<span className={`${iconClass} icon`} style={styles.MyNyplIcon}></span>);
-    const buttonColorClass = (this.props.isLoggedIn) ? 'loginColor' : '';
+    let iconClass = (HeaderStore.getMyNyplVisible()) ? 'nypl-icon-solo-x' : 'nypl-icon-wedge-down';
+    const icon = (<span className={`${iconClass} icon`} style={styles.MyNyplIcon}></span>);
+    const labelColorClass = (this.props.isLoggedIn) ? 'loggedIn' : '';
 
     if (HeaderStore.getMyNyplVisible()) {
       buttonClass = 'active';
@@ -107,23 +129,28 @@ class MyNyplButton extends React.Component {
 
     return (
       <button
-        className={`MyNyplButton ${buttonClass} ${buttonColorClass}`}
+        className={`MyNyplButton ${buttonClass} ${labelColorClass}`}
         onClick={this.handleClick}
         style={_extend(styles.MyNyplButton, this.props.style)}
       >
         {this.props.label}
+        {this.renderLoginIcon()}
         {icon}
       </button>
     );
   }
 
-  renderMyNyplDialog(isLoggedIn) {
+  renderMyNyplDialog() {
     return (HeaderStore.getMyNyplVisible()) ? (
       <div
         className="MyNypl-Wrapper active animatedFast fadeIn"
         style={styles.MyNyplWrapper}
       >
-        <MyNypl isLoggedIn={isLoggedIn} />
+        <MyNypl
+          patronName={this.props.patronName}
+          isLoggedIn={this.props.isLoggedIn}
+          isOauthLoginActivated={this.props.isOauthLoginActivated}
+        />
       </div>
     ) : null;
   }
@@ -136,7 +163,7 @@ class MyNyplButton extends React.Component {
           style={_extend(styles.base, this.props.style)}
         >
           {this.renderMyNyplButton()}
-          {this.renderMyNyplDialog(this.props.isLoggedIn)}
+          {this.renderMyNyplDialog()}
         </div>
       </ClickOutHandler>
     );
@@ -148,6 +175,8 @@ MyNyplButton.propTypes = {
   label: React.PropTypes.string,
   style: React.PropTypes.object,
   isLoggedIn: React.PropTypes.bool,
+  isOauthLoginActivated: React.PropTypes.bool,
+  patronName: React.PropTypes.string,
 };
 
 MyNyplButton.defaultProps = {

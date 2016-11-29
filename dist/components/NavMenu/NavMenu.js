@@ -28,9 +28,9 @@ var _NavMenuItem = require('../NavMenuItem/NavMenuItem.js');
 
 var _NavMenuItem2 = _interopRequireDefault(_NavMenuItem);
 
-var _NavMenuBottomButtons = require('../NavMenuBottomButtons/NavMenuBottomButtons.js');
+var _NavMenuMobileButtons = require('../NavMenuMobileButtons/NavMenuMobileButtons.js');
 
-var _NavMenuBottomButtons2 = _interopRequireDefault(_NavMenuBottomButtons);
+var _NavMenuMobileButtons2 = _interopRequireDefault(_NavMenuMobileButtons);
 
 var _DonateButton = require('../DonateButton/DonateButton.js');
 
@@ -196,7 +196,7 @@ var NavMenu = function (_React$Component) {
             className: this.props.className
           }),
           this.renderStickyNavItems(),
-          _react2.default.createElement(_NavMenuBottomButtons2.default, {
+          _react2.default.createElement(_NavMenuMobileButtons2.default, {
             className: 'MobileBottomButtons',
             libraryCardLink: this.props.urlType === 'absolute' ? '//www.nypl.org/library-card' : '/library-card'
           })

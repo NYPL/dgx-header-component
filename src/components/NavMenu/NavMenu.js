@@ -12,7 +12,7 @@ import Actions from '../../actions/Actions.js';
 // Dependent Components
 import SearchButton from '../SearchButton/SearchButton.js';
 import NavMenuItem from '../NavMenuItem/NavMenuItem.js';
-import NavMenuBottomButtons from '../NavMenuBottomButtons/NavMenuBottomButtons.js';
+import NavMenuBottomButtons from '../NavMenuMobileButtons/NavMenuMobileButtons.js';
 import DonateButton from '../DonateButton/DonateButton.js';
 import StickyMyNyplButton from '../MyNyplButton/StickyMyNyplButton.js';
 

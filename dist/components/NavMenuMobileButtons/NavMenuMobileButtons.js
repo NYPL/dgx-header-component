@@ -79,7 +79,7 @@ var styles = {
 // Dependent NYPL React Component
 
 
-var NavMenuBottomButtons = function NavMenuBottomButtons(_ref) {
+var NavMenuMobileButtons = function NavMenuMobileButtons(_ref) {
   var className = _ref.className,
       libraryCardLink = _ref.libraryCardLink,
       subscribeLink = _ref.subscribeLink;
@@ -161,19 +161,19 @@ var NavMenuBottomButtons = function NavMenuBottomButtons(_ref) {
   );
 };
 
-NavMenuBottomButtons.propTypes = {
+NavMenuMobileButtons.propTypes = {
   lang: _react2.default.PropTypes.string,
   className: _react2.default.PropTypes.string,
   libraryCardLink: _react2.default.PropTypes.string,
   subscribeLink: _react2.default.PropTypes.string
 };
 
-NavMenuBottomButtons.defaultProps = {
+NavMenuMobileButtons.defaultProps = {
   lang: 'en',
-  className: 'NavMenuBottomButtons',
+  className: 'NavMenuMobileButtons',
   libraryCardLink: '//www.nypl.org/library-card',
   subscribeLink: '//pages.email.nypl.org/page.aspx' + '?QS=3935619f7de112ef7250fe02b84fb2f9ab74e4ea015814b7'
 };
 
-exports.default = NavMenuBottomButtons;
+exports.default = NavMenuMobileButtons;
 module.exports = exports['default'];

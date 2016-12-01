@@ -160,9 +160,11 @@ function Utils() {
           console.warn(response.headers);
           console.warn(response.config);
           // If the cookie yo get log in Data is expired
-          if(response.data.statusCode == 401 && response.data.expired == true) {
+          if (response.data.statusCode == 401 && response.data.expired == true) {
             // Hit the refresh link
-            window.location.assign(`https://isso.nypl.org/auth/refresh?redirect_uri=${window.location.href}`);
+            window.location.assign(
+              `https://isso.nypl.org/auth/refresh?redirect_uri=${window.location.href}`
+            );
           }
         }
       });

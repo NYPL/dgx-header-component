@@ -239,8 +239,6 @@ class Header extends React.Component {
           patronInitial: patronNameObject.initial,
           patronDataReceived: true,
         });
-
-        window.location.assign(`https://isso.nypl.org/auth/refresh?redirect_uri=${window.location.href}`);
       }
     });
   }

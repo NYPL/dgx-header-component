@@ -92,6 +92,7 @@ class Header extends React.Component {
         isFeatureFlagsActivated: {
           OauthLogin: FeatureFlags.store._getImmutableState().get('OauthLogin'),
         },
+        needRefresh: false,
       },
       HeaderStore.getState()
     );
@@ -131,6 +132,7 @@ class Header extends React.Component {
           isFeatureFlagsActivated: {
             OauthLogin: FeatureFlags.store._getImmutableState().get('OauthLogin'),
           },
+          needRefresh: false,
         },
         HeaderStore.getState()
       )
@@ -230,17 +232,32 @@ class Header extends React.Component {
    * @param {cookie} - The cookie returned from log in.
    */
   fetchPatronData(cookie) {
-    utils.getLoginData(cookie, result => {
-      if (result.data && result.data.data) {
-        const patronNameObject = utils.modelPatronName(utils.extractPatronName(result.data));
+    utils.getLoginData(
+      cookie,
+      result => {
+        if (result.data && result.data.data) {
+          const patronNameObject = utils.modelPatronName(utils.extractPatronName(result.data));
 
+          this.setState({
+            patronName: patronNameObject.name,
+            patronInitial: patronNameObject.initial,
+            patronDataReceived: true,
+          });
+        }
+      },
+      () => {
         this.setState({
-          patronName: patronNameObject.name,
-          patronInitial: patronNameObject.initial,
-          patronDataReceived: true,
+          needRefresh: true,
         });
+        console.log(this.state.needRefresh);
       }
-    });
+    );
+  }
+
+  refreshAccessToken() {
+    if (this.state.refreshAccessToken) {
+      utils.refreshAccessToken();
+    }
   }
 
   /**

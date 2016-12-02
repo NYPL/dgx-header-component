@@ -166,7 +166,8 @@ var Header = function (_React$Component) {
       patronDataReceived: false,
       isFeatureFlagsActivated: {
         OauthLogin: _dgxFeatureFlags2.default.store._getImmutableState().get('OauthLogin')
-      }
+      },
+      needRefresh: false
     }, _HeaderStore2.default.getState());
 
     _this.handleStickyHeader = _this.handleStickyHeader.bind(_this);
@@ -206,7 +207,8 @@ var Header = function (_React$Component) {
         patronDataReceived: this.state.patronDataReceived,
         isFeatureFlagsActivated: {
           OauthLogin: _dgxFeatureFlags2.default.store._getImmutableState().get('OauthLogin')
-        }
+        },
+        needRefresh: false
       }, _HeaderStore2.default.getState()));
     }
 
@@ -340,7 +342,19 @@ var Header = function (_React$Component) {
             patronDataReceived: true
           });
         }
+      }, function () {
+        _this4.setState({
+          needRefresh: true
+        });
+        console.log(_this4.state.needRefresh);
       });
+    }
+  }, {
+    key: 'refreshAccessToken',
+    value: function refreshAccessToken() {
+      if (this.state.refreshAccessToken) {
+        _utils2.default.refreshAccessToken();
+      }
     }
 
     /**

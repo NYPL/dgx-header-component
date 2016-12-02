@@ -145,8 +145,9 @@ function Utils() {
    * @param {string} cookie - The cookie returned.
    * @param {function(result: Object)} cb - The callback function passed in.
    */
-  this.getLoginData = function (cookie, cb) {
+  this.getLoginData = function (cookie, cb, cb2) {
     var decodedToken = JSON.parse(cookie).access_token;
+    // const decodedToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvd3d3Lm55cGwub3JnIiwic3ViIjoiNjQ3MTAzMiIsImF1ZCI6ImFwcF9sb2dpbiIsImlhdCI6MTQ3OTMzNTkyMCwiZXhwIjoxNDc5MzM5NTIwLCJhdXRoX3RpbWUiOjE0NzkzMzU5MjAsInNjb3BlIjoib3BlbmlkIG9mZmxpbmVfYWNjZXNzIGNvb2tpZSBwYXRyb246cmVhZCJ9.GB299lkZa5mUePZnSoDU8DIY32QQIdB7mwBeIkuWjri1cHfUQp03fjIq-TA1NDlCv2itztsuwRw8wHSRVEZdIkUAu2tRPQf8yJ2cccCCIawEK8dBq2bHz8uhzExzb3wjdCZguWXfSL9Vfh1-XjbcsrUrbmkLEPXao0SoLQkC7rRRaX1KOMOWw39SGHr8kv7wAJMyTb03fKLUB-J897Vmmxd9hG8hZieicu_ygWI9i_TAHFhGYI5RBPiE5daTNo1v2tV4IWL3LCFfN0rr-xuEi3F5BUP4wG97ufXjGig9dJKMaRYyRbkWKSDducIo3fJzkiDz_9Lapv39Ma7UyJoN6g';
     var endpoint = '' + _appConfig2.default.patronApiUrl + decodedToken;
 
     _axios2.default.get(endpoint).then(cb).catch(function (response) {
@@ -160,11 +161,42 @@ function Utils() {
         console.warn(response.status);
         console.warn(response.headers);
         console.warn(response.config);
-        // If the cookie yo get log in Data is expired
+        // If the cookie for getting log in Data is expired
         if (response.data.statusCode == 401 && response.data.expired == true) {
           // Hit the refresh link
-          window.location.assign('https://isso.nypl.org/auth/refresh?redirect_uri=' + window.location.href);
+          // window.location.assign(
+          //   `https://isso.nypl.org/auth/refresh?redirect_uri=${window.location.href}`
+          // );
+          // this.refreshAccessToken();
+          cb2();
         }
+      }
+    });
+  };
+
+  this.refreshAccessToken = function () {
+    console.log("expired");
+
+    _axios2.default.get('https://isso.nypl.org/auth/refresh', { headers: {
+        xhrFields: {
+          withCredentials: true
+        }
+      }
+    }).then(function (result) {
+      if (result.data && result.data.data) {
+        console.log(result.data);
+      }
+    }).catch(function (response) {
+      console.warn('Error on Axios GET request: ' + endpoint);
+      if (response instanceof Error) {
+        console.warn(response.message);
+      } else {
+        // The request was made, but the server responded with a status code
+        // that falls out of the range of 2xx
+        console.warn(response.data);
+        console.warn(response.status);
+        console.warn(response.headers);
+        console.warn(response.config);
       }
     });
   };

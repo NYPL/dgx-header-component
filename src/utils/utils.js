@@ -137,6 +137,8 @@ function Utils() {
   /**
    * getLoginData(cookie, cb)
    * Handle the cookie from log in and make api calls with the callback function passed in.
+   * If getting statusCode as 401 and exipred as true, go and hit refreshAccessToken() to refresh
+   * access_token in nyplIdentityPatron cookie
    *
    * @param {string} cookie - The cookie returned.
    * @param {function(result: Object)} cb - The callback function passed in.
@@ -168,6 +170,10 @@ function Utils() {
       });
   };
 
+  /**
+   * refreshAccessToken()
+   * Hit the refresh endpoint to set new cookie value.
+   */
   this.refreshAccessToken = () => {
     console.log("refresh expired cookie");
 

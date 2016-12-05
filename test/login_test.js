@@ -21,5 +21,5 @@ the test goals include
 //  "statusCode":401 and "expired":true
 // b. Hit refresh URL, and nyplIdentityPatron cookie will be updated
 //  b.1 If caling the refresh URL failed, follow the steps for the case of calling user's data failed
-// c. Update access_toke from nyplIdentityPatron cookie  => looks like we don't need to do it
-// d. Make the call to get patron's data again  => looks like we don't need to do it
+// c. The endpoint will update access_toke from nyplIdentityPatron cookie automatically
+// d. Make the call to get patron's data again

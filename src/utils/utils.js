@@ -141,9 +141,8 @@ function Utils() {
    * @param {string} cookie - The cookie returned.
    * @param {function(result: Object)} cb - The callback function passed in.
    */
-  this.getLoginData = (cookie, cb, cb2) => {
+  this.getLoginData = (cookie, cb) => {
     const decodedToken = JSON.parse(cookie).access_token;
-    // const decodedToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvd3d3Lm55cGwub3JnIiwic3ViIjoiNjQ3MTAzMiIsImF1ZCI6ImFwcF9sb2dpbiIsImlhdCI6MTQ3OTMzNTkyMCwiZXhwIjoxNDc5MzM5NTIwLCJhdXRoX3RpbWUiOjE0NzkzMzU5MjAsInNjb3BlIjoib3BlbmlkIG9mZmxpbmVfYWNjZXNzIGNvb2tpZSBwYXRyb246cmVhZCJ9.GB299lkZa5mUePZnSoDU8DIY32QQIdB7mwBeIkuWjri1cHfUQp03fjIq-TA1NDlCv2itztsuwRw8wHSRVEZdIkUAu2tRPQf8yJ2cccCCIawEK8dBq2bHz8uhzExzb3wjdCZguWXfSL9Vfh1-XjbcsrUrbmkLEPXao0SoLQkC7rRRaX1KOMOWw39SGHr8kv7wAJMyTb03fKLUB-J897Vmmxd9hG8hZieicu_ygWI9i_TAHFhGYI5RBPiE5daTNo1v2tV4IWL3LCFfN0rr-xuEi3F5BUP4wG97ufXjGig9dJKMaRYyRbkWKSDducIo3fJzkiDz_9Lapv39Ma7UyJoN6g';
     const endpoint = `${config.patronApiUrl}${decodedToken}`;
 
     axios
@@ -162,37 +161,26 @@ function Utils() {
           console.warn(response.config);
           // If the cookie for getting log in Data is expired
           if (response.data.statusCode == 401 && response.data.expired == true) {
-            // Hit the refresh link
-            // window.location.assign(
-            //   `https://isso.nypl.org/auth/refresh?redirect_uri=${window.location.href}`
-            // );
-            // this.refreshAccessToken();
-            cb2();
+            this.refreshAccessToken();
+            console.log('refreshed!');
           }
         }
       });
   };
 
   this.refreshAccessToken = () => {
-    console.log("expired");
+    console.log("refresh expired cookie");
 
     axios
       .get(
         'https://isso.nypl.org/auth/refresh',
-        { headers: {
-            xhrFields: {
-              withCredentials: true,
-            },
-          },
-        }
+        { withCredentials: true }
       )
       .then(result => {
-        if (result.data && result.data.data) {
-          console.log(result.data);
-        }
+        console.log('success!');
       })
       .catch(response => {
-        console.warn(`Error on Axios GET request: ${endpoint}`);
+        console.warn('Error on Axios GET request: https://isso.nypl.org/auth/refresh');
         if (response instanceof Error) {
           console.warn(response.message);
         } else {

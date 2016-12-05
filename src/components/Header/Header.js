@@ -92,7 +92,6 @@ class Header extends React.Component {
         isFeatureFlagsActivated: {
           OauthLogin: FeatureFlags.store._getImmutableState().get('OauthLogin'),
         },
-        needRefresh: false,
       },
       HeaderStore.getState()
     );
@@ -132,13 +131,11 @@ class Header extends React.Component {
           isFeatureFlagsActivated: {
             OauthLogin: FeatureFlags.store._getImmutableState().get('OauthLogin'),
           },
-          needRefresh: false,
         },
         HeaderStore.getState()
       )
     );
   }
-
 
   /**
    * setLoginCookie()
@@ -244,20 +241,12 @@ class Header extends React.Component {
             patronDataReceived: true,
           });
         }
-      },
-      () => {
-        this.setState({
-          needRefresh: true,
-        });
-        console.log(this.state.needRefresh);
       }
     );
   }
 
   refreshAccessToken() {
-    if (this.state.refreshAccessToken) {
-      utils.refreshAccessToken();
-    }
+    utils.refreshAccessToken();
   }
 
   /**

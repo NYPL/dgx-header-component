@@ -226,6 +226,7 @@ class Header extends React.Component {
    * fetchPatronData(cookie)
    * Executes utils.getLoginData to fetch patron's data based on the cookie.
    * Updates the state with the results.
+   * Also, pass this.setLoginCookie(), if cookie needs to be refreshed and set again.
    * @param {cookie} - The cookie returned from log in.
    */
   fetchPatronData(cookie) {
@@ -243,10 +244,7 @@ class Header extends React.Component {
         }
       },
       () => {
-        const loginCookie = utils.getCookie('nyplIdentityPatron');
-
-        this.setState({ loginCookie });
-        this.fetchPatronData(loginCookie);
+        this.setLoginCookie();
       }
     );
   }

@@ -139,13 +139,16 @@ function Utils() {
   };
 
   /**
-   * getLoginData(cookie, cb)
+   * getLoginData(cookie, cb, refreshCookieCb)
    * Handle the cookie from log in and make api calls with the callback function passed in.
    * If getting statusCode as 401 and exipred as true, go and hit refreshAccessToken() to refresh
    * access_token in nyplIdentityPatron cookie
    *
    * @param {string} cookie - The cookie returned.
-   * @param {function(result: Object)} cb - The callback function passed in.
+   * @param {function(result: Object)} cb - The callback function passed in for dealing with data
+   * responses.
+   * @param {function(result: Object)} refreshCookieCb - The callback function passed in for cookie
+   * refreshing mechanism.
    */
   this.getLoginData = function (cookie, cb, refreshCookieCb) {
     var decodedToken = JSON.parse(cookie).access_token;
@@ -163,21 +166,21 @@ function Utils() {
         console.warn(response.headers);
         console.warn(response.config);
         // If the cookie for getting log in Data is expired
-        if (response.data.statusCode == 401 && response.data.expired == true) {
+        if (response.data.statusCode === 401 && response.data.expired === true) {
           _this.refreshAccessToken(refreshCookieCb);
-          console.log('refreshed!');
         }
       }
     });
   };
 
   /**
-   * refreshAccessToken()
+   * refreshAccessToken(cb)
    * Hit the refresh endpoint to set new cookie value.
+   *
+   * @param {function(result: Object)} cb - The callback function passed in after the cookie
+   * has been refreshed.
    */
   this.refreshAccessToken = function (cb) {
-    console.log("refresh expired cookie");
-
     _axios2.default.get('https://isso.nypl.org/auth/refresh', { withCredentials: true }).then(cb).catch(function (response) {
       console.warn('Error on Axios GET request: https://isso.nypl.org/auth/refresh');
       if (response instanceof Error) {
@@ -185,7 +188,6 @@ function Utils() {
       } else {
         // The request was made, but the server responded with a status code
         // that falls out of the range of 2xx
-        console.warn(response.data);
         console.warn(response.status);
         console.warn(response.headers);
         console.warn(response.config);

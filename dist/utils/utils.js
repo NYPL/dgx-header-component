@@ -141,11 +141,13 @@ function Utils() {
   /**
    * getLoginData(cookie, cb)
    * Handle the cookie from log in and make api calls with the callback function passed in.
+   * If getting statusCode as 401 and exipred as true, go and hit refreshAccessToken() to refresh
+   * access_token in nyplIdentityPatron cookie
    *
    * @param {string} cookie - The cookie returned.
    * @param {function(result: Object)} cb - The callback function passed in.
    */
-  this.getLoginData = function (cookie, cb) {
+  this.getLoginData = function (cookie, cb, refreshCookieCb) {
     var decodedToken = JSON.parse(cookie).access_token;
     var endpoint = '' + _appConfig2.default.patronApiUrl + decodedToken;
 
@@ -162,19 +164,21 @@ function Utils() {
         console.warn(response.config);
         // If the cookie for getting log in Data is expired
         if (response.data.statusCode == 401 && response.data.expired == true) {
-          _this.refreshAccessToken();
+          _this.refreshAccessToken(refreshCookieCb);
           console.log('refreshed!');
         }
       }
     });
   };
 
-  this.refreshAccessToken = function () {
+  /**
+   * refreshAccessToken()
+   * Hit the refresh endpoint to set new cookie value.
+   */
+  this.refreshAccessToken = function (cb) {
     console.log("refresh expired cookie");
 
-    _axios2.default.get('https://isso.nypl.org/auth/refresh', { withCredentials: true }).then(function (result) {
-      console.log('success!');
-    }).catch(function (response) {
+    _axios2.default.get('https://isso.nypl.org/auth/refresh', { withCredentials: true }).then(cb).catch(function (response) {
       console.warn('Error on Axios GET request: https://isso.nypl.org/auth/refresh');
       if (response instanceof Error) {
         console.warn(response.message);

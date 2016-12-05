@@ -340,12 +340,12 @@ var Header = function (_React$Component) {
             patronDataReceived: true
           });
         }
+      }, function () {
+        var loginCookie = _utils2.default.getCookie('nyplIdentityPatron');
+
+        _this4.setState({ loginCookie: loginCookie });
+        _this4.fetchPatronData(loginCookie);
       });
-    }
-  }, {
-    key: 'refreshAccessToken',
-    value: function refreshAccessToken() {
-      _utils2.default.refreshAccessToken();
     }
 
     /**

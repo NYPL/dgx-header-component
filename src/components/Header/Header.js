@@ -241,12 +241,14 @@ class Header extends React.Component {
             patronDataReceived: true,
           });
         }
+      },
+      () => {
+        const loginCookie = utils.getCookie('nyplIdentityPatron');
+
+        this.setState({ loginCookie });
+        this.fetchPatronData(loginCookie);
       }
     );
-  }
-
-  refreshAccessToken() {
-    utils.refreshAccessToken();
   }
 
   /**

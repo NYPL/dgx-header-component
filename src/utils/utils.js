@@ -143,7 +143,7 @@ function Utils() {
    * @param {string} cookie - The cookie returned.
    * @param {function(result: Object)} cb - The callback function passed in.
    */
-  this.getLoginData = (cookie, cb) => {
+  this.getLoginData = (cookie, cb, refreshCookieCb) => {
     const decodedToken = JSON.parse(cookie).access_token;
     const endpoint = `${config.patronApiUrl}${decodedToken}`;
 
@@ -163,7 +163,7 @@ function Utils() {
           console.warn(response.config);
           // If the cookie for getting log in Data is expired
           if (response.data.statusCode == 401 && response.data.expired == true) {
-            this.refreshAccessToken();
+            this.refreshAccessToken(refreshCookieCb);
             console.log('refreshed!');
           }
         }
@@ -174,7 +174,7 @@ function Utils() {
    * refreshAccessToken()
    * Hit the refresh endpoint to set new cookie value.
    */
-  this.refreshAccessToken = () => {
+  this.refreshAccessToken = (cb) => {
     console.log("refresh expired cookie");
 
     axios
@@ -182,9 +182,7 @@ function Utils() {
         'https://isso.nypl.org/auth/refresh',
         { withCredentials: true }
       )
-      .then(result => {
-        console.log('success!');
-      })
+      .then(cb)
       .catch(response => {
         console.warn('Error on Axios GET request: https://isso.nypl.org/auth/refresh');
         if (response instanceof Error) {

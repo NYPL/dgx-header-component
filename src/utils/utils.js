@@ -205,6 +205,21 @@ function Utils() {
 
     return { name: patronName, initial: patronInitial };
   };
+
+  /**
+   * renderDynamicLogOutLink (location)
+   * Render the log out link URL with redirect URI.
+   *
+   * @param {string} location - The url it is passed in.
+   * @return {String} The log out URL with redirect URI
+   */
+  this.renderDynamicLogOutLink = (location) => {
+    if (!location || location === 'about:blank') {
+      return config.loginMyNyplLinks.logoutLink;
+    }
+
+    return `${config.loginMyNyplLinks.logoutLink}?redirect_uri=${location}`;
+  };
 }
 
 export default new Utils();

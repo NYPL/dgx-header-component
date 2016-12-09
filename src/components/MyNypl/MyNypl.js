@@ -56,13 +56,14 @@ class MyNypl extends React.Component {
   }
 
   /**
-   * renderLogoutLink()
+   * renderLogoutLink(location)
    * Returns the log out button if the patron has been logged in.
+   * @param {string} location - The current location.
    */
-  renderLogoutLink() {
+  renderLogoutLink(location) {
     return (this.props.isLoggedIn) ?
       <a
-        href={this.props.logoutLink}
+        href={utils.renderDynamicLogOutLink(location)}
         className={`${this.props.className}-Catalog-Link`}
         onClick={() => utils.trackHeader('My NYPL', 'Log Out')}
         style={styles.logoutLink}
@@ -109,7 +110,7 @@ class MyNypl extends React.Component {
           </li>
         </ul>
 
-        {this.renderLogoutLink()}
+        {this.renderLogoutLink(window.location.href)}
       </div>
     );
   }

@@ -110,7 +110,7 @@ class MyNypl extends React.Component {
           </li>
         </ul>
 
-        {this.renderLogoutLink()}
+        {this.renderLogoutLink(window.location.href)}
       </div>
     );
   }

@@ -168,7 +168,7 @@ var MyNypl = function (_React$Component) {
             )
           )
         ),
-        this.renderLogoutLink()
+        this.renderLogoutLink(window.location.href)
       );
     }
   }]);

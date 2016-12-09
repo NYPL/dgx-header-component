@@ -146,6 +146,8 @@ describe('<MyNypl> with the props isLoggedIn that is set to be true', () => {
 
       component.find('.MyNypl-Catalog-Link').simulate('click');
       expect(onClick.called);
+
+      onClick.restore();
     }
   );
 });

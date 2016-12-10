@@ -12,12 +12,11 @@ describe('<MobileMyNypl> as default', () => {
   let component;
 
   before(() => {
-    component = mount(<MobileMyNypl />);
+    component = shallow(<MobileMyNypl />);
   });
 
-  it('should have a <div> with class name "MyNypl" as a wrapper', () => {
-    expect(component.find('div')).to.have.length(1);
-    expect(component.find('.MyNypl').type()).to.equal('div');
+  it('should have a <div> with class name "MobileMyNypl" as a wrapper', () => {
+    expect(component.find('.MobileMyNypl').type()).to.equal('div');
   });
 
   it('should have two <a>. Their class names are "CatalogLink" and "ResearchLink"',
@@ -150,12 +149,12 @@ describe('<MobileMyNypl> with the props patronName that has valid value', () => 
     component = shallow(<MobileMyNypl patronName={'Darren Stewart'} />);
   });
 
-  it('should have a <div> with class name "MobileMyNypl-Greeting". Its text equals to ' +
-    '"Hello, Darren Stewart"',
+  it('should have a <div> with class name "MobileMyNypl-Greeting". It has a <p> and its text ' +
+    'equals to "Hello, Darren Stewart"',
     () => {
+      expect(component.find('.MobileMyNypl-Greeting').type()).to.equal('div');
       expect(component.find('p')).to.have.length(1);
-      expect(component.find('.MyNypl-Patron-Name')).to.be.defined;
-      expect(component.find('.MyNypl-Patron-Name').text()).to.equal('HELLO, Darren Stewart');
+      expect(component.find('p').text()).to.equal('HELLO, Darren Stewart');
     }
   );
 });

@@ -12,7 +12,7 @@ describe('<MyNypl> as default', () => {
   let component;
 
   before(() => {
-    component = mount(<MyNypl />);
+    component = shallow(<MyNypl />);
   });
 
   it('should have a <div> with class name "MyNypl" as a wrapper', () => {

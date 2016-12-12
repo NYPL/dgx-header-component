@@ -108,11 +108,11 @@ var MobileMyNypl = function (_React$Component) {
      * Returns the log out button if the patron has been logged in.
      * @param {string} location - The current location.
      */
-    value: function renderLogoutLink(location) {
+    value: function renderLogoutLink() {
       return this.props.isLoggedIn ? _react2.default.createElement(
         'a',
         {
-          href: _utils2.default.renderDynamicLogOutLink(location),
+          href: this.props.logOutLink,
           className: this.props.className + '-Catalog-Link',
           onClick: function onClick() {
             return _utils2.default.trackHeader('My NYPL', 'Log Out');
@@ -214,7 +214,7 @@ var MobileMyNypl = function (_React$Component) {
             )
           )
         ),
-        this.renderLogoutLink(window.location.href)
+        this.renderLogoutLink()
       );
     }
   }]);

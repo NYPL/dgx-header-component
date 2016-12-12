@@ -213,7 +213,8 @@ var MyNyplButton = function (_React$Component) {
         _react2.default.createElement(_MyNypl2.default, {
           patronName: this.props.patronName,
           isLoggedIn: this.props.isLoggedIn,
-          isOauthLoginActivated: this.props.isOauthLoginActivated
+          isOauthLoginActivated: this.props.isOauthLoginActivated,
+          logOutLink: this.props.logOutLink
         })
       ) : null;
     }

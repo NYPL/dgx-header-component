@@ -332,7 +332,8 @@ var MobileHeader = function (_React$Component) {
           _react2.default.createElement(_MobileMyNypl2.default, {
             isLoggedIn: this.props.isLoggedIn,
             isOauthLoginActivated: this.props.isOauthLoginActivated,
-            patronName: this.props.patronName
+            patronName: this.props.patronName,
+            logOutLink: this.props.logOutLink
           })
         );
       }

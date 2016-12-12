@@ -150,6 +150,7 @@ class MyNyplButton extends React.Component {
           patronName={this.props.patronName}
           isLoggedIn={this.props.isLoggedIn}
           isOauthLoginActivated={this.props.isOauthLoginActivated}
+          logOutLink={this.props.logOutLink}
         />
       </div>
     ) : null;
@@ -177,6 +178,7 @@ MyNyplButton.propTypes = {
   isLoggedIn: React.PropTypes.bool,
   isOauthLoginActivated: React.PropTypes.bool,
   patronName: React.PropTypes.string,
+  logOutLink: React.PropTypes.string,
 };
 
 MyNyplButton.defaultProps = {

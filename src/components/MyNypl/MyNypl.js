@@ -58,7 +58,6 @@ class MyNypl extends React.Component {
   /**
    * renderLogOutLink()
    * Returns the log out button if the patron has been logged in.
-   * @param {string} location - The current location.
    */
   renderLogOutLink() {
     return (this.props.isLoggedIn) ?
@@ -109,7 +108,6 @@ class MyNypl extends React.Component {
             </a>
           </li>
         </ul>
-
         {this.renderLogOutLink()}
       </div>
     );

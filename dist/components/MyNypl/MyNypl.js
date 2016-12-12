@@ -167,7 +167,7 @@ var MyNypl = function (_React$Component) {
             )
           )
         ),
-        this.renderLogoutLink(this.props.logOutLink)
+        this.renderLogoutLink()
       );
     }
   }]);
@@ -186,7 +186,8 @@ MyNypl.propTypes = {
   logoutLink: _react2.default.PropTypes.string,
   isLoggedIn: _react2.default.PropTypes.bool,
   isOauthLoginActivated: _react2.default.PropTypes.bool,
-  patronName: _react2.default.PropTypes.string
+  patronName: _react2.default.PropTypes.string,
+  logOutLink: _react2.default.PropTypes.string
 };
 
 MyNypl.defaultProps = {

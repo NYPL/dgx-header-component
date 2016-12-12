@@ -217,7 +217,8 @@ NavMenu.propTypes = {
   isLoggedIn: _react2.default.PropTypes.bool,
   isOauthLoginActivated: _react2.default.PropTypes.bool,
   patronInitial: _react2.default.PropTypes.string,
-  patronName: _react2.default.PropTypes.string
+  patronName: _react2.default.PropTypes.string,
+  logOutLink: _react2.default.PropTypes.string
 };
 
 NavMenu.defaultProps = {

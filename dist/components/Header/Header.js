@@ -189,7 +189,7 @@ var Header = function (_React$Component) {
       // Set feature flag cookies to the state
       this.checkFeatureFlagActivated(_featureFlagConfig2.default.featureFlagList);
 
-      // Get current URL location
+      // Set the log out link
       this.setLogOutLink(window.location.href);
     }
   }, {
@@ -275,6 +275,18 @@ var Header = function (_React$Component) {
     key: 'getWindowVerticalScroll',
     value: function getWindowVerticalScroll() {
       return window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+    }
+
+    /**
+     * setLogOutLink(location)
+     * Generate the full log out url including the redirect URI, and update the state with it.
+     * @param {location} - The URI for redirect request
+     */
+
+  }, {
+    key: 'setLogOutLink',
+    value: function setLogOutLink(location) {
+      this.setState({ logOutUrl: _utils2.default.renderDynamicLogOutLink(location) });
     }
 
     /**
@@ -379,11 +391,6 @@ var Header = function (_React$Component) {
       }
     }
   }, {
-    key: 'setLogOutLink',
-    value: function setLogOutLink(location) {
-      this.setState({ logOutUrl: _utils2.default.renderDynamicLogOutLink(location) });
-    }
-  }, {
     key: 'render',
     value: function render() {
       var isHeaderSticky = this.state.isSticky;
@@ -391,7 +398,8 @@ var Header = function (_React$Component) {
       var headerClass = this.props.className || 'Header';
       var headerClasses = (0, _classnames2.default)(headerClass, { sticky: isHeaderSticky });
       var skipNav = this.props.skipNav ? _react2.default.createElement(_dgxSkipNavigationLink2.default, this.props.skipNav) : '';
-      var isLoggedIn = !!this.state.patronDataReceived;
+      // const isLoggedIn = !!this.state.patronDataReceived;
+      var isLoggedIn = true;
       var isOauthLoginActivated = !!this.state.isFeatureFlagsActivated.OauthLogin;
       var myNyplButtonLabel = this.state.patronName ? 'You are logged in' : 'Log In';
 

@@ -104,9 +104,8 @@ var MobileMyNypl = function (_React$Component) {
     key: 'renderLogoutLink',
 
     /**
-     * renderLogoutLink(location)
+     * renderLogoutLink()
      * Returns the log out button if the patron has been logged in.
-     * @param {string} location - The current location.
      */
     value: function renderLogoutLink() {
       return this.props.isLoggedIn ? _react2.default.createElement(
@@ -232,7 +231,8 @@ MobileMyNypl.propTypes = {
   logoutLink: _react2.default.PropTypes.string,
   isLoggedIn: _react2.default.PropTypes.bool,
   isOauthLoginActivated: _react2.default.PropTypes.bool,
-  patronName: _react2.default.PropTypes.string
+  patronName: _react2.default.PropTypes.string,
+  logOutLink: _react2.default.PropTypes.string
 };
 
 MobileMyNypl.defaultProps = {

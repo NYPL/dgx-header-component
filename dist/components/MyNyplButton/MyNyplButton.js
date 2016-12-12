@@ -246,7 +246,8 @@ MyNyplButton.propTypes = {
   style: _react2.default.PropTypes.object,
   isLoggedIn: _react2.default.PropTypes.bool,
   isOauthLoginActivated: _react2.default.PropTypes.bool,
-  patronName: _react2.default.PropTypes.string
+  patronName: _react2.default.PropTypes.string,
+  logOutLink: _react2.default.PropTypes.string
 };
 
 MyNyplButton.defaultProps = {

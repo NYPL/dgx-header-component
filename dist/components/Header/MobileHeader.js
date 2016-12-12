@@ -539,7 +539,8 @@ MobileHeader.propTypes = {
   alt: _react2.default.PropTypes.string,
   isLoggedIn: _react2.default.PropTypes.bool,
   isOauthLoginActivated: _react2.default.PropTypes.bool,
-  patronName: _react2.default.PropTypes.string
+  patronName: _react2.default.PropTypes.string,
+  logOutLink: _react2.default.PropTypes.string
 };
 
 MobileHeader.defaultProps = {

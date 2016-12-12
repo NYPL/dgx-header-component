@@ -398,8 +398,7 @@ var Header = function (_React$Component) {
       var headerClass = this.props.className || 'Header';
       var headerClasses = (0, _classnames2.default)(headerClass, { sticky: isHeaderSticky });
       var skipNav = this.props.skipNav ? _react2.default.createElement(_dgxSkipNavigationLink2.default, this.props.skipNav) : '';
-      // const isLoggedIn = !!this.state.patronDataReceived;
-      var isLoggedIn = true;
+      var isLoggedIn = !!this.state.patronDataReceived;
       var isOauthLoginActivated = !!this.state.isFeatureFlagsActivated.OauthLogin;
       var myNyplButtonLabel = this.state.patronName ? 'You are logged in' : 'Log In';
 

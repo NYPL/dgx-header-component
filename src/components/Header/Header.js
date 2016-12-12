@@ -291,7 +291,8 @@ class Header extends React.Component {
     const headerClasses = cx(headerClass, { sticky: isHeaderSticky });
     const skipNav = this.props.skipNav ?
       (<SkipNavigation {...this.props.skipNav} />) : '';
-    const isLoggedIn = !!this.state.patronDataReceived;
+    // const isLoggedIn = !!this.state.patronDataReceived;
+    const isLoggedIn = true;
     const isOauthLoginActivated = !!this.state.isFeatureFlagsActivated.OauthLogin;
     const myNyplButtonLabel = (this.state.patronName) ? 'You are logged in' : 'Log In';
 

@@ -98,7 +98,12 @@ describe('<MyNypl> with the props isLoggedIn that is set to be true', () => {
   let component;
 
   before(() => {
-    component = shallow(<MyNypl isLoggedIn />);
+    component = shallow(
+      <MyNypl
+        isLoggedIn
+        logOutLink={'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'}
+      />
+    );
   });
 
   it('should have three <a>. Their class names are "MyNypl-Catalog-Btn",' +
@@ -131,9 +136,9 @@ describe('<MyNypl> with the props isLoggedIn that is set to be true', () => {
     );
   });
 
-  it('should have the method "renderLogoutLink" to render the properly log out link',
+  it('should have the method "renderLogOutLink" to render the properly log out link',
     () => {
-      const renderedInstance = component.instance().renderLogoutLink('https://www.nypl.org');
+      const renderedInstance = component.instance().renderLogOutLink();
 
       expect(renderedInstance.type).to.equal('a');
       expect(renderedInstance.props.href).to.equal(

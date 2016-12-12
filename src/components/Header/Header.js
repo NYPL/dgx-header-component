@@ -92,6 +92,7 @@ class Header extends React.Component {
         isFeatureFlagsActivated: {
           OauthLogin: FeatureFlags.store._getImmutableState().get('OauthLogin'),
         },
+        logOutUrl: '',
       },
       HeaderStore.getState()
     );
@@ -111,6 +112,9 @@ class Header extends React.Component {
 
     // Set feature flag cookies to the state
     this.checkFeatureFlagActivated(featureFlagConfig.featureFlagList);
+
+    // Set the log out link
+    this.setLogOutLink(window.location.href);
   }
 
   componentWillUnmount() {
@@ -131,12 +135,12 @@ class Header extends React.Component {
           isFeatureFlagsActivated: {
             OauthLogin: FeatureFlags.store._getImmutableState().get('OauthLogin'),
           },
+          logOutUrl: this.state.logOutUrl,
         },
         HeaderStore.getState()
       )
     );
   }
-
 
   /**
    * setLoginCookie()
@@ -186,6 +190,15 @@ class Header extends React.Component {
     return window.scrollY
       || window.pageYOffset
       || document.documentElement.scrollTop;
+  }
+
+  /**
+   * setLogOutLink(location)
+   * Generate the full log out url including the redirect URI, and update the state with it.
+   * @param {location} - The URI for redirect request
+   */
+  setLogOutLink(location) {
+    this.setState({ logOutUrl: utils.renderDynamicLogOutLink(location) });
   }
 
   /**
@@ -302,6 +315,7 @@ class Header extends React.Component {
             isLoggedIn={isLoggedIn}
             isOauthLoginActivated={isOauthLoginActivated}
             patronName={this.state.patronName}
+            logOutLink={this.state.logOutUrl}
             ref="headerMobile"
           />
           <div
@@ -320,6 +334,7 @@ class Header extends React.Component {
                 isLoggedIn={isLoggedIn}
                 isOauthLoginActivated={isOauthLoginActivated}
                 patronName={this.state.patronName}
+                logOutLink={this.state.logOutUrl}
               />
               <SimpleLink
                 label="Locations"
@@ -375,6 +390,7 @@ class Header extends React.Component {
             isLoggedIn={isLoggedIn}
             patronName={this.state.patronName}
             isOauthLoginActivated={isOauthLoginActivated}
+            logOutLink={this.state.logOutUrl}
           />
         </div>
       </header>

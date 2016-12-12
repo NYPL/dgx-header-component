@@ -35,7 +35,7 @@ const styles = {
     margin: '0',
     padding: '1.75em 0',
   },
-  logoutLink: {
+  logOutLink: {
     display: 'block',
     color: '#fff',
     textAlign: 'center',
@@ -67,20 +67,20 @@ const styles = {
 
 class MobileMyNypl extends React.Component {
   /**
-   * renderLogoutLink(location)
+   * renderLogOutLink()
    * Returns the log out button if the patron has been logged in.
    * @param {string} location - The current location.
    */
-  renderLogoutLink(location) {
+  renderLogOutLink() {
     return (this.props.isLoggedIn) ?
       <a
-        href={utils.renderDynamicLogOutLink(location)}
+        href={this.props.logOutLink}
         className={`${this.props.className}-Catalog-Link`}
         onClick={() => utils.trackHeader('My NYPL', 'Log Out')}
-        style={styles.logoutLink}
+        style={styles.logOutLink}
       >
         Log Out
-      </a> : <div style={styles.logoutLink}></div>;
+      </a> : <div style={styles.logOutLink}></div>;
   }
 
   /**
@@ -153,7 +153,8 @@ class MobileMyNypl extends React.Component {
             </span>
           </span>
         </a>
-        {this.renderLogoutLink(window.location.href)}
+
+        {this.renderLogOutLink()}
       </div>
     );
   }
@@ -166,10 +167,10 @@ MobileMyNypl.propTypes = {
   researchLink: React.PropTypes.string,
   loginCatalogLink: React.PropTypes.string,
   loginResearchLink: React.PropTypes.string,
-  logoutLink: React.PropTypes.string,
   isLoggedIn: React.PropTypes.bool,
   isOauthLoginActivated: React.PropTypes.bool,
   patronName: React.PropTypes.string,
+  logOutLink: React.PropTypes.string,
 };
 
 MobileMyNypl.defaultProps = {
@@ -179,7 +180,6 @@ MobileMyNypl.defaultProps = {
   loginResearchLink: appConfig.loginMyNyplLinks.research,
   catalogLink: appConfig.myNyplLinks.catalog,
   researchLink: appConfig.myNyplLinks.research,
-  logoutLink: appConfig.loginMyNyplLinks.logoutLink,
 };
 
 export default MobileMyNypl;

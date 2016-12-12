@@ -4,7 +4,7 @@ import utils from '../../utils/utils.js';
 import appConfig from '../../appConfig.js';
 
 const styles = {
-  logoutLink: {
+  logOutLink: {
     backgroundColor: '#FFF',
     border: '10px solid #FFF',
     borderRadius: '20px',
@@ -56,17 +56,17 @@ class MyNypl extends React.Component {
   }
 
   /**
-   * renderLogoutLink(location)
+   * renderLogOutLink()
    * Returns the log out button if the patron has been logged in.
    * @param {string} location - The current location.
    */
-  renderLogoutLink(location) {
+  renderLogOutLink() {
     return (this.props.isLoggedIn) ?
       <a
-        href={utils.renderDynamicLogOutLink(location)}
+        href={this.props.logOutLink}
         className={`${this.props.className}-Catalog-Link`}
         onClick={() => utils.trackHeader('My NYPL', 'Log Out')}
-        style={styles.logoutLink}
+        style={styles.logOutLink}
       >
         Log Out
       </a> : null;
@@ -110,7 +110,7 @@ class MyNypl extends React.Component {
           </li>
         </ul>
 
-        {this.renderLogoutLink(window.location.href)}
+        {this.renderLogOutLink()}
       </div>
     );
   }
@@ -124,7 +124,7 @@ MyNypl.propTypes = {
   researchLink: React.PropTypes.string,
   loginCatalogLink: React.PropTypes.string,
   loginResearchLink: React.PropTypes.string,
-  logoutLink: React.PropTypes.string,
+  logOutLink: React.PropTypes.string,
   isLoggedIn: React.PropTypes.bool,
   isOauthLoginActivated: React.PropTypes.bool,
   patronName: React.PropTypes.string,
@@ -137,7 +137,6 @@ MyNypl.defaultProps = {
   loginResearchLink: appConfig.loginMyNyplLinks.research,
   catalogLink: appConfig.myNyplLinks.catalog,
   researchLink: appConfig.myNyplLinks.research,
-  logoutLink: appConfig.loginMyNyplLinks.logoutLink,
 };
 
 export default MyNypl;

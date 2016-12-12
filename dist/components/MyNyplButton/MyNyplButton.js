@@ -213,7 +213,8 @@ var MyNyplButton = function (_React$Component) {
         _react2.default.createElement(_MyNypl2.default, {
           patronName: this.props.patronName,
           isLoggedIn: this.props.isLoggedIn,
-          isOauthLoginActivated: this.props.isOauthLoginActivated
+          isOauthLoginActivated: this.props.isOauthLoginActivated,
+          logOutLink: this.props.logOutLink
         })
       ) : null;
     }
@@ -245,7 +246,8 @@ MyNyplButton.propTypes = {
   style: _react2.default.PropTypes.object,
   isLoggedIn: _react2.default.PropTypes.bool,
   isOauthLoginActivated: _react2.default.PropTypes.bool,
-  patronName: _react2.default.PropTypes.string
+  patronName: _react2.default.PropTypes.string,
+  logOutLink: _react2.default.PropTypes.string
 };
 
 MyNyplButton.defaultProps = {

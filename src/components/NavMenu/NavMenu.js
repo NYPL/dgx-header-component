@@ -78,6 +78,7 @@ class NavMenu extends React.Component {
           isLoggedIn={this.props.isLoggedIn}
           patronName={this.props.patronName}
           isOauthLoginActivated={this.props.isOauthLoginActivated}
+          logOutLink={this.props.logOutLink}
         />
         <DonateButton
           id="Collapsed-DonateButton"
@@ -153,6 +154,7 @@ NavMenu.propTypes = {
   isOauthLoginActivated: React.PropTypes.bool,
   patronInitial: React.PropTypes.string,
   patronName: React.PropTypes.string,
+  logOutLink: React.PropTypes.string,
 };
 
 NavMenu.defaultProps = {

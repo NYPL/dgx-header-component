@@ -130,7 +130,7 @@ var MobileMyNypl = function (_React$Component) {
   }, {
     key: 'renderGreeting',
     value: function renderGreeting() {
-      return this.props.isLoggedIn ? _react2.default.createElement(
+      return this.props.patronName ? _react2.default.createElement(
         'div',
         { className: this.props.className + '-Greeting' },
         _react2.default.createElement(

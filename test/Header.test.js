@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import { shallow, mount } from 'enzyme';
 
 // Import the component that is going to be tested
-import MyNypl from './../src/components/MyNypl/MyNypl.js';
+import Header from './../src/components/Header/Header.js';
 // Import related functions
 import utils from './../src/utils/utils.js';
 
@@ -12,7 +12,7 @@ describe('<Header>', () => {
   let component;
 
   before(() => {
-    component = shallow(<MyNypl />);
+    component = shallow(<Header />);
   });
 
   // it should make an api call if the access token is available
@@ -30,6 +30,7 @@ describe('<Header>', () => {
   // 1. the refresh method returns 200
   // 1.1 it calls setLoginCookie()
   // 2. it returns errors
+
 
 
   it('should have a <div> with class name "MyNypl" as a wrapper', () => {

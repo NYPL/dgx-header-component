@@ -137,7 +137,6 @@ class Header extends React.Component {
     );
   }
 
-
   /**
    * setLoginCookie()
    * Updates the state loginCookie property
@@ -227,20 +226,27 @@ class Header extends React.Component {
    * fetchPatronData(cookie)
    * Executes utils.getLoginData to fetch patron's data based on the cookie.
    * Updates the state with the results.
+   * Also, pass this.setLoginCookie(), if cookie needs to be refreshed and set again.
    * @param {cookie} - The cookie returned from log in.
    */
   fetchPatronData(cookie) {
-    utils.getLoginData(cookie, result => {
-      if (result.data && result.data.data) {
-        const patronNameObject = utils.modelPatronName(utils.extractPatronName(result.data));
+    utils.getLoginData(
+      cookie,
+      result => {
+        if (result.data && result.data.data) {
+          const patronNameObject = utils.modelPatronName(utils.extractPatronName(result.data));
 
-        this.setState({
-          patronName: patronNameObject.name,
-          patronInitial: patronNameObject.initial,
-          patronDataReceived: true,
-        });
+          this.setState({
+            patronName: patronNameObject.name,
+            patronInitial: patronNameObject.initial,
+            patronDataReceived: true,
+          });
+        }
+      },
+      () => {
+        this.setLoginCookie();
       }
-    });
+    );
   }
 
   /**

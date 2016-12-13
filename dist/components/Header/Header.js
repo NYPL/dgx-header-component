@@ -322,6 +322,7 @@ var Header = function (_React$Component) {
      * fetchPatronData(cookie)
      * Executes utils.getLoginData to fetch patron's data based on the cookie.
      * Updates the state with the results.
+     * Also, pass this.setLoginCookie(), if cookie needs to be refreshed and set again.
      * @param {cookie} - The cookie returned from log in.
      */
 
@@ -340,6 +341,8 @@ var Header = function (_React$Component) {
             patronDataReceived: true
           });
         }
+      }, function () {
+        _this4.setLoginCookie();
       });
     }
 

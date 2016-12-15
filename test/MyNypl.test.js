@@ -110,6 +110,8 @@ describe('<MyNypl> with the props isLoggedIn that is set to be true', () => {
     '"MyNypl-Research-Btn", and "MyNypl-Catalog-Link"', () => {
     expect(component.find('a')).to.have.length(3);
     expect(component.find('.MyNypl-Catalog-Link').type()).to.equal('a');
+    expect(component.find('.MyNypl-Catalog-Btn').type()).to.equal('a');
+    expect(component.find('.MyNypl-Research-Btn').type()).to.equal('a');
   });
 
   it('should have the <a> with class name "MyNypl-Catalog-Btn". Its text equals to ' +

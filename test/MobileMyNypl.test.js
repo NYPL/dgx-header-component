@@ -100,6 +100,8 @@ describe('<MobileMyNypl> with the props isLoggedIn that is set to be true', () =
     '"ResearchLink", and "MobileMyNypl-Catalog-Link"', () => {
     expect(component.find('a')).to.have.length(3);
     expect(component.find('.MobileMyNypl-Catalog-Link').type()).to.equal('a');
+    expect(component.find('.CatalogLink').type()).to.equal('a');
+    expect(component.find('.ResearchLink').type()).to.equal('a');
   });
 
   it('should have the <a> with class name "CatalogLink". Its text equals to ' +

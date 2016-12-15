@@ -128,6 +128,8 @@ describe('<MobileMyNypl> with the props isLoggedIn that is set to be true', () =
 
   it('should have the method "renderLogOutLink" to render the proper log out link',
     () => {
+      // renderLogOutLink() is one of the methods of <MobileMyNypl />. It locates in render()
+      // life cycle and renders HTML elements for log out link.
       const renderedInstance = component.instance().renderLogOutLink();
 
       expect(renderedInstance.type).to.equal('a');
@@ -155,7 +157,7 @@ describe('<MobileMyNypl> with the props patronName that has valid value', () => 
   });
 
   it('should have a <div> with class name "MobileMyNypl-Greeting". It has a <p> and its text ' +
-    'equals to "Hello, Darren Stewart"',
+    'equals to "HELLO, Darren Stewart"',
     () => {
       expect(component.find('.MobileMyNypl-Greeting').type()).to.equal('div');
       expect(component.find('p')).to.have.length(1);

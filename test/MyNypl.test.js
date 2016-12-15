@@ -136,8 +136,10 @@ describe('<MyNypl> with the props isLoggedIn that is set to be true', () => {
     );
   });
 
-  it('should have the method "renderLogOutLink" to render the properly log out link',
+  it('should have the method "renderLogOutLink" to render the proper log out link',
     () => {
+      // renderLogOutLink() is one of the methods of <MobileMyNypl />. It locates in the render()
+      // life cycle and renders HTML elements for log out link.
       const renderedInstance = component.instance().renderLogOutLink();
 
       expect(renderedInstance.type).to.equal('a');
@@ -165,7 +167,7 @@ describe('<MyNypl> with the props patronName that has valid value', () => {
   });
 
   it('should have a <p> with class name "MyNypl-Patron-Name". Its text equals to ' +
-    '"Hello, Darren Stewart"',
+    '"HELLO, Darren Stewart"',
     () => {
       expect(component.find('p')).to.have.length(1);
       expect(component.find('.MyNypl-Patron-Name')).to.be.defined;

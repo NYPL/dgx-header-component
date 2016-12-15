@@ -126,7 +126,7 @@ describe('<MobileMyNypl> with the props isLoggedIn that is set to be true', () =
     );
   });
 
-  it('should have the method "renderLogOutLink" to render the properly log out link',
+  it('should have the method "renderLogOutLink" to render the proper log out link',
     () => {
       const renderedInstance = component.instance().renderLogOutLink();
 

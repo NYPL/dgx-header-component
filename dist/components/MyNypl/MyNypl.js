@@ -195,7 +195,11 @@ MyNypl.defaultProps = {
   loginCatalogLink: _appConfig2.default.loginMyNyplLinks.catalog,
   loginResearchLink: _appConfig2.default.loginMyNyplLinks.research,
   catalogLink: _appConfig2.default.myNyplLinks.catalog,
-  researchLink: _appConfig2.default.myNyplLinks.research
+  researchLink: _appConfig2.default.myNyplLinks.research,
+  logOutLink: _appConfig2.default.loginMyNyplLinks.logOutLink,
+  isLoggedIn: false,
+  isOauthLoginActivated: false,
+  patronName: ''
 };
 
 exports.default = MyNypl;

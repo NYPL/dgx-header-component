@@ -49,24 +49,24 @@ describe('MyNypl', () => {
       }
     );
 
-    it('should have an <a> with class name "MyNypl-Catalog-Btn". Its text equals to ' +
+    it('should have an <a> with class name "MyNypl-Catalog-Btn". Its text equals ' +
       '"LOG INTO THE CATALOG"', () => {
       expect(component.find('.MyNypl-Catalog-Btn').text()).to.equal('LOG INTO THE CATALOG');
     });
 
-    it('should have the <a> with class name "MyNypl-Catalog-Btn". Its href equals to ' +
+    it('should have the <a> with class name "MyNypl-Catalog-Btn". Its href equals' +
       '"https://browse.nypl.org/iii/encore/myaccount"', () => {
       expect(component.find('.MyNypl-Catalog-Btn').props().href).to.equal(
         'https://browse.nypl.org/iii/encore/myaccount'
       );
     });
 
-    it('should have the <a> with class name "MyNypl-Research-Btn". Its text equals to ' +
+    it('should have the <a> with class name "MyNypl-Research-Btn". Its text equals ' +
       '"LOG INTO THE RESEARCH CATALOG"', () => {
       expect(component.find('.MyNypl-Research-Btn').text()).to.equal('LOG INTO THE RESEARCH CATALOG');
     });
 
-    it('should have the <a> with class name "MyNypl-Research-Btn". Its href equals to ' +
+    it('should have the <a> with class name "MyNypl-Research-Btn". Its href equals' +
       '"https://browse.nypl.org/iii/encore/myaccount"', () => {
       expect(component.find('.MyNypl-Research-Btn').props().href).to.equal(
         'https://catalog.nypl.org/patroninfo/top'
@@ -74,7 +74,7 @@ describe('MyNypl', () => {
     });
   });
 
-  describe('<MyNypl> with the props isOauthLoginActivated that is set to be true', () => {
+  describe('<MyNypl> with the prop isOauthLoginActivated that is set to be true', () => {
     let component;
 
     before(() => {
@@ -87,7 +87,7 @@ describe('MyNypl', () => {
       }
     );
 
-    it('should have the <a> with class name "MyNypl-Catalog-Btn". Its href equals to ' +
+    it('should have the <a> with class name "MyNypl-Catalog-Btn". Its href equals ' +
       '"https://isso.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount"',
       () => {
         expect(component.find('.MyNypl-Catalog-Btn').props().href).to.equal(
@@ -96,7 +96,7 @@ describe('MyNypl', () => {
       }
     );
 
-    it('should have the <a> with class name "MyNypl-Research-Btn". Its href equals to ' +
+    it('should have the <a> with class name "MyNypl-Research-Btn". Its href equals ' +
       '"https://isso.nypl.org/auth/login?redirect_uri=https://catalog.nypl.org/patroninfo/top" ',
       () => {
         expect(component.find('.MyNypl-Research-Btn').props().href).to.equal(
@@ -106,84 +106,162 @@ describe('MyNypl', () => {
     );
   });
 
-  describe('<MyNypl> with the props isLoggedIn that is set to be true', () => {
+  describe('<MyNypl> with the prop isLoggedIn that is set to be true', () => {
     let component;
 
     before(() => {
       component = mount(
-        <MyNypl
-          isLoggedIn
-          logOutLink={'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'}
-        />
+        <MyNypl isLoggedIn />
       );
     });
 
-    it('should have props isOauthLoginActivated and isLoggedIn equals true, and logOutLink equals' +
-      'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org',
-      () => {
-        expect(component.props().isLoggedIn).to.equal(true);
-        expect(component.props().logOutLink).to.equal(
-          'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'
-        )
-      }
-    );
-
-    it('should have three <a>. Their class names are "MyNypl-Catalog-Btn",' +
-      '"MyNypl-Research-Btn", and "MyNypl-Catalog-Link"', () => {
-      expect(component.find('a')).to.have.length(3);
-      expect(component.find('.MyNypl-Catalog-Link').type()).to.equal('a');
-      expect(component.find('.MyNypl-Catalog-Btn').type()).to.equal('a');
-      expect(component.find('.MyNypl-Research-Btn').type()).to.equal('a');
-    });
-
-    it('should have the <a> with class name "MyNypl-Catalog-Btn". Its text equals to ' +
-      '"GO TO THE CATALOG"', () => {
-      expect(component.find('.MyNypl-Catalog-Btn').text()).to.equal('GO TO THE CATALOG');
-    });
-
-    it('should have the <a> with class name "MyNypl-Research-Btn". Its text equals to ' +
-      '"GO TO THE RESEARCH CATALOG"', () => {
-      expect(component.find('.MyNypl-Research-Btn').text()).to.equal('GO TO THE RESEARCH CATALOG');
-    });
-
-    it('should have the <a> with class name "MyNypl-Catalog-Btn". Its href equals to ' +
-      '"https://browse.nypl.org/iii/encore/myaccount"', () => {
-      expect(component.find('.MyNypl-Catalog-Btn').props().href).to.equal(
-        'https://browse.nypl.org/iii/encore/myaccount'
+    it('should have props isLoggedIn equals true, and logOutLink equals' +
+      '"https://isso.nypl.org/auth/logout"',
+        () => {
+          expect(component.props().isLoggedIn).to.equal(true);
+          expect(component.props().logOutLink).to.equal(
+            'https://isso.nypl.org/auth/logout'
+          )
+        }
       );
-    });
 
-    it('should have the <a> with class name "MyNypl-Research-Btn". Its href equals to ' +
-      '"https://catalog.nypl.org/patroninfo/top"', () => {
-      expect(component.find('.MyNypl-Research-Btn').props().href).to.equal(
-        'https://catalog.nypl.org/patroninfo/top'
-      );
-    });
+      it('should have three <a>. Their class names are "MyNypl-Catalog-Btn",' +
+        '"MyNypl-Research-Btn", and "MyNypl-Catalog-Link"', () => {
+        expect(component.find('a')).to.have.length(3);
+        expect(component.find('.MyNypl-Catalog-Link').type()).to.equal('a');
+        expect(component.find('.MyNypl-Catalog-Btn').type()).to.equal('a');
+        expect(component.find('.MyNypl-Research-Btn').type()).to.equal('a');
+      });
 
-    it('should have the method "renderLogOutLink" to render the proper log out link',
-      () => {
-        // renderLogOutLink() is one of the methods of <MobileMyNypl />. It locates in the render()
-        // life cycle and renders HTML elements for log out link.
-        const renderedInstance = component.instance().renderLogOutLink();
+      it('should have the <a> with class name "MyNypl-Catalog-Btn". Its text equals ' +
+        '"GO TO THE CATALOG"', () => {
+        expect(component.find('.MyNypl-Catalog-Btn').text()).to.equal('GO TO THE CATALOG');
+      });
 
-        expect(renderedInstance.type).to.equal('a');
-        expect(renderedInstance.props.href).to.equal(
-          'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'
+      it('should have the <a> with class name "MyNypl-Research-Btn". Its text equals ' +
+        '"GO TO THE RESEARCH CATALOG"', () => {
+        expect(component.find('.MyNypl-Research-Btn').text()).to.equal('GO TO THE RESEARCH CATALOG');
+      });
+
+      it('should have the <a> with class name "MyNypl-Catalog-Btn". Its href equals ' +
+        '"https://browse.nypl.org/iii/encore/myaccount"', () => {
+        expect(component.find('.MyNypl-Catalog-Btn').props().href).to.equal(
+          'https://browse.nypl.org/iii/encore/myaccount'
         );
-        expect(renderedInstance.props.className).to.equal('MyNypl-Catalog-Link');
-        expect(renderedInstance.props.children).to.equal('Log Out');
+      });
 
-        const onClick = sinon.spy(utils, 'trackHeader');
+      it('should have the <a> with class name "MyNypl-Research-Btn". Its href equals ' +
+        '"https://catalog.nypl.org/patroninfo/top"', () => {
+        expect(component.find('.MyNypl-Research-Btn').props().href).to.equal(
+          'https://catalog.nypl.org/patroninfo/top'
+        );
+      });
 
-        component.find('.MyNypl-Catalog-Link').simulate('click');
-        expect(onClick.called);
+      it('should have the method "renderLogOutLink" to render the proper log out link',
+        () => {
+          // renderLogOutLink() is one of the methods of <MobileMyNypl />. It locates in the render()
+          // life cycle and renders HTML elements for log out link.
+          const renderedInstance = component.instance().renderLogOutLink();
 
-        onClick.restore();
-      }
-    );
+          expect(renderedInstance.type).to.equal('a');
+          expect(renderedInstance.props.href).to.equal(
+            'https://isso.nypl.org/auth/logout'
+          );
+          expect(renderedInstance.props.className).to.equal('MyNypl-Catalog-Link');
+          expect(renderedInstance.props.children).to.equal('Log Out');
+
+          const onClick = sinon.spy(utils, 'trackHeader');
+
+          component.find('.MyNypl-Catalog-Link').simulate('click');
+          expect(onClick.called);
+
+          onClick.restore();
+        }
+      );
+
   });
 
-  describe('<MyNypl> with the props patronName that has valid value', () => {
+  describe('<MyNypl> with the prop isLoggedIn that is set to be true and the value of logOutLink ' +
+    'is passed',
+    () => {
+      let component;
+
+      before(() => {
+        component = mount(
+          <MyNypl
+            isLoggedIn
+            logOutLink={'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'}
+          />
+        );
+      });
+
+      it('should have props isLoggedIn equals true, and logOutLink equals' +
+        'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org',
+        () => {
+          expect(component.props().isLoggedIn).to.equal(true);
+          expect(component.props().logOutLink).to.equal(
+            'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'
+          )
+        }
+      );
+
+      it('should have three <a>. Their class names are "MyNypl-Catalog-Btn",' +
+        '"MyNypl-Research-Btn", and "MyNypl-Catalog-Link"', () => {
+        expect(component.find('a')).to.have.length(3);
+        expect(component.find('.MyNypl-Catalog-Link').type()).to.equal('a');
+        expect(component.find('.MyNypl-Catalog-Btn').type()).to.equal('a');
+        expect(component.find('.MyNypl-Research-Btn').type()).to.equal('a');
+      });
+
+      it('should have the <a> with class name "MyNypl-Catalog-Btn". Its text equals ' +
+        '"GO TO THE CATALOG"', () => {
+        expect(component.find('.MyNypl-Catalog-Btn').text()).to.equal('GO TO THE CATALOG');
+      });
+
+      it('should have the <a> with class name "MyNypl-Research-Btn". Its text equals ' +
+        '"GO TO THE RESEARCH CATALOG"', () => {
+        expect(component.find('.MyNypl-Research-Btn').text()).to.equal('GO TO THE RESEARCH CATALOG');
+      });
+
+      it('should have the <a> with class name "MyNypl-Catalog-Btn". Its href equals ' +
+        '"https://browse.nypl.org/iii/encore/myaccount"', () => {
+        expect(component.find('.MyNypl-Catalog-Btn').props().href).to.equal(
+          'https://browse.nypl.org/iii/encore/myaccount'
+        );
+      });
+
+      it('should have the <a> with class name "MyNypl-Research-Btn". Its href equals ' +
+        '"https://catalog.nypl.org/patroninfo/top"', () => {
+        expect(component.find('.MyNypl-Research-Btn').props().href).to.equal(
+          'https://catalog.nypl.org/patroninfo/top'
+        );
+      });
+
+      it('should have the method "renderLogOutLink" to render the proper log out link',
+        () => {
+          // renderLogOutLink() is one of the methods of <MobileMyNypl />. It locates in the render()
+          // life cycle and renders HTML elements for log out link.
+          const renderedInstance = component.instance().renderLogOutLink();
+
+          expect(renderedInstance.type).to.equal('a');
+          expect(renderedInstance.props.href).to.equal(
+            'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'
+          );
+          expect(renderedInstance.props.className).to.equal('MyNypl-Catalog-Link');
+          expect(renderedInstance.props.children).to.equal('Log Out');
+
+          const onClick = sinon.spy(utils, 'trackHeader');
+
+          component.find('.MyNypl-Catalog-Link').simulate('click');
+          expect(onClick.called);
+
+          onClick.restore();
+        }
+      );
+    }
+  );
+
+  describe('<MyNypl> with the prop patronName that has valid value', () => {
     let component;
 
     before(() => {
@@ -196,7 +274,7 @@ describe('MyNypl', () => {
       }
     );
 
-    it('should have a <p> with class name "MyNypl-Patron-Name". Its text equals to ' +
+    it('should have a <p> with class name "MyNypl-Patron-Name". Its text equals ' +
       '"HELLO, Darren Stewart"',
       () => {
         expect(component.find('p')).to.have.length(1);

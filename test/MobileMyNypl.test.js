@@ -37,19 +37,19 @@ describe('MobileMyNypl', () => {
       }
     );
 
-    it('should have an <a> with class name "CatalogLink". Its text equals to ' +
+    it('should have an <a> with class name "CatalogLink". Its text equals ' +
       '"LOG INTO THE CATALOG"', () => {
       expect(component.find('.CatalogLink').text()).to.equal('LOG INTO THE CATALOG');
     });
 
-    it('should have the <a> with class name "CatalogLink". Its href equals to ' +
+    it('should have the <a> with class name "CatalogLink". Its href equals ' +
       '"https://browse.nypl.org/iii/encore/myaccount"', () => {
       expect(component.find('.CatalogLink').props().href).to.equal(
         'https://browse.nypl.org/iii/encore/myaccount'
       );
     });
 
-    it('should have the <a> with class name "ResearchLink". Its text equals to ' +
+    it('should have the <a> with class name "ResearchLink". Its text equals ' +
       '"LOG INTO THE RESEARCH CATALOG"', () => {
       expect(component.find('.ResearchLink').text()).to.equal('LOG INTO THE RESEARCH CATALOG');
     });
@@ -75,7 +75,7 @@ describe('MobileMyNypl', () => {
       }
     );
 
-    it('should have the <a> with class name "CatalogLink". Its href equals to ' +
+    it('should have the <a> with class name "CatalogLink". Its href equals ' +
       '"https://isso.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount"',
       () => {
         expect(component.find('.CatalogLink').props().href).to.equal(
@@ -84,7 +84,7 @@ describe('MobileMyNypl', () => {
       }
     );
 
-    it('should have the <a> with class name "ResearchLink". Its href equals to ' +
+    it('should have the <a> with class name "ResearchLink". Its href equals ' +
       '"https://isso.nypl.org/auth/login?redirect_uri=https://catalog.nypl.org/patroninfo/top" ',
       () => {
         expect(component.find('.ResearchLink').props().href).to.equal(
@@ -94,24 +94,21 @@ describe('MobileMyNypl', () => {
     );
   });
 
-  describe('<MobileMyNypl> with the props isLoggedIn that is set to be true', () => {
+  describe('<MobileMyNypl> with the prop isLoggedIn that is set to be true', () => {
     let component;
 
     before(() => {
       component = mount(
-        <MobileMyNypl
-          isLoggedIn
-          logOutLink={'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'}
-        />
+        <MobileMyNypl isLoggedIn />
       );
     });
 
-    it('should have props isOauthLoginActivated and isLoggedIn equals true, and logOutLink equals' +
-      'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org',
+    it('should have props isLoggedIn equals true and logOutLink equals' +
+      '"https://isso.nypl.org/auth/logout"',
       () => {
         expect(component.props().isLoggedIn).to.equal(true);
         expect(component.props().logOutLink).to.equal(
-          'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'
+          'https://isso.nypl.org/auth/logout'
         )
       }
     );
@@ -124,24 +121,24 @@ describe('MobileMyNypl', () => {
       expect(component.find('.ResearchLink').type()).to.equal('a');
     });
 
-    it('should have the <a> with class name "CatalogLink". Its text equals to ' +
+    it('should have the <a> with class name "CatalogLink". Its text equals ' +
       '"GO TO THE CATALOG"', () => {
       expect(component.find('.CatalogLink').text()).to.equal('GO TO THE CATALOG');
     });
 
-    it('should have the <a> with class name "ResearchLink". Its text equals to ' +
+    it('should have the <a> with class name "ResearchLink". Its text equals ' +
       '"GO TO THE RESEARCH CATALOG"', () => {
       expect(component.find('.ResearchLink').text()).to.equal('GO TO THE RESEARCH CATALOG');
     });
 
-    it('should have the <a> with class name "CatalogLink". Its href equals to ' +
+    it('should have the <a> with class name "CatalogLink". Its href equals ' +
       '"https://browse.nypl.org/iii/encore/myaccount"', () => {
       expect(component.find('.CatalogLink').props().href).to.equal(
         'https://browse.nypl.org/iii/encore/myaccount'
       );
     });
 
-    it('should have the <a> with class name "ResearchLink". Its href equals to ' +
+    it('should have the <a> with class name "ResearchLink". Its href equals ' +
       '"https://catalog.nypl.org/patroninfo/top"', () => {
       expect(component.find('.ResearchLink').props().href).to.equal(
         'https://catalog.nypl.org/patroninfo/top'
@@ -156,7 +153,7 @@ describe('MobileMyNypl', () => {
 
         expect(renderedInstance.type).to.equal('a');
         expect(renderedInstance.props.href).to.equal(
-          'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'
+          'https://isso.nypl.org/auth/logout'
         );
         expect(renderedInstance.props.className).to.equal('MobileMyNypl-Catalog-Link');
         expect(renderedInstance.props.children).to.equal('Log Out');
@@ -170,6 +167,86 @@ describe('MobileMyNypl', () => {
       }
     );
   });
+
+  describe('<MobileMyNypl> with the prop isLoggedIn that is set to be true and the value of ' +
+    'logOutLink is passed',
+    () => {
+      let component;
+
+      before(() => {
+        component = mount(
+          <MobileMyNypl
+            isLoggedIn
+            logOutLink={'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'}
+          />
+        );
+      });
+
+      it('should have props isOauthLoginActivated and isLoggedIn equals true, and logOutLink equals' +
+        'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org',
+        () => {
+          expect(component.props().isLoggedIn).to.equal(true);
+          expect(component.props().logOutLink).to.equal(
+            'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'
+          )
+        }
+      );
+
+      it('should have three <a>. Their class names are "CatalogLink",' +
+        '"ResearchLink", and "MobileMyNypl-Catalog-Link"', () => {
+        expect(component.find('a')).to.have.length(3);
+        expect(component.find('.MobileMyNypl-Catalog-Link').type()).to.equal('a');
+        expect(component.find('.CatalogLink').type()).to.equal('a');
+        expect(component.find('.ResearchLink').type()).to.equal('a');
+      });
+
+      it('should have the <a> with class name "CatalogLink". Its text equals to ' +
+        '"GO TO THE CATALOG"', () => {
+        expect(component.find('.CatalogLink').text()).to.equal('GO TO THE CATALOG');
+      });
+
+      it('should have the <a> with class name "ResearchLink". Its text equals to ' +
+        '"GO TO THE RESEARCH CATALOG"', () => {
+        expect(component.find('.ResearchLink').text()).to.equal('GO TO THE RESEARCH CATALOG');
+      });
+
+      it('should have the <a> with class name "CatalogLink". Its href equals to ' +
+        '"https://browse.nypl.org/iii/encore/myaccount"', () => {
+        expect(component.find('.CatalogLink').props().href).to.equal(
+          'https://browse.nypl.org/iii/encore/myaccount'
+        );
+      });
+
+      it('should have the <a> with class name "ResearchLink". Its href equals to ' +
+        '"https://catalog.nypl.org/patroninfo/top"', () => {
+        expect(component.find('.ResearchLink').props().href).to.equal(
+          'https://catalog.nypl.org/patroninfo/top'
+        );
+      });
+
+      it('should have the method "renderLogOutLink" to render the proper log out link',
+        () => {
+          // renderLogOutLink() is one of the methods of <MobileMyNypl />. It locates in render()
+          // life cycle and renders HTML elements for log out link.
+          const renderedInstance = component.instance().renderLogOutLink();
+
+          expect(renderedInstance.type).to.equal('a');
+          expect(renderedInstance.props.href).to.equal(
+            'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'
+          );
+          expect(renderedInstance.props.className).to.equal('MobileMyNypl-Catalog-Link');
+          expect(renderedInstance.props.children).to.equal('Log Out');
+
+          const onClick = sinon.spy(utils, 'trackHeader');
+
+          component.find('.MobileMyNypl-Catalog-Link').simulate('click');
+          expect(onClick.called);
+
+          onClick.restore();
+        }
+      );
+    }
+  );
 
   describe('<MobileMyNypl> with the props patronName that has valid value', () => {
     let component;

@@ -178,7 +178,7 @@ MobileMyNypl.defaultProps = {
   loginResearchLink: appConfig.loginMyNyplLinks.research,
   catalogLink: appConfig.myNyplLinks.catalog,
   researchLink: appConfig.myNyplLinks.research,
-  logOutLink: '',
+  logOutLink: appConfig.loginMyNyplLinks.logOutLink,
   isLoggedIn: false,
   isOauthLoginActivated: false,
   patronName: '',

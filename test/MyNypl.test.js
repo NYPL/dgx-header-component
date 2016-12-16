@@ -45,7 +45,7 @@ describe('MyNypl', () => {
         expect(component.props().isLoggedIn).to.equal(false);
         expect(component.props().isOauthLoginActivated).to.equal(false);
         expect(component.props().patronName).to.equal('');
-        expect(component.props().logOutLink).to.equal('');
+        expect(component.props().logOutLink).to.equal('https://isso.nypl.org/auth/logout');
       }
     );
 

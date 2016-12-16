@@ -137,8 +137,8 @@ function Utils() {
   /**
    * getLoginData(cookie, cb, refreshCookieCb)
    * Handle the cookie from log in and make api calls with the callback function passed in.
-   * If getting statusCode as 401 and exipred as true, go and hit refreshAccessToken() to refresh
-   * access_token in nyplIdentityPatron cookie
+   * If the returned statusCode is 401 and the cookie is expired, invoke refreshAccessToken()
+   * to refresh access_token in the nyplIdentityPatron cookie.
    *
    * @param {string} cookie - The cookie returned.
    * @param {function(result: Object)} cb - The callback function passed in for dealing with data

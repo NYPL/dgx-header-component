@@ -182,12 +182,12 @@ function Utils() {
   this.refreshAccessToken = (cb) => {
     axios
       .get(
-        'https://isso.nypl.org/auth/refresh',
+        config.loginMyNyplLinks.tokenRefreshLink,
         { withCredentials: true }
       )
       .then(cb)
       .catch(response => {
-        console.warn('Error on Axios GET request: https://isso.nypl.org/auth/refresh');
+        console.warn(`Error on Axios GET request: ${config.loginMyNyplLinks.tokenRefreshLink}`);
         if (response instanceof Error) {
           console.warn(response.message);
         } else {

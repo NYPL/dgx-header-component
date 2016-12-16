@@ -13,7 +13,7 @@ describe('MobileMyNypl', () => {
     let component;
 
     before(() => {
-      component = shallow(<MobileMyNypl />);
+      component = mount(<MobileMyNypl />);
     });
 
     it('should have a <div> with class name "MobileMyNypl" as a wrapper', () => {
@@ -28,11 +28,14 @@ describe('MobileMyNypl', () => {
       }
     );
 
-    it('should have props for isLoggedIn, isOauthLoginActivated, and patronName', () => {
-      expect(component.props().isLoggedIn).to.be.defined;
-      expect(component.props().isOauthLoginActivated).to.be.defined;
-      expect(component.props().patronName).to.be.defined;
-    });
+    it('should have props with default values of isLoggedIn, isOauthLoginActivated, patronName, ' +
+      'and logOutLink', () => {
+        expect(component.props().isLoggedIn).to.equal(false);
+        expect(component.props().isOauthLoginActivated).to.equal(false);
+        expect(component.props().patronName).to.equal('');
+        expect(component.props().logOutLink).to.equal('');
+      }
+    );
 
     it('should have an <a> with class name "CatalogLink". Its text equals to ' +
       '"LOG INTO THE CATALOG"', () => {
@@ -63,8 +66,14 @@ describe('MobileMyNypl', () => {
     let component;
 
     before(() => {
-      component = shallow(<MobileMyNypl isOauthLoginActivated />);
+      component = mount(<MobileMyNypl isOauthLoginActivated />);
     });
+
+    it('should have props isOauthLoginActivated equals true',
+      () => {
+        expect(component.props().isOauthLoginActivated).to.equal(true);
+      }
+    );
 
     it('should have the <a> with class name "CatalogLink". Its href equals to ' +
       '"https://isso.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount"',
@@ -89,13 +98,23 @@ describe('MobileMyNypl', () => {
     let component;
 
     before(() => {
-      component = shallow(
+      component = mount(
         <MobileMyNypl
           isLoggedIn
           logOutLink={'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'}
         />
       );
     });
+
+    it('should have props isOauthLoginActivated and isLoggedIn equals true, and logOutLink equals' +
+      'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org',
+      () => {
+        expect(component.props().isLoggedIn).to.equal(true);
+        expect(component.props().logOutLink).to.equal(
+          'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'
+        )
+      }
+    );
 
     it('should have three <a>. Their class names are "CatalogLink",' +
       '"ResearchLink", and "MobileMyNypl-Catalog-Link"', () => {
@@ -156,8 +175,14 @@ describe('MobileMyNypl', () => {
     let component;
 
     before(() => {
-      component = shallow(<MobileMyNypl patronName={'Darren Stewart'} />);
+      component = mount(<MobileMyNypl patronName={'Darren Stewart'} />);
     });
+
+    it('should have props patronName equals "Darren Stewart"',
+      () => {
+        expect(component.props().patronName).to.equal('Darren Stewart');
+      }
+    );
 
     it('should have a <div> with class name "MobileMyNypl-Greeting". It has a <p> and its text ' +
       'equals to "HELLO, Darren Stewart"',

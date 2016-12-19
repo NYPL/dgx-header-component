@@ -182,8 +182,8 @@ describe('MobileMyNypl', () => {
         );
       });
 
-      it('should have props isOauthLoginActivated and isLoggedIn equals true, and logOutLink ' +
-        'equals "https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org"',
+      it('should have prop isLoggedIn equals true, and logOutLink equals ' +
+        '"https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org"',
         () => {
           expect(component.props().isLoggedIn).to.equal(true);
           expect(component.props().logOutLink).to.equal(

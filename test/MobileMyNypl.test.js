@@ -248,26 +248,50 @@ describe('MobileMyNypl', () => {
     }
   );
 
-  describe('<MobileMyNypl> with the props patronName that has valid value', () => {
-    let component;
+  describe('<MobileMyNypl> with the prop patronName that has valid value but isLoggedIn is false',
+    () => {
+      let component;
 
-    before(() => {
-      component = mount(<MobileMyNypl patronName={'Darren Stewart'} />);
-    });
+      before(() => {
+        component = mount(<MobileMyNypl patronName={'Darren Stewart'} />);
+      });
 
-    it('should have props patronName equals "Darren Stewart"',
-      () => {
-        expect(component.props().patronName).to.equal('Darren Stewart');
-      }
-    );
+      it('should have props patronName equals "Darren Stewart"',
+        () => {
+          expect(component.props().patronName).to.equal('Darren Stewart');
+        }
+      );
 
-    it('should have a <div> with class name "MobileMyNypl-Greeting". It has a <p> and its text ' +
-      'equals to "HELLO, Darren Stewart"',
-      () => {
-        expect(component.find('.MobileMyNypl-Greeting').type()).to.equal('div');
-        expect(component.find('p')).to.have.length(1);
-        expect(component.find('p').text()).to.equal('HELLO, Darren Stewart');
-      }
-    );
-  });
+      it('should not render the <p> for patron greeting',
+        () => {
+          expect(component.find('p')).to.have.length(0);
+        }
+      );
+    }
+  );
+
+  describe('<MobileMyNypl> with the prop patronName that has valid value and isLoggedIn is true',
+    () => {
+      let component;
+
+      before(() => {
+        component = mount(<MobileMyNypl isLoggedIn patronName={'Darren Stewart'} />);
+      });
+
+      it('should have props patronName equals "Darren Stewart"',
+        () => {
+          expect(component.props().patronName).to.equal('Darren Stewart');
+        }
+      );
+
+      it('should have a <div> with class name "MobileMyNypl-Greeting". It has a <p> and its text ' +
+        'equals to "HELLO, Darren Stewart"',
+        () => {
+          expect(component.find('.MobileMyNypl-Greeting').type()).to.equal('div');
+          expect(component.find('p')).to.have.length(1);
+          expect(component.find('p').text()).to.equal('HELLO, Darren Stewart');
+        }
+      );
+    }
+  );
 });

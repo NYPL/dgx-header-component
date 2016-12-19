@@ -277,6 +277,26 @@ describe('MyNypl', () => {
       }
     );
 
+    it('should not render the <p> for patron greeting',
+      () => {
+        expect(component.find('p')).to.have.length(0);
+      }
+    );
+  });
+
+  describe('<MyNypl> with the prop patronName that has valid value', () => {
+    let component;
+
+    before(() => {
+      component = mount(<MyNypl isLoggedIn patronName={'Darren Stewart'} />);
+    });
+
+    it('should have props patronName equals "Darren Stewart"',
+      () => {
+        expect(component.props().patronName).to.equal('Darren Stewart');
+      }
+    );
+
     it('should have a <p> with class name "MyNypl-Patron-Name". Its text equals ' +
       '"HELLO, Darren Stewart"',
       () => {

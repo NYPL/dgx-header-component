@@ -44,7 +44,7 @@ class MyNypl extends React.Component {
    * Returns the patron's name in the drop down menu if it exists.
    */
   renderGreeting() {
-    if (!this.props.patronName) {
+    if (!this.props.patronName || !this.props.isLoggedIn) {
       return null;
     }
 

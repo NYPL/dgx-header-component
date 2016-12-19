@@ -87,7 +87,7 @@ class MobileMyNypl extends React.Component {
    * Returns the patron's name in the drop down menu if it exists.
    */
   renderGreeting() {
-    return (this.props.patronName) ?
+    return (this.props.patronName && this.props.isLoggedIn) ?
       <div className={`${this.props.className}-Greeting`}>
         <p>
           HELLO, {this.props.patronName}

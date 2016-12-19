@@ -264,7 +264,7 @@ describe('MyNypl', () => {
     }
   );
 
-  describe('<MyNypl> with the prop patronName that has valid value', () => {
+  describe('<MyNypl> with the props patronName that has valid value but isLoggedIn is false', () => {
     let component;
 
     before(() => {
@@ -284,7 +284,7 @@ describe('MyNypl', () => {
     );
   });
 
-  describe('<MyNypl> with the prop patronName that has valid value', () => {
+  describe('<MyNypl> with the props patronName that has valid value and isLoggedIn is true', () => {
     let component;
 
     before(() => {

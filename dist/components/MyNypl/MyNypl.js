@@ -83,7 +83,7 @@ var MyNypl = function (_React$Component) {
   }, {
     key: 'renderGreeting',
     value: function renderGreeting() {
-      if (!this.props.patronName) {
+      if (!this.props.patronName || !this.props.isLoggedIn) {
         return null;
       }
 

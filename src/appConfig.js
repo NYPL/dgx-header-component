@@ -35,6 +35,7 @@ const config = {
     catalog: 'https://isso.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount',
     research: 'https://isso.nypl.org/auth/login?redirect_uri=https://catalog.nypl.org/patroninfo/top',
     logoutLink: 'https://isso.nypl.org/auth/logout',
+    tokenRefreshLink: 'https://isso.nypl.org/auth/refresh',
   },
   myNyplLinks: {
     catalog: 'https://browse.nypl.org/iii/encore/myaccount',

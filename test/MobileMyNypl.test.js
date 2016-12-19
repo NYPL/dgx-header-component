@@ -1,7 +1,8 @@
+ /* globals before describe it */
 import React from 'react';
 import sinon from 'sinon';
 import { expect } from 'chai';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 
 // Import the component that is going to be tested
 import MobileMyNypl from './../src/components/MyNypl/MobileMyNypl.js';
@@ -30,12 +31,11 @@ describe('MobileMyNypl', () => {
 
     it('should have props with default values of isLoggedIn, isOauthLoginActivated, patronName, ' +
       'and logOutLink', () => {
-        expect(component.props().isLoggedIn).to.equal(false);
-        expect(component.props().isOauthLoginActivated).to.equal(false);
-        expect(component.props().patronName).to.equal('');
-        expect(component.props().logOutLink).to.equal('https://isso.nypl.org/auth/logout');
-      }
-    );
+      expect(component.props().isLoggedIn).to.equal(false);
+      expect(component.props().isOauthLoginActivated).to.equal(false);
+      expect(component.props().patronName).to.equal('');
+      expect(component.props().logOutLink).to.equal('https://isso.nypl.org/auth/logout');
+    });
 
     it('should have an <a> with class name "CatalogLink". Its text equals ' +
       '"LOG INTO THE CATALOG"', () => {
@@ -109,7 +109,7 @@ describe('MobileMyNypl', () => {
         expect(component.props().isLoggedIn).to.equal(true);
         expect(component.props().logOutLink).to.equal(
           'https://isso.nypl.org/auth/logout'
-        )
+        );
       }
     );
 
@@ -182,13 +182,13 @@ describe('MobileMyNypl', () => {
         );
       });
 
-      it('should have props isOauthLoginActivated and isLoggedIn equals true, and logOutLink equals' +
-        'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org',
+      it('should have props isOauthLoginActivated and isLoggedIn equals true, and logOutLink ' +
+        'equals "https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org"',
         () => {
           expect(component.props().isLoggedIn).to.equal(true);
           expect(component.props().logOutLink).to.equal(
             'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'
-          )
+          );
         }
       );
 

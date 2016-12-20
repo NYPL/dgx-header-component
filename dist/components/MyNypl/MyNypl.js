@@ -29,7 +29,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var styles = {
-  logoutLink: {
+  logOutLink: {
     backgroundColor: '#FFF',
     border: '10px solid #FFF',
     borderRadius: '20px',
@@ -83,7 +83,7 @@ var MyNypl = function (_React$Component) {
   }, {
     key: 'renderGreeting',
     value: function renderGreeting() {
-      if (!this.props.patronName) {
+      if (!this.props.patronName || !this.props.isLoggedIn) {
         return null;
       }
 
@@ -96,22 +96,22 @@ var MyNypl = function (_React$Component) {
     }
 
     /**
-     * renderLogoutLink()
+     * renderLogOutLink()
      * Returns the log out button if the patron has been logged in.
      */
 
   }, {
-    key: 'renderLogoutLink',
-    value: function renderLogoutLink() {
+    key: 'renderLogOutLink',
+    value: function renderLogOutLink() {
       return this.props.isLoggedIn ? _react2.default.createElement(
         'a',
         {
-          href: this.props.logoutLink,
+          href: this.props.logOutLink,
           className: this.props.className + '-Catalog-Link',
           onClick: function onClick() {
             return _utils2.default.trackHeader('My NYPL', 'Log Out');
           },
-          style: styles.logoutLink
+          style: styles.logOutLink
         },
         'Log Out'
       ) : null;
@@ -167,7 +167,7 @@ var MyNypl = function (_React$Component) {
             )
           )
         ),
-        this.renderLogoutLink()
+        this.renderLogOutLink()
       );
     }
   }]);
@@ -183,7 +183,7 @@ MyNypl.propTypes = {
   researchLink: _react2.default.PropTypes.string,
   loginCatalogLink: _react2.default.PropTypes.string,
   loginResearchLink: _react2.default.PropTypes.string,
-  logoutLink: _react2.default.PropTypes.string,
+  logOutLink: _react2.default.PropTypes.string,
   isLoggedIn: _react2.default.PropTypes.bool,
   isOauthLoginActivated: _react2.default.PropTypes.bool,
   patronName: _react2.default.PropTypes.string
@@ -196,7 +196,10 @@ MyNypl.defaultProps = {
   loginResearchLink: _appConfig2.default.loginMyNyplLinks.research,
   catalogLink: _appConfig2.default.myNyplLinks.catalog,
   researchLink: _appConfig2.default.myNyplLinks.research,
-  logoutLink: _appConfig2.default.loginMyNyplLinks.logoutLink
+  logOutLink: _appConfig2.default.loginMyNyplLinks.logOutLink,
+  isLoggedIn: false,
+  isOauthLoginActivated: false,
+  patronName: ''
 };
 
 exports.default = MyNypl;

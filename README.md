@@ -40,6 +40,10 @@ Call the instance in your application component:
 />
 ```
 
+### Test
+
+To run unit tests, run `npm test` in the terminal. Or run `npm run test-with-coverage` to run the test and see the test coverage.
+
 ### Navigation Configuration
 The current navigation can be used by importing `navConfig` from the module and passing it as a prop. Custom navigation can be passed if it follows a similar structure to what is in `/src/navConfig.js`.
 

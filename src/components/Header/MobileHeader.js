@@ -266,6 +266,7 @@ class MobileHeader extends React.Component {
             isLoggedIn={this.props.isLoggedIn}
             isOauthLoginActivated={this.props.isOauthLoginActivated}
             patronName={this.props.patronName}
+            logOutLink={this.props.logOutLink}
           />
         </FocusTrap>
       );
@@ -422,6 +423,7 @@ MobileHeader.propTypes = {
   isLoggedIn: React.PropTypes.bool,
   isOauthLoginActivated: React.PropTypes.bool,
   patronName: React.PropTypes.string,
+  logOutLink: React.PropTypes.string,
 };
 
 MobileHeader.defaultProps = {

@@ -332,7 +332,8 @@ var MobileHeader = function (_React$Component) {
           _react2.default.createElement(_MobileMyNypl2.default, {
             isLoggedIn: this.props.isLoggedIn,
             isOauthLoginActivated: this.props.isOauthLoginActivated,
-            patronName: this.props.patronName
+            patronName: this.props.patronName,
+            logOutLink: this.props.logOutLink
           })
         );
       }
@@ -538,7 +539,8 @@ MobileHeader.propTypes = {
   alt: _react2.default.PropTypes.string,
   isLoggedIn: _react2.default.PropTypes.bool,
   isOauthLoginActivated: _react2.default.PropTypes.bool,
-  patronName: _react2.default.PropTypes.string
+  patronName: _react2.default.PropTypes.string,
+  logOutLink: _react2.default.PropTypes.string
 };
 
 MobileHeader.defaultProps = {

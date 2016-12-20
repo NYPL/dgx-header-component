@@ -1,4 +1,4 @@
-{
+const mockData = {
   "data": {
     "decodedToken": {
       "iss": "https://www.nypl.org",
@@ -285,4 +285,6 @@
   "count": 1,
   "statusCode": 200,
   "debugInfo": [],
-}
+};
+
+export default mockData;

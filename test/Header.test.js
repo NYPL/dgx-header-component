@@ -3,18 +3,20 @@ import sinon from 'sinon';
 import { expect } from 'chai';
 import { shallow, mount } from 'enzyme';
 
+import axios from 'axios';
+
 // Import the component that is going to be tested
 import Header from './../src/components/Header/Header.js';
+// Import mock up data
+import authApiMockResponse from './authApiMockResponse.js';
 // Import related functions
 import utils from './../src/utils/utils.js';
 
 describe('<Header>', () => {
   let component;
+  let server;
 
-  before(() => {
-    component = mount(<Header />);
-  });
-
+  const mockApi = '/api/v0.1/auth/patron/tokens/eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvd3d3Lm55cGwub3JnIiwic3ViIjoiNjM2NzAyOCIsImF1ZCI6ImFwcF9sb2dpbiIsImlhdCI6MTQ4MjE3NjQ3MCwiZXhwIjoxNDgyMTgwMDcwLCJhdXRoX3RpbWUiOjE0ODIxNzY0NzAsInNjb3BlIjoib3BlbmlkIG9mZmxpbmVfYWNjZXNzIGNvb2tpZSBwYXRyb246cmVhZCJ9.JO7VbOqCC7HyjRmeyHD4zM1Gl0JBk5RdxjAkCp0h6sfVe-xs5FyY7biYqs19k4dUY2DbFYR5IG3xYt9IdhqyMkSnJxtiCY36WN7X_e0eBF2T1_IWKGaBc4JlbroMj5_aNB5W4nQvclrdlb2mV38Q_HGAMUKe8DDeCmAHctEtqGppNl8DC7IvqkekRS_6zgQwsHHW5kJR-f7zUROi4fvFpdNR-I7J4VNWdFIOijb4vXFOOWRLzdY_GHLJdWvSgxhqzwkceA5BScCicAKeHYHo04vabNp5TvPXoR0ypULqTyGYsNnXnUmh2Mu46j3bcNTACEKS97FBx1IfwttBL1ARtQ';
   // it should make an api call if the access token is available
     // call fetchPatronData and fake the result
     // if the result is expired
@@ -31,22 +33,55 @@ describe('<Header>', () => {
   // 1.1 it calls setLoginCookie()
   // 2. it returns errors
 
-  it('should call the API endpoint to get logged in patron\'s data if its state, loginCookie, is not empty' , (done) => {
-    component.setState({
-      loginCookie: '%7B%22access_token%22%3A%22eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvd3d3Lm55cGwub3JnIiwic3ViIjoiNjY3NzI3MyIsImF1ZCI6ImFwcF9sb2dpbiIsImlhdCI6MTQ4MTY2NjYyNSwiZXhwIjoxNDgxNjcwMjI1LCJhdXRoX3RpbWUiOjE0ODE2NjY2MjUsInNjb3BlIjoib3BlbmlkIG9mZmxpbmVfYWNjZXNzIGNvb2tpZSBwYXRyb246cmVhZCJ9.Bk2dWHnMvgl_BxW8CoS9DSwMmLC5Sm_jps4OXN0s6X16BajqHnjnxXNNJtnsMf2v2G7wezS7VYeh0VTBy9j1z9UiqHXIQP9EkXlGgLjRIVk9m0-ko8o39cQ-mN5TPjV5IxneG0AAioBV4fsvlkgsOxOxcYvaxFMEz52qd3s6-eBGcxZKfsgryFAAgM0bcLtkkE2WY91uezKhlbfzFfKxcpbV7GpO2-_YNVt2bBUojRAenZSia-dBvQ6-6uAz1xZhGxvo6j2FeWshKtOLERjsuZSpAPiS-hvUIUwEHj9qSZdwViHQjgMrzTNpTAX_pL7B_MCWIVAiJq9nPpXwlukGBA%22%2C%22expires_in%22%3A3600%2C%22token_type%22%3A%22Bearer%22%2C%22scope%22%3A%22openid+offline_access+cookie+patron%3Aread%22%2C%22refresh_token%22%3A%2202b49603a8a2719389a6c77416b110675067827d%22%7D '
+  it('should call the API endpoint to get logged in patron\'s data if its state, loginCookie, is not empty' , () => {
+    before(() => {
+      component = mount(<Header />);
     });
 
-    nock('https://api.github.com')
-      .get('/users')
-      .reply(200, [
-        { 'name': 'Reign', 'age': 26 }
-      ]);
+    component.setState({
+      loginCookie: '%7B%22access_token%22%3A%22eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvd3d3Lm55cGwub3JnIiwic3ViIjoiNjM2NzAyOCIsImF1ZCI6ImFwcF9sb2dpbiIsImlhdCI6MTQ4MjE3NjQ3MCwiZXhwIjoxNDgyMTgwMDcwLCJhdXRoX3RpbWUiOjE0ODIxNzY0NzAsInNjb3BlIjoib3BlbmlkIG9mZmxpbmVfYWNjZXNzIGNvb2tpZSBwYXRyb246cmVhZCJ9.JO7VbOqCC7HyjRmeyHD4zM1Gl0JBk5RdxjAkCp0h6sfVe-xs5FyY7biYqs19k4dUY2DbFYR5IG3xYt9IdhqyMkSnJxtiCY36WN7X_e0eBF2T1_IWKGaBc4JlbroMj5_aNB5W4nQvclrdlb2mV38Q_HGAMUKe8DDeCmAHctEtqGppNl8DC7IvqkekRS_6zgQwsHHW5kJR-f7zUROi4fvFpdNR-I7J4VNWdFIOijb4vXFOOWRLzdY_GHLJdWvSgxhqzwkceA5BScCicAKeHYHo04vabNp5TvPXoR0ypULqTyGYsNnXnUmh2Mu46j3bcNTACEKS97FBx1IfwttBL1ARtQ%22expires_in%22%3A3600%2C%22token_type%22%3A%22Bearer%22%2C%22scope%22%3A%22openid+offline_access+cookie+patron%3Aread%22%2C%22refresh_token%22%3A%2202b49603a8a2719389a6c77416b110675067827d%22%7D '
+    });
 
-    expect(component.state().patronName).to.equal('Stewart, Darren');
-    expect(component.state().patronInitial.type()).to.equal('DS');
-    expect(component.state().patronDataReceived).to.equal(true);
-    nock.cleanAll();
-    done();
+    const spy = sinon.spy(Header, 'fetchPatronData');
+
+    expect(spy.called).to.equal(true);
+    Header.fetchPatronData.restore();
+  });
+
+  before(() => {
+    server = sinon.fakeServer.create();
+  });
+
+  it('should set the states of patronName, patronInitial, and patronDataReceived if recevied a ' +
+    'valid response from Auth API', (done) => {
+
+    const callback = sinon.spy();
+
+    sinon.spyOn(axios, 'get').andReturn({
+      done: (callback) => { callback(data); }
+    });
+
+
+    server.respondWith("GET", mockApi, [
+      200, {"Content-Type":"application/json"}, JSON.stringify(data)
+    ]);
+
+    after(() => {
+      server.restore();
+    });
+    nock('https://api.nypltech.org')
+      .get(mockApi)
+      .reply(200, authApiMockResponse);
+
+    component = mount(<Header />);
+
+    setTimeout(() => {
+      expect(component.state().patronName).to.equal('Stewart, Darren');
+      expect(component.state().patronInitial.type()).to.equal('DS');
+      expect(component.state().patronDataReceived).to.equal(true);
+      nock.cleanAll();
+      done();
+    }, 1500);
   });
 });
 

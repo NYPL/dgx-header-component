@@ -4,7 +4,7 @@ import utils from '../../utils/utils.js';
 import appConfig from '../../appConfig.js';
 
 const styles = {
-  logoutLink: {
+  logOutLink: {
     backgroundColor: '#FFF',
     border: '10px solid #FFF',
     borderRadius: '20px',
@@ -44,7 +44,7 @@ class MyNypl extends React.Component {
    * Returns the patron's name in the drop down menu if it exists.
    */
   renderGreeting() {
-    if (!this.props.patronName) {
+    if (!this.props.patronName || !this.props.isLoggedIn) {
       return null;
     }
 
@@ -56,16 +56,16 @@ class MyNypl extends React.Component {
   }
 
   /**
-   * renderLogoutLink()
+   * renderLogOutLink()
    * Returns the log out button if the patron has been logged in.
    */
-  renderLogoutLink() {
+  renderLogOutLink() {
     return (this.props.isLoggedIn) ?
       <a
-        href={this.props.logoutLink}
+        href={this.props.logOutLink}
         className={`${this.props.className}-Catalog-Link`}
         onClick={() => utils.trackHeader('My NYPL', 'Log Out')}
-        style={styles.logoutLink}
+        style={styles.logOutLink}
       >
         Log Out
       </a> : null;
@@ -108,8 +108,7 @@ class MyNypl extends React.Component {
             </a>
           </li>
         </ul>
-
-        {this.renderLogoutLink()}
+        {this.renderLogOutLink()}
       </div>
     );
   }
@@ -123,7 +122,7 @@ MyNypl.propTypes = {
   researchLink: React.PropTypes.string,
   loginCatalogLink: React.PropTypes.string,
   loginResearchLink: React.PropTypes.string,
-  logoutLink: React.PropTypes.string,
+  logOutLink: React.PropTypes.string,
   isLoggedIn: React.PropTypes.bool,
   isOauthLoginActivated: React.PropTypes.bool,
   patronName: React.PropTypes.string,
@@ -136,7 +135,10 @@ MyNypl.defaultProps = {
   loginResearchLink: appConfig.loginMyNyplLinks.research,
   catalogLink: appConfig.myNyplLinks.catalog,
   researchLink: appConfig.myNyplLinks.research,
-  logoutLink: appConfig.loginMyNyplLinks.logoutLink,
+  logOutLink: appConfig.loginMyNyplLinks.logOutLink,
+  isLoggedIn: false,
+  isOauthLoginActivated: false,
+  patronName: '',
 };
 
 export default MyNypl;

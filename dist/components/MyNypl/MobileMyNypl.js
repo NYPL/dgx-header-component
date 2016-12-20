@@ -61,7 +61,7 @@ var styles = {
     margin: '0',
     padding: '1.75em 0'
   },
-  logoutLink: {
+  logOutLink: {
     display: 'block',
     color: '#fff',
     textAlign: 'center',
@@ -101,25 +101,25 @@ var MobileMyNypl = function (_React$Component) {
   }
 
   _createClass(MobileMyNypl, [{
-    key: 'renderLogoutLink',
+    key: 'renderLogOutLink',
 
     /**
-     * renderLogoutLink()
+     * renderLogOutLink()
      * Returns the log out button if the patron has been logged in.
      */
-    value: function renderLogoutLink() {
+    value: function renderLogOutLink() {
       return this.props.isLoggedIn ? _react2.default.createElement(
         'a',
         {
-          href: this.props.logoutLink,
+          href: this.props.logOutLink,
           className: this.props.className + '-Catalog-Link',
           onClick: function onClick() {
             return _utils2.default.trackHeader('My NYPL', 'Log Out');
           },
-          style: styles.logoutLink
+          style: styles.logOutLink
         },
         'Log Out'
-      ) : _react2.default.createElement('div', { style: styles.logoutLink });
+      ) : _react2.default.createElement('div', { style: styles.logOutLink });
     }
 
     /**
@@ -130,7 +130,7 @@ var MobileMyNypl = function (_React$Component) {
   }, {
     key: 'renderGreeting',
     value: function renderGreeting() {
-      return this.props.isLoggedIn ? _react2.default.createElement(
+      return this.props.patronName && this.props.isLoggedIn ? _react2.default.createElement(
         'div',
         { className: this.props.className + '-Greeting' },
         _react2.default.createElement(
@@ -213,7 +213,7 @@ var MobileMyNypl = function (_React$Component) {
             )
           )
         ),
-        this.renderLogoutLink()
+        this.renderLogOutLink()
       );
     }
   }]);
@@ -228,10 +228,10 @@ MobileMyNypl.propTypes = {
   researchLink: _react2.default.PropTypes.string,
   loginCatalogLink: _react2.default.PropTypes.string,
   loginResearchLink: _react2.default.PropTypes.string,
-  logoutLink: _react2.default.PropTypes.string,
   isLoggedIn: _react2.default.PropTypes.bool,
   isOauthLoginActivated: _react2.default.PropTypes.bool,
-  patronName: _react2.default.PropTypes.string
+  patronName: _react2.default.PropTypes.string,
+  logOutLink: _react2.default.PropTypes.string
 };
 
 MobileMyNypl.defaultProps = {
@@ -241,7 +241,10 @@ MobileMyNypl.defaultProps = {
   loginResearchLink: _appConfig2.default.loginMyNyplLinks.research,
   catalogLink: _appConfig2.default.myNyplLinks.catalog,
   researchLink: _appConfig2.default.myNyplLinks.research,
-  logoutLink: _appConfig2.default.loginMyNyplLinks.logoutLink
+  logOutLink: _appConfig2.default.loginMyNyplLinks.logOutLink,
+  isLoggedIn: false,
+  isOauthLoginActivated: false,
+  patronName: ''
 };
 
 exports.default = MobileMyNypl;

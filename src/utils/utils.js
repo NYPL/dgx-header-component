@@ -215,10 +215,10 @@ function Utils() {
    */
   this.renderDynamicLogOutLink = (location) => {
     if (!location || location === 'about:blank') {
-      return config.loginMyNyplLinks.logoutLink;
+      return config.loginMyNyplLinks.logOutLink;
     }
 
-    return `${config.loginMyNyplLinks.logoutLink}?redirect_uri=${location}`;
+    return `${config.loginMyNyplLinks.logOutLink}?redirect_uri=${location}`;
   };
 }
 

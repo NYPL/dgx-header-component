@@ -213,10 +213,10 @@ function Utils() {
    */
   this.renderDynamicLogOutLink = function (location) {
     if (!location || location === 'about:blank') {
-      return _appConfig2.default.loginMyNyplLinks.logoutLink;
+      return _appConfig2.default.loginMyNyplLinks.logOutLink;
     }
 
-    return _appConfig2.default.loginMyNyplLinks.logoutLink + '?redirect_uri=' + location;
+    return _appConfig2.default.loginMyNyplLinks.logOutLink + '?redirect_uri=' + location;
   };
 }
 

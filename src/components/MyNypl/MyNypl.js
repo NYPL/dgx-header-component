@@ -44,7 +44,7 @@ class MyNypl extends React.Component {
    * Returns the patron's name in the drop down menu if it exists.
    */
   renderGreeting() {
-    if (!this.props.patronName) {
+    if (!this.props.patronName || !this.props.isLoggedIn) {
       return null;
     }
 
@@ -108,7 +108,6 @@ class MyNypl extends React.Component {
             </a>
           </li>
         </ul>
-
         {this.renderLogOutLink()}
       </div>
     );
@@ -136,6 +135,10 @@ MyNypl.defaultProps = {
   loginResearchLink: appConfig.loginMyNyplLinks.research,
   catalogLink: appConfig.myNyplLinks.catalog,
   researchLink: appConfig.myNyplLinks.research,
+  logOutLink: appConfig.loginMyNyplLinks.logOutLink,
+  isLoggedIn: false,
+  isOauthLoginActivated: false,
+  patronName: '',
 };
 
 export default MyNypl;

@@ -130,7 +130,7 @@ var MobileMyNypl = function (_React$Component) {
   }, {
     key: 'renderGreeting',
     value: function renderGreeting() {
-      return this.props.patronName ? _react2.default.createElement(
+      return this.props.patronName && this.props.isLoggedIn ? _react2.default.createElement(
         'div',
         { className: this.props.className + '-Greeting' },
         _react2.default.createElement(
@@ -240,7 +240,11 @@ MobileMyNypl.defaultProps = {
   loginCatalogLink: _appConfig2.default.loginMyNyplLinks.catalog,
   loginResearchLink: _appConfig2.default.loginMyNyplLinks.research,
   catalogLink: _appConfig2.default.myNyplLinks.catalog,
-  researchLink: _appConfig2.default.myNyplLinks.research
+  researchLink: _appConfig2.default.myNyplLinks.research,
+  logOutLink: _appConfig2.default.loginMyNyplLinks.logOutLink,
+  isLoggedIn: false,
+  isOauthLoginActivated: false,
+  patronName: ''
 };
 
 exports.default = MobileMyNypl;

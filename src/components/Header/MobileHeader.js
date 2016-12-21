@@ -246,8 +246,13 @@ class MobileHeader extends React.Component {
   */
   renderMyNyplButton() {
     let myNyplClass = '';
-    const loginIconClass = (this.props.isLoggedIn) ? '-loggedIn' : '';
-    let icon = <LoginIconSolid className={`MobileMyNypl LoginIcon${loginIconClass}`} />;
+    const loginIconClass = (this.props.patronName) ? '-loggedIn' : '';
+    const loggedInFadeInAnimation = (this.props.patronName) ? ' animatedFast fadeIn' : '';
+    let icon = (
+      <LoginIconSolid
+        className={`MobileMyNypl LoginIcon${loginIconClass}${loggedInFadeInAnimation}`}
+      />
+    );
     let buttonStyles = styles.inactiveMyNyplButton;
     let buttonLabel = 'Open Log In Dialog';
     let dialogWindow = null;

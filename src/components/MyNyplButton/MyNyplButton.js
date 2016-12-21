@@ -120,7 +120,9 @@ class MyNyplButton extends React.Component {
     let buttonClass = '';
     let iconClass = (HeaderStore.getMyNyplVisible()) ? 'nypl-icon-solo-x' : 'nypl-icon-wedge-down';
     const icon = (<span className={`${iconClass} icon`} style={styles.MyNyplIcon}></span>);
-    const labelColorClass = (this.props.isLoggedIn) ? 'loggedIn' : '';
+    const labelColorClass = (this.props.isLoggedIn) ? ' loggedIn' : '';
+    const myNyplButtonLabel = (this.props.patronName) ? 'You are logged in' : 'Log In';
+    const loggedInFadeInAnimation = (this.props.patronName) ? ' animatedFast fadeIn' : '';
 
     if (HeaderStore.getMyNyplVisible()) {
       buttonClass = 'active';
@@ -129,11 +131,11 @@ class MyNyplButton extends React.Component {
 
     return (
       <button
-        className={`MyNyplButton ${buttonClass} ${labelColorClass}`}
+        className={`MyNyplButton ${buttonClass}${labelColorClass}${loggedInFadeInAnimation}`}
         onClick={this.handleClick}
         style={_extend(styles.MyNyplButton, this.props.style)}
       >
-        {this.props.label}
+        {myNyplButtonLabel}
         {this.renderLoginIcon()}
         {icon}
       </button>
@@ -173,7 +175,6 @@ class MyNyplButton extends React.Component {
 
 MyNyplButton.propTypes = {
   lang: React.PropTypes.string,
-  label: React.PropTypes.string,
   style: React.PropTypes.object,
   isLoggedIn: React.PropTypes.bool,
   isOauthLoginActivated: React.PropTypes.bool,

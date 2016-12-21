@@ -133,6 +133,7 @@ var StickyMyNyplButton = function (_React$Component) {
       var buttonClasses = (0, _classnames2.default)({ active: showDialog });
       var myNyplClasses = (0, _classnames2.default)({ 'active animatedFast fadeIn': showDialog });
       var loginIconClass = this.props.isLoggedIn ? '-loggedIn' : '';
+      var loggedInFadeInAnimation = this.props.patronName ? ' animatedFast fadeIn' : '';
       var active = showDialog ? ' active' : '';
 
       return _react2.default.createElement(
@@ -158,7 +159,9 @@ var StickyMyNyplButton = function (_React$Component) {
               { className: 'visuallyHidden' },
               this.props.label
             ),
-            _react2.default.createElement(_dgxSvgIcons.LoginIconSolid, { className: 'StickyMyNyplButton LoginIcon' + loginIconClass + active })
+            _react2.default.createElement(_dgxSvgIcons.LoginIconSolid, {
+              className: 'StickyMyNyplButton LoginIcon' + loginIconClass + loggedInFadeInAnimation + active
+            })
           ),
           _react2.default.createElement(
             'div',

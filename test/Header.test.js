@@ -7,7 +7,7 @@ import { expect } from 'chai';
 import { shallow, mount, render } from 'enzyme';
 
 // Import the component that is going to be tested
-import Header from './../src/components/Header/Header.js';
+import { Header } from './../src/components/Header/Header.js';
 
 // Import related functions
 import utils from './../src/utils/utils.js';
@@ -22,57 +22,61 @@ const mockApi = `${appConfig.patronApiUrl}eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.e
 describe('Header', () => {
   describe('when "nyplIdentityPatron" cookie exists', () => {
     let component;
+    let hasNyplIdentityPatronCookie;
+    let getNyplIdentityPatronCookie;
+    let getPatronData;
+    let modelPatronName;
 
     before(() => {
-      const hasNyplIdentityPatronCookie = sinon.stub(utils, 'hasCookie')
+      hasNyplIdentityPatronCookie = sinon.stub(utils, 'hasCookie')
         .withArgs('nyplIdentityPatron')
         .returns(true);
-      const getNyplIdentityPatronCookie = sinon.stub(utils, 'getCookie')
+      getNyplIdentityPatronCookie = sinon.stub(utils, 'getCookie')
         .withArgs('nyplIdentityPatron')
         .returns(mockLoginCookie);
+      getPatronData = sinon.spy(utils, 'getLoginData');
+      modelPatronName = sinon.spy(utils, 'modelPatronName');
 
       component = mount(<Header />);
-      hasNyplIdentityPatronCookie('nyplIdentityPatron');
     });
 
     after(() => {
-      hasNyplIdentityPatronCookie.restore();
-      getNyplIdentityPatronCookie.restore();
+      // hasNyplIdentityPatronCookie.restore();
+      // getNyplIdentityPatronCookie.restore();
     });
 
     it('should call the function to get the value of "nyplIdentityPatron" cookie', () => {
       sinon.assert.calledOnce(getNyplIdentityPatronCookie);
+      sinon.assert.calledWith(getNyplIdentityPatronCookie, 'nyplIdentityPatron');
     });
 
     it('should call the API endpoint to get logged in patron\'s data with the cookie we got', () => {
-      const getPatronData = sinon.spy(utils, 'getLoginData');
-
       sinon.assert.calledOnce(getPatronData);
       sinon.assert.calledWith(getPatronData, mockLoginCookie);
-      getPatronData.restore();
     });
 
     it('should update the states of patronName, patronInitial, and patronDataReceived ' +
       'if it recevies a valid response from Auth API', () => {
-        // let spyAxios;
+        let spyAxios;
 
         // before(() => {
-        //   mock
-        //     .onGet(mockApi)
-        //     .reply(200, authApiMockResponse);
+          mock
+            .onGet(mockApi)
+            .reply(200, mockResponseData);
 
-        //   spyAxios = sinon.spy(axios, 'get');
-
-        //   component = mount(<Header />);
+          // spyAxios = sinon.spy(axios, 'get');
         // });
 
         // after(() => {
         //   mock.restore();
         //   spyAxios.restore();
         // });
-        // expect(component.state().patronName).to.equal('Stewart, Darren');
-        // expect(component.state().patronInitial.type()).to.equal('DS');
-        // expect(component.state().patronDataReceived).to.equal(true);
+        setTimeout(() => {
+          sinon.assert.calledOnce(modelPatronName);
+          expect(component.state().patronName).to.equal('Stewart, Darren');
+          expect(component.state().patronInitial.type()).to.equal('DS');
+          expect(component.state().patronDataReceived).to.equal(true);
+        }, 500);
     });
 
     it('should throw error if the call to get patron\'s data faild, and the states of ' +

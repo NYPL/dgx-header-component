@@ -3,6 +3,8 @@ import React from 'react';
 import utils from '../../utils/utils.js';
 import appConfig from '../../appConfig.js';
 
+import { LogoutIcon } from 'dgx-svg-icons';
+
 const styles = {
   logOutLink: {
     backgroundColor: '#FFF',

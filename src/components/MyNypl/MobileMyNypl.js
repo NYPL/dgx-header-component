@@ -4,6 +4,8 @@ import { extend as _extend } from 'underscore';
 import utils from '../../utils/utils.js';
 import appConfig from '../../appConfig.js';
 
+import { LogoutIcon } from 'dgx-svg-icons';
+
 const styles = {
   base: {
     backgroundColor: '#2B2B2B',

@@ -10,14 +10,14 @@ const styles = {
     backgroundColor: '#FFF',
     border: '10px solid #FFF',
     borderRadius: '20px',
-    bottom: '15px',
+    bottom: '30px',
     color: '#1B7FA7',
     fontSize: '14px',
     fontWeight: '200',
     letterSpacing: '.03em',
     padding: '3px 20px',
     position: 'absolute',
-    right: '30px',
+    left: '30px',
   },
   loginButtons: {
     backgroundColor: '#1B7FA7',
@@ -39,6 +39,33 @@ class MyNypl extends React.Component {
 
   componentWillUnmount() {
     this.refs.catalogLink.blur();
+  }
+
+  rednerLoginLinks() {
+    if (this.props.isLoggedIn) {
+      return (
+        {
+          catalogLink:  this.props.catalogLink,
+          researchLink: this.props.researchLink,
+        }
+      );
+    }
+
+    if (this.props.isOauthLoginActivated) {
+      return (
+        {
+          catalogLink: this.props.loginCatalogLink,
+          researchLink: this.props.loginResearchLink,
+        }
+      );
+    }
+
+    return (
+      {
+        catalogLink: this.props.catalogLink,
+        researchLink: this.props.researchLink,
+      }
+    );
   }
 
   /**
@@ -69,7 +96,7 @@ class MyNypl extends React.Component {
         onClick={() => utils.trackHeader('My NYPL', 'Log Out')}
         style={styles.logOutLink}
       >
-        Log Out
+        LOG OUT
       </a> : null;
   }
 
@@ -77,10 +104,8 @@ class MyNypl extends React.Component {
     const catalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
     const researchCatalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE RESEARCH CATALOG' :
       'LOG INTO THE RESEARCH CATALOG';
-    const catalogLink = (!this.props.isOauthLoginActivated || this.props.isLoggedIn) ?
-      this.props.catalogLink : this.props.loginCatalogLink;
-    const researchLink = (!this.props.isOauthLoginActivated || this.props.isLoggedIn) ?
-      this.props.researchLink : this.props.loginResearchLink;
+    const catalogLink = this.rednerLoginLinks().catalogLink;
+    const researchLink = this.rednerLoginLinks().researchLink;
 
     return (
       <div className={this.props.className} role="dialog">

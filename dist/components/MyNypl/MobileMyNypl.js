@@ -51,6 +51,9 @@ var styles = {
     textDecoration: 'none',
     lineHeight: 'normal'
   },
+  loggedInLinksMarginTop: {
+    margin: '120px 0 0 0'
+  },
   label: {
     fontSize: '14px',
     textTransform: 'uppercase',
@@ -103,12 +106,35 @@ var MobileMyNypl = function (_React$Component) {
   }
 
   _createClass(MobileMyNypl, [{
-    key: 'renderLogOutLink',
+    key: 'rednerLoginLinks',
+    value: function rednerLoginLinks() {
+      if (this.props.isLoggedIn) {
+        return {
+          catalogLink: this.props.sierraTestLink,
+          researchLink: this.props.sierraTestLink
+        };
+      }
+
+      if (this.props.isOauthLoginActivated) {
+        return {
+          catalogLink: this.props.loginCatalogLink,
+          researchLink: this.props.loginResearchLink
+        };
+      }
+
+      return {
+        catalogLink: this.props.catalogLink,
+        researchLink: this.props.researchLink
+      };
+    }
 
     /**
      * renderLogOutLink()
      * Returns the log out button if the patron has been logged in.
      */
+
+  }, {
+    key: 'renderLogOutLink',
     value: function renderLogOutLink() {
       return this.props.isLoggedIn ? _react2.default.createElement(
         'a',
@@ -120,7 +146,7 @@ var MobileMyNypl = function (_React$Component) {
           },
           style: styles.logOutLink
         },
-        'Log Out'
+        'LOG OUT'
       ) : _react2.default.createElement('div', { style: styles.logOutLink });
     }
 
@@ -148,10 +174,11 @@ var MobileMyNypl = function (_React$Component) {
     value: function render() {
       var catalogLinkClass = 'CatalogLink';
       var researchLinkClass = 'ResearchLink';
-      var catalogLink = !this.props.isOauthLoginActivated || this.props.isLoggedIn ? this.props.catalogLink : this.props.loginCatalogLink;
-      var researchLink = !this.props.isOauthLoginActivated || this.props.isLoggedIn ? this.props.researchLink : this.props.loginResearchLink;
+      var catalogLink = this.rednerLoginLinks().catalogLink;
+      var researchLink = this.rednerLoginLinks().researchLink;
       var catalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
       var researchCatalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE RESEARCH CATALOG' : 'LOG INTO THE RESEARCH CATALOG';
+      var loggedInMarginTop = this.props.isLoggedIn ? styles.loggedInLinksMarginTop : null;
 
       return _react2.default.createElement(
         'div',
@@ -166,7 +193,7 @@ var MobileMyNypl = function (_React$Component) {
           {
             href: catalogLink,
             className: catalogLinkClass,
-            style: styles.links,
+            style: (0, _underscore.extend)(styles.links, loggedInMarginTop),
             onClick: function onClick() {
               return _utils2.default.trackHeader('Mobile Log In', 'Catalog');
             }
@@ -193,7 +220,7 @@ var MobileMyNypl = function (_React$Component) {
           {
             href: researchLink,
             className: researchLinkClass,
-            style: styles.links,
+            style: (0, _underscore.extend)(styles.links, loggedInMarginTop),
             onClick: function onClick() {
               return _utils2.default.trackHeader('Mobile Log In', 'Research');
             }

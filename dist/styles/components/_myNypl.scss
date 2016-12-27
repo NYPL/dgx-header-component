@@ -45,6 +45,11 @@
   text-transform: none;
   display: none;
   box-sizing: content-box;
+  min-height: 180px;
+
+  &.loggedInHeight {
+    min-height: 250px;
+  }
 
   &.active {
     display: block;

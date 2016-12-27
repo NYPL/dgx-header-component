@@ -16,8 +16,6 @@ var _reactOnclickout = require('react-onclickout');
 
 var _reactOnclickout2 = _interopRequireDefault(_reactOnclickout);
 
-var _dgxSvgIcons = require('dgx-svg-icons');
-
 var _HeaderStore = require('../../stores/HeaderStore.js');
 
 var _HeaderStore2 = _interopRequireDefault(_HeaderStore);
@@ -75,10 +73,10 @@ var styles = {
     zIndex: 1000,
     left: '0',
     minWidth: '250px',
-    minHeight: '190px',
     backgroundColor: '#1B7FA7',
     padding: '25px 30px'
-  }
+  },
+  MyNyplWrapperLoggedInHeight: {}
 };
 
 var MyNyplButton = function (_React$Component) {
@@ -151,27 +149,6 @@ var MyNyplButton = function (_React$Component) {
     }
 
     /**
-     * renderLoginIcon()
-     * Returns log in icon based on the status of the state.
-     */
-
-  }, {
-    key: 'renderLoginIcon',
-    value: function renderLoginIcon() {
-      var active = _HeaderStore2.default.getMyNyplVisible() ? ' active' : '';
-
-      if (!this.props.isLoggedIn) {
-        return null;
-      }
-
-      return _react2.default.createElement(
-        'span',
-        { className: 'MyNyplButton-IconWrapper' },
-        _react2.default.createElement(_dgxSvgIcons.LoginIconSolid, { className: 'MyNyplButton LoginIcon-loggedIn' + active })
-      );
-    }
-
-    /**
      * renderMyNyplButton()
      * Returns MyNypl button and its icon based on the log in and the click status.
      */
@@ -197,17 +174,18 @@ var MyNyplButton = function (_React$Component) {
           style: (0, _underscore.extend)(styles.MyNyplButton, this.props.style)
         },
         this.props.label,
-        this.renderLoginIcon(),
         icon
       );
     }
   }, {
     key: 'renderMyNyplDialog',
     value: function renderMyNyplDialog() {
+      var boxHeight = this.props.isLoggedIn ? ' loggedInHeight' : null;
+
       return _HeaderStore2.default.getMyNyplVisible() ? _react2.default.createElement(
         'div',
         {
-          className: 'MyNypl-Wrapper active animatedFast fadeIn',
+          className: 'MyNypl-Wrapper active animatedFast fadeIn' + boxHeight,
           style: styles.MyNyplWrapper
         },
         _react2.default.createElement(_MyNypl2.default, {

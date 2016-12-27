@@ -35,14 +35,14 @@ var styles = {
     backgroundColor: '#FFF',
     border: '10px solid #FFF',
     borderRadius: '20px',
-    bottom: '15px',
+    bottom: '30px',
     color: '#1B7FA7',
     fontSize: '14px',
     fontWeight: '200',
     letterSpacing: '.03em',
     padding: '3px 20px',
     position: 'absolute',
-    right: '30px'
+    left: '30px'
   },
   loginButtons: {
     backgroundColor: '#1B7FA7',
@@ -75,6 +75,28 @@ var MyNypl = function (_React$Component) {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
       this.refs.catalogLink.blur();
+    }
+  }, {
+    key: 'rednerLoginLinks',
+    value: function rednerLoginLinks() {
+      if (this.props.isLoggedIn) {
+        return {
+          catalogLink: this.props.catalogLink,
+          researchLink: this.props.researchLink
+        };
+      }
+
+      if (this.props.isOauthLoginActivated) {
+        return {
+          catalogLink: this.props.loginCatalogLink,
+          researchLink: this.props.loginResearchLink
+        };
+      }
+
+      return {
+        catalogLink: this.props.catalogLink,
+        researchLink: this.props.researchLink
+      };
     }
 
     /**
@@ -115,7 +137,7 @@ var MyNypl = function (_React$Component) {
           },
           style: styles.logOutLink
         },
-        'Log Out'
+        'LOG OUT'
       ) : null;
     }
   }, {
@@ -123,8 +145,8 @@ var MyNypl = function (_React$Component) {
     value: function render() {
       var catalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
       var researchCatalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE RESEARCH CATALOG' : 'LOG INTO THE RESEARCH CATALOG';
-      var catalogLink = !this.props.isOauthLoginActivated || this.props.isLoggedIn ? this.props.catalogLink : this.props.loginCatalogLink;
-      var researchLink = !this.props.isOauthLoginActivated || this.props.isLoggedIn ? this.props.researchLink : this.props.loginResearchLink;
+      var catalogLink = this.rednerLoginLinks().catalogLink;
+      var researchLink = this.rednerLoginLinks().researchLink;
 
       return _react2.default.createElement(
         'div',

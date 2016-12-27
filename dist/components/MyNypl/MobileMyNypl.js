@@ -49,9 +49,6 @@ var styles = {
     textDecoration: 'none',
     lineHeight: 'normal'
   },
-  loggedInLinksMarginTop: {
-    margin: '120px 0 0 0'
-  },
   label: {
     fontSize: '14px',
     textTransform: 'uppercase',
@@ -176,7 +173,6 @@ var MobileMyNypl = function (_React$Component) {
       var researchLink = this.rednerLoginLinks().researchLink;
       var catalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
       var researchCatalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE RESEARCH CATALOG' : 'LOG INTO THE RESEARCH CATALOG';
-      var loggedInMarginTop = this.props.isLoggedIn ? styles.loggedInLinksMarginTop : null;
 
       return _react2.default.createElement(
         'div',
@@ -191,7 +187,7 @@ var MobileMyNypl = function (_React$Component) {
           {
             href: catalogLink,
             className: catalogLinkClass,
-            style: (0, _underscore.extend)(styles.links, loggedInMarginTop),
+            style: styles.links,
             onClick: function onClick() {
               return _utils2.default.trackHeader('Mobile Log In', 'Catalog');
             }
@@ -218,7 +214,7 @@ var MobileMyNypl = function (_React$Component) {
           {
             href: researchLink,
             className: researchLinkClass,
-            style: (0, _underscore.extend)(styles.links, loggedInMarginTop),
+            style: styles.links,
             onClick: function onClick() {
               return _utils2.default.trackHeader('Mobile Log In', 'Research');
             }

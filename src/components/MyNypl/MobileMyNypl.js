@@ -23,9 +23,6 @@ const styles = {
     textDecoration: 'none',
     lineHeight: 'normal',
   },
-  loggedInLinksMarginTop: {
-    margin: '120px 0 0 0',
-  },
   label: {
     fontSize: '14px',
     textTransform: 'uppercase',
@@ -133,7 +130,6 @@ class MobileMyNypl extends React.Component {
     const catalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
     const researchCatalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE RESEARCH CATALOG' :
       'LOG INTO THE RESEARCH CATALOG';
-    const loggedInMarginTop = (this.props.isLoggedIn) ? styles.loggedInLinksMarginTop : null;
 
     return (
       <div
@@ -145,7 +141,7 @@ class MobileMyNypl extends React.Component {
         <a
           href={catalogLink}
           className={catalogLinkClass}
-          style={_extend(styles.links, loggedInMarginTop)}
+          style={styles.links}
           onClick={() => utils.trackHeader('Mobile Log In', 'Catalog')}
         >
           <span
@@ -165,7 +161,7 @@ class MobileMyNypl extends React.Component {
         <a
           href={researchLink}
           className={researchLinkClass}
-          style={_extend(styles.links, loggedInMarginTop)}
+          style={styles.links}
           onClick={() => utils.trackHeader('Mobile Log In', 'Research')}
         >
           <span

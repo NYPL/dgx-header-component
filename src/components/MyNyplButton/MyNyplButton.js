@@ -39,8 +39,6 @@ const styles = {
     backgroundColor: '#1B7FA7',
     padding: '25px 30px',
   },
-  MyNyplWrapperLoggedInHeight: {
-  },
 };
 
 class MyNyplButton extends React.Component {

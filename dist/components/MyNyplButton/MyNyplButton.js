@@ -75,8 +75,7 @@ var styles = {
     minWidth: '250px',
     backgroundColor: '#1B7FA7',
     padding: '25px 30px'
-  },
-  MyNyplWrapperLoggedInHeight: {}
+  }
 };
 
 var MyNyplButton = function (_React$Component) {

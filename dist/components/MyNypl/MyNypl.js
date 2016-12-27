@@ -33,8 +33,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var styles = {
   logOutLink: {
     backgroundColor: '#FFF',
-    border: '10px solid #FFF',
-    borderRadius: '20px',
+    border: '3px solid #FFF',
+    borderRadius: '33px',
     bottom: '30px',
     color: '#1B7FA7',
     fontSize: '14px',
@@ -137,6 +137,7 @@ var MyNypl = function (_React$Component) {
           },
           style: styles.logOutLink
         },
+        _react2.default.createElement(_dgxSvgIcons.LogoutIcon, { className: 'logoutIcon' }),
         'LOG OUT'
       ) : null;
     }

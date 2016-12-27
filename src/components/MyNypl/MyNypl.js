@@ -8,8 +8,8 @@ import { LogoutIcon } from 'dgx-svg-icons';
 const styles = {
   logOutLink: {
     backgroundColor: '#FFF',
-    border: '10px solid #FFF',
-    borderRadius: '20px',
+    border: '3px solid #FFF',
+    borderRadius: '33px',
     bottom: '30px',
     color: '#1B7FA7',
     fontSize: '14px',
@@ -45,7 +45,7 @@ class MyNypl extends React.Component {
     if (this.props.isLoggedIn) {
       return (
         {
-          catalogLink:  this.props.catalogLink,
+          catalogLink: this.props.catalogLink,
           researchLink: this.props.researchLink,
         }
       );
@@ -96,6 +96,7 @@ class MyNypl extends React.Component {
         onClick={() => utils.trackHeader('My NYPL', 'Log Out')}
         style={styles.logOutLink}
       >
+        <LogoutIcon className="logoutIcon" />
         LOG OUT
       </a> : null;
   }

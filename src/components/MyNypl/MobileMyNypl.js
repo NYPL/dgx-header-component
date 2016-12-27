@@ -4,8 +4,6 @@ import { extend as _extend } from 'underscore';
 import utils from '../../utils/utils.js';
 import appConfig from '../../appConfig.js';
 
-import { LogoutIcon } from 'dgx-svg-icons';
-
 const styles = {
   base: {
     backgroundColor: '#2B2B2B',
@@ -75,8 +73,8 @@ class MobileMyNypl extends React.Component {
     if (this.props.isLoggedIn) {
       return (
         {
-          catalogLink: this.props.sierraTestLink,
-          researchLink: this.props.sierraTestLink,
+          catalogLink: this.props.catalogLink,
+          researchLink: this.props.researchLink,
         }
       );
     }

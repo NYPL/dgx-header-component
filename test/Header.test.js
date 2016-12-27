@@ -89,34 +89,22 @@ describe('Header', () => {
           if (response.data && response.data.data) {
             const patronNameObject = utils.modelPatronName(utils.extractPatronName(response.data));
 
+            component.setState({
+              patronName: patronNameObject.name,
+              patronInitial: patronNameObject.initial,
+              patronDataReceived: true,
+            });
+
             setTimeout(
               () => {
-                expect(patronNameObject.name).to.deep.equal('THERESA');
-                expect(patronNameObject.initial).to.deep.equal('TS');
+                expect(component.state().patronName).to.deep.equal('THERESA');
+                expect(component.state().patronInitial).to.deep.equal('TS');
+                expect(component.state().patronDataReceived).to.deep.equal(true);
                 done();
               }, 1500
             );
           }
         });
-
-      // setTimeout(() => {
-      //   expect(modelPatronName.calledOnce).to.equal(true);
-      //   expect(component.state().patronName).to.equal('Stewart, Darren');
-      //  }, 1500);
-
-          // expect(modelPatronName.calledOnce).to.equal(true);
-          // expect(component.state().patronName).to.equal('Stewart, Darren');
-
-        // after(() => {
-        //   mock.restore();
-        //   spyAxios.restore();
-        // });
-        // setTimeout(() => {
-          // sinon.assert.calledOnce(modelPatronName);
-          // expect(component.state().patronName).to.equal('Stewart, Darren');
-          // expect(component.state().patronInitial.type()).to.equal('DS');
-          // expect(component.state().patronDataReceived).to.equal(true);
-        // }, 500);
     });
 
     it('should throw error if the call to get patron\'s data faild, and the states of ' +

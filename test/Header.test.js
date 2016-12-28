@@ -14,20 +14,32 @@ import utils from './../src/utils/utils.js';
 import appConfig from './../src/appConfig.js';
 
 // Import mock up data
-import { mockResponseData, mockLoginCookie } from './authApiMockResponse.js';
+import { mockResponseData, mockErrorResponseData, mockLoginCookie } from './authApiMockResponse.js';
 
 const mock = new MockAdapter(axios);
 const mockApi = `${appConfig.patronApiUrl}eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvd3d3Lm55cGwub3JnIiwic3ViIjoiNjM2NzAyOCIsImF1ZCI6ImFwcF9sb2dpbiIsImlhdCI6MTQ4MjE3NjQ3MCwiZXhwIjoxNDgyMTgwMDcwLCJhdXRoX3RpbWUiOjE0ODIxNzY0NzAsInNjb3BlIjoib3BlbmlkIG9mZmxpbmVfYWNjZXNzIGNvb2tpZSBwYXRyb246cmVhZCJ9.JO7VbOqCC7HyjRmeyHD4zM1Gl0JBk5RdxjAkCp0h6sfVe-xs5FyY7biYqs19k4dUY2DbFYR5IG3xYt9IdhqyMkSnJxtiCY36WN7X_e0eBF2T1_IWKGaBc4JlbroMj5_aNB5W4nQvclrdlb2mV38Q_HGAMUKe8DDeCmAHctEtqGppNl8DC7IvqkekRS_6zgQwsHHW5kJR-f7zUROi4fvFpdNR-I7J4VNWdFIOijb4vXFOOWRLzdY_GHLJdWvSgxhqzwkceA5BScCicAKeHYHo04vabNp5TvPXoR0ypULqTyGYsNnXnUmh2Mu46j3bcNTACEKS97FBx1IfwttBL1ARtQ`;
+const errorApiLink = '/errorLink';
 
 describe('Header', () => {
   describe('when "nyplIdentityPatron" cookie exists', () => {
     let component;
+
+    // functions in Header.js
+    let setLoginCookie;
+    let fetchPatronData;
+
+    // functions in utils.js
     let hasNyplIdentityPatronCookie;
     let getNyplIdentityPatronCookie;
     let getPatronData;
     let modelPatronName;
 
     before(() => {
+      // functions in Header.js
+      setLoginCookie = sinon.spy(Header.prototype, 'setLoginCookie');
+      fetchPatronData = sinon.spy(Header.prototype, 'fetchPatronData');
+
+      // functions in utils.js
       hasNyplIdentityPatronCookie = sinon.stub(utils, 'hasCookie')
         .withArgs('nyplIdentityPatron')
         .returns(true);
@@ -39,19 +51,17 @@ describe('Header', () => {
 
       mock
         .onGet(mockApi)
-        .reply(200, mockResponseData);
+        .reply(200, mockResponseData)
+        .onGet('/errorApi')
+        .reply(400, mockErrorResponseData);
 
       component = mount(<Header />);
     });
 
-    after(() => {
-      // hasNyplIdentityPatronCookie.restore();
-      // getNyplIdentityPatronCookie.restore();
-    });
-
     it('should call the function to check if the cookie "nyplIdentityPatron" exists', () => {
-       expect(hasNyplIdentityPatronCookie.calledOnce).to.equal(true);
-       hasNyplIdentityPatronCookie.alwaysCalledWithExactly('nyplIdentityPatron');
+      expect(setLoginCookie.calledOnce).to.equal(true);
+      expect(hasNyplIdentityPatronCookie.calledOnce).to.equal(true);
+      hasNyplIdentityPatronCookie.alwaysCalledWithExactly('nyplIdentityPatron');
     });
 
     it('should call the function to get the value of "nyplIdentityPatron" cookie, ' +
@@ -61,6 +71,7 @@ describe('Header', () => {
     });
 
     it('should call the API endpoint to get logged in patron\'s data with the cookie we got', () => {
+      expect(fetchPatronData.calledOnce).to.equal(true);
       expect(getPatronData.calledOnce).to.equal(true);
       getPatronData.alwaysCalledWithExactly(
         mockLoginCookie,
@@ -107,12 +118,6 @@ describe('Header', () => {
         });
     });
 
-    it('should throw error if the call to get patron\'s data faild, and the states of ' +
-      'patronName, patronInitial, and patronDataReceived should remain default values', () => {
-
-      }
-    );
-
     it('should call the cookie refresh API endpoint if the response indicates that the cookie is ' +
       'expired from the call for patron\'s data', () => {
 
@@ -123,6 +128,69 @@ describe('Header', () => {
 
     });
   });
+
+  describe('when "nyplIdentityPatron" cookie exists but the API call to get patron\'s data failes',
+    () => {
+      let component;
+
+      before(() => {
+        mock
+          .onGet(mockApi)
+          .reply(200, mockResponseData)
+          .onGet('/errorApi')
+          .reply(400, mockErrorResponseData);
+
+        component = mount(<Header />);
+      });
+
+      it('should throw error if the call to get patron\'s data faild, and the states of ' +
+        'patronName, patronInitial, and patronDataReceived should remain default values', (done) => {
+        axios
+          .get(errorApiLink)
+          .then((response) => {
+            if (response.data && response.data.data) {
+              const patronNameObject = utils.modelPatronName(utils.extractPatronName(response.data));
+
+              component.setState({
+                patronName: patronNameObject.name,
+                patronInitial: patronNameObject.initial,
+                patronDataReceived: true,
+              });
+
+              setTimeout(
+                () => {
+                  expect(component.state().patronName).to.deep.equal('THERESA');
+                  expect(component.state().patronInitial).to.deep.equal('TS');
+                  expect(component.state().patronDataReceived).to.deep.equal(true);
+                  done();
+                }, 1500
+              );
+            }
+          })
+          .catch(response => {
+            // console.warn(`Error on Axios GET request: ${config.loginMyNyplLinks.tokenRefreshLink}`);
+            if (response instanceof Error) {
+              console.warn(response.message);
+            } else {
+              // The request was made, but the server responded with a status code
+              // that falls out of the range of 2xx
+              console.warn(response.status);
+              console.warn(response.headers);
+              console.warn(response.config);
+              setTimeout(
+                () => {
+                  expect(component.state().patronName).to.deep.equal('');
+                  expect(component.state().patronInitial).to.deep.equal('');
+                  expect(component.state().patronDataReceived).to.deep.equal(false);
+                  done();
+                }, 1500
+              );
+            }
+          });
+        }
+      );
+    }
+  );
 });
 
 

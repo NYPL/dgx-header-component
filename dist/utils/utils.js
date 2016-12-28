@@ -159,6 +159,7 @@ function Utils() {
       if (response instanceof Error) {
         console.warn(response.message);
       } else {
+        console.log(response);
         // The request was made, but the server responded with a status code
         // that falls out of the range of 2xx
         console.warn(response.data);

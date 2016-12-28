@@ -45,6 +45,11 @@
   text-transform: none;
   display: none;
   box-sizing: content-box;
+  min-height: 180px;
+
+  &.loggedInHeight {
+    min-height: 250px;
+  }
 
   &.active {
     display: block;
@@ -104,6 +109,12 @@
       color: rgba(255, 255, 255, 0.6);
       vertical-align: middle;
       margin-right: 5px;
+    }
+
+    .logoutIcon {
+      fill: #1B7FA7;
+      margin: 0 10px 0 0;
+      vertical-align: -11px;
     }
   }
 }

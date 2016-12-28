@@ -101,12 +101,41 @@ var MobileMyNypl = function (_React$Component) {
   }
 
   _createClass(MobileMyNypl, [{
-    key: 'renderLogOutLink',
+    key: 'rednerLoginLinks',
+
+    /**
+     * rednerLoginLinks()
+     * Returns the href addresses for catalog and research catalog buttons
+     * based on different conditions.
+     */
+    value: function rednerLoginLinks() {
+      if (this.props.isLoggedIn) {
+        return {
+          catalogLink: this.props.catalogLink,
+          researchLink: this.props.researchLink
+        };
+      }
+
+      if (this.props.isOauthLoginActivated) {
+        return {
+          catalogLink: this.props.loginCatalogLink,
+          researchLink: this.props.loginResearchLink
+        };
+      }
+
+      return {
+        catalogLink: this.props.catalogLink,
+        researchLink: this.props.researchLink
+      };
+    }
 
     /**
      * renderLogOutLink()
      * Returns the log out button if the patron has been logged in.
      */
+
+  }, {
+    key: 'renderLogOutLink',
     value: function renderLogOutLink() {
       return this.props.isLoggedIn ? _react2.default.createElement(
         'a',
@@ -118,7 +147,7 @@ var MobileMyNypl = function (_React$Component) {
           },
           style: styles.logOutLink
         },
-        'Log Out'
+        'LOG OUT'
       ) : _react2.default.createElement('div', { style: styles.logOutLink });
     }
 
@@ -146,8 +175,8 @@ var MobileMyNypl = function (_React$Component) {
     value: function render() {
       var catalogLinkClass = 'CatalogLink';
       var researchLinkClass = 'ResearchLink';
-      var catalogLink = !this.props.isOauthLoginActivated || this.props.isLoggedIn ? this.props.catalogLink : this.props.loginCatalogLink;
-      var researchLink = !this.props.isOauthLoginActivated || this.props.isLoggedIn ? this.props.researchLink : this.props.loginResearchLink;
+      var catalogLink = this.rednerLoginLinks().catalogLink;
+      var researchLink = this.rednerLoginLinks().researchLink;
       var catalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
       var researchCatalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE RESEARCH CATALOG' : 'LOG INTO THE RESEARCH CATALOG';
 

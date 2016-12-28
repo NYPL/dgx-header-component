@@ -67,6 +67,38 @@ const styles = {
 
 class MobileMyNypl extends React.Component {
   /**
+   * rednerLoginLinks()
+   * Returns the href addresses for catalog and research catalog buttons
+   * based on different conditions.
+   */
+  rednerLoginLinks() {
+    if (this.props.isLoggedIn) {
+      return (
+        {
+          catalogLink: this.props.catalogLink,
+          researchLink: this.props.researchLink,
+        }
+      );
+    }
+
+    if (this.props.isOauthLoginActivated) {
+      return (
+        {
+          catalogLink: this.props.loginCatalogLink,
+          researchLink: this.props.loginResearchLink,
+        }
+      );
+    }
+
+    return (
+      {
+        catalogLink: this.props.catalogLink,
+        researchLink: this.props.researchLink,
+      }
+    );
+  }
+
+  /**
    * renderLogOutLink()
    * Returns the log out button if the patron has been logged in.
    */
@@ -78,7 +110,7 @@ class MobileMyNypl extends React.Component {
         onClick={() => utils.trackHeader('My NYPL', 'Log Out')}
         style={styles.logOutLink}
       >
-        Log Out
+        LOG OUT
       </a> : <div style={styles.logOutLink}></div>;
   }
 
@@ -98,10 +130,8 @@ class MobileMyNypl extends React.Component {
   render() {
     const catalogLinkClass = 'CatalogLink';
     const researchLinkClass = 'ResearchLink';
-    const catalogLink = (!this.props.isOauthLoginActivated || this.props.isLoggedIn) ?
-      this.props.catalogLink : this.props.loginCatalogLink;
-    const researchLink = (!this.props.isOauthLoginActivated || this.props.isLoggedIn) ?
-      this.props.researchLink : this.props.loginResearchLink;
+    const catalogLink = this.rednerLoginLinks().catalogLink;
+    const researchLink = this.rednerLoginLinks().researchLink;
     const catalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
     const researchCatalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE RESEARCH CATALOG' :
       'LOG INTO THE RESEARCH CATALOG';

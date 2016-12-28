@@ -66,6 +66,11 @@ const styles = {
 };
 
 class MobileMyNypl extends React.Component {
+  /**
+   * rednerLoginLinks()
+   * Returns the href addresses for catalog and research catalog buttons
+   * based on different conditions.
+   */
   rednerLoginLinks() {
     if (this.props.isLoggedIn) {
       return (

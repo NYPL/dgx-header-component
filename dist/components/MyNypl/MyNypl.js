@@ -76,6 +76,13 @@ var MyNypl = function (_React$Component) {
     value: function componentWillUnmount() {
       this.refs.catalogLink.blur();
     }
+
+    /**
+     * rednerLoginLinks()
+     * Returns the href addresses for catalog and research catalog buttons
+     * based on different conditions.
+     */
+
   }, {
     key: 'rednerLoginLinks',
     value: function rednerLoginLinks() {

@@ -102,6 +102,12 @@ var MobileMyNypl = function (_React$Component) {
 
   _createClass(MobileMyNypl, [{
     key: 'rednerLoginLinks',
+
+    /**
+     * rednerLoginLinks()
+     * Returns the href addresses for catalog and research catalog buttons
+     * based on different conditions.
+     */
     value: function rednerLoginLinks() {
       if (this.props.isLoggedIn) {
         return {

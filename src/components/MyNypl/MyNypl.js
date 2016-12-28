@@ -41,6 +41,11 @@ class MyNypl extends React.Component {
     this.refs.catalogLink.blur();
   }
 
+  /**
+   * rednerLoginLinks()
+   * Returns the href addresses for catalog and research catalog buttons
+   * based on different conditions.
+   */
   rednerLoginLinks() {
     if (this.props.isLoggedIn) {
       return (

@@ -18,7 +18,7 @@
   background-color: transparent;
 
   &.loggedIn {
-    color: #497629;
+    color: #000;
   }
 
   &.active {
@@ -145,7 +145,7 @@
   }
 
   &-loggedIn {
-    fill: #497629;
+    fill: #000;
     stroke: none;
 
     &.active {

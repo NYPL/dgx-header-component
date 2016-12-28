@@ -313,7 +313,7 @@ var MobileHeader = function (_React$Component) {
 
       var myNyplClass = '';
       var loginIconClass = this.props.patronName ? '-loggedIn' : '';
-      var loggedInFadeInAnimation = this.props.patronName ? ' animatedFast fadeIn' : '';
+      var loggedInFadeInAnimation = this.props.patronName ? ' animated fadeIn' : '';
       var icon = _react2.default.createElement(_dgxSvgIcons.LoginIconSolid, {
         className: 'MobileMyNypl LoginIcon' + loginIconClass + loggedInFadeInAnimation
       });

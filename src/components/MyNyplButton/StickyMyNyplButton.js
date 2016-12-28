@@ -82,7 +82,7 @@ class StickyMyNyplButton extends React.Component {
     const buttonClasses = cx({ active: showDialog });
     const myNyplClasses = cx({ 'active animatedFast fadeIn': showDialog });
     const loginIconClass = (this.props.patronName) ? '-loggedIn' : '';
-    const loggedInFadeInAnimation = (this.props.patronName) ? ' animatedFast fadeIn' : '';
+    const loggedInFadeInAnimation = (this.props.patronName) ? ' animated fadeIn' : '';
     const active = (showDialog) ? ' active' : '';
 
     return (

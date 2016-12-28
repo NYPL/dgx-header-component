@@ -184,7 +184,7 @@ var MyNyplButton = function (_React$Component) {
       var icon = _react2.default.createElement('span', { className: iconClass + ' icon', style: styles.MyNyplIcon });
       var labelColorClass = this.props.isLoggedIn ? ' loggedIn' : '';
       var myNyplButtonLabel = this.props.patronName ? 'You are logged in' : 'Log In';
-      var loggedInFadeInAnimation = this.props.patronName ? ' animatedFast fadeIn' : '';
+      var loggedInFadeInAnimation = this.props.patronName ? ' animated fadeIn' : '';
 
       if (_HeaderStore2.default.getMyNyplVisible()) {
         buttonClass = 'active';

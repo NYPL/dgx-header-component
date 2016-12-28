@@ -247,7 +247,7 @@ class MobileHeader extends React.Component {
   renderMyNyplButton() {
     let myNyplClass = '';
     const loginIconClass = (this.props.patronName) ? '-loggedIn' : '';
-    const loggedInFadeInAnimation = (this.props.patronName) ? ' animatedFast fadeIn' : '';
+    const loggedInFadeInAnimation = (this.props.patronName) ? ' animated fadeIn' : '';
     let icon = (
       <LoginIconSolid
         className={`MobileMyNypl LoginIcon${loginIconClass}${loggedInFadeInAnimation}`}

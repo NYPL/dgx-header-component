@@ -133,7 +133,7 @@ var StickyMyNyplButton = function (_React$Component) {
       var buttonClasses = (0, _classnames2.default)({ active: showDialog });
       var myNyplClasses = (0, _classnames2.default)({ 'active animatedFast fadeIn': showDialog });
       var loginIconClass = this.props.patronName ? '-loggedIn' : '';
-      var loggedInFadeInAnimation = this.props.patronName ? ' animatedFast fadeIn' : '';
+      var loggedInFadeInAnimation = this.props.patronName ? ' animated fadeIn' : '';
       var active = showDialog ? ' active' : '';
 
       return _react2.default.createElement(

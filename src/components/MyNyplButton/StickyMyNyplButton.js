@@ -32,7 +32,6 @@ const styles = {
     position: 'absolute',
     right: '0',
     minWidth: '218px',
-    minHeight: '210px',
     backgroundColor: '#1B7FA7',
     padding: '17px 30px',
   },
@@ -84,6 +83,7 @@ class StickyMyNyplButton extends React.Component {
     const loginIconClass = (this.props.patronName) ? '-loggedIn' : '';
     const loggedInFadeInAnimation = (this.props.patronName) ? ' animated fadeIn' : '';
     const active = (showDialog) ? ' active' : '';
+    const boxHeight = (this.props.isLoggedIn) ? ' loggedInHeight' : null;
 
     return (
       <ClickOutHandler onClickOut={this.handleOnClickOut}>
@@ -108,7 +108,7 @@ class StickyMyNyplButton extends React.Component {
             />
           </button>
           <div
-            className={`StickyMyNypl-Wrapper ${myNyplClasses}`}
+            className={`StickyMyNypl-Wrapper ${myNyplClasses}${boxHeight}`}
             style={styles.MyNyplWrapper}
           >
             <MyNypl

@@ -1,7 +1,6 @@
 import React from 'react';
 import { extend as _extend } from 'underscore';
 import ClickOutHandler from 'react-onclickout';
-import { LoginIconSolid } from 'dgx-svg-icons';
 // Alt Store/Actions
 import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
@@ -37,7 +36,6 @@ const styles = {
     zIndex: 1000,
     left: '0',
     minWidth: '250px',
-    minHeight: '190px',
     backgroundColor: '#1B7FA7',
     padding: '25px 30px',
   },
@@ -95,24 +93,6 @@ class MyNyplButton extends React.Component {
   }
 
   /**
-   * renderLoginIcon()
-   * Returns log in icon based on the status of the state.
-   */
-  renderLoginIcon() {
-    const active = (HeaderStore.getMyNyplVisible()) ? ' active' : '';
-
-    if (!this.props.isLoggedIn) {
-      return null;
-    }
-
-    return (
-      <span className="MyNyplButton-IconWrapper">
-        <LoginIconSolid className={`MyNyplButton LoginIcon-loggedIn${active}`} />
-      </span>
-    );
-  }
-
-  /**
    * renderMyNyplButton()
    * Returns MyNypl button and its icon based on the log in and the click status.
    */
@@ -136,16 +116,17 @@ class MyNyplButton extends React.Component {
         style={_extend(styles.MyNyplButton, this.props.style)}
       >
         {myNyplButtonLabel}
-        {this.renderLoginIcon()}
         {icon}
       </button>
     );
   }
 
   renderMyNyplDialog() {
+    const boxHeight = (this.props.isLoggedIn) ? ' loggedInHeight' : null;
+
     return (HeaderStore.getMyNyplVisible()) ? (
       <div
-        className="MyNypl-Wrapper active animatedFast fadeIn"
+        className={`MyNypl-Wrapper active animatedFast fadeIn${boxHeight}`}
         style={styles.MyNyplWrapper}
       >
         <MyNypl

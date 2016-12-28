@@ -83,9 +83,14 @@ class MyNypl extends React.Component {
     }
 
     return (
-      <p className={`${this.props.className}-Patron-Name`}>
-        HELLO, {this.props.patronName}
-      </p>
+      <div>
+        <p className={`${this.props.className}-Patron-Greeting Login-Indication`}>
+          You are logged in as:
+        </p>
+        <p className={`${this.props.className}-Patron-Greeting`}>
+          {this.props.patronName}
+        </p>
+      </div>
     );
   }
 

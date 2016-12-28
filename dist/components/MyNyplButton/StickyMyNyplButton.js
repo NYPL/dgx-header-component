@@ -70,7 +70,6 @@ var styles = {
     position: 'absolute',
     right: '0',
     minWidth: '218px',
-    minHeight: '210px',
     backgroundColor: '#1B7FA7',
     padding: '17px 30px'
   },
@@ -134,6 +133,7 @@ var StickyMyNyplButton = function (_React$Component) {
       var myNyplClasses = (0, _classnames2.default)({ 'active animatedFast fadeIn': showDialog });
       var loginIconClass = this.props.isLoggedIn ? '-loggedIn' : '';
       var active = showDialog ? ' active' : '';
+      var boxHeight = this.props.isLoggedIn ? ' loggedInHeight' : null;
 
       return _react2.default.createElement(
         _reactOnclickout2.default,
@@ -163,7 +163,7 @@ var StickyMyNyplButton = function (_React$Component) {
           _react2.default.createElement(
             'div',
             {
-              className: 'StickyMyNypl-Wrapper ' + myNyplClasses,
+              className: 'StickyMyNypl-Wrapper ' + myNyplClasses + boxHeight,
               style: styles.MyNyplWrapper
             },
             _react2.default.createElement(_MyNypl2.default, {

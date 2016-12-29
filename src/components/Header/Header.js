@@ -300,7 +300,7 @@ class Header extends React.Component {
       (<SkipNavigation {...this.props.skipNav} />) : '';
     const isLoggedIn = !!this.state.patronDataReceived;
     const isOauthLoginActivated = !!this.state.isFeatureFlagsActivated.OauthLogin;
-    const myNyplButtonLabel = (this.state.patronName) ? 'You are logged in' : 'Log In';
+    const myNyplButtonLabel = (this.state.patronName) ? 'My Account' : 'Log In';
 
     return (
       <header

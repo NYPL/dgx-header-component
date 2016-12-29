@@ -403,7 +403,7 @@ var Header = function (_React$Component) {
       var skipNav = this.props.skipNav ? _react2.default.createElement(_dgxSkipNavigationLink2.default, this.props.skipNav) : '';
       var isLoggedIn = !!this.state.patronDataReceived;
       var isOauthLoginActivated = !!this.state.isFeatureFlagsActivated.OauthLogin;
-      var myNyplButtonLabel = this.state.patronName ? 'You are logged in' : 'Log In';
+      var myNyplButtonLabel = this.state.patronName ? 'My Account' : 'Log In';
 
       return _react2.default.createElement(
         'header',

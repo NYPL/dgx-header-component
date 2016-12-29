@@ -168,7 +168,7 @@ function Utils() {
         console.warn(response.config);
         // If the cookie for getting log in Data is expired
         if (response.data.statusCode === 401 && response.data.expired === true) {
-          _this.refreshAccessToken(refreshCookieCb);
+          _this.refreshAccessToken(_appConfig2.default.loginMyNyplLinks.tokenRefreshLink, refreshCookieCb);
         }
       }
     });
@@ -181,9 +181,9 @@ function Utils() {
    * @param {function(result: Object)} cb - The callback function passed in after the cookie
    * has been refreshed.
    */
-  this.refreshAccessToken = function (cb) {
-    _axios2.default.get(_appConfig2.default.loginMyNyplLinks.tokenRefreshLink, { withCredentials: true }).then(cb).catch(function (response) {
-      console.warn('Error on Axios GET request: ' + _appConfig2.default.loginMyNyplLinks.tokenRefreshLink);
+  this.refreshAccessToken = function (api, cb) {
+    _axios2.default.get(api, { withCredentials: true }).then(cb).catch(function (response) {
+      console.warn('Error on Axios GET request: ' + api);
       if (response instanceof Error) {
         console.warn(response.message);
       } else {

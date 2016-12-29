@@ -62,6 +62,8 @@ describe('Header', () => {
 
     after(() => {
       mock.reset();
+      getPatronData.restore();
+      modelPatronName.restore();
     });
 
     it('should call the function to check if the cookie "nyplIdentityPatron" exists', () => {
@@ -123,10 +125,6 @@ describe('Header', () => {
           }
         });
     });
-
-    it('should log the patron out, if calling the refesh link fails', () => {
-
-    });
   });
 
   describe('when "nyplIdentityPatron" cookie exists but the API call to get patron\'s data failes',
@@ -179,10 +177,7 @@ describe('Header', () => {
               // console.warn(response.status);
               // console.warn(response.headers);
               // console.warn(response.config);
-              // If the cookie for getting log in Data is expired
-              if (response.data.statusCode === 401 && response.data.expired === true) {
-                this.refreshAccessToken(refreshCookieCb);
-              }
+
               setTimeout(
                 () => {
                   expect(component.state().patronName).to.deep.equal('');
@@ -202,13 +197,21 @@ describe('Header', () => {
     () => {
       let component;
       let refreshAccessToken;
+      let getPatronData;
+      let modelPatronName;
 
       before(() => {
         refreshAccessToken = sinon.spy(utils, 'refreshAccessToken');
+        getPatronData = sinon.spy(utils, 'getLoginData');
+        modelPatronName = sinon.spy(utils, 'modelPatronName');
 
         mock
           .onGet(mockApi)
-          .reply(401, mockExpiredResponseData);
+          .reply(401, mockExpiredResponseData)
+          .onGet('/refresh')
+          .reply(200)
+          .onGet(mockApi)
+          .reply(400, mockErrorResponseData);
 
         component = mount(<Header />);
       });
@@ -253,11 +256,11 @@ describe('Header', () => {
 
               // If the cookie for getting log in Data is expired
               if (response.data.statusCode === 401 && response.data.expired === true) {
-                utils.refreshAccessToken(Header.prototype.setLoginCookie);
+                utils.refreshAccessToken('/refresh', Header.prototype.setLoginCookie);
               }
               setTimeout(
                 () => {
-                  expect(refreshAccessToken.calledOnce).to.equal(true);
+                  expect(refreshAccessToken.calledTwice).to.equal(true);
                   done();
                 }, 1500
               );
@@ -265,6 +268,10 @@ describe('Header', () => {
           });
         }
       );
+
+      it('should log the patron out, if calling the refesh link fails', () => {
+
+      });
     }
   );
 });

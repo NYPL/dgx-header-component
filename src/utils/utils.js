@@ -167,7 +167,7 @@ function Utils() {
           console.warn(response.config);
           // If the cookie for getting log in Data is expired
           if (response.data.statusCode === 401 && response.data.expired === true) {
-            this.refreshAccessToken(refreshCookieCb);
+            this.refreshAccessToken(config.loginMyNyplLinks.tokenRefreshLink, refreshCookieCb);
           }
         }
       });
@@ -180,15 +180,15 @@ function Utils() {
    * @param {function(result: Object)} cb - The callback function passed in after the cookie
    * has been refreshed.
    */
-  this.refreshAccessToken = (cb) => {
+  this.refreshAccessToken = (api, cb) => {
     axios
       .get(
-        config.loginMyNyplLinks.tokenRefreshLink,
+        api,
         { withCredentials: true }
       )
       .then(cb)
       .catch(response => {
-        console.warn(`Error on Axios GET request: ${config.loginMyNyplLinks.tokenRefreshLink}`);
+        console.warn(`Error on Axios GET request: ${api}`);
         if (response instanceof Error) {
           console.warn(response.message);
         } else {

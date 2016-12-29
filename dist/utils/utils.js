@@ -229,10 +229,9 @@ function Utils() {
     var initialArray = (0, _underscore.map)(nameArray, function (item) {
       return item.charAt(0);
     });
-    var patronName = nameArray[0];
     var patronInitial = initialArray.join('');
 
-    return { name: patronName, initial: patronInitial };
+    return { name: name, initial: patronInitial };
   };
 
   /**

@@ -156,7 +156,7 @@ describe('MobileMyNypl', () => {
           'https://isso.nypl.org/auth/logout'
         );
         expect(renderedInstance.props.className).to.equal('MobileMyNypl-Catalog-Link');
-        expect(renderedInstance.props.children).to.equal('Log Out');
+        expect(renderedInstance.props.children).to.equal('LOG OUT');
 
         const onClick = sinon.spy(utils, 'trackHeader');
 
@@ -235,7 +235,7 @@ describe('MobileMyNypl', () => {
             'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'
           );
           expect(renderedInstance.props.className).to.equal('MobileMyNypl-Catalog-Link');
-          expect(renderedInstance.props.children).to.equal('Log Out');
+          expect(renderedInstance.props.children).to.equal('LOG OUT');
 
           const onClick = sinon.spy(utils, 'trackHeader');
 

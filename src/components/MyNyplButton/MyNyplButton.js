@@ -101,7 +101,7 @@ class MyNyplButton extends React.Component {
     let iconClass = (HeaderStore.getMyNyplVisible()) ? 'nypl-icon-solo-x' : 'nypl-icon-wedge-down';
     const icon = (<span className={`${iconClass} icon`} style={styles.MyNyplIcon}></span>);
     const labelColorClass = (this.props.isLoggedIn) ? ' loggedIn' : '';
-    const myNyplButtonLabel = (this.props.patronName) ? 'You are logged in' : 'Log In';
+    const myNyplButtonLabel = (this.props.patronName) ? 'My Account' : 'Log In';
     const loggedInFadeInAnimation = (this.props.patronName) ? ' animated fadeIn' : '';
 
     if (HeaderStore.getMyNyplVisible()) {

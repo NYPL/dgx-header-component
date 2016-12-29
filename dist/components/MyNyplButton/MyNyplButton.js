@@ -159,7 +159,7 @@ var MyNyplButton = function (_React$Component) {
       var iconClass = _HeaderStore2.default.getMyNyplVisible() ? 'nypl-icon-solo-x' : 'nypl-icon-wedge-down';
       var icon = _react2.default.createElement('span', { className: iconClass + ' icon', style: styles.MyNyplIcon });
       var labelColorClass = this.props.isLoggedIn ? ' loggedIn' : '';
-      var myNyplButtonLabel = this.props.patronName ? 'You are logged in' : 'Log In';
+      var myNyplButtonLabel = this.props.patronName ? 'My Account' : 'Log In';
       var loggedInFadeInAnimation = this.props.patronName ? ' animated fadeIn' : '';
 
       if (_HeaderStore2.default.getMyNyplVisible()) {

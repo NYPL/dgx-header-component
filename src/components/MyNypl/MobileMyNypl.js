@@ -23,6 +23,9 @@ const styles = {
     textDecoration: 'none',
     lineHeight: 'normal',
   },
+  loggedInLinksMarginTop: {
+    margin: '120px 0 0 0',
+  },
   label: {
     fontSize: '14px',
     textTransform: 'uppercase',
@@ -121,9 +124,8 @@ class MobileMyNypl extends React.Component {
   renderGreeting() {
     return (this.props.patronName && this.props.isLoggedIn) ?
       <div className={`${this.props.className}-Greeting`}>
-        <p>
-          HELLO, {this.props.patronName}
-        </p>
+        <p className="Login-Indication">You are logged in as:</p>
+        <p>{this.props.patronName}</p>
       </div> : null;
   }
 
@@ -135,6 +137,7 @@ class MobileMyNypl extends React.Component {
     const catalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
     const researchCatalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE RESEARCH CATALOG' :
       'LOG INTO THE RESEARCH CATALOG';
+    const loggedInMarginTop = (this.props.isLoggedIn) ? styles.loggedInLinksMarginTop : null;
 
     return (
       <div
@@ -146,7 +149,7 @@ class MobileMyNypl extends React.Component {
         <a
           href={catalogLink}
           className={catalogLinkClass}
-          style={styles.links}
+          style={_extend(styles.links, loggedInMarginTop)}
           onClick={() => utils.trackHeader('Mobile Log In', 'Catalog')}
         >
           <span
@@ -166,7 +169,7 @@ class MobileMyNypl extends React.Component {
         <a
           href={researchLink}
           className={researchLinkClass}
-          style={styles.links}
+          style={_extend(styles.links, loggedInMarginTop)}
           onClick={() => utils.trackHeader('Mobile Log In', 'Research')}
         >
           <span

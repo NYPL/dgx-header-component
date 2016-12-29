@@ -312,8 +312,11 @@ var MobileHeader = function (_React$Component) {
       var _this2 = this;
 
       var myNyplClass = '';
-      var loginIconClass = this.props.isLoggedIn ? '-loggedIn' : '';
-      var icon = _react2.default.createElement(_dgxSvgIcons.LoginIconSolid, { className: 'MobileMyNypl LoginIcon' + loginIconClass });
+      var loginIconClass = this.props.patronName ? '-loggedIn' : '';
+      var loggedInFadeInAnimation = this.props.patronName ? ' animated fadeIn' : '';
+      var icon = _react2.default.createElement(_dgxSvgIcons.LoginIconSolid, {
+        className: 'MobileMyNypl LoginIcon' + loginIconClass + loggedInFadeInAnimation
+      });
       var buttonStyles = styles.inactiveMyNyplButton;
       var buttonLabel = 'Open Log In Dialog';
       var dialogWindow = null;

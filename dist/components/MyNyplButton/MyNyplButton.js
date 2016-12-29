@@ -158,7 +158,9 @@ var MyNyplButton = function (_React$Component) {
       var buttonClass = '';
       var iconClass = _HeaderStore2.default.getMyNyplVisible() ? 'nypl-icon-solo-x' : 'nypl-icon-wedge-down';
       var icon = _react2.default.createElement('span', { className: iconClass + ' icon', style: styles.MyNyplIcon });
-      var labelColorClass = this.props.isLoggedIn ? 'loggedIn' : '';
+      var labelColorClass = this.props.isLoggedIn ? ' loggedIn' : '';
+      var myNyplButtonLabel = this.props.patronName ? 'My Account' : 'Log In';
+      var loggedInFadeInAnimation = this.props.patronName ? ' animated fadeIn' : '';
 
       if (_HeaderStore2.default.getMyNyplVisible()) {
         buttonClass = 'active';
@@ -168,11 +170,11 @@ var MyNyplButton = function (_React$Component) {
       return _react2.default.createElement(
         'button',
         {
-          className: 'MyNyplButton ' + buttonClass + ' ' + labelColorClass,
+          className: 'MyNyplButton ' + buttonClass + labelColorClass + loggedInFadeInAnimation,
           onClick: this.handleClick,
           style: (0, _underscore.extend)(styles.MyNyplButton, this.props.style)
         },
-        this.props.label,
+        myNyplButtonLabel,
         icon
       );
     }
@@ -219,7 +221,6 @@ var MyNyplButton = function (_React$Component) {
 
 MyNyplButton.propTypes = {
   lang: _react2.default.PropTypes.string,
-  label: _react2.default.PropTypes.string,
   style: _react2.default.PropTypes.object,
   isLoggedIn: _react2.default.PropTypes.bool,
   isOauthLoginActivated: _react2.default.PropTypes.bool,

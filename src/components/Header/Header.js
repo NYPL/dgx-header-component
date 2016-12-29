@@ -293,7 +293,6 @@ class Header extends React.Component {
       (<SkipNavigation {...this.props.skipNav} />) : '';
     const isLoggedIn = !!this.state.patronDataReceived;
     const isOauthLoginActivated = !!this.state.isFeatureFlagsActivated.OauthLogin;
-    const myNyplButtonLabel = (this.state.patronName) ? 'My Account' : 'Log In';
 
     return (
       <header
@@ -329,7 +328,6 @@ class Header extends React.Component {
             />
             <div className={`${headerClass}-Buttons`} style={styles.topButtons}>
               <MyNyplButton
-                label={myNyplButtonLabel}
                 refId="desktopLogin"
                 isLoggedIn={isLoggedIn}
                 isOauthLoginActivated={isOauthLoginActivated}

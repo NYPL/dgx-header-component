@@ -150,7 +150,7 @@ function Utils() {
    * @param {function(result: Object)} refreshCookieCb - The callback function passed in for cookie
    * refreshing mechanism.
    */
-  this.getLoginData = function (cookie, cb, refreshCookieCb) {
+  this.getLoginData = function (cookie, cb, refreshCookieCb, logOutLink) {
     var decodedToken = JSON.parse(cookie).access_token;
     var endpoint = '' + _appConfig2.default.patronApiUrl + decodedToken;
 
@@ -168,7 +168,9 @@ function Utils() {
         console.warn(response.config);
         // If the cookie for getting log in Data is expired
         if (response.data.statusCode === 401 && response.data.expired === true) {
-          _this.refreshAccessToken(_appConfig2.default.loginMyNyplLinks.tokenRefreshLink, refreshCookieCb);
+          _this.refreshAccessToken(_appConfig2.default.loginMyNyplLinks.tokenRefreshLink, refreshCookieCb, function () {
+            _this.logOut(logOutLink);
+          });
         }
       }
     });
@@ -181,7 +183,7 @@ function Utils() {
    * @param {function(result: Object)} cb - The callback function passed in after the cookie
    * has been refreshed.
    */
-  this.refreshAccessToken = function (api, cb) {
+  this.refreshAccessToken = function (api, cb, fallBackCb) {
     _axios2.default.get(api, { withCredentials: true }).then(cb).catch(function (response) {
       console.warn('Error on Axios GET request: ' + api);
       if (response instanceof Error) {
@@ -192,8 +194,13 @@ function Utils() {
         console.warn(response.status);
         console.warn(response.headers);
         console.warn(response.config);
+        fallBackCb();
       }
     });
+  };
+
+  this.logOut = function (link) {
+    window.location.href = link;
   };
 
   /**

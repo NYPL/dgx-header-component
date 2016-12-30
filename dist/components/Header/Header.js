@@ -360,7 +360,7 @@ var Header = function (_React$Component) {
         }
       }, function () {
         _this4.setLoginCookie();
-      });
+      }, this.state.logOutUrl);
     }
 
     /**

@@ -268,12 +268,12 @@ describe('MyNypl', () => {
     let component;
 
     before(() => {
-      component = mount(<MyNypl patronName={'Darren Stewart'} />);
+      component = mount(<MyNypl patronName={'Stewart, Darren'} />);
     });
 
-    it('should have props patronName equals "Darren Stewart"',
+    it('should have props patronName equals "Stewart, Darren"',
       () => {
-        expect(component.props().patronName).to.equal('Darren Stewart');
+        expect(component.props().patronName).to.equal('Stewart, Darren');
       }
     );
 
@@ -288,21 +288,23 @@ describe('MyNypl', () => {
     let component;
 
     before(() => {
-      component = mount(<MyNypl isLoggedIn patronName={'Darren Stewart'} />);
+      component = mount(<MyNypl isLoggedIn patronName={'Stewart, Darren'} />);
     });
 
-    it('should have props patronName equals "Darren Stewart"',
+    it('should have props patronName equals "Stewart, Darren"',
       () => {
-        expect(component.props().patronName).to.equal('Darren Stewart');
+        expect(component.props().patronName).to.equal('Stewart, Darren');
       }
     );
 
     it('should have a <p> with class name "MyNypl-Patron-Name". Its text equals ' +
-      '"HELLO, Darren Stewart"',
+      '"You are logged in as:" as the first line and second line as "Stewart, Darren"',
       () => {
-        expect(component.find('p')).to.have.length(1);
-        expect(component.find('.MyNypl-Patron-Name').type()).to.equal('p');
-        expect(component.find('.MyNypl-Patron-Name').text()).to.equal('HELLO, Darren Stewart');
+        expect(component.find('p')).to.have.length(2);
+        expect(component.find('.MyNypl-Patron-Greeting.Login-Indication').type()).to.equal('p');
+        expect(component.find('.MyNypl-Patron-Greeting.Login-Indication').text()).to.equal('You are logged in as:');
+        expect(component.find('.MyNypl-Patron-Greeting.Login-Name').type()).to.equal('p');
+        expect(component.find('.MyNypl-Patron-Greeting.Login-Name').text()).to.equal('Stewart, Darren');
       }
     );
   });

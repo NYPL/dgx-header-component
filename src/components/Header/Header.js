@@ -259,7 +259,8 @@ class Header extends React.Component {
       },
       () => {
         this.setLoginCookie();
-      }
+      },
+      this.state.logOutUrl,
     );
   }
 

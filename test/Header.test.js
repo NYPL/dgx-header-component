@@ -116,7 +116,7 @@ describe('Header', () => {
 
             setTimeout(
               () => {
-                expect(component.state().patronName).to.deep.equal('THERESA');
+                expect(component.state().patronName).to.deep.equal('SMITH, THERESA');
                 expect(component.state().patronInitial).to.deep.equal('TS');
                 expect(component.state().patronDataReceived).to.deep.equal(true);
                 done();
@@ -159,7 +159,7 @@ describe('Header', () => {
 
               setTimeout(
                 () => {
-                  expect(component.state().patronName).to.deep.equal('THERESA');
+                  expect(component.state().patronName).to.deep.equal('SMITH, THERESA');
                   expect(component.state().patronInitial).to.deep.equal('');
                   expect(component.state().patronDataReceived).to.deep.equal(true);
                   done();
@@ -174,9 +174,9 @@ describe('Header', () => {
             } else {
               // The request was made, but the server responded with a status code
               // that falls out of the range of 2xx
-              // console.warn(response.status);
-              // console.warn(response.headers);
-              // console.warn(response.config);
+              console.warn(response.status);
+              console.warn(response.headers);
+              console.warn(response.config);
 
               setTimeout(
                 () => {
@@ -199,11 +199,13 @@ describe('Header', () => {
       let refreshAccessToken;
       let getPatronData;
       let modelPatronName;
+      let logOut;
 
       before(() => {
         refreshAccessToken = sinon.spy(utils, 'refreshAccessToken');
         getPatronData = sinon.spy(utils, 'getLoginData');
         modelPatronName = sinon.spy(utils, 'modelPatronName');
+        logOut = sinon.spy(utils, 'logOut');
 
         mock
           .onGet(mockApi)
@@ -211,7 +213,9 @@ describe('Header', () => {
           .onGet('/refresh')
           .reply(200)
           .onGet(mockApi)
-          .reply(400, mockErrorResponseData);
+          .reply(400, mockErrorResponseData)
+          .onGet('/refresh')
+          .reply(400);
 
         component = mount(<Header />);
       });
@@ -235,7 +239,7 @@ describe('Header', () => {
 
               setTimeout(
                 () => {
-                  expect(component.state().patronName).to.deep.equal('THERESA');
+                  expect(component.state().patronName).to.deep.equal('SMITH, THERESA');
                   expect(component.state().patronInitial).to.deep.equal('TS');
                   expect(component.state().patronDataReceived).to.deep.equal(true);
                   done();
@@ -250,9 +254,9 @@ describe('Header', () => {
             } else {
               // The request was made, but the server responded with a status code
               // that falls out of the range of 2xx
-              // console.warn(response.status);
-              // console.warn(response.headers);
-              // console.warn(response.config);
+              console.warn(response.status);
+              console.warn(response.headers);
+              console.warn(response.config);
 
               // If the cookie for getting log in Data is expired
               if (response.data.statusCode === 401 && response.data.expired === true) {
@@ -270,7 +274,51 @@ describe('Header', () => {
       );
 
       it('should log the patron out, if calling the refesh link fails', () => {
+        axios
+          .get(mockApi)
+          .then((response) => {
+            if (response.data && response.data.data) {
+              const patronNameObject = utils.modelPatronName(utils.extractPatronName(response.data));
 
+              component.setState({
+                patronName: patronNameObject.name,
+                patronInitial: patronNameObject.initial,
+                patronDataReceived: true,
+              });
+
+              setTimeout(
+                () => {
+                  expect(component.state().patronName).to.deep.equal('SMITH, THERESA');
+                  expect(component.state().patronInitial).to.deep.equal('TS');
+                  expect(component.state().patronDataReceived).to.deep.equal(true);
+                  done();
+                }, 1500
+              );
+            }
+          })
+          .catch(response => {
+            // console.warn(`Error on Axios GET request: ${config.loginMyNyplLinks.tokenRefreshLink}`);
+            if (response instanceof Error) {
+              console.warn(response.message);
+            } else {
+              // The request was made, but the server responded with a status code
+              // that falls out of the range of 2xx
+              console.warn(response.status);
+              console.warn(response.headers);
+              console.warn(response.config);
+
+              // If the cookie for getting log in Data is expired
+              if (response.data.statusCode === 401 && response.data.expired === true) {
+                utils.refreshAccessToken('/refresh', Header.prototype.setLoginCookie);
+              }
+              setTimeout(
+                () => {
+                  expect(logOut.calledOnce).to.equal(true);
+                  done();
+                }, 1500
+              );
+            }
+          });
       });
     }
   );

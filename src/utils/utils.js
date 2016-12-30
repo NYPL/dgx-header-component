@@ -144,7 +144,7 @@ function Utils() {
    * @param {function(result: Object)} refreshCookieCb - The callback function passed in for cookie
    * refreshing mechanism.
    */
-  this.getLoginData = (cookie, cb, refreshCookieCb) => {
+  this.getLoginData = (cookie, cb, refreshCookieCb, logOutLink) => {
     const decodedToken = JSON.parse(cookie).access_token;
     const endpoint = `${config.patronApiUrl}${decodedToken}`;
 
@@ -165,7 +165,11 @@ function Utils() {
           console.warn(response.config);
           // If the cookie for getting log in Data is expired
           if (response.data.statusCode === 401 && response.data.expired === true) {
-            this.refreshAccessToken(config.loginMyNyplLinks.tokenRefreshLink, refreshCookieCb);
+            this.refreshAccessToken(
+              config.loginMyNyplLinks.tokenRefreshLink,
+              refreshCookieCb,
+              () => { this.logOut(logOutLink); }
+            );
           }
         }
       });
@@ -178,7 +182,7 @@ function Utils() {
    * @param {function(result: Object)} cb - The callback function passed in after the cookie
    * has been refreshed.
    */
-  this.refreshAccessToken = (api, cb) => {
+  this.refreshAccessToken = (api, cb, fallBackCb) => {
     axios
       .get(
         api,
@@ -195,8 +199,13 @@ function Utils() {
           console.warn(response.status);
           console.warn(response.headers);
           console.warn(response.config);
+          fallBackCb();
         }
       });
+  };
+
+  this.logOut = (link) => {
+    window.location.href = link;
   };
 
   /**

@@ -125,7 +125,7 @@ class MobileMyNypl extends React.Component {
     return (this.props.patronName && this.props.isLoggedIn) ?
       <div className={`${this.props.className}-Greeting`}>
         <p className="Login-Indication">You are logged in as:</p>
-        <p>{this.props.patronName}</p>
+        <p className="Login-Name">{this.props.patronName}</p>
       </div> : null;
   }
 

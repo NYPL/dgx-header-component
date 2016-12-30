@@ -297,8 +297,9 @@ describe('MyNypl', () => {
       }
     );
 
-    it('should have a <p> with class name "MyNypl-Patron-Name". Its text equals ' +
-      '"You are logged in as:" as the first line and second line as "Stewart, Darren"',
+    it('should have two <p>. One is with the class name "MyNypl-Patron-Greeting.Login-Indication". ' +
+      'And its text equals "You are logged in as:". The other is with the class name ' +
+      '"MyNypl-Patron-Greeting.Login-Name". And its text equals "Stewart, Darren"',
       () => {
         expect(component.find('p')).to.have.length(2);
         expect(component.find('.MyNypl-Patron-Greeting.Login-Indication').type()).to.equal('p');

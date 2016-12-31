@@ -144,7 +144,7 @@ function Utils() {
    * @param {function(result: Object)} refreshCookieCb - The callback function passed in for cookie
    * refreshing mechanism.
    */
-  this.getLoginData = (cookie, cb, refreshCookieCb, logOutLink) => {
+  this.getLoginData = (cookie, cb, refreshLink, refreshCookieCb, logOutLink) => {
     const decodedToken = JSON.parse(cookie).access_token;
     const endpoint = `${config.patronApiUrl}${decodedToken}`;
 

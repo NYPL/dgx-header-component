@@ -10,6 +10,7 @@ import FeatureFlags from 'dgx-feature-flags';
 // Nav Config
 import navConfig from '../../navConfig.js';
 import featureFlagConfig from '../../featureFlagConfig.js';
+import config from '../../appConfig.js';
 // ALT Flux
 import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
@@ -257,6 +258,7 @@ class Header extends React.Component {
           });
         }
       },
+      config.loginMyNyplLinks.tokenRefreshLink,
       () => {
         this.setLoginCookie();
       },

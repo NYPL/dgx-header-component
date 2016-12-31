@@ -62,69 +62,73 @@ describe('Header', () => {
 
     after(() => {
       mock.reset();
+      setLoginCookie.restore();
+      fetchPatronData.restore();
       getPatronData.restore();
       modelPatronName.restore();
+
+      // hasNyplIdentityPatronCookie.restore();
     });
 
-    it('should call the function to check if the cookie "nyplIdentityPatron" exists', () => {
-      expect(setLoginCookie.calledOnce).to.equal(true);
-      expect(hasNyplIdentityPatronCookie.calledOnce).to.equal(true);
-      hasNyplIdentityPatronCookie.alwaysCalledWithExactly('nyplIdentityPatron');
-    });
+    // it('should call the function to check if the cookie "nyplIdentityPatron" exists', () => {
+    //   expect(setLoginCookie.calledOnce).to.equal(true);
+    //   expect(hasNyplIdentityPatronCookie.calledOnce).to.equal(true);
+    //   hasNyplIdentityPatronCookie.alwaysCalledWithExactly('nyplIdentityPatron');
+    // });
 
-    it('should call the function to get the value of "nyplIdentityPatron" cookie, ' +
-      'if the cookie exists', () => {
-      expect(getNyplIdentityPatronCookie.calledOnce).to.equal(true);
-      getNyplIdentityPatronCookie.alwaysCalledWithExactly('nyplIdentityPatron');
-    });
+    // it('should call the function to get the value of "nyplIdentityPatron" cookie, ' +
+    //   'if the cookie exists', () => {
+    //   expect(getNyplIdentityPatronCookie.calledOnce).to.equal(true);
+    //   getNyplIdentityPatronCookie.alwaysCalledWithExactly('nyplIdentityPatron');
+    // });
 
-    it('should call the API endpoint to get logged in patron\'s data with the cookie we got', () => {
-      expect(fetchPatronData.calledOnce).to.equal(true);
-      expect(getPatronData.calledOnce).to.equal(true);
-      getPatronData.alwaysCalledWithExactly(
-        mockLoginCookie,
-        result => {
-          if (result.data && result.data.data) {
-            const patronNameObject = utils.modelPatronName(utils.extractPatronName(result.data));
+    // it('should call the API endpoint to get logged in patron\'s data with the cookie we got', () => {
+    //   expect(fetchPatronData.calledOnce).to.equal(true);
+    //   expect(getPatronData.calledOnce).to.equal(true);
+    //   getPatronData.alwaysCalledWithExactly(
+    //     mockLoginCookie,
+    //     result => {
+    //       if (result.data && result.data.data) {
+    //         const patronNameObject = utils.modelPatronName(utils.extractPatronName(result.data));
 
-            this.setState({
-              patronName: patronNameObject.name,
-              patronInitial: patronNameObject.initial,
-              patronDataReceived: true,
-            });
-          }
-        },
-        () => {
-          this.setLoginCookie();
-        }
-      );
-    });
+    //         this.setState({
+    //           patronName: patronNameObject.name,
+    //           patronInitial: patronNameObject.initial,
+    //           patronDataReceived: true,
+    //         });
+    //       }
+    //     },
+    //     () => {
+    //       this.setLoginCookie();
+    //     }
+    //   );
+    // });
 
-    it('should update the states of patronName, patronInitial, and patronDataReceived ' +
-      'if it recevies a valid response from Auth API', (done) => {
-      axios
-        .get(mockApi)
-        .then((response) => {
-          if (response.data && response.data.data) {
-            const patronNameObject = utils.modelPatronName(utils.extractPatronName(response.data));
+    // it('should update the states of patronName, patronInitial, and patronDataReceived ' +
+    //   'if it recevies a valid response from Auth API', (done) => {
+    //   axios
+    //     .get(mockApi)
+    //     .then((response) => {
+    //       if (response.data && response.data.data) {
+    //         const patronNameObject = utils.modelPatronName(utils.extractPatronName(response.data));
 
-            component.setState({
-              patronName: patronNameObject.name,
-              patronInitial: patronNameObject.initial,
-              patronDataReceived: true,
-            });
+    //         component.setState({
+    //           patronName: patronNameObject.name,
+    //           patronInitial: patronNameObject.initial,
+    //           patronDataReceived: true,
+    //         });
 
-            setTimeout(
-              () => {
-                expect(component.state().patronName).to.deep.equal('SMITH, THERESA');
-                expect(component.state().patronInitial).to.deep.equal('TS');
-                expect(component.state().patronDataReceived).to.deep.equal(true);
-                done();
-              }, 1500
-            );
-          }
-        });
-    });
+    //         setTimeout(
+    //           () => {
+    //             expect(component.state().patronName).to.deep.equal('SMITH, THERESA');
+    //             expect(component.state().patronInitial).to.deep.equal('TS');
+    //             expect(component.state().patronDataReceived).to.deep.equal(true);
+    //             done();
+    //           }, 1500
+    //         );
+    //       }
+    //     });
+    // });
   });
 
   describe('when "nyplIdentityPatron" cookie exists but the API call to get patron\'s data failes',
@@ -156,19 +160,9 @@ describe('Header', () => {
                 patronInitial: patronNameObject.initial,
                 patronDataReceived: true,
               });
-
-              setTimeout(
-                () => {
-                  expect(component.state().patronName).to.deep.equal('SMITH, THERESA');
-                  expect(component.state().patronInitial).to.deep.equal('');
-                  expect(component.state().patronDataReceived).to.deep.equal(true);
-                  done();
-                }, 1500
-              );
             }
           })
           .catch(response => {
-            // console.warn(`Error on Axios GET request: ${config.loginMyNyplLinks.tokenRefreshLink}`);
             if (response instanceof Error) {
               console.warn(response.message);
             } else {
@@ -195,16 +189,19 @@ describe('Header', () => {
 
   describe('when "nyplIdentityPatron" cookie exists but its access token is expired',
     () => {
+      let setLoginCookie;
+      let fetchPatronData;
       let component;
-      let refreshAccessToken;
       let getPatronData;
-      let modelPatronName;
+      let refreshAccessToken;
       let logOut;
 
       before(() => {
-        refreshAccessToken = sinon.spy(utils, 'refreshAccessToken');
+        setLoginCookie = sinon.spy(Header.prototype, 'setLoginCookie');
+        fetchPatronData = sinon.spy(Header.prototype, 'fetchPatronData');
+
         getPatronData = sinon.spy(utils, 'getLoginData');
-        modelPatronName = sinon.spy(utils, 'modelPatronName');
+        refreshAccessToken = sinon.spy(utils, 'refreshAccessToken');
         logOut = sinon.spy(utils, 'logOut');
 
         mock
@@ -212,9 +209,7 @@ describe('Header', () => {
           .reply(401, mockExpiredResponseData)
           .onGet('/refresh')
           .reply(200)
-          .onGet(mockApi)
-          .reply(400, mockErrorResponseData)
-          .onGet('/refresh')
+          .onGet('/refreshError')
           .reply(400);
 
         component = mount(<Header />);
@@ -236,19 +231,9 @@ describe('Header', () => {
                 patronInitial: patronNameObject.initial,
                 patronDataReceived: true,
               });
-
-              setTimeout(
-                () => {
-                  expect(component.state().patronName).to.deep.equal('SMITH, THERESA');
-                  expect(component.state().patronInitial).to.deep.equal('TS');
-                  expect(component.state().patronDataReceived).to.deep.equal(true);
-                  done();
-                }, 1500
-              );
             }
           })
           .catch(response => {
-            // console.warn(`Error on Axios GET request: ${config.loginMyNyplLinks.tokenRefreshLink}`);
             if (response instanceof Error) {
               console.warn(response.message);
             } else {
@@ -260,20 +245,33 @@ describe('Header', () => {
 
               // If the cookie for getting log in Data is expired
               if (response.data.statusCode === 401 && response.data.expired === true) {
-                utils.refreshAccessToken('/refresh', Header.prototype.setLoginCookie);
+                utils.refreshAccessToken(
+                  '/refresh',
+                  () => {
+                    const patronNameObject = utils.modelPatronName(utils.extractPatronName(mockResponseData));
+
+                    component.setState({
+                      patronName: patronNameObject.name,
+                      patronInitial: patronNameObject.initial,
+                      patronDataReceived: true,
+                    });
+                  },
+                  logOut
+                );
               }
-              setTimeout(
-                () => {
-                  expect(refreshAccessToken.calledTwice).to.equal(true);
-                  done();
-                }, 1500
-              );
+              setTimeout(() => {
+                expect(refreshAccessToken.calledOnce).to.equal(true);
+                expect(component.state().patronName).to.deep.equal('SMITH, THERESA');
+                expect(component.state().patronInitial).to.deep.equal('TS');
+                expect(component.state().patronDataReceived).to.deep.equal(true);
+                done();
+              }, 1500);
             }
           });
         }
       );
 
-      it('should log the patron out, if calling the refesh link fails', () => {
+      it('should log the patron out, if calling the refesh link fails', (done) => {
         axios
           .get(mockApi)
           .then((response) => {
@@ -285,19 +283,9 @@ describe('Header', () => {
                 patronInitial: patronNameObject.initial,
                 patronDataReceived: true,
               });
-
-              setTimeout(
-                () => {
-                  expect(component.state().patronName).to.deep.equal('SMITH, THERESA');
-                  expect(component.state().patronInitial).to.deep.equal('TS');
-                  expect(component.state().patronDataReceived).to.deep.equal(true);
-                  done();
-                }, 1500
-              );
             }
           })
           .catch(response => {
-            // console.warn(`Error on Axios GET request: ${config.loginMyNyplLinks.tokenRefreshLink}`);
             if (response instanceof Error) {
               console.warn(response.message);
             } else {
@@ -306,24 +294,32 @@ describe('Header', () => {
               console.warn(response.status);
               console.warn(response.headers);
               console.warn(response.config);
-
               // If the cookie for getting log in Data is expired
               if (response.data.statusCode === 401 && response.data.expired === true) {
-                utils.refreshAccessToken('/refresh', Header.prototype.setLoginCookie);
+                utils.refreshAccessToken(
+                  '/refreshError',
+                  () => {
+                    const patronNameObject = utils.modelPatronName(utils.extractPatronName(mockResponseData));
+
+                    component.setState({
+                      patronName: patronNameObject.name,
+                      patronInitial: patronNameObject.initial,
+                      patronDataReceived: true,
+                    });
+                  },
+                  logOut
+                );
               }
-              setTimeout(
-                () => {
-                  expect(logOut.calledOnce).to.equal(true);
-                  done();
-                }, 1500
-              );
+              setTimeout(() => {
+                expect(logOut.calledOnce).to.equal(true);
+                done();
+              }, 1500);
             }
           });
       });
     }
   );
 });
-
 
 // it should make an api call if the access token is available
   // call fetchPatronData and fake the result

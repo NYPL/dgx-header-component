@@ -33,6 +33,10 @@ var _featureFlagConfig = require('../../featureFlagConfig.js');
 
 var _featureFlagConfig2 = _interopRequireDefault(_featureFlagConfig);
 
+var _appConfig = require('../../appConfig.js');
+
+var _appConfig2 = _interopRequireDefault(_appConfig);
+
 var _HeaderStore = require('../../stores/HeaderStore.js');
 
 var _HeaderStore2 = _interopRequireDefault(_HeaderStore);
@@ -358,7 +362,7 @@ var Header = function (_React$Component) {
             patronDataReceived: true
           });
         }
-      }, function () {
+      }, _appConfig2.default.loginMyNyplLinks.tokenRefreshLink, function () {
         _this4.setLoginCookie();
       }, this.state.logOutUrl);
     }

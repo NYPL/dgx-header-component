@@ -172,7 +172,7 @@ var MobileMyNypl = function (_React$Component) {
         ),
         _react2.default.createElement(
           'p',
-          null,
+          { className: 'Login-Name' },
           this.props.patronName
         )
       ) : null;

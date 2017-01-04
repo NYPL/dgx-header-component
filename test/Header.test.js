@@ -110,8 +110,8 @@ describe('Header', () => {
 
     after(() => {
       mock.reset();
-      // stubs don't have restore(), the way to restore them is go back to the orignal functions.
-      // However, if the sutbs only use the methods belongs to spies, restore() will do the work.
+      // stubs don't have restore(), the way to restore them is go back to the original functions.
+      // However, if the sutbs only use the methods that belong to spies, restore() will work.
       utils.hasCookie.restore();
       utils.getCookie.restore();
       setLoginCookie.restore();
@@ -170,7 +170,7 @@ describe('Header', () => {
     });
   });
 
-  describe('when "nyplIdentityPatron" cookie exists but the API call to get patron\'s data failes',
+  describe('when "nyplIdentityPatron" cookie exists but the API call to get patron\'s data fails',
     () => {
       let component;
 
@@ -186,8 +186,8 @@ describe('Header', () => {
         mock.reset();
       });
 
-      it('should throw error if the call to get patron\'s data faild, and the states of ' +
-        'patronName, patronInitial, and patronDataReceived should remain default values',
+      it('should throw error if the call to get patron\'s data failed, and then the states of ' +
+        'patronName, patronInitial, and patronDataReceived should remain their default values',
         (done) => {
           patronApiCall(component);
           setTimeout(

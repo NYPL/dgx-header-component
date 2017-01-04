@@ -142,25 +142,7 @@ describe('Header', () => {
       () => {
         expect(fetchPatronData.calledOnce).to.equal(true);
         expect(getPatronData.calledOnce).to.equal(true);
-        getPatronData.alwaysCalledWithExactly(
-          mockLoginCookie,
-          result => {
-            if (result.data && result.data.data) {
-              const patronNameObject = utils.modelPatronName(utils.extractPatronName(result.data));
-
-              this.setState({
-                patronName: patronNameObject.name,
-                patronInitial: patronNameObject.initial,
-                patronDataReceived: true,
-              });
-            }
-          },
-          'https://isso.nypl.org/auth/refresh',
-          () => {
-            this.setLoginCookie(this.state.loginCookieName);
-          },
-          'https://isso.nypl.org/auth/logout'
-        );
+        expect(getPatronData.alwaysCalledWith(mockLoginCookie)).to.equal(true);
       }
     );
 

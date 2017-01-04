@@ -86,7 +86,8 @@ class Header extends React.Component {
       {
         headerHeight: null,
         navData: this.props.navData,
-        loginCookie: null,
+        loginCookieName: 'nyplIdentityPatron',
+        loginCookieValue: null,
         patronName: '',
         patronInitial: '',
         patronDataReceived: false,
@@ -109,7 +110,7 @@ class Header extends React.Component {
     window.addEventListener('scroll', this.handleStickyHeader, false);
 
     // Set nyplIdentityPatron cookie to the state.
-    this.setLoginCookie('nyplIdentityPatron');
+    this.setLoginCookie(this.state.loginCookieName);
 
     // Set feature flag cookies to the state
     this.checkFeatureFlagActivated(featureFlagConfig.featureFlagList);
@@ -129,7 +130,7 @@ class Header extends React.Component {
       _extend(
         {
           headerHeight: this.state.headerHeight,
-          loginCookie: this.state.loginCookie,
+          loginCookieValue: this.state.loginCookieValue,
           patronName: this.state.patronName,
           patronInitial: this.state.patronInitial,
           patronDataReceived: this.state.patronDataReceived,
@@ -145,16 +146,16 @@ class Header extends React.Component {
 
   /**
    * setLoginCookie()
-   * Updates the state loginCookie property
+   * Updates the state loginCookieValue property
    */
   setLoginCookie(cookie) {
     if (utils.hasCookie(cookie)) {
-      const loginCookie = utils.getCookie(cookie);
+      const loginCookieValue = utils.getCookie(cookie);
 
-      this.setState({ loginCookie });
-      this.fetchPatronData(loginCookie);
+      this.setState({ loginCookieValue });
+      this.fetchPatronData(loginCookieValue);
     } else {
-      this.setState({ loginCookie: null });
+      this.setState({ loginCookieValue: null });
     }
   }
 
@@ -260,7 +261,7 @@ class Header extends React.Component {
       },
       config.loginMyNyplLinks.tokenRefreshLink,
       () => {
-        this.setLoginCookie();
+        this.setLoginCookie(this.state.loginCookieName);
       },
       this.state.logOutUrl,
     );

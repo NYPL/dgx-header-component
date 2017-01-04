@@ -164,7 +164,8 @@ var Header = function (_React$Component) {
     _this.state = (0, _underscore.extend)({
       headerHeight: null,
       navData: _this.props.navData,
-      loginCookie: null,
+      loginCookieName: 'nyplIdentityPatron',
+      loginCookieValue: null,
       patronName: '',
       patronInitial: '',
       patronDataReceived: false,
@@ -188,7 +189,7 @@ var Header = function (_React$Component) {
       window.addEventListener('scroll', this.handleStickyHeader, false);
 
       // Set nyplIdentityPatron cookie to the state.
-      this.setLoginCookie('nyplIdentityPatron');
+      this.setLoginCookie(this.state.loginCookieName);
 
       // Set feature flag cookies to the state
       this.checkFeatureFlagActivated(_featureFlagConfig2.default.featureFlagList);
@@ -208,7 +209,7 @@ var Header = function (_React$Component) {
     value: function onChange() {
       this.setState((0, _underscore.extend)({
         headerHeight: this.state.headerHeight,
-        loginCookie: this.state.loginCookie,
+        loginCookieValue: this.state.loginCookieValue,
         patronName: this.state.patronName,
         patronInitial: this.state.patronInitial,
         patronDataReceived: this.state.patronDataReceived,
@@ -221,19 +222,19 @@ var Header = function (_React$Component) {
 
     /**
      * setLoginCookie()
-     * Updates the state loginCookie property
+     * Updates the state loginCookieValue property
      */
 
   }, {
     key: 'setLoginCookie',
     value: function setLoginCookie(cookie) {
       if (_utils2.default.hasCookie(cookie)) {
-        var loginCookie = _utils2.default.getCookie(cookie);
+        var loginCookieValue = _utils2.default.getCookie(cookie);
 
-        this.setState({ loginCookie: loginCookie });
-        this.fetchPatronData(loginCookie);
+        this.setState({ loginCookieValue: loginCookieValue });
+        this.fetchPatronData(loginCookieValue);
       } else {
-        this.setState({ loginCookie: null });
+        this.setState({ loginCookieValue: null });
       }
     }
 
@@ -363,7 +364,7 @@ var Header = function (_React$Component) {
           });
         }
       }, _appConfig2.default.loginMyNyplLinks.tokenRefreshLink, function () {
-        _this4.setLoginCookie();
+        _this4.setLoginCookie(_this4.state.loginCookieName);
       }, this.state.logOutUrl);
     }
 

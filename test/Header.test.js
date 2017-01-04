@@ -19,7 +19,7 @@ import {
   mockResponseData,
   mockErrorResponseData,
   mockExpiredResponseData,
-  mockLoginCookie,
+  mockLoginCookieValue,
 } from './authApiMockResponse.js';
 
 const mock = new MockAdapter(axios);
@@ -96,7 +96,7 @@ describe('Header', () => {
         .returns(true);
       getNyplIdentityPatronCookie = sinon.stub(utils, 'getCookie')
         .withArgs('nyplIdentityPatron')
-        .returns(mockLoginCookie);
+        .returns(mockLoginCookieValue);
       getPatronData = sinon.spy(utils, 'getLoginData');
       modelPatronName = sinon.spy(utils, 'modelPatronName');
 
@@ -137,7 +137,7 @@ describe('Header', () => {
         expect(fetchPatronData.calledOnce).to.equal(true);
         expect(getPatronData.calledOnce).to.equal(true);
         getPatronData.alwaysCalledWithExactly(
-          mockLoginCookie,
+          mockLoginCookieValue,
           result => {
             if (result.data && result.data.data) {
               const patronNameObject = utils.modelPatronName(utils.extractPatronName(result.data));
@@ -149,9 +149,11 @@ describe('Header', () => {
               });
             }
           },
+          'https://isso.nypl.org/auth/refresh',
           () => {
-            this.setLoginCookie();
-          }
+            this.setLoginCookie(this.state.loginCookieName);
+          },
+          'https://isso.nypl.org/auth/logout'
         );
       }
     );

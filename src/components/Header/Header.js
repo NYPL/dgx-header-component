@@ -109,7 +109,7 @@ class Header extends React.Component {
     window.addEventListener('scroll', this.handleStickyHeader, false);
 
     // Set nyplIdentityPatron cookie to the state.
-    this.setLoginCookie();
+    this.setLoginCookie('nyplIdentityPatron');
 
     // Set feature flag cookies to the state
     this.checkFeatureFlagActivated(featureFlagConfig.featureFlagList);
@@ -147,9 +147,9 @@ class Header extends React.Component {
    * setLoginCookie()
    * Updates the state loginCookie property
    */
-  setLoginCookie() {
-    if (utils.hasCookie('nyplIdentityPatron')) {
-      const loginCookie = utils.getCookie('nyplIdentityPatron');
+  setLoginCookie(cookie) {
+    if (utils.hasCookie(cookie)) {
+      const loginCookie = utils.getCookie(cookie);
 
       this.setState({ loginCookie });
       this.fetchPatronData(loginCookie);

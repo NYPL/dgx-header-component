@@ -1,4 +1,4 @@
- /* globals before describe it */
+/* eslint-env mocha */
 import React from 'react';
 import sinon from 'sinon';
 import { expect } from 'chai';

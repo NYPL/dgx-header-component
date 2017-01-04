@@ -55,7 +55,9 @@ describe('Header', () => {
             utils.refreshAccessToken(
               refreshApi,
               () => {
-                const patronNameObject = utils.modelPatronName(utils.extractPatronName(mockResponseData));
+                const patronNameObject = utils.modelPatronName(
+                  utils.extractPatronName(mockResponseData)
+                );
 
                 component.setState({
                   patronName: patronNameObject.name,
@@ -130,27 +132,29 @@ describe('Header', () => {
       getNyplIdentityPatronCookie.alwaysCalledWithExactly('nyplIdentityPatron');
     });
 
-    it('should call the API endpoint to get logged in patron\'s data with the cookie we got', () => {
-      expect(fetchPatronData.calledOnce).to.equal(true);
-      expect(getPatronData.calledOnce).to.equal(true);
-      getPatronData.alwaysCalledWithExactly(
-        mockLoginCookie,
-        result => {
-          if (result.data && result.data.data) {
-            const patronNameObject = utils.modelPatronName(utils.extractPatronName(result.data));
+    it('should call the API endpoint to get logged in patron\'s data with the cookie we got',
+      () => {
+        expect(fetchPatronData.calledOnce).to.equal(true);
+        expect(getPatronData.calledOnce).to.equal(true);
+        getPatronData.alwaysCalledWithExactly(
+          mockLoginCookie,
+          result => {
+            if (result.data && result.data.data) {
+              const patronNameObject = utils.modelPatronName(utils.extractPatronName(result.data));
 
-            this.setState({
-              patronName: patronNameObject.name,
-              patronInitial: patronNameObject.initial,
-              patronDataReceived: true,
-            });
+              this.setState({
+                patronName: patronNameObject.name,
+                patronInitial: patronNameObject.initial,
+                patronDataReceived: true,
+              });
+            }
+          },
+          () => {
+            this.setLoginCookie();
           }
-        },
-        () => {
-          this.setLoginCookie();
-        }
-      );
-    });
+        );
+      }
+    );
 
     it('should update the states of patronName, patronInitial, and patronDataReceived ' +
       'if it recevies a valid response from Auth API', (done) => {
@@ -183,7 +187,8 @@ describe('Header', () => {
       });
 
       it('should throw error if the call to get patron\'s data faild, and the states of ' +
-          'patronName, patronInitial, and patronDataReceived should remain default values', (done) => {
+        'patronName, patronInitial, and patronDataReceived should remain default values',
+        (done) => {
           patronApiCall(component);
           setTimeout(
             () => {
@@ -193,7 +198,8 @@ describe('Header', () => {
               done();
             }, 1500
           );
-      });
+        }
+      );
     }
   );
 

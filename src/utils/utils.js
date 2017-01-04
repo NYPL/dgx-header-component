@@ -133,7 +133,7 @@ function Utils() {
   };
 
   /**
-   * getLoginData(cookie, cb, refreshCookieCb)
+   * getLoginData(cookie, cb, refreshLink, refreshCookieCb, logOutLink)
    * Handle the cookie from log in and make api calls with the callback function passed in.
    * If the returned statusCode is 401 and the cookie is expired, invoke refreshAccessToken()
    * to refresh access_token in the nyplIdentityPatron cookie.
@@ -141,8 +141,10 @@ function Utils() {
    * @param {string} cookie - The cookie returned.
    * @param {function(result: Object)} cb - The callback function passed in for dealing with data
    * responses.
+   * @param {string} refreshLink - The link to call for refreshing access_token
    * @param {function(result: Object)} refreshCookieCb - The callback function passed in for cookie
    * refreshing mechanism.
+   * @param {string} logOutLink - The link to call for logging the patrons out
    */
   this.getLoginData = (cookie, cb, refreshLink, refreshCookieCb, logOutLink) => {
     const decodedToken = JSON.parse(cookie).access_token;
@@ -156,7 +158,6 @@ function Utils() {
         if (response instanceof Error) {
           console.warn(response.message);
         } else {
-          console.log(response);
           // The request was made, but the server responded with a status code
           // that falls out of the range of 2xx
           console.warn(response.data);
@@ -166,7 +167,7 @@ function Utils() {
           // If the cookie for getting log in Data is expired
           if (response.data.statusCode === 401 && response.data.expired === true) {
             this.refreshAccessToken(
-              config.loginMyNyplLinks.tokenRefreshLink,
+              refreshLink,
               refreshCookieCb,
               () => { this.logOut(logOutLink); }
             );

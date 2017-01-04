@@ -188,7 +188,7 @@ var Header = function (_React$Component) {
       window.addEventListener('scroll', this.handleStickyHeader, false);
 
       // Set nyplIdentityPatron cookie to the state.
-      this.setLoginCookie();
+      this.setLoginCookie('nyplIdentityPatron');
 
       // Set feature flag cookies to the state
       this.checkFeatureFlagActivated(_featureFlagConfig2.default.featureFlagList);
@@ -226,9 +226,9 @@ var Header = function (_React$Component) {
 
   }, {
     key: 'setLoginCookie',
-    value: function setLoginCookie() {
-      if (_utils2.default.hasCookie('nyplIdentityPatron')) {
-        var loginCookie = _utils2.default.getCookie('nyplIdentityPatron');
+    value: function setLoginCookie(cookie) {
+      if (_utils2.default.hasCookie(cookie)) {
+        var loginCookie = _utils2.default.getCookie(cookie);
 
         this.setState({ loginCookie: loginCookie });
         this.fetchPatronData(loginCookie);

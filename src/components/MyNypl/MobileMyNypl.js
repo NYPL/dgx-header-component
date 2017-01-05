@@ -138,6 +138,7 @@ class MobileMyNypl extends React.Component {
     const researchCatalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE RESEARCH CATALOG' :
       'LOG INTO THE RESEARCH CATALOG';
     const loggedInMarginTop = (this.props.isLoggedIn) ? styles.loggedInLinksMarginTop : null;
+    const gaAction = (this.props.isLoggedIn) ? 'Mobile Go To' : 'Mobile Log In';
 
     return (
       <div
@@ -150,7 +151,7 @@ class MobileMyNypl extends React.Component {
           href={catalogLink}
           className={catalogLinkClass}
           style={_extend(styles.links, loggedInMarginTop)}
-          onClick={() => utils.trackHeader('Mobile Log In', 'Catalog')}
+          onClick={() => utils.trackHeader(gaAction, 'Catalog')}
         >
           <span
             className={`${catalogLinkClass}-Wrapper`}
@@ -170,7 +171,7 @@ class MobileMyNypl extends React.Component {
           href={researchLink}
           className={researchLinkClass}
           style={_extend(styles.links, loggedInMarginTop)}
-          onClick={() => utils.trackHeader('Mobile Log In', 'Research')}
+          onClick={() => utils.trackHeader(gaAction, 'Research')}
         >
           <span
             className={`${researchLinkClass}-Wrapper`}

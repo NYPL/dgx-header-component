@@ -139,7 +139,7 @@ function Utils() {
   };
 
   /**
-   * getLoginData(cookie, cb, refreshCookieCb)
+   * getLoginData(cookie, cb, refreshLink, refreshCookieCb, logOutLink)
    * Handle the cookie from log in and make api calls with the callback function passed in.
    * If the returned statusCode is 401 and the cookie is expired, invoke refreshAccessToken()
    * to refresh access_token in the nyplIdentityPatron cookie.
@@ -147,10 +147,12 @@ function Utils() {
    * @param {string} cookie - The cookie returned.
    * @param {function(result: Object)} cb - The callback function passed in for dealing with data
    * responses.
+   * @param {string} refreshLink - The link to call for refreshing access_token
    * @param {function(result: Object)} refreshCookieCb - The callback function passed in for cookie
    * refreshing mechanism.
+   * @param {string} logOutLink - The link to call for logging the patrons out
    */
-  this.getLoginData = function (cookie, cb, refreshCookieCb) {
+  this.getLoginData = function (cookie, cb, refreshLink, refreshCookieCb, logOutLink) {
     var decodedToken = JSON.parse(cookie).access_token;
     var endpoint = '' + _appConfig2.default.patronApiUrl + decodedToken;
 
@@ -167,7 +169,9 @@ function Utils() {
         console.warn(response.config);
         // If the cookie for getting log in Data is expired
         if (response.data.statusCode === 401 && response.data.expired === true) {
-          _this.refreshAccessToken(refreshCookieCb);
+          _this.refreshAccessToken(refreshLink, refreshCookieCb, function () {
+            _this.logOut(logOutLink);
+          });
         }
       }
     });
@@ -180,9 +184,9 @@ function Utils() {
    * @param {function(result: Object)} cb - The callback function passed in after the cookie
    * has been refreshed.
    */
-  this.refreshAccessToken = function (cb) {
-    _axios2.default.get(_appConfig2.default.loginMyNyplLinks.tokenRefreshLink, { withCredentials: true }).then(cb).catch(function (response) {
-      console.warn('Error on Axios GET request: ' + _appConfig2.default.loginMyNyplLinks.tokenRefreshLink);
+  this.refreshAccessToken = function (api, cb, fallBackCb) {
+    _axios2.default.get(api, { withCredentials: true }).then(cb).catch(function (response) {
+      console.warn('Error on Axios GET request: ' + api);
       if (response instanceof Error) {
         console.warn(response.message);
       } else {
@@ -191,8 +195,13 @@ function Utils() {
         console.warn(response.status);
         console.warn(response.headers);
         console.warn(response.config);
+        fallBackCb();
       }
     });
+  };
+
+  this.logOut = function (link) {
+    window.location.href = link;
   };
 
   /**

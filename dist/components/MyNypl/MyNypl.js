@@ -128,7 +128,7 @@ var MyNypl = function (_React$Component) {
         ),
         _react2.default.createElement(
           'p',
-          { className: this.props.className + '-Patron-Greeting' },
+          { className: this.props.className + '-Patron-Greeting Login-Name' },
           this.props.patronName
         )
       );

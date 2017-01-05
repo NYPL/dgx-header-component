@@ -1,4 +1,4 @@
- /* globals before describe it */
+/* eslint-env mocha */
 import React from 'react';
 import sinon from 'sinon';
 import { expect } from 'chai';
@@ -156,7 +156,7 @@ describe('MobileMyNypl', () => {
           'https://isso.nypl.org/auth/logout'
         );
         expect(renderedInstance.props.className).to.equal('MobileMyNypl-Catalog-Link');
-        expect(renderedInstance.props.children).to.equal('Log Out');
+        expect(renderedInstance.props.children).to.equal('LOG OUT');
 
         const onClick = sinon.spy(utils, 'trackHeader');
 
@@ -235,7 +235,7 @@ describe('MobileMyNypl', () => {
             'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'
           );
           expect(renderedInstance.props.className).to.equal('MobileMyNypl-Catalog-Link');
-          expect(renderedInstance.props.children).to.equal('Log Out');
+          expect(renderedInstance.props.children).to.equal('LOG OUT');
 
           const onClick = sinon.spy(utils, 'trackHeader');
 
@@ -275,21 +275,22 @@ describe('MobileMyNypl', () => {
       let component;
 
       before(() => {
-        component = mount(<MobileMyNypl isLoggedIn patronName={'Darren Stewart'} />);
+        component = mount(<MobileMyNypl isLoggedIn patronName={'Stewart, Darren'} />);
       });
 
-      it('should have props patronName equals "Darren Stewart"',
+      it('should have props patronName equals "Stewart, Darren"',
         () => {
-          expect(component.props().patronName).to.equal('Darren Stewart');
+          expect(component.props().patronName).to.equal('Stewart, Darren');
         }
       );
 
-      it('should have a <div> with class name "MobileMyNypl-Greeting". It has a <p> and its text ' +
-        'equals to "HELLO, Darren Stewart"',
+      it('should have a <div> with class name "MobileMyNypl-Greeting". It has two <p>' +
+        'and their texts equal to "You are logged in as:" and "Stewart, Darren"',
         () => {
           expect(component.find('.MobileMyNypl-Greeting').type()).to.equal('div');
-          expect(component.find('p')).to.have.length(1);
-          expect(component.find('p').text()).to.equal('HELLO, Darren Stewart');
+          expect(component.find('p')).to.have.length(2);
+          expect(component.find('.Login-Indication').text()).to.equal('You are logged in as:');
+          expect(component.find('.Login-Name').text()).to.equal('Stewart, Darren');
         }
       );
     }

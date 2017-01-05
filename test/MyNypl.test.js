@@ -1,4 +1,4 @@
- /* globals before describe it */
+/* eslint-env mocha */
 import React from 'react';
 import sinon from 'sinon';
 import { expect } from 'chai';
@@ -170,7 +170,7 @@ describe('MyNypl', () => {
           'https://isso.nypl.org/auth/logout'
         );
         expect(renderedInstance.props.className).to.equal('MyNypl-Catalog-Link');
-        expect(renderedInstance.props.children).to.equal('Log Out');
+        expect(renderedInstance.props.children[1]).to.equal('LOG OUT');
 
         const onClick = sinon.spy(utils, 'trackHeader');
 
@@ -251,7 +251,7 @@ describe('MyNypl', () => {
             'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'
           );
           expect(renderedInstance.props.className).to.equal('MyNypl-Catalog-Link');
-          expect(renderedInstance.props.children).to.equal('Log Out');
+          expect(renderedInstance.props.children[1]).to.equal('LOG OUT');
 
           const onClick = sinon.spy(utils, 'trackHeader');
 
@@ -268,12 +268,12 @@ describe('MyNypl', () => {
     let component;
 
     before(() => {
-      component = mount(<MyNypl patronName={'Darren Stewart'} />);
+      component = mount(<MyNypl patronName={'Stewart, Darren'} />);
     });
 
-    it('should have props patronName equals "Darren Stewart"',
+    it('should have props patronName equals "Stewart, Darren"',
       () => {
-        expect(component.props().patronName).to.equal('Darren Stewart');
+        expect(component.props().patronName).to.equal('Stewart, Darren');
       }
     );
 
@@ -288,21 +288,24 @@ describe('MyNypl', () => {
     let component;
 
     before(() => {
-      component = mount(<MyNypl isLoggedIn patronName={'Darren Stewart'} />);
+      component = mount(<MyNypl isLoggedIn patronName={'Stewart, Darren'} />);
     });
 
-    it('should have props patronName equals "Darren Stewart"',
+    it('should have props patronName equals "Stewart, Darren"',
       () => {
-        expect(component.props().patronName).to.equal('Darren Stewart');
+        expect(component.props().patronName).to.equal('Stewart, Darren');
       }
     );
 
-    it('should have a <p> with class name "MyNypl-Patron-Name". Its text equals ' +
-      '"HELLO, Darren Stewart"',
+    it('should have two <p>. One is with the class name "MyNypl-Patron-Greeting.Login-Indication". ' +
+      'And its text equals "You are logged in as:". The other is with the class name ' +
+      '"MyNypl-Patron-Greeting.Login-Name". And its text equals "Stewart, Darren"',
       () => {
-        expect(component.find('p')).to.have.length(1);
-        expect(component.find('.MyNypl-Patron-Name').type()).to.equal('p');
-        expect(component.find('.MyNypl-Patron-Name').text()).to.equal('HELLO, Darren Stewart');
+        expect(component.find('p')).to.have.length(2);
+        expect(component.find('.MyNypl-Patron-Greeting.Login-Indication').type()).to.equal('p');
+        expect(component.find('.MyNypl-Patron-Greeting.Login-Indication').text()).to.equal('You are logged in as:');
+        expect(component.find('.MyNypl-Patron-Greeting.Login-Name').type()).to.equal('p');
+        expect(component.find('.MyNypl-Patron-Greeting.Login-Name').text()).to.equal('Stewart, Darren');
       }
     );
   });

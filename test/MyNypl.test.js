@@ -175,7 +175,8 @@ describe('MyNypl', () => {
         const onClick = sinon.spy(utils, 'trackHeader');
 
         component.find('.MyNypl-Catalog-Link').simulate('click');
-        expect(onClick.called);
+        expect(onClick.calledOnce).to.equal(true);
+        expect(onClick.calledWith('My Account', 'Log Out')).to.equal(true);
 
         onClick.restore();
       }
@@ -256,7 +257,8 @@ describe('MyNypl', () => {
           const onClick = sinon.spy(utils, 'trackHeader');
 
           component.find('.MyNypl-Catalog-Link').simulate('click');
-          expect(onClick.called);
+          expect(onClick.calledOnce).to.equal(true);
+          expect(onClick.calledWith('My Account', 'Log Out')).to.equal(true);
 
           onClick.restore();
         }

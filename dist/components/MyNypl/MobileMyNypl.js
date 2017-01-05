@@ -146,7 +146,7 @@ var MobileMyNypl = function (_React$Component) {
           href: this.props.logOutLink,
           className: this.props.className + '-Catalog-Link',
           onClick: function onClick() {
-            return _utils2.default.trackHeader('My NYPL', 'Log Out');
+            return _utils2.default.trackHeader('My Account', 'Log Out');
           },
           style: styles.logOutLink
         },

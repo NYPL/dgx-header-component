@@ -131,7 +131,8 @@ var NavMenu = function (_React$Component) {
           isLoggedIn: this.props.isLoggedIn,
           patronName: this.props.patronName,
           isOauthLoginActivated: this.props.isOauthLoginActivated,
-          logOutLink: this.props.logOutLink
+          logOutLink: this.props.logOutLink,
+          gaAction: this.props.gaAction
         }),
         _react2.default.createElement(_DonateButton2.default, {
           id: 'Collapsed-DonateButton',
@@ -218,7 +219,8 @@ NavMenu.propTypes = {
   isOauthLoginActivated: _react2.default.PropTypes.bool,
   patronInitial: _react2.default.PropTypes.string,
   patronName: _react2.default.PropTypes.string,
-  logOutLink: _react2.default.PropTypes.string
+  logOutLink: _react2.default.PropTypes.string,
+  gaAction: _react2.default.PropTypes.string
 };
 
 NavMenu.defaultProps = {

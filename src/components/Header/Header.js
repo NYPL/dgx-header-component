@@ -263,7 +263,7 @@ class Header extends React.Component {
       () => {
         this.setLoginCookie(this.state.loginCookieName);
       },
-      this.state.logOutUrl,
+      this.state.logOutUrl
     );
   }
 
@@ -304,6 +304,7 @@ class Header extends React.Component {
       (<SkipNavigation {...this.props.skipNav} />) : '';
     const isLoggedIn = !!this.state.patronDataReceived;
     const isOauthLoginActivated = !!this.state.isFeatureFlagsActivated.OauthLogin;
+    const gaAction = (isLoggedIn) ? 'My Account' : 'Log In';
 
     return (
       <header
@@ -344,6 +345,7 @@ class Header extends React.Component {
                 isOauthLoginActivated={isOauthLoginActivated}
                 patronName={this.state.patronName}
                 logOutLink={this.state.logOutUrl}
+                gaAction={gaAction}
               />
               <SimpleLink
                 label="Locations"
@@ -400,6 +402,7 @@ class Header extends React.Component {
             patronName={this.state.patronName}
             isOauthLoginActivated={isOauthLoginActivated}
             logOutLink={this.state.logOutUrl}
+            gaAction={gaAction}
           />
         </div>
       </header>

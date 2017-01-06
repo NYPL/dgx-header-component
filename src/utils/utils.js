@@ -4,6 +4,8 @@ import { map as _map } from 'underscore';
 import axios from 'axios';
 import config from './../appConfig.js';
 
+require('es6-promise').polyfill();
+
 function Utils() {
   this.formatDate = (startDate, endDate) => {
     let formattedDate,

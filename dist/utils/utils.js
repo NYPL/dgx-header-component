@@ -24,6 +24,8 @@ var _appConfig2 = _interopRequireDefault(_appConfig);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+require('es6-promise').polyfill();
+
 function Utils() {
   var _this = this;
 

@@ -201,7 +201,8 @@ describe('MobileMyNypl', () => {
         expect(renderedInstance.props.children).to.equal('LOG OUT');
 
         component.find('.MobileMyNypl-Catalog-Link').simulate('click');
-        expect(onClick.called);
+        expect(onClick.calledOnce).to.equal(true);
+        expect(onClick.calledWith('My Account', 'Log Out')).to.equal(true);
       }
     );
   });
@@ -278,7 +279,8 @@ describe('MobileMyNypl', () => {
           const onClick = sinon.spy(utils, 'trackHeader');
 
           component.find('.MobileMyNypl-Catalog-Link').simulate('click');
-          expect(onClick.called);
+          expect(onClick.calledOnce).to.equal(true);
+          expect(onClick.calledWith('My Account', 'Log Out')).to.equal(true);
 
           onClick.restore();
         }

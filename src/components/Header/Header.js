@@ -1,5 +1,3 @@
-// Polyfill Promise for legacy browsers
-import "babel-polyfill";
 // NPM Modules
 import React from 'react';
 import ReactDOM from 'react-dom';

@@ -8,7 +8,7 @@ if (process.env.NODE_ENV !== 'development') {
   module.exports = {
     devtool: 'source-map',
     entry: [
-      path.resolve(rootPath, 'babel-polyfill', './src/components/Header/Header.js')
+      path.resolve(rootPath,'./src/components/Header/Header.js')
     ],
     resolve: {
       extensions: ['', '.js', '.jsx', '.scss']
@@ -67,6 +67,7 @@ if (process.env.NODE_ENV !== 'development') {
     entry: [
       'webpack-dev-server/client?http://localhost:3000',
       'webpack/hot/only-dev-server',
+      'babel-polyfill',
       './src/app.js'
     ],
     output: {

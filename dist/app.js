@@ -1,5 +1,7 @@
 'use strict';
 
+require('babel-polyfill');
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -29,6 +31,7 @@ if (loadA11y) {
 }
 
 // Use for testing GA events
+// Polyfill Promise for legacy browsers
 if (!window.ga) {
   console.log('Analytics not available - loading through React.');
   var gaOpts = { debug: true };

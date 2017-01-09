@@ -40,6 +40,48 @@ Call the instance in your application component:
 />
 ```
 
+Install the polyfill For IE 11 and older version browsers:
+The polyfill for ES6 Promise is essential for the header to be rendered correctly on IE 11 and older browsers, as the version of axios we are using no longer supports ES6 Promise as default.
+
+NPM Install `"babel-polyfill": "6.20.0"` as a dependency to the application you want to import the header component to.
+
+```
+npm install --save babel-polyfill@6.20.0;
+```
+
+For `nypl-dgx-react-header`, as it will be built before uploaded, the polyfill can be installed as 
+devDependency.
+
+```
+npm install --save-dev babel-polyfill@6.20.0;
+```
+
+At the very beginning of the entry file of the application, put
+
+```
+import "babel-polyfill";
+```
+
+In the application's `webpack.config.js`, put `'babel-polyfill'` in the `entry` array of each environment. For example,
+
+```
+entry: [
+ 'babel-polyfill',
+  path.resolve(ROOT_PATH, 'src/client/App.jsx')
+],
+```
+
+or
+
+```
+entry: [
+  'webpack-dev-server/client?http://localhost:3000',
+  'webpack/hot/only-dev-server',
+  'babel-polyfill',
+  path.resolve(ROOT_PATH, 'src/client/App.jsx')
+],
+```
+
 ### Test
 
 To run unit tests, run `npm test` in the terminal. Or run `npm run test-with-coverage` to run the test and see the test coverage.

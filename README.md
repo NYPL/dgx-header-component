@@ -45,6 +45,10 @@ The polyfill for ES6 Promise is essential for the header to be rendered correctl
 
 NPM Install `"babel-polyfill": "6.20.0"` as a devDependency to the application you want to import the header component to.
 
+```
+npm install --save-dev babel-polyfill@6.20.0;
+```
+
 At the very beginning of the entry file of the application, put
 
 ```

@@ -228,7 +228,7 @@ var MobileHeader = function (_React$Component) {
         } else {
           _Actions2.default.setMobileMenuButtonValue('');
         }
-      } else if (activeButton === 'clickMyNypl') {
+      } else if (activeButton === 'clickLogIn' || activeButton === 'clickMyAccount') {
         if (_HeaderStore2.default.getMobileMyNyplButtonValue() !== activeButton) {
           _Actions2.default.setMobileMyNyplButtonValue(activeButton);
           _Actions2.default.searchButtonActionValue('');
@@ -252,7 +252,7 @@ var MobileHeader = function (_React$Component) {
   }, {
     key: 'closeMyNyplDialog',
     value: function closeMyNyplDialog() {
-      if (this.state.mobileMyNyplButton === 'clickMyNypl') {
+      if (this.state.mobileMyNyplButton === 'clickLogIn' || this.state.mobileMyNyplButton === 'clickMyAccount') {
         _Actions2.default.setMobileMyNyplButtonValue('');
       }
     }
@@ -314,6 +314,7 @@ var MobileHeader = function (_React$Component) {
       var myNyplClass = '';
       var loginIconClass = this.props.patronName ? '-loggedIn' : '';
       var loggedInFadeInAnimation = this.props.patronName ? ' animated fadeIn' : '';
+      var gaAction = this.props.patronName ? 'MyAccount' : 'LogIn';
       var icon = _react2.default.createElement(_dgxSvgIcons.LoginIconSolid, {
         className: 'MobileMyNypl LoginIcon' + loginIconClass + loggedInFadeInAnimation
       });
@@ -321,7 +322,7 @@ var MobileHeader = function (_React$Component) {
       var buttonLabel = 'Open Log In Dialog';
       var dialogWindow = null;
 
-      if (this.state.mobileMyNyplButton === 'clickMyNypl') {
+      if (this.state.mobileMyNyplButton === 'clickLogIn' || this.state.mobileMyNyplButton === 'clickMyAccount') {
         myNyplClass = ' active';
         icon = _react2.default.createElement(_dgxSvgIcons.XIcon, { ariaHidden: true, fill: '#FFF' });
         buttonStyles = styles.activeMyNyplButton;
@@ -352,7 +353,7 @@ var MobileHeader = function (_React$Component) {
             ref: 'MobileMyNyplButton',
             style: (0, _underscore.extend)(styles.myNyplButton, buttonStyles),
             onTap: function onTap() {
-              return _this2.toggleMobileMenuButton('clickMyNypl');
+              return _this2.toggleMobileMenuButton('click' + gaAction);
             }
           },
           _react2.default.createElement(

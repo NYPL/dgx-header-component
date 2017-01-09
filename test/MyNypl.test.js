@@ -11,10 +11,19 @@ import utils from './../src/utils/utils.js';
 
 describe('MyNypl', () => {
   describe('<MyNypl> as default', () => {
+    let onClick;
     let component;
 
     before(() => {
       component = mount(<MyNypl />);
+    });
+
+    beforeEach(() => {
+      onClick = sinon.spy(utils, 'trackHeader');
+    });
+
+    afterEach(() => {
+      onClick.restore();
     });
 
     it('should have a <div> with class name "MyNypl" as a wrapper', () => {
@@ -40,6 +49,18 @@ describe('MyNypl', () => {
         expect(component.find('.MyNypl-Research-Btn').type()).to.equal('a');
       }
     );
+
+    it('should call GA event tracker when "MyNypl-Catalog-Btn" is clicked', () => {
+      component.find('.MyNypl-Catalog-Btn').simulate('click');
+      expect(onClick.calledOnce).to.equal(true);
+      expect(onClick.calledWith('Log In', 'Catalog')).to.equal(true);
+    });
+
+    it('should call GA event tracker when "MyNypl-Research-Btn" is clicked', () => {
+      component.find('.MyNypl-Research-Btn').simulate('click');
+      expect(onClick.calledOnce).to.equal(true);
+      expect(onClick.calledWith('Log In', 'Research')).to.equal(true);
+    });
 
     it('should have props with default values of isLoggedIn, isOauthLoginActivated, patronName, ' +
       'and logOutLink', () => {
@@ -109,12 +130,19 @@ describe('MyNypl', () => {
   });
 
   describe('<MyNypl> with the prop isLoggedIn that is set to be true', () => {
+    let onClick;
     let component;
 
     before(() => {
-      component = mount(
-        <MyNypl isLoggedIn />
-      );
+      component = mount(<MyNypl isLoggedIn />);
+    });
+
+    beforeEach(() => {
+      onClick = sinon.spy(utils, 'trackHeader');
+    });
+
+    afterEach(() => {
+      onClick.restore();
     });
 
     it('should have props isLoggedIn equals true, and logOutLink equals' +
@@ -159,6 +187,18 @@ describe('MyNypl', () => {
       );
     });
 
+    it('should call GA event tracker when "MyNypl-Catalog-Btn" is clicked', () => {
+      component.find('.MyNypl-Catalog-Btn').simulate('click');
+      expect(onClick.calledOnce).to.equal(true);
+      expect(onClick.calledWith('Go To', 'Catalog')).to.equal(true);
+    });
+
+    it('should call GA event tracker when "MyNypl-Research-Btn" is clicked', () => {
+      component.find('.MyNypl-Research-Btn').simulate('click');
+      expect(onClick.calledOnce).to.equal(true);
+      expect(onClick.calledWith('Go To', 'Research')).to.equal(true);
+    });
+
     it('should have the method "renderLogOutLink" to render the proper log out link',
       () => {
         // renderLogOutLink() is one of the methods of <MobileMyNypl />. It locates in the
@@ -172,13 +212,9 @@ describe('MyNypl', () => {
         expect(renderedInstance.props.className).to.equal('MyNypl-Catalog-Link');
         expect(renderedInstance.props.children[1]).to.equal('LOG OUT');
 
-        const onClick = sinon.spy(utils, 'trackHeader');
-
         component.find('.MyNypl-Catalog-Link').simulate('click');
         expect(onClick.calledOnce).to.equal(true);
         expect(onClick.calledWith('My Account', 'Log Out')).to.equal(true);
-
-        onClick.restore();
       }
     );
   });
@@ -266,25 +302,27 @@ describe('MyNypl', () => {
     }
   );
 
-  describe('<MyNypl> with the props patronName that has valid value but isLoggedIn is false', () => {
-    let component;
+  describe('<MyNypl> with the props patronName that has valid value but isLoggedIn is false',
+    () => {
+      let component;
 
-    before(() => {
-      component = mount(<MyNypl patronName={'Stewart, Darren'} />);
-    });
+      before(() => {
+        component = mount(<MyNypl patronName={'Stewart, Darren'} />);
+      });
 
-    it('should have props patronName equals "Stewart, Darren"',
-      () => {
-        expect(component.props().patronName).to.equal('Stewart, Darren');
-      }
-    );
+      it('should have props patronName equals "Stewart, Darren"',
+        () => {
+          expect(component.props().patronName).to.equal('Stewart, Darren');
+        }
+      );
 
-    it('should not render the <p> for patron greeting',
-      () => {
-        expect(component.find('p')).to.have.length(0);
-      }
-    );
-  });
+      it('should not render the <p> for patron greeting',
+        () => {
+          expect(component.find('p')).to.have.length(0);
+        }
+      );
+    }
+  );
 
   describe('<MyNypl> with the props patronName that has valid value and isLoggedIn is true', () => {
     let component;
@@ -299,15 +337,20 @@ describe('MyNypl', () => {
       }
     );
 
-    it('should have two <p>. One is with the class name "MyNypl-Patron-Greeting.Login-Indication". ' +
-      'And its text equals "You are logged in as:". The other is with the class name ' +
-      '"MyNypl-Patron-Greeting.Login-Name". And its text equals "Stewart, Darren"',
+    it('should have two <p>. One is with the class name ' +
+      '"MyNypl-Patron-Greeting.Login-Indication". And its text equals "You are logged in as:". ' +
+      'The other is with the class name "MyNypl-Patron-Greeting.Login-Name". ' +
+      'And its text equals "Stewart, Darren"',
       () => {
         expect(component.find('p')).to.have.length(2);
         expect(component.find('.MyNypl-Patron-Greeting.Login-Indication').type()).to.equal('p');
-        expect(component.find('.MyNypl-Patron-Greeting.Login-Indication').text()).to.equal('You are logged in as:');
+        expect(component.find('.MyNypl-Patron-Greeting.Login-Indication').text()).to.equal(
+          'You are logged in as:'
+        );
         expect(component.find('.MyNypl-Patron-Greeting.Login-Name').type()).to.equal('p');
-        expect(component.find('.MyNypl-Patron-Greeting.Login-Name').text()).to.equal('Stewart, Darren');
+        expect(component.find('.MyNypl-Patron-Greeting.Login-Name').text()).to.equal(
+          'Stewart, Darren'
+        );
       }
     );
   });

@@ -117,6 +117,7 @@ class MyNypl extends React.Component {
       'LOG INTO THE RESEARCH CATALOG';
     const catalogLink = this.rednerLoginLinks().catalogLink;
     const researchLink = this.rednerLoginLinks().researchLink;
+    const gaAction = (this.props.isLoggedIn) ? 'Go To' : 'Log In';
 
     return (
       <div className={this.props.className} role="dialog">
@@ -128,7 +129,7 @@ class MyNypl extends React.Component {
               href={catalogLink}
               style={styles.loginButtons}
               className={`${this.props.className}-Catalog-Btn`}
-              onClick={() => utils.trackHeader('Log In', 'Catalog')}
+              onClick={() => utils.trackHeader(gaAction, 'Catalog')}
             >
               <span className="nypl-icon-login icon"></span>
               {catalogLinkLabel}
@@ -139,7 +140,7 @@ class MyNypl extends React.Component {
               href={researchLink}
               style={styles.loginButtons}
               className={`${this.props.className}-Research-Btn`}
-              onClick={() => utils.trackHeader('Log In', 'Research')}
+              onClick={() => utils.trackHeader(gaAction, 'Research')}
             >
               <span className="nypl-icon-bldg icon"></span>
               {researchCatalogLinkLabel}

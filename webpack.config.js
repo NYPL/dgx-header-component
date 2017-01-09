@@ -8,7 +8,7 @@ if (process.env.NODE_ENV !== 'development') {
   module.exports = {
     devtool: 'source-map',
     entry: [
-    'babel-polyfill',
+      'babel-polyfill',
       path.resolve(rootPath,'./src/components/Header/Header.js')
     ],
     resolve: {

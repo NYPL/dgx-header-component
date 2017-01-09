@@ -187,6 +187,7 @@ var MobileMyNypl = function (_React$Component) {
       var catalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
       var researchCatalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE RESEARCH CATALOG' : 'LOG INTO THE RESEARCH CATALOG';
       var loggedInMarginTop = this.props.isLoggedIn ? styles.loggedInLinksMarginTop : null;
+      var gaAction = this.props.isLoggedIn ? 'Mobile Go To' : 'Mobile Log In';
 
       return _react2.default.createElement(
         'div',
@@ -203,7 +204,7 @@ var MobileMyNypl = function (_React$Component) {
             className: catalogLinkClass,
             style: (0, _underscore.extend)(styles.links, loggedInMarginTop),
             onClick: function onClick() {
-              return _utils2.default.trackHeader('Mobile Log In', 'Catalog');
+              return _utils2.default.trackHeader(gaAction, 'Catalog');
             }
           },
           _react2.default.createElement(
@@ -230,7 +231,7 @@ var MobileMyNypl = function (_React$Component) {
             className: researchLinkClass,
             style: (0, _underscore.extend)(styles.links, loggedInMarginTop),
             onClick: function onClick() {
-              return _utils2.default.trackHeader('Mobile Log In', 'Research');
+              return _utils2.default.trackHeader(gaAction, 'Research');
             }
           },
           _react2.default.createElement(

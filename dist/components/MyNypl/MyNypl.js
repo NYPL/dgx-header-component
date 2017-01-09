@@ -163,6 +163,7 @@ var MyNypl = function (_React$Component) {
       var researchCatalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE RESEARCH CATALOG' : 'LOG INTO THE RESEARCH CATALOG';
       var catalogLink = this.rednerLoginLinks().catalogLink;
       var researchLink = this.rednerLoginLinks().researchLink;
+      var gaAction = this.props.isLoggedIn ? 'Go To' : 'Log In';
 
       return _react2.default.createElement(
         'div',
@@ -182,7 +183,7 @@ var MyNypl = function (_React$Component) {
                 style: styles.loginButtons,
                 className: this.props.className + '-Catalog-Btn',
                 onClick: function onClick() {
-                  return _utils2.default.trackHeader('Log In', 'Catalog');
+                  return _utils2.default.trackHeader(gaAction, 'Catalog');
                 }
               },
               _react2.default.createElement('span', { className: 'nypl-icon-login icon' }),
@@ -199,7 +200,7 @@ var MyNypl = function (_React$Component) {
                 style: styles.loginButtons,
                 className: this.props.className + '-Research-Btn',
                 onClick: function onClick() {
-                  return _utils2.default.trackHeader('Log In', 'Research');
+                  return _utils2.default.trackHeader(gaAction, 'Research');
                 }
               },
               _react2.default.createElement('span', { className: 'nypl-icon-bldg icon' }),

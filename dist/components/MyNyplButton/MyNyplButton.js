@@ -127,7 +127,7 @@ var MyNyplButton = function (_React$Component) {
       var visibleState = _HeaderStore2.default.getMyNyplVisible() ? 'Closed' : 'Open';
 
       _Actions2.default.toggleMyNyplVisible(!_HeaderStore2.default.getMyNyplVisible());
-      _utils2.default.trackHeader('Log In', 'MyNyplButton - ' + visibleState);
+      _utils2.default.trackHeader(this.props.gaAction, 'MyNyplButton - ' + visibleState);
     }
 
     /**
@@ -141,7 +141,7 @@ var MyNyplButton = function (_React$Component) {
     value: function handleOnClickOut() {
       if (_HeaderStore2.default.getMyNyplVisible()) {
         if (_HeaderStore2.default.getMobileMyNyplButtonValue() === '') {
-          _utils2.default.trackHeader('Log In', 'MyNyplButton - Closed');
+          _utils2.default.trackHeader(this.props.gaAction, 'MyNyplButton - Closed');
         }
         _Actions2.default.toggleMyNyplVisible(false);
       }
@@ -225,7 +225,8 @@ MyNyplButton.propTypes = {
   isLoggedIn: _react2.default.PropTypes.bool,
   isOauthLoginActivated: _react2.default.PropTypes.bool,
   patronName: _react2.default.PropTypes.string,
-  logOutLink: _react2.default.PropTypes.string
+  logOutLink: _react2.default.PropTypes.string,
+  gaAction: _react2.default.PropTypes.string
 };
 
 MyNyplButton.defaultProps = {

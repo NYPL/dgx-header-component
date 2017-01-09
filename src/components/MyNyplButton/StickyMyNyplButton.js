@@ -60,7 +60,7 @@ class StickyMyNyplButton extends React.Component {
     const visibleState = HeaderStore.getStickyMyNyplVisible() ? 'Closed' : 'Open';
 
     Actions.toggleStickyMyNyplVisible(!HeaderStore.getStickyMyNyplVisible());
-    utils.trackHeader('Log In', `StickyMyNyplButton - ${visibleState}`);
+    utils.trackHeader(this.props.gaAction, `StickyMyNyplButton - ${visibleState}`);
   }
 
   /**
@@ -71,7 +71,7 @@ class StickyMyNyplButton extends React.Component {
   handleOnClickOut() {
     if (HeaderStore.getStickyMyNyplVisible()) {
       Actions.toggleStickyMyNyplVisible(false);
-      utils.trackHeader('Log In', 'StickyMyNyplButton - Closed');
+      utils.trackHeader(this.props.gaAction, 'StickyMyNyplButton - Closed');
     }
   }
 
@@ -132,6 +132,7 @@ StickyMyNyplButton.propTypes = {
   isOauthLoginActivated: React.PropTypes.bool,
   patronName: React.PropTypes.string,
   logOutLink: React.PropTypes.string,
+  gaAction: React.PropTypes.string,
 };
 
 StickyMyNyplButton.defaultProps = {

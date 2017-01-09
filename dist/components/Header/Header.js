@@ -408,6 +408,7 @@ var Header = function (_React$Component) {
       var skipNav = this.props.skipNav ? _react2.default.createElement(_dgxSkipNavigationLink2.default, this.props.skipNav) : '';
       var isLoggedIn = !!this.state.patronDataReceived;
       var isOauthLoginActivated = !!this.state.isFeatureFlagsActivated.OauthLogin;
+      var gaAction = isLoggedIn ? 'My Account' : 'Log In';
 
       return _react2.default.createElement(
         'header',
@@ -451,7 +452,8 @@ var Header = function (_React$Component) {
                 isLoggedIn: isLoggedIn,
                 isOauthLoginActivated: isOauthLoginActivated,
                 patronName: this.state.patronName,
-                logOutLink: this.state.logOutUrl
+                logOutLink: this.state.logOutUrl,
+                gaAction: gaAction
               }),
               _react2.default.createElement(_SimpleLink2.default, {
                 label: 'Locations',
@@ -501,7 +503,8 @@ var Header = function (_React$Component) {
             isLoggedIn: isLoggedIn,
             patronName: this.state.patronName,
             isOauthLoginActivated: isOauthLoginActivated,
-            logOutLink: this.state.logOutUrl
+            logOutLink: this.state.logOutUrl,
+            gaAction: gaAction
           })
         )
       );

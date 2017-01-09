@@ -180,7 +180,7 @@ class MobileHeader extends React.Component {
       } else {
         Actions.setMobileMenuButtonValue('');
       }
-    } else if (activeButton === 'clickMyNypl') {
+    } else if (activeButton === 'clickLogIn' || activeButton === 'clickMyAccount') {
       if (HeaderStore.getMobileMyNyplButtonValue() !== activeButton) {
         Actions.setMobileMyNyplButtonValue(activeButton);
         Actions.searchButtonActionValue('');
@@ -201,7 +201,8 @@ class MobileHeader extends React.Component {
    * the proper deactivateMethod for each dialog.
    */
   closeMyNyplDialog() {
-    if (this.state.mobileMyNyplButton === 'clickMyNypl') {
+    if (this.state.mobileMyNyplButton === 'clickLogIn' ||
+      this.state.mobileMyNyplButton === 'clickMyAccount') {
       Actions.setMobileMyNyplButtonValue('');
     }
   }
@@ -248,6 +249,7 @@ class MobileHeader extends React.Component {
     let myNyplClass = '';
     const loginIconClass = (this.props.patronName) ? '-loggedIn' : '';
     const loggedInFadeInAnimation = (this.props.patronName) ? ' animated fadeIn' : '';
+    const gaAction = (this.props.patronName) ? 'MyAccount' : 'LogIn';
     let icon = (
       <LoginIconSolid
         className={`MobileMyNypl LoginIcon${loginIconClass}${loggedInFadeInAnimation}`}
@@ -257,7 +259,8 @@ class MobileHeader extends React.Component {
     let buttonLabel = 'Open Log In Dialog';
     let dialogWindow = null;
 
-    if (this.state.mobileMyNyplButton === 'clickMyNypl') {
+    if (this.state.mobileMyNyplButton === 'clickLogIn' ||
+      this.state.mobileMyNyplButton === 'clickMyAccount') {
       myNyplClass = ' active';
       icon = <XIcon ariaHidden fill="#FFF" />;
       buttonStyles = styles.activeMyNyplButton;
@@ -284,7 +287,7 @@ class MobileHeader extends React.Component {
           component="button"
           ref="MobileMyNyplButton"
           style={_extend(styles.myNyplButton, buttonStyles)}
-          onTap={() => this.toggleMobileMenuButton('clickMyNypl')}
+          onTap={() => this.toggleMobileMenuButton(`click${gaAction}`)}
         >
           <span className="visuallyHidden">{buttonLabel}</span>
           {icon}

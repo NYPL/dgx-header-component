@@ -11,10 +11,19 @@ import utils from './../src/utils/utils.js';
 
 describe('MobileMyNypl', () => {
   describe('<MobileMyNypl> as default', () => {
+    let onClick;
     let component;
 
     before(() => {
       component = mount(<MobileMyNypl />);
+    });
+
+    beforeEach(() => {
+      onClick = sinon.spy(utils, 'trackHeader');
+    });
+
+    afterEach(() => {
+      onClick.restore();
     });
 
     it('should have a <div> with class name "MobileMyNypl" as a wrapper', () => {
@@ -60,6 +69,18 @@ describe('MobileMyNypl', () => {
         'https://catalog.nypl.org/patroninfo/top'
       );
     });
+
+    it('should call GA event tracker when "CatalogLink" is clicked', () => {
+      component.find('.CatalogLink').simulate('click');
+      expect(onClick.calledOnce).to.equal(true);
+      expect(onClick.calledWith('Mobile Log In', 'Catalog')).to.equal(true);
+    });
+
+    it('should call GA event tracker when "ResearchLink" is clicked', () => {
+      component.find('.ResearchLink').simulate('click');
+      expect(onClick.calledOnce).to.equal(true);
+      expect(onClick.calledWith('Mobile Log In', 'Research')).to.equal(true);
+    });
   });
 
   describe('<MobileMyNypl> with the props isOauthLoginActivated that is set to be true', () => {
@@ -95,12 +116,21 @@ describe('MobileMyNypl', () => {
   });
 
   describe('<MobileMyNypl> with the prop isLoggedIn that is set to be true', () => {
+    let onClick;
     let component;
 
     before(() => {
       component = mount(
         <MobileMyNypl isLoggedIn />
       );
+    });
+
+    beforeEach(() => {
+      onClick = sinon.spy(utils, 'trackHeader');
+    });
+
+    afterEach(() => {
+      onClick.restore();
     });
 
     it('should have props isLoggedIn equals true and logOutLink equals' +
@@ -145,6 +175,18 @@ describe('MobileMyNypl', () => {
       );
     });
 
+    it('should call GA event tracker when "CatalogLink" is clicked', () => {
+      component.find('.CatalogLink').simulate('click');
+      expect(onClick.calledOnce).to.equal(true);
+      expect(onClick.calledWith('Mobile Go To', 'Catalog')).to.equal(true);
+    });
+
+    it('should call GA event tracker when "ResearchLink" is clicked', () => {
+      component.find('.ResearchLink').simulate('click');
+      expect(onClick.calledOnce).to.equal(true);
+      expect(onClick.calledWith('Mobile Go To', 'Research')).to.equal(true);
+    });
+
     it('should have the method "renderLogOutLink" to render the proper log out link',
       () => {
         // renderLogOutLink() is one of the methods of <MobileMyNypl />. It locates in render()
@@ -158,13 +200,9 @@ describe('MobileMyNypl', () => {
         expect(renderedInstance.props.className).to.equal('MobileMyNypl-Catalog-Link');
         expect(renderedInstance.props.children).to.equal('LOG OUT');
 
-        const onClick = sinon.spy(utils, 'trackHeader');
-
         component.find('.MobileMyNypl-Catalog-Link').simulate('click');
         expect(onClick.calledOnce).to.equal(true);
         expect(onClick.calledWith('My Account', 'Log Out')).to.equal(true);
-
-        onClick.restore();
       }
     );
   });

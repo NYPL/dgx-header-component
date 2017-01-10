@@ -4,7 +4,7 @@ This repository is for the header component used in React applications at NYPL.
 
 ### Version
 
-1.4.2
+1.5.0
 
 ### App Installation
 
@@ -191,3 +191,9 @@ https://bitbucket.org/NYPL/dgx-feature-flags
 
 #### v1.4.2
 > Updated all Header donation URLs
+
+#### v1.5.0
+> Added the new functions of OAuth log in.
+> Added the new styles to "My NYPL Button" and "My NYPL Dropdown menu". The new styles will dynamically update based on the log in status.
+> Added the tests for the new functions.
+> Updated the version of "axios", and imported ES6 Promise polyfill for the compatibility of older browsers.

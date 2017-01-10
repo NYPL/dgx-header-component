@@ -31,11 +31,17 @@ var config = {
     url: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form&amt=0&s_src=FRQ16ZZ_TNN&s_subsrc=other',
     amount: 'Other'
   }],
+  loginMyNyplLinks: {
+    catalog: 'https://isso.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount',
+    research: 'https://isso.nypl.org/auth/login?redirect_uri=https://catalog.nypl.org/patroninfo/top',
+    tokenRefreshLink: 'https://isso.nypl.org/auth/refresh',
+    logOutLink: 'https://isso.nypl.org/auth/logout'
+  },
   myNyplLinks: {
     catalog: 'https://browse.nypl.org/iii/encore/myaccount',
-    research: 'https://catalog.nypl.org/patroninfo/top',
-    moreInfo: 'https://www.nypl.org/online-catalog-changes'
-  }
+    research: 'https://catalog.nypl.org/patroninfo/top'
+  },
+  patronApiUrl: 'https://api.nypltech.org/api/v0.1/auth/patron/tokens/'
 };
 
 exports.default = config;

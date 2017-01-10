@@ -28,9 +28,9 @@ var _NavMenuItem = require('../NavMenuItem/NavMenuItem.js');
 
 var _NavMenuItem2 = _interopRequireDefault(_NavMenuItem);
 
-var _NavMenuBottomButtons = require('../NavMenuBottomButtons/NavMenuBottomButtons.js');
+var _NavMenuMobileButtons = require('../NavMenuMobileButtons/NavMenuMobileButtons.js');
 
-var _NavMenuBottomButtons2 = _interopRequireDefault(_NavMenuBottomButtons);
+var _NavMenuMobileButtons2 = _interopRequireDefault(_NavMenuMobileButtons);
 
 var _DonateButton = require('../DonateButton/DonateButton.js');
 
@@ -127,7 +127,13 @@ var NavMenu = function (_React$Component) {
         'div',
         { className: this.props.className + '-stickyItems' + stickyClass },
         _react2.default.createElement('span', { className: 'lineSeparator', style: styles.lineSeparator }),
-        _react2.default.createElement(_StickyMyNyplButton2.default, null),
+        _react2.default.createElement(_StickyMyNyplButton2.default, {
+          isLoggedIn: this.props.isLoggedIn,
+          patronName: this.props.patronName,
+          isOauthLoginActivated: this.props.isOauthLoginActivated,
+          logOutLink: this.props.logOutLink,
+          gaAction: this.props.gaAction
+        }),
         _react2.default.createElement(_DonateButton2.default, {
           id: 'Collapsed-DonateButton',
           style: styles.donateButton,
@@ -192,7 +198,7 @@ var NavMenu = function (_React$Component) {
             className: this.props.className
           }),
           this.renderStickyNavItems(),
-          _react2.default.createElement(_NavMenuBottomButtons2.default, {
+          _react2.default.createElement(_NavMenuMobileButtons2.default, {
             className: 'MobileBottomButtons',
             libraryCardLink: this.props.urlType === 'absolute' ? '//www.nypl.org/library-card' : '/library-card'
           })
@@ -209,13 +215,17 @@ NavMenu.propTypes = {
   className: _react2.default.PropTypes.string,
   items: _react2.default.PropTypes.array,
   urlType: _react2.default.PropTypes.string,
-  cookie: _react2.default.PropTypes.string
+  isLoggedIn: _react2.default.PropTypes.bool,
+  isOauthLoginActivated: _react2.default.PropTypes.bool,
+  patronInitial: _react2.default.PropTypes.string,
+  patronName: _react2.default.PropTypes.string,
+  logOutLink: _react2.default.PropTypes.string,
+  gaAction: _react2.default.PropTypes.string
 };
 
 NavMenu.defaultProps = {
   lang: 'en',
-  className: 'NavMenu',
-  cookie: '0'
+  className: 'NavMenu'
 };
 
 exports.default = NavMenu;

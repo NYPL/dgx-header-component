@@ -17,6 +17,10 @@
   letter-spacing: .04em;
   background-color: transparent;
 
+  &.loggedIn {
+    color: #000;
+  }
+
   &.active {
     background-color: #135772;
     color: #FFF;
@@ -41,6 +45,11 @@
   text-transform: none;
   display: none;
   box-sizing: content-box;
+  min-height: 180px;
+
+  &.loggedInHeight {
+    min-height: 250px;
+  }
 
   &.active {
     display: block;
@@ -64,7 +73,19 @@
       font-weight: normal;
       line-height: 1.2em;
     }
+    &-Patron-Greeting {
+      color: #fff;
+      @include Kievit-Book;
+      font-weight: normal;
+      letter-spacing: .03em;
+      line-height: 1.2em;
+      margin: 0;
+      text-align: left;
 
+      &.Login-Indication {
+        margin: 0 0 6px 0;
+      }
+    }
     &-Login-List {
       text-align: left;
       list-style: none;
@@ -93,6 +114,12 @@
       vertical-align: middle;
       margin-right: 5px;
     }
+
+    .logoutIcon {
+      fill: #1B7FA7;
+      margin: 0 10px 0 0;
+      vertical-align: -11px;
+    }
   }
 }
 
@@ -111,3 +138,56 @@
     }
   }
 }
+
+.LoginIcon {
+  fill: #FFF;
+  stroke: #000;
+  stroke-width: 2px;
+
+  &.active {
+    stroke: none;
+  }
+
+  &-loggedIn {
+    fill: #000;
+    stroke: none;
+
+    &.active {
+      fill: #FFF;
+      opacity: 1;
+    }
+  }
+}
+
+.MyNyplButton {
+  &.LoginIcon {
+    &-loggedIn {
+      height: 20px;
+      left: 143px;
+      position: absolute;
+      top: 7px;
+    }
+  }
+  &-IconWrapper {
+    margin: 0 0 0 22px;
+  }
+}
+
+.MobileMyNypl {
+  &-Greeting {
+    box-sizing: content-box;
+    color: #FFF;
+    text-align: left;
+    padding: 22px 0 0 11px;
+    position: absolute;
+    width: 100%;
+    .Login-Indication {
+      margin: 0 0 30px 0;
+    }
+  }
+}
+
+.Login-Indication {
+  font-style: italic;
+}
+

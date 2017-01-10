@@ -4,7 +4,7 @@ This repository is for the header component used in React applications at NYPL.
 
 ### Version
 
-1.4.3
+1.5.0
 
 ### App Installation
 
@@ -39,6 +39,52 @@ Call the instance in your application component:
   navData={navConfig.current}
 />
 ```
+
+Install the polyfill For IE 11 and older version browsers:
+The polyfill for ES6 Promise is essential for the header to be rendered correctly on IE 11 and older browsers, as the version of axios we are using no longer supports ES6 Promise as default.
+
+NPM Install `"babel-polyfill": "6.20.0"` as a dependency to the application you want to import the header component to.
+
+```
+npm install --save babel-polyfill@6.20.0;
+```
+
+For `nypl-dgx-react-header`, as it will be built before uploaded, the polyfill can be installed as 
+devDependency.
+
+```
+npm install --save-dev babel-polyfill@6.20.0;
+```
+
+At the very beginning of the entry file of the application, put
+
+```
+import "babel-polyfill";
+```
+
+In the application's `webpack.config.js`, put `'babel-polyfill'` in the `entry` array of each environment. For example,
+
+```
+entry: [
+ 'babel-polyfill',
+  path.resolve(ROOT_PATH, 'src/client/App.jsx')
+],
+```
+
+or
+
+```
+entry: [
+  'webpack-dev-server/client?http://localhost:3000',
+  'webpack/hot/only-dev-server',
+  'babel-polyfill',
+  path.resolve(ROOT_PATH, 'src/client/App.jsx')
+],
+```
+
+### Test
+
+To run unit tests, run `npm test` in the terminal. Or run `npm run test-with-coverage` to run the test and see the test coverage.
 
 ### Navigation Configuration
 The current navigation can be used by importing `navConfig` from the module and passing it as a prop. Custom navigation can be passed if it follows a similar structure to what is in `/src/navConfig.js`.
@@ -128,6 +174,11 @@ $ npm run babel-build
 $ NODE_ENV=production npm start
 ```
 
+### Using Feature Flags
+
+Please go to NYPL/dgx-feature-flags repository for the step-by-step instruction.
+https://bitbucket.org/NYPL/dgx-feature-flags
+
 ### Contribute
 
 1. Fork this repo.
@@ -140,3 +191,9 @@ $ NODE_ENV=production npm start
 
 #### v1.4.3
 > Updated all Header donation URLs
+
+#### v1.5.0
+> Added the new functions of OAuth log in.
+> Added the new styles to "My NYPL Button" and "My NYPL Dropdown menu". The new styles will dynamically update based on the log in status.
+> Added the tests for the new functions.
+> Updated the version of "axios", and imported ES6 Promise polyfill for the compatibility of older browsers.

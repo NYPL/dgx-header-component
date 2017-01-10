@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -20,7 +22,14 @@ var _appConfig2 = _interopRequireDefault(_appConfig);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 // Config and Utility
+
+
 var styles = {
   base: {
     backgroundColor: '#2B2B2B',
@@ -40,6 +49,9 @@ var styles = {
     textDecoration: 'none',
     lineHeight: 'normal'
   },
+  loggedInLinksMarginTop: {
+    margin: '120px 0 0 0'
+  },
   label: {
     fontSize: '14px',
     textTransform: 'uppercase',
@@ -52,7 +64,7 @@ var styles = {
     margin: '0',
     padding: '1.75em 0'
   },
-  catalogInfoLink: {
+  logOutLink: {
     display: 'block',
     color: '#fff',
     textAlign: 'center',
@@ -82,107 +94,195 @@ var styles = {
   }
 };
 
-var MobileMyNypl = function MobileMyNypl(_ref) {
-  var lang = _ref.lang,
-      className = _ref.className,
-      catalogLink = _ref.catalogLink,
-      researchLink = _ref.researchLink,
-      infoLink = _ref.infoLink;
+var MobileMyNypl = function (_React$Component) {
+  _inherits(MobileMyNypl, _React$Component);
 
-  var catalogLinkClass = 'CatalogLink';
-  var researchLinkClass = 'ResearchLink';
+  function MobileMyNypl() {
+    _classCallCheck(this, MobileMyNypl);
 
-  return _react2.default.createElement(
-    'div',
-    {
-      className: className,
-      style: styles.base,
-      role: 'dialog'
-    },
-    _react2.default.createElement(
-      'a',
-      {
-        href: catalogLink,
-        className: catalogLinkClass,
-        style: styles.links,
-        onClick: function onClick() {
-          return _utils2.default.trackHeader('Mobile Log In', 'Catalog');
-        }
-      },
-      _react2.default.createElement(
-        'span',
+    return _possibleConstructorReturn(this, (MobileMyNypl.__proto__ || Object.getPrototypeOf(MobileMyNypl)).apply(this, arguments));
+  }
+
+  _createClass(MobileMyNypl, [{
+    key: 'rednerLoginLinks',
+
+    /**
+     * rednerLoginLinks()
+     * Returns the href addresses for catalog and research catalog buttons
+     * based on different conditions.
+     */
+    value: function rednerLoginLinks() {
+      if (this.props.isLoggedIn) {
+        return {
+          catalogLink: this.props.catalogLink,
+          researchLink: this.props.researchLink
+        };
+      }
+
+      if (this.props.isOauthLoginActivated) {
+        return {
+          catalogLink: this.props.loginCatalogLink,
+          researchLink: this.props.loginResearchLink
+        };
+      }
+
+      return {
+        catalogLink: this.props.catalogLink,
+        researchLink: this.props.researchLink
+      };
+    }
+
+    /**
+     * renderLogOutLink()
+     * Returns the log out button if the patron has been logged in.
+     */
+
+  }, {
+    key: 'renderLogOutLink',
+    value: function renderLogOutLink() {
+      return this.props.isLoggedIn ? _react2.default.createElement(
+        'a',
         {
-          className: catalogLinkClass + '-Wrapper',
-          style: (0, _underscore.extend)(styles.wrapper, styles.catalogLinkWrapper)
-        },
-        _react2.default.createElement('span', { className: catalogLinkClass + '-Icon nypl-icon-login', style: styles.icon }),
-        _react2.default.createElement(
-          'span',
-          {
-            className: catalogLinkClass + '-Label',
-            style: (0, _underscore.extend)(styles.catalogLinkLabel, styles.label)
+          href: this.props.logOutLink,
+          className: this.props.className + '-Catalog-Link',
+          onClick: function onClick() {
+            return _utils2.default.trackHeader('My Account', 'Log Out');
           },
-          'Log into the Catalog'
+          style: styles.logOutLink
+        },
+        'LOG OUT'
+      ) : _react2.default.createElement('div', { style: styles.logOutLink });
+    }
+
+    /**
+     * renderGreeting()
+     * Returns the patron's name in the drop down menu if it exists.
+     */
+
+  }, {
+    key: 'renderGreeting',
+    value: function renderGreeting() {
+      return this.props.patronName && this.props.isLoggedIn ? _react2.default.createElement(
+        'div',
+        { className: this.props.className + '-Greeting' },
+        _react2.default.createElement(
+          'p',
+          { className: 'Login-Indication' },
+          'You are logged in as:'
+        ),
+        _react2.default.createElement(
+          'p',
+          { className: 'Login-Name' },
+          this.props.patronName
         )
-      )
-    ),
-    _react2.default.createElement(
-      'a',
-      {
-        href: researchLink,
-        className: researchLinkClass,
-        style: styles.links,
-        onClick: function onClick() {
-          return _utils2.default.trackHeader('Mobile Log In', 'Research');
-        }
-      },
-      _react2.default.createElement(
-        'span',
+      ) : null;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var catalogLinkClass = 'CatalogLink';
+      var researchLinkClass = 'ResearchLink';
+      var catalogLink = this.rednerLoginLinks().catalogLink;
+      var researchLink = this.rednerLoginLinks().researchLink;
+      var catalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
+      var researchCatalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE RESEARCH CATALOG' : 'LOG INTO THE RESEARCH CATALOG';
+      var loggedInMarginTop = this.props.isLoggedIn ? styles.loggedInLinksMarginTop : null;
+      var gaAction = this.props.isLoggedIn ? 'Mobile Go To' : 'Mobile Log In';
+
+      return _react2.default.createElement(
+        'div',
         {
-          className: researchLinkClass + '-Wrapper',
-          style: (0, _underscore.extend)(styles.wrapper, styles.researchLinkWrapper)
+          className: this.props.className,
+          style: styles.base,
+          role: 'dialog'
         },
-        _react2.default.createElement('span', { className: researchLinkClass + '-Icon nypl-icon-bldg', style: styles.icon }),
+        this.renderGreeting(),
         _react2.default.createElement(
-          'span',
+          'a',
           {
-            className: researchLinkClass + '-Label',
-            style: (0, _underscore.extend)(styles.researchLinkLabel, styles.label)
+            href: catalogLink,
+            className: catalogLinkClass,
+            style: (0, _underscore.extend)(styles.links, loggedInMarginTop),
+            onClick: function onClick() {
+              return _utils2.default.trackHeader(gaAction, 'Catalog');
+            }
           },
-          'Log into the Research Catalog'
-        )
-      )
-    ),
-    _react2.default.createElement(
-      'a',
-      {
-        className: 'Mobile-Catalog-Info',
-        href: infoLink,
-        lang: lang,
-        onClick: function onClick() {
-          return _utils2.default.trackHeader('Mobile Log In', 'Catalog Info');
-        },
-        style: styles.catalogInfoLink
-      },
-      'Catalog Info'
-    )
-  );
-};
+          _react2.default.createElement(
+            'span',
+            {
+              className: catalogLinkClass + '-Wrapper',
+              style: (0, _underscore.extend)(styles.wrapper, styles.catalogLinkWrapper)
+            },
+            _react2.default.createElement('span', { className: catalogLinkClass + '-Icon nypl-icon-login', style: styles.icon }),
+            _react2.default.createElement(
+              'span',
+              {
+                className: catalogLinkClass + '-Label',
+                style: (0, _underscore.extend)(styles.catalogLinkLabel, styles.label)
+              },
+              catalogLinkLabel
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'a',
+          {
+            href: researchLink,
+            className: researchLinkClass,
+            style: (0, _underscore.extend)(styles.links, loggedInMarginTop),
+            onClick: function onClick() {
+              return _utils2.default.trackHeader(gaAction, 'Research');
+            }
+          },
+          _react2.default.createElement(
+            'span',
+            {
+              className: researchLinkClass + '-Wrapper',
+              style: (0, _underscore.extend)(styles.wrapper, styles.researchLinkWrapper)
+            },
+            _react2.default.createElement('span', { className: researchLinkClass + '-Icon nypl-icon-bldg', style: styles.icon }),
+            _react2.default.createElement(
+              'span',
+              {
+                className: researchLinkClass + '-Label',
+                style: (0, _underscore.extend)(styles.researchLinkLabel, styles.label)
+              },
+              researchCatalogLinkLabel
+            )
+          )
+        ),
+        this.renderLogOutLink()
+      );
+    }
+  }]);
+
+  return MobileMyNypl;
+}(_react2.default.Component);
 
 MobileMyNypl.propTypes = {
   lang: _react2.default.PropTypes.string,
   className: _react2.default.PropTypes.string,
   catalogLink: _react2.default.PropTypes.string,
   researchLink: _react2.default.PropTypes.string,
-  infoLink: _react2.default.PropTypes.string
+  loginCatalogLink: _react2.default.PropTypes.string,
+  loginResearchLink: _react2.default.PropTypes.string,
+  isLoggedIn: _react2.default.PropTypes.bool,
+  isOauthLoginActivated: _react2.default.PropTypes.bool,
+  patronName: _react2.default.PropTypes.string,
+  logOutLink: _react2.default.PropTypes.string
 };
 
 MobileMyNypl.defaultProps = {
   lang: 'en',
   className: 'MobileMyNypl',
+  loginCatalogLink: _appConfig2.default.loginMyNyplLinks.catalog,
+  loginResearchLink: _appConfig2.default.loginMyNyplLinks.research,
   catalogLink: _appConfig2.default.myNyplLinks.catalog,
   researchLink: _appConfig2.default.myNyplLinks.research,
-  infoLink: _appConfig2.default.myNyplLinks.moreInfo
+  logOutLink: _appConfig2.default.loginMyNyplLinks.logOutLink,
+  isLoggedIn: false,
+  isOauthLoginActivated: false,
+  patronName: ''
 };
 
 exports.default = MobileMyNypl;

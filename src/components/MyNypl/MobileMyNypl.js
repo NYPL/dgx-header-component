@@ -23,6 +23,9 @@ const styles = {
     textDecoration: 'none',
     lineHeight: 'normal',
   },
+  loggedInLinksMarginTop: {
+    margin: '120px 0 0 0',
+  },
   label: {
     fontSize: '14px',
     textTransform: 'uppercase',
@@ -35,7 +38,7 @@ const styles = {
     margin: '0',
     padding: '1.75em 0',
   },
-  catalogInfoLink: {
+  logOutLink: {
     display: 'block',
     color: '#fff',
     textAlign: 'center',
@@ -65,88 +68,154 @@ const styles = {
   },
 };
 
-const MobileMyNypl = ({
-  lang,
-  className,
-  catalogLink,
-  researchLink,
-  infoLink,
-}) => {
-  const catalogLinkClass = 'CatalogLink';
-  const researchLinkClass = 'ResearchLink';
+class MobileMyNypl extends React.Component {
+  /**
+   * rednerLoginLinks()
+   * Returns the href addresses for catalog and research catalog buttons
+   * based on different conditions.
+   */
+  rednerLoginLinks() {
+    if (this.props.isLoggedIn) {
+      return (
+        {
+          catalogLink: this.props.catalogLink,
+          researchLink: this.props.researchLink,
+        }
+      );
+    }
 
-  return (
-    <div
-      className={className}
-      style={styles.base}
-      role="dialog"
-    >
+    if (this.props.isOauthLoginActivated) {
+      return (
+        {
+          catalogLink: this.props.loginCatalogLink,
+          researchLink: this.props.loginResearchLink,
+        }
+      );
+    }
+
+    return (
+      {
+        catalogLink: this.props.catalogLink,
+        researchLink: this.props.researchLink,
+      }
+    );
+  }
+
+  /**
+   * renderLogOutLink()
+   * Returns the log out button if the patron has been logged in.
+   */
+  renderLogOutLink() {
+    return (this.props.isLoggedIn) ?
       <a
-        href={catalogLink}
-        className={catalogLinkClass}
-        style={styles.links}
-        onClick={() => utils.trackHeader('Mobile Log In', 'Catalog')}
+        href={this.props.logOutLink}
+        className={`${this.props.className}-Catalog-Link`}
+        onClick={() => utils.trackHeader('My Account', 'Log Out')}
+        style={styles.logOutLink}
       >
-        <span
-          className={`${catalogLinkClass}-Wrapper`}
-          style={_extend(styles.wrapper, styles.catalogLinkWrapper)}
+        LOG OUT
+      </a> : <div style={styles.logOutLink}></div>;
+  }
+
+  /**
+   * renderGreeting()
+   * Returns the patron's name in the drop down menu if it exists.
+   */
+  renderGreeting() {
+    return (this.props.patronName && this.props.isLoggedIn) ?
+      <div className={`${this.props.className}-Greeting`}>
+        <p className="Login-Indication">You are logged in as:</p>
+        <p className="Login-Name">{this.props.patronName}</p>
+      </div> : null;
+  }
+
+  render() {
+    const catalogLinkClass = 'CatalogLink';
+    const researchLinkClass = 'ResearchLink';
+    const catalogLink = this.rednerLoginLinks().catalogLink;
+    const researchLink = this.rednerLoginLinks().researchLink;
+    const catalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
+    const researchCatalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE RESEARCH CATALOG' :
+      'LOG INTO THE RESEARCH CATALOG';
+    const loggedInMarginTop = (this.props.isLoggedIn) ? styles.loggedInLinksMarginTop : null;
+    const gaAction = (this.props.isLoggedIn) ? 'Mobile Go To' : 'Mobile Log In';
+
+    return (
+      <div
+        className={this.props.className}
+        style={styles.base}
+        role="dialog"
+      >
+        {this.renderGreeting()}
+        <a
+          href={catalogLink}
+          className={catalogLinkClass}
+          style={_extend(styles.links, loggedInMarginTop)}
+          onClick={() => utils.trackHeader(gaAction, 'Catalog')}
         >
-          <span className={`${catalogLinkClass}-Icon nypl-icon-login`} style={styles.icon}>
-          </span>
           <span
-            className={`${catalogLinkClass}-Label`}
-            style={_extend(styles.catalogLinkLabel, styles.label)}
+            className={`${catalogLinkClass}-Wrapper`}
+            style={_extend(styles.wrapper, styles.catalogLinkWrapper)}
           >
-            Log into the Catalog
+            <span className={`${catalogLinkClass}-Icon nypl-icon-login`} style={styles.icon}>
+            </span>
+            <span
+              className={`${catalogLinkClass}-Label`}
+              style={_extend(styles.catalogLinkLabel, styles.label)}
+            >
+              {catalogLinkLabel}
+            </span>
           </span>
-        </span>
-      </a>
-      <a
-        href={researchLink}
-        className={researchLinkClass}
-        style={styles.links}
-        onClick={() => utils.trackHeader('Mobile Log In', 'Research')}
-      >
-        <span
-          className={`${researchLinkClass}-Wrapper`}
-          style={_extend(styles.wrapper, styles.researchLinkWrapper)}
+        </a>
+        <a
+          href={researchLink}
+          className={researchLinkClass}
+          style={_extend(styles.links, loggedInMarginTop)}
+          onClick={() => utils.trackHeader(gaAction, 'Research')}
         >
-          <span className={`${researchLinkClass}-Icon nypl-icon-bldg`} style={styles.icon}></span>
           <span
-            className={`${researchLinkClass}-Label`}
-            style={_extend(styles.researchLinkLabel, styles.label)}
+            className={`${researchLinkClass}-Wrapper`}
+            style={_extend(styles.wrapper, styles.researchLinkWrapper)}
           >
-            Log into the Research Catalog
+            <span className={`${researchLinkClass}-Icon nypl-icon-bldg`} style={styles.icon}></span>
+            <span
+              className={`${researchLinkClass}-Label`}
+              style={_extend(styles.researchLinkLabel, styles.label)}
+            >
+              {researchCatalogLinkLabel}
+            </span>
           </span>
-        </span>
-      </a>
-      <a
-        className="Mobile-Catalog-Info"
-        href={infoLink}
-        lang={lang}
-        onClick={() => utils.trackHeader('Mobile Log In', 'Catalog Info')}
-        style={styles.catalogInfoLink}
-      >
-        Catalog Info
-      </a>
-    </div>
-  );
-};
+        </a>
+        {this.renderLogOutLink()}
+      </div>
+    );
+  }
+}
 
 MobileMyNypl.propTypes = {
   lang: React.PropTypes.string,
   className: React.PropTypes.string,
   catalogLink: React.PropTypes.string,
   researchLink: React.PropTypes.string,
-  infoLink: React.PropTypes.string,
+  loginCatalogLink: React.PropTypes.string,
+  loginResearchLink: React.PropTypes.string,
+  isLoggedIn: React.PropTypes.bool,
+  isOauthLoginActivated: React.PropTypes.bool,
+  patronName: React.PropTypes.string,
+  logOutLink: React.PropTypes.string,
 };
 
 MobileMyNypl.defaultProps = {
   lang: 'en',
   className: 'MobileMyNypl',
+  loginCatalogLink: appConfig.loginMyNyplLinks.catalog,
+  loginResearchLink: appConfig.loginMyNyplLinks.research,
   catalogLink: appConfig.myNyplLinks.catalog,
   researchLink: appConfig.myNyplLinks.research,
-  infoLink: appConfig.myNyplLinks.moreInfo,
+  logOutLink: appConfig.loginMyNyplLinks.logOutLink,
+  isLoggedIn: false,
+  isOauthLoginActivated: false,
+  patronName: '',
 };
 
 export default MobileMyNypl;

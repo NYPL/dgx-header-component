@@ -4,8 +4,8 @@ import FocusTrap from 'focus-trap-react';
 import {
   LionLogoIcon,
   LocatorIcon,
-  LoginIcon,
   MenuIcon,
+  LoginIconSolid,
   SearchIcon,
   XIcon,
 } from 'dgx-svg-icons';
@@ -69,6 +69,14 @@ const styles = {
     border: 'none',
     lineHeight: 'normal',
     verticalAlign: '0px',
+  },
+  patronInitial: {
+    color: '#497629',
+    display: 'inline-block',
+    fontSize: '1.8em',
+    lineHeight: 'normal',
+    margin: '0 5px 0 0',
+    verticalAlign: '8px',
   },
   activeMyNyplButton: {
     backgroundColor: '#2B2B2B',
@@ -172,7 +180,7 @@ class MobileHeader extends React.Component {
       } else {
         Actions.setMobileMenuButtonValue('');
       }
-    } else if (activeButton === 'clickMyNypl') {
+    } else if (activeButton === 'clickLogIn' || activeButton === 'clickMyAccount') {
       if (HeaderStore.getMobileMyNyplButtonValue() !== activeButton) {
         Actions.setMobileMyNyplButtonValue(activeButton);
         Actions.searchButtonActionValue('');
@@ -193,7 +201,8 @@ class MobileHeader extends React.Component {
    * the proper deactivateMethod for each dialog.
    */
   closeMyNyplDialog() {
-    if (this.state.mobileMyNyplButton === 'clickMyNypl') {
+    if (this.state.mobileMyNyplButton === 'clickLogIn' ||
+      this.state.mobileMyNyplButton === 'clickMyAccount') {
       Actions.setMobileMyNyplButtonValue('');
     }
   }
@@ -238,12 +247,20 @@ class MobileHeader extends React.Component {
   */
   renderMyNyplButton() {
     let myNyplClass = '';
-    let icon = <LoginIcon ariaHidden fill="#000" />;
+    const loginIconClass = (this.props.patronName) ? '-loggedIn' : '';
+    const loggedInFadeInAnimation = (this.props.patronName) ? ' animated fadeIn' : '';
+    const gaAction = (this.props.patronName) ? 'MyAccount' : 'LogIn';
+    let icon = (
+      <LoginIconSolid
+        className={`MobileMyNypl LoginIcon${loginIconClass}${loggedInFadeInAnimation}`}
+      />
+    );
     let buttonStyles = styles.inactiveMyNyplButton;
     let buttonLabel = 'Open Log In Dialog';
     let dialogWindow = null;
 
-    if (this.state.mobileMyNyplButton === 'clickMyNypl') {
+    if (this.state.mobileMyNyplButton === 'clickLogIn' ||
+      this.state.mobileMyNyplButton === 'clickMyAccount') {
       myNyplClass = ' active';
       icon = <XIcon ariaHidden fill="#FFF" />;
       buttonStyles = styles.activeMyNyplButton;
@@ -253,7 +270,12 @@ class MobileHeader extends React.Component {
           className={`MobileMyNypl-Wrapper${myNyplClass}`}
           onDeactivate={this.closeMyNyplDialog}
         >
-          <MobileMyNypl />
+          <MobileMyNypl
+            isLoggedIn={this.props.isLoggedIn}
+            isOauthLoginActivated={this.props.isOauthLoginActivated}
+            patronName={this.props.patronName}
+            logOutLink={this.props.logOutLink}
+          />
         </FocusTrap>
       );
     }
@@ -265,7 +287,7 @@ class MobileHeader extends React.Component {
           component="button"
           ref="MobileMyNyplButton"
           style={_extend(styles.myNyplButton, buttonStyles)}
-          onTap={() => this.toggleMobileMenuButton('clickMyNypl')}
+          onTap={() => this.toggleMobileMenuButton(`click${gaAction}`)}
         >
           <span className="visuallyHidden">{buttonLabel}</span>
           {icon}
@@ -406,6 +428,10 @@ MobileHeader.propTypes = {
   locatorUrl: React.PropTypes.string,
   nyplRootUrl: React.PropTypes.string,
   alt: React.PropTypes.string,
+  isLoggedIn: React.PropTypes.bool,
+  isOauthLoginActivated: React.PropTypes.bool,
+  patronName: React.PropTypes.string,
+  logOutLink: React.PropTypes.string,
 };
 
 MobileHeader.defaultProps = {

@@ -106,6 +106,14 @@ var styles = {
     lineHeight: 'normal',
     verticalAlign: '0px'
   },
+  patronInitial: {
+    color: '#497629',
+    display: 'inline-block',
+    fontSize: '1.8em',
+    lineHeight: 'normal',
+    margin: '0 5px 0 0',
+    verticalAlign: '8px'
+  },
   activeMyNyplButton: {
     backgroundColor: '#2B2B2B'
   },
@@ -220,7 +228,7 @@ var MobileHeader = function (_React$Component) {
         } else {
           _Actions2.default.setMobileMenuButtonValue('');
         }
-      } else if (activeButton === 'clickMyNypl') {
+      } else if (activeButton === 'clickLogIn' || activeButton === 'clickMyAccount') {
         if (_HeaderStore2.default.getMobileMyNyplButtonValue() !== activeButton) {
           _Actions2.default.setMobileMyNyplButtonValue(activeButton);
           _Actions2.default.searchButtonActionValue('');
@@ -244,7 +252,7 @@ var MobileHeader = function (_React$Component) {
   }, {
     key: 'closeMyNyplDialog',
     value: function closeMyNyplDialog() {
-      if (this.state.mobileMyNyplButton === 'clickMyNypl') {
+      if (this.state.mobileMyNyplButton === 'clickLogIn' || this.state.mobileMyNyplButton === 'clickMyAccount') {
         _Actions2.default.setMobileMyNyplButtonValue('');
       }
     }
@@ -304,12 +312,17 @@ var MobileHeader = function (_React$Component) {
       var _this2 = this;
 
       var myNyplClass = '';
-      var icon = _react2.default.createElement(_dgxSvgIcons.LoginIcon, { ariaHidden: true, fill: '#000' });
+      var loginIconClass = this.props.patronName ? '-loggedIn' : '';
+      var loggedInFadeInAnimation = this.props.patronName ? ' animated fadeIn' : '';
+      var gaAction = this.props.patronName ? 'MyAccount' : 'LogIn';
+      var icon = _react2.default.createElement(_dgxSvgIcons.LoginIconSolid, {
+        className: 'MobileMyNypl LoginIcon' + loginIconClass + loggedInFadeInAnimation
+      });
       var buttonStyles = styles.inactiveMyNyplButton;
       var buttonLabel = 'Open Log In Dialog';
       var dialogWindow = null;
 
-      if (this.state.mobileMyNyplButton === 'clickMyNypl') {
+      if (this.state.mobileMyNyplButton === 'clickLogIn' || this.state.mobileMyNyplButton === 'clickMyAccount') {
         myNyplClass = ' active';
         icon = _react2.default.createElement(_dgxSvgIcons.XIcon, { ariaHidden: true, fill: '#FFF' });
         buttonStyles = styles.activeMyNyplButton;
@@ -320,7 +333,12 @@ var MobileHeader = function (_React$Component) {
             className: 'MobileMyNypl-Wrapper' + myNyplClass,
             onDeactivate: this.closeMyNyplDialog
           },
-          _react2.default.createElement(_MobileMyNypl2.default, null)
+          _react2.default.createElement(_MobileMyNypl2.default, {
+            isLoggedIn: this.props.isLoggedIn,
+            isOauthLoginActivated: this.props.isOauthLoginActivated,
+            patronName: this.props.patronName,
+            logOutLink: this.props.logOutLink
+          })
         );
       }
 
@@ -335,7 +353,7 @@ var MobileHeader = function (_React$Component) {
             ref: 'MobileMyNyplButton',
             style: (0, _underscore.extend)(styles.myNyplButton, buttonStyles),
             onTap: function onTap() {
-              return _this2.toggleMobileMenuButton('clickMyNypl');
+              return _this2.toggleMobileMenuButton('click' + gaAction);
             }
           },
           _react2.default.createElement(
@@ -522,7 +540,11 @@ MobileHeader.propTypes = {
   className: _react2.default.PropTypes.string,
   locatorUrl: _react2.default.PropTypes.string,
   nyplRootUrl: _react2.default.PropTypes.string,
-  alt: _react2.default.PropTypes.string
+  alt: _react2.default.PropTypes.string,
+  isLoggedIn: _react2.default.PropTypes.bool,
+  isOauthLoginActivated: _react2.default.PropTypes.bool,
+  patronName: _react2.default.PropTypes.string,
+  logOutLink: _react2.default.PropTypes.string
 };
 
 MobileHeader.defaultProps = {

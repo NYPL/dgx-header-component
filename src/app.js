@@ -1,6 +1,9 @@
+// Polyfill Promise for legacy browsers
+import "babel-polyfill";
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ga from 'react-ga';
+import { ga } from 'dgx-react-ga';
 import { config } from 'dgx-react-ga';
 import FeatureFlags from 'dgx-feature-flags';
 import { Header, navConfig } from './components/Header/Header.js';

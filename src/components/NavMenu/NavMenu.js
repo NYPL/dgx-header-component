@@ -12,7 +12,7 @@ import Actions from '../../actions/Actions.js';
 // Dependent Components
 import SearchButton from '../SearchButton/SearchButton.js';
 import NavMenuItem from '../NavMenuItem/NavMenuItem.js';
-import NavMenuBottomButtons from '../NavMenuBottomButtons/NavMenuBottomButtons.js';
+import NavMenuBottomButtons from '../NavMenuMobileButtons/NavMenuMobileButtons.js';
 import DonateButton from '../DonateButton/DonateButton.js';
 import StickyMyNyplButton from '../MyNyplButton/StickyMyNyplButton.js';
 
@@ -74,7 +74,13 @@ class NavMenu extends React.Component {
     return (
       <div className={`${this.props.className}-stickyItems${stickyClass}`}>
         <span className="lineSeparator" style={styles.lineSeparator}></span>
-        <StickyMyNyplButton />
+        <StickyMyNyplButton
+          isLoggedIn={this.props.isLoggedIn}
+          patronName={this.props.patronName}
+          isOauthLoginActivated={this.props.isOauthLoginActivated}
+          logOutLink={this.props.logOutLink}
+          gaAction={this.props.gaAction}
+        />
         <DonateButton
           id="Collapsed-DonateButton"
           style={styles.donateButton}
@@ -145,13 +151,17 @@ NavMenu.propTypes = {
   className: React.PropTypes.string,
   items: React.PropTypes.array,
   urlType: React.PropTypes.string,
-  cookie: React.PropTypes.string,
+  isLoggedIn: React.PropTypes.bool,
+  isOauthLoginActivated: React.PropTypes.bool,
+  patronInitial: React.PropTypes.string,
+  patronName: React.PropTypes.string,
+  logOutLink: React.PropTypes.string,
+  gaAction: React.PropTypes.string,
 };
 
 NavMenu.defaultProps = {
   lang: 'en',
   className: 'NavMenu',
-  cookie: '0',
 };
 
 export default NavMenu;

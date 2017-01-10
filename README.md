@@ -1,24 +1,126 @@
 # NYPL Header React NPM Component
 
-## Installation
+This repository is for the header component used in React applications at NYPL.
+
+### Version
+
+1.5.0
+
+### App Installation
+
+To install this module, run:
+
+```sh
+$ npm install --save @nypl/dgx-header-component
+```
+
+This component is a scoped NPM module. This means that when installing, NPM will create a `@NYPL` folder and the `dgx-header-component` module (and other NYPL scoped modules) will be there.
+
+### Usage
+
+Import using ES6 style syntax:
+```
+// Application.jsx
+import { Header, navConfig } from '@nypl/dgx-header-component';
+```
+
+Import using ES5 style syntax:
+```
+// Application.jsx
+var HeaderComponent =  require('@nypl/dgx-header-component');
+var Header = HeaderComponent.Header;
+var navConfig = HeaderComponent.navConfig;
+```
+
+Call the instance in your application component:
+```
+<Header
+  skipNav={{ target: 'mainContent' }}
+  navData={navConfig.current}
+/>
+```
+
+Install the polyfill For IE 11 and older version browsers:
+The polyfill for ES6 Promise is essential for the header to be rendered correctly on IE 11 and older browsers, as the version of axios we are using no longer supports ES6 Promise as default.
+
+NPM Install `"babel-polyfill": "6.20.0"` as a dependency to the application you want to import the header component to.
+
+```
+npm install --save babel-polyfill@6.20.0;
+```
+
+For `nypl-dgx-react-header`, as it will be built before uploaded, the polyfill can be installed as 
+devDependency.
+
+```
+npm install --save-dev babel-polyfill@6.20.0;
+```
+
+At the very beginning of the entry file of the application, put
+
+```
+import "babel-polyfill";
+```
+
+In the application's `webpack.config.js`, put `'babel-polyfill'` in the `entry` array of each environment. For example,
+
+```
+entry: [
+ 'babel-polyfill',
+  path.resolve(ROOT_PATH, 'src/client/App.jsx')
+],
+```
+
+or
+
+```
+entry: [
+  'webpack-dev-server/client?http://localhost:3000',
+  'webpack/hot/only-dev-server',
+  'babel-polyfill',
+  path.resolve(ROOT_PATH, 'src/client/App.jsx')
+],
+```
+
+### Test
+
+To run unit tests, run `npm test` in the terminal. Or run `npm run test-with-coverage` to run the test and see the test coverage.
+
+### Navigation Configuration
+The current navigation can be used by importing `navConfig` from the module and passing it as a prop. Custom navigation can be passed if it follows a similar structure to what is in `/src/navConfig.js`.
+
+### Styles
+You can write your own styles for the header but we suggest you use the styles that come in the package. It's written in SASS and to import we use the Webpack syntax in SASS:
+
+```
+// app.scss
+@import "~@nypl/dgx-header-component/dist/styles/main";
+```
+
+### Local Installation
+Install all dependencies listed under package.json
+
 ```sh
 $ npm install
 ```
 
-## Development Server
-Using Webpack hot-reload server at localhost:3000
+### Development Mode
+We use Webpack to fire off a hot-reloading development server. This allows for continuous code changes without the need to refresh your browser.
+
+This starts the server at localhost:3000 defaulting to `NODE_ENV=development`.
+
 ```sh
 $ npm start
 ```
 
-## Accessibility with React-a11y
+### Accessibility with React-a11y
 To use the react-a11y plugin start the development server with the `loadA11y` environment variable set to true (false by default):
 
 ```sh
 $ loadA11y=true npm start
 ```
 
-## Component Props
+### Component Props
 
 - `className`: Class to be assigned to the main header container (String, default: "Header")
 
@@ -52,8 +154,6 @@ $ loadA11y=true npm start
   <Header skipNav={{ target: 'topContent' }} />
 ```
 
-## Accessibility
-
 ### Skip Navigation
 
 If skip navigation is used, the skip navigation link will be the first link in
@@ -65,3 +165,35 @@ key should focus the skip navigation link which will reveal it visually.
 If the target of the link is not naturally focusable, as a div is not, it should
 be given a tab-index of −1. This allows the element to receive programmatic focus
 while being ignored during normal navigation flow.
+
+### Production Mode
+To build the component and serve the minified files, run the following two commands. Setting the `NODE_ENV` flag to production triggers the production environment.
+
+```sh
+$ npm run babel-build
+$ NODE_ENV=production npm start
+```
+
+### Using Feature Flags
+
+Please go to NYPL/dgx-feature-flags repository for the step-by-step instruction.
+https://bitbucket.org/NYPL/dgx-feature-flags
+
+### Contribute
+
+1. Fork this repo.
+2. Create a feature branch - `git checkout -b new-feature`.
+3. Commit your changes - `git commit -am 'Description of feature'`.
+4. Push the branch - `git push origin new-feature`.
+5. Create a new Pull Request.
+
+### CHANGE LOG
+
+#### v1.4.3
+> Updated all Header donation URLs
+
+#### v1.5.0
+> Added the new functions of OAuth log in.
+> Added the new styles to "My NYPL Button" and "My NYPL Dropdown menu". The new styles will dynamically update based on the log in status.
+> Added the tests for the new functions.
+> Updated the version of "axios", and imported ES6 Promise polyfill for the compatibility of older browsers.

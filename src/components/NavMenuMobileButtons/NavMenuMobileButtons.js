@@ -61,7 +61,7 @@ const styles = {
   },
 };
 
-const NavMenuBottomButtons = ({
+const NavMenuMobileButtons = ({
   className,
   libraryCardLink,
   subscribeLink,
@@ -129,19 +129,19 @@ const NavMenuBottomButtons = ({
   );
 };
 
-NavMenuBottomButtons.propTypes = {
+NavMenuMobileButtons.propTypes = {
   lang: React.PropTypes.string,
   className: React.PropTypes.string,
   libraryCardLink: React.PropTypes.string,
   subscribeLink: React.PropTypes.string,
 };
 
-NavMenuBottomButtons.defaultProps = {
+NavMenuMobileButtons.defaultProps = {
   lang: 'en',
-  className: 'NavMenuBottomButtons',
+  className: 'NavMenuMobileButtons',
   libraryCardLink: '//www.nypl.org/library-card',
   subscribeLink: '//pages.email.nypl.org/page.aspx' +
     '?QS=3935619f7de112ef7250fe02b84fb2f9ab74e4ea015814b7',
 };
 
-export default NavMenuBottomButtons;
+export default NavMenuMobileButtons;

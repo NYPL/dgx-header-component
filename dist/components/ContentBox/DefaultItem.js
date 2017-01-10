@@ -68,9 +68,9 @@ var DefaultItem = function (_React$Component) {
     key: 'featureDetails',
     value: function featureDetails(feature) {
       var person = this.personField(feature.person);
-      var date = feature.date;
-      var location = feature.location;
-      var description = feature.description;
+      var date = feature.date,
+          location = feature.location,
+          description = feature.description;
 
 
       if (description) {

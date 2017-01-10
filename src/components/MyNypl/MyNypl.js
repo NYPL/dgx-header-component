@@ -3,16 +3,21 @@ import React from 'react';
 import utils from '../../utils/utils.js';
 import appConfig from '../../appConfig.js';
 
+import { LogoutIcon } from 'dgx-svg-icons';
+
 const styles = {
-  catalogInfo: {
-    bottom: '26px',
-    color: '#FFF',
+  logOutLink: {
+    backgroundColor: '#FFF',
+    border: '3px solid #FFF',
+    borderRadius: '33px',
+    bottom: '30px',
+    color: '#1B7FA7',
     fontSize: '14px',
     fontWeight: '200',
     letterSpacing: '.03em',
+    padding: '3px 20px',
     position: 'absolute',
-    right: '30px',
-    textDecoration: 'underline',
+    left: '30px',
   },
   loginButtons: {
     backgroundColor: '#1B7FA7',
@@ -36,43 +41,113 @@ class MyNypl extends React.Component {
     this.refs.catalogLink.blur();
   }
 
+  /**
+   * rednerLoginLinks()
+   * Returns the href addresses for catalog and research catalog buttons
+   * based on different conditions.
+   */
+  rednerLoginLinks() {
+    if (this.props.isLoggedIn) {
+      return (
+        {
+          catalogLink: this.props.catalogLink,
+          researchLink: this.props.researchLink,
+        }
+      );
+    }
+
+    if (this.props.isOauthLoginActivated) {
+      return (
+        {
+          catalogLink: this.props.loginCatalogLink,
+          researchLink: this.props.loginResearchLink,
+        }
+      );
+    }
+
+    return (
+      {
+        catalogLink: this.props.catalogLink,
+        researchLink: this.props.researchLink,
+      }
+    );
+  }
+
+  /**
+   * renderGreeting()
+   * Returns the patron's name in the drop down menu if it exists.
+   */
+  renderGreeting() {
+    if (!this.props.patronName || !this.props.isLoggedIn) {
+      return null;
+    }
+
+    return (
+      <div>
+        <p className={`${this.props.className}-Patron-Greeting Login-Indication`}>
+          You are logged in as:
+        </p>
+        <p className={`${this.props.className}-Patron-Greeting Login-Name`}>
+          {this.props.patronName}
+        </p>
+      </div>
+    );
+  }
+
+  /**
+   * renderLogOutLink()
+   * Returns the log out button if the patron has been logged in.
+   */
+  renderLogOutLink() {
+    return (this.props.isLoggedIn) ?
+      <a
+        href={this.props.logOutLink}
+        className={`${this.props.className}-Catalog-Link`}
+        onClick={() => utils.trackHeader('My Account', 'Log Out')}
+        style={styles.logOutLink}
+      >
+        <LogoutIcon className="logoutIcon" />
+        LOG OUT
+      </a> : null;
+  }
+
   render() {
+    const catalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
+    const researchCatalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE RESEARCH CATALOG' :
+      'LOG INTO THE RESEARCH CATALOG';
+    const catalogLink = this.rednerLoginLinks().catalogLink;
+    const researchLink = this.rednerLoginLinks().researchLink;
+    const gaAction = (this.props.isLoggedIn) ? 'Go To' : 'Log In';
+
     return (
       <div className={this.props.className} role="dialog">
+       {this.renderGreeting()}
         <ul className={`${this.props.className}-Login-List`}>
           <li>
             <a
               ref="catalogLink"
-              href={this.props.catalogLink}
+              href={catalogLink}
               style={styles.loginButtons}
               className={`${this.props.className}-Catalog-Btn`}
-              onClick={() => utils.trackHeader('Log In', 'Catalog')}
+              onClick={() => utils.trackHeader(gaAction, 'Catalog')}
             >
               <span className="nypl-icon-login icon"></span>
-              LOG INTO THE CATALOG
+              {catalogLinkLabel}
             </a>
           </li>
           <li>
             <a
-              href={this.props.researchLink}
+              href={researchLink}
               style={styles.loginButtons}
               className={`${this.props.className}-Research-Btn`}
-              onClick={() => utils.trackHeader('Log In', 'Research')}
+              onClick={() => utils.trackHeader(gaAction, 'Research')}
             >
               <span className="nypl-icon-bldg icon"></span>
-              LOG INTO THE RESEARCH CATALOG
+              {researchCatalogLinkLabel}
             </a>
           </li>
         </ul>
-
-        <a
-          href={this.props.infoLink}
-          className={`${this.props.className}-Catalog-Link`}
-          onClick={() => utils.trackHeader('Log In', 'Catalog Info')}
-          style={styles.catalogInfo}
-        >
-          Catalog Info
-        </a>
+        {this.renderLogOutLink()}
       </div>
     );
   }
@@ -84,15 +159,25 @@ MyNypl.propTypes = {
   lang: React.PropTypes.string,
   catalogLink: React.PropTypes.string,
   researchLink: React.PropTypes.string,
-  infoLink: React.PropTypes.string,
+  loginCatalogLink: React.PropTypes.string,
+  loginResearchLink: React.PropTypes.string,
+  logOutLink: React.PropTypes.string,
+  isLoggedIn: React.PropTypes.bool,
+  isOauthLoginActivated: React.PropTypes.bool,
+  patronName: React.PropTypes.string,
 };
 
 MyNypl.defaultProps = {
   className: 'MyNypl',
   lang: 'en',
+  loginCatalogLink: appConfig.loginMyNyplLinks.catalog,
+  loginResearchLink: appConfig.loginMyNyplLinks.research,
   catalogLink: appConfig.myNyplLinks.catalog,
   researchLink: appConfig.myNyplLinks.research,
-  infoLink: appConfig.myNyplLinks.moreInfo,
+  logOutLink: appConfig.loginMyNyplLinks.logOutLink,
+  isLoggedIn: false,
+  isOauthLoginActivated: false,
+  patronName: '',
 };
 
 export default MyNypl;

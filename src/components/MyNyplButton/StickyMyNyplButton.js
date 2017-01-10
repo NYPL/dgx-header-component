@@ -6,7 +6,7 @@ import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
 import utils from '../../utils/utils.js';
 import MyNypl from '../MyNypl/MyNypl.js';
-import { LoginIcon } from 'dgx-svg-icons';
+import { LoginIconSolid } from 'dgx-svg-icons';
 
 const styles = {
   base: {
@@ -32,7 +32,6 @@ const styles = {
     position: 'absolute',
     right: '0',
     minWidth: '218px',
-    minHeight: '185px',
     backgroundColor: '#1B7FA7',
     padding: '17px 30px',
   },
@@ -59,8 +58,9 @@ class StickyMyNyplButton extends React.Component {
    */
   handleClick() {
     const visibleState = HeaderStore.getStickyMyNyplVisible() ? 'Closed' : 'Open';
+
     Actions.toggleStickyMyNyplVisible(!HeaderStore.getStickyMyNyplVisible());
-    utils.trackHeader('Log In', `StickyMyNyplButton - ${visibleState}`);
+    utils.trackHeader(this.props.gaAction, `StickyMyNyplButton - ${visibleState}`);
   }
 
   /**
@@ -71,7 +71,7 @@ class StickyMyNyplButton extends React.Component {
   handleOnClickOut() {
     if (HeaderStore.getStickyMyNyplVisible()) {
       Actions.toggleStickyMyNyplVisible(false);
-      utils.trackHeader('Log In', 'StickyMyNyplButton - Closed');
+      utils.trackHeader(this.props.gaAction, 'StickyMyNyplButton - Closed');
     }
   }
 
@@ -80,6 +80,10 @@ class StickyMyNyplButton extends React.Component {
     const showDialog = HeaderStore.getStickyMyNyplVisible();
     const buttonClasses = cx({ active: showDialog });
     const myNyplClasses = cx({ 'active animatedFast fadeIn': showDialog });
+    const loginIconClass = (this.props.patronName) ? '-loggedIn' : '';
+    const loggedInFadeInAnimation = (this.props.patronName) ? ' animated fadeIn' : '';
+    const active = (showDialog) ? ' active' : '';
+    const boxHeight = (this.props.isLoggedIn) ? ' loggedInHeight' : null;
 
     return (
       <ClickOutHandler onClickOut={this.handleOnClickOut}>
@@ -97,17 +101,22 @@ class StickyMyNyplButton extends React.Component {
             <span className="visuallyHidden">
               {this.props.label}
             </span>
-            <LoginIcon
-              width="25"
-              height="25"
-              fill={showDialog ? '#FFF' : '#333'}
+            <LoginIconSolid
+              className={
+                `StickyMyNyplButton LoginIcon${loginIconClass}${loggedInFadeInAnimation}${active}`
+              }
             />
           </button>
           <div
-            className={`StickyMyNypl-Wrapper ${myNyplClasses}`}
+            className={`StickyMyNypl-Wrapper ${myNyplClasses}${boxHeight}`}
             style={styles.MyNyplWrapper}
           >
-            <MyNypl />
+            <MyNypl
+              isLoggedIn={this.props.isLoggedIn}
+              isOauthLoginActivated={this.props.isOauthLoginActivated}
+              patronName={this.props.patronName}
+              logOutLink={this.props.logOutLink}
+            />
           </div>
         </div>
       </ClickOutHandler>
@@ -119,6 +128,11 @@ StickyMyNyplButton.propTypes = {
   lang: React.PropTypes.string,
   label: React.PropTypes.string,
   style: React.PropTypes.object,
+  isLoggedIn: React.PropTypes.bool,
+  isOauthLoginActivated: React.PropTypes.bool,
+  patronName: React.PropTypes.string,
+  logOutLink: React.PropTypes.string,
+  gaAction: React.PropTypes.string,
 };
 
 StickyMyNyplButton.defaultProps = {

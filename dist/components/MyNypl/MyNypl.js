@@ -18,6 +18,8 @@ var _appConfig = require('../../appConfig.js');
 
 var _appConfig2 = _interopRequireDefault(_appConfig);
 
+var _dgxSvgIcons = require('dgx-svg-icons');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -29,15 +31,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var styles = {
-  catalogInfo: {
-    bottom: '26px',
-    color: '#FFF',
+  logOutLink: {
+    backgroundColor: '#FFF',
+    border: '3px solid #FFF',
+    borderRadius: '33px',
+    bottom: '30px',
+    color: '#1B7FA7',
     fontSize: '14px',
     fontWeight: '200',
     letterSpacing: '.03em',
+    padding: '3px 20px',
     position: 'absolute',
-    right: '30px',
-    textDecoration: 'underline'
+    left: '30px'
   },
   loginButtons: {
     backgroundColor: '#1B7FA7',
@@ -71,12 +76,99 @@ var MyNypl = function (_React$Component) {
     value: function componentWillUnmount() {
       this.refs.catalogLink.blur();
     }
+
+    /**
+     * rednerLoginLinks()
+     * Returns the href addresses for catalog and research catalog buttons
+     * based on different conditions.
+     */
+
+  }, {
+    key: 'rednerLoginLinks',
+    value: function rednerLoginLinks() {
+      if (this.props.isLoggedIn) {
+        return {
+          catalogLink: this.props.catalogLink,
+          researchLink: this.props.researchLink
+        };
+      }
+
+      if (this.props.isOauthLoginActivated) {
+        return {
+          catalogLink: this.props.loginCatalogLink,
+          researchLink: this.props.loginResearchLink
+        };
+      }
+
+      return {
+        catalogLink: this.props.catalogLink,
+        researchLink: this.props.researchLink
+      };
+    }
+
+    /**
+     * renderGreeting()
+     * Returns the patron's name in the drop down menu if it exists.
+     */
+
+  }, {
+    key: 'renderGreeting',
+    value: function renderGreeting() {
+      if (!this.props.patronName || !this.props.isLoggedIn) {
+        return null;
+      }
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'p',
+          { className: this.props.className + '-Patron-Greeting Login-Indication' },
+          'You are logged in as:'
+        ),
+        _react2.default.createElement(
+          'p',
+          { className: this.props.className + '-Patron-Greeting Login-Name' },
+          this.props.patronName
+        )
+      );
+    }
+
+    /**
+     * renderLogOutLink()
+     * Returns the log out button if the patron has been logged in.
+     */
+
+  }, {
+    key: 'renderLogOutLink',
+    value: function renderLogOutLink() {
+      return this.props.isLoggedIn ? _react2.default.createElement(
+        'a',
+        {
+          href: this.props.logOutLink,
+          className: this.props.className + '-Catalog-Link',
+          onClick: function onClick() {
+            return _utils2.default.trackHeader('My Account', 'Log Out');
+          },
+          style: styles.logOutLink
+        },
+        _react2.default.createElement(_dgxSvgIcons.LogoutIcon, { className: 'logoutIcon' }),
+        'LOG OUT'
+      ) : null;
+    }
   }, {
     key: 'render',
     value: function render() {
+      var catalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
+      var researchCatalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE RESEARCH CATALOG' : 'LOG INTO THE RESEARCH CATALOG';
+      var catalogLink = this.rednerLoginLinks().catalogLink;
+      var researchLink = this.rednerLoginLinks().researchLink;
+      var gaAction = this.props.isLoggedIn ? 'Go To' : 'Log In';
+
       return _react2.default.createElement(
         'div',
         { className: this.props.className, role: 'dialog' },
+        this.renderGreeting(),
         _react2.default.createElement(
           'ul',
           { className: this.props.className + '-Login-List' },
@@ -87,15 +179,15 @@ var MyNypl = function (_React$Component) {
               'a',
               {
                 ref: 'catalogLink',
-                href: this.props.catalogLink,
+                href: catalogLink,
                 style: styles.loginButtons,
                 className: this.props.className + '-Catalog-Btn',
                 onClick: function onClick() {
-                  return _utils2.default.trackHeader('Log In', 'Catalog');
+                  return _utils2.default.trackHeader(gaAction, 'Catalog');
                 }
               },
               _react2.default.createElement('span', { className: 'nypl-icon-login icon' }),
-              'LOG INTO THE CATALOG'
+              catalogLinkLabel
             )
           ),
           _react2.default.createElement(
@@ -104,30 +196,19 @@ var MyNypl = function (_React$Component) {
             _react2.default.createElement(
               'a',
               {
-                href: this.props.researchLink,
+                href: researchLink,
                 style: styles.loginButtons,
                 className: this.props.className + '-Research-Btn',
                 onClick: function onClick() {
-                  return _utils2.default.trackHeader('Log In', 'Research');
+                  return _utils2.default.trackHeader(gaAction, 'Research');
                 }
               },
               _react2.default.createElement('span', { className: 'nypl-icon-bldg icon' }),
-              'LOG INTO THE RESEARCH CATALOG'
+              researchCatalogLinkLabel
             )
           )
         ),
-        _react2.default.createElement(
-          'a',
-          {
-            href: this.props.infoLink,
-            className: this.props.className + '-Catalog-Link',
-            onClick: function onClick() {
-              return _utils2.default.trackHeader('Log In', 'Catalog Info');
-            },
-            style: styles.catalogInfo
-          },
-          'Catalog Info'
-        )
+        this.renderLogOutLink()
       );
     }
   }]);
@@ -141,15 +222,25 @@ MyNypl.propTypes = {
   lang: _react2.default.PropTypes.string,
   catalogLink: _react2.default.PropTypes.string,
   researchLink: _react2.default.PropTypes.string,
-  infoLink: _react2.default.PropTypes.string
+  loginCatalogLink: _react2.default.PropTypes.string,
+  loginResearchLink: _react2.default.PropTypes.string,
+  logOutLink: _react2.default.PropTypes.string,
+  isLoggedIn: _react2.default.PropTypes.bool,
+  isOauthLoginActivated: _react2.default.PropTypes.bool,
+  patronName: _react2.default.PropTypes.string
 };
 
 MyNypl.defaultProps = {
   className: 'MyNypl',
   lang: 'en',
+  loginCatalogLink: _appConfig2.default.loginMyNyplLinks.catalog,
+  loginResearchLink: _appConfig2.default.loginMyNyplLinks.research,
   catalogLink: _appConfig2.default.myNyplLinks.catalog,
   researchLink: _appConfig2.default.myNyplLinks.research,
-  infoLink: _appConfig2.default.myNyplLinks.moreInfo
+  logOutLink: _appConfig2.default.loginMyNyplLinks.logOutLink,
+  isLoggedIn: false,
+  isOauthLoginActivated: false,
+  patronName: ''
 };
 
 exports.default = MyNypl;

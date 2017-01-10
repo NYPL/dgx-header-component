@@ -189,7 +189,7 @@ https://bitbucket.org/NYPL/dgx-feature-flags
 
 ### CHANGE LOG
 
-#### v1.4.2
+#### v1.4.3
 > Updated all Header donation URLs
 
 #### v1.5.0

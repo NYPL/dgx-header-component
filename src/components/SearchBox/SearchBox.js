@@ -42,7 +42,7 @@ class SearchBox extends React.Component {
    */
   setEncoreUrl(searchInput, baseUrl, language, scopeString) {
     const searchTerm = this.encoreEncodeSearchString(searchInput);
-    const rootUrl = baseUrl || 'http://browse.nypl.org/iii/encore/search/';
+    const rootUrl = baseUrl || 'https://browse.nypl.org/iii/encore/search/';
     const defaultLang = (language) ? `?lang=${language}` : '';
     let finalEncoreUrl;
 
@@ -147,7 +147,7 @@ class SearchBox extends React.Component {
     let gaSearchLabel;
     const searchInputValue = this.state.searchInput;
     const searchOptionValue = this.state.searchOption;
-    const encoreBaseUrl = 'http://browse.nypl.org/iii/encore/search/';
+    const encoreBaseUrl = 'https://browse.nypl.org/iii/encore/search/';
     const catalogBaseUrl = '//www.nypl.org/search/apachesolr_search/';
 
     if (this.isSearchInputValid(searchInputValue)) {

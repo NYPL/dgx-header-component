@@ -179,8 +179,6 @@ class SearchBox extends React.Component {
         window.location.assign(requestUrl);
       }
 
-      console.log('requestUrl', requestUrl);
-
     } else {
       event.preventDefault();
       // No search input has been entered

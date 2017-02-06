@@ -77,7 +77,7 @@ var SearchBox = function (_React$Component) {
     key: 'setEncoreUrl',
     value: function setEncoreUrl(searchInput, baseUrl, language, scopeString) {
       var searchTerm = this.encoreEncodeSearchString(searchInput);
-      var rootUrl = baseUrl || 'http://browse.nypl.org/iii/encore/search/';
+      var rootUrl = baseUrl || 'https://browse.nypl.org/iii/encore/search/';
       var defaultLang = language ? '?lang=' + language : '';
       var finalEncoreUrl = void 0;
 
@@ -195,7 +195,7 @@ var SearchBox = function (_React$Component) {
       var gaSearchLabel = void 0;
       var searchInputValue = this.state.searchInput;
       var searchOptionValue = this.state.searchOption;
-      var encoreBaseUrl = 'http://browse.nypl.org/iii/encore/search/';
+      var encoreBaseUrl = 'https://browse.nypl.org/iii/encore/search/';
       var catalogBaseUrl = '//www.nypl.org/search/apachesolr_search/';
 
       if (this.isSearchInputValid(searchInputValue)) {
@@ -226,6 +226,8 @@ var SearchBox = function (_React$Component) {
           // Go to the proper search page
           window.location.assign(requestUrl);
         }
+
+        console.log('requestUrl', requestUrl);
       } else {
         event.preventDefault();
         // No search input has been entered

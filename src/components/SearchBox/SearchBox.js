@@ -178,7 +178,6 @@ class SearchBox extends React.Component {
         // Go to the proper search page
         window.location.assign(requestUrl);
       }
-
     } else {
       event.preventDefault();
       // No search input has been entered

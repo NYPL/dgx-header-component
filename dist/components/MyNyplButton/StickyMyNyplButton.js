@@ -38,6 +38,10 @@ var _MyNypl2 = _interopRequireDefault(_MyNypl);
 
 var _dgxSvgIcons = require('dgx-svg-icons');
 
+var _appConfig = require('../../appConfig.js');
+
+var _appConfig2 = _interopRequireDefault(_appConfig);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -45,6 +49,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// Configs
+
 
 var styles = {
   base: {
@@ -53,7 +59,6 @@ var styles = {
     verticalAlign: 'middle'
   },
   MyNyplButton: {
-    display: 'inline',
     textTransform: 'uppercase',
     padding: '5px 7.5px',
     border: 'none',
@@ -103,7 +108,10 @@ var StickyMyNyplButton = function (_React$Component) {
 
   _createClass(StickyMyNyplButton, [{
     key: 'handleClick',
-    value: function handleClick() {
+    value: function handleClick(e) {
+      // If javascript is enabled, clicking the button will open the dropdown menu instead of
+      // going to the link
+      e.preventDefault();
       var visibleState = _HeaderStore2.default.getStickyMyNyplVisible() ? 'Closed' : 'Open';
 
       _Actions2.default.toggleStickyMyNyplVisible(!_HeaderStore2.default.getStickyMyNyplVisible());
@@ -147,12 +155,14 @@ var StickyMyNyplButton = function (_React$Component) {
             style: (0, _underscore.extend)(styles.base, this.props.style)
           },
           _react2.default.createElement(
-            'button',
+            'a',
             {
               id: 'MyNyplButton',
               className: 'MyNyplButton ' + buttonClasses,
               onClick: this.handleClick,
-              style: (0, _underscore.extend)(styles.MyNyplButton, this.props.style)
+              style: (0, _underscore.extend)(styles.MyNyplButton, this.props.style),
+              href: this.props.target,
+              role: 'button'
             },
             _react2.default.createElement(
               'span',
@@ -192,12 +202,14 @@ StickyMyNyplButton.propTypes = {
   isOauthLoginActivated: _react2.default.PropTypes.bool,
   patronName: _react2.default.PropTypes.string,
   logOutLink: _react2.default.PropTypes.string,
-  gaAction: _react2.default.PropTypes.string
+  gaAction: _react2.default.PropTypes.string,
+  target: _react2.default.PropTypes.string
 };
 
 StickyMyNyplButton.defaultProps = {
   lang: 'en',
-  label: 'Log In'
+  label: 'Log In',
+  target: _appConfig2.default.myNyplLinks.catalog
 };
 
 exports.default = StickyMyNyplButton;

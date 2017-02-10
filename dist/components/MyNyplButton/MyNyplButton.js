@@ -32,6 +32,10 @@ var _MyNypl = require('../MyNypl/MyNypl.js');
 
 var _MyNypl2 = _interopRequireDefault(_MyNypl);
 
+var _appConfig = require('../../appConfig.js');
+
+var _appConfig2 = _interopRequireDefault(_appConfig);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -44,6 +48,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // GA Utilities
 
 // Component Dependencies
+
+// Configs
 
 
 var styles = {
@@ -123,7 +129,10 @@ var MyNyplButton = function (_React$Component) {
 
   }, {
     key: 'handleClick',
-    value: function handleClick() {
+    value: function handleClick(e) {
+      // If javascript is enabled, clicking the button will open the dropdown menu instead of
+      // going to the link
+      e.preventDefault();
       var visibleState = _HeaderStore2.default.getMyNyplVisible() ? 'Closed' : 'Open';
 
       _Actions2.default.toggleMyNyplVisible(!_HeaderStore2.default.getMyNyplVisible());
@@ -168,11 +177,13 @@ var MyNyplButton = function (_React$Component) {
       }
 
       return _react2.default.createElement(
-        'button',
+        'a',
         {
           className: 'MyNyplButton ' + buttonClass + labelColorClass + loggedInFadeInAnimation,
           onClick: this.handleClick,
-          style: (0, _underscore.extend)(styles.MyNyplButton, this.props.style)
+          style: (0, _underscore.extend)(styles.MyNyplButton, this.props.style),
+          href: this.props.target,
+          role: 'button'
         },
         myNyplButtonLabel,
         icon
@@ -226,12 +237,14 @@ MyNyplButton.propTypes = {
   isOauthLoginActivated: _react2.default.PropTypes.bool,
   patronName: _react2.default.PropTypes.string,
   logOutLink: _react2.default.PropTypes.string,
-  gaAction: _react2.default.PropTypes.string
+  gaAction: _react2.default.PropTypes.string,
+  target: _react2.default.PropTypes.string
 };
 
 MyNyplButton.defaultProps = {
   lang: 'en',
-  label: 'Log In'
+  label: 'Log In',
+  target: _appConfig2.default.myNyplLinks.catalog
 };
 
 exports.default = MyNyplButton;

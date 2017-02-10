@@ -8,6 +8,8 @@ import Actions from '../../actions/Actions.js';
 import utils from '../../utils/utils.js';
 // Component Dependencies
 import MyNypl from '../MyNypl/MyNypl.js';
+// Configs
+import appConfig from '../../appConfig.js';
 
 const styles = {
   base: {
@@ -71,7 +73,10 @@ class MyNyplButton extends React.Component {
    * Toggles the visibility of the form. Sends an Action
    * that will dispatch an event to the Header Store.
    */
-  handleClick() {
+  handleClick(e) {
+    // If javascript is enabled, clicking the button will open the dropdown menu instead of
+    // going to the link
+    e.preventDefault();
     const visibleState = HeaderStore.getMyNyplVisible() ? 'Closed' : 'Open';
 
     Actions.toggleMyNyplVisible(!HeaderStore.getMyNyplVisible());
@@ -110,14 +115,16 @@ class MyNyplButton extends React.Component {
     }
 
     return (
-      <button
+      <a
         className={`MyNyplButton ${buttonClass}${labelColorClass}${loggedInFadeInAnimation}`}
         onClick={this.handleClick}
         style={_extend(styles.MyNyplButton, this.props.style)}
+        href={this.props.target}
+        role="button"
       >
         {myNyplButtonLabel}
         {icon}
-      </button>
+      </a>
     );
   }
 
@@ -162,11 +169,13 @@ MyNyplButton.propTypes = {
   patronName: React.PropTypes.string,
   logOutLink: React.PropTypes.string,
   gaAction: React.PropTypes.string,
+  target: React.PropTypes.string,
 };
 
 MyNyplButton.defaultProps = {
   lang: 'en',
   label: 'Log In',
+  target: appConfig.myNyplLinks.catalog,
 };
 
 export default MyNyplButton;

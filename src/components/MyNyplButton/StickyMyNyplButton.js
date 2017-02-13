@@ -7,6 +7,8 @@ import Actions from '../../actions/Actions.js';
 import utils from '../../utils/utils.js';
 import MyNypl from '../MyNypl/MyNypl.js';
 import { LoginIconSolid } from 'dgx-svg-icons';
+// Configs
+import appConfig from '../../appConfig.js';
 
 const styles = {
   base: {
@@ -15,7 +17,6 @@ const styles = {
     verticalAlign: 'middle',
   },
   MyNyplButton: {
-    display: 'inline',
     textTransform: 'uppercase',
     padding: '5px 7.5px',
     border: 'none',
@@ -56,7 +57,10 @@ class StickyMyNyplButton extends React.Component {
    * Toggles the visibility of the form. Sends an Action
    * that will dispatch an event to the HeaderStore.
    */
-  handleClick() {
+  handleClick(e) {
+    // If javascript is enabled, clicking the button will open the dropdown menu instead of
+    // going to the link
+    e.preventDefault();
     const visibleState = HeaderStore.getStickyMyNyplVisible() ? 'Closed' : 'Open';
 
     Actions.toggleStickyMyNyplVisible(!HeaderStore.getStickyMyNyplVisible());
@@ -92,11 +96,13 @@ class StickyMyNyplButton extends React.Component {
           ref="MyNypl"
           style={_extend(styles.base, this.props.style)}
         >
-          <button
+          <a
             id="MyNyplButton"
             className={`MyNyplButton ${buttonClasses}`}
             onClick={this.handleClick}
             style={_extend(styles.MyNyplButton, this.props.style)}
+            href={this.props.target}
+            role="button"
           >
             <span className="visuallyHidden">
               {this.props.label}
@@ -106,7 +112,7 @@ class StickyMyNyplButton extends React.Component {
                 `StickyMyNyplButton LoginIcon${loginIconClass}${loggedInFadeInAnimation}${active}`
               }
             />
-          </button>
+          </a>
           <div
             className={`StickyMyNypl-Wrapper ${myNyplClasses}${boxHeight}`}
             style={styles.MyNyplWrapper}
@@ -133,11 +139,13 @@ StickyMyNyplButton.propTypes = {
   patronName: React.PropTypes.string,
   logOutLink: React.PropTypes.string,
   gaAction: React.PropTypes.string,
+  target: React.PropTypes.string,
 };
 
 StickyMyNyplButton.defaultProps = {
   lang: 'en',
   label: 'Log In',
+  target: appConfig.myNyplLinks.catalog,
 };
 
 export default StickyMyNyplButton;

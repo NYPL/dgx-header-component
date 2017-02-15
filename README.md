@@ -4,7 +4,7 @@ This repository is for the header component used in React applications at NYPL.
 
 ### Version
 
-1.5.1
+1.5.2
 
 ### App Installation
 
@@ -188,6 +188,9 @@ https://bitbucket.org/NYPL/dgx-feature-flags
 5. Create a new Pull Request.
 
 ### CHANGE LOG
+
+#### v1.5.2
+> Removed the Feature Flag of "OAuthLogin" as OAuth Login is going to be default. Also Removed the related props in the <MyNypl> and <MobileMyNypl>.
 
 #### v1.5.1
 > Updated the encore search link to start with HTTPS.

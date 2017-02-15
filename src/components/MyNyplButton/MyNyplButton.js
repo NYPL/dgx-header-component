@@ -139,7 +139,6 @@ class MyNyplButton extends React.Component {
         <MyNypl
           patronName={this.props.patronName}
           isLoggedIn={this.props.isLoggedIn}
-          isOauthLoginActivated={this.props.isOauthLoginActivated}
           logOutLink={this.props.logOutLink}
         />
       </div>
@@ -165,7 +164,6 @@ MyNyplButton.propTypes = {
   lang: React.PropTypes.string,
   style: React.PropTypes.object,
   isLoggedIn: React.PropTypes.bool,
-  isOauthLoginActivated: React.PropTypes.bool,
   patronName: React.PropTypes.string,
   logOutLink: React.PropTypes.string,
   gaAction: React.PropTypes.string,

@@ -130,7 +130,6 @@ var NavMenu = function (_React$Component) {
         _react2.default.createElement(_StickyMyNyplButton2.default, {
           isLoggedIn: this.props.isLoggedIn,
           patronName: this.props.patronName,
-          isOauthLoginActivated: this.props.isOauthLoginActivated,
           logOutLink: this.props.logOutLink,
           gaAction: this.props.gaAction
         }),
@@ -216,7 +215,6 @@ NavMenu.propTypes = {
   items: _react2.default.PropTypes.array,
   urlType: _react2.default.PropTypes.string,
   isLoggedIn: _react2.default.PropTypes.bool,
-  isOauthLoginActivated: _react2.default.PropTypes.bool,
   patronInitial: _react2.default.PropTypes.string,
   patronName: _react2.default.PropTypes.string,
   logOutLink: _react2.default.PropTypes.string,

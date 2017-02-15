@@ -119,16 +119,9 @@ var MobileMyNypl = function (_React$Component) {
         };
       }
 
-      if (this.props.isOauthLoginActivated) {
-        return {
-          catalogLink: this.props.loginCatalogLink,
-          researchLink: this.props.loginResearchLink
-        };
-      }
-
       return {
-        catalogLink: this.props.catalogLink,
-        researchLink: this.props.researchLink
+        catalogLink: this.props.loginCatalogLink,
+        researchLink: this.props.loginResearchLink
       };
     }
 
@@ -267,7 +260,6 @@ MobileMyNypl.propTypes = {
   loginCatalogLink: _react2.default.PropTypes.string,
   loginResearchLink: _react2.default.PropTypes.string,
   isLoggedIn: _react2.default.PropTypes.bool,
-  isOauthLoginActivated: _react2.default.PropTypes.bool,
   patronName: _react2.default.PropTypes.string,
   logOutLink: _react2.default.PropTypes.string
 };
@@ -281,7 +273,6 @@ MobileMyNypl.defaultProps = {
   researchLink: _appConfig2.default.myNyplLinks.research,
   logOutLink: _appConfig2.default.loginMyNyplLinks.logOutLink,
   isLoggedIn: false,
-  isOauthLoginActivated: false,
   patronName: ''
 };
 

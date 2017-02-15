@@ -91,9 +91,7 @@ class Header extends React.Component {
         patronName: '',
         patronInitial: '',
         patronDataReceived: false,
-        isFeatureFlagsActivated: {
-          OauthLogin: FeatureFlags.store._getImmutableState().get('OauthLogin'),
-        },
+        isFeatureFlagsActivated: {},
         logOutUrl: '',
       },
       HeaderStore.getState()
@@ -303,7 +301,6 @@ class Header extends React.Component {
     const skipNav = this.props.skipNav ?
       (<SkipNavigation {...this.props.skipNav} />) : '';
     const isLoggedIn = !!this.state.patronDataReceived;
-    const isOauthLoginActivated = !!this.state.isFeatureFlagsActivated.OauthLogin;
     const gaAction = (isLoggedIn) ? 'My Account' : 'Log In';
 
     return (
@@ -324,7 +321,6 @@ class Header extends React.Component {
             }
             nyplRootUrl={(this.props.urlType === 'absolute') ? '//www.nypl.org' : '/'}
             isLoggedIn={isLoggedIn}
-            isOauthLoginActivated={isOauthLoginActivated}
             patronName={this.state.patronName}
             logOutLink={this.state.logOutUrl}
             ref="headerMobile"
@@ -342,7 +338,6 @@ class Header extends React.Component {
               <MyNyplButton
                 refId="desktopLogin"
                 isLoggedIn={isLoggedIn}
-                isOauthLoginActivated={isOauthLoginActivated}
                 patronName={this.state.patronName}
                 logOutLink={this.state.logOutUrl}
                 gaAction={gaAction}
@@ -400,7 +395,6 @@ class Header extends React.Component {
             urlType={this.props.urlType}
             isLoggedIn={isLoggedIn}
             patronName={this.state.patronName}
-            isOauthLoginActivated={isOauthLoginActivated}
             logOutLink={this.state.logOutUrl}
             gaAction={gaAction}
           />

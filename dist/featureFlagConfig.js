@@ -1,11 +1,11 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var FeatureFlagConfig = {
-  featureFlagList: ['OauthLogin']
+  featureFlagList: []
 };
 
 exports.default = FeatureFlagConfig;
-module.exports = exports['default'];
+module.exports = exports["default"];

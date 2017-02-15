@@ -169,9 +169,7 @@ var Header = function (_React$Component) {
       patronName: '',
       patronInitial: '',
       patronDataReceived: false,
-      isFeatureFlagsActivated: {
-        OauthLogin: _dgxFeatureFlags2.default.store._getImmutableState().get('OauthLogin')
-      },
+      isFeatureFlagsActivated: {},
       logOutUrl: ''
     }, _HeaderStore2.default.getState());
 
@@ -407,7 +405,6 @@ var Header = function (_React$Component) {
       var headerClasses = (0, _classnames2.default)(headerClass, { sticky: isHeaderSticky });
       var skipNav = this.props.skipNav ? _react2.default.createElement(_dgxSkipNavigationLink2.default, this.props.skipNav) : '';
       var isLoggedIn = !!this.state.patronDataReceived;
-      var isOauthLoginActivated = !!this.state.isFeatureFlagsActivated.OauthLogin;
       var gaAction = isLoggedIn ? 'My Account' : 'Log In';
 
       return _react2.default.createElement(
@@ -428,7 +425,6 @@ var Header = function (_React$Component) {
             locatorUrl: this.props.urlType === 'absolute' ? '//www.nypl.org/locations/map?nearme=true' : '/locations/map?nearme=true',
             nyplRootUrl: this.props.urlType === 'absolute' ? '//www.nypl.org' : '/',
             isLoggedIn: isLoggedIn,
-            isOauthLoginActivated: isOauthLoginActivated,
             patronName: this.state.patronName,
             logOutLink: this.state.logOutUrl,
             ref: 'headerMobile'
@@ -450,7 +446,6 @@ var Header = function (_React$Component) {
               _react2.default.createElement(_MyNyplButton2.default, {
                 refId: 'desktopLogin',
                 isLoggedIn: isLoggedIn,
-                isOauthLoginActivated: isOauthLoginActivated,
                 patronName: this.state.patronName,
                 logOutLink: this.state.logOutUrl,
                 gaAction: gaAction
@@ -502,7 +497,6 @@ var Header = function (_React$Component) {
             urlType: this.props.urlType,
             isLoggedIn: isLoggedIn,
             patronName: this.state.patronName,
-            isOauthLoginActivated: isOauthLoginActivated,
             logOutLink: this.state.logOutUrl,
             gaAction: gaAction
           })

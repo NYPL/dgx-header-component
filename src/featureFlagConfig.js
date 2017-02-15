@@ -1,6 +1,5 @@
 const FeatureFlagConfig = {
   featureFlagList: [
-    'OauthLogin',
   ],
 };
 

@@ -291,17 +291,8 @@ function Utils() {
    */
   this.checkFeatureFlagCookie = (name) => {
     if (this.hasCookie(`nyplFeatureFlag${name}`)) {
-      this.activateFeatureFlag(name);
+      FeatureFlags.utils.activateFeature(name);
     }
-  };
-
-  /**
-   * activateFeatureFlags(name)
-   * Activate the feature flag that are indicated in the cookie.
-   * @param {string} name - The feature flag's name.
-   */
-  this.activateFeatureFlag = (name) => {
-    FeatureFlags.utils.activateFeature(name);
   };
 }
 

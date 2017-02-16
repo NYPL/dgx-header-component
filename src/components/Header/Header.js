@@ -4,9 +4,7 @@ import ReactDOM from 'react-dom';
 import cx from 'classnames';
 import {
   extend as _extend,
-  map as _map,
 } from 'underscore';
-import FeatureFlags from 'dgx-feature-flags';
 // Nav Config
 import navConfig from '../../navConfig.js';
 import featureFlagConfig from '../../featureFlagConfig.js';
@@ -111,7 +109,10 @@ class Header extends React.Component {
     this.setLoginCookie(this.state.loginCookieName);
 
     // Set feature flag cookies to the state
-    this.checkFeatureFlagActivated(featureFlagConfig.featureFlagList);
+    // We don't have any feature flags set in the config list at this moment though
+    utils.checkFeatureFlagActivated(
+      featureFlagConfig.featureFlagList, this.state.isFeatureFlagsActivated
+    );
 
     // Set the log out link
     this.setLogOutLink(window.location.href);
@@ -132,9 +133,7 @@ class Header extends React.Component {
           patronName: this.state.patronName,
           patronInitial: this.state.patronInitial,
           patronDataReceived: this.state.patronDataReceived,
-          isFeatureFlagsActivated: {
-            OauthLogin: FeatureFlags.store._getImmutableState().get('OauthLogin'),
-          },
+          isFeatureFlagsActivated: {},
           logOutUrl: this.state.logOutUrl,
         },
         HeaderStore.getState()
@@ -199,41 +198,6 @@ class Header extends React.Component {
    */
   setLogOutLink(location) {
     this.setState({ logOutUrl: utils.renderDynamicLogOutLink(location) });
-  }
-
-  /**
-   * checkFeatureFlagActivated(featureFlagList)
-   * Check if the feature flags have been set. If they have not, activate the function to check
-   * if the related cookies are set.
-   * @param {string[]} featureFlagList - The list of the feature flags we want to set.
-   */
-  checkFeatureFlagActivated(featureFlagList) {
-    _map(featureFlagList, (item) => {
-      if (!this.state.isFeatureFlagsActivated[item]) {
-        this.checkFeatureFlagCookie(item);
-      }
-    });
-  }
-
-  /**
-   * checkFeatureFlagCookie(name)
-   * Check if the cookie exist. If they do, activate the function to enable
-   * the indicated feature flags.
-   * @param {string} name - The name of the cookie.
-   */
-  checkFeatureFlagCookie(name) {
-    if (utils.hasCookie(`nyplFeatureFlag${name}`)) {
-      this.activateFeatureFlag(name);
-    }
-  }
-
-  /**
-   * activateFeatureFlags(name)
-   * Activate the feature flag that are indicated in the cookie.
-   * @param {string} name - The feature flag's name.
-   */
-  activateFeatureFlag(name) {
-    FeatureFlags.utils.activateFeature(name);
   }
 
   /**

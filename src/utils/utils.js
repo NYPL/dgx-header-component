@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { gaUtils } from 'dgx-react-ga';
+import FeatureFlags from 'dgx-feature-flags';
 import { map as _map } from 'underscore';
 import axios from 'axios';
 import config from './../appConfig.js';
@@ -264,6 +265,43 @@ function Utils() {
     }
 
     return `${config.loginMyNyplLinks.logOutLink}?redirect_uri=${location}`;
+  };
+
+  /**
+   * checkFeatureFlagActivated(featureFlagList, componentStateObject)
+   * Check if the feature flags have been set. If they have not, activate the function to check
+   * if the related cookies are set.
+   * @param {string[]} featureFlagList - The list of the feature flags we want to set.
+   * @param {object} componentStateObject - The object that points to the state object of
+   * the component. The feature flag will change the state of the component through it.
+   */
+  this.checkFeatureFlagActivated = (featureFlagList, componentStateObject) => {
+    _map(featureFlagList, (item) => {
+      if (!componentStateObject[item]) {
+        this.checkFeatureFlagCookie(item);
+      }
+    });
+  };
+
+  /**
+   * checkFeatureFlagCookie(name)
+   * Check if the cookie exist. If they do, activate the function to enable
+   * the indicated feature flags.
+   * @param {string} name - The name of the cookie.
+   */
+  this.checkFeatureFlagCookie = (name) => {
+    if (this.hasCookie(`nyplFeatureFlag${name}`)) {
+      this.activateFeatureFlag(name);
+    }
+  };
+
+  /**
+   * activateFeatureFlags(name)
+   * Activate the feature flag that are indicated in the cookie.
+   * @param {string} name - The feature flag's name.
+   */
+  this.activateFeatureFlag = (name) => {
+    FeatureFlags.utils.activateFeature(name);
   };
 }
 

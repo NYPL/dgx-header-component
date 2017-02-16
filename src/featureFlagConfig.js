@@ -1,6 +1,5 @@
 const FeatureFlagConfig = {
-  featureFlagList: [
-  ],
+  featureFlagList: [],
 };
 
 export default FeatureFlagConfig;

@@ -38,10 +38,9 @@ describe('MobileMyNypl', () => {
       }
     );
 
-    it('should have props with default values of isLoggedIn, isOauthLoginActivated, patronName, ' +
+    it('should have props with default values of isLoggedIn, patronName, ' +
       'and logOutLink', () => {
       expect(component.props().isLoggedIn).to.equal(false);
-      expect(component.props().isOauthLoginActivated).to.equal(false);
       expect(component.props().patronName).to.equal('');
       expect(component.props().logOutLink).to.equal('https://isso.nypl.org/auth/logout');
     });
@@ -52,11 +51,13 @@ describe('MobileMyNypl', () => {
     });
 
     it('should have the <a> with class name "CatalogLink". Its href equals ' +
-      '"https://browse.nypl.org/iii/encore/myaccount"', () => {
-      expect(component.find('.CatalogLink').props().href).to.equal(
-        'https://browse.nypl.org/iii/encore/myaccount'
-      );
-    });
+      '"https://isso.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount"',
+      () => {
+        expect(component.find('.CatalogLink').props().href).to.equal(
+          'https://isso.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount'
+        );
+      }
+    );
 
     it('should have the <a> with class name "ResearchLink". Its text equals ' +
       '"LOG INTO THE RESEARCH CATALOG"', () => {
@@ -64,11 +65,13 @@ describe('MobileMyNypl', () => {
     });
 
     it('should have the <a> with class name "ResearchLink". Its href equals to ' +
-      '"https://browse.nypl.org/iii/encore/myaccount"', () => {
-      expect(component.find('.ResearchLink').props().href).to.equal(
-        'https://catalog.nypl.org/patroninfo/top'
-      );
-    });
+      '"https://isso.nypl.org/auth/login?redirect_uri=https://catalog.nypl.org/patroninfo/top"',
+      () => {
+        expect(component.find('.ResearchLink').props().href).to.equal(
+          'https://isso.nypl.org/auth/login?redirect_uri=https://catalog.nypl.org/patroninfo/top'
+        );
+      }
+    );
 
     it('should call GA event tracker when "CatalogLink" is clicked', () => {
       component.find('.CatalogLink').simulate('click');
@@ -81,38 +84,6 @@ describe('MobileMyNypl', () => {
       expect(onClick.calledOnce).to.equal(true);
       expect(onClick.calledWith('Mobile Log In', 'Research')).to.equal(true);
     });
-  });
-
-  describe('<MobileMyNypl> with the props isOauthLoginActivated that is set to be true', () => {
-    let component;
-
-    before(() => {
-      component = mount(<MobileMyNypl isOauthLoginActivated />);
-    });
-
-    it('should have props isOauthLoginActivated equals true',
-      () => {
-        expect(component.props().isOauthLoginActivated).to.equal(true);
-      }
-    );
-
-    it('should have the <a> with class name "CatalogLink". Its href equals ' +
-      '"https://isso.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount"',
-      () => {
-        expect(component.find('.CatalogLink').props().href).to.equal(
-          'https://isso.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount'
-        );
-      }
-    );
-
-    it('should have the <a> with class name "ResearchLink". Its href equals ' +
-      '"https://isso.nypl.org/auth/login?redirect_uri=https://catalog.nypl.org/patroninfo/top" ',
-      () => {
-        expect(component.find('.ResearchLink').props().href).to.equal(
-          'https://isso.nypl.org/auth/login?redirect_uri=https://catalog.nypl.org/patroninfo/top'
-        );
-      }
-    );
   });
 
   describe('<MobileMyNypl> with the prop isLoggedIn that is set to be true', () => {

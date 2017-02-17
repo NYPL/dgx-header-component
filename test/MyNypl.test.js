@@ -65,7 +65,6 @@ describe('MyNypl', () => {
     it('should have props with default values of isLoggedIn, isOauthLoginActivated, patronName, ' +
       'and logOutLink', () => {
       expect(component.props().isLoggedIn).to.equal(false);
-      expect(component.props().isOauthLoginActivated).to.equal(false);
       expect(component.props().patronName).to.equal('');
       expect(component.props().logOutLink).to.equal('https://isso.nypl.org/auth/logout');
     });
@@ -76,11 +75,13 @@ describe('MyNypl', () => {
     });
 
     it('should have the <a> with class name "MyNypl-Catalog-Btn". Its href equals' +
-      '"https://browse.nypl.org/iii/encore/myaccount"', () => {
-      expect(component.find('.MyNypl-Catalog-Btn').props().href).to.equal(
-        'https://browse.nypl.org/iii/encore/myaccount'
-      );
-    });
+      '"https://isso.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount"',
+      () => {
+        expect(component.find('.MyNypl-Catalog-Btn').props().href).to.equal(
+          'https://isso.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount'
+        );
+      }
+    );
 
     it('should have the <a> with class name "MyNypl-Research-Btn". Its text equals ' +
       '"LOG INTO THE RESEARCH CATALOG"', () => {
@@ -90,37 +91,7 @@ describe('MyNypl', () => {
     });
 
     it('should have the <a> with class name "MyNypl-Research-Btn". Its href equals' +
-      '"https://browse.nypl.org/iii/encore/myaccount"', () => {
-      expect(component.find('.MyNypl-Research-Btn').props().href).to.equal(
-        'https://catalog.nypl.org/patroninfo/top'
-      );
-    });
-  });
-
-  describe('<MyNypl> with the prop isOauthLoginActivated that is set to be true', () => {
-    let component;
-
-    before(() => {
-      component = mount(<MyNypl isOauthLoginActivated />);
-    });
-
-    it('should have props isOauthLoginActivated equals true',
-      () => {
-        expect(component.props().isOauthLoginActivated).to.equal(true);
-      }
-    );
-
-    it('should have the <a> with class name "MyNypl-Catalog-Btn". Its href equals ' +
-      '"https://isso.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount"',
-      () => {
-        expect(component.find('.MyNypl-Catalog-Btn').props().href).to.equal(
-          'https://isso.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount'
-        );
-      }
-    );
-
-    it('should have the <a> with class name "MyNypl-Research-Btn". Its href equals ' +
-      '"https://isso.nypl.org/auth/login?redirect_uri=https://catalog.nypl.org/patroninfo/top" ',
+      '"https://isso.nypl.org/auth/login?redirect_uri=https://catalog.nypl.org/patroninfo/top"',
       () => {
         expect(component.find('.MyNypl-Research-Btn').props().href).to.equal(
           'https://isso.nypl.org/auth/login?redirect_uri=https://catalog.nypl.org/patroninfo/top'

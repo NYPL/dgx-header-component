@@ -12,6 +12,10 @@ var _moment2 = _interopRequireDefault(_moment);
 
 var _dgxReactGa = require('dgx-react-ga');
 
+var _dgxFeatureFlags = require('dgx-feature-flags');
+
+var _dgxFeatureFlags2 = _interopRequireDefault(_dgxFeatureFlags);
+
 var _underscore = require('underscore');
 
 var _axios = require('axios');
@@ -256,6 +260,34 @@ function Utils() {
     }
 
     return _appConfig2.default.loginMyNyplLinks.logOutLink + '?redirect_uri=' + location;
+  };
+
+  /**
+   * checkFeatureFlagActivated(featureFlagList, componentStateObject)
+   * Check if the feature flags have been set. If they have not, activate the function to check
+   * if the related cookies are set.
+   * @param {string[]} featureFlagList - The list of the feature flags we want to set.
+   * @param {object} componentStateObject - The object that points to the state object of
+   * the component. The feature flag will change the state of the component through it.
+   */
+  this.checkFeatureFlagActivated = function (featureFlagList, componentStateObject) {
+    (0, _underscore.map)(featureFlagList, function (item) {
+      if (!componentStateObject[item]) {
+        _this.checkFeatureFlagCookie(item);
+      }
+    });
+  };
+
+  /**
+   * checkFeatureFlagCookie(name)
+   * Check if the cookie exist. If they do, activate the function to enable
+   * the indicated feature flags.
+   * @param {string} name - The name of the cookie.
+   */
+  this.checkFeatureFlagCookie = function (name) {
+    if (_this.hasCookie('nyplFeatureFlag' + name)) {
+      _dgxFeatureFlags2.default.utils.activateFeature(name);
+    }
   };
 }
 

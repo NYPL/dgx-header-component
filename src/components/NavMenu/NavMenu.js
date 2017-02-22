@@ -77,7 +77,6 @@ class NavMenu extends React.Component {
         <StickyMyNyplButton
           isLoggedIn={this.props.isLoggedIn}
           patronName={this.props.patronName}
-          isOauthLoginActivated={this.props.isOauthLoginActivated}
           logOutLink={this.props.logOutLink}
           gaAction={this.props.gaAction}
         />
@@ -152,7 +151,6 @@ NavMenu.propTypes = {
   items: React.PropTypes.array,
   urlType: React.PropTypes.string,
   isLoggedIn: React.PropTypes.bool,
-  isOauthLoginActivated: React.PropTypes.bool,
   patronInitial: React.PropTypes.string,
   patronName: React.PropTypes.string,
   logOutLink: React.PropTypes.string,

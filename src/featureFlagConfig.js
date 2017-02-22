@@ -1,7 +1,5 @@
 const FeatureFlagConfig = {
-  featureFlagList: [
-    'OauthLogin',
-  ],
+  featureFlagList: [],
 };
 
 export default FeatureFlagConfig;

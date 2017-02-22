@@ -155,16 +155,9 @@ function Utils() {
       .get(endpoint)
       .then(cb)
       .catch(response => {
-        console.warn(`Error on Axios GET request: ${endpoint}`);
         if (response instanceof Error) {
           console.warn(response.message);
         } else {
-          // The request was made, but the server responded with a status code
-          // that falls out of the range of 2xx
-          console.warn(response.data);
-          console.warn(response.status);
-          console.warn(response.headers);
-          console.warn(response.config);
           // If the cookie for getting log in Data is expired
           if (response.data.statusCode === 401 && response.data.expired === true) {
             this.refreshAccessToken(
@@ -172,6 +165,13 @@ function Utils() {
               refreshCookieCb,
               () => { this.logOut(logOutLink); }
             );
+          } else {
+            // The request was made, but the server responded with a status code
+            // that falls out of the range of 2xx and it is not 401 with the expired token
+            console.warn(response.data);
+            console.warn(response.status);
+            console.warn(response.headers);
+            console.warn(response.config);
           }
         }
       });
@@ -192,7 +192,6 @@ function Utils() {
       )
       .then(cb)
       .catch(response => {
-        console.warn(`Error on Axios GET request: ${api}`);
         if (response instanceof Error) {
           console.warn(response.message);
         } else {

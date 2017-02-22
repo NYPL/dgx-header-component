@@ -21,10 +21,6 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 var _underscore = require('underscore');
 
-var _dgxFeatureFlags = require('dgx-feature-flags');
-
-var _dgxFeatureFlags2 = _interopRequireDefault(_dgxFeatureFlags);
-
 var _navConfig = require('../../navConfig.js');
 
 var _navConfig2 = _interopRequireDefault(_navConfig);
@@ -169,9 +165,7 @@ var Header = function (_React$Component) {
       patronName: '',
       patronInitial: '',
       patronDataReceived: false,
-      isFeatureFlagsActivated: {
-        OauthLogin: _dgxFeatureFlags2.default.store._getImmutableState().get('OauthLogin')
-      },
+      isFeatureFlagsActivated: {},
       logOutUrl: ''
     }, _HeaderStore2.default.getState());
 
@@ -192,7 +186,8 @@ var Header = function (_React$Component) {
       this.setLoginCookie(this.state.loginCookieName);
 
       // Set feature flag cookies to the state
-      this.checkFeatureFlagActivated(_featureFlagConfig2.default.featureFlagList);
+      // We don't have any feature flags set in the config list at this moment though
+      _utils2.default.checkFeatureFlagActivated(_featureFlagConfig2.default.featureFlagList, this.state.isFeatureFlagsActivated);
 
       // Set the log out link
       this.setLogOutLink(window.location.href);
@@ -213,9 +208,7 @@ var Header = function (_React$Component) {
         patronName: this.state.patronName,
         patronInitial: this.state.patronInitial,
         patronDataReceived: this.state.patronDataReceived,
-        isFeatureFlagsActivated: {
-          OauthLogin: _dgxFeatureFlags2.default.store._getImmutableState().get('OauthLogin')
-        },
+        isFeatureFlagsActivated: {},
         logOutUrl: this.state.logOutUrl
       }, _HeaderStore2.default.getState()));
     }
@@ -295,52 +288,6 @@ var Header = function (_React$Component) {
     }
 
     /**
-     * checkFeatureFlagActivated(featureFlagList)
-     * Check if the feature flags have been set. If they have not, activate the function to check
-     * if the related cookies are set.
-     * @param {string[]} featureFlagList - The list of the feature flags we want to set.
-     */
-
-  }, {
-    key: 'checkFeatureFlagActivated',
-    value: function checkFeatureFlagActivated(featureFlagList) {
-      var _this3 = this;
-
-      (0, _underscore.map)(featureFlagList, function (item) {
-        if (!_this3.state.isFeatureFlagsActivated[item]) {
-          _this3.checkFeatureFlagCookie(item);
-        }
-      });
-    }
-
-    /**
-     * checkFeatureFlagCookie(name)
-     * Check if the cookie exist. If they do, activate the function to enable
-     * the indicated feature flags.
-     * @param {string} name - The name of the cookie.
-     */
-
-  }, {
-    key: 'checkFeatureFlagCookie',
-    value: function checkFeatureFlagCookie(name) {
-      if (_utils2.default.hasCookie('nyplFeatureFlag' + name)) {
-        this.activateFeatureFlag(name);
-      }
-    }
-
-    /**
-     * activateFeatureFlags(name)
-     * Activate the feature flag that are indicated in the cookie.
-     * @param {string} name - The feature flag's name.
-     */
-
-  }, {
-    key: 'activateFeatureFlag',
-    value: function activateFeatureFlag(name) {
-      _dgxFeatureFlags2.default.utils.activateFeature(name);
-    }
-
-    /**
      * fetchPatronData(cookie)
      * Executes utils.getLoginData to fetch patron's data based on the cookie.
      * Updates the state with the results.
@@ -351,20 +298,20 @@ var Header = function (_React$Component) {
   }, {
     key: 'fetchPatronData',
     value: function fetchPatronData(cookie) {
-      var _this4 = this;
+      var _this3 = this;
 
       _utils2.default.getLoginData(cookie, function (result) {
         if (result.data && result.data.data) {
           var patronNameObject = _utils2.default.modelPatronName(_utils2.default.extractPatronName(result.data));
 
-          _this4.setState({
+          _this3.setState({
             patronName: patronNameObject.name,
             patronInitial: patronNameObject.initial,
             patronDataReceived: true
           });
         }
       }, _appConfig2.default.loginMyNyplLinks.tokenRefreshLink, function () {
-        _this4.setLoginCookie(_this4.state.loginCookieName);
+        _this3.setLoginCookie(_this3.state.loginCookieName);
       }, this.state.logOutUrl);
     }
 
@@ -407,7 +354,6 @@ var Header = function (_React$Component) {
       var headerClasses = (0, _classnames2.default)(headerClass, { sticky: isHeaderSticky });
       var skipNav = this.props.skipNav ? _react2.default.createElement(_dgxSkipNavigationLink2.default, this.props.skipNav) : '';
       var isLoggedIn = !!this.state.patronDataReceived;
-      var isOauthLoginActivated = !!this.state.isFeatureFlagsActivated.OauthLogin;
       var gaAction = isLoggedIn ? 'My Account' : 'Log In';
 
       return _react2.default.createElement(
@@ -428,7 +374,6 @@ var Header = function (_React$Component) {
             locatorUrl: this.props.urlType === 'absolute' ? '//www.nypl.org/locations/map?nearme=true' : '/locations/map?nearme=true',
             nyplRootUrl: this.props.urlType === 'absolute' ? '//www.nypl.org' : '/',
             isLoggedIn: isLoggedIn,
-            isOauthLoginActivated: isOauthLoginActivated,
             patronName: this.state.patronName,
             logOutLink: this.state.logOutUrl,
             ref: 'headerMobile'
@@ -450,7 +395,6 @@ var Header = function (_React$Component) {
               _react2.default.createElement(_MyNyplButton2.default, {
                 refId: 'desktopLogin',
                 isLoggedIn: isLoggedIn,
-                isOauthLoginActivated: isOauthLoginActivated,
                 patronName: this.state.patronName,
                 logOutLink: this.state.logOutUrl,
                 gaAction: gaAction
@@ -502,7 +446,6 @@ var Header = function (_React$Component) {
             urlType: this.props.urlType,
             isLoggedIn: isLoggedIn,
             patronName: this.state.patronName,
-            isOauthLoginActivated: isOauthLoginActivated,
             logOutLink: this.state.logOutUrl,
             gaAction: gaAction
           })

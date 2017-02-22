@@ -119,7 +119,6 @@ class StickyMyNyplButton extends React.Component {
           >
             <MyNypl
               isLoggedIn={this.props.isLoggedIn}
-              isOauthLoginActivated={this.props.isOauthLoginActivated}
               patronName={this.props.patronName}
               logOutLink={this.props.logOutLink}
             />
@@ -135,7 +134,6 @@ StickyMyNyplButton.propTypes = {
   label: React.PropTypes.string,
   style: React.PropTypes.object,
   isLoggedIn: React.PropTypes.bool,
-  isOauthLoginActivated: React.PropTypes.bool,
   patronName: React.PropTypes.string,
   logOutLink: React.PropTypes.string,
   gaAction: React.PropTypes.string,

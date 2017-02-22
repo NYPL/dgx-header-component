@@ -56,19 +56,10 @@ class MyNypl extends React.Component {
       );
     }
 
-    if (this.props.isOauthLoginActivated) {
-      return (
-        {
-          catalogLink: this.props.loginCatalogLink,
-          researchLink: this.props.loginResearchLink,
-        }
-      );
-    }
-
     return (
       {
-        catalogLink: this.props.catalogLink,
-        researchLink: this.props.researchLink,
+        catalogLink: this.props.loginCatalogLink,
+        researchLink: this.props.loginResearchLink,
       }
     );
   }
@@ -163,7 +154,6 @@ MyNypl.propTypes = {
   loginResearchLink: React.PropTypes.string,
   logOutLink: React.PropTypes.string,
   isLoggedIn: React.PropTypes.bool,
-  isOauthLoginActivated: React.PropTypes.bool,
   patronName: React.PropTypes.string,
 };
 
@@ -176,7 +166,6 @@ MyNypl.defaultProps = {
   researchLink: appConfig.myNyplLinks.research,
   logOutLink: appConfig.loginMyNyplLinks.logOutLink,
   isLoggedIn: false,
-  isOauthLoginActivated: false,
   patronName: '',
 };
 

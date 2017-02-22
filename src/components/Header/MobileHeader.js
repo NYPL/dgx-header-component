@@ -272,7 +272,6 @@ class MobileHeader extends React.Component {
         >
           <MobileMyNypl
             isLoggedIn={this.props.isLoggedIn}
-            isOauthLoginActivated={this.props.isOauthLoginActivated}
             patronName={this.props.patronName}
             logOutLink={this.props.logOutLink}
           />
@@ -429,7 +428,6 @@ MobileHeader.propTypes = {
   nyplRootUrl: React.PropTypes.string,
   alt: React.PropTypes.string,
   isLoggedIn: React.PropTypes.bool,
-  isOauthLoginActivated: React.PropTypes.bool,
   patronName: React.PropTypes.string,
   logOutLink: React.PropTypes.string,
 };

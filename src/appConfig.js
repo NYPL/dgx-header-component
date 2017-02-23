@@ -32,10 +32,10 @@ const config = {
     },
   ],
   loginMyNyplLinks: {
-    catalog: 'https://isso.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount',
-    research: 'https://isso.nypl.org/auth/login?redirect_uri=https://catalog.nypl.org/patroninfo/top',
-    tokenRefreshLink: 'https://isso.nypl.org/auth/refresh',
-    logOutLink: 'https://isso.nypl.org/auth/logout',
+    catalog: 'https://beta-oauth.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount',
+    research: 'https://beta-oauth.nypl.org/auth/login?redirect_uri=https://catalog.nypl.org/patroninfo/top',
+    tokenRefreshLink: 'https://beta-oauth.nypl.org/auth/refresh',
+    logOutLink: 'https://beta-oauth.nypl.org/auth/logout',
   },
   myNyplLinks: {
     catalog: 'https://browse.nypl.org/iii/encore/myaccount',

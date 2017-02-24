@@ -4,7 +4,7 @@ This repository is for the header component used in React applications at NYPL.
 
 ### Version
 
-1.5.3
+1.6.0
 
 ### App Installation
 
@@ -188,6 +188,10 @@ https://bitbucket.org/NYPL/dgx-feature-flags
 5. Create a new Pull Request.
 
 ### CHANGE LOG
+
+#### v1.6.0
+> Updated log in, log out, and refresh link from beta-oauth instead of isso.
+For instance, the log in link now is "https://beta-oauth.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount"
 
 #### v1.5.3
 > Removed the console loggings for token expiration.

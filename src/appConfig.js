@@ -1,3 +1,5 @@
+const authServerDomain = 'https://beta-oauth.nypl.org/auth';
+
 const config = {
   appTitle: 'NYPL | React Header Component',
   appName: 'NYPL React Header Component',
@@ -32,10 +34,10 @@ const config = {
     },
   ],
   loginMyNyplLinks: {
-    catalog: 'https://beta-oauth.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount',
-    research: 'https://beta-oauth.nypl.org/auth/login?redirect_uri=https://catalog.nypl.org/patroninfo/top',
-    tokenRefreshLink: 'https://beta-oauth.nypl.org/auth/refresh',
-    logOutLink: 'https://beta-oauth.nypl.org/auth/logout',
+    catalog: `${authServerDomain}/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount`,
+    research: `${authServerDomain}/login?redirect_uri=https://catalog.nypl.org/patroninfo/top`,
+    tokenRefreshLink: `${authServerDomain}/refresh`,
+    logOutLink: `${authServerDomain}/logout`,
   },
   myNyplLinks: {
     catalog: 'https://browse.nypl.org/iii/encore/myaccount',

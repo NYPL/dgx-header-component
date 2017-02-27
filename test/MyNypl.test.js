@@ -8,6 +8,16 @@ import { mount } from 'enzyme';
 import MyNypl from './../src/components/MyNypl/MyNypl.js';
 // Import related functions
 import utils from './../src/utils/utils.js';
+// Import the configs of the log in links
+import configs from './../src/appConfig.js';
+
+const {
+  loginMyNyplLinks: {
+    catalog,
+    research,
+    logOutLink,
+  },
+} = configs;
 
 describe('MyNypl', () => {
   describe('<MyNypl> as default', () => {
@@ -66,7 +76,7 @@ describe('MyNypl', () => {
       'and logOutLink', () => {
       expect(component.props().isLoggedIn).to.equal(false);
       expect(component.props().patronName).to.equal('');
-      expect(component.props().logOutLink).to.equal('https://beta-oauth.nypl.org/auth/logout');
+      expect(component.props().logOutLink).to.equal(logOutLink);
     });
 
     it('should have an <a> with class name "MyNypl-Catalog-Btn". Its text equals ' +
@@ -78,7 +88,7 @@ describe('MyNypl', () => {
       '"https://beta-oauth.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount"',
       () => {
         expect(component.find('.MyNypl-Catalog-Btn').props().href).to.equal(
-          'https://beta-oauth.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount'
+          catalog
         );
       }
     );
@@ -94,7 +104,7 @@ describe('MyNypl', () => {
       '"https://beta-oauth.nypl.org/auth/login?redirect_uri=https://catalog.nypl.org/patroninfo/top"',
       () => {
         expect(component.find('.MyNypl-Research-Btn').props().href).to.equal(
-          'https://beta-oauth.nypl.org/auth/login?redirect_uri=https://catalog.nypl.org/patroninfo/top'
+          research
         );
       }
     );
@@ -121,7 +131,7 @@ describe('MyNypl', () => {
         () => {
           expect(component.props().isLoggedIn).to.equal(true);
           expect(component.props().logOutLink).to.equal(
-            'https://beta-oauth.nypl.org/auth/logout'
+            logOutLink
           );
         }
       );
@@ -178,7 +188,7 @@ describe('MyNypl', () => {
 
         expect(renderedInstance.type).to.equal('a');
         expect(renderedInstance.props.href).to.equal(
-          'https://beta-oauth.nypl.org/auth/logout'
+          logOutLink
         );
         expect(renderedInstance.props.className).to.equal('MyNypl-Catalog-Link');
         expect(renderedInstance.props.children[1]).to.equal('LOG OUT');
@@ -199,7 +209,7 @@ describe('MyNypl', () => {
         component = mount(
           <MyNypl
             isLoggedIn
-            logOutLink={'https://beta-oauth.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'}
+            logOutLink={`${logOutLink}?redirect_uri=https://www.nypl.org`}
           />
         );
       });
@@ -209,7 +219,7 @@ describe('MyNypl', () => {
         () => {
           expect(component.props().isLoggedIn).to.equal(true);
           expect(component.props().logOutLink).to.equal(
-            'https://beta-oauth.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'
+            `${logOutLink}?redirect_uri=https://www.nypl.org`
           );
         }
       );
@@ -256,7 +266,7 @@ describe('MyNypl', () => {
 
           expect(renderedInstance.type).to.equal('a');
           expect(renderedInstance.props.href).to.equal(
-            'https://beta-oauth.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'
+            `${logOutLink}?redirect_uri=https://www.nypl.org`
           );
           expect(renderedInstance.props.className).to.equal('MyNypl-Catalog-Link');
           expect(renderedInstance.props.children[1]).to.equal('LOG OUT');

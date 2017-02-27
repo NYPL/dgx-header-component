@@ -66,7 +66,7 @@ describe('MyNypl', () => {
       'and logOutLink', () => {
       expect(component.props().isLoggedIn).to.equal(false);
       expect(component.props().patronName).to.equal('');
-      expect(component.props().logOutLink).to.equal('https://isso.nypl.org/auth/logout');
+      expect(component.props().logOutLink).to.equal('https://beta-oauth.nypl.org/auth/logout');
     });
 
     it('should have an <a> with class name "MyNypl-Catalog-Btn". Its text equals ' +
@@ -75,10 +75,10 @@ describe('MyNypl', () => {
     });
 
     it('should have the <a> with class name "MyNypl-Catalog-Btn". Its href equals' +
-      '"https://isso.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount"',
+      '"https://beta-oauth.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount"',
       () => {
         expect(component.find('.MyNypl-Catalog-Btn').props().href).to.equal(
-          'https://isso.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount'
+          'https://beta-oauth.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount'
         );
       }
     );
@@ -91,10 +91,10 @@ describe('MyNypl', () => {
     });
 
     it('should have the <a> with class name "MyNypl-Research-Btn". Its href equals' +
-      '"https://isso.nypl.org/auth/login?redirect_uri=https://catalog.nypl.org/patroninfo/top"',
+      '"https://beta-oauth.nypl.org/auth/login?redirect_uri=https://catalog.nypl.org/patroninfo/top"',
       () => {
         expect(component.find('.MyNypl-Research-Btn').props().href).to.equal(
-          'https://isso.nypl.org/auth/login?redirect_uri=https://catalog.nypl.org/patroninfo/top'
+          'https://beta-oauth.nypl.org/auth/login?redirect_uri=https://catalog.nypl.org/patroninfo/top'
         );
       }
     );
@@ -117,11 +117,11 @@ describe('MyNypl', () => {
     });
 
     it('should have props isLoggedIn equals true, and logOutLink equals' +
-      '"https://isso.nypl.org/auth/logout"',
+      '"https://beta-oauth.nypl.org/auth/logout"',
         () => {
           expect(component.props().isLoggedIn).to.equal(true);
           expect(component.props().logOutLink).to.equal(
-            'https://isso.nypl.org/auth/logout'
+            'https://beta-oauth.nypl.org/auth/logout'
           );
         }
       );
@@ -178,7 +178,7 @@ describe('MyNypl', () => {
 
         expect(renderedInstance.type).to.equal('a');
         expect(renderedInstance.props.href).to.equal(
-          'https://isso.nypl.org/auth/logout'
+          'https://beta-oauth.nypl.org/auth/logout'
         );
         expect(renderedInstance.props.className).to.equal('MyNypl-Catalog-Link');
         expect(renderedInstance.props.children[1]).to.equal('LOG OUT');
@@ -199,17 +199,17 @@ describe('MyNypl', () => {
         component = mount(
           <MyNypl
             isLoggedIn
-            logOutLink={'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'}
+            logOutLink={'https://beta-oauth.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'}
           />
         );
       });
 
       it('should have props isLoggedIn equals true, and logOutLink equals' +
-        'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org',
+        '"https://beta-oauth.nypl.org/auth/logout?redirect_uri=https://www.nypl.org"',
         () => {
           expect(component.props().isLoggedIn).to.equal(true);
           expect(component.props().logOutLink).to.equal(
-            'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'
+            'https://beta-oauth.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'
           );
         }
       );
@@ -256,7 +256,7 @@ describe('MyNypl', () => {
 
           expect(renderedInstance.type).to.equal('a');
           expect(renderedInstance.props.href).to.equal(
-            'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'
+            'https://beta-oauth.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'
           );
           expect(renderedInstance.props.className).to.equal('MyNypl-Catalog-Link');
           expect(renderedInstance.props.children[1]).to.equal('LOG OUT');

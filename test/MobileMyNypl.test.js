@@ -8,6 +8,16 @@ import { mount } from 'enzyme';
 import MobileMyNypl from './../src/components/MyNypl/MobileMyNypl.js';
 // Import related functions
 import utils from './../src/utils/utils.js';
+// Import the configs of the log in links
+import configs from './../src/appConfig.js';
+
+const {
+  loginMyNyplLinks: {
+    catalog,
+    research,
+    logOutLink,
+  },
+} = configs;
 
 describe('MobileMyNypl', () => {
   describe('<MobileMyNypl> as default', () => {
@@ -42,7 +52,7 @@ describe('MobileMyNypl', () => {
       'and logOutLink', () => {
       expect(component.props().isLoggedIn).to.equal(false);
       expect(component.props().patronName).to.equal('');
-      expect(component.props().logOutLink).to.equal('https://isso.nypl.org/auth/logout');
+      expect(component.props().logOutLink).to.equal(logOutLink);
     });
 
     it('should have an <a> with class name "CatalogLink". Its text equals ' +
@@ -51,10 +61,10 @@ describe('MobileMyNypl', () => {
     });
 
     it('should have the <a> with class name "CatalogLink". Its href equals ' +
-      '"https://isso.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount"',
+      '"https://beta-oauth.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount"',
       () => {
         expect(component.find('.CatalogLink').props().href).to.equal(
-          'https://isso.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount'
+          catalog
         );
       }
     );
@@ -65,10 +75,10 @@ describe('MobileMyNypl', () => {
     });
 
     it('should have the <a> with class name "ResearchLink". Its href equals to ' +
-      '"https://isso.nypl.org/auth/login?redirect_uri=https://catalog.nypl.org/patroninfo/top"',
+      '"https://beta-oauth.nypl.org/auth/login?redirect_uri=https://catalog.nypl.org/patroninfo/top"',
       () => {
         expect(component.find('.ResearchLink').props().href).to.equal(
-          'https://isso.nypl.org/auth/login?redirect_uri=https://catalog.nypl.org/patroninfo/top'
+          research
         );
       }
     );
@@ -105,11 +115,11 @@ describe('MobileMyNypl', () => {
     });
 
     it('should have props isLoggedIn equals true and logOutLink equals' +
-      '"https://isso.nypl.org/auth/logout"',
+      '"https://beta-oauth.nypl.org/auth/logout"',
       () => {
         expect(component.props().isLoggedIn).to.equal(true);
         expect(component.props().logOutLink).to.equal(
-          'https://isso.nypl.org/auth/logout'
+          logOutLink
         );
       }
     );
@@ -166,7 +176,7 @@ describe('MobileMyNypl', () => {
 
         expect(renderedInstance.type).to.equal('a');
         expect(renderedInstance.props.href).to.equal(
-          'https://isso.nypl.org/auth/logout'
+          logOutLink
         );
         expect(renderedInstance.props.className).to.equal('MobileMyNypl-Catalog-Link');
         expect(renderedInstance.props.children).to.equal('LOG OUT');
@@ -187,17 +197,17 @@ describe('MobileMyNypl', () => {
         component = mount(
           <MobileMyNypl
             isLoggedIn
-            logOutLink={'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'}
+            logOutLink={`${logOutLink}?redirect_uri=https://www.nypl.org`}
           />
         );
       });
 
       it('should have prop isLoggedIn equals true, and logOutLink equals ' +
-        '"https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org"',
+        '"https://beta-oauth.nypl.org/auth/logout?redirect_uri=https://www.nypl.org"',
         () => {
           expect(component.props().isLoggedIn).to.equal(true);
           expect(component.props().logOutLink).to.equal(
-            'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'
+            `${logOutLink}?redirect_uri=https://www.nypl.org`
           );
         }
       );
@@ -242,7 +252,7 @@ describe('MobileMyNypl', () => {
 
           expect(renderedInstance.type).to.equal('a');
           expect(renderedInstance.props.href).to.equal(
-            'https://isso.nypl.org/auth/logout?redirect_uri=https://www.nypl.org'
+            `${logOutLink}?redirect_uri=https://www.nypl.org`
           );
           expect(renderedInstance.props.className).to.equal('MobileMyNypl-Catalog-Link');
           expect(renderedInstance.props.children).to.equal('LOG OUT');

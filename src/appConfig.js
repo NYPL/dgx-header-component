@@ -1,4 +1,4 @@
-const authServerDomain = 'https://beta-oauth.nypl.org/auth';
+const authServerDomain = 'https://login.nypl.org/auth';
 
 const config = {
   appTitle: 'NYPL | React Header Component',

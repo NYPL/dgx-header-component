@@ -120,9 +120,11 @@ const styles = {
     verticalAlign: '0px',
   },
   activeMenuButton: {
+    color: '#FFF',
     backgroundColor: '#2B2B2B',
   },
   inactiveMenuButton: {
+    color: '#000',
     backgroundColor: '#FFF',
   },
 };

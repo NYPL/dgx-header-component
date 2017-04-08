@@ -81,9 +81,11 @@ const styles = {
     verticalAlign: '8px',
   },
   activeMyNyplButton: {
+    color: '#FFF',
     backgroundColor: '#2B2B2B',
   },
   inactiveMyNyplButton: {
+    color: '#000',
     backgroundColor: '#FFF',
   },
   searchButton: {

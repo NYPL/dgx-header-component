@@ -95,9 +95,11 @@ const styles = {
     verticalAlign: '0px',
   },
   activeSearchButton: {
+    color: '#FFF',
     backgroundColor: '#1B7FA7',
   },
   inactiveSearchButton: {
+    color: '#000',
     backgroundColor: '#FFF',
   },
   searchDialog: {

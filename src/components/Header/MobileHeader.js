@@ -62,6 +62,7 @@ const styles = {
     padding: '12px 13px',
     display: 'inline-block',
     color: '#000',
+    backgroundColor: '#FFF',
   },
   myNyplButton: {
     margin: 0,

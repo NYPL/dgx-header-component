@@ -40,6 +40,7 @@ const styles = {
   },
   mobileLogoLink: {
     color: '#000',
+    backgroundColor: '#FFF',
     textDecoration: 'none',
     display: 'inline-block',
     height: '50px',

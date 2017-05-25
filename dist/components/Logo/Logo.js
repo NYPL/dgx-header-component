@@ -8,6 +8,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _dgxSvgIcons = require('dgx-svg-icons');
 
 var _utils = require('../../utils/utils.js');
@@ -38,11 +42,11 @@ var Logo = function Logo(props) {
 };
 
 Logo.propTypes = {
-  target: _react2.default.PropTypes.string,
-  id: _react2.default.PropTypes.string,
-  className: _react2.default.PropTypes.string,
-  alt: _react2.default.PropTypes.string,
-  style: _react2.default.PropTypes.object
+  target: _propTypes2.default.string,
+  id: _propTypes2.default.string,
+  className: _propTypes2.default.string,
+  alt: _propTypes2.default.string,
+  style: _propTypes2.default.object
 };
 
 Logo.defaultProps = {

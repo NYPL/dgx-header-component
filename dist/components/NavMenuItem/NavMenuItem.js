@@ -8,6 +8,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _utils = require('../../utils/utils.js');
 
 var _utils2 = _interopRequireDefault(_utils);
@@ -55,12 +59,12 @@ var NavMenuItem = function NavMenuItem(_ref) {
 
 
 NavMenuItem.propTypes = {
-  className: _react2.default.PropTypes.string,
-  label: _react2.default.PropTypes.object,
-  lang: _react2.default.PropTypes.string,
-  navId: _react2.default.PropTypes.string,
-  target: _react2.default.PropTypes.string,
-  urlType: _react2.default.PropTypes.string
+  className: _propTypes2.default.string,
+  label: _propTypes2.default.object,
+  lang: _propTypes2.default.string,
+  navId: _propTypes2.default.string,
+  target: _propTypes2.default.string,
+  urlType: _propTypes2.default.string
 };
 
 NavMenuItem.defaultProps = {

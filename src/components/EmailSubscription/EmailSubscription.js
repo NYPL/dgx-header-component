@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import cx from 'classnames';
 import { extend as _extend } from 'underscore';
@@ -319,17 +320,17 @@ class EmailSubscription extends React.Component {
 }
 
 EmailSubscription.propTypes = {
-  id: React.PropTypes.string,
-  className: React.PropTypes.string,
-  lang: React.PropTypes.string,
-  target: React.PropTypes.string,
-  form_name: React.PropTypes.string,
-  list_id: React.PropTypes.string,
-  form_method: React.PropTypes.string,
-  placeholder: React.PropTypes.string,
-  policyUrl: React.PropTypes.string,
-  subCenterUrl: React.PropTypes.string,
-  style: React.PropTypes.object,
+  id: PropTypes.string,
+  className: PropTypes.string,
+  lang: PropTypes.string,
+  target: PropTypes.string,
+  form_name: PropTypes.string,
+  list_id: PropTypes.string,
+  form_method: PropTypes.string,
+  placeholder: PropTypes.string,
+  policyUrl: PropTypes.string,
+  subCenterUrl: PropTypes.string,
+  style: PropTypes.object,
 };
 
 EmailSubscription.defaultProps = {

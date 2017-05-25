@@ -1,5 +1,6 @@
 // Import React libraries
 import React from 'react';
+import PropTypes from 'prop-types';
 import cx from 'classnames';
 import ClickOutHandler from 'react-onclickout';
 // Import components
@@ -109,8 +110,8 @@ class SearchButton extends React.Component {
 }
 
 SearchButton.propTypes = {
-  lang: React.PropTypes.string,
-  className: React.PropTypes.string,
+  lang: PropTypes.string,
+  className: PropTypes.string,
 };
 
 SearchButton.defaultProps = {

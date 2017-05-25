@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import utils from '../../utils/utils.js';
 
 class DefaultItem extends React.Component {
@@ -81,11 +82,11 @@ class DefaultItem extends React.Component {
 }
 
 DefaultItem.propTypes = {
-  className: React.PropTypes.string,
-  lang: React.PropTypes.string,
-  classes: React.PropTypes.string,
-  feature: React.PropTypes.object,
-  navLabel: React.PropTypes.string,
+  className: PropTypes.string,
+  lang: PropTypes.string,
+  classes: PropTypes.string,
+  feature: PropTypes.object,
+  navLabel: PropTypes.string,
 };
 
 DefaultItem.defaultProps = {

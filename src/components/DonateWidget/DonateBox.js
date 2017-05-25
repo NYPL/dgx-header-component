@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import utils from '../../utils/utils.js';
 
 const DonateBox = ({
@@ -37,11 +38,11 @@ const DonateBox = ({
 };
 
 DonateBox.propTypes = {
-  className: React.PropTypes.string,
-  tag: React.PropTypes.string,
-  title: React.PropTypes.string,
-  desc: React.PropTypes.string,
-  donationLinks: React.PropTypes.array,
+  className: PropTypes.string,
+  tag: PropTypes.string,
+  title: PropTypes.string,
+  desc: PropTypes.string,
+  donationLinks: PropTypes.array,
 };
 
 DonateBox.defaultProps = {

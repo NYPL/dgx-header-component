@@ -8,6 +8,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _underscore = require('underscore');
 
 var _utils = require('../../utils/utils.js');
@@ -162,10 +166,10 @@ var NavMenuMobileButtons = function NavMenuMobileButtons(_ref) {
 };
 
 NavMenuMobileButtons.propTypes = {
-  lang: _react2.default.PropTypes.string,
-  className: _react2.default.PropTypes.string,
-  libraryCardLink: _react2.default.PropTypes.string,
-  subscribeLink: _react2.default.PropTypes.string
+  lang: _propTypes2.default.string,
+  className: _propTypes2.default.string,
+  libraryCardLink: _propTypes2.default.string,
+  subscribeLink: _propTypes2.default.string
 };
 
 NavMenuMobileButtons.defaultProps = {

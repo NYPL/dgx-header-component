@@ -1,10 +1,12 @@
 // NPM Modules
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import cx from 'classnames';
 import {
   extend as _extend,
 } from 'underscore';
+
 // Nav Config
 import navConfig from '../../navConfig.js';
 import featureFlagConfig from '../../featureFlagConfig.js';
@@ -369,12 +371,12 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-  lang: React.PropTypes.string,
-  className: React.PropTypes.string,
-  id: React.PropTypes.string,
-  navData: React.PropTypes.array,
-  skipNav: React.PropTypes.object,
-  urlType: React.PropTypes.string,
+  lang: PropTypes.string,
+  className: PropTypes.string,
+  id: PropTypes.string,
+  navData: PropTypes.array,
+  skipNav: PropTypes.object,
+  urlType: PropTypes.string,
 };
 
 Header.defaultProps = {

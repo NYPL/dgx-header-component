@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import DonateBox from './DonateBox.js';
 import MegaMenuFeatureItem from '../MegaMenu/MegaMenuFeatureItem.js';
 
@@ -20,10 +21,10 @@ const DonateWidget = ({ className, featuredItem, donationLinks, navLabel }) => (
 );
 
 DonateWidget.propTypes = {
-  className: React.PropTypes.string,
-  featuredItem: React.PropTypes.object,
-  donationLinks: React.PropTypes.array,
-  navLabel: React.PropTypes.string,
+  className: PropTypes.string,
+  featuredItem: PropTypes.object,
+  donationLinks: PropTypes.array,
+  navLabel: PropTypes.string,
 };
 
 DonateWidget.defaultProps = {

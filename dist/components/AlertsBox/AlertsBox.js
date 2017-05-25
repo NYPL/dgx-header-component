@@ -8,6 +8,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _underscore = require('underscore');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -40,11 +44,11 @@ var AlertsBox = function AlertsBox(_ref) {
 };
 
 AlertsBox.propTypes = {
-  id: _react2.default.PropTypes.string,
-  className: _react2.default.PropTypes.string,
-  lang: _react2.default.PropTypes.string,
-  style: _react2.default.PropTypes.object,
-  alerts: _react2.default.PropTypes.array
+  id: _propTypes2.default.string,
+  className: _propTypes2.default.string,
+  lang: _propTypes2.default.string,
+  style: _propTypes2.default.object,
+  alerts: _propTypes2.default.array
 };
 
 AlertsBox.defaultProps = {

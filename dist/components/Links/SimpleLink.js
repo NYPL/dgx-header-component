@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _utils = require('../../utils/utils.js');
 
 var _utils2 = _interopRequireDefault(_utils);
@@ -62,16 +66,16 @@ var SimpleLink = function (_React$Component) {
 }(_react2.default.Component);
 
 SimpleLink.propTypes = {
-  id: _react2.default.PropTypes.string,
-  ref: _react2.default.PropTypes.string,
-  className: _react2.default.PropTypes.string,
-  lang: _react2.default.PropTypes.string,
-  style: _react2.default.PropTypes.object,
-  target: _react2.default.PropTypes.string,
-  label: _react2.default.PropTypes.string,
-  onClick: _react2.default.PropTypes.func,
-  gaAction: _react2.default.PropTypes.string,
-  gaLabel: _react2.default.PropTypes.string
+  id: _propTypes2.default.string,
+  ref: _propTypes2.default.string,
+  className: _propTypes2.default.string,
+  lang: _propTypes2.default.string,
+  style: _propTypes2.default.object,
+  target: _propTypes2.default.string,
+  label: _propTypes2.default.string,
+  onClick: _propTypes2.default.func,
+  gaAction: _propTypes2.default.string,
+  gaLabel: _propTypes2.default.string
 };
 
 SimpleLink.defaultProps = {

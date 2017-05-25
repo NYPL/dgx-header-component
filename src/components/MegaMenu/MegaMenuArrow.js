@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import cx from 'classnames';
 // ALT Flux Store/Actions
 import HeaderStore from '../../stores/HeaderStore.js';
@@ -17,9 +18,9 @@ const MegaMenuArrow = ({ index, navId, currentActiveItem }) => {
 };
 
 MegaMenuArrow.propTypes = {
-  index: React.PropTypes.number,
-  currentActiveItem: React.PropTypes.number,
-  navId: React.PropTypes.string,
+  index: PropTypes.number,
+  currentActiveItem: PropTypes.number,
+  navId: PropTypes.string,
 };
 
 export default MegaMenuArrow;

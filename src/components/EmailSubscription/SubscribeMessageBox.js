@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const SubscribeMessageBox = ({ className, status, msg }) => (
   <div className={`${className} ${status}`}>
@@ -10,9 +11,9 @@ const SubscribeMessageBox = ({ className, status, msg }) => (
 );
 
 SubscribeMessageBox.propTypes = {
-  msg: React.PropTypes.string,
-  className: React.PropTypes.string,
-  status: React.PropTypes.string,
+  msg: PropTypes.string,
+  className: PropTypes.string,
+  status: PropTypes.string,
 };
 
 SubscribeMessageBox.defaultProps = {

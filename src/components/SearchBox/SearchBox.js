@@ -1,5 +1,6 @@
 // Import React libraries
 import React from 'react';
+import PropTypes from 'prop-types';
 import { SearchIcon } from 'dgx-svg-icons';
 // GA Utility Library
 import utils from '../../utils/utils.js';
@@ -283,11 +284,11 @@ class SearchBox extends React.Component {
 }
 
 SearchBox.propTypes = {
-  lang: React.PropTypes.string,
-  className: React.PropTypes.string.isRequired,
-  type: React.PropTypes.string,
-  placeholder: React.PropTypes.string,
-  legendText: React.PropTypes.string,
+  lang: PropTypes.string,
+  className: PropTypes.string.isRequired,
+  type: PropTypes.string,
+  placeholder: PropTypes.string,
+  legendText: PropTypes.string,
 };
 
 SearchBox.defaultProps = {

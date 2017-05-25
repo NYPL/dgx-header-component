@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _underscore = require('underscore');
 
 var _HeaderStore = require('../../stores/HeaderStore.js');
@@ -210,15 +214,15 @@ var NavMenu = function (_React$Component) {
 }(_react2.default.Component);
 
 NavMenu.propTypes = {
-  lang: _react2.default.PropTypes.string,
-  className: _react2.default.PropTypes.string,
-  items: _react2.default.PropTypes.array,
-  urlType: _react2.default.PropTypes.string,
-  isLoggedIn: _react2.default.PropTypes.bool,
-  patronInitial: _react2.default.PropTypes.string,
-  patronName: _react2.default.PropTypes.string,
-  logOutLink: _react2.default.PropTypes.string,
-  gaAction: _react2.default.PropTypes.string
+  lang: _propTypes2.default.string,
+  className: _propTypes2.default.string,
+  items: _propTypes2.default.array,
+  urlType: _propTypes2.default.string,
+  isLoggedIn: _propTypes2.default.bool,
+  patronInitial: _propTypes2.default.string,
+  patronName: _propTypes2.default.string,
+  logOutLink: _propTypes2.default.string,
+  gaAction: _propTypes2.default.string
 };
 
 NavMenu.defaultProps = {

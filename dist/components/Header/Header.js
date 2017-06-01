@@ -111,12 +111,14 @@ var styles = {
   locationsTopLink: {
     display: 'inline-block',
     color: '#000',
+    backgroundColor: '#FFF',
     padding: '5px 15px 5px 5px',
     verticalAlign: 'baseline'
   },
   libraryCardButton: {
     display: 'inline-block',
     color: '#000',
+    backgroundColor: '#FFF',
     padding: '5px',
     verticalAlign: 'baseline'
   },
@@ -134,6 +136,7 @@ var styles = {
   },
   shopLink: {
     color: '#000',
+    backgroundColor: '#FFF',
     padding: '10px 15px',
     margin: '0 0 0 5px',
     verticalAlign: 'baseline'

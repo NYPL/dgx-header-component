@@ -1,4 +1,10 @@
 #skip {
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
   a {
     display: block;
     position: absolute;
@@ -24,8 +30,8 @@
       left: auto;
       width: auto;
       height: auto;
+      top: 10px;
       overflow: visible;
-      top: 65px;
       @include min-screen(769px) {
         top: auto;
       }

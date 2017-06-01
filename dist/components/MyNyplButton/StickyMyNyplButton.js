@@ -79,6 +79,7 @@ var styles = {
     position: 'absolute',
     right: '0',
     minWidth: '218px',
+    color: '#FFF',
     backgroundColor: '#1B7FA7',
     padding: '17px 30px'
   },

@@ -80,6 +80,7 @@ var styles = {
   },
   mobileLogoLink: {
     color: '#000',
+    backgroundColor: '#FFF',
     textDecoration: 'none',
     display: 'inline-block',
     height: '50px',
@@ -100,7 +101,8 @@ var styles = {
     margin: 0,
     padding: '12px 13px',
     display: 'inline-block',
-    color: '#000'
+    color: '#000',
+    backgroundColor: '#FFF'
   },
   myNyplButton: {
     margin: 0,
@@ -119,9 +121,11 @@ var styles = {
     verticalAlign: '8px'
   },
   activeMyNyplButton: {
+    color: '#FFF',
     backgroundColor: '#2B2B2B'
   },
   inactiveMyNyplButton: {
+    color: '#000',
     backgroundColor: '#FFF'
   },
   searchButton: {
@@ -133,9 +137,11 @@ var styles = {
     verticalAlign: '0px'
   },
   activeSearchButton: {
+    color: '#FFF',
     backgroundColor: '#1B7FA7'
   },
   inactiveSearchButton: {
+    color: '#000',
     backgroundColor: '#FFF'
   },
   searchDialog: {
@@ -156,9 +162,11 @@ var styles = {
     verticalAlign: '0px'
   },
   activeMenuButton: {
+    color: '#FFF',
     backgroundColor: '#2B2B2B'
   },
   inactiveMenuButton: {
+    color: '#000',
     backgroundColor: '#FFF'
   }
 };

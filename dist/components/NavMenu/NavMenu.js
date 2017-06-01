@@ -68,6 +68,7 @@ var styles = {
     margin: '0 0 -10px 0',
     width: '2px',
     height: '30px',
+    color: '#837377',
     backgroundColor: '#837377'
   }
 };

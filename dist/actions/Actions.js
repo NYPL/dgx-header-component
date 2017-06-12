@@ -22,37 +22,37 @@ var Actions = function () {
   _createClass(Actions, [{
     key: 'setMobileMenuButtonValue',
     value: function setMobileMenuButtonValue(currentActiveMobileButton) {
-      this.dispatch(currentActiveMobileButton);
+      return currentActiveMobileButton;
     }
   }, {
     key: 'setMobileMyNyplButtonValue',
     value: function setMobileMyNyplButtonValue(value) {
-      this.dispatch(value);
+      return value;
     }
   }, {
     key: 'searchButtonActionValue',
     value: function searchButtonActionValue(actionValue) {
-      this.dispatch(actionValue);
+      return actionValue;
     }
   }, {
     key: 'updateIsHeaderSticky',
     value: function updateIsHeaderSticky(value) {
-      this.dispatch(value);
+      return value;
     }
   }, {
     key: 'toggleSubscribeFormVisible',
     value: function toggleSubscribeFormVisible(value) {
-      this.dispatch(value);
+      return value;
     }
   }, {
     key: 'toggleMyNyplVisible',
     value: function toggleMyNyplVisible(value) {
-      this.dispatch(value);
+      return value;
     }
   }, {
     key: 'toggleStickyMyNyplVisible',
     value: function toggleStickyMyNyplVisible(value) {
-      this.dispatch(value);
+      return value;
     }
   }]);
 

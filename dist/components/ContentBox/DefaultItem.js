@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _utils = require('../../utils/utils.js');
 
 var _utils2 = _interopRequireDefault(_utils);
@@ -132,11 +136,11 @@ var DefaultItem = function (_React$Component) {
 }(_react2.default.Component);
 
 DefaultItem.propTypes = {
-  className: _react2.default.PropTypes.string,
-  lang: _react2.default.PropTypes.string,
-  classes: _react2.default.PropTypes.string,
-  feature: _react2.default.PropTypes.object,
-  navLabel: _react2.default.PropTypes.string
+  className: _propTypes2.default.string,
+  lang: _propTypes2.default.string,
+  classes: _propTypes2.default.string,
+  feature: _propTypes2.default.object,
+  navLabel: _propTypes2.default.string
 };
 
 DefaultItem.defaultProps = {

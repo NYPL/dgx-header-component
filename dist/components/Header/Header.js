@@ -15,6 +15,10 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
@@ -89,6 +93,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // NPM Modules
 
+
 // Nav Config
 
 // ALT Flux
@@ -111,12 +116,14 @@ var styles = {
   locationsTopLink: {
     display: 'inline-block',
     color: '#000',
+    backgroundColor: '#FFF',
     padding: '5px 15px 5px 5px',
     verticalAlign: 'baseline'
   },
   libraryCardButton: {
     display: 'inline-block',
     color: '#000',
+    backgroundColor: '#FFF',
     padding: '5px',
     verticalAlign: 'baseline'
   },
@@ -134,6 +141,7 @@ var styles = {
   },
   shopLink: {
     color: '#000',
+    backgroundColor: '#FFF',
     padding: '10px 15px',
     margin: '0 0 0 5px',
     verticalAlign: 'baseline'
@@ -458,12 +466,12 @@ var Header = function (_React$Component) {
 }(_react2.default.Component);
 
 Header.propTypes = {
-  lang: _react2.default.PropTypes.string,
-  className: _react2.default.PropTypes.string,
-  id: _react2.default.PropTypes.string,
-  navData: _react2.default.PropTypes.array,
-  skipNav: _react2.default.PropTypes.object,
-  urlType: _react2.default.PropTypes.string
+  lang: _propTypes2.default.string,
+  className: _propTypes2.default.string,
+  id: _propTypes2.default.string,
+  navData: _propTypes2.default.array,
+  skipNav: _propTypes2.default.object,
+  urlType: _propTypes2.default.string
 };
 
 Header.defaultProps = {

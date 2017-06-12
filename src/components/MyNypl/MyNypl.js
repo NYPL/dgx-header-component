@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 // Config and Utility Library
 import utils from '../../utils/utils.js';
 import appConfig from '../../appConfig.js';
@@ -145,16 +146,16 @@ class MyNypl extends React.Component {
 }
 
 MyNypl.propTypes = {
-  id: React.PropTypes.string,
-  className: React.PropTypes.string,
-  lang: React.PropTypes.string,
-  catalogLink: React.PropTypes.string,
-  researchLink: React.PropTypes.string,
-  loginCatalogLink: React.PropTypes.string,
-  loginResearchLink: React.PropTypes.string,
-  logOutLink: React.PropTypes.string,
-  isLoggedIn: React.PropTypes.bool,
-  patronName: React.PropTypes.string,
+  id: PropTypes.string,
+  className: PropTypes.string,
+  lang: PropTypes.string,
+  catalogLink: PropTypes.string,
+  researchLink: PropTypes.string,
+  loginCatalogLink: PropTypes.string,
+  loginResearchLink: PropTypes.string,
+  logOutLink: PropTypes.string,
+  isLoggedIn: PropTypes.bool,
+  patronName: PropTypes.string,
 };
 
 MyNypl.defaultProps = {

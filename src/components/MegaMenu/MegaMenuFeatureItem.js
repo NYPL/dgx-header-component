@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { ContentModel } from 'dgx-model-data';
 import DefaultItem from '../ContentBox/DefaultItem.js';
@@ -25,10 +26,10 @@ class MegaMenuFeatureItem extends React.Component {
 }
 
 MegaMenuFeatureItem.propTypes = {
-  lang: React.PropTypes.string,
-  className: React.PropTypes.string,
-  feature: React.PropTypes.object,
-  navLabel: React.PropTypes.string,
+  lang: PropTypes.string,
+  className: PropTypes.string,
+  feature: PropTypes.object,
+  navLabel: PropTypes.string,
 };
 
 MegaMenuFeatureItem.defaultProps = {

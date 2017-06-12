@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
@@ -61,10 +65,10 @@ var MegaMenuFeatureItem = function (_React$Component) {
 }(_react2.default.Component);
 
 MegaMenuFeatureItem.propTypes = {
-  lang: _react2.default.PropTypes.string,
-  className: _react2.default.PropTypes.string,
-  feature: _react2.default.PropTypes.object,
-  navLabel: _react2.default.PropTypes.string
+  lang: _propTypes2.default.string,
+  className: _propTypes2.default.string,
+  feature: _propTypes2.default.object,
+  navLabel: _propTypes2.default.string
 };
 
 MegaMenuFeatureItem.defaultProps = {

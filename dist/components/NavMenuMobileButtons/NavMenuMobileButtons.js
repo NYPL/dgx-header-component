@@ -8,6 +8,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _underscore = require('underscore');
 
 var _utils = require('../../utils/utils.js');
@@ -23,6 +27,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var styles = {
   base: {
     borderTop: '2px solid #363636',
+    color: '#FFF',
     backgroundColor: '#2B2B2B',
     margin: 0,
     padding: 0
@@ -30,6 +35,7 @@ var styles = {
   links: {
     display: 'inline-table',
     color: '#FFF',
+    backgroundColor: '#2B2B2B',
     padding: 0,
     margin: 0,
     width: '50%',
@@ -64,7 +70,8 @@ var styles = {
   icon: {
     fontSize: '32px',
     display: 'inline-block',
-    color: '#959595'
+    color: '#959595',
+    backgroundColor: '#2B2B2B'
   },
   donateLink: {
     padding: '1.75em 0',
@@ -162,10 +169,10 @@ var NavMenuMobileButtons = function NavMenuMobileButtons(_ref) {
 };
 
 NavMenuMobileButtons.propTypes = {
-  lang: _react2.default.PropTypes.string,
-  className: _react2.default.PropTypes.string,
-  libraryCardLink: _react2.default.PropTypes.string,
-  subscribeLink: _react2.default.PropTypes.string
+  lang: _propTypes2.default.string,
+  className: _propTypes2.default.string,
+  libraryCardLink: _propTypes2.default.string,
+  subscribeLink: _propTypes2.default.string
 };
 
 NavMenuMobileButtons.defaultProps = {

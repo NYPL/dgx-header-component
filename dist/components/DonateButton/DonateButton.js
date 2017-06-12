@@ -8,6 +8,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _underscore = require('underscore');
 
 var _utils = require('../../utils/utils.js');
@@ -44,12 +48,12 @@ var DonateButton = function DonateButton(_ref) {
 };
 
 DonateButton.propTypes = {
-  id: _react2.default.PropTypes.string,
-  className: _react2.default.PropTypes.string,
-  target: _react2.default.PropTypes.string,
-  label: _react2.default.PropTypes.string,
-  style: _react2.default.PropTypes.object,
-  gaLabel: _react2.default.PropTypes.string
+  id: _propTypes2.default.string,
+  className: _propTypes2.default.string,
+  target: _propTypes2.default.string,
+  label: _propTypes2.default.string,
+  style: _propTypes2.default.object,
+  gaLabel: _propTypes2.default.string
 };
 
 DonateButton.defaultProps = {

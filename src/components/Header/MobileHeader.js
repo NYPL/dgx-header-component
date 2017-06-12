@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactTappable from 'react-tappable';
 import FocusTrap from 'focus-trap-react';
 import {
@@ -40,6 +41,7 @@ const styles = {
   },
   mobileLogoLink: {
     color: '#000',
+    backgroundColor: '#FFF',
     textDecoration: 'none',
     display: 'inline-block',
     height: '50px',
@@ -61,6 +63,7 @@ const styles = {
     padding: '12px 13px',
     display: 'inline-block',
     color: '#000',
+    backgroundColor: '#FFF',
   },
   myNyplButton: {
     margin: 0,
@@ -79,9 +82,11 @@ const styles = {
     verticalAlign: '8px',
   },
   activeMyNyplButton: {
+    color: '#FFF',
     backgroundColor: '#2B2B2B',
   },
   inactiveMyNyplButton: {
+    color: '#000',
     backgroundColor: '#FFF',
   },
   searchButton: {
@@ -93,9 +98,11 @@ const styles = {
     verticalAlign: '0px',
   },
   activeSearchButton: {
+    color: '#FFF',
     backgroundColor: '#1B7FA7',
   },
   inactiveSearchButton: {
+    color: '#000',
     backgroundColor: '#FFF',
   },
   searchDialog: {
@@ -116,9 +123,11 @@ const styles = {
     verticalAlign: '0px',
   },
   activeMenuButton: {
+    color: '#FFF',
     backgroundColor: '#2B2B2B',
   },
   inactiveMenuButton: {
+    color: '#000',
     backgroundColor: '#FFF',
   },
 };
@@ -422,14 +431,14 @@ class MobileHeader extends React.Component {
 }
 
 MobileHeader.propTypes = {
-  lang: React.PropTypes.string,
-  className: React.PropTypes.string,
-  locatorUrl: React.PropTypes.string,
-  nyplRootUrl: React.PropTypes.string,
-  alt: React.PropTypes.string,
-  isLoggedIn: React.PropTypes.bool,
-  patronName: React.PropTypes.string,
-  logOutLink: React.PropTypes.string,
+  lang: PropTypes.string,
+  className: PropTypes.string,
+  locatorUrl: PropTypes.string,
+  nyplRootUrl: PropTypes.string,
+  alt: PropTypes.string,
+  isLoggedIn: PropTypes.bool,
+  patronName: PropTypes.string,
+  logOutLink: PropTypes.string,
 };
 
 MobileHeader.defaultProps = {

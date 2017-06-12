@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
@@ -131,17 +135,17 @@ var MegaMenu = function (_React$Component) {
 }(_react2.default.Component);
 
 MegaMenu.propTypes = {
-  lang: _react2.default.PropTypes.string,
-  className: _react2.default.PropTypes.string,
-  lastActiveMenuItem: _react2.default.PropTypes.string,
-  currentActiveItem: _react2.default.PropTypes.number,
-  index: _react2.default.PropTypes.number,
-  navId: _react2.default.PropTypes.string,
-  label: _react2.default.PropTypes.object,
-  features: _react2.default.PropTypes.array,
-  items: _react2.default.PropTypes.array,
-  topLink: _react2.default.PropTypes.string,
-  urlType: _react2.default.PropTypes.string
+  lang: _propTypes2.default.string,
+  className: _propTypes2.default.string,
+  lastActiveMenuItem: _propTypes2.default.string,
+  currentActiveItem: _propTypes2.default.number,
+  index: _propTypes2.default.number,
+  navId: _propTypes2.default.string,
+  label: _propTypes2.default.object,
+  features: _propTypes2.default.array,
+  items: _propTypes2.default.array,
+  topLink: _propTypes2.default.string,
+  urlType: _propTypes2.default.string
 };
 
 MegaMenu.defaultProps = {

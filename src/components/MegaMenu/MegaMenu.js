@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import cx from 'classnames';
 // ALT Flux Store/Actions
 import HeaderStore from '../../stores/HeaderStore.js';
@@ -75,17 +76,17 @@ class MegaMenu extends React.Component {
 }
 
 MegaMenu.propTypes = {
-  lang: React.PropTypes.string,
-  className: React.PropTypes.string,
-  lastActiveMenuItem: React.PropTypes.string,
-  currentActiveItem: React.PropTypes.number,
-  index: React.PropTypes.number,
-  navId: React.PropTypes.string,
-  label: React.PropTypes.object,
-  features: React.PropTypes.array,
-  items: React.PropTypes.array,
-  topLink: React.PropTypes.string,
-  urlType: React.PropTypes.string,
+  lang: PropTypes.string,
+  className: PropTypes.string,
+  lastActiveMenuItem: PropTypes.string,
+  currentActiveItem: PropTypes.number,
+  index: PropTypes.number,
+  navId: PropTypes.string,
+  label: PropTypes.object,
+  features: PropTypes.array,
+  items: PropTypes.array,
+  topLink: PropTypes.string,
+  urlType: PropTypes.string,
 };
 
 MegaMenu.defaultProps = {

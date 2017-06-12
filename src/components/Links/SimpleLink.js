@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import utils from '../../utils/utils.js';
 
 class SimpleLink extends React.Component {
@@ -29,16 +30,16 @@ class SimpleLink extends React.Component {
 }
 
 SimpleLink.propTypes = {
-  id: React.PropTypes.string,
-  ref: React.PropTypes.string,
-  className: React.PropTypes.string,
-  lang: React.PropTypes.string,
-  style: React.PropTypes.object,
-  target: React.PropTypes.string,
-  label: React.PropTypes.string,
-  onClick: React.PropTypes.func,
-  gaAction: React.PropTypes.string,
-  gaLabel: React.PropTypes.string,
+  id: PropTypes.string,
+  ref: PropTypes.string,
+  className: PropTypes.string,
+  lang: PropTypes.string,
+  style: PropTypes.object,
+  target: PropTypes.string,
+  label: PropTypes.string,
+  onClick: PropTypes.func,
+  gaAction: PropTypes.string,
+  gaLabel: PropTypes.string,
 };
 
 SimpleLink.defaultProps = {

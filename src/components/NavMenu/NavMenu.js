@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   map as _map,
   filter as _filter,
@@ -28,6 +29,7 @@ const styles = {
     margin: '0 0 -10px 0',
     width: '2px',
     height: '30px',
+    color: '#837377',
     backgroundColor: '#837377',
   },
 };
@@ -146,15 +148,15 @@ class NavMenu extends React.Component {
 }
 
 NavMenu.propTypes = {
-  lang: React.PropTypes.string,
-  className: React.PropTypes.string,
-  items: React.PropTypes.array,
-  urlType: React.PropTypes.string,
-  isLoggedIn: React.PropTypes.bool,
-  patronInitial: React.PropTypes.string,
-  patronName: React.PropTypes.string,
-  logOutLink: React.PropTypes.string,
-  gaAction: React.PropTypes.string,
+  lang: PropTypes.string,
+  className: PropTypes.string,
+  items: PropTypes.array,
+  urlType: PropTypes.string,
+  isLoggedIn: PropTypes.bool,
+  patronInitial: PropTypes.string,
+  patronName: PropTypes.string,
+  logOutLink: PropTypes.string,
+  gaAction: PropTypes.string,
 };
 
 NavMenu.defaultProps = {

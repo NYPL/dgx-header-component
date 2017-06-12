@@ -49,7 +49,7 @@ NPM Install `"babel-polyfill": "6.20.0"` as a dependency to the application you 
 npm install --save babel-polyfill@6.20.0;
 ```
 
-For `nypl-dgx-react-header`, as it will be built before uploaded, the polyfill can be installed as 
+For `nypl-dgx-react-header`, as it will be built before uploaded, the polyfill can be installed as
 devDependency.
 
 ```
@@ -186,30 +186,3 @@ https://bitbucket.org/NYPL/dgx-feature-flags
 3. Commit your changes - `git commit -am 'Description of feature'`.
 4. Push the branch - `git push origin new-feature`.
 5. Create a new Pull Request.
-
-### CHANGE LOG
-
-#### v1.5.5
-> Updated the log in, the log out, and the refresh links to login server instead of beta-oauth server. For instance, the log in link now is "https://login.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount". Also, updated the unit tests for the URLs changes.
-
-#### v1.5.4
-> Updated the log in, the log out, and the refresh links to beta-oauth server instead of isso server. For instance, the log in link now is "https://beta-oauth.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount". Also, updated the unit tests for the URLs changes.
-
-#### v1.5.3
-> Removed the console loggings for token expiration.
-
-#### v1.5.2
-> Removed the Feature Flag of "OAuthLogin" as OAuth Login is going to be default. Also Removed the related props in the <MyNypl> and <MobileMyNypl>.
-
-#### v1.5.1
-> Updated the encore search link to start with HTTPS.
-> Added the fallback for the log in button in case that JavaScript doesn't work. It will work as a link to the catalog page.
-
-#### v1.5.0
-> Added the new functions of OAuth log in.
-> Added the new styles to "My NYPL Button" and "My NYPL Dropdown menu". The new styles will dynamically update based on the log in status.
-> Added the tests for the new functions.
-> Updated the version of "axios", and imported ES6 Promise polyfill for the compatibility of older browsers.
-
-#### v1.4.3
-> Updated all Header donation URLs

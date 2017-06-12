@@ -2,31 +2,31 @@ import alt from 'dgx-alt-center';
 
 class Actions {
   setMobileMenuButtonValue(currentActiveMobileButton) {
-    this.dispatch(currentActiveMobileButton);
+    return currentActiveMobileButton;
   }
 
   setMobileMyNyplButtonValue(value) {
-    this.dispatch(value);
+    return value;
   }
 
   searchButtonActionValue(actionValue) {
-    this.dispatch(actionValue);
+    return actionValue;
   }
 
   updateIsHeaderSticky(value) {
-    this.dispatch(value);
+    return value;
   }
 
   toggleSubscribeFormVisible(value) {
-    this.dispatch(value);
+    return value;
   }
 
   toggleMyNyplVisible(value) {
-    this.dispatch(value);
+    return value;
   }
 
   toggleStickyMyNyplVisible(value) {
-    this.dispatch(value);
+    return value;
   }
 }
 

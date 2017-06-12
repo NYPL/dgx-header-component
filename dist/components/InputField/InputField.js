@@ -8,6 +8,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var InputField = function InputField(_ref) {
@@ -45,21 +49,21 @@ var InputField = function InputField(_ref) {
 };
 
 InputField.propTypes = {
-  ariaLabel: _react2.default.PropTypes.string,
-  type: _react2.default.PropTypes.string,
-  lang: _react2.default.PropTypes.string,
-  id: _react2.default.PropTypes.string,
-  name: _react2.default.PropTypes.string,
-  value: _react2.default.PropTypes.string,
-  checked: _react2.default.PropTypes.bool,
-  maxLength: _react2.default.PropTypes.string,
-  placeholder: _react2.default.PropTypes.string,
-  className: _react2.default.PropTypes.string,
-  onClick: _react2.default.PropTypes.func,
-  onChange: _react2.default.PropTypes.func,
-  required: _react2.default.PropTypes.bool,
-  isRequired: _react2.default.PropTypes.bool,
-  style: _react2.default.PropTypes.object
+  ariaLabel: _propTypes2.default.string,
+  type: _propTypes2.default.string,
+  lang: _propTypes2.default.string,
+  id: _propTypes2.default.string,
+  name: _propTypes2.default.string,
+  value: _propTypes2.default.string,
+  checked: _propTypes2.default.bool,
+  maxLength: _propTypes2.default.string,
+  placeholder: _propTypes2.default.string,
+  className: _propTypes2.default.string,
+  onClick: _propTypes2.default.func,
+  onChange: _propTypes2.default.func,
+  required: _propTypes2.default.bool,
+  isRequired: _propTypes2.default.bool,
+  style: _propTypes2.default.object
 };
 
 InputField.defaultProps = {

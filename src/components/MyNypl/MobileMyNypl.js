@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { extend as _extend } from 'underscore';
 // Config and Utility
 import utils from '../../utils/utils.js';
@@ -184,15 +185,15 @@ class MobileMyNypl extends React.Component {
 }
 
 MobileMyNypl.propTypes = {
-  lang: React.PropTypes.string,
-  className: React.PropTypes.string,
-  catalogLink: React.PropTypes.string,
-  researchLink: React.PropTypes.string,
-  loginCatalogLink: React.PropTypes.string,
-  loginResearchLink: React.PropTypes.string,
-  isLoggedIn: React.PropTypes.bool,
-  patronName: React.PropTypes.string,
-  logOutLink: React.PropTypes.string,
+  lang: PropTypes.string,
+  className: PropTypes.string,
+  catalogLink: PropTypes.string,
+  researchLink: PropTypes.string,
+  loginCatalogLink: PropTypes.string,
+  loginResearchLink: PropTypes.string,
+  isLoggedIn: PropTypes.bool,
+  patronName: PropTypes.string,
+  logOutLink: PropTypes.string,
 };
 
 MobileMyNypl.defaultProps = {

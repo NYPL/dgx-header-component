@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _dgxSvgIcons = require('dgx-svg-icons');
 
 var _utils = require('../../utils/utils.js');
@@ -378,11 +382,11 @@ var SearchBox = function (_React$Component) {
 }(_react2.default.Component);
 
 SearchBox.propTypes = {
-  lang: _react2.default.PropTypes.string,
-  className: _react2.default.PropTypes.string.isRequired,
-  type: _react2.default.PropTypes.string,
-  placeholder: _react2.default.PropTypes.string,
-  legendText: _react2.default.PropTypes.string
+  lang: _propTypes2.default.string,
+  className: _propTypes2.default.string.isRequired,
+  type: _propTypes2.default.string,
+  placeholder: _propTypes2.default.string,
+  legendText: _propTypes2.default.string
 };
 
 SearchBox.defaultProps = {

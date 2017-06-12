@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { map as _map, isEmpty as _isEmpty } from 'underscore';
 import config from '../../appConfig.js';
 import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWidget.js';
@@ -83,11 +84,11 @@ class MegaMenuSubNav extends React.Component {
 }
 
 MegaMenuSubNav.propTypes = {
-  lang: React.PropTypes.string,
-  topLink: React.PropTypes.string,
-  navId: React.PropTypes.string,
-  label: React.PropTypes.object,
-  items: React.PropTypes.array,
+  lang: PropTypes.string,
+  topLink: PropTypes.string,
+  navId: PropTypes.string,
+  label: PropTypes.object,
+  items: PropTypes.array,
 };
 
 MegaMenuSubNav.defaultProps = {

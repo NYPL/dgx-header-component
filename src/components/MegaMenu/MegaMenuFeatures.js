@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { map as _map, isEmpty as _isEmpty } from 'underscore';
 import MegaMenuFeatureItem from './MegaMenuFeatureItem.js';
 import FindUsWidget from '../FindUsWidget/FindUsWidget.js';
@@ -79,11 +80,11 @@ class MegaMenuFeatures extends React.Component {
 }
 
 MegaMenuFeatures.propTypes = {
-  lang: React.PropTypes.string,
-  className: React.PropTypes.string,
-  features: React.PropTypes.array,
-  navId: React.PropTypes.string,
-  navLabel: React.PropTypes.string,
+  lang: PropTypes.string,
+  className: PropTypes.string,
+  features: PropTypes.array,
+  navId: PropTypes.string,
+  navLabel: PropTypes.string,
 };
 
 MegaMenuFeatures.defaultProps = {

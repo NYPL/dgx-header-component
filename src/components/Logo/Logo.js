@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { LionLogoWithText } from 'dgx-svg-icons';
 import utils from '../../utils/utils.js';
 
@@ -15,11 +16,11 @@ const Logo = (props) =>
   </a>;
 
 Logo.propTypes = {
-  target: React.PropTypes.string,
-  id: React.PropTypes.string,
-  className: React.PropTypes.string,
-  alt: React.PropTypes.string,
-  style: React.PropTypes.object,
+  target: PropTypes.string,
+  id: PropTypes.string,
+  className: PropTypes.string,
+  alt: PropTypes.string,
+  style: PropTypes.object,
 };
 
 Logo.defaultProps = {

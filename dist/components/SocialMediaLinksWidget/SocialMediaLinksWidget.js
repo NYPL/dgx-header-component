@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _underscore = require('underscore');
 
 var _utils = require('../../utils/utils.js');
@@ -117,10 +121,10 @@ var SocialMediaLinksWidget = function (_React$Component) {
 }(_react2.default.Component);
 
 SocialMediaLinksWidget.propTypes = {
-  lang: _react2.default.PropTypes.string,
-  className: _react2.default.PropTypes.string,
-  links: _react2.default.PropTypes.object,
-  displayOnlyList: _react2.default.PropTypes.array
+  lang: _propTypes2.default.string,
+  className: _propTypes2.default.string,
+  links: _propTypes2.default.object,
+  displayOnlyList: _propTypes2.default.array
 };
 
 SocialMediaLinksWidget.defaultProps = {

@@ -14,6 +14,10 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _axios = require('axios');
 
 var _axios2 = _interopRequireDefault(_axios);
@@ -427,17 +431,17 @@ var EmailSubscription = function (_React$Component) {
 }(_react2.default.Component);
 
 EmailSubscription.propTypes = {
-  id: _react2.default.PropTypes.string,
-  className: _react2.default.PropTypes.string,
-  lang: _react2.default.PropTypes.string,
-  target: _react2.default.PropTypes.string,
-  form_name: _react2.default.PropTypes.string,
-  list_id: _react2.default.PropTypes.string,
-  form_method: _react2.default.PropTypes.string,
-  placeholder: _react2.default.PropTypes.string,
-  policyUrl: _react2.default.PropTypes.string,
-  subCenterUrl: _react2.default.PropTypes.string,
-  style: _react2.default.PropTypes.object
+  id: _propTypes2.default.string,
+  className: _propTypes2.default.string,
+  lang: _propTypes2.default.string,
+  target: _propTypes2.default.string,
+  form_name: _propTypes2.default.string,
+  list_id: _propTypes2.default.string,
+  form_method: _propTypes2.default.string,
+  placeholder: _propTypes2.default.string,
+  policyUrl: _propTypes2.default.string,
+  subCenterUrl: _propTypes2.default.string,
+  style: _propTypes2.default.object
 };
 
 EmailSubscription.defaultProps = {

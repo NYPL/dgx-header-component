@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _underscore = require('underscore');
 
 var _reactOnclickout = require('react-onclickout');
@@ -266,10 +270,10 @@ var SubscribeButton = function (_React$Component) {
 }(_react2.default.Component);
 
 SubscribeButton.propTypes = {
-  lang: _react2.default.PropTypes.string,
-  label: _react2.default.PropTypes.string,
-  target: _react2.default.PropTypes.string,
-  style: _react2.default.PropTypes.object
+  lang: _propTypes2.default.string,
+  label: _propTypes2.default.string,
+  target: _propTypes2.default.string,
+  style: _propTypes2.default.object
 };
 
 SubscribeButton.defaultProps = {

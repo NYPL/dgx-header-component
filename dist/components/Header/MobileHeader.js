@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _reactTappable = require('react-tappable');
 
 var _reactTappable2 = _interopRequireDefault(_reactTappable);
@@ -543,14 +547,14 @@ var MobileHeader = function (_React$Component) {
 }(_react2.default.Component);
 
 MobileHeader.propTypes = {
-  lang: _react2.default.PropTypes.string,
-  className: _react2.default.PropTypes.string,
-  locatorUrl: _react2.default.PropTypes.string,
-  nyplRootUrl: _react2.default.PropTypes.string,
-  alt: _react2.default.PropTypes.string,
-  isLoggedIn: _react2.default.PropTypes.bool,
-  patronName: _react2.default.PropTypes.string,
-  logOutLink: _react2.default.PropTypes.string
+  lang: _propTypes2.default.string,
+  className: _propTypes2.default.string,
+  locatorUrl: _propTypes2.default.string,
+  nyplRootUrl: _propTypes2.default.string,
+  alt: _propTypes2.default.string,
+  isLoggedIn: _propTypes2.default.bool,
+  patronName: _propTypes2.default.string,
+  logOutLink: _propTypes2.default.string
 };
 
 MobileHeader.defaultProps = {

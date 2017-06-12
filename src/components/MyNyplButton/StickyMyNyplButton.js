@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { extend as _extend } from 'underscore';
 import ClickOutHandler from 'react-onclickout';
@@ -131,14 +132,14 @@ class StickyMyNyplButton extends React.Component {
 }
 
 StickyMyNyplButton.propTypes = {
-  lang: React.PropTypes.string,
-  label: React.PropTypes.string,
-  style: React.PropTypes.object,
-  isLoggedIn: React.PropTypes.bool,
-  patronName: React.PropTypes.string,
-  logOutLink: React.PropTypes.string,
-  gaAction: React.PropTypes.string,
-  target: React.PropTypes.string,
+  lang: PropTypes.string,
+  label: PropTypes.string,
+  style: PropTypes.object,
+  isLoggedIn: PropTypes.bool,
+  patronName: PropTypes.string,
+  logOutLink: PropTypes.string,
+  gaAction: PropTypes.string,
+  target: PropTypes.string,
 };
 
 StickyMyNyplButton.defaultProps = {

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import cx from 'classnames';
 import moment from 'moment';
 import { filter as _filter } from 'underscore';
@@ -131,9 +132,9 @@ class GlobalAlerts extends React.Component {
 }
 
 GlobalAlerts.propTypes = {
-  lang: React.PropTypes.string,
-  className: React.PropTypes.string,
-  id: React.PropTypes.string,
+  lang: PropTypes.string,
+  className: PropTypes.string,
+  id: PropTypes.string,
 };
 
 GlobalAlerts.defaultProps = {

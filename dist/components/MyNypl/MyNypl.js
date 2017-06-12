@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _utils = require('../../utils/utils.js');
 
 var _utils2 = _interopRequireDefault(_utils);
@@ -210,16 +214,16 @@ var MyNypl = function (_React$Component) {
 }(_react2.default.Component);
 
 MyNypl.propTypes = {
-  id: _react2.default.PropTypes.string,
-  className: _react2.default.PropTypes.string,
-  lang: _react2.default.PropTypes.string,
-  catalogLink: _react2.default.PropTypes.string,
-  researchLink: _react2.default.PropTypes.string,
-  loginCatalogLink: _react2.default.PropTypes.string,
-  loginResearchLink: _react2.default.PropTypes.string,
-  logOutLink: _react2.default.PropTypes.string,
-  isLoggedIn: _react2.default.PropTypes.bool,
-  patronName: _react2.default.PropTypes.string
+  id: _propTypes2.default.string,
+  className: _propTypes2.default.string,
+  lang: _propTypes2.default.string,
+  catalogLink: _propTypes2.default.string,
+  researchLink: _propTypes2.default.string,
+  loginCatalogLink: _propTypes2.default.string,
+  loginResearchLink: _propTypes2.default.string,
+  logOutLink: _propTypes2.default.string,
+  isLoggedIn: _propTypes2.default.bool,
+  patronName: _propTypes2.default.string
 };
 
 MyNypl.defaultProps = {

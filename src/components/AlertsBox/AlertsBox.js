@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { map as _map } from 'underscore';
 
 const AlertsBox = ({ className, id, lang, style, alerts }) => {
@@ -25,11 +26,11 @@ const AlertsBox = ({ className, id, lang, style, alerts }) => {
 };
 
 AlertsBox.propTypes = {
-  id: React.PropTypes.string,
-  className: React.PropTypes.string,
-  lang: React.PropTypes.string,
-  style: React.PropTypes.object,
-  alerts: React.PropTypes.array,
+  id: PropTypes.string,
+  className: PropTypes.string,
+  lang: PropTypes.string,
+  style: PropTypes.object,
+  alerts: PropTypes.array,
 };
 
 AlertsBox.defaultProps = {

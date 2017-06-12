@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { extend as _extend } from 'underscore';
 import ClickOutHandler from 'react-onclickout';
 import EmailSubscription from '../EmailSubscription/EmailSubscription.js';
@@ -198,10 +199,10 @@ class SubscribeButton extends React.Component {
 }
 
 SubscribeButton.propTypes = {
-  lang: React.PropTypes.string,
-  label: React.PropTypes.string,
-  target: React.PropTypes.string,
-  style: React.PropTypes.object,
+  lang: PropTypes.string,
+  label: PropTypes.string,
+  target: PropTypes.string,
+  style: PropTypes.object,
 };
 
 SubscribeButton.defaultProps = {

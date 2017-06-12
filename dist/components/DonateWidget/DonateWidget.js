@@ -8,6 +8,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _DonateBox = require('./DonateBox.js');
 
 var _DonateBox2 = _interopRequireDefault(_DonateBox);
@@ -41,10 +45,10 @@ var DonateWidget = function DonateWidget(_ref) {
 };
 
 DonateWidget.propTypes = {
-  className: _react2.default.PropTypes.string,
-  featuredItem: _react2.default.PropTypes.object,
-  donationLinks: _react2.default.PropTypes.array,
-  navLabel: _react2.default.PropTypes.string
+  className: _propTypes2.default.string,
+  featuredItem: _propTypes2.default.object,
+  donationLinks: _propTypes2.default.array,
+  navLabel: _propTypes2.default.string
 };
 
 DonateWidget.defaultProps = {

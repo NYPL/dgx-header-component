@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactTappable from 'react-tappable';
 import FocusTrap from 'focus-trap-react';
 import {
@@ -430,14 +431,14 @@ class MobileHeader extends React.Component {
 }
 
 MobileHeader.propTypes = {
-  lang: React.PropTypes.string,
-  className: React.PropTypes.string,
-  locatorUrl: React.PropTypes.string,
-  nyplRootUrl: React.PropTypes.string,
-  alt: React.PropTypes.string,
-  isLoggedIn: React.PropTypes.bool,
-  patronName: React.PropTypes.string,
-  logOutLink: React.PropTypes.string,
+  lang: PropTypes.string,
+  className: PropTypes.string,
+  locatorUrl: PropTypes.string,
+  nyplRootUrl: PropTypes.string,
+  alt: PropTypes.string,
+  isLoggedIn: PropTypes.bool,
+  patronName: PropTypes.string,
+  logOutLink: PropTypes.string,
 };
 
 MobileHeader.defaultProps = {

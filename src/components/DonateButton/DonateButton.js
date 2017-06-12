@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { extend as _extend } from 'underscore';
 import utils from '../../utils/utils.js';
 
@@ -20,12 +21,12 @@ const DonateButton = ({ id, className, target, label, gaLabel, style }) => (
 );
 
 DonateButton.propTypes = {
-  id: React.PropTypes.string,
-  className: React.PropTypes.string,
-  target: React.PropTypes.string,
-  label: React.PropTypes.string,
-  style: React.PropTypes.object,
-  gaLabel: React.PropTypes.string,
+  id: PropTypes.string,
+  className: PropTypes.string,
+  target: PropTypes.string,
+  label: PropTypes.string,
+  style: PropTypes.object,
+  gaLabel: PropTypes.string,
 };
 
 DonateButton.defaultProps = {

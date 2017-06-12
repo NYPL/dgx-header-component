@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { extend as _extend } from 'underscore';
 import utils from '../../utils/utils.js';
 // Dependent NYPL React Component
@@ -133,10 +134,10 @@ const NavMenuMobileButtons = ({
 };
 
 NavMenuMobileButtons.propTypes = {
-  lang: React.PropTypes.string,
-  className: React.PropTypes.string,
-  libraryCardLink: React.PropTypes.string,
-  subscribeLink: React.PropTypes.string,
+  lang: PropTypes.string,
+  className: PropTypes.string,
+  libraryCardLink: PropTypes.string,
+  subscribeLink: PropTypes.string,
 };
 
 NavMenuMobileButtons.defaultProps = {

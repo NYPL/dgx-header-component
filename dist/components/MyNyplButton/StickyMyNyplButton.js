@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
@@ -195,14 +199,14 @@ var StickyMyNyplButton = function (_React$Component) {
 }(_react2.default.Component);
 
 StickyMyNyplButton.propTypes = {
-  lang: _react2.default.PropTypes.string,
-  label: _react2.default.PropTypes.string,
-  style: _react2.default.PropTypes.object,
-  isLoggedIn: _react2.default.PropTypes.bool,
-  patronName: _react2.default.PropTypes.string,
-  logOutLink: _react2.default.PropTypes.string,
-  gaAction: _react2.default.PropTypes.string,
-  target: _react2.default.PropTypes.string
+  lang: _propTypes2.default.string,
+  label: _propTypes2.default.string,
+  style: _propTypes2.default.object,
+  isLoggedIn: _propTypes2.default.bool,
+  patronName: _propTypes2.default.string,
+  logOutLink: _propTypes2.default.string,
+  gaAction: _propTypes2.default.string,
+  target: _propTypes2.default.string
 };
 
 StickyMyNyplButton.defaultProps = {

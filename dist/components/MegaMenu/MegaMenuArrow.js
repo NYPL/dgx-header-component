@@ -8,6 +8,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
@@ -35,9 +39,9 @@ var MegaMenuArrow = function MegaMenuArrow(_ref) {
 
 
 MegaMenuArrow.propTypes = {
-  index: _react2.default.PropTypes.number,
-  currentActiveItem: _react2.default.PropTypes.number,
-  navId: _react2.default.PropTypes.string
+  index: _propTypes2.default.number,
+  currentActiveItem: _propTypes2.default.number,
+  navId: _propTypes2.default.string
 };
 
 exports.default = MegaMenuArrow;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { pick as _pick, map as _map } from 'underscore';
 // GA Utility
 import utils from '../../utils/utils.js';
@@ -72,10 +73,10 @@ class SocialMediaLinksWidget extends React.Component {
 }
 
 SocialMediaLinksWidget.propTypes = {
-  lang: React.PropTypes.string,
-  className: React.PropTypes.string,
-  links: React.PropTypes.object,
-  displayOnlyList: React.PropTypes.array,
+  lang: PropTypes.string,
+  className: PropTypes.string,
+  links: PropTypes.object,
+  displayOnlyList: PropTypes.array,
 };
 
 SocialMediaLinksWidget.defaultProps = {

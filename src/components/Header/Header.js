@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import {
   extend as _extend,
+  isEmpty as _isEmpty,
 } from 'underscore';
 
 // Nav Config
@@ -85,15 +86,22 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
 
+    const {
+      patron,
+      navData,
+    } = this.props;
+    const patronNameObject = !_isEmpty(patron) && patron.names && patron.names.length ?
+      utils.modelPatronName(patron.names[0]) : {};
+
     this.state = _extend(
       {
         headerHeight: null,
-        navData: this.props.navData,
+        navData,
         loginCookieName: 'nyplIdentityPatron',
         loginCookieValue: null,
-        patronName: '',
-        patronInitial: '',
-        patronDataReceived: false,
+        patronName: patronNameObject.name || '',
+        patronInitial: patronNameObject.initial || '',
+        patronDataReceived: patron.loggedIn || false,
         isFeatureFlagsActivated: {},
         logOutUrl: '',
       },
@@ -155,7 +163,10 @@ class Header extends React.Component {
       const loginCookieValue = utils.getCookie(cookie);
 
       this.setState({ loginCookieValue });
-      this.fetchPatronData(loginCookieValue);
+
+      if (!this.state.patronName) {
+        this.fetchPatronData(loginCookieValue);
+      }
     } else {
       this.setState({ loginCookieValue: null });
     }
@@ -398,6 +409,7 @@ Header.propTypes = {
   id: PropTypes.string,
   navData: PropTypes.array,
   skipNav: PropTypes.object,
+  patron: PropTypes.object,
   urlType: PropTypes.string,
 };
 
@@ -407,6 +419,7 @@ Header.defaultProps = {
   id: 'nyplHeader',
   skipNav: null,
   urlType: '',
+  patron: {},
 };
 
 export {

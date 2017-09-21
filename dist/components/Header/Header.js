@@ -165,14 +165,20 @@ var Header = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
 
+    var _this$props = _this.props,
+        patron = _this$props.patron,
+        navData = _this$props.navData;
+
+    var patronNameObject = !(0, _underscore.isEmpty)(patron) && patron.names && patron.names.length ? _utils2.default.modelPatronName(patron.names[0]) : {};
+
     _this.state = (0, _underscore.extend)({
       headerHeight: null,
-      navData: _this.props.navData,
+      navData: navData,
       loginCookieName: 'nyplIdentityPatron',
       loginCookieValue: null,
-      patronName: '',
-      patronInitial: '',
-      patronDataReceived: false,
+      patronName: patronNameObject.name || '',
+      patronInitial: patronNameObject.initial || '',
+      patronDataReceived: patron.loggedIn || false,
       isFeatureFlagsActivated: {},
       logOutUrl: ''
     }, _HeaderStore2.default.getState());
@@ -233,7 +239,10 @@ var Header = function (_React$Component) {
         var loginCookieValue = _utils2.default.getCookie(cookie);
 
         this.setState({ loginCookieValue: loginCookieValue });
-        this.fetchPatronData(loginCookieValue);
+
+        if (!this.state.patronName) {
+          this.fetchPatronData(loginCookieValue);
+        }
       } else {
         this.setState({ loginCookieValue: null });
       }
@@ -503,6 +512,7 @@ Header.propTypes = {
   id: _propTypes2.default.string,
   navData: _propTypes2.default.array,
   skipNav: _propTypes2.default.object,
+  patron: _propTypes2.default.object,
   urlType: _propTypes2.default.string
 };
 
@@ -511,7 +521,8 @@ Header.defaultProps = {
   className: 'Header',
   id: 'nyplHeader',
   skipNav: null,
-  urlType: ''
+  urlType: '',
+  patron: {}
 };
 
 exports.Header = Header;

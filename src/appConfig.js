@@ -43,7 +43,7 @@ const config = {
     catalog: 'https://browse.nypl.org/iii/encore/myaccount',
     research: 'https://catalog.nypl.org/patroninfo/top',
   },
-  patronApiUrl: 'https://api.nypltech.org/api/v0.1/auth/patron/tokens/',
+  patronApiUrl: 'https://platform.nypl.org/api/v0.1/auth/patron/tokens/',
 };
 
 export default config;

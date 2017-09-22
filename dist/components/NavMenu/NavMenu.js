@@ -190,7 +190,8 @@ var NavMenu = function (_React$Component) {
           'nav',
           {
             className: this.props.className + '-Wrapper' + mobileActiveClass,
-            role: 'navigation'
+            role: 'navigation',
+            'aria-label': 'Main Navigation'
           },
           _react2.default.createElement('span', { className: 'MobileLogoText nypl-icon-logo-type', 'aria-hidden': 'true' }),
           _react2.default.createElement(

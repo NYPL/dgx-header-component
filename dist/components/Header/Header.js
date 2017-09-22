@@ -165,14 +165,20 @@ var Header = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
 
+    var _this$props = _this.props,
+        patron = _this$props.patron,
+        navData = _this$props.navData;
+
+    var patronNameObject = !(0, _underscore.isEmpty)(patron) && patron.names && patron.names.length ? _utils2.default.modelPatronName(patron.names[0]) : {};
+
     _this.state = (0, _underscore.extend)({
       headerHeight: null,
-      navData: _this.props.navData,
+      navData: navData,
       loginCookieName: 'nyplIdentityPatron',
       loginCookieValue: null,
-      patronName: '',
-      patronInitial: '',
-      patronDataReceived: false,
+      patronName: patronNameObject.name || '',
+      patronInitial: patronNameObject.initial || '',
+      patronDataReceived: patron.loggedIn || false,
       isFeatureFlagsActivated: {},
       logOutUrl: ''
     }, _HeaderStore2.default.getState());
@@ -233,7 +239,10 @@ var Header = function (_React$Component) {
         var loginCookieValue = _utils2.default.getCookie(cookie);
 
         this.setState({ loginCookieValue: loginCookieValue });
-        this.fetchPatronData(loginCookieValue);
+
+        if (!this.state.patronDataReceived) {
+          this.fetchPatronData(loginCookieValue);
+        }
       } else {
         this.setState({ loginCookieValue: null });
       }
@@ -398,53 +407,85 @@ var Header = function (_React$Component) {
               target: this.props.urlType === 'absolute' ? '//www.nypl.org' : '/'
             }),
             _react2.default.createElement(
-              'div',
-              { className: headerClass + '-Buttons', style: styles.topButtons },
-              _react2.default.createElement(_MyNyplButton2.default, {
-                refId: 'desktopLogin',
-                isLoggedIn: isLoggedIn,
-                patronName: this.state.patronName,
-                logOutLink: this.state.logOutUrl,
-                gaAction: gaAction
-              }),
-              _react2.default.createElement(_SimpleLink2.default, {
-                label: 'Locations',
-                target: this.props.urlType === 'absolute' ? '//www.nypl.org/locations/map' : '/locations/map',
-                className: 'LocationsTopLink',
-                id: 'LocationsTopLink',
-                gaAction: 'Locations',
-                gaLabel: 'Header Top Links',
-                style: styles.locationsTopLink
-              }),
-              _react2.default.createElement(_SimpleLink2.default, {
-                label: 'Get a Library Card',
-                target: this.props.urlType === 'absolute' ? '//www.nypl.org/library-card' : '/library-card',
-                className: 'LibraryCardButton',
-                id: 'LibraryCardButton',
-                gaAction: 'Get a Library Card',
-                gaLabel: 'Header Top Links',
-                style: styles.libraryCardButton
-              }),
-              _react2.default.createElement(_SubscribeButton2.default, {
-                label: 'Get Email Updates',
-                lang: this.props.lang,
-                style: styles.subscribeButton
-              }),
-              _react2.default.createElement(_DonateButton2.default, {
-                id: 'Top-DonateButton',
-                lang: this.props.lang,
-                style: styles.donateButton,
-                gaLabel: 'Header Top Links'
-              }),
-              _react2.default.createElement(_SimpleLink2.default, {
-                label: 'Shop',
-                target: 'http://shop.nypl.org',
-                className: 'shopTopLink',
-                id: 'shopTopLink',
-                gaAction: 'Shop',
-                gaLabel: 'Header Top Links',
-                style: styles.shopLink
-              })
+              'nav',
+              {
+                className: headerClass + '-Buttons',
+                style: styles.topButtons,
+                'aria-label': 'Header top links'
+              },
+              _react2.default.createElement(
+                'ul',
+                null,
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  _react2.default.createElement(_MyNyplButton2.default, {
+                    refId: 'desktopLogin',
+                    isLoggedIn: isLoggedIn,
+                    patronName: this.state.patronName,
+                    logOutLink: this.state.logOutUrl,
+                    gaAction: gaAction
+                  })
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  _react2.default.createElement(_SimpleLink2.default, {
+                    label: 'Locations',
+                    target: this.props.urlType === 'absolute' ? '//www.nypl.org/locations/map' : '/locations/map',
+                    className: 'LocationsTopLink',
+                    id: 'LocationsTopLink',
+                    gaAction: 'Locations',
+                    gaLabel: 'Header Top Links',
+                    style: styles.locationsTopLink
+                  })
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  _react2.default.createElement(_SimpleLink2.default, {
+                    label: 'Get a Library Card',
+                    target: this.props.urlType === 'absolute' ? '//www.nypl.org/library-card' : '/library-card',
+                    className: 'LibraryCardButton',
+                    id: 'LibraryCardButton',
+                    gaAction: 'Get a Library Card',
+                    gaLabel: 'Header Top Links',
+                    style: styles.libraryCardButton
+                  })
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  _react2.default.createElement(_SubscribeButton2.default, {
+                    label: 'Get Email Updates',
+                    lang: this.props.lang,
+                    style: styles.subscribeButton
+                  })
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  _react2.default.createElement(_DonateButton2.default, {
+                    id: 'Top-DonateButton',
+                    lang: this.props.lang,
+                    style: styles.donateButton,
+                    gaLabel: 'Header Top Links'
+                  })
+                ),
+                _react2.default.createElement(
+                  'li',
+                  null,
+                  _react2.default.createElement(_SimpleLink2.default, {
+                    label: 'Shop',
+                    target: 'http://shop.nypl.org/?utm_campaign=NYPLHeaderButton&utm_' + 'source=nypl.org&utm_medium=referral',
+                    className: 'shopTopLink',
+                    id: 'shopTopLink',
+                    gaAction: 'Shop',
+                    gaLabel: 'Header Top Links',
+                    style: styles.shopLink
+                  })
+                )
+              )
             )
           ),
           _react2.default.createElement(_NavMenu2.default, {
@@ -471,6 +512,7 @@ Header.propTypes = {
   id: _propTypes2.default.string,
   navData: _propTypes2.default.array,
   skipNav: _propTypes2.default.object,
+  patron: _propTypes2.default.object,
   urlType: _propTypes2.default.string
 };
 
@@ -479,7 +521,8 @@ Header.defaultProps = {
   className: 'Header',
   id: 'nyplHeader',
   skipNav: null,
-  urlType: ''
+  urlType: '',
+  patron: {}
 };
 
 exports.Header = Header;

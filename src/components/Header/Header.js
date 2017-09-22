@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import {
   extend as _extend,
+  isEmpty as _isEmpty,
 } from 'underscore';
 
 // Nav Config
@@ -85,15 +86,22 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
 
+    const {
+      patron,
+      navData,
+    } = this.props;
+    const patronNameObject = !_isEmpty(patron) && patron.names && patron.names.length ?
+      utils.modelPatronName(patron.names[0]) : {};
+
     this.state = _extend(
       {
         headerHeight: null,
-        navData: this.props.navData,
+        navData,
         loginCookieName: 'nyplIdentityPatron',
         loginCookieValue: null,
-        patronName: '',
-        patronInitial: '',
-        patronDataReceived: false,
+        patronName: patronNameObject.name || '',
+        patronInitial: patronNameObject.initial || '',
+        patronDataReceived: patron.loggedIn || false,
         isFeatureFlagsActivated: {},
         logOutUrl: '',
       },
@@ -155,7 +163,10 @@ class Header extends React.Component {
       const loginCookieValue = utils.getCookie(cookie);
 
       this.setState({ loginCookieValue });
-      this.fetchPatronData(loginCookieValue);
+
+      if (!this.state.patronDataReceived) {
+        this.fetchPatronData(loginCookieValue);
+      }
     } else {
       this.setState({ loginCookieValue: null });
     }
@@ -303,59 +314,78 @@ class Header extends React.Component {
               className={`${headerClass}-Logo`}
               target={(this.props.urlType === 'absolute') ? '//www.nypl.org' : '/'}
             />
-            <div className={`${headerClass}-Buttons`} style={styles.topButtons}>
-              <MyNyplButton
-                refId="desktopLogin"
-                isLoggedIn={isLoggedIn}
-                patronName={this.state.patronName}
-                logOutLink={this.state.logOutUrl}
-                gaAction={gaAction}
-              />
-              <SimpleLink
-                label="Locations"
-                target={
-                  (this.props.urlType === 'absolute') ?
-                    '//www.nypl.org/locations/map' : '/locations/map'
-                }
-                className="LocationsTopLink"
-                id="LocationsTopLink"
-                gaAction="Locations"
-                gaLabel="Header Top Links"
-                style={styles.locationsTopLink}
-              />
-              <SimpleLink
-                label="Get a Library Card"
-                target={
-                  (this.props.urlType === 'absolute') ?
-                    '//www.nypl.org/library-card' : '/library-card'
-                }
-                className="LibraryCardButton"
-                id="LibraryCardButton"
-                gaAction="Get a Library Card"
-                gaLabel="Header Top Links"
-                style={styles.libraryCardButton}
-              />
-              <SubscribeButton
-                label="Get Email Updates"
-                lang={this.props.lang}
-                style={styles.subscribeButton}
-              />
-              <DonateButton
-                id="Top-DonateButton"
-                lang={this.props.lang}
-                style={styles.donateButton}
-                gaLabel="Header Top Links"
-              />
-              <SimpleLink
-                label="Shop"
-                target="http://shop.nypl.org"
-                className="shopTopLink"
-                id="shopTopLink"
-                gaAction="Shop"
-                gaLabel="Header Top Links"
-                style={styles.shopLink}
-              />
-            </div>
+            <nav
+              className={`${headerClass}-Buttons`}
+              style={styles.topButtons}
+              aria-label="Header top links"
+            >
+              <ul>
+                <li>
+                  <MyNyplButton
+                    refId="desktopLogin"
+                    isLoggedIn={isLoggedIn}
+                    patronName={this.state.patronName}
+                    logOutLink={this.state.logOutUrl}
+                    gaAction={gaAction}
+                  />
+                </li>
+                <li>
+                  <SimpleLink
+                    label="Locations"
+                    target={
+                      (this.props.urlType === 'absolute') ?
+                        '//www.nypl.org/locations/map' : '/locations/map'
+                    }
+                    className="LocationsTopLink"
+                    id="LocationsTopLink"
+                    gaAction="Locations"
+                    gaLabel="Header Top Links"
+                    style={styles.locationsTopLink}
+                  />
+                </li>
+                <li>
+                  <SimpleLink
+                    label="Get a Library Card"
+                    target={
+                      (this.props.urlType === 'absolute') ?
+                        '//www.nypl.org/library-card' : '/library-card'
+                    }
+                    className="LibraryCardButton"
+                    id="LibraryCardButton"
+                    gaAction="Get a Library Card"
+                    gaLabel="Header Top Links"
+                    style={styles.libraryCardButton}
+                  />
+                </li>
+                <li>
+                  <SubscribeButton
+                    label="Get Email Updates"
+                    lang={this.props.lang}
+                    style={styles.subscribeButton}
+                  />
+                </li>
+                <li>
+                  <DonateButton
+                    id="Top-DonateButton"
+                    lang={this.props.lang}
+                    style={styles.donateButton}
+                    gaLabel="Header Top Links"
+                  />
+                </li>
+                <li>
+                  <SimpleLink
+                    label="Shop"
+                    target={'http://shop.nypl.org/?utm_campaign=NYPLHeaderButton&utm_' +
+                      'source=nypl.org&utm_medium=referral'}
+                    className="shopTopLink"
+                    id="shopTopLink"
+                    gaAction="Shop"
+                    gaLabel="Header Top Links"
+                    style={styles.shopLink}
+                  />
+                </li>
+              </ul>
+            </nav>
           </div>
           <NavMenu
             className={`${headerClass}-NavMenu`}
@@ -379,6 +409,7 @@ Header.propTypes = {
   id: PropTypes.string,
   navData: PropTypes.array,
   skipNav: PropTypes.object,
+  patron: PropTypes.object,
   urlType: PropTypes.string,
 };
 
@@ -388,6 +419,7 @@ Header.defaultProps = {
   id: 'nyplHeader',
   skipNav: null,
   urlType: '',
+  patron: {},
 };
 
 export {

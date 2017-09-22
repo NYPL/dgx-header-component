@@ -126,6 +126,7 @@ class NavMenu extends React.Component {
         <nav
           className={`${this.props.className}-Wrapper${mobileActiveClass}`}
           role="navigation"
+          aria-label="Main Navigation"
         >
           <span className="MobileLogoText nypl-icon-logo-type" aria-hidden="true"></span>
           <ul className={`${this.props.className}-List`} id="NavMenu-List">

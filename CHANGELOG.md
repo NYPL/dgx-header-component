@@ -1,5 +1,11 @@
 ### CHANGE LOG
 
+#### v2.1.0
+> Updating the header Donate and Shop links.
+> Updating the structure for the header links to be a <nav> and <ul> list.
+> Allowing prop to be passed to the component for a patron's logged in status and information.
+> Updating the OAuth URL for the Patron authorization endpoint.
+
 #### v2.0.0
 > Updating the React version to v15.
 > Updating the CSS for the skip nav component.

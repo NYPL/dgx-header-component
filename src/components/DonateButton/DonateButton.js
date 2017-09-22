@@ -32,7 +32,8 @@ DonateButton.propTypes = {
 DonateButton.defaultProps = {
   label: 'Donate',
   className: 'DonateButton',
-  target: 'https://secure3.convio.net/nypl/site/SPageServer?pagename=donation_form&JServSessionIdr003=dwcz55yj27.app304a',
+  target: 'https://secure3.convio.net/nypl/site/Donation2?7825.donation=form1&df_id=7825' +
+    '&mfc_pref=T&s_src=FRQ18ZZ_TNN',
 };
 
 export default DonateButton;

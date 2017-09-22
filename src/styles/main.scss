@@ -129,7 +129,17 @@
    * - Donate
   */
   &-Buttons {
+    ul {
+      margin: 0;
+      list-style-type: none;
+
+      li {
+        display: inline-block;
+      }
+    }
+
     // First instance top-level <a> tags
+    li > a,
     & > a {
       @include Kievit-Bold;
       font-size: 13px;

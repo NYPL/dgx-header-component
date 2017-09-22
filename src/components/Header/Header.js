@@ -164,7 +164,7 @@ class Header extends React.Component {
 
       this.setState({ loginCookieValue });
 
-      if (!this.state.patronName) {
+      if (!this.state.patronName && !this.state.patronDataReceived) {
         this.fetchPatronData(loginCookieValue);
       }
     } else {

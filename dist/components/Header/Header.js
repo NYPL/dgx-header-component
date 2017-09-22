@@ -240,7 +240,7 @@ var Header = function (_React$Component) {
 
         this.setState({ loginCookieValue: loginCookieValue });
 
-        if (!this.state.patronName) {
+        if (!this.state.patronName && !this.state.patronDataReceived) {
           this.fetchPatronData(loginCookieValue);
         }
       } else {

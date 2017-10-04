@@ -142,8 +142,8 @@ function Utils() {
     return new RegExp('(?:^|;\\s*)' + _this.encodeURI(sKey) + '\\s*\\=').test(document.cookie);
   };
 
-  this.deleteCookie = function () {
-    document.cookie = 'nyplIdentityPatron=; expires=Thu, 01 Jan 1970 00:00:00 UTC; ' + 'path=/; domain=.nypl.org;';
+  this.deleteCookie = function (sKey) {
+    document.cookie = sKey + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; ' + 'path=/; domain=.nypl.org;';
   };
 
   /**
@@ -171,7 +171,7 @@ function Utils() {
         // If the cookie for getting log in Data is expired
         if (response.data.statusCode === 401 && response.data.expired === true) {
           _this.refreshAccessToken(refreshLink, refreshCookieCb, function () {
-            _this.deleteCookie();
+            _this.deleteCookie('nyplIdentityPatron');
             _this.logOut(logOutLink);
           });
         } else {

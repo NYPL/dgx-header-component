@@ -133,8 +133,8 @@ function Utils() {
     ).test(document.cookie);
   };
 
-  this.deleteCookie = () => {
-    document.cookie = 'nyplIdentityPatron=; expires=Thu, 01 Jan 1970 00:00:00 UTC; ' +
+  this.deleteCookie = (sKey) => {
+    document.cookie = `${sKey}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; ` +
       'path=/; domain=.nypl.org;';
   };
 
@@ -169,7 +169,7 @@ function Utils() {
               refreshLink,
               refreshCookieCb,
               () => {
-                this.deleteCookie();
+                this.deleteCookie('nyplIdentityPatron');
                 this.logOut(logOutLink);
               }
             );

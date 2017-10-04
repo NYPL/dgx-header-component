@@ -142,6 +142,10 @@ function Utils() {
     return new RegExp('(?:^|;\\s*)' + _this.encodeURI(sKey) + '\\s*\\=').test(document.cookie);
   };
 
+  this.deleteCookie = function () {
+    document.cookie = 'nyplIdentityPatron=; expires=Thu, 01 Jan 1970 00:00:00 UTC; ' + 'path=/; domain=.nypl.org;';
+  };
+
   /**
    * getLoginData(cookie, cb, refreshLink, refreshCookieCb, logOutLink)
    * Handle the cookie from log in and make api calls with the callback function passed in.
@@ -167,6 +171,7 @@ function Utils() {
         // If the cookie for getting log in Data is expired
         if (response.data.statusCode === 401 && response.data.expired === true) {
           _this.refreshAccessToken(refreshLink, refreshCookieCb, function () {
+            _this.deleteCookie();
             _this.logOut(logOutLink);
           });
         } else {
@@ -191,6 +196,7 @@ function Utils() {
   this.refreshAccessToken = function (api, cb, fallBackCb) {
     _axios2.default.get(api, { withCredentials: true }).then(cb).catch(function (response) {
       if (response instanceof Error) {
+        fallBackCb();
         console.warn(response.message);
       } else {
         // The request was made, but the server responded with a status code

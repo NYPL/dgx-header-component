@@ -93,7 +93,7 @@ class Header extends React.Component {
     const patronNameObject = !_isEmpty(patron) && patron.names && patron.names.length ?
       utils.modelPatronName(patron.names[0]) : {};
 
-   // Generate the full log out url including the redirect URI.
+    // Generate the full log out url including the redirect URI.
     const logOutUrl = utils.renderDynamicLogOutLink(window.location.href);
 
     this.state = _extend(

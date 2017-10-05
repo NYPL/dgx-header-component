@@ -167,12 +167,13 @@ var Header = function (_React$Component) {
 
     var _this$props = _this.props,
         patron = _this$props.patron,
-        navData = _this$props.navData;
+        navData = _this$props.navData,
+        location = _this$props.location;
 
     var patronNameObject = !(0, _underscore.isEmpty)(patron) && patron.names && patron.names.length ? _utils2.default.modelPatronName(patron.names[0]) : {};
 
     // Generate the full log out url including the redirect URI.
-    var logOutUrl = _utils2.default.renderDynamicLogOutLink(window.location.href);
+    var logOutUrl = _utils2.default.renderDynamicLogOutLink(location);
 
     _this.state = (0, _underscore.extend)({
       headerHeight: null,
@@ -513,7 +514,8 @@ Header.propTypes = {
   navData: _propTypes2.default.array,
   skipNav: _propTypes2.default.object,
   patron: _propTypes2.default.object,
-  urlType: _propTypes2.default.string
+  urlType: _propTypes2.default.string,
+  location: _propTypes2.default.string
 };
 
 Header.defaultProps = {

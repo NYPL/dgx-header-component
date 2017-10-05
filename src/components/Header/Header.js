@@ -89,12 +89,13 @@ class Header extends React.Component {
     const {
       patron,
       navData,
+      location,
     } = this.props;
     const patronNameObject = !_isEmpty(patron) && patron.names && patron.names.length ?
       utils.modelPatronName(patron.names[0]) : {};
 
     // Generate the full log out url including the redirect URI.
-    const logOutUrl = utils.renderDynamicLogOutLink(window.location.href);
+    const logOutUrl = utils.renderDynamicLogOutLink(location);
 
     this.state = _extend(
       {
@@ -411,6 +412,7 @@ Header.propTypes = {
   skipNav: PropTypes.object,
   patron: PropTypes.object,
   urlType: PropTypes.string,
+  location: PropTypes.string,
 };
 
 Header.defaultProps = {

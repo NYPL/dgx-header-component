@@ -93,6 +93,9 @@ class Header extends React.Component {
     const patronNameObject = !_isEmpty(patron) && patron.names && patron.names.length ?
       utils.modelPatronName(patron.names[0]) : {};
 
+   // Generate the full log out url including the redirect URI.
+    const logOutUrl = utils.renderDynamicLogOutLink(window.location.href);
+
     this.state = _extend(
       {
         headerHeight: null,
@@ -103,7 +106,7 @@ class Header extends React.Component {
         patronInitial: patronNameObject.initial || '',
         patronDataReceived: patron.loggedIn || false,
         isFeatureFlagsActivated: {},
-        logOutUrl: '',
+        logOutUrl,
       },
       HeaderStore.getState()
     );
@@ -126,9 +129,6 @@ class Header extends React.Component {
     utils.checkFeatureFlagActivated(
       featureFlagConfig.featureFlagList, this.state.isFeatureFlagsActivated
     );
-
-    // Set the log out link
-    this.setLogOutLink(window.location.href);
   }
 
   componentWillUnmount() {
@@ -237,7 +237,7 @@ class Header extends React.Component {
           });
         }
       },
-      config.loginMyNyplLinks.tokenRefreshLink,
+      config.loginMyNyplLinks.tokenRefreshLinkError,
       () => {
         this.setLoginCookie(this.state.loginCookieName);
       },

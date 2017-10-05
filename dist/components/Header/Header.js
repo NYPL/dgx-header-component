@@ -171,6 +171,9 @@ var Header = function (_React$Component) {
 
     var patronNameObject = !(0, _underscore.isEmpty)(patron) && patron.names && patron.names.length ? _utils2.default.modelPatronName(patron.names[0]) : {};
 
+    // Generate the full log out url including the redirect URI.
+    var logOutUrl = _utils2.default.renderDynamicLogOutLink(window.location.href);
+
     _this.state = (0, _underscore.extend)({
       headerHeight: null,
       navData: navData,
@@ -180,7 +183,7 @@ var Header = function (_React$Component) {
       patronInitial: patronNameObject.initial || '',
       patronDataReceived: patron.loggedIn || false,
       isFeatureFlagsActivated: {},
-      logOutUrl: ''
+      logOutUrl: logOutUrl
     }, _HeaderStore2.default.getState());
 
     _this.handleStickyHeader = _this.handleStickyHeader.bind(_this);
@@ -202,9 +205,6 @@ var Header = function (_React$Component) {
       // Set feature flag cookies to the state
       // We don't have any feature flags set in the config list at this moment though
       _utils2.default.checkFeatureFlagActivated(_featureFlagConfig2.default.featureFlagList, this.state.isFeatureFlagsActivated);
-
-      // Set the log out link
-      this.setLogOutLink(window.location.href);
     }
   }, {
     key: 'componentWillUnmount',
@@ -327,7 +327,7 @@ var Header = function (_React$Component) {
             patronDataReceived: true
           });
         }
-      }, _appConfig2.default.loginMyNyplLinks.tokenRefreshLink, function () {
+      }, _appConfig2.default.loginMyNyplLinks.tokenRefreshLinkError, function () {
         _this3.setLoginCookie(_this3.state.loginCookieName);
       }, this.state.logOutUrl);
     }

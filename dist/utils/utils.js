@@ -142,10 +142,6 @@ function Utils() {
     return new RegExp('(?:^|;\\s*)' + _this.encodeURI(sKey) + '\\s*\\=').test(document.cookie);
   };
 
-  this.deleteCookie = function (sKey) {
-    document.cookie = sKey + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; ' + 'path=/; domain=.nypl.org;';
-  };
-
   /**
    * getLoginData(cookie, cb, refreshLink, refreshCookieCb, logOutLink)
    * Handle the cookie from log in and make api calls with the callback function passed in.
@@ -171,7 +167,6 @@ function Utils() {
         // If the cookie for getting log in Data is expired
         if (response.data.statusCode === 401 && response.data.expired === true) {
           _this.refreshAccessToken(refreshLink, refreshCookieCb, function () {
-            _this.deleteCookie('nyplIdentityPatron');
             _this.logOut(logOutLink);
           });
         } else {

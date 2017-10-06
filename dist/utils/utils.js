@@ -142,6 +142,10 @@ function Utils() {
     return new RegExp('(?:^|;\\s*)' + _this.encodeURI(sKey) + '\\s*\\=').test(document.cookie);
   };
 
+  this.deleteCookie = function (sKey) {
+    document.cookie = sKey + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; ' + 'path=/; domain=.nypl.org;';
+  };
+
   /**
    * getLoginData(cookie, cb, refreshLink, refreshCookieCb, logOutLink)
    * Handle the cookie from log in and make api calls with the callback function passed in.
@@ -154,9 +158,8 @@ function Utils() {
    * @param {string} refreshLink - The link to call for refreshing access_token
    * @param {function(result: Object)} refreshCookieCb - The callback function passed in for cookie
    * refreshing mechanism.
-   * @param {string} logOutLink - The link to call for logging the patrons out
    */
-  this.getLoginData = function (cookie, cb, refreshLink, refreshCookieCb, logOutLink) {
+  this.getLoginData = function (cookie, cb, refreshLink, refreshCookieCb) {
     var decodedToken = JSON.parse(cookie).access_token;
     var endpoint = '' + _appConfig2.default.patronApiUrl + decodedToken;
 
@@ -167,7 +170,7 @@ function Utils() {
         // If the cookie for getting log in Data is expired
         if (response.data.statusCode === 401 && response.data.expired === true) {
           _this.refreshAccessToken(refreshLink, refreshCookieCb, function () {
-            _this.logOut(logOutLink);
+            _this.deleteCookie('nyplIdentityPatron');
           });
         } else {
           // The request was made, but the server responded with a status code

@@ -167,13 +167,9 @@ var Header = function (_React$Component) {
 
     var _this$props = _this.props,
         patron = _this$props.patron,
-        navData = _this$props.navData,
-        location = _this$props.location;
+        navData = _this$props.navData;
 
     var patronNameObject = !(0, _underscore.isEmpty)(patron) && patron.names && patron.names.length ? _utils2.default.modelPatronName(patron.names[0]) : {};
-
-    // Generate the full log out url including the redirect URI.
-    var logOutUrl = _utils2.default.renderDynamicLogOutLink(location);
 
     _this.state = (0, _underscore.extend)({
       headerHeight: null,
@@ -184,7 +180,7 @@ var Header = function (_React$Component) {
       patronInitial: patronNameObject.initial || '',
       patronDataReceived: patron.loggedIn || false,
       isFeatureFlagsActivated: {},
-      logOutUrl: logOutUrl
+      logOutUrl: ''
     }, _HeaderStore2.default.getState());
 
     _this.handleStickyHeader = _this.handleStickyHeader.bind(_this);
@@ -199,10 +195,10 @@ var Header = function (_React$Component) {
       this.setHeaderHeight();
       // Listen to the scroll event for the sticky header.
       window.addEventListener('scroll', this.handleStickyHeader, false);
-
+      // Set log out link with the dynamic redirect URL
+      this.setLogOutLink(window.location.href);
       // Set nyplIdentityPatron cookie to the state.
       this.setLoginCookie(this.state.loginCookieName);
-
       // Set feature flag cookies to the state
       // We don't have any feature flags set in the config list at this moment though
       _utils2.default.checkFeatureFlagActivated(_featureFlagConfig2.default.featureFlagList, this.state.isFeatureFlagsActivated);
@@ -330,7 +326,7 @@ var Header = function (_React$Component) {
         }
       }, _appConfig2.default.loginMyNyplLinks.tokenRefreshLinkError, function () {
         _this3.setLoginCookie(_this3.state.loginCookieName);
-      }, this.state.logOutUrl);
+      });
     }
 
     /**

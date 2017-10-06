@@ -89,13 +89,9 @@ class Header extends React.Component {
     const {
       patron,
       navData,
-      location,
     } = this.props;
     const patronNameObject = !_isEmpty(patron) && patron.names && patron.names.length ?
       utils.modelPatronName(patron.names[0]) : {};
-
-    // Generate the full log out url including the redirect URI.
-    const logOutUrl = utils.renderDynamicLogOutLink(location);
 
     this.state = _extend(
       {
@@ -107,7 +103,7 @@ class Header extends React.Component {
         patronInitial: patronNameObject.initial || '',
         patronDataReceived: patron.loggedIn || false,
         isFeatureFlagsActivated: {},
-        logOutUrl,
+        logOutUrl: '',
       },
       HeaderStore.getState()
     );
@@ -121,10 +117,10 @@ class Header extends React.Component {
     this.setHeaderHeight();
     // Listen to the scroll event for the sticky header.
     window.addEventListener('scroll', this.handleStickyHeader, false);
-
+    // Set log out link with the dynamic redirect URL
+    this.setLogOutLink(window.location.href);
     // Set nyplIdentityPatron cookie to the state.
     this.setLoginCookie(this.state.loginCookieName);
-
     // Set feature flag cookies to the state
     // We don't have any feature flags set in the config list at this moment though
     utils.checkFeatureFlagActivated(
@@ -241,8 +237,7 @@ class Header extends React.Component {
       config.loginMyNyplLinks.tokenRefreshLinkError,
       () => {
         this.setLoginCookie(this.state.loginCookieName);
-      },
-      this.state.logOutUrl
+      }
     );
   }
 

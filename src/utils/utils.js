@@ -133,6 +133,11 @@ function Utils() {
     ).test(document.cookie);
   };
 
+  this.deleteCookie = (sKey) => {
+    document.cookie = `${sKey}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; ` +
+      'path=/; domain=.nypl.org;';
+  };
+
   /**
    * getLoginData(cookie, cb, refreshLink, refreshCookieCb, logOutLink)
    * Handle the cookie from log in and make api calls with the callback function passed in.
@@ -145,9 +150,8 @@ function Utils() {
    * @param {string} refreshLink - The link to call for refreshing access_token
    * @param {function(result: Object)} refreshCookieCb - The callback function passed in for cookie
    * refreshing mechanism.
-   * @param {string} logOutLink - The link to call for logging the patrons out
    */
-  this.getLoginData = (cookie, cb, refreshLink, refreshCookieCb, logOutLink) => {
+  this.getLoginData = (cookie, cb, refreshLink, refreshCookieCb) => {
     const decodedToken = JSON.parse(cookie).access_token;
     const endpoint = `${config.patronApiUrl}${decodedToken}`;
 
@@ -164,7 +168,7 @@ function Utils() {
               refreshLink,
               refreshCookieCb,
               () => {
-                this.logOut(logOutLink);
+                this.deleteCookie('nyplIdentityPatron');
               }
             );
           } else {

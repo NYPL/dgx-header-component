@@ -195,7 +195,7 @@ var Header = function (_React$Component) {
       this.setHeaderHeight();
       // Listen to the scroll event for the sticky header.
       window.addEventListener('scroll', this.handleStickyHeader, false);
-      // Set log out link with the dynamic redirect URL
+      // Set the log out link to state
       this.setLogOutLink(window.location.href);
       // Set nyplIdentityPatron cookie to the state.
       this.setLoginCookie(this.state.loginCookieName);
@@ -510,8 +510,7 @@ Header.propTypes = {
   navData: _propTypes2.default.array,
   skipNav: _propTypes2.default.object,
   patron: _propTypes2.default.object,
-  urlType: _propTypes2.default.string,
-  location: _propTypes2.default.string
+  urlType: _propTypes2.default.string
 };
 
 Header.defaultProps = {

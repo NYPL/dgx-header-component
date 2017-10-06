@@ -197,11 +197,15 @@ describe('Header', () => {
     () => {
       let component;
       let refreshAccessToken;
-      let logOut;
+      // functions in utils.js
+      let deleteNyplIdentityPatronCookie;
 
       before(() => {
         refreshAccessToken = sinon.spy(utils, 'refreshAccessToken');
-        logOut = sinon.spy(utils, 'logOut');
+        // functions in utils.js
+        deleteNyplIdentityPatronCookie = sinon.stub(utils, 'deleteCookie')
+          .withArgs('nyplIdentityPatron')
+          .returns(true);
 
         mock
           .onGet(mockApi)
@@ -217,11 +221,11 @@ describe('Header', () => {
       after(() => {
         mock.reset();
         refreshAccessToken.restore();
-        logOut.restore();
+        utils.deleteCookie.restore();
       });
 
       it('should call the cookie refresh API endpoint', (done) => {
-        patronApiCall(component, '/refresh', logOut);
+        patronApiCall(component, '/refresh', deleteNyplIdentityPatronCookie);
         setTimeout(() => {
           expect(refreshAccessToken.calledOnce).to.equal(true);
           expect(component.state().patronName).to.deep.equal('SMITH, THERESA');
@@ -231,10 +235,10 @@ describe('Header', () => {
         }, 1500);
       });
 
-      it('should log the patron out, if calling the refesh link fails', (done) => {
-        patronApiCall(component, '/refreshError', logOut);
+      it('should delete "nyplIdentityPatron" cookie, if calling the refesh link fails', (done) => {
+        patronApiCall(component, '/refreshError', deleteNyplIdentityPatronCookie);
         setTimeout(() => {
-          expect(logOut.calledOnce).to.equal(true);
+          expect(deleteNyplIdentityPatronCookie.calledOnce).to.equal(true);
           done();
         }, 1500);
       });

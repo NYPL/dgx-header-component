@@ -37,7 +37,6 @@ var config = {
     catalog: authServerDomain + '/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount',
     research: authServerDomain + '/login?redirect_uri=https://catalog.nypl.org/patroninfo/top',
     tokenRefreshLink: authServerDomain + '/refresh',
-    tokenRefreshLinkError: authServerDomain + '/refreshError',
     logOutLink: authServerDomain + '/logout'
   },
   myNyplLinks: {

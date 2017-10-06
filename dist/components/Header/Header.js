@@ -324,7 +324,7 @@ var Header = function (_React$Component) {
             patronDataReceived: true
           });
         }
-      }, _appConfig2.default.loginMyNyplLinks.tokenRefreshLinkError, function () {
+      }, _appConfig2.default.loginMyNyplLinks.tokenRefreshLink, function () {
         _this3.setLoginCookie(_this3.state.loginCookieName);
       });
     }

@@ -234,7 +234,7 @@ class Header extends React.Component {
           });
         }
       },
-      config.loginMyNyplLinks.tokenRefreshLinkError,
+      config.loginMyNyplLinks.tokenRefreshLink,
       () => {
         this.setLoginCookie(this.state.loginCookieName);
       }

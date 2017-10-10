@@ -117,18 +117,15 @@ class Header extends React.Component {
     this.setHeaderHeight();
     // Listen to the scroll event for the sticky header.
     window.addEventListener('scroll', this.handleStickyHeader, false);
-
+    // Set the log out link to state
+    this.setLogOutLink(window.location.href);
     // Set nyplIdentityPatron cookie to the state.
     this.setLoginCookie(this.state.loginCookieName);
-
     // Set feature flag cookies to the state
     // We don't have any feature flags set in the config list at this moment though
     utils.checkFeatureFlagActivated(
       featureFlagConfig.featureFlagList, this.state.isFeatureFlagsActivated
     );
-
-    // Set the log out link
-    this.setLogOutLink(window.location.href);
   }
 
   componentWillUnmount() {
@@ -240,8 +237,7 @@ class Header extends React.Component {
       config.loginMyNyplLinks.tokenRefreshLink,
       () => {
         this.setLoginCookie(this.state.loginCookieName);
-      },
-      this.state.logOutUrl
+      }
     );
   }
 

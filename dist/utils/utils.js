@@ -143,6 +143,16 @@ function Utils() {
   };
 
   /**
+   * deleteCookie(sKey)
+   * Delete the cookie by having it expired.
+   *
+   * @param {string} sKey - The name of the cookie to be looked up.
+   */
+  this.deleteCookie = function (sKey) {
+    document.cookie = sKey + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; ' + 'path=/; domain=.nypl.org;';
+  };
+
+  /**
    * getLoginData(cookie, cb, refreshLink, refreshCookieCb, logOutLink)
    * Handle the cookie from log in and make api calls with the callback function passed in.
    * If the returned statusCode is 401 and the cookie is expired, invoke refreshAccessToken()
@@ -154,9 +164,8 @@ function Utils() {
    * @param {string} refreshLink - The link to call for refreshing access_token
    * @param {function(result: Object)} refreshCookieCb - The callback function passed in for cookie
    * refreshing mechanism.
-   * @param {string} logOutLink - The link to call for logging the patrons out
    */
-  this.getLoginData = function (cookie, cb, refreshLink, refreshCookieCb, logOutLink) {
+  this.getLoginData = function (cookie, cb, refreshLink, refreshCookieCb) {
     var decodedToken = JSON.parse(cookie).access_token;
     var endpoint = '' + _appConfig2.default.patronApiUrl + decodedToken;
 
@@ -167,7 +176,7 @@ function Utils() {
         // If the cookie for getting log in Data is expired
         if (response.data.statusCode === 401 && response.data.expired === true) {
           _this.refreshAccessToken(refreshLink, refreshCookieCb, function () {
-            _this.logOut(logOutLink);
+            _this.deleteCookie('nyplIdentityPatron');
           });
         } else {
           // The request was made, but the server responded with a status code
@@ -191,6 +200,7 @@ function Utils() {
   this.refreshAccessToken = function (api, cb, fallBackCb) {
     _axios2.default.get(api, { withCredentials: true }).then(cb).catch(function (response) {
       if (response instanceof Error) {
+        fallBackCb();
         console.warn(response.message);
       } else {
         // The request was made, but the server responded with a status code

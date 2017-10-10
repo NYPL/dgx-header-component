@@ -1,6 +1,6 @@
 {
   "name": "@nypl/dgx-header-component",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "NYPL Header as a React component.",
   "main": "dist/components/Header/Header.js",
   "scripts": {
@@ -79,7 +79,7 @@
     "node-sass": "3.7.0",
     "nyc": "10.0.0",
     "react-a11y": "0.3.3",
-    "react-addons-test-utils": "0.14.8",
+    "react-addons-test-utils": "15.5.0",
     "react-hot-loader": "1.3.0",
     "sass-loader": "1.0.4",
     "sinon": "1.17.6",

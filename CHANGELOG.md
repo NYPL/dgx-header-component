@@ -1,5 +1,9 @@
 ### CHANGE LOG
 
+#### v2.1.1
+> Updating the mechanism for handling failed cookie refreshing process. Now it will delete the cookie of `nyplIdentityPatron` if it receives an error from the refresh token API.
+> Adding PATRONCOOKIE.md for the information of how `nyplIdentityPatron` and log in work.
+
 #### v2.1.0
 > Updating the header Donate and Shop links.
 > Updating the structure for the header links to be a <nav> and <ul> list.

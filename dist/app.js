@@ -26,12 +26,12 @@ var _reactA11y2 = _interopRequireDefault(_reactA11y);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// Polyfill Promise for legacy browsers
 if (loadA11y) {
   (0, _reactA11y2.default)(_react2.default, { ReactDOM: _reactDom2.default, includeSrcNode: true });
 }
 
 // Use for testing GA events
-// Polyfill Promise for legacy browsers
 if (!window.ga) {
   console.log('Analytics not available - loading through React.');
   var gaOpts = { debug: true };

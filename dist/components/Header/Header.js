@@ -195,16 +195,13 @@ var Header = function (_React$Component) {
       this.setHeaderHeight();
       // Listen to the scroll event for the sticky header.
       window.addEventListener('scroll', this.handleStickyHeader, false);
-
+      // Set the log out link to state
+      this.setLogOutLink(window.location.href);
       // Set nyplIdentityPatron cookie to the state.
       this.setLoginCookie(this.state.loginCookieName);
-
       // Set feature flag cookies to the state
       // We don't have any feature flags set in the config list at this moment though
       _utils2.default.checkFeatureFlagActivated(_featureFlagConfig2.default.featureFlagList, this.state.isFeatureFlagsActivated);
-
-      // Set the log out link
-      this.setLogOutLink(window.location.href);
     }
   }, {
     key: 'componentWillUnmount',
@@ -329,7 +326,7 @@ var Header = function (_React$Component) {
         }
       }, _appConfig2.default.loginMyNyplLinks.tokenRefreshLink, function () {
         _this3.setLoginCookie(_this3.state.loginCookieName);
-      }, this.state.logOutUrl);
+      });
     }
 
     /**

@@ -4,7 +4,7 @@ This repository is for the header component used in React applications at NYPL.
 
 ### Version
 
-2.1.0
+2.1.1
 
 ### App Installation
 
@@ -178,6 +178,10 @@ $ NODE_ENV=production npm start
 
 Please go to NYPL/dgx-feature-flags repository for the step-by-step instruction.
 https://bitbucket.org/NYPL/dgx-feature-flags
+
+### How the Patron Log in Cookie Works
+
+We use a specific NYPL patron log in cookie to decide the logged in status. For more details, please see PATRONCOOKIE.md
 
 ### Contribute
 

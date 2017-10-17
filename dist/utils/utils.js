@@ -105,6 +105,16 @@ function Utils() {
   this.trackHeader = _dgxReactGa.gaUtils.trackEvent('Global Header');
 
   /**
+   * trackHeaderSiteSearch(action, label)
+   * Test to track a GA click event for google site search, where action and label come from
+   * the higher level function call from _trackEvent().
+   *
+   * @param {string} action - Action for GA event.
+   * @param {string} label - Label for GA event.
+   */
+  this.trackHeaderSiteSearch = _dgxReactGa.gaUtils.trackEvent('send');
+
+  /**
    * encodeURI(sKey)
    * Enocode the cookie response.
    *

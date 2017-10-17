@@ -227,6 +227,10 @@ var SearchBox = function (_React$Component) {
         if (gaSearchLabel && requestUrl) {
           // Fire GA event to track Search
           _utils2.default.trackHeader('Search', gaSearchLabel);
+
+          // A second GA for parsing the queries easier
+          _utils2.default.trackHeaderSiteSearch('pageview', '?q=' + searchInputValue + '&c=' + searchOptionValue);
+
           // Go to the proper search page
           window.location.assign(requestUrl);
         }

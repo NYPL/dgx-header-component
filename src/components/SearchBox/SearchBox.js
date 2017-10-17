@@ -176,6 +176,10 @@ class SearchBox extends React.Component {
       if (gaSearchLabel && requestUrl) {
         // Fire GA event to track Search
         utils.trackHeader('Search', gaSearchLabel);
+
+        // A second GA for parsing the queries easier
+        utils.trackHeaderSiteSearch('pageview', `?q=${searchInputValue}&c=${searchOptionValue}`);
+
         // Go to the proper search page
         window.location.assign(requestUrl);
       }

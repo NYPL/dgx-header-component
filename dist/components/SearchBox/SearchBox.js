@@ -229,7 +229,7 @@ var SearchBox = function (_React$Component) {
           _utils2.default.trackHeader('Search', gaSearchLabel);
 
           // A second GA for parsing the queries easier
-          _utils2.default.trackHeaderSiteSearch('pageview', '/analytics_search_query?q=' + searchInputValue + '&c=' + searchOptionValue);
+          _utils2.default.trackHeaderSiteSearch('pageview', '/analytics/search?analytics_search_q=' + searchInputValue + '&c=' + searchOptionValue);
 
           // Go to the proper search page
           window.location.assign(requestUrl);

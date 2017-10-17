@@ -178,7 +178,7 @@ class SearchBox extends React.Component {
         utils.trackHeader('Search', gaSearchLabel);
 
         // A second GA for parsing the queries easier
-        utils.trackHeaderSiteSearch('pageview', `/analytics_search_query?q=${searchInputValue}&c=${searchOptionValue}`);
+        utils.trackHeaderSiteSearch('pageview', `/analytics/search?analytics_search_q=${searchInputValue}&c=${searchOptionValue}`);
 
         // Go to the proper search page
         window.location.assign(requestUrl);

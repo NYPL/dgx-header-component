@@ -96,14 +96,13 @@ function Utils() {
   this.trackHeader = gaUtils.trackEvent('Global Header');
 
   /**
-   * trackHeaderSiteSearch(action, label)
-   * Test to track a GA click event for google site search, where action and label come from
-   * the higher level function call from _trackEvent().
+   * trackPageview(url)
+   * Track a GA pageview for GA site search, where the URL is configured
+   * to simulate a real page view when clicking submit search button.
    *
-   * @param {string} action - Action for GA event.
-   * @param {string} label - Label for GA event.
+   * @param {string} url - simulated URL.
    */
-  this.trackHeaderSiteSearch = gaUtils.trackEvent('send');
+  this.trackPageview = (url) => gaUtils.trackPageview(url);
 
   /**
    * encodeURI(sKey)

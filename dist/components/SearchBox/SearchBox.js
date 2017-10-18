@@ -228,8 +228,8 @@ var SearchBox = function (_React$Component) {
           // Fire GA event to track Search
           _utils2.default.trackHeader('Search', gaSearchLabel);
 
-          // A second GA for parsing the queries easier
-          _utils2.default.trackHeaderSiteSearch('pageview', '/analytics/search?analytics_search_q=' + searchInputValue + '&c=' + searchOptionValue);
+          // A GA pageview for Google Analytics Site Search
+          _utils2.default.trackPageview('/analytics/search?analytics_search_q=' + searchInputValue + '&c=' + searchOptionValue);
 
           // Go to the proper search page
           window.location.assign(requestUrl);

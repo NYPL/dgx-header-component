@@ -105,14 +105,15 @@ function Utils() {
   this.trackHeader = _dgxReactGa.gaUtils.trackEvent('Global Header');
 
   /**
-   * trackHeaderSiteSearch(action, label)
-   * Test to track a GA click event for google site search, where action and label come from
-   * the higher level function call from _trackEvent().
+   * trackPageview(url)
+   * Track a GA pageview for GA site search, where the URL is configured
+   * to simulate a real page view when clicking submit search button.
    *
-   * @param {string} action - Action for GA event.
-   * @param {string} label - Label for GA event.
+   * @param {string} url - simulated URL.
    */
-  this.trackHeaderSiteSearch = _dgxReactGa.gaUtils.trackEvent('send');
+  this.trackPageview = function (url) {
+    return _dgxReactGa.gaUtils.trackPageview(url);
+  };
 
   /**
    * encodeURI(sKey)

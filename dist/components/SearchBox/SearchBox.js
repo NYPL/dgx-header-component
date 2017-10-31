@@ -201,7 +201,7 @@ var SearchBox = function (_React$Component) {
       var searchOptionValue = this.state.searchOption;
       var encoreBaseUrl = 'https://browse.nypl.org/iii/encore/search/';
       var catalogBaseUrl = '//www.nypl.org/search/apachesolr_search/';
-      // For GA "Search" Catelog, "Query Sent" Action Event
+      // For GA "Search" Catalog, "Query Sent" Action Event
       // GASearchedRepo indicates which kind of search is sent
       var GASearchedRepo = 'Unknown';
 
@@ -240,7 +240,7 @@ var SearchBox = function (_React$Component) {
 
           _utils2.default.setDimensions(customDimensions);
 
-          // GA "Search" Catelog, "Query Sent" Action Event
+          // GA "Search" Catalog, "Query Sent" Action Event
           _utils2.default.trackSearchQuerySend('QuerySent', searchInputValue);
 
           // Go to the proper search page

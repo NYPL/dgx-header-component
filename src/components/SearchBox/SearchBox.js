@@ -150,7 +150,7 @@ class SearchBox extends React.Component {
     const searchOptionValue = this.state.searchOption;
     const encoreBaseUrl = 'https://browse.nypl.org/iii/encore/search/';
     const catalogBaseUrl = '//www.nypl.org/search/apachesolr_search/';
-    // For GA "Search" Catelog, "Query Sent" Action Event
+    // For GA "Search" Catalog, "Query Sent" Action Event
     // GASearchedRepo indicates which kind of search is sent
     let GASearchedRepo = 'Unknown';
 
@@ -192,7 +192,7 @@ class SearchBox extends React.Component {
 
         utils.setDimensions(customDimensions);
 
-        // GA "Search" Catelog, "Query Sent" Action Event
+        // GA "Search" Catalog, "Query Sent" Action Event
         utils.trackSearchQuerySend(
           'QuerySent',
           searchInputValue

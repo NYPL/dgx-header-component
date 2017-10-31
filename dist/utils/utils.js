@@ -118,7 +118,7 @@ function Utils() {
    * setDimensions(dimensions)
    * Set the dimensions for GA events. The scope is decided by the admin of the GA platform.
    *
-   * @param {array} dimensions - The array of dimensions. Each dimension includes two arguments:
+   * @param {array} dimensions - The array of dimensions. Each dimension includes two properties:
    * the index and the value.
    */
   this.setDimensions = function (dimensions) {

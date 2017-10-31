@@ -85,7 +85,6 @@ function Utils() {
     return formattedDate;
   };
 
-
   /**
    * trackHeader(action, label)
    * Track a GA click event, where action and label come from
@@ -116,15 +115,6 @@ function Utils() {
   this.setDimensions = (dimensions) => {
     gaUtils.setDimensions(dimensions);
   };
-
-  /**
-   * trackPageview(url)
-   * Track a GA pageview for GA site search, where the URL is configured
-   * to simulate a real page view when clicking submit search button.
-   *
-   * @param {string} url - simulated URL.
-   */
-  this.trackPageview = (url) => gaUtils.trackPageview(url);
 
   /**
    * encodeURI(sKey)

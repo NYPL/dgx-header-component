@@ -126,17 +126,6 @@ function Utils() {
   };
 
   /**
-   * trackPageview(url)
-   * Track a GA pageview for GA site search, where the URL is configured
-   * to simulate a real page view when clicking submit search button.
-   *
-   * @param {string} url - simulated URL.
-   */
-  this.trackPageview = function (url) {
-    return _dgxReactGa.gaUtils.trackPageview(url);
-  };
-
-  /**
    * encodeURI(sKey)
    * Enocode the cookie response.
    *

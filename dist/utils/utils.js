@@ -105,6 +105,27 @@ function Utils() {
   this.trackHeader = _dgxReactGa.gaUtils.trackEvent('Global Header');
 
   /**
+   * trackSearchQuerySend(action, label)
+   * Track a GA click event, where action and label come from
+   * the higher level function call from _trackEvent().
+   *
+   * @param {string} action - Action for GA event.
+   * @param {string} label - Label for GA event.
+   */
+  this.trackSearchQuerySend = _dgxReactGa.gaUtils.trackEvent('Search');
+
+  /**
+   * setDimensions(dimensions)
+   * Set the dimensions for GA events. The scope is decided by the admin of the GA platform.
+   *
+   * @param {array} dimensions - The array of dimensions. Each dimension includes two arguments:
+   * the index and the value.
+   */
+  this.setDimensions = function (dimensions) {
+    _dgxReactGa.gaUtils.setDimensions(dimensions);
+  };
+
+  /**
    * trackPageview(url)
    * Track a GA pageview for GA site search, where the URL is configured
    * to simulate a real page view when clicking submit search button.

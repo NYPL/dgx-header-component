@@ -85,6 +85,7 @@ function Utils() {
     return formattedDate;
   };
 
+
   /**
    * trackHeader(action, label)
    * Track a GA click event, where action and label come from
@@ -94,6 +95,27 @@ function Utils() {
    * @param {string} label - Label for GA event.
    */
   this.trackHeader = gaUtils.trackEvent('Global Header');
+
+  /**
+   * trackSearchQuerySend(action, label)
+   * Track a GA click event, where action and label come from
+   * the higher level function call from _trackEvent().
+   *
+   * @param {string} action - Action for GA event.
+   * @param {string} label - Label for GA event.
+   */
+  this.trackSearchQuerySend = gaUtils.trackEvent('Search');
+
+  /**
+   * setDimensions(dimensions)
+   * Set the dimensions for GA events. The scope is decided by the admin of the GA platform.
+   *
+   * @param {array} dimensions - The array of dimensions. Each dimension includes two arguments:
+   * the index and the value.
+   */
+  this.setDimensions = (dimensions) => {
+    gaUtils.setDimensions(dimensions);
+  };
 
   /**
    * trackPageview(url)

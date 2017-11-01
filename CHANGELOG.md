@@ -1,6 +1,6 @@
 ### CHANGE LOG
 
-#### v2.1.2
+#### v2.2.0
 > Adding the function to send the GA event with its Cateory as "Search" and Action as "QuerySent" when submitting a search request via the header.
 > Adding the related functions in the "utils.js" for setting dimenstions of GA events.
 

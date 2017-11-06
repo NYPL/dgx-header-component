@@ -203,6 +203,9 @@ class SearchBox extends React.Component {
         const customDimensions = [
           { index: 'dimension1', value: 'HeaderSearch' },
           { index: 'dimension2', value: GASearchedRepo },
+          // Reserved custom dimensions for the future use
+          { index: 'dimension4', value: 'NotSet' },
+          { index: 'dimension5', value: 'NotSet' },
         ];
 
         utils.setDimensions(customDimensions);

@@ -73,7 +73,7 @@ var SearchBox = function (_React$Component) {
      * generateQueriesForGA()
      * Generates the queries to be added to the URL of Encore search page. It is for the scripts
      * of GA on Encore to tell where the search request is coming from.
-     * 
+     *
      * @return {string} the queries to add to the URL for Encore search.
      */
 
@@ -247,15 +247,15 @@ var SearchBox = function (_React$Component) {
           }
         }
 
-        console.log(requestUrl);
-
         // Safety check to ensure a proper requestUrl has been defined.
         if (gaSearchLabel && requestUrl) {
           // Fire GA event to track Search
           _utils2.default.trackHeader('Search', gaSearchLabel);
 
           // Set the dimensions for the following hit
-          var customDimensions = [{ index: 'dimension1', value: 'HeaderSearch' }, { index: 'dimension2', value: GASearchedRepo }];
+          var customDimensions = [{ index: 'dimension1', value: 'HeaderSearch' }, { index: 'dimension2', value: GASearchedRepo },
+          // Reserved custom dimensions for the future use
+          { index: 'dimension4', value: 'NotSet' }, { index: 'dimension5', value: 'NotSet' }];
 
           _utils2.default.setDimensions(customDimensions);
 

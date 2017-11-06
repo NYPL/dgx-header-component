@@ -34,6 +34,20 @@ class SearchBox extends React.Component {
     return null;
   }
 
+  /**
+   * generateQueriesForGA()
+   * Generates the queries to be added to the URL of Encore search page. It is for the scripts
+   * of GA on Encore to tell where the search request is coming from.
+   *
+   * @return {string} the queries to add to the URL for Encore search.
+   */
+  generateQueriesForGA() {
+    // the time stamp here is for the purpose of telling when this search query is made.
+    const currentTimeStamp = new Date().getTime() || '';
+
+    return `&searched_from=header_search&timestamp=${currentTimeStamp}`;
+  }
+
 	/**
    * setEncoreUrl(searchInput, baseUrl, language, scopeString)
    * Returns the final URL for encore search which,
@@ -48,7 +62,8 @@ class SearchBox extends React.Component {
     let finalEncoreUrl;
 
     if (searchTerm) {
-      finalEncoreUrl = this.encoreAddScope(rootUrl, searchTerm, scopeString) + defaultLang;
+      finalEncoreUrl = this.encoreAddScope(rootUrl, searchTerm, scopeString) + defaultLang +
+        this.generateQueriesForGA();
     }
 
     return finalEncoreUrl;

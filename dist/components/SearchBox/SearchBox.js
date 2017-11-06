@@ -70,6 +70,23 @@ var SearchBox = function (_React$Component) {
     }
 
     /**
+     * generateQueriesForGA()
+     * Generates the queries to be added to the URL of Encore search page. It is for the scripts
+     * of GA on Encore to tell where the search request is coming from.
+     * 
+     * @return {string} the queries to add to the URL for Encore search.
+     */
+
+  }, {
+    key: 'generateQueriesForGA',
+    value: function generateQueriesForGA() {
+      // the time stamp here is for the purpose of telling when this search query is made.
+      var currentTimeStamp = new Date().getTime() || '';
+
+      return '&searched_from=header_search&timestamp=' + currentTimeStamp;
+    }
+
+    /**
       * setEncoreUrl(searchInput, baseUrl, language, scopeString)
       * Returns the final URL for encore search which,
       * is first encoded, then concatenated by the
@@ -86,7 +103,7 @@ var SearchBox = function (_React$Component) {
       var finalEncoreUrl = void 0;
 
       if (searchTerm) {
-        finalEncoreUrl = this.encoreAddScope(rootUrl, searchTerm, scopeString) + defaultLang;
+        finalEncoreUrl = this.encoreAddScope(rootUrl, searchTerm, scopeString) + defaultLang + this.generateQueriesForGA();
       }
 
       return finalEncoreUrl;
@@ -229,6 +246,8 @@ var SearchBox = function (_React$Component) {
             requestUrl = this.setCatalogUrl(searchInputValue, catalogBaseUrl);
           }
         }
+
+        console.log(requestUrl);
 
         // Safety check to ensure a proper requestUrl has been defined.
         if (gaSearchLabel && requestUrl) {

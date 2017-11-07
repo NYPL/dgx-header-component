@@ -34,7 +34,7 @@ if (loadA11y) {
 // Use for testing GA events
 if (!window.ga) {
   console.log('Analytics not available - loading through React.');
-  var gaOpts = { debug: true };
+  var gaOpts = { debug: true, titleCase: false };
   // Passing false to get the dev GA code.
   _dgxReactGa.ga.initialize(_dgxReactGa.config.google.code(false), gaOpts);
 }

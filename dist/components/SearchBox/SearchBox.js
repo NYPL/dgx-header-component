@@ -68,22 +68,16 @@ var SearchBox = function (_React$Component) {
       }
       return null;
     }
-
-    /**
-     * generateQueriesForGA()
-     * Generates the queries to be added to the URL of Encore search page. It is for the scripts
-     * of GA on Encore to tell where the search request is coming from.
-     *
-     * @return {string} the queries to add to the URL for Encore search.
-     */
-
   }, {
-    key: 'generateQueriesForGA',
-    value: function generateQueriesForGA() {
-      // the time stamp here is for the purpose of telling when this search query is made.
-      var currentTimeStamp = new Date().getTime();
-
-      return currentTimeStamp ? '&searched_from=header_search&timestamp=' + currentTimeStamp : '&searched_from=header_search';
+    key: 'getAnimationClass',
+    value: function getAnimationClass() {
+      if (this.state.placeholderAnimation === 'initial') {
+        return 'keywords-pulse-fade-in';
+      }
+      if (this.state.placeholderAnimation === 'sequential') {
+        return 'keywords-pulse';
+      }
+      return '';
     }
 
     /**
@@ -107,6 +101,23 @@ var SearchBox = function (_React$Component) {
       }
 
       return finalEncoreUrl;
+    }
+
+    /**
+     * generateQueriesForGA()
+     * Generates the queries to be added to the URL of Encore search page. It is for the scripts
+     * of GA on Encore to tell where the search request is coming from.
+     *
+     * @return {string} the queries to add to the URL for Encore search.
+     */
+
+  }, {
+    key: 'generateQueriesForGA',
+    value: function generateQueriesForGA() {
+      // the time stamp here is for the purpose of telling when this search query is made.
+      var currentTimeStamp = new Date().getTime();
+
+      return currentTimeStamp ? '&searched_from=header_search&timestamp=' + currentTimeStamp : '&searched_from=header_search';
     }
 
     /**
@@ -173,17 +184,6 @@ var SearchBox = function (_React$Component) {
           _this2.setState({ placeholderAnimation: null });
         }
       }, 100);
-    }
-  }, {
-    key: 'getAnimationClass',
-    value: function getAnimationClass() {
-      if (this.state.placeholderAnimation === 'initial') {
-        return 'keywords-pulse-fade-in';
-      }
-      if (this.state.placeholderAnimation === 'sequential') {
-        return 'keywords-pulse';
-      }
-      return '';
     }
   }, {
     key: 'isSearchInputValid',

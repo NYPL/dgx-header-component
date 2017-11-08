@@ -34,19 +34,14 @@ class SearchBox extends React.Component {
     return null;
   }
 
-  /**
-   * generateQueriesForGA()
-   * Generates the queries to be added to the URL of Encore search page. It is for the scripts
-   * of GA on Encore to tell where the search request is coming from.
-   *
-   * @return {string} the queries to add to the URL for Encore search.
-   */
-  generateQueriesForGA() {
-    // the time stamp here is for the purpose of telling when this search query is made.
-    const currentTimeStamp = new Date().getTime();
-
-    return (currentTimeStamp) ? `&searched_from=header_search&timestamp=${currentTimeStamp}` :
-      '&searched_from=header_search';
+  getAnimationClass() {
+    if (this.state.placeholderAnimation === 'initial') {
+      return 'keywords-pulse-fade-in';
+    }
+    if (this.state.placeholderAnimation === 'sequential') {
+      return 'keywords-pulse';
+    }
+    return '';
   }
 
 	/**
@@ -68,6 +63,21 @@ class SearchBox extends React.Component {
     }
 
     return finalEncoreUrl;
+  }
+
+  /**
+   * generateQueriesForGA()
+   * Generates the queries to be added to the URL of Encore search page. It is for the scripts
+   * of GA on Encore to tell where the search request is coming from.
+   *
+   * @return {string} the queries to add to the URL for Encore search.
+   */
+  generateQueriesForGA() {
+    // the time stamp here is for the purpose of telling when this search query is made.
+    const currentTimeStamp = new Date().getTime();
+
+    return (currentTimeStamp) ? `&searched_from=header_search&timestamp=${currentTimeStamp}` :
+      '&searched_from=header_search';
   }
 
   /**
@@ -127,16 +137,6 @@ class SearchBox extends React.Component {
         this.setState({ placeholderAnimation: null });
       }
     }, 100);
-  }
-
-  getAnimationClass() {
-    if (this.state.placeholderAnimation === 'initial') {
-      return 'keywords-pulse-fade-in';
-    }
-    if (this.state.placeholderAnimation === 'sequential') {
-      return 'keywords-pulse';
-    }
-    return '';
   }
 
   isSearchInputValid(input) {

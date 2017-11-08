@@ -36,7 +36,7 @@ if (!window.ga) {
   console.log('Analytics not available - loading through React.');
   var gaOpts = { debug: true, titleCase: false };
   // Passing false to get the dev GA code.
-  _dgxReactGa.ga.initialize(_dgxReactGa.config.google.code(false), gaOpts);
+  _dgxReactGa.gaUtils.initilize(_dgxReactGa.config.google.code(false), true, false);
 }
 
 // Used to activate/deactivate AB tests on global namespace.

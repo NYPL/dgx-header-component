@@ -3,7 +3,7 @@ import 'babel-polyfill';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ga, config, gaUtils } from 'dgx-react-ga';
+import { config, gaUtils } from 'dgx-react-ga';
 import FeatureFlags from 'dgx-feature-flags';
 import { Header, navConfig } from './components/Header/Header.js';
 import './styles/main.scss';

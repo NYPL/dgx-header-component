@@ -18,7 +18,7 @@ if (!window.ga) {
   console.log('Analytics not available - loading through React.');
   const gaOpts = { debug: true, titleCase: false };
   // Passing false to get the dev GA code.
-  gaUtils.initilize(config.google.code(false), true, false);
+  gaUtils.initialize(config.google.code(false), gaOpts);
 }
 
 // Used to activate/deactivate AB tests on global namespace.

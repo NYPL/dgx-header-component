@@ -214,7 +214,7 @@ var SearchBox = function (_React$Component) {
             requestUrl = this.setEncoreUrl(searchInputValue, encoreBaseUrl, 'eng');
           } else if (searchType === 'website') {
             gaSearchLabel = 'Submit Search';
-            GASearchedRepo = 'SiteSearch';
+            GASearchedRepo = 'DrupalSearch';
             requestUrl = this.setCatalogUrl(searchInputValue, catalogBaseUrl);
           }
         } else {
@@ -225,7 +225,7 @@ var SearchBox = function (_React$Component) {
             requestUrl = this.setEncoreUrl(searchInputValue, encoreBaseUrl, 'eng');
           } else if (searchOptionValue === 'website') {
             gaSearchLabel = 'Submit Search';
-            GASearchedRepo = 'SiteSearch';
+            GASearchedRepo = 'DrupalSearch';
             requestUrl = this.setCatalogUrl(searchInputValue, catalogBaseUrl);
           }
         }

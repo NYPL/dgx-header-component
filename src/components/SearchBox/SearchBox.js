@@ -43,9 +43,10 @@ class SearchBox extends React.Component {
    */
   generateQueriesForGA() {
     // the time stamp here is for the purpose of telling when this search query is made.
-    const currentTimeStamp = new Date().getTime() || '';
+    const currentTimeStamp = new Date().getTime();
 
-    return `&searched_from=header_search&timestamp=${currentTimeStamp}`;
+    return (currentTimeStamp) ? `&searched_from=header_search&timestamp=${currentTimeStamp}` :
+      '&searched_from=header_search';
   }
 
 	/**

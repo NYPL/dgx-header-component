@@ -81,9 +81,9 @@ var SearchBox = function (_React$Component) {
     key: 'generateQueriesForGA',
     value: function generateQueriesForGA() {
       // the time stamp here is for the purpose of telling when this search query is made.
-      var currentTimeStamp = new Date().getTime() || '';
+      var currentTimeStamp = new Date().getTime();
 
-      return '&searched_from=header_search&timestamp=' + currentTimeStamp;
+      return currentTimeStamp ? '&searched_from=header_search&timestamp=' + currentTimeStamp : '&searched_from=header_search';
     }
 
     /**

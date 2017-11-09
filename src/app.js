@@ -16,9 +16,10 @@ if (loadA11y) {
 // Use for testing GA events
 if (!window.ga) {
   console.log('Analytics not available - loading through React.');
-  const gaOpts = { debug: true, titleCase: false };
+  const gaOpts = { debug: isDev, titleCase: false };
+
   // Passing false to get the dev GA code.
-  gaUtils.initialize(config.google.code(false), gaOpts);
+  gaUtils.initialize(config.google.code(!isDev), gaOpts);
 }
 
 // Used to activate/deactivate AB tests on global namespace.

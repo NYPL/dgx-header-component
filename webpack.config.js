@@ -82,7 +82,7 @@ if (process.env.NODE_ENV !== 'development') {
       new webpack.HotModuleReplacementPlugin(),
       new webpack.DefinePlugin({
         loadA11y: process.env.loadA11y || false,
-        isDev: true,
+        nodeEnv: JSON.stringify('development'),
       }),
     ],
     resolve: {

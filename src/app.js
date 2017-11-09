@@ -16,10 +16,11 @@ if (loadA11y) {
 // Use for testing GA events
 if (!window.ga) {
   console.log('Analytics not available - loading through React.');
-  const gaOpts = { debug: isDev, titleCase: false };
+  const isProd = nodeEnv === 'production';
+  const gaOpts = { debug: !isProd, titleCase: false };
 
   // Passing false to get the dev GA code.
-  gaUtils.initialize(config.google.code(!isDev), gaOpts);
+  gaUtils.initialize(config.google.code(isProd), gaOpts);
 }
 
 // Used to activate/deactivate AB tests on global namespace.

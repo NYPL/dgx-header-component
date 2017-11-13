@@ -201,24 +201,31 @@ var SearchBox = function (_React$Component) {
       var searchOptionValue = this.state.searchOption;
       var encoreBaseUrl = 'https://browse.nypl.org/iii/encore/search/';
       var catalogBaseUrl = '//www.nypl.org/search/apachesolr_search/';
+      // For GA "Search" Catalog, "Query Sent" Action Event
+      // GASearchedRepo indicates which kind of search is sent
+      var GASearchedRepo = 'Unknown';
 
       if (this.isSearchInputValid(searchInputValue)) {
         // Explicit checks for mobile search
         if (this.props.type === 'mobile') {
           if (searchType === 'catalog') {
             gaSearchLabel = 'Submit Catalog Search';
+            GASearchedRepo = 'Encore';
             requestUrl = this.setEncoreUrl(searchInputValue, encoreBaseUrl, 'eng');
           } else if (searchType === 'website') {
             gaSearchLabel = 'Submit Search';
+            GASearchedRepo = 'DrupalSearch';
             requestUrl = this.setCatalogUrl(searchInputValue, catalogBaseUrl);
           }
         } else {
           // Explicit checks for desktop search
           if (searchOptionValue === 'catalog') {
             gaSearchLabel = 'Submit Catalog Search';
+            GASearchedRepo = 'Encore';
             requestUrl = this.setEncoreUrl(searchInputValue, encoreBaseUrl, 'eng');
           } else if (searchOptionValue === 'website') {
             gaSearchLabel = 'Submit Search';
+            GASearchedRepo = 'DrupalSearch';
             requestUrl = this.setCatalogUrl(searchInputValue, catalogBaseUrl);
           }
         }
@@ -227,6 +234,15 @@ var SearchBox = function (_React$Component) {
         if (gaSearchLabel && requestUrl) {
           // Fire GA event to track Search
           _utils2.default.trackHeader('Search', gaSearchLabel);
+
+          // Set the dimensions for the following hit
+          var customDimensions = [{ index: 'dimension1', value: 'HeaderSearch' }, { index: 'dimension2', value: GASearchedRepo }];
+
+          _utils2.default.setDimensions(customDimensions);
+
+          // GA "Search" Catalog, "Query Sent" Action Event
+          _utils2.default.trackSearchQuerySend('QuerySent', searchInputValue);
+
           // Go to the proper search page
           window.location.assign(requestUrl);
         }

@@ -150,24 +150,31 @@ class SearchBox extends React.Component {
     const searchOptionValue = this.state.searchOption;
     const encoreBaseUrl = 'https://browse.nypl.org/iii/encore/search/';
     const catalogBaseUrl = '//www.nypl.org/search/apachesolr_search/';
+    // For GA "Search" Catalog, "Query Sent" Action Event
+    // GASearchedRepo indicates which kind of search is sent
+    let GASearchedRepo = 'Unknown';
 
     if (this.isSearchInputValid(searchInputValue)) {
       // Explicit checks for mobile search
       if (this.props.type === 'mobile') {
         if (searchType === 'catalog') {
           gaSearchLabel = 'Submit Catalog Search';
+          GASearchedRepo = 'Encore';
           requestUrl = this.setEncoreUrl(searchInputValue, encoreBaseUrl, 'eng');
         } else if (searchType === 'website') {
           gaSearchLabel = 'Submit Search';
+          GASearchedRepo = 'DrupalSearch';
           requestUrl = this.setCatalogUrl(searchInputValue, catalogBaseUrl);
         }
       } else {
         // Explicit checks for desktop search
         if (searchOptionValue === 'catalog') {
           gaSearchLabel = 'Submit Catalog Search';
+          GASearchedRepo = 'Encore';
           requestUrl = this.setEncoreUrl(searchInputValue, encoreBaseUrl, 'eng');
         } else if (searchOptionValue === 'website') {
           gaSearchLabel = 'Submit Search';
+          GASearchedRepo = 'DrupalSearch';
           requestUrl = this.setCatalogUrl(searchInputValue, catalogBaseUrl);
         }
       }
@@ -176,6 +183,21 @@ class SearchBox extends React.Component {
       if (gaSearchLabel && requestUrl) {
         // Fire GA event to track Search
         utils.trackHeader('Search', gaSearchLabel);
+
+        // Set the dimensions for the following hit
+        const customDimensions = [
+          { index: 'dimension1', value: 'HeaderSearch' },
+          { index: 'dimension2', value: GASearchedRepo },
+        ];
+
+        utils.setDimensions(customDimensions);
+
+        // GA "Search" Catalog, "Query Sent" Action Event
+        utils.trackSearchQuerySend(
+          'QuerySent',
+          searchInputValue
+        );
+
         // Go to the proper search page
         window.location.assign(requestUrl);
       }

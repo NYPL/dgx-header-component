@@ -3,7 +3,7 @@ import 'babel-polyfill';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ga, config } from 'dgx-react-ga';
+import { config, gaUtils } from 'dgx-react-ga';
 import FeatureFlags from 'dgx-feature-flags';
 import { Header, navConfig } from './components/Header/Header.js';
 import './styles/main.scss';
@@ -16,9 +16,11 @@ if (loadA11y) {
 // Use for testing GA events
 if (!window.ga) {
   console.log('Analytics not available - loading through React.');
-  const gaOpts = { debug: true };
+  const isProd = nodeEnv === 'production';
+  const gaOpts = { debug: !isProd, titleCase: false };
+
   // Passing false to get the dev GA code.
-  ga.initialize(config.google.code(false), gaOpts);
+  gaUtils.initialize(config.google.code(isProd), gaOpts);
 }
 
 // Used to activate/deactivate AB tests on global namespace.

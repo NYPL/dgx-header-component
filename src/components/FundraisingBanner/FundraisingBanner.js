@@ -20,14 +20,8 @@ class FundraisingBanner extends React.Component {
 
   componentDidMount() {
     // Only fetch data if the cookie is not set or false
-    if (utils.getCookie('closeFundraisingBanner') !== 'true') {
+    if (utils.getCookie(this.props.hideBannerCookieName) !== 'true') {
       this.fetchFundraisingData(apiUrl, this.state.bannerData);
-    }
-  }
-
-  componentWillUpdate(nextProps, nextState) {
-    if (nextState.open == true && this.state.open == false) {
-      this.props.onWillOpen();
     }
   }
 
@@ -37,15 +31,18 @@ class FundraisingBanner extends React.Component {
    * boolean to false which will hide the banner.
    */
   closeFundraisingBanner() {
-    utils.setCookie('closeFundraisingBanner', true);
+    utils.setCookie(this.props.hideBannerCookieName, true);
     this.setState({ isBannerVisible: false });
   }
 
   /**
-   * fetchFundraisingData()
+   * fetchFundraisingData(apiUrl, currentBannerData)
    * Performs a GET request to the fundraising API only if no data exists. Upon a successful GET
    * request, it will update the `isBannerVisible` boolean to true and populate the `bannerData`
    * object with the API data.
+   *
+   * @param {string} apiUrl - The API endpoint to fetch fundraising data
+   * @param {object} currentBannerData - The object containing the fundraising data
    */
   fetchFundraisingData(apiUrl, currentBannerData) {
     if (!_isEmpty(apiUrl) && _isEmpty(currentBannerData)) {
@@ -70,6 +67,12 @@ class FundraisingBanner extends React.Component {
     }
   }
 
+  /**
+   * getBackgroundImageStyles(bgImageUrl)
+   * Assigns the proper background CSS styles if the `bgImageUrl` is not empty
+   *
+   * @param {string} bgImageUrl - The full path of the background image
+   */
   getBackgroundImageStyles(bgImageUrl) {
     const styles = {};
     if (!_isEmpty(bgImageUrl)) {
@@ -79,6 +82,12 @@ class FundraisingBanner extends React.Component {
     return styles;
   }
 
+  /**
+   * renderBannerImage(imageUrl)
+   * Generates the DOM for the main fundraising image if the `imageUrl` parameter is not empty
+   *
+   * @param {string} imageUrl - The full path of the main fundraising image
+   */
   renderBannerImage(imageUrl) {
     return !_isEmpty(imageUrl) ? (
       <div className={`${this.props.className}-imageWrapper`}>
@@ -87,6 +96,12 @@ class FundraisingBanner extends React.Component {
     ) : null;
   }
 
+  /**
+   * renderBannerHeadline(headline)
+   * Generates the DOM for the headline text if the `headline` parameter is not empty
+   *
+   * @param {string} headline - String representation of the headline text
+   */
   renderBannerHeadline(headline) {
     return !_isEmpty(headline) ? (
       <span className={`${this.props.className}-headline`}>
@@ -95,6 +110,12 @@ class FundraisingBanner extends React.Component {
     ) : null;
   }
 
+  /**
+   * renderBannerDescription(desc)
+   * Generates the DOM for the description text if the `desc` parameter is not empty
+   *
+   * @param {string} desc - String representation of the description text
+   */
   renderBannerDescription(desc) {
     return !_isEmpty(desc) ? (
       <span className={`${this.props.className}-description`}>
@@ -103,7 +124,13 @@ class FundraisingBanner extends React.Component {
     ) : null;
   }
 
-  renderCloseButton(closeText) {
+  /**
+   * renderCloseButton(closeText)
+   * Generates the DOM for the description text if the `desc` parameter is not empty
+   *
+   * @param {string} closeText - String of the close text button element (default: `Close`)
+   */
+  renderCloseButton(closeText = 'Close') {
     return (
       <button
         className={`${this.props.className}-closeButton`}
@@ -134,7 +161,7 @@ class FundraisingBanner extends React.Component {
               {this.renderBannerDescription(bannerData.description)}
               <span className={`${this.props.className}-button`}>Donate</span>
             </a>
-            {this.renderCloseButton('Close')}
+            {this.renderCloseButton()}
           </div>
         }
       </div>
@@ -145,6 +172,7 @@ class FundraisingBanner extends React.Component {
 FundraisingBanner.propTypes = {
   className: PropTypes.string,
   id: PropTypes.string,
+  hideBannerCookieName: PropTypes.string.isRequired,
 };
 
 FundraisingBanner.defaultProps = {

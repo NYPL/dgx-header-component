@@ -14,6 +14,7 @@ var config = {
   alertsApiUrl: 'https://refinery.nypl.org/api/nypl/ndo/v0.1/content/alerts?filter%5Bscope%5D=all',
   fundraising: {
     apiUrl: 'https://dev-platform.nypl.org/api/v0.1/fundraising-banner',
+    experimentName: 'FundraisingFall2017',
     bgBannerImage: 'https://d3rw2mydk59brd.cloudfront.net/fundraising/snowflakes_bg_fundraising_2017.png'
   },
   socialMediaLinks: {

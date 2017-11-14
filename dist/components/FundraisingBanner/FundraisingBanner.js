@@ -61,15 +61,8 @@ var FundraisingBanner = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       // Only fetch data if the cookie is not set or false
-      if (_utils2.default.getCookie('closeFundraisingBanner') !== 'true') {
+      if (_utils2.default.getCookie(this.props.hideBannerCookieName) !== 'true') {
         this.fetchFundraisingData(apiUrl, this.state.bannerData);
-      }
-    }
-  }, {
-    key: 'componentWillUpdate',
-    value: function componentWillUpdate(nextProps, nextState) {
-      if (nextState.open == true && this.state.open == false) {
-        this.props.onWillOpen();
       }
     }
 
@@ -82,15 +75,18 @@ var FundraisingBanner = function (_React$Component) {
   }, {
     key: 'closeFundraisingBanner',
     value: function closeFundraisingBanner() {
-      _utils2.default.setCookie('closeFundraisingBanner', true);
+      _utils2.default.setCookie(this.props.hideBannerCookieName, true);
       this.setState({ isBannerVisible: false });
     }
 
     /**
-     * fetchFundraisingData()
+     * fetchFundraisingData(apiUrl, currentBannerData)
      * Performs a GET request to the fundraising API only if no data exists. Upon a successful GET
      * request, it will update the `isBannerVisible` boolean to true and populate the `bannerData`
      * object with the API data.
+     *
+     * @param {string} apiUrl - The API endpoint to fetch fundraising data
+     * @param {object} currentBannerData - The object containing the fundraising data
      */
 
   }, {
@@ -116,6 +112,14 @@ var FundraisingBanner = function (_React$Component) {
         });
       }
     }
+
+    /**
+     * getBackgroundImageStyles(bgImageUrl)
+     * Assigns the proper background CSS styles if the `bgImageUrl` is not empty
+     *
+     * @param {string} bgImageUrl - The full path of the background image
+     */
+
   }, {
     key: 'getBackgroundImageStyles',
     value: function getBackgroundImageStyles(bgImageUrl) {
@@ -126,6 +130,14 @@ var FundraisingBanner = function (_React$Component) {
 
       return styles;
     }
+
+    /**
+     * renderBannerImage(imageUrl)
+     * Generates the DOM for the main fundraising image if the `imageUrl` parameter is not empty
+     *
+     * @param {string} imageUrl - The full path of the main fundraising image
+     */
+
   }, {
     key: 'renderBannerImage',
     value: function renderBannerImage(imageUrl) {
@@ -135,6 +147,14 @@ var FundraisingBanner = function (_React$Component) {
         _react2.default.createElement('img', { src: imageUrl, alt: '' })
       ) : null;
     }
+
+    /**
+     * renderBannerHeadline(headline)
+     * Generates the DOM for the headline text if the `headline` parameter is not empty
+     *
+     * @param {string} headline - String representation of the headline text
+     */
+
   }, {
     key: 'renderBannerHeadline',
     value: function renderBannerHeadline(headline) {
@@ -144,6 +164,14 @@ var FundraisingBanner = function (_React$Component) {
         headline
       ) : null;
     }
+
+    /**
+     * renderBannerDescription(desc)
+     * Generates the DOM for the description text if the `desc` parameter is not empty
+     *
+     * @param {string} desc - String representation of the description text
+     */
+
   }, {
     key: 'renderBannerDescription',
     value: function renderBannerDescription(desc) {
@@ -153,9 +181,19 @@ var FundraisingBanner = function (_React$Component) {
         desc
       ) : null;
     }
+
+    /**
+     * renderCloseButton(closeText)
+     * Generates the DOM for the description text if the `desc` parameter is not empty
+     *
+     * @param {string} closeText - String of the close text button element (default: `Close`)
+     */
+
   }, {
     key: 'renderCloseButton',
-    value: function renderCloseButton(closeText) {
+    value: function renderCloseButton() {
+      var closeText = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Close';
+
       return _react2.default.createElement(
         'button',
         {
@@ -198,7 +236,7 @@ var FundraisingBanner = function (_React$Component) {
               'Donate'
             )
           ),
-          this.renderCloseButton('Close')
+          this.renderCloseButton()
         )
       );
     }
@@ -209,7 +247,8 @@ var FundraisingBanner = function (_React$Component) {
 
 FundraisingBanner.propTypes = {
   className: _propTypes2.default.string,
-  id: _propTypes2.default.string
+  id: _propTypes2.default.string,
+  hideBannerCookieName: _propTypes2.default.string.isRequired
 };
 
 FundraisingBanner.defaultProps = {

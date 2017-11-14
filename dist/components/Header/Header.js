@@ -25,6 +25,10 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 var _underscore = require('underscore');
 
+var _dgxFeatureFlags = require('dgx-feature-flags');
+
+var _dgxFeatureFlags2 = _interopRequireDefault(_dgxFeatureFlags);
+
 var _navConfig = require('../../navConfig.js');
 
 var _navConfig2 = _interopRequireDefault(_navConfig);
@@ -77,6 +81,10 @@ var _GlobalAlerts = require('../GlobalAlerts/GlobalAlerts.js');
 
 var _GlobalAlerts2 = _interopRequireDefault(_GlobalAlerts);
 
+var _FundraisingBanner = require('../FundraisingBanner/FundraisingBanner');
+
+var _FundraisingBanner2 = _interopRequireDefault(_FundraisingBanner);
+
 var _dgxSkipNavigationLink = require('dgx-skip-navigation-link');
 
 var _dgxSkipNavigationLink2 = _interopRequireDefault(_dgxSkipNavigationLink);
@@ -92,6 +100,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // NPM Modules
+
+// Feature FeatureFlags
 
 
 // Nav Config
@@ -181,7 +191,7 @@ var Header = function (_React$Component) {
       patronDataReceived: patron.loggedIn || false,
       isFeatureFlagsActivated: {},
       logOutUrl: ''
-    }, _HeaderStore2.default.getState());
+    }, _HeaderStore2.default.getState(), { featureFlagsStore: _dgxFeatureFlags2.default.store.getState() });
 
     _this.handleStickyHeader = _this.handleStickyHeader.bind(_this);
     return _this;
@@ -191,6 +201,8 @@ var Header = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       _HeaderStore2.default.listen(this.onChange.bind(this));
+      // Listen on FeatureFlags Store updates
+      _dgxFeatureFlags2.default.store.listen(this.onFeatureFlagsChange.bind(this));
       // Height needs to be set once the alerts (if any) are mounted.
       this.setHeaderHeight();
       // Listen to the scroll event for the sticky header.
@@ -207,6 +219,8 @@ var Header = function (_React$Component) {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
       _HeaderStore2.default.unlisten(this.onChange.bind(this));
+      // Listen on FeatureFlags Store updates
+      _dgxFeatureFlags2.default.store.unlisten(this.onFeatureFlagsChange.bind(this));
       // Removing event listener to minimize garbage collection
       window.removeEventListener('scroll', this.handleStickyHeader, false);
     }
@@ -222,6 +236,11 @@ var Header = function (_React$Component) {
         isFeatureFlagsActivated: {},
         logOutUrl: this.state.logOutUrl
       }, _HeaderStore2.default.getState()));
+    }
+  }, {
+    key: 'onFeatureFlagsChange',
+    value: function onFeatureFlagsChange() {
+      this.setState({ featureFlagsStore: _dgxFeatureFlags2.default.store.getState() });
     }
 
     /**
@@ -495,7 +514,8 @@ var Header = function (_React$Component) {
             logOutLink: this.state.logOutUrl,
             gaAction: gaAction
           })
-        )
+        ),
+        _dgxFeatureFlags2.default.store._isFeatureActive('isFundraisingActive') && _react2.default.createElement(_FundraisingBanner2.default, null)
       );
     }
   }]);

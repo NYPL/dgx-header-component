@@ -60,7 +60,7 @@ const styles = {
   },
   locationsLink: {
     margin: 0,
-    padding: '12px 13px',
+    padding: '11px 13px',
     display: 'inline-block',
     color: '#000',
     backgroundColor: '#FFF',

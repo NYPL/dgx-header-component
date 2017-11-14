@@ -1,5 +1,9 @@
 ### CHANGE LOG
 
+#### v2.2.0
+> Adding the function to send the GA event with its Category as "Search" and Action as "QuerySent" when submitting a search request via the header.
+> Adding the related functions in the "utils.js" for setting dimenstions of GA events.
+
 #### v2.1.1
 > Updating the mechanism for handling failed cookie refreshing process. Now it will delete the cookie of `nyplIdentityPatron` if it receives an error from the refresh token API.
 > Adding PATRONCOOKIE.md for the information of how `nyplIdentityPatron` and log in work.

@@ -68,6 +68,17 @@ var SearchBox = function (_React$Component) {
       }
       return null;
     }
+  }, {
+    key: 'getAnimationClass',
+    value: function getAnimationClass() {
+      if (this.state.placeholderAnimation === 'initial') {
+        return 'keywords-pulse-fade-in';
+      }
+      if (this.state.placeholderAnimation === 'sequential') {
+        return 'keywords-pulse';
+      }
+      return '';
+    }
 
     /**
       * setEncoreUrl(searchInput, baseUrl, language, scopeString)
@@ -86,10 +97,27 @@ var SearchBox = function (_React$Component) {
       var finalEncoreUrl = void 0;
 
       if (searchTerm) {
-        finalEncoreUrl = this.encoreAddScope(rootUrl, searchTerm, scopeString) + defaultLang;
+        finalEncoreUrl = this.encoreAddScope(rootUrl, searchTerm, scopeString) + defaultLang + this.generateQueriesForGA();
       }
 
       return finalEncoreUrl;
+    }
+
+    /**
+     * generateQueriesForGA()
+     * Generates the queries to be added to the URL of Encore search page. It is for the scripts
+     * of GA on Encore to tell where the search request is coming from.
+     *
+     * @return {string} the queries to add to the URL for Encore search.
+     */
+
+  }, {
+    key: 'generateQueriesForGA',
+    value: function generateQueriesForGA() {
+      // the time stamp here is for the purpose of telling when this search query is made.
+      var currentTimeStamp = new Date().getTime();
+
+      return currentTimeStamp ? '&searched_from=header_search&timestamp=' + currentTimeStamp : '&searched_from=header_search';
     }
 
     /**
@@ -158,17 +186,6 @@ var SearchBox = function (_React$Component) {
       }, 100);
     }
   }, {
-    key: 'getAnimationClass',
-    value: function getAnimationClass() {
-      if (this.state.placeholderAnimation === 'initial') {
-        return 'keywords-pulse-fade-in';
-      }
-      if (this.state.placeholderAnimation === 'sequential') {
-        return 'keywords-pulse';
-      }
-      return '';
-    }
-  }, {
     key: 'isSearchInputValid',
     value: function isSearchInputValid(input) {
       return input !== '';
@@ -201,24 +218,31 @@ var SearchBox = function (_React$Component) {
       var searchOptionValue = this.state.searchOption;
       var encoreBaseUrl = 'https://browse.nypl.org/iii/encore/search/';
       var catalogBaseUrl = '//www.nypl.org/search/apachesolr_search/';
+      // For GA "Search" Catalog, "Query Sent" Action Event
+      // GASearchedRepo indicates which kind of search is sent
+      var GASearchedRepo = 'Unknown';
 
       if (this.isSearchInputValid(searchInputValue)) {
         // Explicit checks for mobile search
         if (this.props.type === 'mobile') {
           if (searchType === 'catalog') {
             gaSearchLabel = 'Submit Catalog Search';
+            GASearchedRepo = 'Encore';
             requestUrl = this.setEncoreUrl(searchInputValue, encoreBaseUrl, 'eng');
           } else if (searchType === 'website') {
             gaSearchLabel = 'Submit Search';
+            GASearchedRepo = 'DrupalSearch';
             requestUrl = this.setCatalogUrl(searchInputValue, catalogBaseUrl);
           }
         } else {
           // Explicit checks for desktop search
           if (searchOptionValue === 'catalog') {
             gaSearchLabel = 'Submit Catalog Search';
+            GASearchedRepo = 'Encore';
             requestUrl = this.setEncoreUrl(searchInputValue, encoreBaseUrl, 'eng');
           } else if (searchOptionValue === 'website') {
             gaSearchLabel = 'Submit Search';
+            GASearchedRepo = 'DrupalSearch';
             requestUrl = this.setCatalogUrl(searchInputValue, catalogBaseUrl);
           }
         }
@@ -227,6 +251,17 @@ var SearchBox = function (_React$Component) {
         if (gaSearchLabel && requestUrl) {
           // Fire GA event to track Search
           _utils2.default.trackHeader('Search', gaSearchLabel);
+
+          // Set the dimensions for the following hit
+          var customDimensions = [{ index: 'dimension1', value: 'HeaderSearch' }, { index: 'dimension2', value: GASearchedRepo },
+          // Reserved custom dimensions for the future use
+          { index: 'dimension4', value: 'NotSet' }, { index: 'dimension5', value: 'NotSet' }];
+
+          _utils2.default.setDimensions(customDimensions);
+
+          // GA "Search" Catalog, "Query Sent" Action Event
+          _utils2.default.trackSearchQuerySend('QuerySent', searchInputValue);
+
           // Go to the proper search page
           window.location.assign(requestUrl);
         }

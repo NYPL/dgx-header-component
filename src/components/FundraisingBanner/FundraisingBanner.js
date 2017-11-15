@@ -4,7 +4,7 @@ import { isEmpty as _isEmpty } from 'underscore';
 import axios from 'axios';
 import utils from '../../utils/utils';
 import config from '../../appConfig.js';
-const { fundraising: { apiUrl, bgBannerImage } } = config;
+const { fundraising: { apiUrl, bgBannerImages, bgBannerImages_2  } } = config;
 
 class FundraisingBanner extends React.Component {
   constructor(props) {
@@ -73,10 +73,13 @@ class FundraisingBanner extends React.Component {
    *
    * @param {string} bgImageUrl - The full path of the background image
    */
-  getBackgroundImageStyles(bgImageUrl) {
+  getBackgroundImageStyles(bgImageUrl, bgImageUrl2) {
     const styles = {};
     if (!_isEmpty(bgImageUrl)) {
-      styles.background = `#07818d url(${bgImageUrl}) repeat-x 35% 0%`;
+      styles.backgroundColor = `#07818d`;
+      styles.backgroundImage = `url(${bgImageUrl}), url(${bgImageUrl}), url(${bgImageUrl2})`;
+      styles.backgroundRepeat = `repeat-x, repeat-x, repeat`;
+      styles.backgroundPosition = `0 150%, 55% -110%, 50% 50%`;
     }
 
     return styles;
@@ -149,7 +152,7 @@ class FundraisingBanner extends React.Component {
       <div
         className={`${this.props.className} ${animationClass}`}
         id={this.props.id}
-        style={this.getBackgroundImageStyles(bgBannerImage)}
+        style={this.getBackgroundImageStyles(bgBannerImages, bgBannerImages_2)}
       >
         { !_isEmpty(bannerData) &&
           <div

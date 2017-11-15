@@ -38,7 +38,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var _config$fundraising = _appConfig2.default.fundraising,
     apiUrl = _config$fundraising.apiUrl,
-    bgBannerImage = _config$fundraising.bgBannerImage;
+    bgBannerImages = _config$fundraising.bgBannerImages,
+    bgBannerImages_2 = _config$fundraising.bgBannerImages_2;
 
 var FundraisingBanner = function (_React$Component) {
   _inherits(FundraisingBanner, _React$Component);
@@ -122,10 +123,14 @@ var FundraisingBanner = function (_React$Component) {
 
   }, {
     key: 'getBackgroundImageStyles',
-    value: function getBackgroundImageStyles(bgImageUrl) {
+    value: function getBackgroundImageStyles(bgImageUrl, bgImageUrl2) {
       var styles = {};
       if (!(0, _underscore.isEmpty)(bgImageUrl)) {
-        styles.background = '#07818d url(' + bgImageUrl + ') repeat-x 35% 0%';
+        styles.backgroundColor = '#07818d';
+        styles.backgroundImage = 'url(' + bgImageUrl + '), url(' + bgImageUrl + '), url(' + bgImageUrl2 + ')';
+        styles.backgroundRepeat = 'repeat-x, repeat-x, repeat';
+        styles.backgroundPosition = '0 150%, 55% -110%, 50% 50%';
+        styles.color = 'red';
       }
 
       return styles;
@@ -217,7 +222,7 @@ var FundraisingBanner = function (_React$Component) {
         {
           className: this.props.className + ' ' + animationClass,
           id: this.props.id,
-          style: this.getBackgroundImageStyles(bgBannerImage)
+          style: this.getBackgroundImageStyles(bgBannerImages, bgBannerImages_2)
         },
         !(0, _underscore.isEmpty)(bannerData) && _react2.default.createElement(
           'div',

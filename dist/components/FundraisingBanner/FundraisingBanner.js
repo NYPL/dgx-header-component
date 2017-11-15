@@ -130,7 +130,6 @@ var FundraisingBanner = function (_React$Component) {
         styles.backgroundImage = 'url(' + bgImageUrl + '), url(' + bgImageUrl + '), url(' + bgImageUrl2 + ')';
         styles.backgroundRepeat = 'repeat-x, repeat-x, repeat';
         styles.backgroundPosition = '0 150%, 55% -110%, 50% 50%';
-        styles.color = 'red';
       }
 
       return styles;

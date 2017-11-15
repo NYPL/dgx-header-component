@@ -51,6 +51,8 @@
   &-description {
     display: block;
     color: #FFF;
+    text-shadow: 2px 2px 5px rgba(100, 100, 100, 0.75);
+
     @include min-screen(769px) {
       display: inline-block;
       position: absolute;

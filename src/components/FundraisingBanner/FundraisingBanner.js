@@ -76,10 +76,10 @@ class FundraisingBanner extends React.Component {
   getBackgroundImageStyles(bgImageUrl, bgImageUrl2) {
     const styles = {};
     if (!_isEmpty(bgImageUrl)) {
-      styles.backgroundColor = `#07818d`;
+      styles.backgroundColor = '#07818d';
       styles.backgroundImage = `url(${bgImageUrl}), url(${bgImageUrl}), url(${bgImageUrl2})`;
-      styles.backgroundRepeat = `repeat-x, repeat-x, repeat`;
-      styles.backgroundPosition = `0 150%, 55% -110%, 50% 50%`;
+      styles.backgroundRepeat = 'repeat-x, repeat-x, repeat';
+      styles.backgroundPosition = '0 150%, 55% -110%, 50% 50%';
     }
 
     return styles;

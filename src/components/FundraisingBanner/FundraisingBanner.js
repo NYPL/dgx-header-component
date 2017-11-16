@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { isEmpty as _isEmpty } from 'underscore';
 import axios from 'axios';
 import utils from '../../utils/utils';
-import config from '../../appConfig.js';
+import config from '../../appConfig';
 const { fundraising: { apiUrl, bgBannerImage } } = config;
 
 class FundraisingBanner extends React.Component {
@@ -11,7 +11,7 @@ class FundraisingBanner extends React.Component {
     super(props);
 
     this.state = {
-      bannerData: {},
+      bannerData: props.bannerData,
       isBannerVisible: false,
     };
 
@@ -31,7 +31,7 @@ class FundraisingBanner extends React.Component {
    * boolean to false which will hide the banner.
    */
   closeFundraisingBanner() {
-    utils.setCookie(this.props.hideBannerCookieName, true);
+    utils.setCookie(this.props.hideBannerCookieName, 'true');
     this.setState({ isBannerVisible: false });
   }
 
@@ -51,6 +51,8 @@ class FundraisingBanner extends React.Component {
         .then(result => {
           if (result.data) {
             this.setState({ bannerData: result.data, isBannerVisible: true });
+          } else {
+            console.warn(`Missing response from GET request: ${apiUrl}`, result);
           }
         })
         .catch(error => {
@@ -143,11 +145,10 @@ class FundraisingBanner extends React.Component {
 
   render() {
     const { bannerData, isBannerVisible } = this.state;
-    const animationClass = isBannerVisible ? 'show': '';
 
     return (
       <div
-        className={`${this.props.className} ${animationClass}`}
+        className={`${this.props.className} ${isBannerVisible ? 'show': ''}`}
         id={this.props.id}
         style={this.getBackgroundImageStyles(bgBannerImage)}
       >
@@ -172,12 +173,14 @@ class FundraisingBanner extends React.Component {
 FundraisingBanner.propTypes = {
   className: PropTypes.string,
   id: PropTypes.string,
+  bannerData: PropTypes.object,
   hideBannerCookieName: PropTypes.string.isRequired,
 };
 
 FundraisingBanner.defaultProps = {
   className: 'FundraisingBanner',
   id: 'FundraisingBanner',
+  bannerData: {},
 };
 
 export default FundraisingBanner;

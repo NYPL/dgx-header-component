@@ -24,7 +24,7 @@ var _utils = require('../../utils/utils');
 
 var _utils2 = _interopRequireDefault(_utils);
 
-var _appConfig = require('../../appConfig.js');
+var _appConfig = require('../../appConfig');
 
 var _appConfig2 = _interopRequireDefault(_appConfig);
 
@@ -49,7 +49,7 @@ var FundraisingBanner = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (FundraisingBanner.__proto__ || Object.getPrototypeOf(FundraisingBanner)).call(this, props));
 
     _this.state = {
-      bannerData: {},
+      bannerData: props.bannerData,
       isBannerVisible: false
     };
 
@@ -75,7 +75,7 @@ var FundraisingBanner = function (_React$Component) {
   }, {
     key: 'closeFundraisingBanner',
     value: function closeFundraisingBanner() {
-      _utils2.default.setCookie(this.props.hideBannerCookieName, true);
+      _utils2.default.setCookie(this.props.hideBannerCookieName, 'true');
       this.setState({ isBannerVisible: false });
     }
 
@@ -98,6 +98,8 @@ var FundraisingBanner = function (_React$Component) {
         return _axios2.default.get(apiUrl).then(function (result) {
           if (result.data) {
             _this2.setState({ bannerData: result.data, isBannerVisible: true });
+          } else {
+            console.warn('Missing response from GET request: ' + apiUrl, result);
           }
         }).catch(function (error) {
           console.warn('Error on Axios GET request: ' + apiUrl);
@@ -210,12 +212,11 @@ var FundraisingBanner = function (_React$Component) {
           bannerData = _state.bannerData,
           isBannerVisible = _state.isBannerVisible;
 
-      var animationClass = isBannerVisible ? 'show' : '';
 
       return _react2.default.createElement(
         'div',
         {
-          className: this.props.className + ' ' + animationClass,
+          className: this.props.className + ' ' + (isBannerVisible ? 'show' : ''),
           id: this.props.id,
           style: this.getBackgroundImageStyles(bgBannerImage)
         },
@@ -248,12 +249,14 @@ var FundraisingBanner = function (_React$Component) {
 FundraisingBanner.propTypes = {
   className: _propTypes2.default.string,
   id: _propTypes2.default.string,
+  bannerData: _propTypes2.default.object,
   hideBannerCookieName: _propTypes2.default.string.isRequired
 };
 
 FundraisingBanner.defaultProps = {
   className: 'FundraisingBanner',
-  id: 'FundraisingBanner'
+  id: 'FundraisingBanner',
+  bannerData: {}
 };
 
 exports.default = FundraisingBanner;

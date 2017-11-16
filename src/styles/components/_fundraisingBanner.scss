@@ -2,8 +2,6 @@
   max-height: 0;
   overflow: hidden;
   @include transition(max-height .75s linear);
-  animation: animatedBackground 15s linear alternate infinite;
-  overflow: hidden;
 
   * {
     margin-top: 0;
@@ -165,9 +163,4 @@
     font-size: 12px;
     padding: 5px 7px;
   }
-}
-
-@keyframes animatedBackground {
-  0% { background-position-x: 0; }
-  100% { background-position-x: -100%; }
 }

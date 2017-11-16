@@ -15,8 +15,8 @@ var config = {
   fundraising: {
     apiUrl: 'https://dev-platform.nypl.org/api/v0.1/fundraising-banner',
     experimentName: 'FundraisingFall2017',
-    bgBannerImages: 'http://127.0.0.1:5678/snowflake_wht_bg.png',
-    bgBannerImages_2: 'http://127.0.0.1:5678/snowflake__teal_bg.png'
+    bgBannerImage: 'https://d2znry4lg8s0tq.cloudfront.net/fundraising/snowflake_wht_bg.png',
+    bgBannerImage_2: 'https://d2znry4lg8s0tq.cloudfront.net/fundraising/snowflake_teal_bg.png'
   },
   socialMediaLinks: {
     facebook: 'https://www.facebook.com/nypl',

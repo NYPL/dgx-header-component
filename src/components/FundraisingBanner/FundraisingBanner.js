@@ -4,7 +4,7 @@ import { isEmpty as _isEmpty } from 'underscore';
 import axios from 'axios';
 import utils from '../../utils/utils';
 import config from '../../appConfig.js';
-const { fundraising: { apiUrl, bgBannerImages, bgBannerImages_2  } } = config;
+const { fundraising: { apiUrl, bgBannerImage, bgBannerImage_2  } } = config;
 
 class FundraisingBanner extends React.Component {
   constructor(props) {
@@ -152,7 +152,7 @@ class FundraisingBanner extends React.Component {
       <div
         className={`${this.props.className} ${animationClass}`}
         id={this.props.id}
-        style={this.getBackgroundImageStyles(bgBannerImages, bgBannerImages_2)}
+        style={this.getBackgroundImageStyles(bgBannerImage, bgBannerImage_2)}
       >
         { !_isEmpty(bannerData) &&
           <div

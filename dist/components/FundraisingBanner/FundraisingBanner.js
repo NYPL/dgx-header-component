@@ -38,8 +38,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var _config$fundraising = _appConfig2.default.fundraising,
     apiUrl = _config$fundraising.apiUrl,
-    bgBannerImages = _config$fundraising.bgBannerImages,
-    bgBannerImages_2 = _config$fundraising.bgBannerImages_2;
+    bgBannerImage = _config$fundraising.bgBannerImage,
+    bgBannerImage_2 = _config$fundraising.bgBannerImage_2;
 
 var FundraisingBanner = function (_React$Component) {
   _inherits(FundraisingBanner, _React$Component);
@@ -221,7 +221,7 @@ var FundraisingBanner = function (_React$Component) {
         {
           className: this.props.className + ' ' + animationClass,
           id: this.props.id,
-          style: this.getBackgroundImageStyles(bgBannerImages, bgBannerImages_2)
+          style: this.getBackgroundImageStyles(bgBannerImage, bgBannerImage_2)
         },
         !(0, _underscore.isEmpty)(bannerData) && _react2.default.createElement(
           'div',

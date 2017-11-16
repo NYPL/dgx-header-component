@@ -36,6 +36,8 @@
 
   &-imageWrapper {
     display: none;
+    line-height: 0;
+
     @include min-screen(769px) {
       display: inline-block;
       width: 250px;

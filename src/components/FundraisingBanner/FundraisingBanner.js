@@ -4,7 +4,8 @@ import { isEmpty as _isEmpty } from 'underscore';
 import axios from 'axios';
 import utils from '../../utils/utils';
 import config from '../../appConfig';
-const { fundraising: { apiUrl, primaryBackgroundImage, secondaryBackgroundImage  } } = config;
+// Fundraising configuration variables
+const { fundraising: { apiUrl, primaryBgImage, secondaryBgImage, cookieExpInSeconds } } = config;
 
 class FundraisingBanner extends React.Component {
   constructor(props) {
@@ -31,7 +32,7 @@ class FundraisingBanner extends React.Component {
    * boolean to false which will hide the banner.
    */
   closeFundraisingBanner() {
-    utils.setCookie(this.props.hideBannerCookieName, 'true');
+    utils.setCookie(this.props.hideBannerCookieName, 'true', cookieExpInSeconds);
     this.setState({ isBannerVisible: false });
   }
 
@@ -73,19 +74,19 @@ class FundraisingBanner extends React.Component {
    * getBackgroundImageStyles(bgImageUrl)
    * Assigns the proper background CSS styles if the `bgImageUrl` is not empty
    *
-   * @param {string} primaryBgImage - The full path of the primary background image
-   * @param {string} secondaryBgImage - The full path of the secondary background image
+   * @param {string} primaryImage - The full path of the primary background image
+   * @param {string} secondaryImage - The full path of the secondary background image
    */
-  getBackgroundImageStyles(primaryBgImage, secondaryBgImage) {
+  getBackgroundImageStyles(primaryImage, secondaryImage) {
     const styles = { backgroundColor: '#07818d' };
 
-    if (!_isEmpty(primaryBgImage)) {
-      if (_isEmpty(secondaryBgImage)) {
-        styles.backgroundImage = `url(${primaryBgImage}), url(${primaryBgImage})`;
+    if (!_isEmpty(primaryImage)) {
+      if (_isEmpty(secondaryImage)) {
+        styles.backgroundImage = `url(${primaryImage}), url(${primaryImage})`;
         styles.backgroundRepeat = 'repeat-x, repeat-x';
         styles.backgroundPosition = '0 150%, 55% -110%';
       } else {
-        styles.backgroundImage = `url(${primaryBgImage}), url(${primaryBgImage}), url(${secondaryBgImage})`;
+        styles.backgroundImage = `url(${primaryImage}), url(${primaryImage}), url(${secondaryImage})`;
         styles.backgroundRepeat = 'repeat-x, repeat-x, repeat';
         styles.backgroundPosition = '0 150%, 55% -110%, 50% 50%';
       }
@@ -160,7 +161,7 @@ class FundraisingBanner extends React.Component {
       <div
         className={`${this.props.className} ${isBannerVisible ? 'show': ''}`}
         id={this.props.id}
-        style={this.getBackgroundImageStyles(primaryBackgroundImage, secondaryBackgroundImage)}
+        style={this.getBackgroundImageStyles(primaryBgImage, secondaryBgImage)}
       >
         { !_isEmpty(bannerData) &&
           <div

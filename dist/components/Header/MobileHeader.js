@@ -106,7 +106,7 @@ var styles = {
   },
   myNyplButton: {
     margin: 0,
-    padding: '13px',
+    padding: '12px 13px',
     display: 'inline-block',
     border: 'none',
     lineHeight: 'normal',
@@ -130,7 +130,7 @@ var styles = {
   },
   searchButton: {
     margin: 0,
-    padding: '13px',
+    padding: '12px 13px',
     display: 'inline-block',
     border: 'none',
     lineHeight: 'normal',
@@ -155,7 +155,7 @@ var styles = {
   },
   menuButton: {
     margin: 0,
-    padding: '13px',
+    padding: '12px 13px',
     display: 'inline-block',
     border: 'none',
     lineHeight: 'normal',

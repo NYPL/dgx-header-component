@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import { isEmpty as _isEmpty } from 'underscore';
 import axios from 'axios';
 import utils from '../../utils/utils';
-import config from '../../appConfig.js';
-const { fundraising: { apiUrl, bgBannerImage, bgBannerImage_2  } } = config;
+import config from '../../appConfig';
+const { fundraising: { apiUrl, primaryBackgroundImage, secondaryBackgroundImage  } } = config;
 
 class FundraisingBanner extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      bannerData: {},
+      bannerData: props.bannerData,
       isBannerVisible: false,
     };
 
@@ -31,7 +31,7 @@ class FundraisingBanner extends React.Component {
    * boolean to false which will hide the banner.
    */
   closeFundraisingBanner() {
-    utils.setCookie(this.props.hideBannerCookieName, true);
+    utils.setCookie(this.props.hideBannerCookieName, 'true');
     this.setState({ isBannerVisible: false });
   }
 
@@ -51,6 +51,8 @@ class FundraisingBanner extends React.Component {
         .then(result => {
           if (result.data) {
             this.setState({ bannerData: result.data, isBannerVisible: true });
+          } else {
+            console.warn(`Missing response from GET request: ${apiUrl}`, result);
           }
         })
         .catch(error => {
@@ -71,15 +73,22 @@ class FundraisingBanner extends React.Component {
    * getBackgroundImageStyles(bgImageUrl)
    * Assigns the proper background CSS styles if the `bgImageUrl` is not empty
    *
-   * @param {string} bgImageUrl - The full path of the background image
+   * @param {string} primaryBgImage - The full path of the primary background image
+   * @param {string} secondaryBgImage - The full path of the secondary background image
    */
-  getBackgroundImageStyles(bgImageUrl, bgImageUrl2) {
-    const styles = {};
-    if (!_isEmpty(bgImageUrl)) {
-      styles.backgroundColor = '#07818d';
-      styles.backgroundImage = `url(${bgImageUrl}), url(${bgImageUrl}), url(${bgImageUrl2})`;
-      styles.backgroundRepeat = 'repeat-x, repeat-x, repeat';
-      styles.backgroundPosition = '0 150%, 55% -110%, 50% 50%';
+  getBackgroundImageStyles(primaryBgImage, secondaryBgImage) {
+    const styles = { backgroundColor: '#07818d' };
+
+    if (!_isEmpty(primaryBgImage)) {
+      if (_isEmpty(secondaryBgImage)) {
+        styles.backgroundImage = `url(${primaryBgImage}), url(${primaryBgImage})`;
+        styles.backgroundRepeat = 'repeat-x, repeat-x';
+        styles.backgroundPosition = '0 150%, 55% -110%';
+      } else {
+        styles.backgroundImage = `url(${primaryBgImage}), url(${primaryBgImage}), url(${secondaryBgImage})`;
+        styles.backgroundRepeat = 'repeat-x, repeat-x, repeat';
+        styles.backgroundPosition = '0 150%, 55% -110%, 50% 50%';
+      }
     }
 
     return styles;
@@ -146,13 +155,12 @@ class FundraisingBanner extends React.Component {
 
   render() {
     const { bannerData, isBannerVisible } = this.state;
-    const animationClass = isBannerVisible ? 'show': '';
 
     return (
       <div
-        className={`${this.props.className} ${animationClass}`}
+        className={`${this.props.className} ${isBannerVisible ? 'show': ''}`}
         id={this.props.id}
-        style={this.getBackgroundImageStyles(bgBannerImage, bgBannerImage_2)}
+        style={this.getBackgroundImageStyles(primaryBackgroundImage, secondaryBackgroundImage)}
       >
         { !_isEmpty(bannerData) &&
           <div
@@ -175,12 +183,14 @@ class FundraisingBanner extends React.Component {
 FundraisingBanner.propTypes = {
   className: PropTypes.string,
   id: PropTypes.string,
+  bannerData: PropTypes.object,
   hideBannerCookieName: PropTypes.string.isRequired,
 };
 
 FundraisingBanner.defaultProps = {
   className: 'FundraisingBanner',
   id: 'FundraisingBanner',
+  bannerData: {},
 };
 
 export default FundraisingBanner;

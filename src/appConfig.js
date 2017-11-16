@@ -10,8 +10,8 @@ const config = {
   fundraising: {
     apiUrl: 'https://dev-platform.nypl.org/api/v0.1/fundraising-banner',
     experimentName: 'FundraisingFall2017',
-    bgBannerImage: 'https://d2znry4lg8s0tq.cloudfront.net/fundraising/snowflake_wht_bg.png',
-    bgBannerImage_2: 'https://d2znry4lg8s0tq.cloudfront.net/fundraising/snowflake_teal_bg.png',
+    primaryBackgroundImage: '//d2znry4lg8s0tq.cloudfront.net/fundraising/snowflake_wht_bg.png',
+    secondaryBackgroundImage: '//d2znry4lg8s0tq.cloudfront.net/fundraising/snowflake_teal_bg.png',
   },
   socialMediaLinks: {
     facebook: 'https://www.facebook.com/nypl',

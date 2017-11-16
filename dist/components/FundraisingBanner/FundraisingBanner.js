@@ -24,7 +24,7 @@ var _utils = require('../../utils/utils');
 
 var _utils2 = _interopRequireDefault(_utils);
 
-var _appConfig = require('../../appConfig.js');
+var _appConfig = require('../../appConfig');
 
 var _appConfig2 = _interopRequireDefault(_appConfig);
 
@@ -38,8 +38,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var _config$fundraising = _appConfig2.default.fundraising,
     apiUrl = _config$fundraising.apiUrl,
-    bgBannerImage = _config$fundraising.bgBannerImage,
-    bgBannerImage_2 = _config$fundraising.bgBannerImage_2;
+    primaryBackgroundImage = _config$fundraising.primaryBackgroundImage,
+    secondaryBackgroundImage = _config$fundraising.secondaryBackgroundImage;
 
 var FundraisingBanner = function (_React$Component) {
   _inherits(FundraisingBanner, _React$Component);
@@ -50,7 +50,7 @@ var FundraisingBanner = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (FundraisingBanner.__proto__ || Object.getPrototypeOf(FundraisingBanner)).call(this, props));
 
     _this.state = {
-      bannerData: {},
+      bannerData: props.bannerData,
       isBannerVisible: false
     };
 
@@ -76,7 +76,7 @@ var FundraisingBanner = function (_React$Component) {
   }, {
     key: 'closeFundraisingBanner',
     value: function closeFundraisingBanner() {
-      _utils2.default.setCookie(this.props.hideBannerCookieName, true);
+      _utils2.default.setCookie(this.props.hideBannerCookieName, 'true');
       this.setState({ isBannerVisible: false });
     }
 
@@ -99,6 +99,8 @@ var FundraisingBanner = function (_React$Component) {
         return _axios2.default.get(apiUrl).then(function (result) {
           if (result.data) {
             _this2.setState({ bannerData: result.data, isBannerVisible: true });
+          } else {
+            console.warn('Missing response from GET request: ' + apiUrl, result);
           }
         }).catch(function (error) {
           console.warn('Error on Axios GET request: ' + apiUrl);
@@ -118,18 +120,25 @@ var FundraisingBanner = function (_React$Component) {
      * getBackgroundImageStyles(bgImageUrl)
      * Assigns the proper background CSS styles if the `bgImageUrl` is not empty
      *
-     * @param {string} bgImageUrl - The full path of the background image
+     * @param {string} primaryBgImage - The full path of the primary background image
+     * @param {string} secondaryBgImage - The full path of the secondary background image
      */
 
   }, {
     key: 'getBackgroundImageStyles',
-    value: function getBackgroundImageStyles(bgImageUrl, bgImageUrl2) {
-      var styles = {};
-      if (!(0, _underscore.isEmpty)(bgImageUrl)) {
-        styles.backgroundColor = '#07818d';
-        styles.backgroundImage = 'url(' + bgImageUrl + '), url(' + bgImageUrl + '), url(' + bgImageUrl2 + ')';
-        styles.backgroundRepeat = 'repeat-x, repeat-x, repeat';
-        styles.backgroundPosition = '0 150%, 55% -110%, 50% 50%';
+    value: function getBackgroundImageStyles(primaryBgImage, secondaryBgImage) {
+      var styles = { backgroundColor: '#07818d' };
+
+      if (!(0, _underscore.isEmpty)(primaryBgImage)) {
+        if ((0, _underscore.isEmpty)(secondaryBgImage)) {
+          styles.backgroundImage = 'url(' + primaryBgImage + '), url(' + primaryBgImage + ')';
+          styles.backgroundRepeat = 'repeat-x, repeat-x';
+          styles.backgroundPosition = '0 150%, 55% -110%';
+        } else {
+          styles.backgroundImage = 'url(' + primaryBgImage + '), url(' + primaryBgImage + '), url(' + secondaryBgImage + ')';
+          styles.backgroundRepeat = 'repeat-x, repeat-x, repeat';
+          styles.backgroundPosition = '0 150%, 55% -110%, 50% 50%';
+        }
       }
 
       return styles;
@@ -214,14 +223,13 @@ var FundraisingBanner = function (_React$Component) {
           bannerData = _state.bannerData,
           isBannerVisible = _state.isBannerVisible;
 
-      var animationClass = isBannerVisible ? 'show' : '';
 
       return _react2.default.createElement(
         'div',
         {
-          className: this.props.className + ' ' + animationClass,
+          className: this.props.className + ' ' + (isBannerVisible ? 'show' : ''),
           id: this.props.id,
-          style: this.getBackgroundImageStyles(bgBannerImage, bgBannerImage_2)
+          style: this.getBackgroundImageStyles(primaryBackgroundImage, secondaryBackgroundImage)
         },
         !(0, _underscore.isEmpty)(bannerData) && _react2.default.createElement(
           'div',
@@ -252,12 +260,14 @@ var FundraisingBanner = function (_React$Component) {
 FundraisingBanner.propTypes = {
   className: _propTypes2.default.string,
   id: _propTypes2.default.string,
+  bannerData: _propTypes2.default.object,
   hideBannerCookieName: _propTypes2.default.string.isRequired
 };
 
 FundraisingBanner.defaultProps = {
   className: 'FundraisingBanner',
-  id: 'FundraisingBanner'
+  id: 'FundraisingBanner',
+  bannerData: {}
 };
 
 exports.default = FundraisingBanner;

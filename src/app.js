@@ -26,7 +26,7 @@ if (!window.ga) {
 if (!window.dgxFeatureFlags) {
   window.dgxFeatureFlags = FeatureFlags.utils;
 }
-FeatureFlags.utils.activateFeature('FundraisingFall2017');
+
 /* app.jsx
  * Used for local development of React Components
  */

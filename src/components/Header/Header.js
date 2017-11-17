@@ -407,7 +407,7 @@ class Header extends React.Component {
           />
         </div>
         { FeatureFlags.store._isFeatureActive(config.fundraising.experimentName) &&
-          <FundraisingBanner hideBannerCookieName="closeFundraiserBanner" />
+          <FundraisingBanner hideBannerCookieName="closeFundraiserBanner" gaLabel="Header Fundraising Banner" />
         }
       </header>
     );

@@ -57,6 +57,7 @@ var FundraisingBanner = function (_React$Component) {
     };
 
     _this.closeFundraisingBanner = _this.closeFundraisingBanner.bind(_this);
+    _this.fetchFundraisingData = _this.fetchFundraisingData.bind(_this);
     return _this;
   }
 
@@ -80,6 +81,10 @@ var FundraisingBanner = function (_React$Component) {
     value: function closeFundraisingBanner() {
       _utils2.default.setCookie(this.props.hideBannerCookieName, 'true', cookieExpInSeconds);
       this.setState({ isBannerVisible: false });
+      // Fire the GA event only if the prop gaLabel is not empty
+      if (!(0, _underscore.isEmpty)(this.props.gaLabel)) {
+        _utils2.default.trackHeader('Close banner button clicked', this.props.gaLabel);
+      }
     }
 
     /**
@@ -198,20 +203,23 @@ var FundraisingBanner = function (_React$Component) {
     }
 
     /**
-     * renderCloseButton(closeText)
+     * renderCloseButton(closeText, ariaLabel)
      * Generates the DOM for the description text if the `desc` parameter is not empty
      *
      * @param {string} closeText - String of the close text button element (default: `Close`)
+     * @param {string} ariaLabel - String of the aria-label property (default: `Close Fundraising banner`)
      */
 
   }, {
     key: 'renderCloseButton',
     value: function renderCloseButton() {
       var closeText = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Close';
+      var ariaLabel = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'Close Fundraising banner';
 
       return _react2.default.createElement(
         'button',
         {
+          'aria-label': ariaLabel,
           className: this.props.className + '-closeButton',
           onClick: this.closeFundraisingBanner
         },
@@ -221,6 +229,8 @@ var FundraisingBanner = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this3 = this;
+
       var _state = this.state,
           bannerData = _state.bannerData,
           isBannerVisible = _state.isBannerVisible;
@@ -240,7 +250,11 @@ var FundraisingBanner = function (_React$Component) {
           },
           _react2.default.createElement(
             'a',
-            { href: !(0, _underscore.isEmpty)(bannerData.url) ? bannerData.url : '#' },
+            {
+              onClick: function onClick() {
+                !(0, _underscore.isEmpty)(_this3.props.gaLabel) && !(0, _underscore.isEmpty)(bannerData.url) ? _utils2.default.trackHeader(bannerData.url, _this3.props.gaLabel) : null;
+              },
+              href: !(0, _underscore.isEmpty)(bannerData.url) ? bannerData.url : '#' },
             this.renderBannerImage(bannerData.imageUrl),
             this.renderBannerHeadline(bannerData.title),
             this.renderBannerDescription(bannerData.description),
@@ -263,6 +277,7 @@ FundraisingBanner.propTypes = {
   className: _propTypes2.default.string,
   id: _propTypes2.default.string,
   bannerData: _propTypes2.default.object,
+  gaLabel: _propTypes2.default.string,
   hideBannerCookieName: _propTypes2.default.string.isRequired
 };
 

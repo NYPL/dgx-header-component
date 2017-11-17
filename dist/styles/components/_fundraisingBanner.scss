@@ -1,7 +1,6 @@
 .FundraisingBanner {
   max-height: 0;
   overflow: hidden;
-  visibility: hidden;
   @include transition(max-height .75s linear);
 
   * {
@@ -11,7 +10,6 @@
   // css transition to reveal fundraising banner
   &.show {
     max-height: 300px;
-    visibility: visible;
   }
 
   &-wrapper {

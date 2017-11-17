@@ -17,6 +17,7 @@ class FundraisingBanner extends React.Component {
     };
 
     this.closeFundraisingBanner = this.closeFundraisingBanner.bind(this);
+    this.fetchFundraisingData = this.fetchFundraisingData.bind(this);
   }
 
   componentDidMount() {
@@ -34,6 +35,10 @@ class FundraisingBanner extends React.Component {
   closeFundraisingBanner() {
     utils.setCookie(this.props.hideBannerCookieName, 'true', cookieExpInSeconds);
     this.setState({ isBannerVisible: false });
+    // Fire the GA event only if the prop gaLabel is not empty
+    if (!_isEmpty(this.props.gaLabel)) {
+      utils.trackHeader('Close banner button clicked', this.props.gaLabel);
+    }
   }
 
   /**
@@ -138,14 +143,16 @@ class FundraisingBanner extends React.Component {
   }
 
   /**
-   * renderCloseButton(closeText)
+   * renderCloseButton(closeText, ariaLabel)
    * Generates the DOM for the description text if the `desc` parameter is not empty
    *
    * @param {string} closeText - String of the close text button element (default: `Close`)
+   * @param {string} ariaLabel - String of the aria-label property (default: `Close Fundraising banner`)
    */
-  renderCloseButton(closeText = 'Close') {
+  renderCloseButton(closeText = 'Close', ariaLabel = 'Close Fundraising banner') {
     return (
       <button
+        aria-label={ariaLabel}
         className={`${this.props.className}-closeButton`}
         onClick={this.closeFundraisingBanner}
       >
@@ -167,7 +174,12 @@ class FundraisingBanner extends React.Component {
           <div
             className={`${this.props.className}-wrapper`}
           >
-            <a href={!_isEmpty(bannerData.url) ? bannerData.url : '#'}>
+            <a
+              onClick={() => {
+                !_isEmpty(this.props.gaLabel) && !_isEmpty(bannerData.url) ?
+                  utils.trackHeader(bannerData.url, this.props.gaLabel) : null
+              }}
+              href={!_isEmpty(bannerData.url) ? bannerData.url : '#'}>
               {this.renderBannerImage(bannerData.imageUrl)}
               {this.renderBannerHeadline(bannerData.title)}
               {this.renderBannerDescription(bannerData.description)}
@@ -185,6 +197,7 @@ FundraisingBanner.propTypes = {
   className: PropTypes.string,
   id: PropTypes.string,
   bannerData: PropTypes.object,
+  gaLabel: PropTypes.string,
   hideBannerCookieName: PropTypes.string.isRequired,
 };
 

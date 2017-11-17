@@ -515,7 +515,7 @@ var Header = function (_React$Component) {
             gaAction: gaAction
           })
         ),
-        _dgxFeatureFlags2.default.store._isFeatureActive(_appConfig2.default.fundraising.experimentName) && _react2.default.createElement(_FundraisingBanner2.default, { hideBannerCookieName: 'closeFundraiserBanner' })
+        _dgxFeatureFlags2.default.store._isFeatureActive(_appConfig2.default.fundraising.experimentName) && _react2.default.createElement(_FundraisingBanner2.default, { hideBannerCookieName: 'closeFundraiserBanner', gaLabel: 'Header Fundraising Banner' })
       );
     }
   }]);

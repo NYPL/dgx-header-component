@@ -166,28 +166,28 @@ class FundraisingBanner extends React.Component {
 
     return (
       <div
-        className={`${this.props.className} ${isBannerVisible ? 'show': ''}`}
+        className={`${this.props.className} ${isBannerVisible ? 'show' : ''}`}
         id={this.props.id}
         style={this.getBackgroundImageStyles(primaryBgImage, secondaryBgImage)}
       >
-        { !_isEmpty(bannerData) &&
-          <div
-            className={`${this.props.className}-wrapper`}
+      {
+        !_isEmpty(bannerData) &&
+        <div className={`${this.props.className}-wrapper`}>
+          <a
+            onClick={() => {
+              !_isEmpty(this.props.gaLabel) && !_isEmpty(bannerData.url) ?
+                utils.trackHeader(bannerData.url, this.props.gaLabel) : null
+            }}
+            href={!_isEmpty(bannerData.url) ? bannerData.url : '#'}
           >
-            <a
-              onClick={() => {
-                !_isEmpty(this.props.gaLabel) && !_isEmpty(bannerData.url) ?
-                  utils.trackHeader(bannerData.url, this.props.gaLabel) : null
-              }}
-              href={!_isEmpty(bannerData.url) ? bannerData.url : '#'}>
-              {this.renderBannerImage(bannerData.imageUrl)}
-              {this.renderBannerHeadline(bannerData.title)}
-              {this.renderBannerDescription(bannerData.description)}
-              <span className={`${this.props.className}-button`}>Donate</span>
-            </a>
-            {this.renderCloseButton()}
-          </div>
-        }
+            {this.renderBannerImage(bannerData.imageUrl)}
+            {this.renderBannerHeadline(bannerData.title)}
+            {this.renderBannerDescription(bannerData.description)}
+            <span className={`${this.props.className}-button`}>Donate</span>
+          </a>
+          {this.renderCloseButton()}
+        </div>
+      }
       </div>
     );
   }

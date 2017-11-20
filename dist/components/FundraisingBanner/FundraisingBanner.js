@@ -245,16 +245,15 @@ var FundraisingBanner = function (_React$Component) {
         },
         !(0, _underscore.isEmpty)(bannerData) && _react2.default.createElement(
           'div',
-          {
-            className: this.props.className + '-wrapper'
-          },
+          { className: this.props.className + '-wrapper' },
           _react2.default.createElement(
             'a',
             {
               onClick: function onClick() {
                 !(0, _underscore.isEmpty)(_this3.props.gaLabel) && !(0, _underscore.isEmpty)(bannerData.url) ? _utils2.default.trackHeader(bannerData.url, _this3.props.gaLabel) : null;
               },
-              href: !(0, _underscore.isEmpty)(bannerData.url) ? bannerData.url : '#' },
+              href: !(0, _underscore.isEmpty)(bannerData.url) ? bannerData.url : '#'
+            },
             this.renderBannerImage(bannerData.imageUrl),
             this.renderBannerHeadline(bannerData.title),
             this.renderBannerDescription(bannerData.description),

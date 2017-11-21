@@ -1,5 +1,10 @@
 ### CHANGE LOG
 
+#### v2.3.0
+> Added FundraisingBanner component to display a banner triggered by FeatureFlags
+> Added SASS partial for FundraisingBanner that scoped viewport widths in the file
+> Updated a few test NPM packages that were outdated in order to unit test the FundraisingBanner component
+
 #### v2.2.0
 > Adding the function to send the GA event with its Category as "Search" and Action as "QuerySent" when submitting a search request via the header.
 > Adding the related functions in the "utils.js" for setting dimenstions of GA events.

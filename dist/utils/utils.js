@@ -164,6 +164,25 @@ function Utils() {
   };
 
   /**
+   * setCookie(name, value, maxAge)
+   * Sets a cookie with a given name, value and defaults the expiration to 24 hours in seconds
+   *
+   * @param {string} name - The name of the cookie to be looked up.
+   * @param {string} value - value of the given cookie.
+   * @param {string} maxAge - string representation of cookie's maximum age in seconds
+   */
+  this.setCookie = function (name, value) {
+    var maxAge = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '86400';
+
+    if (!name || !value) {
+      return false;
+    }
+
+    var expires = '; max-age=' + maxAge;
+    document.cookie = encodeURI(name) + '=' + encodeURI(value) + expires + 'path=/; domain=.nypl.org';
+  };
+
+  /**
    * deleteCookie(sKey)
    * Delete the cookie by having it expired.
    *

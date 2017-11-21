@@ -4,7 +4,9 @@ $BANNER_XLARGE_SCREEN: 1120px;
 
 .FundraisingBanner {
   max-height: 0;
+  visibility: hidden;
   overflow: hidden;
+  opacity: 0;
   @include transition(max-height .75s linear);
 
   * {
@@ -15,6 +17,8 @@ $BANNER_XLARGE_SCREEN: 1120px;
   &.show {
     max-height: 300px;
     display: block; // Fix for Previous StaffPicks App
+    visibility: visible;
+    opacity: 1;
   }
 
   &-wrapper {

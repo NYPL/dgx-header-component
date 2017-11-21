@@ -14,6 +14,7 @@ $BANNER_XLARGE_SCREEN: 1120px;
   // css transition to reveal fundraising banner
   &.show {
     max-height: 300px;
+    display: block; // Fix for Previous StaffPicks App
   }
 
   &-wrapper {

@@ -6,19 +6,18 @@ $BANNER_XLARGE_SCREEN: 1120px;
   max-height: 0;
   visibility: hidden;
   overflow: hidden;
-  opacity: 0;
-  @include transition(max-height .75s linear);
 
   * {
     margin-top: 0;
     margin-bottom: 0;
   }
+
   // css transition to reveal fundraising banner
   &.show {
     max-height: 300px;
     display: block; // Fix for Previous StaffPicks App
     visibility: visible;
-    opacity: 1;
+    @include transition(max-height .75s linear);
   }
 
   &-wrapper {

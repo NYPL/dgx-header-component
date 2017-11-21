@@ -76,8 +76,9 @@ class FundraisingBanner extends React.Component {
   }
 
   /**
-   * getBackgroundImageStyles(bgImageUrl)
-   * Assigns the proper background CSS styles if the `bgImageUrl` is not empty
+   * getBackgroundImageStyles(primaryImage, secondaryImage)
+   * Assigns default background CSS styles and specific backgroundImage properties
+   * if the `primaryImage` and `secondaryImage` paths are defined
    *
    * @param {string} primaryImage - The full path of the primary background image
    * @param {string} secondaryImage - The full path of the secondary background image

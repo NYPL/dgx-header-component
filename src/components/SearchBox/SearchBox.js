@@ -5,6 +5,8 @@ import { SearchIcon } from 'dgx-svg-icons';
 // GA Utility Library
 import utils from '../../utils/utils.js';
 
+import { ga } from 'dgx-react-ga';
+
 class SearchBox extends React.Component {
   constructor(props) {
     super(props);
@@ -44,7 +46,7 @@ class SearchBox extends React.Component {
     return '';
   }
 
-	/**
+  /**
    * setEncoreUrl(searchInput, baseUrl, language, scopeString)
    * Returns the final URL for encore search which,
    * is first encoded, then concatenated by the
@@ -201,21 +203,34 @@ class SearchBox extends React.Component {
         utils.trackHeader('Search', gaSearchLabel);
 
         // Set the dimensions for the following hit
-        const customDimensions = [
-          { index: 'dimension1', value: 'HeaderSearch' },
-          { index: 'dimension2', value: GASearchedRepo },
-          // Reserved custom dimensions for the future use
-          { index: 'dimension4', value: 'NotSet' },
-          { index: 'dimension5', value: 'NotSet' },
-        ];
+        // const customDimensions = [
+        //   { index: 'dimension1', value: 'HeaderSearch' },
+        //   { index: 'dimension2', value: GASearchedRepo },
+        //   // Reserved custom dimensions for the future use
+        //   { index: 'dimension4', value: 'NotSet' },
+        //   { index: 'dimension5', value: 'NotSet' },
+        // ];
 
-        utils.setDimensions(customDimensions);
+        // utils.setDimensions(customDimensions);
 
-        // GA "Search" Catalog, "Query Sent" Action Event
-        utils.trackSearchQuerySend(
-          'QuerySent',
-          searchInputValue
-        );
+        const dimensionsObject = {
+          dimension1: 'HeaderSearch',
+          dimension2: GASearchedRepo,
+          dimension4: 'NotSet',
+          dimension5: 'NotSet',
+        };
+
+        // Send GA "Search" Catalog, "Query Sent" Action Event
+        ga.event({
+          category:'Search',
+          action: 'QuerySent',
+          label: searchInputValue,
+          value:0,
+          dimension1: 'HeaderSearch',
+          dimension2: GASearchedRepo,
+          dimension4: 'NotSet',
+          dimension5: 'NotSet',
+        });
 
         // Go to the proper search page
         window.location.assign(requestUrl);

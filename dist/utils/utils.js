@@ -105,18 +105,31 @@ function Utils() {
   this.trackHeader = _dgxReactGa.gaUtils.trackEvent('Global Header');
 
   /**
-   * trackSearchQuerySend(action, label)
+   * trackSearchQuerySend = (label ='', dimensions = {})
    * Track a GA click event, where action and label come from
    * the higher level function call from _trackEvent().
+   * The dimensions should have following format,
+   * { dimensions1: 'value1', dimensions2: 'value2', ... }
    *
-   * @param {string} action - Action for GA event.
    * @param {string} label - Label for GA event.
+   * @param {object} dimensions - the object that consists the custom dimensions for the event.
    */
-  this.trackSearchQuerySend = _dgxReactGa.gaUtils.trackEvent('Search');
+  this.trackSearchQuerySend = function () {
+    var label = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+    var dimensions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+    _dgxReactGa.ga.event((0, _underscore.extend)({
+      category: 'Search',
+      action: 'QuerySent',
+      label: label,
+      value: 0
+    }, dimensions));
+  };
 
   /**
    * setDimensions(dimensions)
    * Set the dimensions for GA events. The scope is decided by the admin of the GA platform.
+   * This function will set the dimensions that affect all the hits on the same page.
    *
    * @param {array} dimensions - The array of dimensions. Each dimension includes two properties:
    * the index and the value.

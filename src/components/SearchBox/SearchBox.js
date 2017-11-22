@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import { SearchIcon } from 'dgx-svg-icons';
 // GA Utility Library
 import utils from '../../utils/utils.js';
-
-import { ga } from 'dgx-react-ga';
+import gaConfig from '../../gaConfig.js';
 
 class SearchBox extends React.Component {
   constructor(props) {
@@ -202,35 +201,11 @@ class SearchBox extends React.Component {
         // Fire GA event to track Search
         utils.trackHeader('Search', gaSearchLabel);
 
-        // Set the dimensions for the following hit
-        // const customDimensions = [
-        //   { index: 'dimension1', value: 'HeaderSearch' },
-        //   { index: 'dimension2', value: GASearchedRepo },
-        //   // Reserved custom dimensions for the future use
-        //   { index: 'dimension4', value: 'NotSet' },
-        //   { index: 'dimension5', value: 'NotSet' },
-        // ];
-
-        // utils.setDimensions(customDimensions);
-
-        const dimensionsObject = {
-          dimension1: 'HeaderSearch',
-          dimension2: GASearchedRepo,
-          dimension4: 'NotSet',
-          dimension5: 'NotSet',
-        };
+        // Set dynamic value for custom dimension2
+        gaConfig.customDimensions.dimension2 = GASearchedRepo;
 
         // Send GA "Search" Catalog, "Query Sent" Action Event
-        ga.event({
-          category:'Search',
-          action: 'QuerySent',
-          label: searchInputValue,
-          value:0,
-          dimension1: 'HeaderSearch',
-          dimension2: GASearchedRepo,
-          dimension4: 'NotSet',
-          dimension5: 'NotSet',
-        });
+        utils.trackSearchQuerySend(searchInputValue, gaConfig.customDimensions);
 
         // Go to the proper search page
         window.location.assign(requestUrl);

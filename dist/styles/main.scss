@@ -15,7 +15,6 @@
   @include Kievit-Book;
   width: 100%;
   background-color: #FFF;
-  border-bottom: 2px solid #ED1C24;
   @extend %clearfix;
 
   /* Global rules for repetitive link elements */
@@ -59,6 +58,7 @@
 
   &-Wrapper {
     position: relative;
+    border-bottom: 2px solid #ED1C24;
   }
 
   @import 'components/_stickyHeader';
@@ -196,8 +196,9 @@
    * - Arrows on NavMenu Top Links
   */
   @import 'components/_navMenu';
-}
 
+  @import 'components/_fundraisingBanner';
+}
 
 /* CSS for Screen Reader Texts */
 // Taken from H5BP

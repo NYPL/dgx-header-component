@@ -7,6 +7,8 @@ import {
   extend as _extend,
   isEmpty as _isEmpty,
 } from 'underscore';
+// Feature FeatureFlags
+import FeatureFlags from 'dgx-feature-flags';
 
 // Nav Config
 import navConfig from '../../navConfig.js';
@@ -24,6 +26,7 @@ import MyNyplButton from '../MyNyplButton/MyNyplButton.js';
 import NavMenu from '../NavMenu/NavMenu.js';
 import MobileHeader from './MobileHeader.js';
 import GlobalAlerts from '../GlobalAlerts/GlobalAlerts.js';
+import FundraisingBanner from '../FundraisingBanner/FundraisingBanner';
 import SkipNavigation from 'dgx-skip-navigation-link';
 // Utility Library
 import utils from '../../utils/utils.js';
@@ -105,7 +108,8 @@ class Header extends React.Component {
         isFeatureFlagsActivated: {},
         logOutUrl: '',
       },
-      HeaderStore.getState()
+      HeaderStore.getState(),
+      { featureFlagsStore: FeatureFlags.store.getState() },
     );
 
     this.handleStickyHeader = this.handleStickyHeader.bind(this);
@@ -113,6 +117,8 @@ class Header extends React.Component {
 
   componentDidMount() {
     HeaderStore.listen(this.onChange.bind(this));
+    // Listen on FeatureFlags Store updates
+    FeatureFlags.store.listen(this.onFeatureFlagsChange.bind(this));
     // Height needs to be set once the alerts (if any) are mounted.
     this.setHeaderHeight();
     // Listen to the scroll event for the sticky header.
@@ -130,6 +136,8 @@ class Header extends React.Component {
 
   componentWillUnmount() {
     HeaderStore.unlisten(this.onChange.bind(this));
+    // Listen on FeatureFlags Store updates
+    FeatureFlags.store.unlisten(this.onFeatureFlagsChange.bind(this));
     // Removing event listener to minimize garbage collection
     window.removeEventListener('scroll', this.handleStickyHeader, false);
   }
@@ -149,6 +157,10 @@ class Header extends React.Component {
         HeaderStore.getState()
       )
     );
+  }
+
+  onFeatureFlagsChange() {
+    this.setState({ featureFlagsStore: FeatureFlags.store.getState() });
   }
 
   /**
@@ -394,6 +406,12 @@ class Header extends React.Component {
             gaAction={gaAction}
           />
         </div>
+        { FeatureFlags.store._isFeatureActive(config.fundraising.experimentName) &&
+          <FundraisingBanner
+            hideBannerCookieName="closeFundraiserBanner"
+            gaLabel="Header Fundraising Banner"
+          />
+        }
       </header>
     );
   }

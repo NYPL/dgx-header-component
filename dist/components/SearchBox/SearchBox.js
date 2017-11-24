@@ -256,7 +256,7 @@ var SearchBox = function (_React$Component) {
           // Fire GA event to track Search
           _utils2.default.trackHeader('Search', gaSearchLabel);
 
-          // Set dynamic value for custom dimension2
+          // Set a dynamic value for custom dimension2
           _gaConfig2.default.customDimensions.dimension2 = GASearchedRepo;
 
           // Send GA "Search" Catalog, "Query Sent" Action Event

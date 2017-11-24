@@ -201,7 +201,7 @@ class SearchBox extends React.Component {
         // Fire GA event to track Search
         utils.trackHeader('Search', gaSearchLabel);
 
-        // Set dynamic value for custom dimension2
+        // Set a dynamic value for custom dimension2
         gaConfig.customDimensions.dimension2 = GASearchedRepo;
 
         // Send GA "Search" Catalog, "Query Sent" Action Event

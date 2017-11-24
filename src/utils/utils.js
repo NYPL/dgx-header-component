@@ -3,10 +3,12 @@ import { ga, gaUtils } from 'dgx-react-ga';
 import FeatureFlags from 'dgx-feature-flags';
 import {
   map as _map,
-  extend as _extend
+  extend as _extend,
+  isEmpty as _isEmpty
 } from 'underscore';
 import axios from 'axios';
 import config from './../appConfig.js';
+import gaConfig from './../gaConfig.js';
 
 function Utils() {
   this.formatDate = (startDate, endDate) => {
@@ -100,23 +102,26 @@ function Utils() {
 
   /**
    * trackSearchQuerySend = (label ='', dimensions = {})
-   * Track a GA click event, where action and label come from
-   * the higher level function call from _trackEvent().
-   * The dimensions should have following format,
+   * Track a GA click event with custom dimensions.
+   * The parameter "dimensions" should be an object with dimensions listed as the following format,
    * { dimensions1: 'value1', dimensions2: 'value2', ... }
    *
    * @param {string} label - Label for GA event.
    * @param {object} dimensions - the object that consists the custom dimensions for the event.
    */
   this.trackSearchQuerySend = (label = '', dimensions = {}) => {
-    ga.event(
-      _extend({
-        category: 'Search',
-        action: 'QuerySent',
-        label,
-        value: 0,
-      }, dimensions)
-    );
+    let eventObj = {
+      category: gaConfig.eventCategory,
+      action: gaConfig.eventAction,
+      label,
+      value: 0,
+    };
+
+    if (typeof dimensions === 'object' && !_isEmpty(dimensions)) {
+      eventObj = _extend(eventObj, dimensions);
+    }
+
+    ga.event(eventObj);
   };
 
   /**

@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var gaConfig = {
+  eventCategory: 'Search',
+  eventAction: 'QuerySent',
   customDimensions: {
     dimension1: 'HeaderSearch',
     dimension2: 'Unknown',

@@ -6,6 +6,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
@@ -25,6 +27,10 @@ var _axios2 = _interopRequireDefault(_axios);
 var _appConfig = require('./../appConfig.js');
 
 var _appConfig2 = _interopRequireDefault(_appConfig);
+
+var _gaConfig = require('./../gaConfig.js');
+
+var _gaConfig2 = _interopRequireDefault(_gaConfig);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -106,9 +112,8 @@ function Utils() {
 
   /**
    * trackSearchQuerySend = (label ='', dimensions = {})
-   * Track a GA click event, where action and label come from
-   * the higher level function call from _trackEvent().
-   * The dimensions should have following format,
+   * Track a GA click event with custom dimensions.
+   * The parameter "dimensions" should be an object with dimensions listed as the following format,
    * { dimensions1: 'value1', dimensions2: 'value2', ... }
    *
    * @param {string} label - Label for GA event.
@@ -118,12 +123,18 @@ function Utils() {
     var label = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
     var dimensions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-    _dgxReactGa.ga.event((0, _underscore.extend)({
-      category: 'Search',
-      action: 'QuerySent',
+    var eventObj = {
+      category: _gaConfig2.default.eventCategory,
+      action: _gaConfig2.default.eventAction,
       label: label,
       value: 0
-    }, dimensions));
+    };
+
+    if ((typeof dimensions === 'undefined' ? 'undefined' : _typeof(dimensions)) === 'object' && !(0, _underscore.isEmpty)(dimensions)) {
+      eventObj = (0, _underscore.extend)(eventObj, dimensions);
+    }
+
+    _dgxReactGa.ga.event(eventObj);
   };
 
   /**

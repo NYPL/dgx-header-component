@@ -1,5 +1,10 @@
 ### CHANGE LOG
 
+#### v2.3.1
+> Updating the version of dgx-react-ga.
+> Adding the config file for GA.
+> Updating the way to set custom dimensions for GA.
+
 #### v2.3.0
 > Added FundraisingBanner component to display a banner triggered by FeatureFlags
 > Added SASS partial for FundraisingBanner that scoped viewport widths in the file

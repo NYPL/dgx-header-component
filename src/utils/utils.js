@@ -117,7 +117,7 @@ function Utils() {
       value: 0,
     };
 
-    if (typeof dimensions === 'object' && !_isEmpty(dimensions)) {
+    if (!_isEmpty(dimensions)) {
       eventObj = _extend(eventObj, dimensions);
     }
 

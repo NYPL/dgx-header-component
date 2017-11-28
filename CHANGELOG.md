@@ -1,7 +1,7 @@
 ### CHANGE LOG
 
 #### v2.3.1
-> Updating the version of dgx-react-ga.
+> Updating the dgx-react-ga related functions based on the new version of it.
 > Adding the config file for GA.
 > Updating the way to set custom dimensions for GA.
 

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { SearchIcon } from 'dgx-svg-icons';
 // GA Utility Library
 import utils from '../../utils/utils.js';
+import gaConfig from '../../gaConfig.js';
 
 class SearchBox extends React.Component {
   constructor(props) {
@@ -44,7 +45,7 @@ class SearchBox extends React.Component {
     return '';
   }
 
-	/**
+  /**
    * setEncoreUrl(searchInput, baseUrl, language, scopeString)
    * Returns the final URL for encore search which,
    * is first encoded, then concatenated by the
@@ -200,22 +201,11 @@ class SearchBox extends React.Component {
         // Fire GA event to track Search
         utils.trackHeader('Search', gaSearchLabel);
 
-        // Set the dimensions for the following hit
-        const customDimensions = [
-          { index: 'dimension1', value: 'HeaderSearch' },
-          { index: 'dimension2', value: GASearchedRepo },
-          // Reserved custom dimensions for the future use
-          { index: 'dimension4', value: 'NotSet' },
-          { index: 'dimension5', value: 'NotSet' },
-        ];
+        // Set a dynamic value for custom dimension2
+        gaConfig.customDimensions.dimension2 = GASearchedRepo;
 
-        utils.setDimensions(customDimensions);
-
-        // GA "Search" Catalog, "Query Sent" Action Event
-        utils.trackSearchQuerySend(
-          'QuerySent',
-          searchInputValue
-        );
+        // Send GA "Search" Catalog, "Query Sent" Action Event
+        utils.trackSearchQuerySend(searchInputValue, gaConfig.customDimensions);
 
         // Go to the proper search page
         window.location.assign(requestUrl);

@@ -6,6 +6,7 @@ import {
   LionLogoIcon,
   LocatorIcon,
   MenuIcon,
+  LoginIcon,
   LoginIconSolid,
   SearchIcon,
   XIcon,
@@ -256,14 +257,17 @@ class MobileHeader extends React.Component {
   */
   renderMyNyplButton() {
     let myNyplClass = '';
-    const loginIconClass = (this.props.patronName) ? '-loggedIn' : '';
-    const loggedInFadeInAnimation = (this.props.patronName) ? ' animated fadeIn' : '';
+    // const loginIconClass = (this.props.patronName) ? '-loggedIn' : '';
+    // const loggedInFadeInAnimation = (this.props.patronName) ? ' animated fadeIn' : '';
     const gaAction = (this.props.patronName) ? 'MyAccount' : 'LogIn';
-    let icon = (
-      <LoginIconSolid
-        className={`MobileMyNypl LoginIcon${loginIconClass}${loggedInFadeInAnimation}`}
-      />
-    );
+    let icon = <LoginIcon className="MobileMyNypl LoginIcon" />;
+    if (this.props.patronName) {
+      icon = (
+        <LoginIconSolid
+          className={`MobileMyNypl LoginIcon-loggedIn animated fadeIn`}
+        />
+      );
+    }
     let buttonStyles = styles.inactiveMyNyplButton;
     let buttonLabel = 'Open Log In Dialog';
     let dialogWindow = null;

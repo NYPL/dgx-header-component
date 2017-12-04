@@ -7,30 +7,24 @@ class HeaderStore {
       handleSetMobileMenuButtonValue: Actions.SET_MOBILE_MENU_BUTTON_VALUE,
       handleSetMobileMyNyplButtonValue: Actions.SET_MOBILE_MY_NYPL_BUTTON_VALUE,
       handleSearchButtonActionValue: Actions.SEARCH_BUTTON_ACTION_VALUE,
-      handleUpdateIsHeaderSticky: Actions.UPDATE_IS_HEADER_STICKY,
       handleToggleSubscribeFormVisible: Actions.TOGGLE_SUBSCRIBE_FORM_VISIBLE,
       handleToggleMyNyplVisible: Actions.TOGGLE_MY_NYPL_VISIBLE,
-      handleToggleStickyMyNyplVisible: Actions.TOGGLE_STICKY_MY_NYPL_VISIBLE,
     });
 
     this.exportPublicMethods({
       getMobileMenuBtnValue: this.getMobileMenuBtnValue,
       getSearchButtonActionValue: this.getSearchButtonActionValue,
       getMobileMyNyplButtonValue: this.getMobileMyNyplButtonValue,
-      getIsStickyValue: this.getIsStickyValue,
       getSubscribeFormVisible: this.getSubscribeFormVisible,
       getMyNyplVisible: this.getMyNyplVisible,
-      getStickyMyNyplVisible: this.getStickyMyNyplVisible,
     });
 
     this.state = {
-      isSticky: false,
       activeMobileButton: '',
       searchButtonAction: '',
       mobileMyNyplButton: '',
       subscribeFormVisible: false,
       myNyplVisible: false,
-      stickyLoginVisible: false,
     };
   }
 
@@ -75,16 +69,6 @@ class HeaderStore {
   }
 
   /**
-   * getStickyMyNyplVisible()
-   * returns the current state.stickyLoginVisible
-   * value.
-   * @return {Boolean} true/false
-   */
-  getStickyMyNyplVisible() {
-    return this.state.stickyLoginVisible;
-  }
-
-  /**
    * getSearchButtonActionValue()
    * returns the current state.getSearchButtonActionValue
    * value.
@@ -92,16 +76,6 @@ class HeaderStore {
    */
   getSearchButtonActionValue() {
     return this.state.searchButtonAction;
-  }
-
-  /**
-   * getIsStickyValue()
-   * returns the current state.isSticky value.
-   *
-   * @return {Boolean} true/false
-   */
-  getIsStickyValue() {
-    return this.state.isSticky;
   }
 
   handleSetMobileMenuButtonValue(currentActiveMobileButton) {
@@ -117,20 +91,12 @@ class HeaderStore {
     this.setState({ searchButtonAction: actionValue });
   }
 
-  handleUpdateIsHeaderSticky(value) {
-    this.setState({ isSticky: value });
-  }
-
   handleToggleSubscribeFormVisible(value) {
     this.setState({ subscribeFormVisible: value });
   }
 
   handleToggleMyNyplVisible(value) {
     this.setState({ myNyplVisible: value });
-  }
-
-  handleToggleStickyMyNyplVisible(value) {
-    this.setState({ stickyLoginVisible: value });
   }
 }
 

@@ -116,7 +116,7 @@ var SearchButton = function (_React$Component) {
     value: function renderSearchButton() {
       var _this3 = this;
 
-      var classes = (0, _classnames2.default)({ active: this.state.active, isSticky: _HeaderStore2.default.getState().isSticky });
+      var classes = (0, _classnames2.default)({ active: this.state.active });
 
       return _react2.default.createElement(
         'button',
@@ -152,13 +152,9 @@ var SearchButton = function (_React$Component) {
   }, {
     key: 'renderSearchBox',
     value: function renderSearchBox() {
-      var sticky = (0, _classnames2.default)({ isSticky: _HeaderStore2.default.getState().isSticky });
-
       return this.state.active ? _react2.default.createElement(
         'div',
-        {
-          className: this.props.className + '-desktopSearchBox animatedFast fadeIn ' + sticky
-        },
+        { className: this.props.className + '-desktopSearchBox animatedFast fadeIn' },
         _react2.default.createElement(_SearchBox2.default, { className: 'desktopSearch-Form' })
       ) : null;
     }

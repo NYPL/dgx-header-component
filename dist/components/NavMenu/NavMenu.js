@@ -40,10 +40,6 @@ var _DonateButton = require('../DonateButton/DonateButton.js');
 
 var _DonateButton2 = _interopRequireDefault(_DonateButton);
 
-var _StickyMyNyplButton = require('../MyNyplButton/StickyMyNyplButton.js');
-
-var _StickyMyNyplButton2 = _interopRequireDefault(_StickyMyNyplButton);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -117,34 +113,6 @@ var NavMenu = function (_React$Component) {
         _Actions2.default.setMobileMenuButtonValue('');
       }
     }
-    /**
-     * Generates the DOM for the Sticky Items that will
-     * display when the Header is in sticky mode.
-     * Adds the appropriate class based off the sticky value.
-     * @returns {Object} React DOM.
-     */
-
-  }, {
-    key: 'renderStickyNavItems',
-    value: function renderStickyNavItems() {
-      var stickyClass = _HeaderStore2.default.getIsStickyValue() ? ' active' : '';
-      return _react2.default.createElement(
-        'div',
-        { className: this.props.className + '-stickyItems' + stickyClass },
-        _react2.default.createElement('span', { className: 'lineSeparator', style: styles.lineSeparator }),
-        _react2.default.createElement(_StickyMyNyplButton2.default, {
-          isLoggedIn: this.props.isLoggedIn,
-          patronName: this.props.patronName,
-          logOutLink: this.props.logOutLink,
-          gaAction: this.props.gaAction
-        }),
-        _react2.default.createElement(_DonateButton2.default, {
-          id: 'Collapsed-DonateButton',
-          style: styles.donateButton,
-          gaLabel: 'Collapsed Donate Button'
-        })
-      );
-    }
 
     /**
      * Generates the DOM for the NavItems with appropriate class.
@@ -202,7 +170,6 @@ var NavMenu = function (_React$Component) {
           _react2.default.createElement(_SearchButton2.default, {
             className: this.props.className
           }),
-          this.renderStickyNavItems(),
           _react2.default.createElement(_NavMenuMobileButtons2.default, {
             className: 'MobileBottomButtons',
             libraryCardLink: this.props.urlType === 'absolute' ? '//www.nypl.org/library-card' : '/library-card'

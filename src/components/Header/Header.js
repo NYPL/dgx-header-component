@@ -111,8 +111,6 @@ class Header extends React.Component {
       HeaderStore.getState(),
       { featureFlagsStore: FeatureFlags.store.getState() },
     );
-
-    this.handleStickyHeader = this.handleStickyHeader.bind(this);
   }
 
   componentDidMount() {
@@ -121,8 +119,6 @@ class Header extends React.Component {
     FeatureFlags.store.listen(this.onFeatureFlagsChange.bind(this));
     // Height needs to be set once the alerts (if any) are mounted.
     this.setHeaderHeight();
-    // Listen to the scroll event for the sticky header.
-    window.addEventListener('scroll', this.handleStickyHeader, false);
     // Set the log out link to state
     this.setLogOutLink(window.location.href);
     // Set nyplIdentityPatron cookie to the state.
@@ -139,7 +135,6 @@ class Header extends React.Component {
     // Listen on FeatureFlags Store updates
     FeatureFlags.store.unlisten(this.onFeatureFlagsChange.bind(this));
     // Removing event listener to minimize garbage collection
-    window.removeEventListener('scroll', this.handleStickyHeader, false);
   }
 
   onChange() {
@@ -253,39 +248,9 @@ class Header extends React.Component {
     );
   }
 
-  /**
-   * handleStickyHeader()
-   * Executes Actions.updateIsHeaderSticky()
-   * with the proper boolean value to update the
-   * HeaderStore.isSticky value based on the window
-   * vertical scroll position surpassing the height
-   * of the Header DOM element.
-   */
-  handleStickyHeader() {
-    const headerHeight = this.state.headerHeight;
-    const windowVerticalDistance = this.getWindowVerticalScroll();
-
-    if (windowVerticalDistance && headerHeight && (windowVerticalDistance > headerHeight)) {
-      // Only update the value if sticky is false
-      if (!HeaderStore.getIsStickyValue()) {
-        // Fire GA Event when Header is in Sticky Mode
-        utils.trackHeader.bind(this, 'scroll', 'Sticky Header');
-        // Update the isSticky flag
-        Actions.updateIsHeaderSticky(true);
-      }
-    } else {
-      // Avoids re-assignment on each scroll by checking if it is already true
-      if (HeaderStore.getIsStickyValue()) {
-        Actions.updateIsHeaderSticky(false);
-      }
-    }
-  }
-
   render() {
-    const isHeaderSticky = this.state.isSticky;
     const headerHeight = this.state.headerHeight;
     const headerClass = this.props.className || 'Header';
-    const headerClasses = cx(headerClass, { sticky: isHeaderSticky });
     const skipNav = this.props.skipNav ?
       (<SkipNavigation {...this.props.skipNav} />) : '';
     const isLoggedIn = !!this.state.patronDataReceived;
@@ -294,9 +259,8 @@ class Header extends React.Component {
     return (
       <header
         id={this.props.id}
-        className={headerClasses}
+        className={headerClass}
         ref="nyplHeader"
-        style={(isHeaderSticky) ? { height: `${headerHeight}px` } : null}
       >
         {skipNav}
         <GlobalAlerts className={`${headerClass}-GlobalAlerts`} />

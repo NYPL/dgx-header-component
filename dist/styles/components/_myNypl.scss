@@ -1,15 +1,4 @@
-.NavMenuItem {
-  &.stickyLogin {
-    display: none;
-
-    &.active {
-      display: inline-table;
-    }
-  }
-}
-
-.MyNyplButton,
-.StickyMyNyplButton {
+.MyNyplButton {
   @include Kievit-Bold;
   @include border-radius(0px);
   font-size: 13px;
@@ -41,8 +30,7 @@
   }
 }
 
-.MyNypl-Wrapper,
-.StickyMyNypl-Wrapper {
+.MyNypl-Wrapper {
   text-transform: none;
   display: none;
   box-sizing: content-box;

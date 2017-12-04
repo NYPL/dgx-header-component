@@ -192,8 +192,6 @@ var Header = function (_React$Component) {
       isFeatureFlagsActivated: {},
       logOutUrl: ''
     }, _HeaderStore2.default.getState(), { featureFlagsStore: _dgxFeatureFlags2.default.store.getState() });
-
-    _this.handleStickyHeader = _this.handleStickyHeader.bind(_this);
     return _this;
   }
 
@@ -205,8 +203,6 @@ var Header = function (_React$Component) {
       _dgxFeatureFlags2.default.store.listen(this.onFeatureFlagsChange.bind(this));
       // Height needs to be set once the alerts (if any) are mounted.
       this.setHeaderHeight();
-      // Listen to the scroll event for the sticky header.
-      window.addEventListener('scroll', this.handleStickyHeader, false);
       // Set the log out link to state
       this.setLogOutLink(window.location.href);
       // Set nyplIdentityPatron cookie to the state.
@@ -222,7 +218,6 @@ var Header = function (_React$Component) {
       // Listen on FeatureFlags Store updates
       _dgxFeatureFlags2.default.store.unlisten(this.onFeatureFlagsChange.bind(this));
       // Removing event listener to minimize garbage collection
-      window.removeEventListener('scroll', this.handleStickyHeader, false);
     }
   }, {
     key: 'onChange',
@@ -347,44 +342,11 @@ var Header = function (_React$Component) {
         _this3.setLoginCookie(_this3.state.loginCookieName);
       });
     }
-
-    /**
-     * handleStickyHeader()
-     * Executes Actions.updateIsHeaderSticky()
-     * with the proper boolean value to update the
-     * HeaderStore.isSticky value based on the window
-     * vertical scroll position surpassing the height
-     * of the Header DOM element.
-     */
-
-  }, {
-    key: 'handleStickyHeader',
-    value: function handleStickyHeader() {
-      var headerHeight = this.state.headerHeight;
-      var windowVerticalDistance = this.getWindowVerticalScroll();
-
-      if (windowVerticalDistance && headerHeight && windowVerticalDistance > headerHeight) {
-        // Only update the value if sticky is false
-        if (!_HeaderStore2.default.getIsStickyValue()) {
-          // Fire GA Event when Header is in Sticky Mode
-          _utils2.default.trackHeader.bind(this, 'scroll', 'Sticky Header');
-          // Update the isSticky flag
-          _Actions2.default.updateIsHeaderSticky(true);
-        }
-      } else {
-        // Avoids re-assignment on each scroll by checking if it is already true
-        if (_HeaderStore2.default.getIsStickyValue()) {
-          _Actions2.default.updateIsHeaderSticky(false);
-        }
-      }
-    }
   }, {
     key: 'render',
     value: function render() {
-      var isHeaderSticky = this.state.isSticky;
       var headerHeight = this.state.headerHeight;
       var headerClass = this.props.className || 'Header';
-      var headerClasses = (0, _classnames2.default)(headerClass, { sticky: isHeaderSticky });
       var skipNav = this.props.skipNav ? _react2.default.createElement(_dgxSkipNavigationLink2.default, this.props.skipNav) : '';
       var isLoggedIn = !!this.state.patronDataReceived;
       var gaAction = isLoggedIn ? 'My Account' : 'Log In';
@@ -393,9 +355,8 @@ var Header = function (_React$Component) {
         'header',
         {
           id: this.props.id,
-          className: headerClasses,
-          ref: 'nyplHeader',
-          style: isHeaderSticky ? { height: headerHeight + 'px' } : null
+          className: headerClass,
+          ref: 'nyplHeader'
         },
         skipNav,
         _react2.default.createElement(_GlobalAlerts2.default, { className: headerClass + '-GlobalAlerts' }),

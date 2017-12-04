@@ -1,11 +1,12 @@
 # NYPL Header React NPM Component
 
-This repository is for the header component used in React applications at NYPL.
 [![GitHub version](https://badge.fury.io/gh/nypl%2Fdgx-header-component.svg)](https://badge.fury.io/gh/nypl%2Fdgx-header-component)
+
+This repository is for the header component used in React applications at NYPL.
 
 ### Version
 
-> v2.3.1
+> v2.3.2
 
 ### App Installation
 

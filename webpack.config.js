@@ -72,9 +72,6 @@ if (process.env.NODE_ENV !== 'development') {
       new webpack.DefinePlugin({
         loadA11y: process.env.loadA11y || false,
         nodeEnv: JSON.stringify('development'),
-        'process.env': {
-          NODE_ENV: JSON.stringify('production'),
-        },
       }),
     ],
     resolve: {

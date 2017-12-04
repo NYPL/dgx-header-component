@@ -1,0 +1,216 @@
+// NOTE: All sticky rules are in _stickyHeader.scss
+
+// Desktop SearchBox Wrapper
+&-searchBox-Wrapper {
+  display: block;
+
+  @include min-screen($TABLET_PORTRAIT_BP) {
+    display: inline-table;
+    vertical-align: middle;
+    margin: 0 10px 0 5px;
+  }
+  // Progressive enhancement rule to increase left/right margin
+  @include min-screen(792px) {
+    margin: 0 10px;
+  }
+}
+
+// DesktopSearch Button Styles
+&-searchButton {
+  display: none;
+  position: relative;
+  background-color: transparent;
+  border: none;
+  color: $BG_MENU_SEARCH;
+  background-color: #FFF;
+  padding: 10px 10px 12px;
+  margin: 3px 0 0;
+  line-height: normal !important;
+  white-space: normal !important;
+  @include border-radius(none);
+  // Always display the search button after $TABLET_PORTRAIT_BP
+  @include min-screen($TABLET_PORTRAIT_BP) {
+    display: block;
+  }
+
+  &:hover {
+    border: none !important;
+  }
+
+  /* ACTIVE STATE */
+  &.active {
+    background-color: $BG_MENU_SEARCH;
+    color: #FFFFFF;
+    @include transition(background-color .35s linear .08s);
+
+    .svgIcon {
+      fill: #FFF;
+    }
+  }
+
+  &-text {
+    @include Kievit-Book;
+    display: inline-block;
+    font-size: 19px;
+    line-height: 1em;
+    padding: 0 20px 0 0;
+    border-bottom: 3px solid $BG_MENU_SEARCH;
+  }
+
+  &-icon {
+    display: inline-block;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    fill: $BG_MENU_SEARCH;
+  }
+}
+
+// Styles for Desktop SearchBox
+&-desktopSearchBox {
+  display: none;
+  background-color: $BG_MENU_SEARCH;
+  color: #000000;
+  left: 0px;
+  margin: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 999;
+
+  /* Rules for Desktop Open State */
+  @include min-screen($TABLET_PORTRAIT_BP) {
+    display: block;
+    top: 44px;
+  }
+
+  .desktopSearch-Form {
+    position: relative;
+    margin: 0 auto;
+    max-width: 1312px;
+    height: 100%;
+    padding: 0;
+
+    fieldset {
+      border: none;
+      padding: 0;
+      margin: 0;
+      line-height: normal;
+    }
+
+    &-inputBox {
+      display: block;
+      text-align: left;
+      margin: 50px 0px 25px 20px;
+      padding: 0;
+      overflow: hidden;
+
+      @include min-screen(1025px) {
+        margin-left: 140px;
+      }
+
+      label {
+        color: #FFF;
+        display: inline-block;
+        font-size: 18px;
+        margin: 0 0 10px 0;
+        padding: 0 !important;
+        line-height: normal;
+      }
+
+      input {
+        display: block;
+        border: none;
+        @include Kievit-Light;
+        line-height: normal !important;
+        font-style: normal;
+        font-size: 22px;
+        background-color: #FFF;
+        color: #000;
+        min-height: 33px;
+        height: 100%;
+        padding: 10px 0 10px 10px;
+        margin: 0;
+        width: 85%;
+        @include border-radius(5px);
+
+        &:focus,
+        &:active {
+          outline: 3px auto #3b99fc;
+          box-shadow: none;
+        }
+      }
+
+      .icon {
+        display: none;
+      }
+    }
+
+    &-desktopControls {
+      display: block;
+      margin: 0 0 40px 20px;
+      text-align: left;
+      @include min-screen(1025px) {
+        margin-left: 140px;
+      }
+
+      label {
+        position: relative;
+        display: inline-block;
+        margin: 0 0 0 -10px;
+        padding: 2px;
+        color: #FFF;
+        font-size: 18px;
+
+        &:before {
+          background-color: #FFFFFF;
+          @include border-radius(50%);
+          content: '';
+          display: inline-block;
+          height: 10px;
+          left: 0;
+          margin-right: 10px;
+          position: relative;
+          width: 10px;
+          top: 1px;
+          text-align: center;
+        }
+      }
+
+      input[type=radio] {
+        /* Hide original inputs, but still accessible for input related functions */
+        @include opacity(0);
+      }
+
+      input[type=radio]:checked + label:before {
+        content: '\2022';
+        color: #000000;
+        font-size: 18px;
+        line-height: 11px;
+      }
+
+      // Focus effect on label
+      input[type=radio]:focus + label {
+        outline: 3px auto #3b99fc;
+      }
+
+      .catalogOption {
+        margin-right: 25px;
+      }
+
+      button {
+        position: absolute;
+        top: 67px;
+        right: 0px;
+        background-color: transparent;
+        background: transparent;
+        border: 2px solid #FFF;
+        padding: 18px;
+        margin: 0 20px 0 0;
+        line-height: normal !important;
+        @include border-radius(50%);
+        width: 72px;
+        height: 72px;
+      }
+    }
+  }
+}

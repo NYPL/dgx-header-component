@@ -36,10 +36,6 @@ var _NavMenuMobileButtons = require('../NavMenuMobileButtons/NavMenuMobileButton
 
 var _NavMenuMobileButtons2 = _interopRequireDefault(_NavMenuMobileButtons);
 
-var _DonateButton = require('../DonateButton/DonateButton.js');
-
-var _DonateButton2 = _interopRequireDefault(_DonateButton);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -51,23 +47,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 // Dependent Components
 
-
-var styles = {
-  donateButton: {
-    padding: '8px 15px',
-    textTransform: 'uppercase',
-    fontSize: '12.5px',
-    letterSpacing: '.04em'
-  },
-  lineSeparator: {
-    display: 'inline-block',
-    margin: '0 0 -10px 0',
-    width: '2px',
-    height: '30px',
-    color: '#837377',
-    backgroundColor: '#837377'
-  }
-};
 
 var NavMenu = function (_React$Component) {
   _inherits(NavMenu, _React$Component);

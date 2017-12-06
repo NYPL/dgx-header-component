@@ -6,8 +6,6 @@ import ClickOutHandler from 'react-onclickout';
 // Import components
 import { SearchIcon } from 'dgx-svg-icons';
 import SearchBox from '../SearchBox/SearchBox.js';
-// ALT Flux Store
-import HeaderStore from '../../stores/HeaderStore.js';
 // GA Utility Library
 import utils from '../../utils/utils.js';
 

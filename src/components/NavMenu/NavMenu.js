@@ -14,24 +14,6 @@ import Actions from '../../actions/Actions.js';
 import SearchButton from '../SearchButton/SearchButton.js';
 import NavMenuItem from '../NavMenuItem/NavMenuItem.js';
 import NavMenuBottomButtons from '../NavMenuMobileButtons/NavMenuMobileButtons.js';
-import DonateButton from '../DonateButton/DonateButton.js';
-
-const styles = {
-  donateButton: {
-    padding: '8px 15px',
-    textTransform: 'uppercase',
-    fontSize: '12.5px',
-    letterSpacing: '.04em',
-  },
-  lineSeparator: {
-    display: 'inline-block',
-    margin: '0 0 -10px 0',
-    width: '2px',
-    height: '30px',
-    color: '#837377',
-    backgroundColor: '#837377',
-  },
-};
 
 class NavMenu extends React.Component {
   constructor(props) {

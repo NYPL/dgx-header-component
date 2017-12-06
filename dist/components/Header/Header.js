@@ -182,7 +182,6 @@ var Header = function (_React$Component) {
     var patronNameObject = !(0, _underscore.isEmpty)(patron) && patron.names && patron.names.length ? _utils2.default.modelPatronName(patron.names[0]) : {};
 
     _this.state = (0, _underscore.extend)({
-      headerHeight: null,
       navData: navData,
       loginCookieName: 'nyplIdentityPatron',
       loginCookieValue: null,
@@ -201,8 +200,6 @@ var Header = function (_React$Component) {
       _HeaderStore2.default.listen(this.onChange.bind(this));
       // Listen on FeatureFlags Store updates
       _dgxFeatureFlags2.default.store.listen(this.onFeatureFlagsChange.bind(this));
-      // Height needs to be set once the alerts (if any) are mounted.
-      this.setHeaderHeight();
       // Set the log out link to state
       this.setLogOutLink(window.location.href);
       // Set nyplIdentityPatron cookie to the state.
@@ -223,7 +220,6 @@ var Header = function (_React$Component) {
     key: 'onChange',
     value: function onChange() {
       this.setState((0, _underscore.extend)({
-        headerHeight: this.state.headerHeight,
         loginCookieValue: this.state.loginCookieValue,
         patronName: this.state.patronName,
         patronInitial: this.state.patronInitial,
@@ -256,37 +252,6 @@ var Header = function (_React$Component) {
         }
       } else {
         this.setState({ loginCookieValue: null });
-      }
-    }
-
-    /**
-     * getHeaderHeight()
-     * returns the Height of the Header DOM
-     * element in pixels.
-     */
-
-  }, {
-    key: 'getHeaderHeight',
-    value: function getHeaderHeight() {
-      var headerDOM = _reactDom2.default.findDOMNode(this.refs.nyplHeader);
-      return headerDOM.getBoundingClientRect().height;
-    }
-
-    /**
-     * setHeaderHeight()
-     * Updates the state headerHeight property
-     * only if headerHeight is not defined.
-     */
-
-  }, {
-    key: 'setHeaderHeight',
-    value: function setHeaderHeight() {
-      var _this2 = this;
-
-      if (!this.state.headerHeight) {
-        setTimeout(function () {
-          _this2.setState({ headerHeight: _this2.getHeaderHeight() });
-        }, 500);
       }
     }
 
@@ -326,26 +291,25 @@ var Header = function (_React$Component) {
   }, {
     key: 'fetchPatronData',
     value: function fetchPatronData(cookie) {
-      var _this3 = this;
+      var _this2 = this;
 
       _utils2.default.getLoginData(cookie, function (result) {
         if (result.data && result.data.data) {
           var patronNameObject = _utils2.default.modelPatronName(_utils2.default.extractPatronName(result.data));
 
-          _this3.setState({
+          _this2.setState({
             patronName: patronNameObject.name,
             patronInitial: patronNameObject.initial,
             patronDataReceived: true
           });
         }
       }, _appConfig2.default.loginMyNyplLinks.tokenRefreshLink, function () {
-        _this3.setLoginCookie(_this3.state.loginCookieName);
+        _this2.setLoginCookie(_this2.state.loginCookieName);
       });
     }
   }, {
     key: 'render',
     value: function render() {
-      var headerHeight = this.state.headerHeight;
       var headerClass = this.props.className || 'Header';
       var skipNav = this.props.skipNav ? _react2.default.createElement(_dgxSkipNavigationLink2.default, this.props.skipNav) : '';
       var isLoggedIn = !!this.state.patronDataReceived;

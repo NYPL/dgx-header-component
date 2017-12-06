@@ -98,7 +98,6 @@ class Header extends React.Component {
 
     this.state = _extend(
       {
-        headerHeight: null,
         navData,
         loginCookieName: 'nyplIdentityPatron',
         loginCookieValue: null,
@@ -117,8 +116,6 @@ class Header extends React.Component {
     HeaderStore.listen(this.onChange.bind(this));
     // Listen on FeatureFlags Store updates
     FeatureFlags.store.listen(this.onFeatureFlagsChange.bind(this));
-    // Height needs to be set once the alerts (if any) are mounted.
-    this.setHeaderHeight();
     // Set the log out link to state
     this.setLogOutLink(window.location.href);
     // Set nyplIdentityPatron cookie to the state.
@@ -141,7 +138,6 @@ class Header extends React.Component {
     this.setState(
       _extend(
         {
-          headerHeight: this.state.headerHeight,
           loginCookieValue: this.state.loginCookieValue,
           patronName: this.state.patronName,
           patronInitial: this.state.patronInitial,
@@ -173,29 +169,6 @@ class Header extends React.Component {
       }
     } else {
       this.setState({ loginCookieValue: null });
-    }
-  }
-
-  /**
-   * getHeaderHeight()
-   * returns the Height of the Header DOM
-   * element in pixels.
-   */
-  getHeaderHeight() {
-    const headerDOM = ReactDOM.findDOMNode(this.refs.nyplHeader);
-    return headerDOM.getBoundingClientRect().height;
-  }
-
-  /**
-   * setHeaderHeight()
-   * Updates the state headerHeight property
-   * only if headerHeight is not defined.
-   */
-  setHeaderHeight() {
-    if (!this.state.headerHeight) {
-      setTimeout(() => {
-        this.setState({ headerHeight: this.getHeaderHeight() });
-      }, 500);
     }
   }
 
@@ -249,7 +222,6 @@ class Header extends React.Component {
   }
 
   render() {
-    const headerHeight = this.state.headerHeight;
     const headerClass = this.props.className || 'Header';
     const skipNav = this.props.skipNav ?
       (<SkipNavigation {...this.props.skipNav} />) : '';

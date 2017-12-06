@@ -343,7 +343,9 @@ var MobileHeader = function (_React$Component) {
           _focusTrapReact2.default,
           {
             className: 'MobileMyNypl-Wrapper' + myNyplClass,
-            onDeactivate: this.closeMyNyplDialog
+            focusTrapOptions: {
+              onDeactivate: this.closeMyNyplDialog
+            }
           },
           _react2.default.createElement(_MobileMyNypl2.default, {
             isLoggedIn: this.props.isLoggedIn,
@@ -441,8 +443,10 @@ var MobileHeader = function (_React$Component) {
           _focusTrapReact2.default,
           {
             className: this.props.className + '-searchDialog',
-            onDeactivate: this.closeSearchDialog,
-            initialFocus: '.' + this.props.className + '-searchForm-legend',
+            focusTrapOptions: {
+              onDeactivate: this.closeSearchDialog,
+              initialFocus: '.' + this.props.className + '-searchForm-legend'
+            },
             style: styles.searchDialog
           },
           _react2.default.createElement(_SearchBox2.default, {

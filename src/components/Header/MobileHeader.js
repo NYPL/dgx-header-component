@@ -277,7 +277,9 @@ class MobileHeader extends React.Component {
       dialogWindow = (
         <FocusTrap
           className={`MobileMyNypl-Wrapper${myNyplClass}`}
-          onDeactivate={this.closeMyNyplDialog}
+          focusTrapOptions={{
+            onDeactivate: this.closeMyNyplDialog,
+          }}
         >
           <MobileMyNypl
             isLoggedIn={this.props.isLoggedIn}
@@ -351,8 +353,10 @@ class MobileHeader extends React.Component {
       dialogWindow = (
         <FocusTrap
           className={`${this.props.className}-searchDialog`}
-          onDeactivate={this.closeSearchDialog}
-          initialFocus={`.${this.props.className}-searchForm-legend`}
+          focusTrapOptions={{
+            onDeactivate: this.closeSearchDialog,
+            initialFocus: `.${this.props.className}-searchForm-legend`,
+          }}
           style={styles.searchDialog}
         >
           <SearchBox

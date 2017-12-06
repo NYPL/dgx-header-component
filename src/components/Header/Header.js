@@ -173,18 +173,6 @@ class Header extends React.Component {
   }
 
   /**
-   * getWindowVerticallScroll()
-   * returns the current window vertical
-   * scroll position in pixels.
-   * @returns {number} - Vertical Scroll Position.
-   */
-  getWindowVerticalScroll() {
-    return window.scrollY
-      || window.pageYOffset
-      || document.documentElement.scrollTop;
-  }
-
-  /**
    * setLogOutLink(location)
    * Generate the full log out url including the redirect URI, and update the state with it.
    * @param {location} - The URI for redirect request

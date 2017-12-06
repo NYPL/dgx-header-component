@@ -256,19 +256,6 @@ var Header = function (_React$Component) {
     }
 
     /**
-     * getWindowVerticallScroll()
-     * returns the current window vertical
-     * scroll position in pixels.
-     * @returns {number} - Vertical Scroll Position.
-     */
-
-  }, {
-    key: 'getWindowVerticalScroll',
-    value: function getWindowVerticalScroll() {
-      return window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-    }
-
-    /**
      * setLogOutLink(location)
      * Generate the full log out url including the redirect URI, and update the state with it.
      * @param {location} - The URI for redirect request

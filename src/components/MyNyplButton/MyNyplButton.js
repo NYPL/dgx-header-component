@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { extend as _extend } from 'underscore';
-import ClickOutHandler from 'react-onclickout';
+import FocusTrap from 'focus-trap-react';
 // Alt Store/Actions
 import HeaderStore from '../../stores/HeaderStore.js';
 import Actions from '../../actions/Actions.js';
@@ -131,7 +131,7 @@ class MyNyplButton extends React.Component {
 
   renderMyNyplDialog() {
     const boxHeight = (this.props.isLoggedIn) ? ' loggedInHeight' : null;
-
+    // TODO: CHANGE TO STATE-BASED
     return (HeaderStore.getMyNyplVisible()) ? (
       <div
         className={`MyNypl-Wrapper active animatedFast fadeIn${boxHeight}`}
@@ -148,7 +148,13 @@ class MyNyplButton extends React.Component {
 
   render() {
     return (
-      <ClickOutHandler onClickOut={this.handleOnClickOut}>
+      <FocusTrap
+        focusTrapOptions={{
+          onDeactivate: this.handleOnClickOut,
+          clickOutsideDeactivates: true,
+        }}
+        active={HeaderStore.getMyNyplVisible()}
+      >
         <div
           className="MyNyplButton-Wrapper"
           style={_extend(styles.base, this.props.style)}
@@ -156,7 +162,7 @@ class MyNyplButton extends React.Component {
           {this.renderMyNyplButton()}
           {this.renderMyNyplDialog()}
         </div>
-      </ClickOutHandler>
+      </FocusTrap>
     );
   }
 }

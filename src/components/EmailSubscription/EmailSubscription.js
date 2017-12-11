@@ -175,7 +175,7 @@ class EmailSubscription extends React.Component {
     if (!isLoading) {
       // The default view
       subscribeContent = (
-        <div role="dialog" tabIndex="1">
+        <div role="dialog">
           <div className={`SubscribeMessageBox ${status}`}>
             <div className="SubscribeMessageBox-Eyebrow"></div>
             <div className="SubscribeMessageBox-Title">

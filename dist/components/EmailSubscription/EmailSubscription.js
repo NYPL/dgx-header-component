@@ -229,7 +229,7 @@ var EmailSubscription = function (_React$Component) {
         // The default view
         subscribeContent = _react2.default.createElement(
           'div',
-          { role: 'dialog', tabIndex: '1' },
+          { role: 'dialog' },
           _react2.default.createElement(
             'div',
             { className: 'SubscribeMessageBox ' + status },

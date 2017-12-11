@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { extend as _extend } from 'underscore';
-import ClickOutHandler from 'react-onclickout';
+import FocusTrap from 'focus-trap-react';
 import EmailSubscription from '../EmailSubscription/EmailSubscription.js';
 // Alt Store/Actions
 import HeaderStore from '../../stores/HeaderStore.js';
@@ -185,7 +185,13 @@ class SubscribeButton extends React.Component {
 
   render() {
     return (
-      <ClickOutHandler onClickOut={this.handleOnClickOut}>
+      <FocusTrap
+        focusTrapOptions={{
+          onDeactivate: this.handleOnClickOut,
+          clickOutsideDeactivates: true,
+        }}
+        active={HeaderStore.getSubscribeFormVisible()}
+      >
         <div
           className="SubscribeButton-Wrapper"
           style={_extend(styles.base, this.props.style)}
@@ -193,7 +199,7 @@ class SubscribeButton extends React.Component {
           {this.renderEmailButton()}
           {this.renderEmailDialog()}
         </div>
-      </ClickOutHandler>
+      </FocusTrap>
     );
   }
 }

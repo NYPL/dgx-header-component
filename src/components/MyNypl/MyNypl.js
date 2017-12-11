@@ -4,7 +4,11 @@ import PropTypes from 'prop-types';
 import utils from '../../utils/utils.js';
 import appConfig from '../../appConfig.js';
 
-import { LogoutIcon } from 'dgx-svg-icons';
+import {
+  LogoutIcon,
+  BuildingIcon,
+  LoginIcon,
+} from 'dgx-svg-icons';
 
 const styles = {
   logOutLink: {
@@ -43,11 +47,11 @@ class MyNypl extends React.Component {
   }
 
   /**
-   * rednerLoginLinks()
+   * renderLoginLinks()
    * Returns the href addresses for catalog and research catalog buttons
    * based on different conditions.
    */
-  rednerLoginLinks() {
+  renderLoginLinks() {
     if (this.props.isLoggedIn) {
       return (
         {
@@ -107,8 +111,8 @@ class MyNypl extends React.Component {
     const catalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
     const researchCatalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE RESEARCH CATALOG' :
       'LOG INTO THE RESEARCH CATALOG';
-    const catalogLink = this.rednerLoginLinks().catalogLink;
-    const researchLink = this.rednerLoginLinks().researchLink;
+    const catalogLink = this.renderLoginLinks().catalogLink;
+    const researchLink = this.renderLoginLinks().researchLink;
     const gaAction = (this.props.isLoggedIn) ? 'Go To' : 'Log In';
 
     return (
@@ -123,7 +127,7 @@ class MyNypl extends React.Component {
               className={`${this.props.className}-Catalog-Btn`}
               onClick={() => utils.trackHeader(gaAction, 'Catalog')}
             >
-              <span className="nypl-icon-login icon"></span>
+              <LoginIcon fill="#fff" ariaHidden />
               {catalogLinkLabel}
             </a>
           </li>
@@ -134,7 +138,7 @@ class MyNypl extends React.Component {
               className={`${this.props.className}-Research-Btn`}
               onClick={() => utils.trackHeader(gaAction, 'Research')}
             >
-              <span className="nypl-icon-bldg icon"></span>
+              <BuildingIcon fill="#fff" ariaHidden />
               {researchCatalogLinkLabel}
             </a>
           </li>

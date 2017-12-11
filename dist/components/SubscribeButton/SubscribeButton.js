@@ -16,9 +16,9 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _underscore = require('underscore');
 
-var _reactOnclickout = require('react-onclickout');
+var _focusTrapReact = require('focus-trap-react');
 
-var _reactOnclickout2 = _interopRequireDefault(_reactOnclickout);
+var _focusTrapReact2 = _interopRequireDefault(_focusTrapReact);
 
 var _EmailSubscription = require('../EmailSubscription/EmailSubscription.js');
 
@@ -251,8 +251,14 @@ var SubscribeButton = function (_React$Component) {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        _reactOnclickout2.default,
-        { onClickOut: this.handleOnClickOut },
+        _focusTrapReact2.default,
+        {
+          focusTrapOptions: {
+            onDeactivate: this.handleOnClickOut,
+            clickOutsideDeactivates: true
+          },
+          active: _HeaderStore2.default.getSubscribeFormVisible()
+        },
         _react2.default.createElement(
           'div',
           {

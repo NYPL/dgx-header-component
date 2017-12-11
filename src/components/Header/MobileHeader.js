@@ -277,6 +277,7 @@ class MobileHeader extends React.Component {
           className={`MobileMyNypl-Wrapper${myNyplClass}`}
           focusTrapOptions={{
             onDeactivate: this.closeMyNyplDialog,
+            clickOutsideDeactivates: true,
           }}
         >
           <MobileMyNypl
@@ -354,6 +355,7 @@ class MobileHeader extends React.Component {
           focusTrapOptions={{
             onDeactivate: this.closeSearchDialog,
             initialFocus: `.${this.props.className}-searchForm-legend`,
+            clickOutsideDeactivates: true,
           }}
           style={styles.searchDialog}
         >

@@ -354,7 +354,7 @@ var SearchBox = function (_React$Component) {
         { className: this.props.className + '-desktopControls' },
         _react2.default.createElement('input', {
           type: 'radio',
-          name: 'catalogSearch',
+          name: 'catalogWebsiteSearch',
           id: 'catalogSearch',
           value: 'catalog',
           checked: this.state.searchOption === 'catalog',
@@ -367,7 +367,7 @@ var SearchBox = function (_React$Component) {
         ),
         _react2.default.createElement('input', {
           type: 'radio',
-          name: 'websiteSearch',
+          name: 'catalogWebsiteSearch',
           id: 'websiteSearch',
           value: 'website',
           checked: this.state.searchOption === 'website',

@@ -97,7 +97,7 @@ describe('FundraisingBanner Component', () => {
       expect(FundraisingBanner.prototype.fetchFundraisingData.calledOnce).to.equal(true);
     });
 
-    it.only('should render a <div> wrapper with @role="complementary"', () => {
+    it('should render a <div> wrapper with @role="complementary"', () => {
       expect(component.find('[role="complementary"]').length).to.equal(1);
     });
   });

@@ -33,7 +33,7 @@ describe('GlobalAlerts Component', () => {
       mock.restore();
     })
 
-    it.only('should render no alerts', () => {
+    it('should render no alerts', () => {
       expect(component.find('.GlobalAlerts-Box-Item').length).to.equal(0);
     });
   });
@@ -83,12 +83,12 @@ describe('GlobalAlerts Component', () => {
       mock.restore();
     })
 
-    it.only('should render only the single alert valid for current time', () => {
+    it('should render only the single alert valid for current time', () => {
       expect(component.find('.GlobalAlerts-Box-Item').length).to.equal(1);
       expect(component.find('.GlobalAlerts-Box-Item').text()).to.equal('More People Reading More')
     });
 
-    it.only('should render a <div> wrapper with @role="complementary"', () => {
+    it('should render a <div> wrapper with @role="complementary"', () => {
       expect(component.find('[role="complementary"]').length).to.equal(1);
     });
   });

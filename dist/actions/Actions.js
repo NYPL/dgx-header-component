@@ -35,11 +35,6 @@ var Actions = function () {
       return actionValue;
     }
   }, {
-    key: 'updateIsHeaderSticky',
-    value: function updateIsHeaderSticky(value) {
-      return value;
-    }
-  }, {
     key: 'toggleSubscribeFormVisible',
     value: function toggleSubscribeFormVisible(value) {
       return value;
@@ -47,11 +42,6 @@ var Actions = function () {
   }, {
     key: 'toggleMyNyplVisible',
     value: function toggleMyNyplVisible(value) {
-      return value;
-    }
-  }, {
-    key: 'toggleStickyMyNyplVisible',
-    value: function toggleStickyMyNyplVisible(value) {
       return value;
     }
   }]);

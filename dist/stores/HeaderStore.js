@@ -26,30 +26,24 @@ var HeaderStore = function () {
       handleSetMobileMenuButtonValue: _Actions2.default.SET_MOBILE_MENU_BUTTON_VALUE,
       handleSetMobileMyNyplButtonValue: _Actions2.default.SET_MOBILE_MY_NYPL_BUTTON_VALUE,
       handleSearchButtonActionValue: _Actions2.default.SEARCH_BUTTON_ACTION_VALUE,
-      handleUpdateIsHeaderSticky: _Actions2.default.UPDATE_IS_HEADER_STICKY,
       handleToggleSubscribeFormVisible: _Actions2.default.TOGGLE_SUBSCRIBE_FORM_VISIBLE,
-      handleToggleMyNyplVisible: _Actions2.default.TOGGLE_MY_NYPL_VISIBLE,
-      handleToggleStickyMyNyplVisible: _Actions2.default.TOGGLE_STICKY_MY_NYPL_VISIBLE
+      handleToggleMyNyplVisible: _Actions2.default.TOGGLE_MY_NYPL_VISIBLE
     });
 
     this.exportPublicMethods({
       getMobileMenuBtnValue: this.getMobileMenuBtnValue,
       getSearchButtonActionValue: this.getSearchButtonActionValue,
       getMobileMyNyplButtonValue: this.getMobileMyNyplButtonValue,
-      getIsStickyValue: this.getIsStickyValue,
       getSubscribeFormVisible: this.getSubscribeFormVisible,
-      getMyNyplVisible: this.getMyNyplVisible,
-      getStickyMyNyplVisible: this.getStickyMyNyplVisible
+      getMyNyplVisible: this.getMyNyplVisible
     });
 
     this.state = {
-      isSticky: false,
       activeMobileButton: '',
       searchButtonAction: '',
       mobileMyNyplButton: '',
       subscribeFormVisible: false,
-      myNyplVisible: false,
-      stickyLoginVisible: false
+      myNyplVisible: false
     };
   }
 
@@ -107,19 +101,6 @@ var HeaderStore = function () {
     }
 
     /**
-     * getStickyMyNyplVisible()
-     * returns the current state.stickyLoginVisible
-     * value.
-     * @return {Boolean} true/false
-     */
-
-  }, {
-    key: 'getStickyMyNyplVisible',
-    value: function getStickyMyNyplVisible() {
-      return this.state.stickyLoginVisible;
-    }
-
-    /**
      * getSearchButtonActionValue()
      * returns the current state.getSearchButtonActionValue
      * value.
@@ -130,19 +111,6 @@ var HeaderStore = function () {
     key: 'getSearchButtonActionValue',
     value: function getSearchButtonActionValue() {
       return this.state.searchButtonAction;
-    }
-
-    /**
-     * getIsStickyValue()
-     * returns the current state.isSticky value.
-     *
-     * @return {Boolean} true/false
-     */
-
-  }, {
-    key: 'getIsStickyValue',
-    value: function getIsStickyValue() {
-      return this.state.isSticky;
     }
   }, {
     key: 'handleSetMobileMenuButtonValue',
@@ -163,11 +131,6 @@ var HeaderStore = function () {
       this.setState({ searchButtonAction: actionValue });
     }
   }, {
-    key: 'handleUpdateIsHeaderSticky',
-    value: function handleUpdateIsHeaderSticky(value) {
-      this.setState({ isSticky: value });
-    }
-  }, {
     key: 'handleToggleSubscribeFormVisible',
     value: function handleToggleSubscribeFormVisible(value) {
       this.setState({ subscribeFormVisible: value });
@@ -176,11 +139,6 @@ var HeaderStore = function () {
     key: 'handleToggleMyNyplVisible',
     value: function handleToggleMyNyplVisible(value) {
       this.setState({ myNyplVisible: value });
-    }
-  }, {
-    key: 'handleToggleStickyMyNyplVisible',
-    value: function handleToggleStickyMyNyplVisible(value) {
-      this.setState({ stickyLoginVisible: value });
     }
   }]);
 

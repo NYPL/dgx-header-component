@@ -6,8 +6,6 @@ import ClickOutHandler from 'react-onclickout';
 // Import components
 import { SearchIcon } from 'dgx-svg-icons';
 import SearchBox from '../SearchBox/SearchBox.js';
-// ALT Flux Store
-import HeaderStore from '../../stores/HeaderStore.js';
 // GA Utility Library
 import utils from '../../utils/utils.js';
 
@@ -57,7 +55,7 @@ class SearchButton extends React.Component {
   * @returns {Object} React DOM.
   */
   renderSearchButton() {
-    const classes = cx({ active: this.state.active, isSticky: HeaderStore.getState().isSticky });
+    const classes = cx({ active: this.state.active });
 
     return (
       <button
@@ -86,12 +84,8 @@ class SearchButton extends React.Component {
   * @returns {Object} React DOM.
   */
   renderSearchBox() {
-    const sticky = cx({ isSticky: HeaderStore.getState().isSticky });
-
     return (this.state.active) ? (
-      <div
-        className={`${this.props.className}-desktopSearchBox animatedFast fadeIn ${sticky}`}
-      >
+      <div className={`${this.props.className}-desktopSearchBox animatedFast fadeIn`}>
         <SearchBox className="desktopSearch-Form" />
       </div>
     ) : null;

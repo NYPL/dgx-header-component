@@ -1,10 +1,12 @@
 # NYPL Header React NPM Component
 
+[![GitHub version](https://badge.fury.io/gh/nypl%2Fdgx-header-component.svg)](https://badge.fury.io/gh/nypl%2Fdgx-header-component)
+
 This repository is for the header component used in React applications at NYPL.
 
 ### Version
 
-> v2.3.0
+> v2.3.2
 
 ### App Installation
 
@@ -181,7 +183,7 @@ https://bitbucket.org/NYPL/dgx-feature-flags
 
 ### How the Patron Log in Cookie Works
 
-We use a specific NYPL patron log in cookie to decide the logged in status. For more details, please see PATRONCOOKIE.md
+We use a specific NYPL patron log in cookie to decide the logged in status. For more details, please see [PATRONCOOKIE.md](./PATRONCOOKIE.md).
 
 ### Contribute
 

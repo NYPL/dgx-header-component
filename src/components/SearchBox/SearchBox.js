@@ -283,7 +283,7 @@ class SearchBox extends React.Component {
       <div className={`${this.props.className}-desktopControls`}>
         <input
           type="radio"
-          name="catalogSearch"
+          name="catalogWebsiteSearch"
           id="catalogSearch"
           value="catalog"
           checked={this.state.searchOption === 'catalog'}
@@ -292,7 +292,7 @@ class SearchBox extends React.Component {
         <label htmlFor="catalogSearch" className="catalogOption">Search the Catalog</label>
         <input
           type="radio"
-          name="websiteSearch"
+          name="catalogWebsiteSearch"
           id="websiteSearch"
           value="website"
           checked={this.state.searchOption === 'website'}

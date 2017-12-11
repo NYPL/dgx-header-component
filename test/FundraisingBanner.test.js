@@ -96,5 +96,9 @@ describe('FundraisingBanner Component', () => {
       expect(FundraisingBanner.prototype.componentDidMount.calledOnce).to.equal(true);
       expect(FundraisingBanner.prototype.fetchFundraisingData.calledOnce).to.equal(true);
     });
+
+    it.only('should render a <div> wrapper with @role="complementary"', () => {
+      expect(component.find('[role="complementary"]').length).to.equal(1);
+    });
   });
 });

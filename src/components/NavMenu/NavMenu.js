@@ -14,25 +14,6 @@ import Actions from '../../actions/Actions.js';
 import SearchButton from '../SearchButton/SearchButton.js';
 import NavMenuItem from '../NavMenuItem/NavMenuItem.js';
 import NavMenuBottomButtons from '../NavMenuMobileButtons/NavMenuMobileButtons.js';
-import DonateButton from '../DonateButton/DonateButton.js';
-import StickyMyNyplButton from '../MyNyplButton/StickyMyNyplButton.js';
-
-const styles = {
-  donateButton: {
-    padding: '8px 15px',
-    textTransform: 'uppercase',
-    fontSize: '12.5px',
-    letterSpacing: '.04em',
-  },
-  lineSeparator: {
-    display: 'inline-block',
-    margin: '0 0 -10px 0',
-    width: '2px',
-    height: '30px',
-    color: '#837377',
-    backgroundColor: '#837377',
-  },
-};
 
 class NavMenu extends React.Component {
   constructor(props) {
@@ -64,31 +45,6 @@ class NavMenu extends React.Component {
     if (HeaderStore.getMobileMenuBtnValue() === 'mobileMenu') {
       Actions.setMobileMenuButtonValue('');
     }
-  }
-  /**
-   * Generates the DOM for the Sticky Items that will
-   * display when the Header is in sticky mode.
-   * Adds the appropriate class based off the sticky value.
-   * @returns {Object} React DOM.
-   */
-  renderStickyNavItems() {
-    const stickyClass = HeaderStore.getIsStickyValue() ? ' active' : '';
-    return (
-      <div className={`${this.props.className}-stickyItems${stickyClass}`}>
-        <span className="lineSeparator" style={styles.lineSeparator}></span>
-        <StickyMyNyplButton
-          isLoggedIn={this.props.isLoggedIn}
-          patronName={this.props.patronName}
-          logOutLink={this.props.logOutLink}
-          gaAction={this.props.gaAction}
-        />
-        <DonateButton
-          id="Collapsed-DonateButton"
-          style={styles.donateButton}
-          gaLabel="Collapsed Donate Button"
-        />
-      </div>
-    );
   }
 
   /**
@@ -135,7 +91,6 @@ class NavMenu extends React.Component {
           <SearchButton
             className={this.props.className}
           />
-          {this.renderStickyNavItems()}
           <NavMenuBottomButtons
             className="MobileBottomButtons"
             libraryCardLink={

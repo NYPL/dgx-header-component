@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { extend as _extend } from 'underscore';
+import {
+  BuildingIcon,
+  LoginIcon,
+} from 'dgx-svg-icons';
+
 // Config and Utility
 import utils from '../../utils/utils.js';
 import appConfig from '../../appConfig.js';
@@ -71,11 +76,11 @@ const styles = {
 
 class MobileMyNypl extends React.Component {
   /**
-   * rednerLoginLinks()
+   * renderLoginLinks()
    * Returns the href addresses for catalog and research catalog buttons
    * based on different conditions.
    */
-  rednerLoginLinks() {
+  renderLoginLinks() {
     if (this.props.isLoggedIn) {
       return (
         {
@@ -124,8 +129,8 @@ class MobileMyNypl extends React.Component {
   render() {
     const catalogLinkClass = 'CatalogLink';
     const researchLinkClass = 'ResearchLink';
-    const catalogLink = this.rednerLoginLinks().catalogLink;
-    const researchLink = this.rednerLoginLinks().researchLink;
+    const catalogLink = this.renderLoginLinks().catalogLink;
+    const researchLink = this.renderLoginLinks().researchLink;
     const catalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
     const researchCatalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE RESEARCH CATALOG' :
       'LOG INTO THE RESEARCH CATALOG';
@@ -149,8 +154,7 @@ class MobileMyNypl extends React.Component {
             className={`${catalogLinkClass}-Wrapper`}
             style={_extend(styles.wrapper, styles.catalogLinkWrapper)}
           >
-            <span className={`${catalogLinkClass}-Icon nypl-icon-login`} style={styles.icon}>
-            </span>
+            <LoginIcon fill="#fff" ariaHidden />
             <span
               className={`${catalogLinkClass}-Label`}
               style={_extend(styles.catalogLinkLabel, styles.label)}
@@ -169,7 +173,7 @@ class MobileMyNypl extends React.Component {
             className={`${researchLinkClass}-Wrapper`}
             style={_extend(styles.wrapper, styles.researchLinkWrapper)}
           >
-            <span className={`${researchLinkClass}-Icon nypl-icon-bldg`} style={styles.icon}></span>
+            <BuildingIcon fill="#fff" ariaHidden />
             <span
               className={`${researchLinkClass}-Label`}
               style={_extend(styles.researchLinkLabel, styles.label)}

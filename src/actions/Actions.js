@@ -13,19 +13,11 @@ class Actions {
     return actionValue;
   }
 
-  updateIsHeaderSticky(value) {
-    return value;
-  }
-
   toggleSubscribeFormVisible(value) {
     return value;
   }
 
   toggleMyNyplVisible(value) {
-    return value;
-  }
-
-  toggleStickyMyNyplVisible(value) {
     return value;
   }
 }

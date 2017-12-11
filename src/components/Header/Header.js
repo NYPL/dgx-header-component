@@ -98,7 +98,6 @@ class Header extends React.Component {
 
     this.state = _extend(
       {
-        headerHeight: null,
         navData,
         loginCookieName: 'nyplIdentityPatron',
         loginCookieValue: null,
@@ -111,18 +110,12 @@ class Header extends React.Component {
       HeaderStore.getState(),
       { featureFlagsStore: FeatureFlags.store.getState() },
     );
-
-    this.handleStickyHeader = this.handleStickyHeader.bind(this);
   }
 
   componentDidMount() {
     HeaderStore.listen(this.onChange.bind(this));
     // Listen on FeatureFlags Store updates
     FeatureFlags.store.listen(this.onFeatureFlagsChange.bind(this));
-    // Height needs to be set once the alerts (if any) are mounted.
-    this.setHeaderHeight();
-    // Listen to the scroll event for the sticky header.
-    window.addEventListener('scroll', this.handleStickyHeader, false);
     // Set the log out link to state
     this.setLogOutLink(window.location.href);
     // Set nyplIdentityPatron cookie to the state.
@@ -139,14 +132,12 @@ class Header extends React.Component {
     // Listen on FeatureFlags Store updates
     FeatureFlags.store.unlisten(this.onFeatureFlagsChange.bind(this));
     // Removing event listener to minimize garbage collection
-    window.removeEventListener('scroll', this.handleStickyHeader, false);
   }
 
   onChange() {
     this.setState(
       _extend(
         {
-          headerHeight: this.state.headerHeight,
           loginCookieValue: this.state.loginCookieValue,
           patronName: this.state.patronName,
           patronInitial: this.state.patronInitial,
@@ -179,41 +170,6 @@ class Header extends React.Component {
     } else {
       this.setState({ loginCookieValue: null });
     }
-  }
-
-  /**
-   * getHeaderHeight()
-   * returns the Height of the Header DOM
-   * element in pixels.
-   */
-  getHeaderHeight() {
-    const headerDOM = ReactDOM.findDOMNode(this.refs.nyplHeader);
-    return headerDOM.getBoundingClientRect().height;
-  }
-
-  /**
-   * setHeaderHeight()
-   * Updates the state headerHeight property
-   * only if headerHeight is not defined.
-   */
-  setHeaderHeight() {
-    if (!this.state.headerHeight) {
-      setTimeout(() => {
-        this.setState({ headerHeight: this.getHeaderHeight() });
-      }, 500);
-    }
-  }
-
-  /**
-   * getWindowVerticallScroll()
-   * returns the current window vertical
-   * scroll position in pixels.
-   * @returns {number} - Vertical Scroll Position.
-   */
-  getWindowVerticalScroll() {
-    return window.scrollY
-      || window.pageYOffset
-      || document.documentElement.scrollTop;
   }
 
   /**
@@ -253,39 +209,8 @@ class Header extends React.Component {
     );
   }
 
-  /**
-   * handleStickyHeader()
-   * Executes Actions.updateIsHeaderSticky()
-   * with the proper boolean value to update the
-   * HeaderStore.isSticky value based on the window
-   * vertical scroll position surpassing the height
-   * of the Header DOM element.
-   */
-  handleStickyHeader() {
-    const headerHeight = this.state.headerHeight;
-    const windowVerticalDistance = this.getWindowVerticalScroll();
-
-    if (windowVerticalDistance && headerHeight && (windowVerticalDistance > headerHeight)) {
-      // Only update the value if sticky is false
-      if (!HeaderStore.getIsStickyValue()) {
-        // Fire GA Event when Header is in Sticky Mode
-        utils.trackHeader.bind(this, 'scroll', 'Sticky Header');
-        // Update the isSticky flag
-        Actions.updateIsHeaderSticky(true);
-      }
-    } else {
-      // Avoids re-assignment on each scroll by checking if it is already true
-      if (HeaderStore.getIsStickyValue()) {
-        Actions.updateIsHeaderSticky(false);
-      }
-    }
-  }
-
   render() {
-    const isHeaderSticky = this.state.isSticky;
-    const headerHeight = this.state.headerHeight;
     const headerClass = this.props.className || 'Header';
-    const headerClasses = cx(headerClass, { sticky: isHeaderSticky });
     const skipNav = this.props.skipNav ?
       (<SkipNavigation {...this.props.skipNav} />) : '';
     const isLoggedIn = !!this.state.patronDataReceived;
@@ -294,9 +219,8 @@ class Header extends React.Component {
     return (
       <header
         id={this.props.id}
-        className={headerClasses}
+        className={headerClass}
         ref="nyplHeader"
-        style={(isHeaderSticky) ? { height: `${headerHeight}px` } : null}
       >
         {skipNav}
         <GlobalAlerts className={`${headerClass}-GlobalAlerts`} />

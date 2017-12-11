@@ -6,6 +6,7 @@ import {
   LionLogoIcon,
   LocatorIcon,
   MenuIcon,
+  LoginIcon,
   LoginIconSolid,
   SearchIcon,
   XIcon,
@@ -256,14 +257,11 @@ class MobileHeader extends React.Component {
   */
   renderMyNyplButton() {
     let myNyplClass = '';
-    const loginIconClass = (this.props.patronName) ? '-loggedIn' : '';
-    const loggedInFadeInAnimation = (this.props.patronName) ? ' animated fadeIn' : '';
     const gaAction = (this.props.patronName) ? 'MyAccount' : 'LogIn';
-    let icon = (
-      <LoginIconSolid
-        className={`MobileMyNypl LoginIcon${loginIconClass}${loggedInFadeInAnimation}`}
-      />
-    );
+    let icon = <LoginIcon className="MobileMyNypl LoginIcon" />;
+    if (this.props.patronName) {
+      icon = <LoginIconSolid className="MobileMyNypl LoginIcon-loggedIn animated fadeIn" />;
+    }
     let buttonStyles = styles.inactiveMyNyplButton;
     let buttonLabel = 'Open Log In Dialog';
     let dialogWindow = null;
@@ -277,7 +275,9 @@ class MobileHeader extends React.Component {
       dialogWindow = (
         <FocusTrap
           className={`MobileMyNypl-Wrapper${myNyplClass}`}
-          onDeactivate={this.closeMyNyplDialog}
+          focusTrapOptions={{
+            onDeactivate: this.closeMyNyplDialog,
+          }}
         >
           <MobileMyNypl
             isLoggedIn={this.props.isLoggedIn}
@@ -351,8 +351,10 @@ class MobileHeader extends React.Component {
       dialogWindow = (
         <FocusTrap
           className={`${this.props.className}-searchDialog`}
-          onDeactivate={this.closeSearchDialog}
-          initialFocus={`.${this.props.className}-searchForm-legend`}
+          focusTrapOptions={{
+            onDeactivate: this.closeSearchDialog,
+            initialFocus: `.${this.props.className}-searchForm-legend`,
+          }}
           style={styles.searchDialog}
         >
           <SearchBox

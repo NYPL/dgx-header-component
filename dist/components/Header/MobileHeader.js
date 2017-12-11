@@ -324,12 +324,11 @@ var MobileHeader = function (_React$Component) {
       var _this2 = this;
 
       var myNyplClass = '';
-      var loginIconClass = this.props.patronName ? '-loggedIn' : '';
-      var loggedInFadeInAnimation = this.props.patronName ? ' animated fadeIn' : '';
       var gaAction = this.props.patronName ? 'MyAccount' : 'LogIn';
-      var icon = _react2.default.createElement(_dgxSvgIcons.LoginIconSolid, {
-        className: 'MobileMyNypl LoginIcon' + loginIconClass + loggedInFadeInAnimation
-      });
+      var icon = _react2.default.createElement(_dgxSvgIcons.LoginIcon, { className: 'MobileMyNypl LoginIcon' });
+      if (this.props.patronName) {
+        icon = _react2.default.createElement(_dgxSvgIcons.LoginIconSolid, { className: 'MobileMyNypl LoginIcon-loggedIn animated fadeIn' });
+      }
       var buttonStyles = styles.inactiveMyNyplButton;
       var buttonLabel = 'Open Log In Dialog';
       var dialogWindow = null;
@@ -343,7 +342,9 @@ var MobileHeader = function (_React$Component) {
           _focusTrapReact2.default,
           {
             className: 'MobileMyNypl-Wrapper' + myNyplClass,
-            onDeactivate: this.closeMyNyplDialog
+            focusTrapOptions: {
+              onDeactivate: this.closeMyNyplDialog
+            }
           },
           _react2.default.createElement(_MobileMyNypl2.default, {
             isLoggedIn: this.props.isLoggedIn,
@@ -441,8 +442,10 @@ var MobileHeader = function (_React$Component) {
           _focusTrapReact2.default,
           {
             className: this.props.className + '-searchDialog',
-            onDeactivate: this.closeSearchDialog,
-            initialFocus: '.' + this.props.className + '-searchForm-legend',
+            focusTrapOptions: {
+              onDeactivate: this.closeSearchDialog,
+              initialFocus: '.' + this.props.className + '-searchForm-legend'
+            },
             style: styles.searchDialog
           },
           _react2.default.createElement(_SearchBox2.default, {

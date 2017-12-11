@@ -56,8 +56,9 @@ describe('MobileMyNypl', () => {
     });
 
     it('should have an <a> with class name "CatalogLink". Its text equals ' +
-      '"LOG INTO THE CATALOG"', () => {
-      expect(component.find('.CatalogLink').text()).to.equal('LOG INTO THE CATALOG');
+      '"Log in to your accountLOG INTO THE CATALOG"', () => {
+      expect(component.find('.CatalogLink').text())
+        .to.equal('Log in to your accountLOG INTO THE CATALOG');
     });
 
     it('should have the <a> with class name "CatalogLink". Its href equals ' +
@@ -70,8 +71,9 @@ describe('MobileMyNypl', () => {
     );
 
     it('should have the <a> with class name "ResearchLink". Its text equals ' +
-      '"LOG INTO THE RESEARCH CATALOG"', () => {
-      expect(component.find('.ResearchLink').text()).to.equal('LOG INTO THE RESEARCH CATALOG');
+      '"NYPL Building IconLOG INTO THE RESEARCH CATALOG"', () => {
+      expect(component.find('.ResearchLink').text())
+        .to.equal('NYPL Building IconLOG INTO THE RESEARCH CATALOG');
     });
 
     it('should have the <a> with class name "ResearchLink". Its href equals to ' +
@@ -133,13 +135,15 @@ describe('MobileMyNypl', () => {
     });
 
     it('should have the <a> with class name "CatalogLink". Its text equals ' +
-      '"GO TO THE CATALOG"', () => {
-      expect(component.find('.CatalogLink').text()).to.equal('GO TO THE CATALOG');
+      '"Log in to your accountGO TO THE CATALOG"', () => {
+      expect(component.find('.CatalogLink').text())
+        .to.equal('Log in to your accountGO TO THE CATALOG');
     });
 
     it('should have the <a> with class name "ResearchLink". Its text equals ' +
-      '"GO TO THE RESEARCH CATALOG"', () => {
-      expect(component.find('.ResearchLink').text()).to.equal('GO TO THE RESEARCH CATALOG');
+      '"NYPL Building IconGO TO THE RESEARCH CATALOG"', () => {
+      expect(component.find('.ResearchLink').text())
+        .to.equal('NYPL Building IconGO TO THE RESEARCH CATALOG');
     });
 
     it('should have the <a> with class name "CatalogLink". Its href equals ' +
@@ -221,13 +225,15 @@ describe('MobileMyNypl', () => {
       });
 
       it('should have the <a> with class name "CatalogLink". Its text equals to ' +
-        '"GO TO THE CATALOG"', () => {
-        expect(component.find('.CatalogLink').text()).to.equal('GO TO THE CATALOG');
+        '"Log in to your accountGO TO THE CATALOG"', () => {
+        expect(component.find('.CatalogLink')
+          .text()).to.equal('Log in to your accountGO TO THE CATALOG');
       });
 
       it('should have the <a> with class name "ResearchLink". Its text equals to ' +
-        '"GO TO THE RESEARCH CATALOG"', () => {
-        expect(component.find('.ResearchLink').text()).to.equal('GO TO THE RESEARCH CATALOG');
+        '"NYPL Building IconGO TO THE RESEARCH CATALOG"', () => {
+        expect(component.find('.ResearchLink').text())
+          .to.equal('NYPL Building IconGO TO THE RESEARCH CATALOG');
       });
 
       it('should have the <a> with class name "CatalogLink". Its href equals to ' +

@@ -182,7 +182,6 @@ var Header = function (_React$Component) {
     var patronNameObject = !(0, _underscore.isEmpty)(patron) && patron.names && patron.names.length ? _utils2.default.modelPatronName(patron.names[0]) : {};
 
     _this.state = (0, _underscore.extend)({
-      headerHeight: null,
       navData: navData,
       loginCookieName: 'nyplIdentityPatron',
       loginCookieValue: null,
@@ -192,8 +191,6 @@ var Header = function (_React$Component) {
       isFeatureFlagsActivated: {},
       logOutUrl: ''
     }, _HeaderStore2.default.getState(), { featureFlagsStore: _dgxFeatureFlags2.default.store.getState() });
-
-    _this.handleStickyHeader = _this.handleStickyHeader.bind(_this);
     return _this;
   }
 
@@ -203,10 +200,6 @@ var Header = function (_React$Component) {
       _HeaderStore2.default.listen(this.onChange.bind(this));
       // Listen on FeatureFlags Store updates
       _dgxFeatureFlags2.default.store.listen(this.onFeatureFlagsChange.bind(this));
-      // Height needs to be set once the alerts (if any) are mounted.
-      this.setHeaderHeight();
-      // Listen to the scroll event for the sticky header.
-      window.addEventListener('scroll', this.handleStickyHeader, false);
       // Set the log out link to state
       this.setLogOutLink(window.location.href);
       // Set nyplIdentityPatron cookie to the state.
@@ -222,13 +215,11 @@ var Header = function (_React$Component) {
       // Listen on FeatureFlags Store updates
       _dgxFeatureFlags2.default.store.unlisten(this.onFeatureFlagsChange.bind(this));
       // Removing event listener to minimize garbage collection
-      window.removeEventListener('scroll', this.handleStickyHeader, false);
     }
   }, {
     key: 'onChange',
     value: function onChange() {
       this.setState((0, _underscore.extend)({
-        headerHeight: this.state.headerHeight,
         loginCookieValue: this.state.loginCookieValue,
         patronName: this.state.patronName,
         patronInitial: this.state.patronInitial,
@@ -265,50 +256,6 @@ var Header = function (_React$Component) {
     }
 
     /**
-     * getHeaderHeight()
-     * returns the Height of the Header DOM
-     * element in pixels.
-     */
-
-  }, {
-    key: 'getHeaderHeight',
-    value: function getHeaderHeight() {
-      var headerDOM = _reactDom2.default.findDOMNode(this.refs.nyplHeader);
-      return headerDOM.getBoundingClientRect().height;
-    }
-
-    /**
-     * setHeaderHeight()
-     * Updates the state headerHeight property
-     * only if headerHeight is not defined.
-     */
-
-  }, {
-    key: 'setHeaderHeight',
-    value: function setHeaderHeight() {
-      var _this2 = this;
-
-      if (!this.state.headerHeight) {
-        setTimeout(function () {
-          _this2.setState({ headerHeight: _this2.getHeaderHeight() });
-        }, 500);
-      }
-    }
-
-    /**
-     * getWindowVerticallScroll()
-     * returns the current window vertical
-     * scroll position in pixels.
-     * @returns {number} - Vertical Scroll Position.
-     */
-
-  }, {
-    key: 'getWindowVerticalScroll',
-    value: function getWindowVerticalScroll() {
-      return window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-    }
-
-    /**
      * setLogOutLink(location)
      * Generate the full log out url including the redirect URI, and update the state with it.
      * @param {location} - The URI for redirect request
@@ -331,60 +278,26 @@ var Header = function (_React$Component) {
   }, {
     key: 'fetchPatronData',
     value: function fetchPatronData(cookie) {
-      var _this3 = this;
+      var _this2 = this;
 
       _utils2.default.getLoginData(cookie, function (result) {
         if (result.data && result.data.data) {
           var patronNameObject = _utils2.default.modelPatronName(_utils2.default.extractPatronName(result.data));
 
-          _this3.setState({
+          _this2.setState({
             patronName: patronNameObject.name,
             patronInitial: patronNameObject.initial,
             patronDataReceived: true
           });
         }
       }, _appConfig2.default.loginMyNyplLinks.tokenRefreshLink, function () {
-        _this3.setLoginCookie(_this3.state.loginCookieName);
+        _this2.setLoginCookie(_this2.state.loginCookieName);
       });
-    }
-
-    /**
-     * handleStickyHeader()
-     * Executes Actions.updateIsHeaderSticky()
-     * with the proper boolean value to update the
-     * HeaderStore.isSticky value based on the window
-     * vertical scroll position surpassing the height
-     * of the Header DOM element.
-     */
-
-  }, {
-    key: 'handleStickyHeader',
-    value: function handleStickyHeader() {
-      var headerHeight = this.state.headerHeight;
-      var windowVerticalDistance = this.getWindowVerticalScroll();
-
-      if (windowVerticalDistance && headerHeight && windowVerticalDistance > headerHeight) {
-        // Only update the value if sticky is false
-        if (!_HeaderStore2.default.getIsStickyValue()) {
-          // Fire GA Event when Header is in Sticky Mode
-          _utils2.default.trackHeader.bind(this, 'scroll', 'Sticky Header');
-          // Update the isSticky flag
-          _Actions2.default.updateIsHeaderSticky(true);
-        }
-      } else {
-        // Avoids re-assignment on each scroll by checking if it is already true
-        if (_HeaderStore2.default.getIsStickyValue()) {
-          _Actions2.default.updateIsHeaderSticky(false);
-        }
-      }
     }
   }, {
     key: 'render',
     value: function render() {
-      var isHeaderSticky = this.state.isSticky;
-      var headerHeight = this.state.headerHeight;
       var headerClass = this.props.className || 'Header';
-      var headerClasses = (0, _classnames2.default)(headerClass, { sticky: isHeaderSticky });
       var skipNav = this.props.skipNav ? _react2.default.createElement(_dgxSkipNavigationLink2.default, this.props.skipNav) : '';
       var isLoggedIn = !!this.state.patronDataReceived;
       var gaAction = isLoggedIn ? 'My Account' : 'Log In';
@@ -393,9 +306,8 @@ var Header = function (_React$Component) {
         'header',
         {
           id: this.props.id,
-          className: headerClasses,
-          ref: 'nyplHeader',
-          style: isHeaderSticky ? { height: headerHeight + 'px' } : null
+          className: headerClass,
+          ref: 'nyplHeader'
         },
         skipNav,
         _react2.default.createElement(_GlobalAlerts2.default, { className: headerClass + '-GlobalAlerts' }),

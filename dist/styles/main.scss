@@ -61,8 +61,6 @@
     border-bottom: 2px solid #ED1C24;
   }
 
-  @import 'components/_stickyHeader';
-
   /* DESKTOP HEADER WRAPPER
    * ----------------------
    * Sets the max-width on a desktop and up device.
@@ -135,6 +133,7 @@
 
       li {
         display: inline-block;
+        margin-right: 0.18em;
       }
     }
 

@@ -20,6 +20,10 @@ var _utils = require('../../utils/utils.js');
 
 var _utils2 = _interopRequireDefault(_utils);
 
+var _gaConfig = require('../../gaConfig.js');
+
+var _gaConfig2 = _interopRequireDefault(_gaConfig);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -81,12 +85,12 @@ var SearchBox = function (_React$Component) {
     }
 
     /**
-      * setEncoreUrl(searchInput, baseUrl, language, scopeString)
-      * Returns the final URL for encore search which,
-      * is first encoded, then concatenated by the
-      * base encore root url. An optional scope and
-      * language may be concatenated as well.
-      */
+     * setEncoreUrl(searchInput, baseUrl, language, scopeString)
+     * Returns the final URL for encore search which,
+     * is first encoded, then concatenated by the
+     * base encore root url. An optional scope and
+     * language may be concatenated as well.
+     */
 
   }, {
     key: 'setEncoreUrl',
@@ -252,15 +256,11 @@ var SearchBox = function (_React$Component) {
           // Fire GA event to track Search
           _utils2.default.trackHeader('Search', gaSearchLabel);
 
-          // Set the dimensions for the following hit
-          var customDimensions = [{ index: 'dimension1', value: 'HeaderSearch' }, { index: 'dimension2', value: GASearchedRepo },
-          // Reserved custom dimensions for the future use
-          { index: 'dimension4', value: 'NotSet' }, { index: 'dimension5', value: 'NotSet' }];
+          // Set a dynamic value for custom dimension2
+          _gaConfig2.default.customDimensions.dimension2 = GASearchedRepo;
 
-          _utils2.default.setDimensions(customDimensions);
-
-          // GA "Search" Catalog, "Query Sent" Action Event
-          _utils2.default.trackSearchQuerySend('QuerySent', searchInputValue);
+          // Send GA "Search" Catalog, "Query Sent" Action Event
+          _utils2.default.trackSearchQuerySend(searchInputValue, _gaConfig2.default.customDimensions);
 
           // Go to the proper search page
           window.location.assign(requestUrl);

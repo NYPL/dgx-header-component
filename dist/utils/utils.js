@@ -26,6 +26,10 @@ var _appConfig = require('./../appConfig.js');
 
 var _appConfig2 = _interopRequireDefault(_appConfig);
 
+var _gaConfig = require('./../gaConfig.js');
+
+var _gaConfig2 = _interopRequireDefault(_gaConfig);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Utils() {
@@ -105,18 +109,36 @@ function Utils() {
   this.trackHeader = _dgxReactGa.gaUtils.trackEvent('Global Header');
 
   /**
-   * trackSearchQuerySend(action, label)
-   * Track a GA click event, where action and label come from
-   * the higher level function call from _trackEvent().
+   * trackSearchQuerySend = (label ='', dimensions = {})
+   * Track a GA click event with custom dimensions.
+   * The parameter "dimensions" should be an object with dimensions listed as the following format,
+   * { dimensions1: 'value1', dimensions2: 'value2', ... }
    *
-   * @param {string} action - Action for GA event.
    * @param {string} label - Label for GA event.
+   * @param {object} dimensions - the object that consists the custom dimensions for the event.
    */
-  this.trackSearchQuerySend = _dgxReactGa.gaUtils.trackEvent('Search');
+  this.trackSearchQuerySend = function () {
+    var label = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+    var dimensions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+    var eventObj = {
+      category: _gaConfig2.default.eventCategory,
+      action: _gaConfig2.default.eventAction,
+      label: label,
+      value: 0
+    };
+
+    if (!(0, _underscore.isEmpty)(dimensions)) {
+      eventObj = (0, _underscore.extend)(eventObj, dimensions);
+    }
+
+    _dgxReactGa.ga.event(eventObj);
+  };
 
   /**
    * setDimensions(dimensions)
    * Set the dimensions for GA events. The scope is decided by the admin of the GA platform.
+   * This function will set the dimensions that affect all the hits on the same page.
    *
    * @param {array} dimensions - The array of dimensions. Each dimension includes two properties:
    * the index and the value.

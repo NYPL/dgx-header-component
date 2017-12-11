@@ -1,9 +1,14 @@
 import moment from 'moment';
-import { gaUtils } from 'dgx-react-ga';
+import { ga, gaUtils } from 'dgx-react-ga';
 import FeatureFlags from 'dgx-feature-flags';
-import { map as _map } from 'underscore';
+import {
+  map as _map,
+  extend as _extend,
+  isEmpty as _isEmpty
+} from 'underscore';
 import axios from 'axios';
 import config from './../appConfig.js';
+import gaConfig from './../gaConfig.js';
 
 function Utils() {
   this.formatDate = (startDate, endDate) => {
@@ -96,18 +101,33 @@ function Utils() {
   this.trackHeader = gaUtils.trackEvent('Global Header');
 
   /**
-   * trackSearchQuerySend(action, label)
-   * Track a GA click event, where action and label come from
-   * the higher level function call from _trackEvent().
+   * trackSearchQuerySend = (label ='', dimensions = {})
+   * Track a GA click event with custom dimensions.
+   * The parameter "dimensions" should be an object with dimensions listed as the following format,
+   * { dimensions1: 'value1', dimensions2: 'value2', ... }
    *
-   * @param {string} action - Action for GA event.
    * @param {string} label - Label for GA event.
+   * @param {object} dimensions - the object that consists the custom dimensions for the event.
    */
-  this.trackSearchQuerySend = gaUtils.trackEvent('Search');
+  this.trackSearchQuerySend = (label = '', dimensions = {}) => {
+    let eventObj = {
+      category: gaConfig.eventCategory,
+      action: gaConfig.eventAction,
+      label,
+      value: 0,
+    };
+
+    if (!_isEmpty(dimensions)) {
+      eventObj = _extend(eventObj, dimensions);
+    }
+
+    ga.event(eventObj);
+  };
 
   /**
    * setDimensions(dimensions)
    * Set the dimensions for GA events. The scope is decided by the admin of the GA platform.
+   * This function will set the dimensions that affect all the hits on the same page.
    *
    * @param {array} dimensions - The array of dimensions. Each dimension includes two properties:
    * the index and the value.

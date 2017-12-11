@@ -129,10 +129,6 @@
 }
 
 .LoginIcon {
-  fill: #FFF;
-  stroke: #000;
-  stroke-width: 2px;
-
   &.active {
     stroke: none;
   }
@@ -172,6 +168,12 @@
     width: 100%;
     .Login-Indication {
       margin: 0 0 30px 0;
+    }
+  }
+
+  a:first-child {
+    svg {
+      vertical-align: bottom;
     }
   }
 }

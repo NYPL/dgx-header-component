@@ -55,7 +55,6 @@
     "prop-types": "15.5.10",
     "react": "15.5.4",
     "react-dom": "15.5.4",
-    "react-onclickout": "2.0.4",
     "react-tappable": "1.0.0",
     "underscore": "1.8.3"
   },

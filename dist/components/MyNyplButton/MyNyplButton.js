@@ -197,7 +197,7 @@ var MyNyplButton = function (_React$Component) {
     key: 'renderMyNyplDialog',
     value: function renderMyNyplDialog() {
       var boxHeight = this.props.isLoggedIn ? ' loggedInHeight' : null;
-
+      // TODO: CHANGE TO STATE-BASED
       return _HeaderStore2.default.getMyNyplVisible() ? _react2.default.createElement(
         'div',
         {

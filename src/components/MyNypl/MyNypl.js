@@ -79,7 +79,7 @@ class MyNypl extends React.Component {
     }
 
     return (
-      <div>
+      <div tabIndex="0" className="patron-greeting-wrapper" ref={this.props.focusRef}>
         <p className={`${this.props.className}-Patron-Greeting Login-Indication`}>
           You are logged in as:
         </p>
@@ -102,7 +102,7 @@ class MyNypl extends React.Component {
         onClick={() => utils.trackHeader('My Account', 'Log Out')}
         style={styles.logOutLink}
       >
-        <LogoutIcon className="logoutIcon" />
+        <LogoutIcon className="logoutIcon" ariaHidden />
         LOG OUT
       </a> : null;
   }
@@ -160,6 +160,7 @@ MyNypl.propTypes = {
   logOutLink: PropTypes.string,
   isLoggedIn: PropTypes.bool,
   patronName: PropTypes.string,
+  focusRef: PropTypes.func,
 };
 
 MyNypl.defaultProps = {

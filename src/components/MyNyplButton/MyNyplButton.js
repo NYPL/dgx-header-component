@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { extend as _extend } from 'underscore';
 import FocusTrap from 'focus-trap-react';
@@ -61,6 +62,7 @@ class MyNyplButton extends React.Component {
   componentWillUnmount() {
     window.removeEventListener('keydown', this.handleEscKey, false);
   }
+
   /**
    * handleEscKey(e)
    * Triggers the clickOut method if the ESC keyboard key is pressed.
@@ -81,7 +83,11 @@ class MyNyplButton extends React.Component {
     // going to the link
     e.preventDefault();
     const visibleState = this.state.visible ? 'Closed' : 'Open';
-
+    setTimeout(() => {
+      if (this.focusRef) {
+        ReactDOM.findDOMNode(this.focusRef).focus();
+      }
+    }, 100);
     this.setState({ visible: !this.state.visible });
     utils.trackHeader(this.props.gaAction, `MyNyplButton - ${visibleState}`);
   }
@@ -105,15 +111,17 @@ class MyNyplButton extends React.Component {
   renderMyNyplButton() {
     let buttonClass = '';
     let iconClass = 'nypl-icon-wedge-down';
-    const icon = (<span className={`${iconClass} icon`} style={styles.MyNyplIcon}></span>);
+    let myNyplButtonLabel = (this.props.patronName) ? 'My Account' : 'Log In';
     const labelColorClass = (this.props.isLoggedIn) ? ' loggedIn' : '';
-    const myNyplButtonLabel = (this.props.patronName) ? 'My Account' : 'Log In';
     const loggedInFadeInAnimation = (this.props.patronName) ? ' animated fadeIn' : '';
 
     if (this.state.visible) {
       buttonClass = 'active';
       iconClass = 'nypl-icon-solo-x';
+      myNyplButtonLabel = 'Close';
     }
+
+    const icon = (<span className={`${iconClass} icon`} style={styles.MyNyplIcon}></span>);
 
     return (
       <a
@@ -122,6 +130,8 @@ class MyNyplButton extends React.Component {
         style={_extend(styles.MyNyplButton, this.props.style)}
         href={this.props.target}
         role="button"
+        aria-haspopup="true"
+        aria-expanded={this.state.visible ? true : null}
       >
         {myNyplButtonLabel}
         {icon}
@@ -137,6 +147,7 @@ class MyNyplButton extends React.Component {
         style={styles.MyNyplWrapper}
       >
         <MyNypl
+          focusRef={(i) => { this.focusRef = i; }}
           patronName={this.props.patronName}
           isLoggedIn={this.props.isLoggedIn}
           logOutLink={this.props.logOutLink}

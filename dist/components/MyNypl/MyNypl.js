@@ -117,7 +117,7 @@ var MyNypl = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        null,
+        { tabIndex: '0', className: 'patron-greeting-wrapper', ref: this.props.focusRef },
         _react2.default.createElement(
           'p',
           { className: this.props.className + '-Patron-Greeting Login-Indication' },
@@ -149,7 +149,7 @@ var MyNypl = function (_React$Component) {
           },
           style: styles.logOutLink
         },
-        _react2.default.createElement(_dgxSvgIcons.LogoutIcon, { className: 'logoutIcon' }),
+        _react2.default.createElement(_dgxSvgIcons.LogoutIcon, { className: 'logoutIcon', ariaHidden: true }),
         'LOG OUT'
       ) : null;
     }
@@ -223,7 +223,8 @@ MyNypl.propTypes = {
   loginResearchLink: _propTypes2.default.string,
   logOutLink: _propTypes2.default.string,
   isLoggedIn: _propTypes2.default.bool,
-  patronName: _propTypes2.default.string
+  patronName: _propTypes2.default.string,
+  focusRef: _propTypes2.default.func
 };
 
 MyNypl.defaultProps = {

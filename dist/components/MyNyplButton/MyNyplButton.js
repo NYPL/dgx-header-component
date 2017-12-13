@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -106,6 +110,7 @@ var MyNyplButton = function (_React$Component) {
     value: function componentWillUnmount() {
       window.removeEventListener('keydown', this.handleEscKey, false);
     }
+
     /**
      * handleEscKey(e)
      * Triggers the clickOut method if the ESC keyboard key is pressed.
@@ -128,11 +133,17 @@ var MyNyplButton = function (_React$Component) {
   }, {
     key: 'handleClick',
     value: function handleClick(e) {
+      var _this2 = this;
+
       // If javascript is enabled, clicking the button will open the dropdown menu instead of
       // going to the link
       e.preventDefault();
       var visibleState = this.state.visible ? 'Closed' : 'Open';
-
+      setTimeout(function () {
+        if (_this2.focusRef) {
+          _reactDom2.default.findDOMNode(_this2.focusRef).focus();
+        }
+      }, 100);
       this.setState({ visible: !this.state.visible });
       _utils2.default.trackHeader(this.props.gaAction, 'MyNyplButton - ' + visibleState);
     }
@@ -162,15 +173,17 @@ var MyNyplButton = function (_React$Component) {
     value: function renderMyNyplButton() {
       var buttonClass = '';
       var iconClass = 'nypl-icon-wedge-down';
-      var icon = _react2.default.createElement('span', { className: iconClass + ' icon', style: styles.MyNyplIcon });
-      var labelColorClass = this.props.isLoggedIn ? ' loggedIn' : '';
       var myNyplButtonLabel = this.props.patronName ? 'My Account' : 'Log In';
+      var labelColorClass = this.props.isLoggedIn ? ' loggedIn' : '';
       var loggedInFadeInAnimation = this.props.patronName ? ' animated fadeIn' : '';
 
       if (this.state.visible) {
         buttonClass = 'active';
         iconClass = 'nypl-icon-solo-x';
+        myNyplButtonLabel = 'Close';
       }
+
+      var icon = _react2.default.createElement('span', { className: iconClass + ' icon', style: styles.MyNyplIcon });
 
       return _react2.default.createElement(
         'a',
@@ -179,7 +192,9 @@ var MyNyplButton = function (_React$Component) {
           onClick: this.handleClick,
           style: (0, _underscore.extend)(styles.MyNyplButton, this.props.style),
           href: this.props.target,
-          role: 'button'
+          role: 'button',
+          'aria-haspopup': 'true',
+          'aria-expanded': this.state.visible ? true : null
         },
         myNyplButtonLabel,
         icon
@@ -188,6 +203,8 @@ var MyNyplButton = function (_React$Component) {
   }, {
     key: 'renderMyNyplDialog',
     value: function renderMyNyplDialog() {
+      var _this3 = this;
+
       var boxHeight = this.props.isLoggedIn ? ' loggedInHeight' : null;
       return this.state.visible ? _react2.default.createElement(
         'div',
@@ -196,6 +213,9 @@ var MyNyplButton = function (_React$Component) {
           style: styles.MyNyplWrapper
         },
         _react2.default.createElement(_MyNypl2.default, {
+          focusRef: function focusRef(i) {
+            _this3.focusRef = i;
+          },
           patronName: this.props.patronName,
           isLoggedIn: this.props.isLoggedIn,
           logOutLink: this.props.logOutLink

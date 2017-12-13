@@ -24,14 +24,6 @@ var _EmailSubscription = require('../EmailSubscription/EmailSubscription.js');
 
 var _EmailSubscription2 = _interopRequireDefault(_EmailSubscription);
 
-var _HeaderStore = require('../../stores/HeaderStore.js');
-
-var _HeaderStore2 = _interopRequireDefault(_HeaderStore);
-
-var _Actions = require('../../actions/Actions.js');
-
-var _Actions2 = _interopRequireDefault(_Actions);
-
 var _axios = require('axios');
 
 var _axios2 = _interopRequireDefault(_axios);
@@ -47,8 +39,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-// Alt Store/Actions
-
 // Utilities
 
 
@@ -94,10 +84,11 @@ var SubscribeButton = function (_React$Component) {
   function SubscribeButton(props) {
     _classCallCheck(this, SubscribeButton);
 
+    // subscribeFormVisible
     var _this = _possibleConstructorReturn(this, (SubscribeButton.__proto__ || Object.getPrototypeOf(SubscribeButton)).call(this, props));
 
     _this.state = {
-      subscribeFormVisible: _HeaderStore2.default.getSubscribeFormVisible(),
+      visible: false,
       target: _this.props.target
     };
 
@@ -110,7 +101,6 @@ var SubscribeButton = function (_React$Component) {
   _createClass(SubscribeButton, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      _HeaderStore2.default.listen(this.onChange.bind(this));
       window.addEventListener('keydown', this.handleEscKey, false);
       // Make an axios call to the mailinglist API server to check it th server is working.
       // And determine the behavior of subscribe button based on the status of the server.
@@ -119,7 +109,6 @@ var SubscribeButton = function (_React$Component) {
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      _HeaderStore2.default.unlisten(this.onChange.bind(this));
       window.removeEventListener('keydown', this.handleEscKey, false);
     }
 
@@ -131,7 +120,7 @@ var SubscribeButton = function (_React$Component) {
   }, {
     key: 'onChange',
     value: function onChange() {
-      this.setState({ subscribeFormVisible: _HeaderStore2.default.getSubscribeFormVisible() });
+      this.setState({ visible: !this.state.visible });
     }
   }, {
     key: 'handleEscKey',
@@ -152,8 +141,8 @@ var SubscribeButton = function (_React$Component) {
     value: function handleClick(e) {
       if (this.state.target === '#') {
         e.preventDefault();
-        var visibleState = this.state.subscribeFormVisible ? 'Closed' : 'Open';
-        _Actions2.default.toggleSubscribeFormVisible(!this.state.subscribeFormVisible);
+        var visibleState = this.state.visible ? 'Closed' : 'Open';
+        this.setState({ visible: !this.state.visible });
         _utils2.default.trackHeader('Click', 'Subscribe - ' + visibleState);
       }
     }
@@ -167,8 +156,8 @@ var SubscribeButton = function (_React$Component) {
   }, {
     key: 'handleOnClickOut',
     value: function handleOnClickOut() {
-      if (_HeaderStore2.default.getSubscribeFormVisible()) {
-        _Actions2.default.toggleSubscribeFormVisible(false);
+      if (this.state.visible) {
+        this.setState({ visible: false });
         _utils2.default.trackHeader('Click', 'Subscribe - Closed');
       }
     }
@@ -205,7 +194,7 @@ var SubscribeButton = function (_React$Component) {
       var buttonClass = '';
       var iconClass = 'nypl-icon-wedge-down';
 
-      if (this.state.subscribeFormVisible) {
+      if (this.state.visible) {
         iconClass = 'nypl-icon-solo-x';
         buttonClass = 'active';
       }
@@ -235,7 +224,7 @@ var SubscribeButton = function (_React$Component) {
   }, {
     key: 'renderEmailDialog',
     value: function renderEmailDialog() {
-      return this.state.subscribeFormVisible ? _react2.default.createElement(
+      return this.state.visible ? _react2.default.createElement(
         'div',
         {
           className: 'EmailSubscription-Wrapper active animatedFast fadeIn',
@@ -257,7 +246,7 @@ var SubscribeButton = function (_React$Component) {
             onDeactivate: this.handleOnClickOut,
             clickOutsideDeactivates: true
           },
-          active: _HeaderStore2.default.getSubscribeFormVisible()
+          active: this.state.visible
         },
         _react2.default.createElement(
           'div',

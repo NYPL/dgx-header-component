@@ -3,9 +3,6 @@ import PropTypes from 'prop-types';
 import { extend as _extend } from 'underscore';
 import FocusTrap from 'focus-trap-react';
 import EmailSubscription from '../EmailSubscription/EmailSubscription.js';
-// Alt Store/Actions
-import HeaderStore from '../../stores/HeaderStore.js';
-import Actions from '../../actions/Actions.js';
 // Utilities
 import axios from 'axios';
 import utils from '../../utils/utils.js';
@@ -50,8 +47,9 @@ class SubscribeButton extends React.Component {
   constructor(props) {
     super(props);
 
+    // subscribeFormVisible
     this.state = {
-      subscribeFormVisible: HeaderStore.getSubscribeFormVisible(),
+      visible: false,
       target: this.props.target,
     };
 
@@ -61,7 +59,6 @@ class SubscribeButton extends React.Component {
   }
 
   componentDidMount() {
-    HeaderStore.listen(this.onChange.bind(this));
     window.addEventListener('keydown', this.handleEscKey, false);
     // Make an axios call to the mailinglist API server to check it th server is working.
     // And determine the behavior of subscribe button based on the status of the server.
@@ -69,7 +66,6 @@ class SubscribeButton extends React.Component {
   }
 
   componentWillUnmount() {
-    HeaderStore.unlisten(this.onChange.bind(this));
     window.removeEventListener('keydown', this.handleEscKey, false);
   }
 
@@ -78,7 +74,7 @@ class SubscribeButton extends React.Component {
    * Updates the state of the form based off the Header Store.
    */
   onChange() {
-    this.setState({ subscribeFormVisible: HeaderStore.getSubscribeFormVisible() });
+    this.setState({ visible: !this.state.visible });
   }
 
   handleEscKey(e) {
@@ -95,8 +91,8 @@ class SubscribeButton extends React.Component {
   handleClick(e) {
     if (this.state.target === '#') {
       e.preventDefault();
-      const visibleState = this.state.subscribeFormVisible ? 'Closed' : 'Open';
-      Actions.toggleSubscribeFormVisible(!this.state.subscribeFormVisible);
+      const visibleState = this.state.visible ? 'Closed' : 'Open';
+      this.setState({ visible: !this.state.visible });
       utils.trackHeader('Click', `Subscribe - ${visibleState}`);
     }
   }
@@ -107,8 +103,8 @@ class SubscribeButton extends React.Component {
    * currently visible.
    */
   handleOnClickOut() {
-    if (HeaderStore.getSubscribeFormVisible()) {
-      Actions.toggleSubscribeFormVisible(false);
+    if (this.state.visible) {
+      this.setState({ visible: false });
       utils.trackHeader('Click', 'Subscribe - Closed');
     }
   }
@@ -142,7 +138,7 @@ class SubscribeButton extends React.Component {
     let buttonClass = '';
     let iconClass = 'nypl-icon-wedge-down';
 
-    if (this.state.subscribeFormVisible) {
+    if (this.state.visible) {
       iconClass = 'nypl-icon-solo-x';
       buttonClass = 'active';
     }
@@ -170,7 +166,7 @@ class SubscribeButton extends React.Component {
   }
 
   renderEmailDialog() {
-    return this.state.subscribeFormVisible ? (
+    return this.state.visible ? (
       <div
         className="EmailSubscription-Wrapper active animatedFast fadeIn"
         style={styles.EmailSubscribeForm}
@@ -190,7 +186,7 @@ class SubscribeButton extends React.Component {
           onDeactivate: this.handleOnClickOut,
           clickOutsideDeactivates: true,
         }}
-        active={HeaderStore.getSubscribeFormVisible()}
+        active={this.state.visible}
       >
         <div
           className="SubscribeButton-Wrapper"

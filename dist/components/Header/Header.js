@@ -45,10 +45,6 @@ var _HeaderStore = require('../../stores/HeaderStore.js');
 
 var _HeaderStore2 = _interopRequireDefault(_HeaderStore);
 
-var _Actions = require('../../actions/Actions.js');
-
-var _Actions2 = _interopRequireDefault(_Actions);
-
 var _Logo = require('../Logo/Logo.js');
 
 var _Logo2 = _interopRequireDefault(_Logo);

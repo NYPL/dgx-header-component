@@ -2,9 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { extend as _extend } from 'underscore';
 import FocusTrap from 'focus-trap-react';
-// Alt Store/Actions
-import HeaderStore from '../../stores/HeaderStore.js';
-import Actions from '../../actions/Actions.js';
 // GA Utilities
 import utils from '../../utils/utils.js';
 // Component Dependencies
@@ -47,6 +44,11 @@ const styles = {
 class MyNyplButton extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      visible: false,
+    };
+
     this.handleClick = this.handleClick.bind(this);
     this.handleOnClickOut = this.handleOnClickOut.bind(this);
     this.handleEscKey = this.handleEscKey.bind(this);
@@ -78,9 +80,9 @@ class MyNyplButton extends React.Component {
     // If javascript is enabled, clicking the button will open the dropdown menu instead of
     // going to the link
     e.preventDefault();
-    const visibleState = HeaderStore.getMyNyplVisible() ? 'Closed' : 'Open';
+    const visibleState = this.state.visible ? 'Closed' : 'Open';
 
-    Actions.toggleMyNyplVisible(!HeaderStore.getMyNyplVisible());
+    this.setState({ visible: !this.state.visible });
     utils.trackHeader(this.props.gaAction, `MyNyplButton - ${visibleState}`);
   }
 
@@ -90,11 +92,9 @@ class MyNyplButton extends React.Component {
    * currently visible.
    */
   handleOnClickOut() {
-    if (HeaderStore.getMyNyplVisible()) {
-      if (HeaderStore.getMobileMyNyplButtonValue() === '') {
-        utils.trackHeader(this.props.gaAction, 'MyNyplButton - Closed');
-      }
-      Actions.toggleMyNyplVisible(false);
+    if (this.state.visible) {
+      utils.trackHeader(this.props.gaAction, 'MyNyplButton - Closed');
+      this.setState({ visible: false });
     }
   }
 
@@ -104,13 +104,13 @@ class MyNyplButton extends React.Component {
    */
   renderMyNyplButton() {
     let buttonClass = '';
-    let iconClass = (HeaderStore.getMyNyplVisible()) ? 'nypl-icon-solo-x' : 'nypl-icon-wedge-down';
+    let iconClass = (this.state.visible) ? 'nypl-icon-solo-x' : 'nypl-icon-wedge-down';
     const icon = (<span className={`${iconClass} icon`} style={styles.MyNyplIcon}></span>);
     const labelColorClass = (this.props.isLoggedIn) ? ' loggedIn' : '';
     const myNyplButtonLabel = (this.props.patronName) ? 'My Account' : 'Log In';
     const loggedInFadeInAnimation = (this.props.patronName) ? ' animated fadeIn' : '';
 
-    if (HeaderStore.getMyNyplVisible()) {
+    if (this.state.visible) {
       buttonClass = 'active';
       iconClass = 'nypl-icon-solo-x';
     }
@@ -131,8 +131,7 @@ class MyNyplButton extends React.Component {
 
   renderMyNyplDialog() {
     const boxHeight = (this.props.isLoggedIn) ? ' loggedInHeight' : null;
-    // TODO: CHANGE TO STATE-BASED
-    return (HeaderStore.getMyNyplVisible()) ? (
+    return (this.state.visible) ? (
       <div
         className={`MyNypl-Wrapper active animatedFast fadeIn${boxHeight}`}
         style={styles.MyNyplWrapper}
@@ -153,7 +152,7 @@ class MyNyplButton extends React.Component {
           onDeactivate: this.handleOnClickOut,
           clickOutsideDeactivates: true,
         }}
-        active={HeaderStore.getMyNyplVisible()}
+        active={this.state.visible}
       >
         <div
           className="MyNyplButton-Wrapper"

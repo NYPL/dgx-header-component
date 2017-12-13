@@ -16,7 +16,6 @@ import featureFlagConfig from '../../featureFlagConfig.js';
 import config from '../../appConfig.js';
 // ALT Flux
 import HeaderStore from '../../stores/HeaderStore.js';
-import Actions from '../../actions/Actions.js';
 // NYPL Components
 import Logo from '../Logo/Logo.js';
 import DonateButton from '../DonateButton/DonateButton.js';

@@ -20,14 +20,6 @@ var _focusTrapReact = require('focus-trap-react');
 
 var _focusTrapReact2 = _interopRequireDefault(_focusTrapReact);
 
-var _HeaderStore = require('../../stores/HeaderStore.js');
-
-var _HeaderStore2 = _interopRequireDefault(_HeaderStore);
-
-var _Actions = require('../../actions/Actions.js');
-
-var _Actions2 = _interopRequireDefault(_Actions);
-
 var _utils = require('../../utils/utils.js');
 
 var _utils2 = _interopRequireDefault(_utils);
@@ -47,8 +39,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-// Alt Store/Actions
-
 // GA Utilities
 
 // Component Dependencies
@@ -96,6 +86,10 @@ var MyNyplButton = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (MyNyplButton.__proto__ || Object.getPrototypeOf(MyNyplButton)).call(this, props));
 
+    _this.state = {
+      visible: false
+    };
+
     _this.handleClick = _this.handleClick.bind(_this);
     _this.handleOnClickOut = _this.handleOnClickOut.bind(_this);
     _this.handleEscKey = _this.handleEscKey.bind(_this);
@@ -137,9 +131,9 @@ var MyNyplButton = function (_React$Component) {
       // If javascript is enabled, clicking the button will open the dropdown menu instead of
       // going to the link
       e.preventDefault();
-      var visibleState = _HeaderStore2.default.getMyNyplVisible() ? 'Closed' : 'Open';
+      var visibleState = this.state.visible ? 'Closed' : 'Open';
 
-      _Actions2.default.toggleMyNyplVisible(!_HeaderStore2.default.getMyNyplVisible());
+      this.setState({ visible: !this.state.visible });
       _utils2.default.trackHeader(this.props.gaAction, 'MyNyplButton - ' + visibleState);
     }
 
@@ -152,11 +146,9 @@ var MyNyplButton = function (_React$Component) {
   }, {
     key: 'handleOnClickOut',
     value: function handleOnClickOut() {
-      if (_HeaderStore2.default.getMyNyplVisible()) {
-        if (_HeaderStore2.default.getMobileMyNyplButtonValue() === '') {
-          _utils2.default.trackHeader(this.props.gaAction, 'MyNyplButton - Closed');
-        }
-        _Actions2.default.toggleMyNyplVisible(false);
+      if (this.state.visible) {
+        _utils2.default.trackHeader(this.props.gaAction, 'MyNyplButton - Closed');
+        this.setState({ visible: false });
       }
     }
 
@@ -169,13 +161,13 @@ var MyNyplButton = function (_React$Component) {
     key: 'renderMyNyplButton',
     value: function renderMyNyplButton() {
       var buttonClass = '';
-      var iconClass = _HeaderStore2.default.getMyNyplVisible() ? 'nypl-icon-solo-x' : 'nypl-icon-wedge-down';
+      var iconClass = this.state.visible ? 'nypl-icon-solo-x' : 'nypl-icon-wedge-down';
       var icon = _react2.default.createElement('span', { className: iconClass + ' icon', style: styles.MyNyplIcon });
       var labelColorClass = this.props.isLoggedIn ? ' loggedIn' : '';
       var myNyplButtonLabel = this.props.patronName ? 'My Account' : 'Log In';
       var loggedInFadeInAnimation = this.props.patronName ? ' animated fadeIn' : '';
 
-      if (_HeaderStore2.default.getMyNyplVisible()) {
+      if (this.state.visible) {
         buttonClass = 'active';
         iconClass = 'nypl-icon-solo-x';
       }
@@ -197,8 +189,7 @@ var MyNyplButton = function (_React$Component) {
     key: 'renderMyNyplDialog',
     value: function renderMyNyplDialog() {
       var boxHeight = this.props.isLoggedIn ? ' loggedInHeight' : null;
-      // TODO: CHANGE TO STATE-BASED
-      return _HeaderStore2.default.getMyNyplVisible() ? _react2.default.createElement(
+      return this.state.visible ? _react2.default.createElement(
         'div',
         {
           className: 'MyNypl-Wrapper active animatedFast fadeIn' + boxHeight,
@@ -221,7 +212,7 @@ var MyNyplButton = function (_React$Component) {
             onDeactivate: this.handleOnClickOut,
             clickOutsideDeactivates: true
           },
-          active: _HeaderStore2.default.getMyNyplVisible()
+          active: this.state.visible
         },
         _react2.default.createElement(
           'div',

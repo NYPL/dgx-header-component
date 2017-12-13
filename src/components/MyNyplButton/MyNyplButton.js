@@ -104,7 +104,7 @@ class MyNyplButton extends React.Component {
    */
   renderMyNyplButton() {
     let buttonClass = '';
-    let iconClass = (this.state.visible) ? 'nypl-icon-solo-x' : 'nypl-icon-wedge-down';
+    let iconClass = 'nypl-icon-wedge-down';
     const icon = (<span className={`${iconClass} icon`} style={styles.MyNyplIcon}></span>);
     const labelColorClass = (this.props.isLoggedIn) ? ' loggedIn' : '';
     const myNyplButtonLabel = (this.props.patronName) ? 'My Account' : 'Log In';

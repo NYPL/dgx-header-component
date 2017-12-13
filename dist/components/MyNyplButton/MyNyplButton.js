@@ -161,7 +161,7 @@ var MyNyplButton = function (_React$Component) {
     key: 'renderMyNyplButton',
     value: function renderMyNyplButton() {
       var buttonClass = '';
-      var iconClass = this.state.visible ? 'nypl-icon-solo-x' : 'nypl-icon-wedge-down';
+      var iconClass = 'nypl-icon-wedge-down';
       var icon = _react2.default.createElement('span', { className: iconClass + ' icon', style: styles.MyNyplIcon });
       var labelColorClass = this.props.isLoggedIn ? ' loggedIn' : '';
       var myNyplButtonLabel = this.props.patronName ? 'My Account' : 'Log In';

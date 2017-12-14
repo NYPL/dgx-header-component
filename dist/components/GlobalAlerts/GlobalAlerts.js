@@ -173,7 +173,8 @@ var GlobalAlerts = function (_React$Component) {
         {
           className: this.props.className + ' ' + classes,
           id: this.props.id,
-          style: styles
+          style: styles,
+          role: 'complementary'
         },
         _react2.default.createElement(
           'div',

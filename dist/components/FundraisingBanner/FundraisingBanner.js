@@ -242,7 +242,8 @@ var FundraisingBanner = function (_React$Component) {
         {
           className: this.props.className + ' ' + (isBannerVisible ? 'show' : ''),
           id: this.props.id,
-          style: this.getBackgroundImageStyles(primaryBgImage, secondaryBgImage)
+          style: this.getBackgroundImageStyles(primaryBgImage, secondaryBgImage),
+          role: 'complementary'
         },
         !(0, _underscore.isEmpty)(bannerData) && _react2.default.createElement(
           'div',

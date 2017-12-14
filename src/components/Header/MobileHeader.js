@@ -232,6 +232,19 @@ class MobileHeader extends React.Component {
   }
 
   /**
+   * closeMenuDialog()
+   * Verifies the current state.activeMobileButton matches
+   * 'mobileMenu' and fires the Action method to reset.
+   * This is necessary for the FocusTrap component to execute
+   * the proper deactivateMethod for each dialog.
+   */
+  closeMenuDialog() {
+    if (this.state.activeMobileButton === 'mobileMenu') {
+      Actions.setMobileMenuButtonValue('');
+    }
+  }
+
+  /**
   * renderLogoLink()
   * Generates the DOM for the NYPL Logo Link.
   * Uses SVG LionLogo icon & visuallyHidden label.
@@ -417,7 +430,8 @@ class MobileHeader extends React.Component {
       <li style={styles.listItem}>
         <FocusTrap
           focusTrapOptions={{
-            onDeactivate: this.closeMenuDialog,
+            onDeactivate: () => this.closeMenuDialog(),
+            clickOutsideDeactivates: true,
           }}
           active={this.state.activeMobileButton === 'mobileMenu'}
         >

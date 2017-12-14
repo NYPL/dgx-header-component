@@ -13,12 +13,13 @@ import {
 } from 'dgx-svg-icons';
 import { extend as _extend } from 'underscore';
 // ALT FLUX
-import HeaderStore from '../../stores/HeaderStore.js';
-import Actions from '../../actions/Actions.js';
-import utils from '../../utils/utils.js';
+import HeaderStore from '../../stores/HeaderStore';
+import Actions from '../../actions/Actions';
+import utils from '../../utils/utils';
 // NYPL Components
-import MobileMyNypl from '../MyNypl/MobileMyNypl.js';
-import SearchBox from '../SearchBox/SearchBox.js';
+import MobileMyNypl from '../MyNypl/MobileMyNypl';
+import SearchBox from '../SearchBox/SearchBox';
+import NavMenu from '../NavMenu/NavMenu';
 
 const styles = {
   base: {
@@ -231,6 +232,19 @@ class MobileHeader extends React.Component {
   }
 
   /**
+   * closeMenuDialog()
+   * Verifies the current state.activeMobileButton matches
+   * 'mobileMenu' and fires the Action method to reset.
+   * This is necessary for the FocusTrap component to execute
+   * the proper deactivateMethod for each dialog.
+   */
+  closeMenuDialog() {
+    if (this.state.activeMobileButton === 'mobileMenu') {
+      Actions.setMobileMenuButtonValue('');
+    }
+  }
+
+  /**
   * renderLogoLink()
   * Generates the DOM for the NYPL Logo Link.
   * Uses SVG LionLogo icon & visuallyHidden label.
@@ -293,7 +307,6 @@ class MobileHeader extends React.Component {
         <ReactTappable
           className={`${this.props.className}-MyNyplButton${myNyplClass}`}
           component="button"
-          ref="MobileMyNyplButton"
           style={_extend(styles.myNyplButton, buttonStyles)}
           onTap={() => this.toggleMobileMenuButton(`click${gaAction}`)}
         >
@@ -370,7 +383,6 @@ class MobileHeader extends React.Component {
         <ReactTappable
           className={`${this.props.className}-SearchButton${mobileSearchClass}`}
           component="button"
-          ref="MobileSearchButton"
           style={_extend(styles.searchButton, buttonStyles)}
           onTap={() => this.toggleMobileMenuButton('clickSearch')}
         >
@@ -393,26 +405,49 @@ class MobileHeader extends React.Component {
     let icon = <MenuIcon ariaHidden fill="#000" />;
     let buttonStyles = styles.inactiveMenuButton;
     let buttonLabel = 'Open Menu Dialog';
+    let dialogWindow = null;
 
     if (this.state.activeMobileButton === 'mobileMenu') {
       mobileMenuClass = ' active';
       icon = <XIcon ariaHidden fill="#FFF" />;
       buttonStyles = styles.activeMenuButton;
       buttonLabel = 'Close Menu Dialog';
+      dialogWindow = (
+        <NavMenu
+          className={`${this.props.className}-NavMenu`}
+          lang={this.props.lang}
+          items={this.props.navData}
+          urlType={this.props.urlType}
+          isLoggedIn={this.props.isLoggedIn}
+          patronName={this.state.patronName}
+          logOutLink={this.state.logOutUrl}
+        />
+      );
     }
 
     return (
       <li style={styles.listItem}>
-        <ReactTappable
-          className={`${this.props.className}-MenuButton${mobileMenuClass}`}
-          component="button"
-          ref="MobileMenuButton"
-          style={_extend(styles.menuButton, buttonStyles)}
-          onTap={() => this.toggleMobileMenuButton('mobileMenu')}
+        <FocusTrap
+          focusTrapOptions={{
+            initialFocus: 'ul.Header-Mobile-NavMenu-List li:first-of-type a',
+            onDeactivate: () => this.closeMenuDialog(),
+            clickOutsideDeactivates: true,
+          }}
+          active={this.state.activeMobileButton === 'mobileMenu'}
         >
-          <span className="visuallyHidden">{buttonLabel}</span>
-          {icon}
-        </ReactTappable>
+          <ReactTappable
+            className={`${this.props.className}-MenuButton${mobileMenuClass}`}
+            component="button"
+            style={_extend(styles.menuButton, buttonStyles)}
+            onTap={() => this.toggleMobileMenuButton('mobileMenu')}
+          >
+            <span className="visuallyHidden">{buttonLabel}</span>
+            {icon}
+          </ReactTappable>
+          <div className={`MobileMyNypl-Wrapper${mobileMenuClass}`}>
+            {dialogWindow}
+          </div>
+        </FocusTrap>
       </li>
     );
   }
@@ -435,16 +470,20 @@ class MobileHeader extends React.Component {
 MobileHeader.propTypes = {
   lang: PropTypes.string,
   className: PropTypes.string,
-  locatorUrl: PropTypes.string,
+  locatorUrl: PropTypes.string.isRequired,
   nyplRootUrl: PropTypes.string,
   alt: PropTypes.string,
   isLoggedIn: PropTypes.bool,
   patronName: PropTypes.string,
-  logOutLink: PropTypes.string,
+  logOutLink: PropTypes.string.isRequired,
+  navData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  urlType: PropTypes.string.isRequired,
 };
 
 MobileHeader.defaultProps = {
   lang: 'en',
+  isLoggedIn: false,
+  patronName: null,
   className: 'MobileHeader',
   nyplRootUrl: '/',
   alt: 'The New York Public Library',

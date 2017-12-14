@@ -540,6 +540,7 @@ var MobileHeader = function (_React$Component) {
           _focusTrapReact2.default,
           {
             focusTrapOptions: {
+              initialFocus: 'ul.Header-Mobile-NavMenu-List li:first-of-type a',
               onDeactivate: function onDeactivate() {
                 return _this4.closeMenuDialog();
               },

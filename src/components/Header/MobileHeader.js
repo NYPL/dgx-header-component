@@ -430,6 +430,7 @@ class MobileHeader extends React.Component {
       <li style={styles.listItem}>
         <FocusTrap
           focusTrapOptions={{
+            initialFocus: 'ul.Header-Mobile-NavMenu-List li:first-of-type a',
             onDeactivate: () => this.closeMenuDialog(),
             clickOutsideDeactivates: true,
           }}

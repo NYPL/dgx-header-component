@@ -421,7 +421,6 @@ class MobileHeader extends React.Component {
           isLoggedIn={this.props.isLoggedIn}
           patronName={this.state.patronName}
           logOutLink={this.state.logOutUrl}
-          /* gaAction={gaAction} */
         />
       );
     }

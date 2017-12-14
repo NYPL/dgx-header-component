@@ -170,6 +170,7 @@ class FundraisingBanner extends React.Component {
         className={`${this.props.className} ${isBannerVisible ? 'show' : ''}`}
         id={this.props.id}
         style={this.getBackgroundImageStyles(primaryBgImage, secondaryBgImage)}
+        role='complementary'
       >
       {
         !_isEmpty(bannerData) &&

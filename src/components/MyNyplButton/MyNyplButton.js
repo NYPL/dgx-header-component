@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { extend as _extend } from 'underscore';
 import FocusTrap from 'focus-trap-react';
+import {
+  DownWedgeIcon,
+  XIcon,
+} from 'dgx-svg-icons';
 // GA Utilities
 import utils from '../../utils/utils.js';
 // Component Dependencies
@@ -19,18 +23,12 @@ const styles = {
     lineHeight: 'normal',
   },
   MyNyplButton: {
-    display: 'inline-block',
+    display: 'inline',
     border: 'none',
-    padding: '9px 10px 10px 12px',
+    padding: '11px 10px 11px 12px',
     textTransform: 'uppercase',
     lineHeight: 'normal',
     verticalAlign: 'baseline',
-  },
-  MyNyplIcon: {
-    fontSize: '15px',
-    verticalAlign: 'text-bottom',
-    marginLeft: '3px',
-    display: 'inline',
   },
   MyNyplWrapper: {
     position: 'absolute',
@@ -110,18 +108,16 @@ class MyNyplButton extends React.Component {
    */
   renderMyNyplButton() {
     let buttonClass = '';
-    let iconClass = 'nypl-icon-wedge-down';
+    let icon = <DownWedgeIcon className="dropDownIcon" ariaHidden />;
     let myNyplButtonLabel = (this.props.patronName) ? 'My Account' : 'Log In';
     const labelColorClass = (this.props.isLoggedIn) ? ' loggedIn' : '';
     const loggedInFadeInAnimation = (this.props.patronName) ? ' animated fadeIn' : '';
 
     if (this.state.visible) {
       buttonClass = 'active';
-      iconClass = 'nypl-icon-solo-x';
+      icon = <XIcon className="dropDownIcon" ariaHidden fill="#fff" />;
       myNyplButtonLabel = 'Close';
     }
-
-    const icon = (<span className={`${iconClass} icon`} style={styles.MyNyplIcon}></span>);
 
     return (
       <a
@@ -164,14 +160,11 @@ class MyNyplButton extends React.Component {
           clickOutsideDeactivates: true,
         }}
         active={this.state.visible}
+        className="MyNyplButton-Wrapper"
+        style={_extend(styles.base, this.props.style)}
       >
-        <div
-          className="MyNyplButton-Wrapper"
-          style={_extend(styles.base, this.props.style)}
-        >
-          {this.renderMyNyplButton()}
-          {this.renderMyNyplDialog()}
-        </div>
+        {this.renderMyNyplButton()}
+        {this.renderMyNyplDialog()}
       </FocusTrap>
     );
   }

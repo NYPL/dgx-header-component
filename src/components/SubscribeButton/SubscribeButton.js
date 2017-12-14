@@ -2,9 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { extend as _extend } from 'underscore';
 import FocusTrap from 'focus-trap-react';
+import {
+  DownWedgeIcon,
+  XIcon,
+} from 'dgx-svg-icons';
+import axios from 'axios';
+
 import EmailSubscription from '../EmailSubscription/EmailSubscription.js';
 // Utilities
-import axios from 'axios';
 import utils from '../../utils/utils.js';
 
 const styles = {
@@ -12,19 +17,13 @@ const styles = {
     position: 'relative',
   },
   subscribeButton: {
-    display: 'inline-block',
-    padding: '10px 10px 10px 12px',
+    display: 'inline',
+    padding: '11px 10px 11px 12px',
     verticalAlign: 'baseline',
   },
   subscribeLabel: {
     display: 'inline',
     verticalAlign: 'baseline',
-  },
-  subscribeIcon: {
-    fontSize: '15px',
-    verticalAlign: 'text-bottom',
-    marginLeft: '3px',
-    display: 'inline',
   },
   EmailSubscribeForm: {
     position: 'absolute',
@@ -136,11 +135,13 @@ class SubscribeButton extends React.Component {
 
   renderEmailButton() {
     let buttonClass = '';
-    let iconClass = 'nypl-icon-wedge-down';
+    let icon = <DownWedgeIcon className="dropDownIcon" ariaHidden />;
+    let label = this.props.label;
 
     if (this.state.visible) {
-      iconClass = 'nypl-icon-solo-x';
       buttonClass = 'active';
+      label = 'Close';
+      icon = <XIcon className="dropDownIcon" ariaHidden fill="#fff" />;
     }
 
     return (
@@ -151,16 +152,11 @@ class SubscribeButton extends React.Component {
         onClick={this.handleClick}
         style={styles.subscribeButton}
         role={(this.state.target === '#') ? 'button' : null}
+        aria-haspopup="true"
+        aria-expanded={this.state.visible ? true : null}
       >
-        <span style={styles.subscribeLabel}>
-          {this.props.label}
-        </span>
-        <span
-          className={`${iconClass} icon`}
-          aria-hidden="true"
-          style={styles.subscribeIcon}
-        >
-        </span>
+        <span style={styles.subscribeLabel}>{label}</span>
+        {icon}
       </a>
     );
   }
@@ -172,7 +168,7 @@ class SubscribeButton extends React.Component {
         style={styles.EmailSubscribeForm}
       >
         <EmailSubscription
-          list_id="1061"
+          listId="1061"
           target="https://mailinglistapi.nypl.org"
         />
       </div>
@@ -185,16 +181,14 @@ class SubscribeButton extends React.Component {
         focusTrapOptions={{
           onDeactivate: this.handleOnClickOut,
           clickOutsideDeactivates: true,
+          initialFocus: '.SubscribeMessageBox',
         }}
         active={this.state.visible}
+        className="SubscribeButton-Wrapper"
+        style={_extend(styles.base, this.props.style)}
       >
-        <div
-          className="SubscribeButton-Wrapper"
-          style={_extend(styles.base, this.props.style)}
-        >
-          {this.renderEmailButton()}
-          {this.renderEmailDialog()}
-        </div>
+        {this.renderEmailButton()}
+        {this.renderEmailDialog()}
       </FocusTrap>
     );
   }

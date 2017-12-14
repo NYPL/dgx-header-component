@@ -24,6 +24,8 @@ var _focusTrapReact = require('focus-trap-react');
 
 var _focusTrapReact2 = _interopRequireDefault(_focusTrapReact);
 
+var _dgxSvgIcons = require('dgx-svg-icons');
+
 var _utils = require('../../utils/utils.js');
 
 var _utils2 = _interopRequireDefault(_utils);
@@ -59,18 +61,12 @@ var styles = {
     lineHeight: 'normal'
   },
   MyNyplButton: {
-    display: 'inline-block',
+    display: 'inline',
     border: 'none',
-    padding: '9px 10px 10px 12px',
+    padding: '11px 10px 11px 12px',
     textTransform: 'uppercase',
     lineHeight: 'normal',
     verticalAlign: 'baseline'
-  },
-  MyNyplIcon: {
-    fontSize: '15px',
-    verticalAlign: 'text-bottom',
-    marginLeft: '3px',
-    display: 'inline'
   },
   MyNyplWrapper: {
     position: 'absolute',
@@ -172,18 +168,16 @@ var MyNyplButton = function (_React$Component) {
     key: 'renderMyNyplButton',
     value: function renderMyNyplButton() {
       var buttonClass = '';
-      var iconClass = 'nypl-icon-wedge-down';
+      var icon = _react2.default.createElement(_dgxSvgIcons.DownWedgeIcon, { className: 'dropDownIcon', ariaHidden: true });
       var myNyplButtonLabel = this.props.patronName ? 'My Account' : 'Log In';
       var labelColorClass = this.props.isLoggedIn ? ' loggedIn' : '';
       var loggedInFadeInAnimation = this.props.patronName ? ' animated fadeIn' : '';
 
       if (this.state.visible) {
         buttonClass = 'active';
-        iconClass = 'nypl-icon-solo-x';
+        icon = _react2.default.createElement(_dgxSvgIcons.XIcon, { className: 'dropDownIcon', ariaHidden: true, fill: '#fff' });
         myNyplButtonLabel = 'Close';
       }
-
-      var icon = _react2.default.createElement('span', { className: iconClass + ' icon', style: styles.MyNyplIcon });
 
       return _react2.default.createElement(
         'a',
@@ -232,17 +226,12 @@ var MyNyplButton = function (_React$Component) {
             onDeactivate: this.handleOnClickOut,
             clickOutsideDeactivates: true
           },
-          active: this.state.visible
+          active: this.state.visible,
+          className: 'MyNyplButton-Wrapper',
+          style: (0, _underscore.extend)(styles.base, this.props.style)
         },
-        _react2.default.createElement(
-          'div',
-          {
-            className: 'MyNyplButton-Wrapper',
-            style: (0, _underscore.extend)(styles.base, this.props.style)
-          },
-          this.renderMyNyplButton(),
-          this.renderMyNyplDialog()
-        )
+        this.renderMyNyplButton(),
+        this.renderMyNyplDialog()
       );
     }
   }]);

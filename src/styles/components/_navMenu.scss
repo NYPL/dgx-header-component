@@ -1,30 +1,15 @@
-&-NavMenu {
+/*
+  This is the Mobile (i.e. min-screen(769px)) instance of NavMenu
+*/
+&-Mobile-NavMenu {
   position: relative;
   display: block;
-
-  @include min-screen(769px) {
-    position: absolute;
-    width: 100%;
-    bottom: 0px;
-  }
-
-  @include min-screen(1025px) {
-    position: relative;
-    width: auto;
-    bottom: inherit;
-  }
 
   // Desktop Search Button
   @import '_desktopSearch';
 
   // NavMenu Wrapper
   &-Wrapper {
-    @include min-screen(769px) {
-      max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
-      text-align: right;
-      margin: 0 auto;
-    }
-
     /* Controls the display of Mobile View */
     &.mobileActive {
       margin-top: -2.5px;
@@ -43,44 +28,27 @@
       #NavMenu-List {
         display: block;
         line-height: normal;
-
-        @include min-screen(769px) {
-          display: inline-table;
-        }
       }
 
       /* Only display Logo Text on Mobile */
       .MobileLogoText {
         display: block;
-
-        @include min-screen(769px) {
-          display: none;
-        }
       }
 
       /* Only display BottomButtons on Mobile */
       .MobileBottomButtons {
         display: block;
-
-        @include min-screen(769px) {
-          display: none;
-        }
       }
-    }
 
-    .MobileBottomButtons {
-      /* Hide on all viewports, trigger display based on class */
-      display: none;
-    }
+      .MobileLogoText {
+        /* Hide on all viewports, trigger display based on class */
+        position: absolute;
+        top: 20px;
+        left: 15px;
+        color: #FFF;
+        font-size: 85px;
+      }
 
-    .MobileLogoText {
-      /* Hide on all viewports, trigger display based on class */
-      display: none;
-      position: absolute;
-      top: 20px;
-      left: 15px;
-      color: #FFF;
-      font-size: 85px;
     }
   }
 
@@ -93,13 +61,6 @@
     list-style-type: none;
     text-align: right;
     vertical-align: middle;
-
-    @include min-screen(769px) {
-      margin: 0;
-      display: inline-table;
-      background-color: #FFF;
-      padding: 0;
-    }
 
     // Top level <li> items
     .NavMenuItem {
@@ -138,19 +99,108 @@
         &:hover {
           text-decoration: none;
         }
+      }
+    }
+  }
+}
 
-        @include min-screen(769px) {
-          color: #000;
-          padding: 2px 0;
-          border-bottom: 3px solid transparent;
-          @include transition(border-color .1s linear .05s, color .1s linear .05s);
+/*
+  This is the Desktop instance of NavMenu
+*/
+&-NavMenu {
+  display: block;
 
-          &:active,
-          &:hover,
-          &:focus {
-            border-color: $libraryRed;
-            color: $libraryRed;
-          }
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+
+  @include min-screen(1025px) {
+    position: relative;
+    width: auto;
+    bottom: inherit;
+  }
+
+  // Desktop Search Button
+  @import '_desktopSearch';
+
+  // NavMenu Wrapper
+  &-Wrapper {
+    max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
+    text-align: right;
+    margin: 0 auto;
+
+    .MobileBottomButtons {
+      /* Hide on all viewports, trigger display based on class */
+      display: none;
+    }
+
+    .MobileLogoText {
+      /* Hide on all viewports, trigger display based on class */
+      display: none;
+      position: absolute;
+      top: 20px;
+      left: 15px;
+      color: #FFF;
+      font-size: 85px;
+    }
+  }
+
+  // <ul> list holding each NavMenuItem and link
+  &-List {
+    display: none;
+    list-style-type: none;
+    text-align: right;
+    vertical-align: middle;
+
+    margin: 0;
+    background-color: #FFF;
+    padding: 0;
+  
+    @include min-screen(769px) {
+      display: inline-table;
+    }
+
+    // Top level <li> items
+    .NavMenuItem {
+
+      display: inline-block;
+      padding: 0;
+      line-height: normal !important;
+      margin: 0 0 0 15px;
+
+      &:first-child {
+        margin-left: 0px;
+      }
+
+      // <a> tag for each top level NavMenu item
+      &-Link {
+        position: relative;
+        display: inline-block;
+        margin: 0;
+        @include Kievit-Book;
+        font-size: 18px;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        &:visited,
+        &:active,
+        &:focus,
+        &:hover {
+          text-decoration: none;
+        }
+
+        color: #000;
+        padding: 2px 0;
+        border-bottom: 3px solid transparent;
+        @include transition(border-color .1s linear .05s, color .1s linear .05s);
+
+        &:active,
+        &:hover,
+        &:focus {
+          border-color: $libraryRed;
+          color: $libraryRed;
         }
       }
     }

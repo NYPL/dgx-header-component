@@ -1,35 +1,32 @@
 // NPM Modules
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import cx from 'classnames';
 import {
   extend as _extend,
   isEmpty as _isEmpty,
 } from 'underscore';
 // Feature FeatureFlags
 import FeatureFlags from 'dgx-feature-flags';
+import SkipNavigation from 'dgx-skip-navigation-link';
 
 // Nav Config
-import navConfig from '../../navConfig.js';
-import featureFlagConfig from '../../featureFlagConfig.js';
-import config from '../../appConfig.js';
+import navConfig from '../../navConfig';
+import featureFlagConfig from '../../featureFlagConfig';
+import config from '../../appConfig';
 // ALT Flux
-import HeaderStore from '../../stores/HeaderStore.js';
-import Actions from '../../actions/Actions.js';
+import HeaderStore from '../../stores/HeaderStore';
 // NYPL Components
-import Logo from '../Logo/Logo.js';
-import DonateButton from '../DonateButton/DonateButton.js';
-import SimpleLink from '../Links/SimpleLink.js';
-import SubscribeButton from '../SubscribeButton/SubscribeButton.js';
-import MyNyplButton from '../MyNyplButton/MyNyplButton.js';
-import NavMenu from '../NavMenu/NavMenu.js';
-import MobileHeader from './MobileHeader.js';
-import GlobalAlerts from '../GlobalAlerts/GlobalAlerts.js';
+import Logo from '../Logo/Logo';
+import DonateButton from '../DonateButton/DonateButton';
+import SimpleLink from '../Links/SimpleLink';
+import SubscribeButton from '../SubscribeButton/SubscribeButton';
+import MyNyplButton from '../MyNyplButton/MyNyplButton';
+import NavMenu from '../NavMenu/NavMenu';
+import MobileHeader from './MobileHeader';
+import GlobalAlerts from '../GlobalAlerts/GlobalAlerts';
 import FundraisingBanner from '../FundraisingBanner/FundraisingBanner';
-import SkipNavigation from 'dgx-skip-navigation-link';
 // Utility Library
-import utils from '../../utils/utils.js';
+import utils from '../../utils/utils';
 
 const styles = {
   wrapper: {
@@ -205,7 +202,7 @@ class Header extends React.Component {
       config.loginMyNyplLinks.tokenRefreshLink,
       () => {
         this.setLoginCookie(this.state.loginCookieName);
-      }
+      },
     );
   }
 
@@ -220,7 +217,6 @@ class Header extends React.Component {
       <header
         id={this.props.id}
         className={headerClass}
-        ref="nyplHeader"
       >
         {skipNav}
         <GlobalAlerts className={`${headerClass}-GlobalAlerts`} />
@@ -235,12 +231,12 @@ class Header extends React.Component {
             isLoggedIn={isLoggedIn}
             patronName={this.state.patronName}
             logOutLink={this.state.logOutUrl}
-            ref="headerMobile"
+            navData={this.props.navData}
+            urlType={this.props.urlType}
           />
           <div
             className={`${headerClass}-TopWrapper`}
             style={styles.wrapper}
-            ref="headerTopWrapper"
           >
             <Logo
               className={`${headerClass}-Logo`}
@@ -258,7 +254,6 @@ class Header extends React.Component {
                     isLoggedIn={isLoggedIn}
                     patronName={this.state.patronName}
                     logOutLink={this.state.logOutUrl}
-                    gaAction={gaAction}
                   />
                 </li>
                 <li>
@@ -345,9 +340,12 @@ Header.propTypes = {
   lang: PropTypes.string,
   className: PropTypes.string,
   id: PropTypes.string,
-  navData: PropTypes.array,
-  skipNav: PropTypes.object,
-  patron: PropTypes.object,
+  navData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  skipNav: PropTypes.shape(SkipNavigation.propTypes),
+  patron: PropTypes.shape({
+    names: PropTypes.arrayOf(PropTypes.string),
+    loggedIn: PropTypes.bool,
+  }),
   urlType: PropTypes.string,
 };
 
@@ -356,7 +354,7 @@ Header.defaultProps = {
   className: 'Header',
   id: 'nyplHeader',
   skipNav: null,
-  urlType: '',
+  urlType: 'relative',
   patron: {},
 };
 

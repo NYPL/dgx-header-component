@@ -8,35 +8,17 @@ import {
   isArray as _isArray,
 } from 'underscore';
 // Header Store/Actions
-import HeaderStore from '../../stores/HeaderStore.js';
-import Actions from '../../actions/Actions.js';
+import HeaderStore from '../../stores/HeaderStore';
+import Actions from '../../actions/Actions';
 // Dependent Components
-import SearchButton from '../SearchButton/SearchButton.js';
-import NavMenuItem from '../NavMenuItem/NavMenuItem.js';
-import NavMenuBottomButtons from '../NavMenuMobileButtons/NavMenuMobileButtons.js';
-import DonateButton from '../DonateButton/DonateButton.js';
-import StickyMyNyplButton from '../MyNyplButton/StickyMyNyplButton.js';
-
-const styles = {
-  donateButton: {
-    padding: '8px 15px',
-    textTransform: 'uppercase',
-    fontSize: '12.5px',
-    letterSpacing: '.04em',
-  },
-  lineSeparator: {
-    display: 'inline-block',
-    margin: '0 0 -10px 0',
-    width: '2px',
-    height: '30px',
-    color: '#837377',
-    backgroundColor: '#837377',
-  },
-};
+import SearchButton from '../SearchButton/SearchButton';
+import NavMenuItem from '../NavMenuItem/NavMenuItem';
+import NavMenuBottomButtons from '../NavMenuMobileButtons/NavMenuMobileButtons';
 
 class NavMenu extends React.Component {
   constructor(props) {
     super(props);
+
     this.handleEscKey = this.handleEscKey.bind(this);
   }
 
@@ -65,31 +47,6 @@ class NavMenu extends React.Component {
       Actions.setMobileMenuButtonValue('');
     }
   }
-  /**
-   * Generates the DOM for the Sticky Items that will
-   * display when the Header is in sticky mode.
-   * Adds the appropriate class based off the sticky value.
-   * @returns {Object} React DOM.
-   */
-  renderStickyNavItems() {
-    const stickyClass = HeaderStore.getIsStickyValue() ? ' active' : '';
-    return (
-      <div className={`${this.props.className}-stickyItems${stickyClass}`}>
-        <span className="lineSeparator" style={styles.lineSeparator}></span>
-        <StickyMyNyplButton
-          isLoggedIn={this.props.isLoggedIn}
-          patronName={this.props.patronName}
-          logOutLink={this.props.logOutLink}
-          gaAction={this.props.gaAction}
-        />
-        <DonateButton
-          id="Collapsed-DonateButton"
-          style={styles.donateButton}
-          gaLabel="Collapsed Donate Button"
-        />
-      </div>
-    );
-  }
 
   /**
    * Generates the DOM for the NavItems with appropriate class.
@@ -113,7 +70,7 @@ class NavMenu extends React.Component {
         urlType={this.props.urlType}
         navId={item.id}
         key={index}
-      />
+      />,
     );
   }
 
@@ -125,17 +82,15 @@ class NavMenu extends React.Component {
       <div className={this.props.className}>
         <nav
           className={`${this.props.className}-Wrapper${mobileActiveClass}`}
-          role="navigation"
           aria-label="Main Navigation"
         >
-          <span className="MobileLogoText nypl-icon-logo-type" aria-hidden="true"></span>
+          <span className="MobileLogoText nypl-icon-logo-type" aria-hidden="true" />
           <ul className={`${this.props.className}-List`} id="NavMenu-List">
             {this.renderNavMenu(this.props.items)}
           </ul>
           <SearchButton
             className={this.props.className}
           />
-          {this.renderStickyNavItems()}
           <NavMenuBottomButtons
             className="MobileBottomButtons"
             libraryCardLink={
@@ -151,18 +106,14 @@ class NavMenu extends React.Component {
 NavMenu.propTypes = {
   lang: PropTypes.string,
   className: PropTypes.string,
-  items: PropTypes.array,
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
   urlType: PropTypes.string,
-  isLoggedIn: PropTypes.bool,
-  patronInitial: PropTypes.string,
-  patronName: PropTypes.string,
-  logOutLink: PropTypes.string,
-  gaAction: PropTypes.string,
 };
 
 NavMenu.defaultProps = {
   lang: 'en',
   className: 'NavMenu',
+  urlType: 'relative',
 };
 
 export default NavMenu;

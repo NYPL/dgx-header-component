@@ -1,15 +1,4 @@
-.NavMenuItem {
-  &.stickyLogin {
-    display: none;
-
-    &.active {
-      display: inline-table;
-    }
-  }
-}
-
-.MyNyplButton,
-.StickyMyNyplButton {
+.MyNyplButton {
   @include Kievit-Bold;
   @include border-radius(0px);
   font-size: 13px;
@@ -41,8 +30,7 @@
   }
 }
 
-.MyNypl-Wrapper,
-.StickyMyNypl-Wrapper {
+.MyNypl-Wrapper {
   text-transform: none;
   display: none;
   box-sizing: content-box;
@@ -98,6 +86,13 @@
           border-radius: 28px;
           box-sizing: content-box;
         }
+
+        svg {
+          vertical-align: middle;
+          width: 28px;
+          padding-right: 3px;
+          height: 28px;
+        }
       }
     }
 
@@ -141,10 +136,6 @@
 }
 
 .LoginIcon {
-  fill: #FFF;
-  stroke: #000;
-  stroke-width: 2px;
-
   &.active {
     stroke: none;
   }
@@ -184,6 +175,12 @@
     width: 100%;
     .Login-Indication {
       margin: 0 0 30px 0;
+    }
+  }
+
+  a:first-child {
+    svg {
+      vertical-align: bottom;
     }
   }
 }

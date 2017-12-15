@@ -1,35 +1,32 @@
 // NPM Modules
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import cx from 'classnames';
 import {
   extend as _extend,
   isEmpty as _isEmpty,
 } from 'underscore';
 // Feature FeatureFlags
 import FeatureFlags from 'dgx-feature-flags';
+import SkipNavigation from 'dgx-skip-navigation-link';
 
 // Nav Config
-import navConfig from '../../navConfig.js';
-import featureFlagConfig from '../../featureFlagConfig.js';
-import config from '../../appConfig.js';
+import navConfig from '../../navConfig';
+import featureFlagConfig from '../../featureFlagConfig';
+import config from '../../appConfig';
 // ALT Flux
-import HeaderStore from '../../stores/HeaderStore.js';
-import Actions from '../../actions/Actions.js';
+import HeaderStore from '../../stores/HeaderStore';
 // NYPL Components
-import Logo from '../Logo/Logo.js';
-import DonateButton from '../DonateButton/DonateButton.js';
-import SimpleLink from '../Links/SimpleLink.js';
-import SubscribeButton from '../SubscribeButton/SubscribeButton.js';
-import MyNyplButton from '../MyNyplButton/MyNyplButton.js';
-import NavMenu from '../NavMenu/NavMenu.js';
-import MobileHeader from './MobileHeader.js';
-import GlobalAlerts from '../GlobalAlerts/GlobalAlerts.js';
+import Logo from '../Logo/Logo';
+import DonateButton from '../DonateButton/DonateButton';
+import SimpleLink from '../Links/SimpleLink';
+import SubscribeButton from '../SubscribeButton/SubscribeButton';
+import MyNyplButton from '../MyNyplButton/MyNyplButton';
+import NavMenu from '../NavMenu/NavMenu';
+import MobileHeader from './MobileHeader';
+import GlobalAlerts from '../GlobalAlerts/GlobalAlerts';
 import FundraisingBanner from '../FundraisingBanner/FundraisingBanner';
-import SkipNavigation from 'dgx-skip-navigation-link';
 // Utility Library
-import utils from '../../utils/utils.js';
+import utils from '../../utils/utils';
 
 const styles = {
   wrapper: {
@@ -98,7 +95,6 @@ class Header extends React.Component {
 
     this.state = _extend(
       {
-        headerHeight: null,
         navData,
         loginCookieName: 'nyplIdentityPatron',
         loginCookieValue: null,
@@ -111,18 +107,12 @@ class Header extends React.Component {
       HeaderStore.getState(),
       { featureFlagsStore: FeatureFlags.store.getState() },
     );
-
-    this.handleStickyHeader = this.handleStickyHeader.bind(this);
   }
 
   componentDidMount() {
     HeaderStore.listen(this.onChange.bind(this));
     // Listen on FeatureFlags Store updates
     FeatureFlags.store.listen(this.onFeatureFlagsChange.bind(this));
-    // Height needs to be set once the alerts (if any) are mounted.
-    this.setHeaderHeight();
-    // Listen to the scroll event for the sticky header.
-    window.addEventListener('scroll', this.handleStickyHeader, false);
     // Set the log out link to state
     this.setLogOutLink(window.location.href);
     // Set nyplIdentityPatron cookie to the state.
@@ -139,14 +129,12 @@ class Header extends React.Component {
     // Listen on FeatureFlags Store updates
     FeatureFlags.store.unlisten(this.onFeatureFlagsChange.bind(this));
     // Removing event listener to minimize garbage collection
-    window.removeEventListener('scroll', this.handleStickyHeader, false);
   }
 
   onChange() {
     this.setState(
       _extend(
         {
-          headerHeight: this.state.headerHeight,
           loginCookieValue: this.state.loginCookieValue,
           patronName: this.state.patronName,
           patronInitial: this.state.patronInitial,
@@ -182,41 +170,6 @@ class Header extends React.Component {
   }
 
   /**
-   * getHeaderHeight()
-   * returns the Height of the Header DOM
-   * element in pixels.
-   */
-  getHeaderHeight() {
-    const headerDOM = ReactDOM.findDOMNode(this.refs.nyplHeader);
-    return headerDOM.getBoundingClientRect().height;
-  }
-
-  /**
-   * setHeaderHeight()
-   * Updates the state headerHeight property
-   * only if headerHeight is not defined.
-   */
-  setHeaderHeight() {
-    if (!this.state.headerHeight) {
-      setTimeout(() => {
-        this.setState({ headerHeight: this.getHeaderHeight() });
-      }, 500);
-    }
-  }
-
-  /**
-   * getWindowVerticallScroll()
-   * returns the current window vertical
-   * scroll position in pixels.
-   * @returns {number} - Vertical Scroll Position.
-   */
-  getWindowVerticalScroll() {
-    return window.scrollY
-      || window.pageYOffset
-      || document.documentElement.scrollTop;
-  }
-
-  /**
    * setLogOutLink(location)
    * Generate the full log out url including the redirect URI, and update the state with it.
    * @param {location} - The URI for redirect request
@@ -249,43 +202,12 @@ class Header extends React.Component {
       config.loginMyNyplLinks.tokenRefreshLink,
       () => {
         this.setLoginCookie(this.state.loginCookieName);
-      }
+      },
     );
   }
 
-  /**
-   * handleStickyHeader()
-   * Executes Actions.updateIsHeaderSticky()
-   * with the proper boolean value to update the
-   * HeaderStore.isSticky value based on the window
-   * vertical scroll position surpassing the height
-   * of the Header DOM element.
-   */
-  handleStickyHeader() {
-    const headerHeight = this.state.headerHeight;
-    const windowVerticalDistance = this.getWindowVerticalScroll();
-
-    if (windowVerticalDistance && headerHeight && (windowVerticalDistance > headerHeight)) {
-      // Only update the value if sticky is false
-      if (!HeaderStore.getIsStickyValue()) {
-        // Fire GA Event when Header is in Sticky Mode
-        utils.trackHeader.bind(this, 'scroll', 'Sticky Header');
-        // Update the isSticky flag
-        Actions.updateIsHeaderSticky(true);
-      }
-    } else {
-      // Avoids re-assignment on each scroll by checking if it is already true
-      if (HeaderStore.getIsStickyValue()) {
-        Actions.updateIsHeaderSticky(false);
-      }
-    }
-  }
-
   render() {
-    const isHeaderSticky = this.state.isSticky;
-    const headerHeight = this.state.headerHeight;
     const headerClass = this.props.className || 'Header';
-    const headerClasses = cx(headerClass, { sticky: isHeaderSticky });
     const skipNav = this.props.skipNav ?
       (<SkipNavigation {...this.props.skipNav} />) : '';
     const isLoggedIn = !!this.state.patronDataReceived;
@@ -294,9 +216,7 @@ class Header extends React.Component {
     return (
       <header
         id={this.props.id}
-        className={headerClasses}
-        ref="nyplHeader"
-        style={(isHeaderSticky) ? { height: `${headerHeight}px` } : null}
+        className={headerClass}
       >
         {skipNav}
         <GlobalAlerts className={`${headerClass}-GlobalAlerts`} />
@@ -311,12 +231,12 @@ class Header extends React.Component {
             isLoggedIn={isLoggedIn}
             patronName={this.state.patronName}
             logOutLink={this.state.logOutUrl}
-            ref="headerMobile"
+            navData={this.props.navData}
+            urlType={this.props.urlType}
           />
           <div
             className={`${headerClass}-TopWrapper`}
             style={styles.wrapper}
-            ref="headerTopWrapper"
           >
             <Logo
               className={`${headerClass}-Logo`}
@@ -334,7 +254,6 @@ class Header extends React.Component {
                     isLoggedIn={isLoggedIn}
                     patronName={this.state.patronName}
                     logOutLink={this.state.logOutUrl}
-                    gaAction={gaAction}
                   />
                 </li>
                 <li>
@@ -421,9 +340,12 @@ Header.propTypes = {
   lang: PropTypes.string,
   className: PropTypes.string,
   id: PropTypes.string,
-  navData: PropTypes.array,
-  skipNav: PropTypes.object,
-  patron: PropTypes.object,
+  navData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  skipNav: PropTypes.shape(SkipNavigation.propTypes),
+  patron: PropTypes.shape({
+    names: PropTypes.arrayOf(PropTypes.string),
+    loggedIn: PropTypes.bool,
+  }),
   urlType: PropTypes.string,
 };
 
@@ -432,7 +354,7 @@ Header.defaultProps = {
   className: 'Header',
   id: 'nyplHeader',
   skipNav: null,
-  urlType: '',
+  urlType: 'relative',
   patron: {},
 };
 

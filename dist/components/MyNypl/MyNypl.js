@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -73,23 +77,22 @@ var MyNypl = function (_React$Component) {
   _createClass(MyNypl, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.refs.catalogLink.focus();
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      this.refs.catalogLink.blur();
+      if (this.refs.patronGreetingWrapper) {
+        _reactDom2.default.findDOMNode(this.refs.patronGreetingWrapper).focus();
+      } else {
+        this.refs.catalogLink.focus();
+      }
     }
 
     /**
-     * rednerLoginLinks()
+     * renderLoginLinks()
      * Returns the href addresses for catalog and research catalog buttons
      * based on different conditions.
      */
 
   }, {
-    key: 'rednerLoginLinks',
-    value: function rednerLoginLinks() {
+    key: 'renderLoginLinks',
+    value: function renderLoginLinks() {
       if (this.props.isLoggedIn) {
         return {
           catalogLink: this.props.catalogLink,
@@ -117,7 +120,7 @@ var MyNypl = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        null,
+        { tabIndex: '0', className: 'patron-greeting-wrapper', ref: 'patronGreetingWrapper' },
         _react2.default.createElement(
           'p',
           { className: this.props.className + '-Patron-Greeting Login-Indication' },
@@ -149,7 +152,7 @@ var MyNypl = function (_React$Component) {
           },
           style: styles.logOutLink
         },
-        _react2.default.createElement(_dgxSvgIcons.LogoutIcon, { className: 'logoutIcon' }),
+        _react2.default.createElement(_dgxSvgIcons.LogoutIcon, { className: 'logoutIcon', ariaHidden: true }),
         'LOG OUT'
       ) : null;
     }
@@ -158,8 +161,8 @@ var MyNypl = function (_React$Component) {
     value: function render() {
       var catalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
       var researchCatalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE RESEARCH CATALOG' : 'LOG INTO THE RESEARCH CATALOG';
-      var catalogLink = this.rednerLoginLinks().catalogLink;
-      var researchLink = this.rednerLoginLinks().researchLink;
+      var catalogLink = this.renderLoginLinks().catalogLink;
+      var researchLink = this.renderLoginLinks().researchLink;
       var gaAction = this.props.isLoggedIn ? 'Go To' : 'Log In';
 
       return _react2.default.createElement(
@@ -183,7 +186,7 @@ var MyNypl = function (_React$Component) {
                   return _utils2.default.trackHeader(gaAction, 'Catalog');
                 }
               },
-              _react2.default.createElement('span', { className: 'nypl-icon-login icon' }),
+              _react2.default.createElement(_dgxSvgIcons.LoginIcon, { fill: '#fff', ariaHidden: true }),
               catalogLinkLabel
             )
           ),
@@ -200,7 +203,7 @@ var MyNypl = function (_React$Component) {
                   return _utils2.default.trackHeader(gaAction, 'Research');
                 }
               },
-              _react2.default.createElement('span', { className: 'nypl-icon-bldg icon' }),
+              _react2.default.createElement(_dgxSvgIcons.BuildingIcon, { fill: '#fff', ariaHidden: true }),
               researchCatalogLinkLabel
             )
           )

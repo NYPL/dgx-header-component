@@ -16,6 +16,8 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _underscore = require('underscore');
 
+var _dgxSvgIcons = require('dgx-svg-icons');
+
 var _utils = require('../../utils/utils.js');
 
 var _utils2 = _interopRequireDefault(_utils);
@@ -31,6 +33,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 // Config and Utility
 
 
@@ -108,14 +111,14 @@ var MobileMyNypl = function (_React$Component) {
   }
 
   _createClass(MobileMyNypl, [{
-    key: 'rednerLoginLinks',
+    key: 'renderLoginLinks',
 
     /**
-     * rednerLoginLinks()
+     * renderLoginLinks()
      * Returns the href addresses for catalog and research catalog buttons
      * based on different conditions.
      */
-    value: function rednerLoginLinks() {
+    value: function renderLoginLinks() {
       if (this.props.isLoggedIn) {
         return {
           catalogLink: this.props.catalogLink,
@@ -179,8 +182,8 @@ var MobileMyNypl = function (_React$Component) {
     value: function render() {
       var catalogLinkClass = 'CatalogLink';
       var researchLinkClass = 'ResearchLink';
-      var catalogLink = this.rednerLoginLinks().catalogLink;
-      var researchLink = this.rednerLoginLinks().researchLink;
+      var catalogLink = this.renderLoginLinks().catalogLink;
+      var researchLink = this.renderLoginLinks().researchLink;
       var catalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
       var researchCatalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE RESEARCH CATALOG' : 'LOG INTO THE RESEARCH CATALOG';
       var loggedInMarginTop = this.props.isLoggedIn ? styles.loggedInLinksMarginTop : null;
@@ -210,7 +213,7 @@ var MobileMyNypl = function (_React$Component) {
               className: catalogLinkClass + '-Wrapper',
               style: (0, _underscore.extend)(styles.wrapper, styles.catalogLinkWrapper)
             },
-            _react2.default.createElement('span', { className: catalogLinkClass + '-Icon nypl-icon-login', style: styles.icon }),
+            _react2.default.createElement(_dgxSvgIcons.LoginIcon, { fill: '#fff', ariaHidden: true }),
             _react2.default.createElement(
               'span',
               {
@@ -237,7 +240,7 @@ var MobileMyNypl = function (_React$Component) {
               className: researchLinkClass + '-Wrapper',
               style: (0, _underscore.extend)(styles.wrapper, styles.researchLinkWrapper)
             },
-            _react2.default.createElement('span', { className: researchLinkClass + '-Icon nypl-icon-bldg', style: styles.icon }),
+            _react2.default.createElement(_dgxSvgIcons.BuildingIcon, { fill: '#fff', ariaHidden: true }),
             _react2.default.createElement(
               'span',
               {

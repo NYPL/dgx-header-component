@@ -16,25 +16,19 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _underscore = require('underscore');
 
-var _reactOnclickout = require('react-onclickout');
+var _focusTrapReact = require('focus-trap-react');
 
-var _reactOnclickout2 = _interopRequireDefault(_reactOnclickout);
+var _focusTrapReact2 = _interopRequireDefault(_focusTrapReact);
 
-var _EmailSubscription = require('../EmailSubscription/EmailSubscription.js');
-
-var _EmailSubscription2 = _interopRequireDefault(_EmailSubscription);
-
-var _HeaderStore = require('../../stores/HeaderStore.js');
-
-var _HeaderStore2 = _interopRequireDefault(_HeaderStore);
-
-var _Actions = require('../../actions/Actions.js');
-
-var _Actions2 = _interopRequireDefault(_Actions);
+var _dgxSvgIcons = require('dgx-svg-icons');
 
 var _axios = require('axios');
 
 var _axios2 = _interopRequireDefault(_axios);
+
+var _EmailSubscription = require('../EmailSubscription/EmailSubscription.js');
+
+var _EmailSubscription2 = _interopRequireDefault(_EmailSubscription);
 
 var _utils = require('../../utils/utils.js');
 
@@ -47,8 +41,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-// Alt Store/Actions
-
 // Utilities
 
 
@@ -57,19 +49,13 @@ var styles = {
     position: 'relative'
   },
   subscribeButton: {
-    display: 'inline-block',
-    padding: '10px 10px 10px 12px',
+    display: 'inline',
+    padding: '11px 10px 11px 12px',
     verticalAlign: 'baseline'
   },
   subscribeLabel: {
     display: 'inline',
     verticalAlign: 'baseline'
-  },
-  subscribeIcon: {
-    fontSize: '15px',
-    verticalAlign: 'text-bottom',
-    marginLeft: '3px',
-    display: 'inline'
   },
   EmailSubscribeForm: {
     position: 'absolute',
@@ -94,10 +80,11 @@ var SubscribeButton = function (_React$Component) {
   function SubscribeButton(props) {
     _classCallCheck(this, SubscribeButton);
 
+    // subscribeFormVisible
     var _this = _possibleConstructorReturn(this, (SubscribeButton.__proto__ || Object.getPrototypeOf(SubscribeButton)).call(this, props));
 
     _this.state = {
-      subscribeFormVisible: _HeaderStore2.default.getSubscribeFormVisible(),
+      visible: false,
       target: _this.props.target
     };
 
@@ -110,7 +97,6 @@ var SubscribeButton = function (_React$Component) {
   _createClass(SubscribeButton, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      _HeaderStore2.default.listen(this.onChange.bind(this));
       window.addEventListener('keydown', this.handleEscKey, false);
       // Make an axios call to the mailinglist API server to check it th server is working.
       // And determine the behavior of subscribe button based on the status of the server.
@@ -119,7 +105,6 @@ var SubscribeButton = function (_React$Component) {
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      _HeaderStore2.default.unlisten(this.onChange.bind(this));
       window.removeEventListener('keydown', this.handleEscKey, false);
     }
 
@@ -131,7 +116,7 @@ var SubscribeButton = function (_React$Component) {
   }, {
     key: 'onChange',
     value: function onChange() {
-      this.setState({ subscribeFormVisible: _HeaderStore2.default.getSubscribeFormVisible() });
+      this.setState({ visible: !this.state.visible });
     }
   }, {
     key: 'handleEscKey',
@@ -152,8 +137,8 @@ var SubscribeButton = function (_React$Component) {
     value: function handleClick(e) {
       if (this.state.target === '#') {
         e.preventDefault();
-        var visibleState = this.state.subscribeFormVisible ? 'Closed' : 'Open';
-        _Actions2.default.toggleSubscribeFormVisible(!this.state.subscribeFormVisible);
+        var visibleState = this.state.visible ? 'Closed' : 'Open';
+        this.setState({ visible: !this.state.visible });
         _utils2.default.trackHeader('Click', 'Subscribe - ' + visibleState);
       }
     }
@@ -167,8 +152,8 @@ var SubscribeButton = function (_React$Component) {
   }, {
     key: 'handleOnClickOut',
     value: function handleOnClickOut() {
-      if (_HeaderStore2.default.getSubscribeFormVisible()) {
-        _Actions2.default.toggleSubscribeFormVisible(false);
+      if (this.state.visible) {
+        this.setState({ visible: false });
         _utils2.default.trackHeader('Click', 'Subscribe - Closed');
       }
     }
@@ -203,11 +188,13 @@ var SubscribeButton = function (_React$Component) {
     key: 'renderEmailButton',
     value: function renderEmailButton() {
       var buttonClass = '';
-      var iconClass = 'nypl-icon-wedge-down';
+      var icon = _react2.default.createElement(_dgxSvgIcons.DownWedgeIcon, { className: 'dropDownIcon', ariaHidden: true });
+      var label = this.props.label;
 
-      if (this.state.subscribeFormVisible) {
-        iconClass = 'nypl-icon-solo-x';
+      if (this.state.visible) {
         buttonClass = 'active';
+        label = 'Close';
+        icon = _react2.default.createElement(_dgxSvgIcons.XIcon, { className: 'dropDownIcon', ariaHidden: true, fill: '#fff' });
       }
 
       return _react2.default.createElement(
@@ -218,31 +205,29 @@ var SubscribeButton = function (_React$Component) {
           href: this.state.target,
           onClick: this.handleClick,
           style: styles.subscribeButton,
-          role: this.state.target === '#' ? 'button' : null
+          role: this.state.target === '#' ? 'button' : null,
+          'aria-haspopup': 'true',
+          'aria-expanded': this.state.visible ? true : null
         },
         _react2.default.createElement(
           'span',
           { style: styles.subscribeLabel },
-          this.props.label
+          label
         ),
-        _react2.default.createElement('span', {
-          className: iconClass + ' icon',
-          'aria-hidden': 'true',
-          style: styles.subscribeIcon
-        })
+        icon
       );
     }
   }, {
     key: 'renderEmailDialog',
     value: function renderEmailDialog() {
-      return this.state.subscribeFormVisible ? _react2.default.createElement(
+      return this.state.visible ? _react2.default.createElement(
         'div',
         {
           className: 'EmailSubscription-Wrapper active animatedFast fadeIn',
           style: styles.EmailSubscribeForm
         },
         _react2.default.createElement(_EmailSubscription2.default, {
-          list_id: '1061',
+          listId: '1061',
           target: 'https://mailinglistapi.nypl.org'
         })
       ) : null;
@@ -251,17 +236,19 @@ var SubscribeButton = function (_React$Component) {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        _reactOnclickout2.default,
-        { onClickOut: this.handleOnClickOut },
-        _react2.default.createElement(
-          'div',
-          {
-            className: 'SubscribeButton-Wrapper',
-            style: (0, _underscore.extend)(styles.base, this.props.style)
+        _focusTrapReact2.default,
+        {
+          focusTrapOptions: {
+            onDeactivate: this.handleOnClickOut,
+            clickOutsideDeactivates: true,
+            initialFocus: '.SubscribeMessageBox'
           },
-          this.renderEmailButton(),
-          this.renderEmailDialog()
-        )
+          active: this.state.visible,
+          className: 'SubscribeButton-Wrapper',
+          style: (0, _underscore.extend)(styles.base, this.props.style)
+        },
+        this.renderEmailButton(),
+        this.renderEmailDialog()
       );
     }
   }]);

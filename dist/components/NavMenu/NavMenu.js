@@ -16,33 +16,25 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _underscore = require('underscore');
 
-var _HeaderStore = require('../../stores/HeaderStore.js');
+var _HeaderStore = require('../../stores/HeaderStore');
 
 var _HeaderStore2 = _interopRequireDefault(_HeaderStore);
 
-var _Actions = require('../../actions/Actions.js');
+var _Actions = require('../../actions/Actions');
 
 var _Actions2 = _interopRequireDefault(_Actions);
 
-var _SearchButton = require('../SearchButton/SearchButton.js');
+var _SearchButton = require('../SearchButton/SearchButton');
 
 var _SearchButton2 = _interopRequireDefault(_SearchButton);
 
-var _NavMenuItem = require('../NavMenuItem/NavMenuItem.js');
+var _NavMenuItem = require('../NavMenuItem/NavMenuItem');
 
 var _NavMenuItem2 = _interopRequireDefault(_NavMenuItem);
 
-var _NavMenuMobileButtons = require('../NavMenuMobileButtons/NavMenuMobileButtons.js');
+var _NavMenuMobileButtons = require('../NavMenuMobileButtons/NavMenuMobileButtons');
 
 var _NavMenuMobileButtons2 = _interopRequireDefault(_NavMenuMobileButtons);
-
-var _DonateButton = require('../DonateButton/DonateButton.js');
-
-var _DonateButton2 = _interopRequireDefault(_DonateButton);
-
-var _StickyMyNyplButton = require('../MyNyplButton/StickyMyNyplButton.js');
-
-var _StickyMyNyplButton2 = _interopRequireDefault(_StickyMyNyplButton);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,23 +47,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 // Dependent Components
 
-
-var styles = {
-  donateButton: {
-    padding: '8px 15px',
-    textTransform: 'uppercase',
-    fontSize: '12.5px',
-    letterSpacing: '.04em'
-  },
-  lineSeparator: {
-    display: 'inline-block',
-    margin: '0 0 -10px 0',
-    width: '2px',
-    height: '30px',
-    color: '#837377',
-    backgroundColor: '#837377'
-  }
-};
 
 var NavMenu = function (_React$Component) {
   _inherits(NavMenu, _React$Component);
@@ -116,34 +91,6 @@ var NavMenu = function (_React$Component) {
       if (_HeaderStore2.default.getMobileMenuBtnValue() === 'mobileMenu') {
         _Actions2.default.setMobileMenuButtonValue('');
       }
-    }
-    /**
-     * Generates the DOM for the Sticky Items that will
-     * display when the Header is in sticky mode.
-     * Adds the appropriate class based off the sticky value.
-     * @returns {Object} React DOM.
-     */
-
-  }, {
-    key: 'renderStickyNavItems',
-    value: function renderStickyNavItems() {
-      var stickyClass = _HeaderStore2.default.getIsStickyValue() ? ' active' : '';
-      return _react2.default.createElement(
-        'div',
-        { className: this.props.className + '-stickyItems' + stickyClass },
-        _react2.default.createElement('span', { className: 'lineSeparator', style: styles.lineSeparator }),
-        _react2.default.createElement(_StickyMyNyplButton2.default, {
-          isLoggedIn: this.props.isLoggedIn,
-          patronName: this.props.patronName,
-          logOutLink: this.props.logOutLink,
-          gaAction: this.props.gaAction
-        }),
-        _react2.default.createElement(_DonateButton2.default, {
-          id: 'Collapsed-DonateButton',
-          style: styles.donateButton,
-          gaLabel: 'Collapsed Donate Button'
-        })
-      );
     }
 
     /**
@@ -190,7 +137,6 @@ var NavMenu = function (_React$Component) {
           'nav',
           {
             className: this.props.className + '-Wrapper' + mobileActiveClass,
-            role: 'navigation',
             'aria-label': 'Main Navigation'
           },
           _react2.default.createElement('span', { className: 'MobileLogoText nypl-icon-logo-type', 'aria-hidden': 'true' }),
@@ -202,7 +148,6 @@ var NavMenu = function (_React$Component) {
           _react2.default.createElement(_SearchButton2.default, {
             className: this.props.className
           }),
-          this.renderStickyNavItems(),
           _react2.default.createElement(_NavMenuMobileButtons2.default, {
             className: 'MobileBottomButtons',
             libraryCardLink: this.props.urlType === 'absolute' ? '//www.nypl.org/library-card' : '/library-card'
@@ -218,18 +163,14 @@ var NavMenu = function (_React$Component) {
 NavMenu.propTypes = {
   lang: _propTypes2.default.string,
   className: _propTypes2.default.string,
-  items: _propTypes2.default.array,
-  urlType: _propTypes2.default.string,
-  isLoggedIn: _propTypes2.default.bool,
-  patronInitial: _propTypes2.default.string,
-  patronName: _propTypes2.default.string,
-  logOutLink: _propTypes2.default.string,
-  gaAction: _propTypes2.default.string
+  items: _propTypes2.default.arrayOf(_propTypes2.default.object).isRequired,
+  urlType: _propTypes2.default.string
 };
 
 NavMenu.defaultProps = {
   lang: 'en',
-  className: 'NavMenu'
+  className: 'NavMenu',
+  urlType: 'relative'
 };
 
 exports.default = NavMenu;

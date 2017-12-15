@@ -1,163 +1,208 @@
+/*
+  This is the Mobile (i.e. min-screen(769px)) instance of NavMenu
+*/
+&-Mobile-NavMenu {
+  position: relative;
+  display: block;
+
+  // Desktop Search Button
+  @import '_desktopSearch';
+
+  // NavMenu Wrapper
+  &-Wrapper {
+    /* Controls the display of Mobile View */
+    &.mobileActive {
+      margin-top: -2.5px;
+      position: absolute;
+      width: 100%;
+      z-index: 1000;
+      line-height: normal;
+
+      @include min-screen(769px) {
+        position: initial;
+        margin-top: 0px;
+        width: initial;
+      }
+
+      /* Displays NavMenu on Mobile with proper class on parent */
+      #NavMenu-List {
+        display: block;
+        line-height: normal;
+      }
+
+      /* Only display Logo Text on Mobile */
+      .MobileLogoText {
+        display: block;
+      }
+
+      /* Only display BottomButtons on Mobile */
+      .MobileBottomButtons {
+        display: block;
+      }
+
+      .MobileLogoText {
+        /* Hide on all viewports, trigger display based on class */
+        position: absolute;
+        top: 20px;
+        left: 15px;
+        color: #FFF;
+        font-size: 85px;
+      }
+
+    }
+  }
+
+  // <ul> list holding each NavMenuItem and link
+  &-List {
+    display: none;
+    background-color: #2B2B2B;
+    padding: 10px 0;
+    margin: 0;
+    list-style-type: none;
+    text-align: right;
+    vertical-align: middle;
+
+    // Top level <li> items
+    .NavMenuItem {
+      padding: 8px 0;
+      margin: 3.5px 15px 0px 0;
+      display: block;
+
+      @include min-screen(769px) {
+        display: inline-block;
+        padding: 0;
+        line-height: normal !important;
+        margin: 0 0 0 15px;
+
+        &:first-child {
+          margin-left: 0px;
+        }
+      }
+
+      // <a> tag for each top level NavMenu item
+      &-Link {
+        position: relative;
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+        color: #FFF;
+        @include Kievit-Book;
+        font-size: 18px;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        &:visited,
+        &:active,
+        &:focus,
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+/*
+  This is the Desktop instance of NavMenu
+*/
 &-NavMenu {
-	position: relative;
-	display: block;
+  display: block;
 
-	@include min-screen(769px) {
-		position: absolute;
-		width: 100%;
-		bottom: 0px;
-	}
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
 
-	@include min-screen(1025px) {
-		position: relative;
-		width: auto;
-		bottom: inherit;
-	}
+  @include min-screen(1025px) {
+    position: relative;
+    width: auto;
+    bottom: inherit;
+  }
 
-	// Desktop Search Button
-	@import '_desktopSearch';
+  // Desktop Search Button
+  @import '_desktopSearch';
 
-	// Login/Donate Buttons displayed in sticky Header mode
-	&-stickyItems {
-		display: none;
-	}
+  // NavMenu Wrapper
+  &-Wrapper {
+    max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
+    text-align: right;
+    margin: 0 auto;
 
-	// NavMenu Wrapper
-	&-Wrapper {
-		@include min-screen(769px) {
-			max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
-			text-align: right;
-			margin: 0 auto;
-		}
+    .MobileBottomButtons {
+      /* Hide on all viewports, trigger display based on class */
+      display: none;
+    }
 
-		/* Controls the display of Mobile View */
-		&.mobileActive {
-			margin-top: -2.5px;
-			position: absolute;
-			width: 100%;
-			z-index: 1000;
-			line-height: normal;
+    .MobileLogoText {
+      /* Hide on all viewports, trigger display based on class */
+      display: none;
+      position: absolute;
+      top: 20px;
+      left: 15px;
+      color: #FFF;
+      font-size: 85px;
+    }
+  }
 
-			@include min-screen(769px) {
-				position: initial;
-				margin-top: 0px;
-				width: initial;
-			}
+  // <ul> list holding each NavMenuItem and link
+  &-List {
+    display: none;
+    list-style-type: none;
+    text-align: right;
+    vertical-align: middle;
 
-			/* Displays NavMenu on Mobile with proper class on parent */
-			#NavMenu-List {
-				display: block;
-				line-height: normal;
+    margin: 0;
+    background-color: #FFF;
+    padding: 0;
+  
+    @include min-screen(769px) {
+      display: inline-table;
+    }
 
-				@include min-screen(769px) {
-					display: inline-table;
-				}
-			}
+    // Top level <li> items
+    .NavMenuItem {
 
-			/* Only display Logo Text on Mobile */
-			.MobileLogoText {
-				display: block;
+      display: inline-block;
+      padding: 0;
+      line-height: normal !important;
+      margin: 0 0 0 15px;
 
-				@include min-screen(769px) {
-					display: none;
-				}
-			}
+      &:first-child {
+        margin-left: 0px;
+      }
 
-			/* Only display BottomButtons on Mobile */
-			.MobileBottomButtons {
-				display: block;
+      // <a> tag for each top level NavMenu item
+      &-Link {
+        position: relative;
+        display: inline-block;
+        margin: 0;
+        @include Kievit-Book;
+        font-size: 18px;
 
-				@include min-screen(769px) {
-					display: none;
-				}
-			}
-		}
+        &:hover {
+          cursor: pointer;
+        }
 
-  	.MobileBottomButtons {
-  		/* Hide on all viewports, trigger display based on class */
-  		display: none;
-  	}
+        &:visited,
+        &:active,
+        &:focus,
+        &:hover {
+          text-decoration: none;
+        }
 
-  	.MobileLogoText {
-  		/* Hide on all viewports, trigger display based on class */
-  		display: none;
-  		position: absolute;
-  		top: 20px;
-  		left: 15px;
-  		color: #FFF;
-  		font-size: 85px;
-  	}
-	}
+        color: #000;
+        padding: 2px 0;
+        border-bottom: 3px solid transparent;
+        @include transition(border-color .1s linear .05s, color .1s linear .05s);
 
-	// <ul> list holding each NavMenuItem and link
-	&-List {
-  	display: none;
-  	background-color: #2B2B2B;
-  	padding: 10px 0;
-  	margin: 0;
-  	list-style-type: none;
-  	text-align: right;
-  	vertical-align: middle;
-
-  	@include min-screen(769px) {
-  		margin: 0;
-  		display: inline-table;
-  		background-color: #FFF;
-  		padding: 0;
-  	}
-
-  	// Top level <li> items
-  	.NavMenuItem {
-  		padding: 8px 0;
-  		margin: 3.5px 15px 0px 0;
-  		display: block;
-
-		  @include min-screen(769px) {
-  			display: inline-block;
-  			padding: 0;
-  			line-height: normal !important;
-  			margin: 0 0 0 15px;
-
-  			&:first-child {
-  				margin-left: 0px;
-  			}
-		  }
-
-			// <a> tag for each top level NavMenu item
-			&-Link {
-	  		position: relative;
-	  		display: inline-block;
-	  		padding: 0;
-	  		margin: 0;
-				color: #FFF;
-  			@include Kievit-Book;
-  			font-size: 18px;
-
-	  		&:hover {
-	  			cursor: pointer;
-	  		}
-
-	  		&:visited,
-				&:active,
-				&:focus,
-				&:hover {
-	  			text-decoration: none;
-	  		}
-
-	  		@include min-screen(769px) {
-  				color: #000;
-					padding: 2px 0;
-					border-bottom: 3px solid transparent;
-					@include transition(border-color .1s linear .05s, color .1s linear .05s);
-
-					&:active,
-					&:hover,
-					&:focus {
-						border-color: $libraryRed;
-						color: $libraryRed;
-					}
-	  		}
-	  	}
-  	}
-	}
+        &:active,
+        &:hover,
+        &:focus {
+          border-color: $libraryRed;
+          color: $libraryRed;
+        }
+      }
+    }
+  }
 }

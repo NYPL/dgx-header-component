@@ -1,10 +1,15 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 // Config and Utility Library
 import utils from '../../utils/utils.js';
 import appConfig from '../../appConfig.js';
 
-import { LogoutIcon } from 'dgx-svg-icons';
+import {
+  LogoutIcon,
+  BuildingIcon,
+  LoginIcon,
+} from 'dgx-svg-icons';
 
 const styles = {
   logOutLink: {
@@ -35,19 +40,19 @@ const styles = {
 
 class MyNypl extends React.Component {
   componentDidMount() {
-    this.refs.catalogLink.focus();
-  }
-
-  componentWillUnmount() {
-    this.refs.catalogLink.blur();
+    if (this.refs.patronGreetingWrapper) {
+      ReactDOM.findDOMNode(this.refs.patronGreetingWrapper).focus();
+    } else {
+      this.refs.catalogLink.focus();
+    }
   }
 
   /**
-   * rednerLoginLinks()
+   * renderLoginLinks()
    * Returns the href addresses for catalog and research catalog buttons
    * based on different conditions.
    */
-  rednerLoginLinks() {
+  renderLoginLinks() {
     if (this.props.isLoggedIn) {
       return (
         {
@@ -75,7 +80,7 @@ class MyNypl extends React.Component {
     }
 
     return (
-      <div>
+      <div tabIndex="0" className="patron-greeting-wrapper" ref="patronGreetingWrapper">
         <p className={`${this.props.className}-Patron-Greeting Login-Indication`}>
           You are logged in as:
         </p>
@@ -98,7 +103,7 @@ class MyNypl extends React.Component {
         onClick={() => utils.trackHeader('My Account', 'Log Out')}
         style={styles.logOutLink}
       >
-        <LogoutIcon className="logoutIcon" />
+        <LogoutIcon className="logoutIcon" ariaHidden />
         LOG OUT
       </a> : null;
   }
@@ -107,8 +112,8 @@ class MyNypl extends React.Component {
     const catalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
     const researchCatalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE RESEARCH CATALOG' :
       'LOG INTO THE RESEARCH CATALOG';
-    const catalogLink = this.rednerLoginLinks().catalogLink;
-    const researchLink = this.rednerLoginLinks().researchLink;
+    const catalogLink = this.renderLoginLinks().catalogLink;
+    const researchLink = this.renderLoginLinks().researchLink;
     const gaAction = (this.props.isLoggedIn) ? 'Go To' : 'Log In';
 
     return (
@@ -123,7 +128,7 @@ class MyNypl extends React.Component {
               className={`${this.props.className}-Catalog-Btn`}
               onClick={() => utils.trackHeader(gaAction, 'Catalog')}
             >
-              <span className="nypl-icon-login icon"></span>
+              <LoginIcon fill="#fff" ariaHidden />
               {catalogLinkLabel}
             </a>
           </li>
@@ -134,7 +139,7 @@ class MyNypl extends React.Component {
               className={`${this.props.className}-Research-Btn`}
               onClick={() => utils.trackHeader(gaAction, 'Research')}
             >
-              <span className="nypl-icon-bldg icon"></span>
+              <BuildingIcon fill="#fff" ariaHidden />
               {researchCatalogLinkLabel}
             </a>
           </li>

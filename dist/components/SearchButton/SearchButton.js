@@ -18,19 +18,15 @@ var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _reactOnclickout = require('react-onclickout');
+var _focusTrapReact = require('focus-trap-react');
 
-var _reactOnclickout2 = _interopRequireDefault(_reactOnclickout);
+var _focusTrapReact2 = _interopRequireDefault(_focusTrapReact);
 
 var _dgxSvgIcons = require('dgx-svg-icons');
 
 var _SearchBox = require('../SearchBox/SearchBox.js');
 
 var _SearchBox2 = _interopRequireDefault(_SearchBox);
-
-var _HeaderStore = require('../../stores/HeaderStore.js');
-
-var _HeaderStore2 = _interopRequireDefault(_HeaderStore);
 
 var _utils = require('../../utils/utils.js');
 
@@ -45,8 +41,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // Import React libraries
 
 // Import components
-
-// ALT Flux Store
 
 // GA Utility Library
 
@@ -116,7 +110,7 @@ var SearchButton = function (_React$Component) {
     value: function renderSearchButton() {
       var _this3 = this;
 
-      var classes = (0, _classnames2.default)({ active: this.state.active, isSticky: _HeaderStore2.default.getState().isSticky });
+      var classes = (0, _classnames2.default)({ active: this.state.active });
 
       return _react2.default.createElement(
         'button',
@@ -152,13 +146,9 @@ var SearchButton = function (_React$Component) {
   }, {
     key: 'renderSearchBox',
     value: function renderSearchBox() {
-      var sticky = (0, _classnames2.default)({ isSticky: _HeaderStore2.default.getState().isSticky });
-
       return this.state.active ? _react2.default.createElement(
         'div',
-        {
-          className: this.props.className + '-desktopSearchBox animatedFast fadeIn ' + sticky
-        },
+        { className: this.props.className + '-desktopSearchBox animatedFast fadeIn' },
         _react2.default.createElement(_SearchBox2.default, { className: 'desktopSearch-Form' })
       ) : null;
     }
@@ -169,8 +159,14 @@ var SearchButton = function (_React$Component) {
         'div',
         { className: this.props.className + '-searchBox-Wrapper' },
         _react2.default.createElement(
-          _reactOnclickout2.default,
-          { onClickOut: this.handleOnClickOut },
+          _focusTrapReact2.default,
+          {
+            focusTrapOptions: {
+              onDeactivate: this.handleOnClickOut,
+              clickOutsideDeactivates: true
+            },
+            active: this.state.active
+          },
           this.renderSearchButton(),
           this.renderSearchBox()
         )

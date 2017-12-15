@@ -126,7 +126,7 @@ class EmailSubscription extends React.Component {
       this.addSubscriberToList(
         userInput.value,
         this.props.target,
-        this.props.list_id
+        this.props.listId
       );
     }
   }
@@ -175,8 +175,8 @@ class EmailSubscription extends React.Component {
     if (!isLoading) {
       // The default view
       subscribeContent = (
-        <div role="dialog" tabIndex="1">
-          <div className={`SubscribeMessageBox ${status}`}>
+        <div role="dialog">
+          <div className={`SubscribeMessageBox ${status}`} tabIndex="0">
             <div className="SubscribeMessageBox-Eyebrow"></div>
             <div className="SubscribeMessageBox-Title">
               Get the <span className="SubscribeMessageBox-Title-BestNYPL">
@@ -325,7 +325,7 @@ EmailSubscription.propTypes = {
   lang: PropTypes.string,
   target: PropTypes.string,
   form_name: PropTypes.string,
-  list_id: PropTypes.string,
+  listId: PropTypes.string,
   form_method: PropTypes.string,
   placeholder: PropTypes.string,
   policyUrl: PropTypes.string,
@@ -339,7 +339,7 @@ EmailSubscription.defaultProps = {
   lang: 'en',
   target: 'http://cl.exct.net/subscribe.aspx',
   form_name: 'subscribeForm',
-  list_id: '1061',
+  listId: '1061',
   form_method: 'POST',
   placeholder: 'Your email address',
   policyUrl: 'http://www.nypl.org/help/about-nypl/legal-notices/privacy-policy',

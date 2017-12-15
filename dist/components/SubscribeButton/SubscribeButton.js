@@ -20,13 +20,15 @@ var _focusTrapReact = require('focus-trap-react');
 
 var _focusTrapReact2 = _interopRequireDefault(_focusTrapReact);
 
-var _EmailSubscription = require('../EmailSubscription/EmailSubscription.js');
-
-var _EmailSubscription2 = _interopRequireDefault(_EmailSubscription);
+var _dgxSvgIcons = require('dgx-svg-icons');
 
 var _axios = require('axios');
 
 var _axios2 = _interopRequireDefault(_axios);
+
+var _EmailSubscription = require('../EmailSubscription/EmailSubscription.js');
+
+var _EmailSubscription2 = _interopRequireDefault(_EmailSubscription);
 
 var _utils = require('../../utils/utils.js');
 
@@ -47,19 +49,13 @@ var styles = {
     position: 'relative'
   },
   subscribeButton: {
-    display: 'inline-block',
-    padding: '10px 10px 10px 12px',
+    display: 'inline',
+    padding: '11px 10px 11px 12px',
     verticalAlign: 'baseline'
   },
   subscribeLabel: {
     display: 'inline',
     verticalAlign: 'baseline'
-  },
-  subscribeIcon: {
-    fontSize: '15px',
-    verticalAlign: 'text-bottom',
-    marginLeft: '3px',
-    display: 'inline'
   },
   EmailSubscribeForm: {
     position: 'absolute',
@@ -192,11 +188,13 @@ var SubscribeButton = function (_React$Component) {
     key: 'renderEmailButton',
     value: function renderEmailButton() {
       var buttonClass = '';
-      var iconClass = 'nypl-icon-wedge-down';
+      var icon = _react2.default.createElement(_dgxSvgIcons.DownWedgeIcon, { className: 'dropDownIcon', ariaHidden: true });
+      var label = this.props.label;
 
       if (this.state.visible) {
-        iconClass = 'nypl-icon-solo-x';
         buttonClass = 'active';
+        label = 'Close';
+        icon = _react2.default.createElement(_dgxSvgIcons.XIcon, { className: 'dropDownIcon', ariaHidden: true, fill: '#fff' });
       }
 
       return _react2.default.createElement(
@@ -207,18 +205,16 @@ var SubscribeButton = function (_React$Component) {
           href: this.state.target,
           onClick: this.handleClick,
           style: styles.subscribeButton,
-          role: this.state.target === '#' ? 'button' : null
+          role: this.state.target === '#' ? 'button' : null,
+          'aria-haspopup': 'true',
+          'aria-expanded': this.state.visible ? true : null
         },
         _react2.default.createElement(
           'span',
           { style: styles.subscribeLabel },
-          this.props.label
+          label
         ),
-        _react2.default.createElement('span', {
-          className: iconClass + ' icon',
-          'aria-hidden': 'true',
-          style: styles.subscribeIcon
-        })
+        icon
       );
     }
   }, {
@@ -231,7 +227,7 @@ var SubscribeButton = function (_React$Component) {
           style: styles.EmailSubscribeForm
         },
         _react2.default.createElement(_EmailSubscription2.default, {
-          list_id: '1061',
+          listId: '1061',
           target: 'https://mailinglistapi.nypl.org'
         })
       ) : null;
@@ -244,19 +240,15 @@ var SubscribeButton = function (_React$Component) {
         {
           focusTrapOptions: {
             onDeactivate: this.handleOnClickOut,
-            clickOutsideDeactivates: true
+            clickOutsideDeactivates: true,
+            initialFocus: '.SubscribeMessageBox'
           },
-          active: this.state.visible
+          active: this.state.visible,
+          className: 'SubscribeButton-Wrapper',
+          style: (0, _underscore.extend)(styles.base, this.props.style)
         },
-        _react2.default.createElement(
-          'div',
-          {
-            className: 'SubscribeButton-Wrapper',
-            style: (0, _underscore.extend)(styles.base, this.props.style)
-          },
-          this.renderEmailButton(),
-          this.renderEmailDialog()
-        )
+        this.renderEmailButton(),
+        this.renderEmailDialog()
       );
     }
   }]);

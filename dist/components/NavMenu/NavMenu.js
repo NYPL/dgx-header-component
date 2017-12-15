@@ -16,23 +16,23 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _underscore = require('underscore');
 
-var _HeaderStore = require('../../stores/HeaderStore.js');
+var _HeaderStore = require('../../stores/HeaderStore');
 
 var _HeaderStore2 = _interopRequireDefault(_HeaderStore);
 
-var _Actions = require('../../actions/Actions.js');
+var _Actions = require('../../actions/Actions');
 
 var _Actions2 = _interopRequireDefault(_Actions);
 
-var _SearchButton = require('../SearchButton/SearchButton.js');
+var _SearchButton = require('../SearchButton/SearchButton');
 
 var _SearchButton2 = _interopRequireDefault(_SearchButton);
 
-var _NavMenuItem = require('../NavMenuItem/NavMenuItem.js');
+var _NavMenuItem = require('../NavMenuItem/NavMenuItem');
 
 var _NavMenuItem2 = _interopRequireDefault(_NavMenuItem);
 
-var _NavMenuMobileButtons = require('../NavMenuMobileButtons/NavMenuMobileButtons.js');
+var _NavMenuMobileButtons = require('../NavMenuMobileButtons/NavMenuMobileButtons');
 
 var _NavMenuMobileButtons2 = _interopRequireDefault(_NavMenuMobileButtons);
 
@@ -137,7 +137,6 @@ var NavMenu = function (_React$Component) {
           'nav',
           {
             className: this.props.className + '-Wrapper' + mobileActiveClass,
-            role: 'navigation',
             'aria-label': 'Main Navigation'
           },
           _react2.default.createElement('span', { className: 'MobileLogoText nypl-icon-logo-type', 'aria-hidden': 'true' }),
@@ -164,18 +163,14 @@ var NavMenu = function (_React$Component) {
 NavMenu.propTypes = {
   lang: _propTypes2.default.string,
   className: _propTypes2.default.string,
-  items: _propTypes2.default.array,
-  urlType: _propTypes2.default.string,
-  isLoggedIn: _propTypes2.default.bool,
-  patronInitial: _propTypes2.default.string,
-  patronName: _propTypes2.default.string,
-  logOutLink: _propTypes2.default.string,
-  gaAction: _propTypes2.default.string
+  items: _propTypes2.default.arrayOf(_propTypes2.default.object).isRequired,
+  urlType: _propTypes2.default.string
 };
 
 NavMenu.defaultProps = {
   lang: 'en',
-  className: 'NavMenu'
+  className: 'NavMenu',
+  urlType: 'relative'
 };
 
 exports.default = NavMenu;

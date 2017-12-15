@@ -8,16 +8,17 @@ import {
   isArray as _isArray,
 } from 'underscore';
 // Header Store/Actions
-import HeaderStore from '../../stores/HeaderStore.js';
-import Actions from '../../actions/Actions.js';
+import HeaderStore from '../../stores/HeaderStore';
+import Actions from '../../actions/Actions';
 // Dependent Components
-import SearchButton from '../SearchButton/SearchButton.js';
-import NavMenuItem from '../NavMenuItem/NavMenuItem.js';
-import NavMenuBottomButtons from '../NavMenuMobileButtons/NavMenuMobileButtons.js';
+import SearchButton from '../SearchButton/SearchButton';
+import NavMenuItem from '../NavMenuItem/NavMenuItem';
+import NavMenuBottomButtons from '../NavMenuMobileButtons/NavMenuMobileButtons';
 
 class NavMenu extends React.Component {
   constructor(props) {
     super(props);
+
     this.handleEscKey = this.handleEscKey.bind(this);
   }
 
@@ -69,7 +70,7 @@ class NavMenu extends React.Component {
         urlType={this.props.urlType}
         navId={item.id}
         key={index}
-      />
+      />,
     );
   }
 
@@ -81,10 +82,9 @@ class NavMenu extends React.Component {
       <div className={this.props.className}>
         <nav
           className={`${this.props.className}-Wrapper${mobileActiveClass}`}
-          role="navigation"
           aria-label="Main Navigation"
         >
-          <span className="MobileLogoText nypl-icon-logo-type" aria-hidden="true"></span>
+          <span className="MobileLogoText nypl-icon-logo-type" aria-hidden="true" />
           <ul className={`${this.props.className}-List`} id="NavMenu-List">
             {this.renderNavMenu(this.props.items)}
           </ul>
@@ -106,18 +106,14 @@ class NavMenu extends React.Component {
 NavMenu.propTypes = {
   lang: PropTypes.string,
   className: PropTypes.string,
-  items: PropTypes.array,
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
   urlType: PropTypes.string,
-  isLoggedIn: PropTypes.bool,
-  patronInitial: PropTypes.string,
-  patronName: PropTypes.string,
-  logOutLink: PropTypes.string,
-  gaAction: PropTypes.string,
 };
 
 NavMenu.defaultProps = {
   lang: 'en',
   className: 'NavMenu',
+  urlType: 'relative',
 };
 
 export default NavMenu;

@@ -81,9 +81,9 @@ describe('MyNypl', () => {
 
     // Tests ignore `aria-hidden` attribute
     it('should have an <a> with class name "MyNypl-Catalog-Btn". Its text equals ' +
-      '"LOG INTO THE CATALOG"', () => {
+      '"Log in to your accountLOG INTO THE CATALOG"', () => {
       expect(component.find('.MyNypl-Catalog-Btn').text())
-        .to.equal('LOG INTO THE CATALOG');
+        .to.equal('Log in to your accountLOG INTO THE CATALOG');
     });
 
     it('should have the <a> with class name "MyNypl-Catalog-Btn". Its href equals' +
@@ -96,9 +96,9 @@ describe('MyNypl', () => {
     );
 
     it('should have the <a> with class name "MyNypl-Research-Btn". Its text equals ' +
-      '"LOG INTO THE RESEARCH CATALOG"', () => {
+      '"NYPL Building IconLOG INTO THE RESEARCH CATALOG"', () => {
       expect(component.find('.MyNypl-Research-Btn').text()).to.equal(
-        'LOG INTO THE RESEARCH CATALOG'
+        'NYPL Building IconLOG INTO THE RESEARCH CATALOG'
       );
     });
 
@@ -147,15 +147,15 @@ describe('MyNypl', () => {
     });
 
     it('should have the <a> with class name "MyNypl-Catalog-Btn". Its text equals ' +
-      '"GO TO THE CATALOG"', () => {
+      '"Log in to your accountGO TO THE CATALOG"', () => {
       expect(component.find('.MyNypl-Catalog-Btn').text())
-        .to.equal('GO TO THE CATALOG');
+        .to.equal('Log in to your accountGO TO THE CATALOG');
     });
 
     it('should have the <a> with class name "MyNypl-Research-Btn". Its text equals ' +
-      '"GO TO THE RESEARCH CATALOG"', () => {
+      '"NYPL Building IconGO TO THE RESEARCH CATALOG"', () => {
       expect(component.find('.MyNypl-Research-Btn').text())
-        .to.equal('GO TO THE RESEARCH CATALOG');
+        .to.equal('NYPL Building IconGO TO THE RESEARCH CATALOG');
     });
 
     it('should have the <a> with class name "MyNypl-Catalog-Btn". Its href equals ' +
@@ -237,15 +237,15 @@ describe('MyNypl', () => {
       });
 
       it('should have the <a> with class name "MyNypl-Catalog-Btn". Its text equals ' +
-        '"GO TO THE CATALOG"', () => {
+        '"Log in to your accountGO TO THE CATALOG"', () => {
         expect(component.find('.MyNypl-Catalog-Btn').text())
-          .to.equal('GO TO THE CATALOG');
+          .to.equal('Log in to your accountGO TO THE CATALOG');
       });
 
       it('should have the <a> with class name "MyNypl-Research-Btn". Its text equals ' +
-        '"GO TO THE RESEARCH CATALOG"', () => {
+        '"NYPL Building IconGO TO THE RESEARCH CATALOG"', () => {
         expect(component.find('.MyNypl-Research-Btn').text())
-          .to.equal('GO TO THE RESEARCH CATALOG');
+          .to.equal('NYPL Building IconGO TO THE RESEARCH CATALOG');
       });
 
       it('should have the <a> with class name "MyNypl-Catalog-Btn". Its href equals ' +

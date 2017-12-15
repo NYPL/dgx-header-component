@@ -363,7 +363,8 @@ var MobileHeader = function (_React$Component) {
           {
             className: 'MobileMyNypl-Wrapper' + myNyplClass,
             focusTrapOptions: {
-              onDeactivate: this.closeMyNyplDialog
+              onDeactivate: this.closeMyNyplDialog,
+              clickOutsideDeactivates: true
             }
           },
           _react2.default.createElement(_MobileMyNypl2.default, {
@@ -463,7 +464,8 @@ var MobileHeader = function (_React$Component) {
             className: this.props.className + '-searchDialog',
             focusTrapOptions: {
               onDeactivate: this.closeSearchDialog,
-              initialFocus: '.' + this.props.className + '-searchForm-legend'
+              initialFocus: '.' + this.props.className + '-searchForm-legend',
+              clickOutsideDeactivates: true
             },
             style: styles.searchDialog
           },

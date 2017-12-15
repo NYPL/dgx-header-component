@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import ClickOutHandler from 'react-onclickout';
+import FocusTrap from 'focus-trap-react';
 // Import components
 import { SearchIcon } from 'dgx-svg-icons';
 import SearchBox from '../SearchBox/SearchBox.js';
@@ -94,10 +94,16 @@ class SearchButton extends React.Component {
   render() {
     return (
       <div className={`${this.props.className}-searchBox-Wrapper`}>
-        <ClickOutHandler onClickOut={this.handleOnClickOut}>
+        <FocusTrap
+          focusTrapOptions={{
+            onDeactivate: this.handleOnClickOut,
+            clickOutsideDeactivates: true,
+          }}
+          active={this.state.active}
+        >
           {this.renderSearchButton()}
           {this.renderSearchBox()}
-        </ClickOutHandler>
+        </FocusTrap>
       </div>
     );
   }

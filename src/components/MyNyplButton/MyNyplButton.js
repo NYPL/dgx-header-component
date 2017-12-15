@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { extend as _extend } from 'underscore';
-import ClickOutHandler from 'react-onclickout';
-// Alt Store/Actions
-import HeaderStore from '../../stores/HeaderStore.js';
-import Actions from '../../actions/Actions.js';
+import FocusTrap from 'focus-trap-react';
+import {
+  DownWedgeIcon,
+  XIcon,
+} from 'dgx-svg-icons';
 // GA Utilities
 import utils from '../../utils/utils.js';
 // Component Dependencies
@@ -21,18 +22,12 @@ const styles = {
     lineHeight: 'normal',
   },
   MyNyplButton: {
-    display: 'inline-block',
+    display: 'inline',
     border: 'none',
-    padding: '9px 10px 10px 12px',
+    padding: '11px 10px 11px 12px',
     textTransform: 'uppercase',
     lineHeight: 'normal',
     verticalAlign: 'baseline',
-  },
-  MyNyplIcon: {
-    fontSize: '15px',
-    verticalAlign: 'text-bottom',
-    marginLeft: '3px',
-    display: 'inline',
   },
   MyNyplWrapper: {
     position: 'absolute',
@@ -47,6 +42,11 @@ const styles = {
 class MyNyplButton extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      visible: false,
+    };
+
     this.handleClick = this.handleClick.bind(this);
     this.handleOnClickOut = this.handleOnClickOut.bind(this);
     this.handleEscKey = this.handleEscKey.bind(this);
@@ -59,6 +59,7 @@ class MyNyplButton extends React.Component {
   componentWillUnmount() {
     window.removeEventListener('keydown', this.handleEscKey, false);
   }
+
   /**
    * handleEscKey(e)
    * Triggers the clickOut method if the ESC keyboard key is pressed.
@@ -78,9 +79,8 @@ class MyNyplButton extends React.Component {
     // If javascript is enabled, clicking the button will open the dropdown menu instead of
     // going to the link
     e.preventDefault();
-    const visibleState = HeaderStore.getMyNyplVisible() ? 'Closed' : 'Open';
-
-    Actions.toggleMyNyplVisible(!HeaderStore.getMyNyplVisible());
+    const visibleState = this.state.visible ? 'Closed' : 'Open';
+    this.setState({ visible: !this.state.visible });
     utils.trackHeader(this.props.gaAction, `MyNyplButton - ${visibleState}`);
   }
 
@@ -90,11 +90,9 @@ class MyNyplButton extends React.Component {
    * currently visible.
    */
   handleOnClickOut() {
-    if (HeaderStore.getMyNyplVisible()) {
-      if (HeaderStore.getMobileMyNyplButtonValue() === '') {
-        utils.trackHeader(this.props.gaAction, 'MyNyplButton - Closed');
-      }
-      Actions.toggleMyNyplVisible(false);
+    if (this.state.visible) {
+      utils.trackHeader(this.props.gaAction, 'MyNyplButton - Closed');
+      this.setState({ visible: false });
     }
   }
 
@@ -104,15 +102,15 @@ class MyNyplButton extends React.Component {
    */
   renderMyNyplButton() {
     let buttonClass = '';
-    let iconClass = (HeaderStore.getMyNyplVisible()) ? 'nypl-icon-solo-x' : 'nypl-icon-wedge-down';
-    const icon = (<span className={`${iconClass} icon`} style={styles.MyNyplIcon}></span>);
+    let icon = <DownWedgeIcon className="dropDownIcon" ariaHidden />;
+    let myNyplButtonLabel = (this.props.patronName) ? 'My Account' : 'Log In';
     const labelColorClass = (this.props.isLoggedIn) ? ' loggedIn' : '';
-    const myNyplButtonLabel = (this.props.patronName) ? 'My Account' : 'Log In';
     const loggedInFadeInAnimation = (this.props.patronName) ? ' animated fadeIn' : '';
 
-    if (HeaderStore.getMyNyplVisible()) {
+    if (this.state.visible) {
       buttonClass = 'active';
-      iconClass = 'nypl-icon-solo-x';
+      icon = <XIcon className="dropDownIcon" ariaHidden fill="#fff" />;
+      myNyplButtonLabel = 'Close';
     }
 
     return (
@@ -122,6 +120,8 @@ class MyNyplButton extends React.Component {
         style={_extend(styles.MyNyplButton, this.props.style)}
         href={this.props.target}
         role="button"
+        aria-haspopup="true"
+        aria-expanded={this.state.visible ? true : null}
       >
         {myNyplButtonLabel}
         {icon}
@@ -131,8 +131,7 @@ class MyNyplButton extends React.Component {
 
   renderMyNyplDialog() {
     const boxHeight = (this.props.isLoggedIn) ? ' loggedInHeight' : null;
-
-    return (HeaderStore.getMyNyplVisible()) ? (
+    return (this.state.visible) ? (
       <div
         className={`MyNypl-Wrapper active animatedFast fadeIn${boxHeight}`}
         style={styles.MyNyplWrapper}
@@ -148,15 +147,18 @@ class MyNyplButton extends React.Component {
 
   render() {
     return (
-      <ClickOutHandler onClickOut={this.handleOnClickOut}>
-        <div
-          className="MyNyplButton-Wrapper"
-          style={_extend(styles.base, this.props.style)}
-        >
-          {this.renderMyNyplButton()}
-          {this.renderMyNyplDialog()}
-        </div>
-      </ClickOutHandler>
+      <FocusTrap
+        focusTrapOptions={{
+          onDeactivate: this.handleOnClickOut,
+          clickOutsideDeactivates: true,
+        }}
+        active={this.state.visible}
+        className="MyNyplButton-Wrapper"
+        style={_extend(styles.base, this.props.style)}
+      >
+        {this.renderMyNyplButton()}
+        {this.renderMyNyplDialog()}
+      </FocusTrap>
     );
   }
 }

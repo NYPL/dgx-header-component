@@ -178,7 +178,7 @@ var EmailSubscription = function (_React$Component) {
         });
 
         // Send as a POST request
-        this.addSubscriberToList(userInput.value, this.props.target, this.props.list_id);
+        this.addSubscriberToList(userInput.value, this.props.target, this.props.listId);
       }
     }
   }, {
@@ -229,10 +229,10 @@ var EmailSubscription = function (_React$Component) {
         // The default view
         subscribeContent = _react2.default.createElement(
           'div',
-          { role: 'dialog', tabIndex: '1' },
+          { role: 'dialog' },
           _react2.default.createElement(
             'div',
-            { className: 'SubscribeMessageBox ' + status },
+            { className: 'SubscribeMessageBox ' + status, tabIndex: '0' },
             _react2.default.createElement('div', { className: 'SubscribeMessageBox-Eyebrow' }),
             _react2.default.createElement(
               'div',
@@ -436,7 +436,7 @@ EmailSubscription.propTypes = {
   lang: _propTypes2.default.string,
   target: _propTypes2.default.string,
   form_name: _propTypes2.default.string,
-  list_id: _propTypes2.default.string,
+  listId: _propTypes2.default.string,
   form_method: _propTypes2.default.string,
   placeholder: _propTypes2.default.string,
   policyUrl: _propTypes2.default.string,
@@ -450,7 +450,7 @@ EmailSubscription.defaultProps = {
   lang: 'en',
   target: 'http://cl.exct.net/subscribe.aspx',
   form_name: 'subscribeForm',
-  list_id: '1061',
+  listId: '1061',
   form_method: 'POST',
   placeholder: 'Your email address',
   policyUrl: 'http://www.nypl.org/help/about-nypl/legal-notices/privacy-policy',

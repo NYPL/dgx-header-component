@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 // Config and Utility Library
 import utils from '../../utils/utils.js';
@@ -39,11 +40,11 @@ const styles = {
 
 class MyNypl extends React.Component {
   componentDidMount() {
-    this.refs.catalogLink.focus();
-  }
-
-  componentWillUnmount() {
-    this.refs.catalogLink.blur();
+    if (this.refs.patronGreetingWrapper) {
+      ReactDOM.findDOMNode(this.refs.patronGreetingWrapper).focus();
+    } else {
+      this.refs.catalogLink.focus();
+    }
   }
 
   /**
@@ -79,7 +80,7 @@ class MyNypl extends React.Component {
     }
 
     return (
-      <div>
+      <div tabIndex="0" className="patron-greeting-wrapper" ref="patronGreetingWrapper">
         <p className={`${this.props.className}-Patron-Greeting Login-Indication`}>
           You are logged in as:
         </p>
@@ -102,7 +103,7 @@ class MyNypl extends React.Component {
         onClick={() => utils.trackHeader('My Account', 'Log Out')}
         style={styles.logOutLink}
       >
-        <LogoutIcon className="logoutIcon" />
+        <LogoutIcon className="logoutIcon" ariaHidden />
         LOG OUT
       </a> : null;
   }

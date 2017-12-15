@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -73,12 +77,11 @@ var MyNypl = function (_React$Component) {
   _createClass(MyNypl, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.refs.catalogLink.focus();
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      this.refs.catalogLink.blur();
+      if (this.refs.patronGreetingWrapper) {
+        _reactDom2.default.findDOMNode(this.refs.patronGreetingWrapper).focus();
+      } else {
+        this.refs.catalogLink.focus();
+      }
     }
 
     /**
@@ -117,7 +120,7 @@ var MyNypl = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        null,
+        { tabIndex: '0', className: 'patron-greeting-wrapper', ref: 'patronGreetingWrapper' },
         _react2.default.createElement(
           'p',
           { className: this.props.className + '-Patron-Greeting Login-Indication' },
@@ -149,7 +152,7 @@ var MyNypl = function (_React$Component) {
           },
           style: styles.logOutLink
         },
-        _react2.default.createElement(_dgxSvgIcons.LogoutIcon, { className: 'logoutIcon' }),
+        _react2.default.createElement(_dgxSvgIcons.LogoutIcon, { className: 'logoutIcon', ariaHidden: true }),
         'LOG OUT'
       ) : null;
     }

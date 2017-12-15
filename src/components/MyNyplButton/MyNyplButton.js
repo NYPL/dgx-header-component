@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { extend as _extend } from 'underscore';
 import FocusTrap from 'focus-trap-react';
@@ -81,11 +80,6 @@ class MyNyplButton extends React.Component {
     // going to the link
     e.preventDefault();
     const visibleState = this.state.visible ? 'Closed' : 'Open';
-    setTimeout(() => {
-      if (this.focusRef) {
-        ReactDOM.findDOMNode(this.focusRef).focus();
-      }
-    }, 100);
     this.setState({ visible: !this.state.visible });
     utils.trackHeader(this.props.gaAction, `MyNyplButton - ${visibleState}`);
   }
@@ -143,7 +137,6 @@ class MyNyplButton extends React.Component {
         style={styles.MyNyplWrapper}
       >
         <MyNypl
-          focusRef={(i) => { this.focusRef = i; }}
           patronName={this.props.patronName}
           isLoggedIn={this.props.isLoggedIn}
           logOutLink={this.props.logOutLink}

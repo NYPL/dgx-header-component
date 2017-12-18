@@ -111,7 +111,20 @@ var SearchButton = function (_React$Component) {
       var _this3 = this;
 
       var classes = (0, _classnames2.default)({ active: this.state.active });
+      var label = this.state.active ? 'Close' : 'Search';
 
+      var icon = this.state.active ? _react2.default.createElement(_dgxSvgIcons.XIcon, {
+        className: this.props.className + '-searchButton-icon',
+        ariaHidden: true,
+        fill: '#FFF',
+        width: '20',
+        height: '20'
+      }) : _react2.default.createElement(_dgxSvgIcons.SearchIcon, {
+        className: this.props.className + '-searchButton-icon',
+        width: '20',
+        height: '20',
+        ariaHidden: true
+      });
       return _react2.default.createElement(
         'button',
         {
@@ -125,14 +138,9 @@ var SearchButton = function (_React$Component) {
         _react2.default.createElement(
           'span',
           { className: this.props.className + '-searchButton-text' },
-          'Search'
+          label
         ),
-        _react2.default.createElement(_dgxSvgIcons.SearchIcon, {
-          className: this.props.className + '-searchButton-icon',
-          width: '20',
-          height: '20',
-          ariaHidden: true
-        })
+        icon
       );
     }
 

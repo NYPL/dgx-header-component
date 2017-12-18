@@ -198,17 +198,6 @@ var Header = function (_React$Component) {
       // Removing event listener to minimize garbage collection
     }
   }, {
-    key: 'onChange',
-    value: function onChange() {
-      this.setState({
-        loginCookieValue: this.state.loginCookieValue,
-        patronName: this.state.patronName,
-        patronInitial: this.state.patronInitial,
-        patronDataReceived: this.state.patronDataReceived,
-        isFeatureFlagsActivated: {}
-      });
-    }
-  }, {
     key: 'onFeatureFlagsChange',
     value: function onFeatureFlagsChange() {
       this.setState({ featureFlagsStore: _dgxFeatureFlags2.default.store.getState() });

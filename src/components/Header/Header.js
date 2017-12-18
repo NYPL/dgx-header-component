@@ -127,16 +127,6 @@ class Header extends React.Component {
     // Removing event listener to minimize garbage collection
   }
 
-  onChange() {
-    this.setState({
-      loginCookieValue: this.state.loginCookieValue,
-      patronName: this.state.patronName,
-      patronInitial: this.state.patronInitial,
-      patronDataReceived: this.state.patronDataReceived,
-      isFeatureFlagsActivated: {},
-    });
-  }
-
   onFeatureFlagsChange() {
     this.setState({ featureFlagsStore: FeatureFlags.store.getState() });
   }

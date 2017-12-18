@@ -37,10 +37,6 @@ var _appConfig = require('../../appConfig');
 
 var _appConfig2 = _interopRequireDefault(_appConfig);
 
-var _HeaderStore = require('../../stores/HeaderStore');
-
-var _HeaderStore2 = _interopRequireDefault(_HeaderStore);
-
 var _Logo = require('../Logo/Logo');
 
 var _Logo2 = _interopRequireDefault(_Logo);
@@ -94,7 +90,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 // Nav Config
 
-// ALT Flux
 
 // NYPL Components
 
@@ -178,14 +173,13 @@ var Header = function (_React$Component) {
       patronDataReceived: patron.loggedIn || false,
       isFeatureFlagsActivated: {},
       logOutUrl: ''
-    }, _HeaderStore2.default.getState(), { featureFlagsStore: _dgxFeatureFlags2.default.store.getState() });
+    }, { featureFlagsStore: _dgxFeatureFlags2.default.store.getState() });
     return _this;
   }
 
   _createClass(Header, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      _HeaderStore2.default.listen(this.onChange.bind(this));
       // Listen on FeatureFlags Store updates
       _dgxFeatureFlags2.default.store.listen(this.onFeatureFlagsChange.bind(this));
       // Set the log out link to state
@@ -199,7 +193,6 @@ var Header = function (_React$Component) {
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      _HeaderStore2.default.unlisten(this.onChange.bind(this));
       // Listen on FeatureFlags Store updates
       _dgxFeatureFlags2.default.store.unlisten(this.onFeatureFlagsChange.bind(this));
       // Removing event listener to minimize garbage collection
@@ -207,14 +200,14 @@ var Header = function (_React$Component) {
   }, {
     key: 'onChange',
     value: function onChange() {
-      this.setState((0, _underscore.extend)({
+      this.setState({
         loginCookieValue: this.state.loginCookieValue,
         patronName: this.state.patronName,
         patronInitial: this.state.patronInitial,
         patronDataReceived: this.state.patronDataReceived,
         isFeatureFlagsActivated: {},
         logOutUrl: this.state.logOutUrl
-      }, _HeaderStore2.default.getState()));
+      });
     }
   }, {
     key: 'onFeatureFlagsChange',

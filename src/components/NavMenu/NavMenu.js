@@ -7,47 +7,13 @@ import {
   contains as _contains,
   isArray as _isArray,
 } from 'underscore';
-// Header Store/Actions
-import HeaderStore from '../../stores/HeaderStore';
-import Actions from '../../actions/Actions';
+
 // Dependent Components
 import SearchButton from '../SearchButton/SearchButton';
 import NavMenuItem from '../NavMenuItem/NavMenuItem';
 import NavMenuBottomButtons from '../NavMenuMobileButtons/NavMenuMobileButtons';
 
 class NavMenu extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.handleEscKey = this.handleEscKey.bind(this);
-  }
-
-  componentDidMount() {
-    window.addEventListener('keydown', this.handleEscKey, false);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleEscKey, false);
-  }
-
-  handleEscKey(e) {
-    if (e.key === 'Escape' || e.key === 'Esc' || e.keyCode === 27) {
-      this.closeMobileNavMenuDialog();
-    }
-  }
-
-  /**
-   * closeMobileNavMenuDialog()
-   * Verifies that the HeaderStore's mobileMenuButtonValue equals
-   * 'mobileMenu' then resets value with appropriate Action.
-   * Used in FocusTrap onDeactivate callback for A11Y users.
-   */
-  closeMobileNavMenuDialog() {
-    if (HeaderStore.getMobileMenuBtnValue() === 'mobileMenu') {
-      Actions.setMobileMenuButtonValue('');
-    }
-  }
-
   /**
    * Generates the DOM for the NavItems with appropriate class.
    * Optionally, removes any NavItems if a match is found from the exceptionList.
@@ -70,18 +36,17 @@ class NavMenu extends React.Component {
         urlType={this.props.urlType}
         navId={item.id}
         key={index}
-      />,
+      />
     );
   }
 
   render() {
-    const mobileActiveClass = HeaderStore.getMobileMenuBtnValue() === 'mobileMenu' ?
-      ' mobileActive' : '';
+    const mobileActiveClass = this.props.mobileActive ? 'mobileActive' : '';
 
     return (
       <div className={this.props.className}>
         <nav
-          className={`${this.props.className}-Wrapper${mobileActiveClass}`}
+          className={`${this.props.className}-Wrapper ${mobileActiveClass}`}
           aria-label="Main Navigation"
         >
           <span className="MobileLogoText nypl-icon-logo-type" aria-hidden="true" />
@@ -108,12 +73,14 @@ NavMenu.propTypes = {
   className: PropTypes.string,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   urlType: PropTypes.string,
+  mobileActive: PropTypes.bool,
 };
 
 NavMenu.defaultProps = {
   lang: 'en',
   className: 'NavMenu',
   urlType: 'relative',
+  mobileActive: false,
 };
 
 export default NavMenu;

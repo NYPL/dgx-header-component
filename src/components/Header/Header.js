@@ -13,8 +13,7 @@ import SkipNavigation from 'dgx-skip-navigation-link';
 import navConfig from '../../navConfig';
 import featureFlagConfig from '../../featureFlagConfig';
 import config from '../../appConfig';
-// ALT Flux
-import HeaderStore from '../../stores/HeaderStore';
+
 // NYPL Components
 import Logo from '../Logo/Logo';
 import DonateButton from '../DonateButton/DonateButton';
@@ -104,13 +103,11 @@ class Header extends React.Component {
         isFeatureFlagsActivated: {},
         logOutUrl: '',
       },
-      HeaderStore.getState(),
       { featureFlagsStore: FeatureFlags.store.getState() },
     );
   }
 
   componentDidMount() {
-    HeaderStore.listen(this.onChange.bind(this));
     // Listen on FeatureFlags Store updates
     FeatureFlags.store.listen(this.onFeatureFlagsChange.bind(this));
     // Set the log out link to state
@@ -125,26 +122,20 @@ class Header extends React.Component {
   }
 
   componentWillUnmount() {
-    HeaderStore.unlisten(this.onChange.bind(this));
     // Listen on FeatureFlags Store updates
     FeatureFlags.store.unlisten(this.onFeatureFlagsChange.bind(this));
     // Removing event listener to minimize garbage collection
   }
 
   onChange() {
-    this.setState(
-      _extend(
-        {
-          loginCookieValue: this.state.loginCookieValue,
-          patronName: this.state.patronName,
-          patronInitial: this.state.patronInitial,
-          patronDataReceived: this.state.patronDataReceived,
-          isFeatureFlagsActivated: {},
-          logOutUrl: this.state.logOutUrl,
-        },
-        HeaderStore.getState()
-      )
-    );
+    this.setState({
+      loginCookieValue: this.state.loginCookieValue,
+      patronName: this.state.patronName,
+      patronInitial: this.state.patronInitial,
+      patronDataReceived: this.state.patronDataReceived,
+      isFeatureFlagsActivated: {},
+      logOutUrl: this.state.logOutUrl,
+    });
   }
 
   onFeatureFlagsChange() {

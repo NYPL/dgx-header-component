@@ -16,14 +16,6 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _underscore = require('underscore');
 
-var _HeaderStore = require('../../stores/HeaderStore');
-
-var _HeaderStore2 = _interopRequireDefault(_HeaderStore);
-
-var _Actions = require('../../actions/Actions');
-
-var _Actions2 = _interopRequireDefault(_Actions);
-
 var _SearchButton = require('../SearchButton/SearchButton');
 
 var _SearchButton2 = _interopRequireDefault(_SearchButton);
@@ -43,7 +35,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-// Header Store/Actions
 
 // Dependent Components
 
@@ -51,47 +42,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var NavMenu = function (_React$Component) {
   _inherits(NavMenu, _React$Component);
 
-  function NavMenu(props) {
+  function NavMenu() {
     _classCallCheck(this, NavMenu);
 
-    var _this = _possibleConstructorReturn(this, (NavMenu.__proto__ || Object.getPrototypeOf(NavMenu)).call(this, props));
-
-    _this.handleEscKey = _this.handleEscKey.bind(_this);
-    return _this;
+    return _possibleConstructorReturn(this, (NavMenu.__proto__ || Object.getPrototypeOf(NavMenu)).apply(this, arguments));
   }
 
   _createClass(NavMenu, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      window.addEventListener('keydown', this.handleEscKey, false);
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      window.removeEventListener('keydown', this.handleEscKey, false);
-    }
-  }, {
-    key: 'handleEscKey',
-    value: function handleEscKey(e) {
-      if (e.key === 'Escape' || e.key === 'Esc' || e.keyCode === 27) {
-        this.closeMobileNavMenuDialog();
-      }
-    }
-
-    /**
-     * closeMobileNavMenuDialog()
-     * Verifies that the HeaderStore's mobileMenuButtonValue equals
-     * 'mobileMenu' then resets value with appropriate Action.
-     * Used in FocusTrap onDeactivate callback for A11Y users.
-     */
-
-  }, {
-    key: 'closeMobileNavMenuDialog',
-    value: function closeMobileNavMenuDialog() {
-      if (_HeaderStore2.default.getMobileMenuBtnValue() === 'mobileMenu') {
-        _Actions2.default.setMobileMenuButtonValue('');
-      }
-    }
+    key: 'renderNavMenu',
 
     /**
      * Generates the DOM for the NavItems with appropriate class.
@@ -100,9 +58,6 @@ var NavMenu = function (_React$Component) {
      * @param {exceptionList[]} (optional) - Array containing NavId strings.
      * @returns {Object} React DOM.
      */
-
-  }, {
-    key: 'renderNavMenu',
     value: function renderNavMenu(items, exceptionList) {
       var _this2 = this;
 
@@ -128,7 +83,7 @@ var NavMenu = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var mobileActiveClass = _HeaderStore2.default.getMobileMenuBtnValue() === 'mobileMenu' ? ' mobileActive' : '';
+      var mobileActiveClass = this.props.mobileActive ? 'mobileActive' : '';
 
       return _react2.default.createElement(
         'div',
@@ -136,7 +91,7 @@ var NavMenu = function (_React$Component) {
         _react2.default.createElement(
           'nav',
           {
-            className: this.props.className + '-Wrapper' + mobileActiveClass,
+            className: this.props.className + '-Wrapper ' + mobileActiveClass,
             'aria-label': 'Main Navigation'
           },
           _react2.default.createElement('span', { className: 'MobileLogoText nypl-icon-logo-type', 'aria-hidden': 'true' }),
@@ -164,13 +119,15 @@ NavMenu.propTypes = {
   lang: _propTypes2.default.string,
   className: _propTypes2.default.string,
   items: _propTypes2.default.arrayOf(_propTypes2.default.object).isRequired,
-  urlType: _propTypes2.default.string
+  urlType: _propTypes2.default.string,
+  mobileActive: _propTypes2.default.bool
 };
 
 NavMenu.defaultProps = {
   lang: 'en',
   className: 'NavMenu',
-  urlType: 'relative'
+  urlType: 'relative',
+  mobileActive: false
 };
 
 exports.default = NavMenu;

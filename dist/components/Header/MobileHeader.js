@@ -384,7 +384,9 @@ var MobileHeader = function (_React$Component) {
               style: (0, _underscore.extend)(styles.myNyplButton, buttonStyles),
               onTap: function onTap() {
                 return _this2.toggleMobileMenuButton('click' + gaAction);
-              }
+              },
+              'aria-haspopup': 'true',
+              'aria-expanded': active ? true : null
             },
             _react2.default.createElement(
               'span',

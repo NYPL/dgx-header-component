@@ -304,6 +304,8 @@ class MobileHeader extends React.Component {
             ref="MobileMyNyplButton"
             style={_extend(styles.myNyplButton, buttonStyles)}
             onTap={() => this.toggleMobileMenuButton(`click${gaAction}`)}
+            aria-haspopup="true"
+            aria-expanded={active ? true : null}
           >
             <span className="visuallyHidden">{buttonLabel}</span>
             {icon}

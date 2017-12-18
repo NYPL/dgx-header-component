@@ -185,6 +185,8 @@ var MobileHeader = function (_React$Component) {
 
   /**
    * toggleMobileMenuButton(activeButton)
+   * This function either activates or deactivates the state of the button that was clicked on,
+   * to track the active state SCSS styles.
    *
    * @param {String} activeButton
    */
@@ -197,10 +199,10 @@ var MobileHeader = function (_React$Component) {
         var searchActive = this.state.activeButton === 'search' ? '' : 'search';
         this.setState({ activeButton: searchActive });
       } else if (activeButton === 'mobileMenu') {
-        var navMenuActive = this.state.activeButton === 'navmenu' ? '' : 'navmenu';
+        var navMenuActive = this.state.activeButton === 'navMenu' ? '' : 'navMenu';
         this.setState({ activeButton: navMenuActive });
       } else if (activeButton === 'clickLogIn' || activeButton === 'clickMyAccount') {
-        var menuActive = this.state.activeButton === 'menu' ? '' : 'menu';
+        var menuActive = this.state.activeButton === 'myNypl' ? '' : 'myNypl';
         this.setState({ activeButton: menuActive });
       }
 
@@ -265,7 +267,7 @@ var MobileHeader = function (_React$Component) {
       }
       var buttonStyles = styles.inactiveMyNyplButton;
       var buttonLabel = this.props.patronName ? 'My Account' : 'Login';
-      var active = this.state.activeButton === 'menu';
+      var active = this.state.activeButton === 'myNypl';
 
       if (active) {
         myNyplClass = 'active';
@@ -435,7 +437,7 @@ var MobileHeader = function (_React$Component) {
       var buttonStyles = styles.inactiveMenuButton;
       var buttonLabel = 'Open Menu Dialog';
       var dialogWindow = null;
-      var active = this.state.activeButton === 'navmenu';
+      var active = this.state.activeButton === 'navMenu';
 
       if (active) {
         mobileMenuClass = ' active';

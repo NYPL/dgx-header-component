@@ -243,7 +243,7 @@ var MobileHeader = function (_React$Component) {
           { className: 'visuallyHidden' },
           this.props.alt
         ),
-        _react2.default.createElement(_dgxSvgIcons.LionLogoIcon, { ariaHidden: true, className: this.props.className + '-Logo' })
+        _react2.default.createElement(_dgxSvgIcons.LionLogoIcon, { ariaHidden: true, className: this.props.className + '-logo' })
       );
     }
 
@@ -261,9 +261,9 @@ var MobileHeader = function (_React$Component) {
 
       var myNyplClass = '';
       var gaAction = this.props.patronName ? 'MyAccount' : 'LogIn';
-      var icon = _react2.default.createElement(_dgxSvgIcons.LoginIcon, { className: 'LoginIcon', ariaHidden: true });
+      var icon = _react2.default.createElement(_dgxSvgIcons.LoginIcon, { className: 'loginIcon', ariaHidden: true });
       if (this.props.patronName) {
-        icon = _react2.default.createElement(_dgxSvgIcons.LoginIconSolid, { className: 'LoginIcon-loggedIn animated fadeIn', ariaHidden: true });
+        icon = _react2.default.createElement(_dgxSvgIcons.LoginIconSolid, { className: 'loginIcon-loggedIn animated fadeIn', ariaHidden: true });
       }
       var buttonStyles = styles.inactiveMyNyplButton;
       var buttonLabel = this.props.patronName ? 'My Account' : 'Login';
@@ -282,7 +282,7 @@ var MobileHeader = function (_React$Component) {
         _react2.default.createElement(
           _focusTrapReact2.default,
           {
-            className: 'MobileMyNypl-Wrapper',
+            className: 'mobileMyNypl-wrapper',
             focusTrapOptions: {
               onDeactivate: this.closeDropDown,
               clickOutsideDeactivates: true
@@ -292,9 +292,8 @@ var MobileHeader = function (_React$Component) {
           _react2.default.createElement(
             _reactTappable2.default,
             {
-              className: this.props.className + '-MyNyplButton',
+              className: this.props.className + '-myNyplButton',
               component: 'button',
-              ref: 'MobileMyNyplButton',
               style: (0, _underscore.extend)(styles.myNyplButton, buttonStyles),
               onTap: function onTap() {
                 return _this2.toggleMobileMenuButton('click' + gaAction);
@@ -310,7 +309,7 @@ var MobileHeader = function (_React$Component) {
             icon
           ),
           active && _react2.default.createElement(_MobileMyNypl2.default, {
-            className: myNyplClass + ' MobileMyNypl',
+            className: myNyplClass + ' mobileMyNypl',
             isLoggedIn: this.props.isLoggedIn,
             patronName: this.props.patronName,
             logOutLink: this.props.logOutLink
@@ -342,7 +341,7 @@ var MobileHeader = function (_React$Component) {
             onClick: function onClick() {
               return _utils2.default.trackHeader('Click', 'Mobile Locations Button');
             },
-            className: this.props.className + '-Locator',
+            className: this.props.className + '-locator',
             'aria-label': 'NYPL Locations Near Me'
           },
           _react2.default.createElement(
@@ -402,7 +401,7 @@ var MobileHeader = function (_React$Component) {
         _react2.default.createElement(
           _reactTappable2.default,
           {
-            className: this.props.className + '-SearchButton' + mobileSearchClass,
+            className: this.props.className + '-searchButton' + mobileSearchClass,
             component: 'button',
             style: (0, _underscore.extend)(styles.searchButton, buttonStyles),
             onTap: function onTap() {
@@ -445,7 +444,7 @@ var MobileHeader = function (_React$Component) {
         buttonStyles = styles.activeMenuButton;
         buttonLabel = 'Close Menu Dialog';
         dialogWindow = _react2.default.createElement(_NavMenu2.default, {
-          className: this.props.className + '-NavMenu',
+          className: this.props.className + '-navMenu',
           lang: this.props.lang,
           items: this.props.navData,
           urlType: this.props.urlType,
@@ -463,7 +462,7 @@ var MobileHeader = function (_React$Component) {
           _focusTrapReact2.default,
           {
             focusTrapOptions: {
-              initialFocus: 'ul.Header-Mobile-NavMenu-List li:first-of-type a',
+              initialFocus: 'ul.header-mobile-navMenu-list li:first-of-type a',
               onDeactivate: this.closeDropDown,
               clickOutsideDeactivates: true
             },
@@ -472,7 +471,7 @@ var MobileHeader = function (_React$Component) {
           _react2.default.createElement(
             _reactTappable2.default,
             {
-              className: this.props.className + '-MenuButton' + mobileMenuClass,
+              className: this.props.className + '-menuButton' + mobileMenuClass,
               component: 'button',
               style: (0, _underscore.extend)(styles.menuButton, buttonStyles),
               onTap: function onTap() {
@@ -488,7 +487,7 @@ var MobileHeader = function (_React$Component) {
           ),
           _react2.default.createElement(
             'div',
-            { className: 'Header-Mobile-Wrapper' + mobileMenuClass },
+            { className: 'header-mobile-wrapper' + mobileMenuClass },
             dialogWindow
           )
         )
@@ -533,7 +532,7 @@ MobileHeader.defaultProps = {
   lang: 'en',
   isLoggedIn: false,
   patronName: null,
-  className: 'MobileHeader',
+  className: 'mobileHeader',
   nyplRootUrl: '/',
   alt: 'The New York Public Library'
 };

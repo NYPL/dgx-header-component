@@ -167,7 +167,7 @@ class EmailSubscription extends React.Component {
     const status = this.state.formStatus;
     const isLoading = this.state.formProcessing;
     const notValidEmail = this.state.notValidEmail;
-    const formClass = 'EmailSubscribeForm';
+    const formClass = 'emailSubscribeForm';
     const emailAddressField = 'emailAddressField';
     const errorClass = cx({ active: notValidEmail });
     let subscribeContent;
@@ -176,17 +176,17 @@ class EmailSubscription extends React.Component {
       // The default view
       subscribeContent = (
         <div role="dialog">
-          <div className={`SubscribeMessageBox ${status}`} tabIndex="0">
-            <div className="SubscribeMessageBox-Eyebrow"></div>
-            <div className="SubscribeMessageBox-Title">
-              Get the <span className="SubscribeMessageBox-Title-BestNYPL">
+          <div className={`subscribeMessageBox ${status}`} tabIndex="0">
+            <div className="subscribeMessageBox-eyebrow"></div>
+            <div className="subscribeMessageBox-title">
+              Get the <span className="subscribeMessageBox-title-bestNYPL">
               best of NYPL</span> in your inbox
             </div>
           </div>
 
           <form
             ref="EmailSubscribeForm"
-            id="EmailSubscribeForm"
+            id="emailSubscribeForm"
             className={formClass}
             action={this.props.target}
             method={this.props.form_method}
@@ -204,7 +204,7 @@ class EmailSubscription extends React.Component {
               </label>
               <input
                 aria-label="Enter your email address"
-                className={`${formClass}-Input`}
+                className={`${formClass}-input`}
                 type="email"
                 name="Email Address"
                 placeholder={this.props.placeholder}
@@ -216,12 +216,12 @@ class EmailSubscription extends React.Component {
                 autoFocus
               />
 
-              <div className={`${formClass}-Error ${errorClass}`}>
+              <div className={`${formClass}-error ${errorClass}`}>
                 <span className="nypl-icon-solo-x icon" aria-hidden="true"></span>
                 <span>Please enter a valid email address</span>
               </div>
 
-              <div className={`${formClass}-Submit`}>
+              <div className={`${formClass}-submit`}>
                 <span className="nypl-icon-check-solo icon" aria-hidden="true"></span>
                 <input
                   aria-label="Sign up"
@@ -243,15 +243,15 @@ class EmailSubscription extends React.Component {
               status={status}
               msg="Thank you for subscribing to our email updates."
             />
-            <div className={`${this.props.className}-NewEmail`}>
+            <div className={`${this.props.className}-newEmail`}>
               <button onClick={this.initForm} style={styles.resubmitButton}>
                 Enter another email address
               </button>
             </div>
-            <div className={`${this.props.className}-FollowUs`}>
+            <div className={`${this.props.className}-followUs`}>
               <p>Follow us:</p>
               <SocialMediaLinksWidget
-                className={`${this.props.className}-SocialMediaWidget`}
+                className={`${this.props.className}-socialMediaWidget`}
                 links={config.socialMediaLinks}
                 displayOnlyList={['facebook', 'twitter']}
               />
@@ -265,7 +265,7 @@ class EmailSubscription extends React.Component {
         subscribeContent = (
           <div>
             <SubscribeMessageBox status={status} msg="Looks like you're already signed up!" />
-            <div className={`${this.props.className}-NewEmail`}>
+            <div className={`${this.props.className}-newEmail`}>
               <button style={styles.resubmitButton} onClick={this.initForm}>
                 Enter a different email address
               </button>
@@ -277,7 +277,7 @@ class EmailSubscription extends React.Component {
       if (status === 'error' || status === 'Internal Server Error') {
         utils.trackHeader('Subscribe', 'Error');
         subscribeContent = (
-          <div className={`${this.props.className}-Misc-Error`}>
+          <div className={`${this.props.className}-misc-error`}>
             <div>Hmm...</div>
             <div>Something isn&apos;t quite right.</div>
             <div>Please try again.</div>
@@ -335,7 +335,7 @@ EmailSubscription.propTypes = {
 
 EmailSubscription.defaultProps = {
   id: 'EmailSubscription',
-  className: 'EmailSubscription',
+  className: 'emailSubscription',
   lang: 'en',
   target: 'http://cl.exct.net/subscribe.aspx',
   form_name: 'subscribeForm',

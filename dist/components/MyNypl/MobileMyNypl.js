@@ -158,7 +158,7 @@ var MobileMyNypl = function (_React$Component) {
         'a',
         {
           href: this.props.logOutLink,
-          className: this.props.className + '-Catalog-Link',
+          className: this.props.className + '-catalog-link',
           onClick: function onClick() {
             return _utils2.default.trackHeader('My Account', 'Log Out');
           },
@@ -178,15 +178,15 @@ var MobileMyNypl = function (_React$Component) {
     value: function renderGreeting() {
       return this.props.patronName && this.props.isLoggedIn ? _react2.default.createElement(
         'div',
-        { className: this.props.className + '-Greeting', ref: 'loginGreeting', tabIndex: '0' },
+        { className: this.props.className + '-greeting', ref: 'loginGreeting', tabIndex: '0' },
         _react2.default.createElement(
           'p',
-          { className: 'Login-Indication' },
+          { className: 'login-indication' },
           'You are logged in as:'
         ),
         _react2.default.createElement(
           'p',
-          { className: 'Login-Name' },
+          { className: 'login-name' },
           this.props.patronName
         )
       ) : null;
@@ -194,8 +194,8 @@ var MobileMyNypl = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var catalogLinkClass = 'CatalogLink';
-      var researchLinkClass = 'ResearchLink';
+      var catalogLinkClass = 'catalogLink';
+      var researchLinkClass = 'researchLink';
       var catalogLink = this.renderLoginLinks().catalogLink;
       var researchLink = this.renderLoginLinks().researchLink;
       var catalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
@@ -225,14 +225,14 @@ var MobileMyNypl = function (_React$Component) {
           _react2.default.createElement(
             'span',
             {
-              className: catalogLinkClass + '-Wrapper',
+              className: catalogLinkClass + '-wrapper',
               style: (0, _underscore.extend)(styles.wrapper, styles.catalogLinkWrapper)
             },
             _react2.default.createElement(_dgxSvgIcons.LoginIcon, { fill: '#fff', ariaHidden: true }),
             _react2.default.createElement(
               'span',
               {
-                className: catalogLinkClass + '-Label',
+                className: catalogLinkClass + '-label',
                 style: (0, _underscore.extend)(styles.catalogLinkLabel, styles.label)
               },
               catalogLinkLabel
@@ -252,14 +252,14 @@ var MobileMyNypl = function (_React$Component) {
           _react2.default.createElement(
             'span',
             {
-              className: researchLinkClass + '-Wrapper',
+              className: researchLinkClass + '-wrapper',
               style: (0, _underscore.extend)(styles.wrapper, styles.researchLinkWrapper)
             },
             _react2.default.createElement(_dgxSvgIcons.BuildingIcon, { fill: '#fff', ariaHidden: true }),
             _react2.default.createElement(
               'span',
               {
-                className: researchLinkClass + '-Label',
+                className: researchLinkClass + '-label',
                 style: (0, _underscore.extend)(styles.researchLinkLabel, styles.label)
               },
               researchCatalogLinkLabel
@@ -288,7 +288,7 @@ MobileMyNypl.propTypes = {
 
 MobileMyNypl.defaultProps = {
   lang: 'en',
-  className: 'MobileMyNypl',
+  className: 'mobileMyNypl',
   loginCatalogLink: _appConfig2.default.loginMyNyplLinks.catalog,
   loginResearchLink: _appConfig2.default.loginMyNyplLinks.research,
   catalogLink: _appConfig2.default.myNyplLinks.catalog,

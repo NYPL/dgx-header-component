@@ -21,10 +21,10 @@ var SubscribeMessageBox = function SubscribeMessageBox(_ref) {
   return _react2.default.createElement(
     'div',
     { className: className + ' ' + status },
-    _react2.default.createElement('div', { className: className + '-Eyebrow' }),
+    _react2.default.createElement('div', { className: className + '-eyebrow' }),
     _react2.default.createElement(
       'div',
-      { className: className + '-Title' },
+      { className: className + '-title' },
       msg
     )
   );
@@ -38,7 +38,7 @@ SubscribeMessageBox.propTypes = {
 
 SubscribeMessageBox.defaultProps = {
   msg: 'Thank you for subscribing to our email updates.',
-  className: 'SubscribeMessageBox'
+  className: 'subscribeMessageBox'
 };
 
 exports.default = SubscribeMessageBox;

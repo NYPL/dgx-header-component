@@ -181,8 +181,8 @@ var GlobalAlerts = function (_React$Component) {
           { className: this.props.className + '-Wrapper' },
           _react2.default.createElement(_AlertsBox2.default, {
             alerts: currentGlobalAlerts,
-            id: this.props.className + '-Box',
-            className: this.props.className + '-Box'
+            id: this.props.className + '-box',
+            className: this.props.className + '-box'
           })
         )
       ) : null;
@@ -200,8 +200,8 @@ GlobalAlerts.propTypes = {
 
 GlobalAlerts.defaultProps = {
   lang: 'en',
-  className: 'GlobalAlerts',
-  id: 'GlobalAlerts'
+  className: 'globalAlerts',
+  id: 'globalAlerts'
 };
 
 exports.default = GlobalAlerts;

@@ -115,7 +115,7 @@ class MyNyplButton extends React.Component {
 
     return (
       <a
-        className={`MyNyplButton ${buttonClass}${labelColorClass}${loggedInFadeInAnimation}`}
+        className={`myNyplButton ${buttonClass}${labelColorClass}${loggedInFadeInAnimation}`}
         onClick={this.handleClick}
         style={_extend(styles.MyNyplButton, this.props.style)}
         href={this.props.target}
@@ -133,7 +133,7 @@ class MyNyplButton extends React.Component {
     const boxHeight = (this.props.isLoggedIn) ? ' loggedInHeight' : null;
     return (this.state.visible) ? (
       <div
-        className={`MyNypl-Wrapper active animatedFast fadeIn${boxHeight}`}
+        className={`myNypl-wrapper active animatedFast fadeIn${boxHeight}`}
         style={styles.MyNyplWrapper}
       >
         <MyNypl
@@ -153,7 +153,7 @@ class MyNyplButton extends React.Component {
           clickOutsideDeactivates: true,
         }}
         active={this.state.visible}
-        className="MyNyplButton-Wrapper"
+        className="myNyplButton-wrapper"
         style={_extend(styles.base, this.props.style)}
       >
         {this.renderMyNyplButton()}

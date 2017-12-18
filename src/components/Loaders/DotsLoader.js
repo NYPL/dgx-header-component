@@ -40,7 +40,7 @@ const DotsLoader = ({ className, dots }) => {
   };
 
   return (
-    <div className={`${className}-Wrapper`}>
+    <div className={`${className}-wrapper`}>
       <span style={styles.text}>Loading</span>
       <ul className={className} style={styles.list}>
         {renderDots(dots)}

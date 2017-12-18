@@ -1,12 +1,12 @@
-.DonateWidget {
-  &-DonateBox {
+.donateWidget {
+  &-donateBox {
     display: inline-table;
     width: 50%;
     height: 100%;
     margin: 0;
     padding: 0;
 
-    &-Wrapper {
+    &-wrapper {
       color: #FFFFFF;
       display: block;
       position: relative;
@@ -22,13 +22,13 @@
       }
     }
 
-    &-Tag {
+    &-tag {
       font-size: 13px;
       @include Kievit-Medium;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
-    &-Title {
+    &-title {
       font-size: 27px;
       @include Kievit-Book;
       line-height: 1em;
@@ -41,7 +41,7 @@
       }
     }
 
-    &-Desc {
+    &-desc {
       @include Kievit-Book;
       font-size: 15.5px;
       line-height: 1.3em;
@@ -52,7 +52,7 @@
       }
     }
 
-    &-DonationLinks {
+    &-donationLinks {
       list-style-type: none;
       display: none;
       margin: .5em 0 0 0;

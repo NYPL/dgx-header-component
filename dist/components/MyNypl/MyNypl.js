@@ -123,12 +123,12 @@ var MyNypl = function (_React$Component) {
         { tabIndex: '0', className: 'patron-greeting-wrapper', ref: 'patronGreetingWrapper' },
         _react2.default.createElement(
           'p',
-          { className: this.props.className + '-Patron-Greeting Login-Indication' },
+          { className: this.props.className + '-patron-greeting login-indication' },
           'You are logged in as:'
         ),
         _react2.default.createElement(
           'p',
-          { className: this.props.className + '-Patron-Greeting Login-Name' },
+          { className: this.props.className + '-patron-greeting login-name' },
           this.props.patronName
         )
       );
@@ -146,7 +146,7 @@ var MyNypl = function (_React$Component) {
         'a',
         {
           href: this.props.logOutLink,
-          className: this.props.className + '-Catalog-Link',
+          className: this.props.className + '-catalog-link',
           onClick: function onClick() {
             return _utils2.default.trackHeader('My Account', 'Log Out');
           },
@@ -171,7 +171,7 @@ var MyNypl = function (_React$Component) {
         this.renderGreeting(),
         _react2.default.createElement(
           'ul',
-          { className: this.props.className + '-Login-List' },
+          { className: this.props.className + '-login-list' },
           _react2.default.createElement(
             'li',
             null,
@@ -181,7 +181,7 @@ var MyNypl = function (_React$Component) {
                 ref: 'catalogLink',
                 href: catalogLink,
                 style: styles.loginButtons,
-                className: this.props.className + '-Catalog-Btn',
+                className: this.props.className + '-catalog-btn',
                 onClick: function onClick() {
                   return _utils2.default.trackHeader(gaAction, 'Catalog');
                 }
@@ -198,7 +198,7 @@ var MyNypl = function (_React$Component) {
               {
                 href: researchLink,
                 style: styles.loginButtons,
-                className: this.props.className + '-Research-Btn',
+                className: this.props.className + '-research-btn',
                 onClick: function onClick() {
                   return _utils2.default.trackHeader(gaAction, 'Research');
                 }
@@ -230,7 +230,7 @@ MyNypl.propTypes = {
 };
 
 MyNypl.defaultProps = {
-  className: 'MyNypl',
+  className: 'myNypl',
   lang: 'en',
   loginCatalogLink: _appConfig2.default.loginMyNyplLinks.catalog,
   loginResearchLink: _appConfig2.default.loginMyNyplLinks.research,

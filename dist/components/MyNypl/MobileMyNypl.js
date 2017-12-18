@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -111,13 +115,23 @@ var MobileMyNypl = function (_React$Component) {
   }
 
   _createClass(MobileMyNypl, [{
-    key: 'renderLoginLinks',
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      if (this.refs.loginGreeting) {
+        _reactDom2.default.findDOMNode(this.refs.loginGreeting).focus();
+      } else {
+        _reactDom2.default.findDOMNode(this.refs.catalogLoginLink).focus();
+      }
+    }
 
     /**
      * renderLoginLinks()
      * Returns the href addresses for catalog and research catalog buttons
      * based on different conditions.
      */
+
+  }, {
+    key: 'renderLoginLinks',
     value: function renderLoginLinks() {
       if (this.props.isLoggedIn) {
         return {
@@ -164,7 +178,7 @@ var MobileMyNypl = function (_React$Component) {
     value: function renderGreeting() {
       return this.props.patronName && this.props.isLoggedIn ? _react2.default.createElement(
         'div',
-        { className: this.props.className + '-Greeting' },
+        { className: this.props.className + '-Greeting', ref: 'loginGreeting', tabIndex: '0' },
         _react2.default.createElement(
           'p',
           { className: 'Login-Indication' },
@@ -205,7 +219,8 @@ var MobileMyNypl = function (_React$Component) {
             style: (0, _underscore.extend)(styles.links, loggedInMarginTop),
             onClick: function onClick() {
               return _utils2.default.trackHeader(gaAction, 'Catalog');
-            }
+            },
+            ref: 'catalogLoginLink'
           },
           _react2.default.createElement(
             'span',

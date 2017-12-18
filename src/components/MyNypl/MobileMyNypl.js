@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { extend as _extend } from 'underscore';
 import {
@@ -75,6 +76,14 @@ const styles = {
 };
 
 class MobileMyNypl extends React.Component {
+  componentDidMount() {
+    if (this.refs.loginGreeting) {
+      ReactDOM.findDOMNode(this.refs.loginGreeting).focus();
+    } else {
+      ReactDOM.findDOMNode(this.refs.catalogLoginLink).focus();
+    }
+  }
+
   /**
    * renderLoginLinks()
    * Returns the href addresses for catalog and research catalog buttons
@@ -120,7 +129,7 @@ class MobileMyNypl extends React.Component {
    */
   renderGreeting() {
     return (this.props.patronName && this.props.isLoggedIn) ?
-      <div className={`${this.props.className}-Greeting`}>
+      <div className={`${this.props.className}-Greeting`} ref="loginGreeting" tabIndex="0">
         <p className="Login-Indication">You are logged in as:</p>
         <p className="Login-Name">{this.props.patronName}</p>
       </div> : null;
@@ -149,6 +158,7 @@ class MobileMyNypl extends React.Component {
           className={catalogLinkClass}
           style={_extend(styles.links, loggedInMarginTop)}
           onClick={() => utils.trackHeader(gaAction, 'Catalog')}
+          ref="catalogLoginLink"
         >
           <span
             className={`${catalogLinkClass}-Wrapper`}

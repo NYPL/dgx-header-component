@@ -52,6 +52,8 @@ var _NavMenu2 = _interopRequireDefault(_NavMenu);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -345,57 +347,59 @@ var MobileHeader = function (_React$Component) {
 
       var myNyplClass = '';
       var gaAction = this.props.patronName ? 'MyAccount' : 'LogIn';
-      var icon = _react2.default.createElement(_dgxSvgIcons.LoginIcon, { className: 'MobileMyNypl LoginIcon' });
+      var icon = _react2.default.createElement(_dgxSvgIcons.LoginIcon, { className: 'LoginIcon', ariaHidden: true });
       if (this.props.patronName) {
-        icon = _react2.default.createElement(_dgxSvgIcons.LoginIconSolid, { className: 'MobileMyNypl LoginIcon-loggedIn animated fadeIn' });
+        icon = _react2.default.createElement(_dgxSvgIcons.LoginIconSolid, { className: 'LoginIcon-loggedIn animated fadeIn', ariaHidden: true });
       }
       var buttonStyles = styles.inactiveMyNyplButton;
-      var buttonLabel = 'Open Log In Dialog';
-      var dialogWindow = null;
+      var buttonLabel = this.props.patronName ? 'My Account' : 'Login';
+      var active = this.state.mobileMyNyplButton === 'clickLogIn' || this.state.mobileMyNyplButton === 'clickMyAccount';
 
-      if (this.state.mobileMyNyplButton === 'clickLogIn' || this.state.mobileMyNyplButton === 'clickMyAccount') {
+      if (active) {
         myNyplClass = ' active';
-        icon = _react2.default.createElement(_dgxSvgIcons.XIcon, { ariaHidden: true, fill: '#FFF' });
+        icon = _react2.default.createElement(_dgxSvgIcons.XIcon, _defineProperty({ ariaHidden: true, fill: '#FFF' }, 'ariaHidden', true));
         buttonStyles = styles.activeMyNyplButton;
-        buttonLabel = 'Close Log In Dialog';
-        dialogWindow = _react2.default.createElement(
-          _focusTrapReact2.default,
-          {
-            className: 'MobileMyNypl-Wrapper' + myNyplClass,
-            focusTrapOptions: {
-              onDeactivate: this.closeMyNyplDialog,
-              clickOutsideDeactivates: true
-            }
-          },
-          _react2.default.createElement(_MobileMyNypl2.default, {
-            isLoggedIn: this.props.isLoggedIn,
-            patronName: this.props.patronName,
-            logOutLink: this.props.logOutLink
-          })
-        );
+        buttonLabel = 'Close';
       }
 
       return _react2.default.createElement(
         'li',
         { style: styles.listItem },
         _react2.default.createElement(
-          _reactTappable2.default,
+          _focusTrapReact2.default,
           {
-            className: this.props.className + '-MyNyplButton' + myNyplClass,
-            component: 'button',
-            style: (0, _underscore.extend)(styles.myNyplButton, buttonStyles),
-            onTap: function onTap() {
-              return _this2.toggleMobileMenuButton('click' + gaAction);
-            }
+            className: 'MobileMyNypl-Wrapper',
+            focusTrapOptions: {
+              onDeactivate: this.closeMyNyplDialog,
+              clickOutsideDeactivates: true
+            },
+            active: active
           },
           _react2.default.createElement(
-            'span',
-            { className: 'visuallyHidden' },
-            buttonLabel
+            _reactTappable2.default,
+            {
+              className: this.props.className + '-MyNyplButton',
+              component: 'button',
+              ref: 'MobileMyNyplButton',
+              style: (0, _underscore.extend)(styles.myNyplButton, buttonStyles),
+              onTap: function onTap() {
+                return _this2.toggleMobileMenuButton('click' + gaAction);
+              }
+            },
+            _react2.default.createElement(
+              'span',
+              { className: 'visuallyHidden' },
+              buttonLabel
+            ),
+            icon
           ),
-          icon
-        ),
-        dialogWindow
+          active && _react2.default.createElement(_MobileMyNypl2.default, {
+            className: myNyplClass + ' MobileMyNypl',
+            isLoggedIn: this.props.isLoggedIn,
+            patronName: this.props.patronName,
+            logOutLink: this.props.logOutLink
+          })
+        )
       );
     }
 
@@ -568,7 +572,7 @@ var MobileHeader = function (_React$Component) {
           ),
           _react2.default.createElement(
             'div',
-            { className: 'MobileMyNypl-Wrapper' + mobileMenuClass },
+            { className: 'Header-Mobile-Wrapper' + mobileMenuClass },
             dialogWindow
           )
         )

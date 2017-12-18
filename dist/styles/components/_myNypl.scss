@@ -120,11 +120,13 @@
 }
 
 .MobileMyNypl-Wrapper {
-  display: none;
-  position: absolute;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
+  // display: none;
+  // position: absolute;
+  // left: 0;
+  // width: 100%;
+  // z-index: 1000;
+  display: inline-block;
+  position: inherit;
 
   &.active {
     display: block;
@@ -166,6 +168,15 @@
 }
 
 .MobileMyNypl {
+  display: none;
+  position: absolute;
+  left: 0;
+  width: 100%;
+
+  &.active {
+    display: block;
+  }
+
   &-Greeting {
     box-sizing: content-box;
     color: #FFF;

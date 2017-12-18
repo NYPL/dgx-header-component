@@ -272,49 +272,52 @@ class MobileHeader extends React.Component {
   renderMyNyplButton() {
     let myNyplClass = '';
     const gaAction = (this.props.patronName) ? 'MyAccount' : 'LogIn';
-    let icon = <LoginIcon className="MobileMyNypl LoginIcon" />;
+    let icon = <LoginIcon className="LoginIcon" ariaHidden />;
     if (this.props.patronName) {
-      icon = <LoginIconSolid className="MobileMyNypl LoginIcon-loggedIn animated fadeIn" />;
+      icon = <LoginIconSolid className="LoginIcon-loggedIn animated fadeIn" ariaHidden />;
     }
     let buttonStyles = styles.inactiveMyNyplButton;
-    let buttonLabel = 'Open Log In Dialog';
-    let dialogWindow = null;
+    let buttonLabel = (this.props.patronName) ? 'My Account' : 'Login';
+    const active = this.state.mobileMyNyplButton === 'clickLogIn' ||
+      this.state.mobileMyNyplButton === 'clickMyAccount';
 
-    if (this.state.mobileMyNyplButton === 'clickLogIn' ||
-      this.state.mobileMyNyplButton === 'clickMyAccount') {
+    if (active) {
       myNyplClass = ' active';
-      icon = <XIcon ariaHidden fill="#FFF" />;
+      icon = <XIcon ariaHidden fill="#FFF" ariaHidden />;
       buttonStyles = styles.activeMyNyplButton;
-      buttonLabel = 'Close Log In Dialog';
-      dialogWindow = (
-        <FocusTrap
-          className={`MobileMyNypl-Wrapper${myNyplClass}`}
-          focusTrapOptions={{
-            onDeactivate: this.closeMyNyplDialog,
-            clickOutsideDeactivates: true,
-          }}
-        >
-          <MobileMyNypl
-            isLoggedIn={this.props.isLoggedIn}
-            patronName={this.props.patronName}
-            logOutLink={this.props.logOutLink}
-          />
-        </FocusTrap>
-      );
+      buttonLabel = 'Close';
     }
 
     return (
       <li style={styles.listItem}>
-        <ReactTappable
-          className={`${this.props.className}-MyNyplButton${myNyplClass}`}
-          component="button"
-          style={_extend(styles.myNyplButton, buttonStyles)}
-          onTap={() => this.toggleMobileMenuButton(`click${gaAction}`)}
+        <FocusTrap
+          className="MobileMyNypl-Wrapper"
+          focusTrapOptions={{
+            onDeactivate: this.closeMyNyplDialog,
+            clickOutsideDeactivates: true,
+          }}
+          active={active}
         >
-          <span className="visuallyHidden">{buttonLabel}</span>
-          {icon}
-        </ReactTappable>
-        {dialogWindow}
+          <ReactTappable
+            className={`${this.props.className}-MyNyplButton`}
+            component="button"
+            ref="MobileMyNyplButton"
+            style={_extend(styles.myNyplButton, buttonStyles)}
+            onTap={() => this.toggleMobileMenuButton(`click${gaAction}`)}
+          >
+            <span className="visuallyHidden">{buttonLabel}</span>
+            {icon}
+          </ReactTappable>
+          {
+            active &&
+              <MobileMyNypl
+                className={`${myNyplClass} MobileMyNypl`}
+                isLoggedIn={this.props.isLoggedIn}
+                patronName={this.props.patronName}
+                logOutLink={this.props.logOutLink}
+              />
+          }
+        </FocusTrap>
       </li>
     );
   }
@@ -446,7 +449,7 @@ class MobileHeader extends React.Component {
             <span className="visuallyHidden">{buttonLabel}</span>
             {icon}
           </ReactTappable>
-          <div className={`MobileMyNypl-Wrapper${mobileMenuClass}`}>
+          <div className={`Header-Mobile-Wrapper${mobileMenuClass}`}>
             {dialogWindow}
           </div>
         </FocusTrap>

@@ -54,6 +54,12 @@
 
     // Mobile Search
     @import 'components/_mobileSearch';
+
+    &-Wrapper {
+      width: 100%;
+      position: absolute;
+      left: 0;
+    }
   }
 
   &-Wrapper {

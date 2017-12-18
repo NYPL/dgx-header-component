@@ -205,8 +205,7 @@ var Header = function (_React$Component) {
         patronName: this.state.patronName,
         patronInitial: this.state.patronInitial,
         patronDataReceived: this.state.patronDataReceived,
-        isFeatureFlagsActivated: {},
-        logOutUrl: this.state.logOutUrl
+        isFeatureFlagsActivated: {}
       });
     }
   }, {

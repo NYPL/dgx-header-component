@@ -17,7 +17,7 @@ describe('GlobalAlerts Component', () => {
 
     before(() => {
       mock = new MockAdapter(axios);
-       
+
       // Mock any GET request to configured alerts API:
       mock.onGet(config.alertsApiUrl).reply(200, {
         // No alerts scheduled:
@@ -34,7 +34,7 @@ describe('GlobalAlerts Component', () => {
     })
 
     it('should render no alerts', () => {
-      expect(component.find('.GlobalAlerts-Box-Item').length).to.equal(0);
+      expect(component.find('.globalAlerts-box-item').length).to.equal(0);
     });
   });
 
@@ -43,7 +43,7 @@ describe('GlobalAlerts Component', () => {
 
     before(() => {
       mock = new MockAdapter(axios);
-       
+
       // Mock any GET request to configured alerts API:
       mock.onGet(config.alertsApiUrl).reply(200, {
         data: [
@@ -84,8 +84,8 @@ describe('GlobalAlerts Component', () => {
     })
 
     it('should render only the single alert valid for current time', () => {
-      expect(component.find('.GlobalAlerts-Box-Item').length).to.equal(1);
-      expect(component.find('.GlobalAlerts-Box-Item').text()).to.equal('More People Reading More')
+      expect(component.find('.globalAlerts-box-item').length).to.equal(1);
+      expect(component.find('.globalAlerts-box-item').text()).to.equal('More People Reading More')
     });
 
     it('should render a <div> wrapper with @role="complementary"', () => {

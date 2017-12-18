@@ -352,7 +352,7 @@ var MobileHeader = function (_React$Component) {
         icon = _react2.default.createElement(_dgxSvgIcons.LoginIconSolid, { className: 'LoginIcon-loggedIn animated fadeIn', ariaHidden: true });
       }
       var buttonStyles = styles.inactiveMyNyplButton;
-      var buttonLabel = this.props.patronName ? 'My Account' : 'Login';
+      var buttonLabel = this.props.patronName ? 'My Account' : 'Log In';
       var active = this.state.mobileMyNyplButton === 'clickLogIn' || this.state.mobileMyNyplButton === 'clickMyAccount';
 
       if (active) {

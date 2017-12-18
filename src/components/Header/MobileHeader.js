@@ -277,7 +277,7 @@ class MobileHeader extends React.Component {
       icon = <LoginIconSolid className="LoginIcon-loggedIn animated fadeIn" ariaHidden />;
     }
     let buttonStyles = styles.inactiveMyNyplButton;
-    let buttonLabel = (this.props.patronName) ? 'My Account' : 'Login';
+    let buttonLabel = (this.props.patronName) ? 'My Account' : 'Log In';
     const active = this.state.mobileMyNyplButton === 'clickLogIn' ||
       this.state.mobileMyNyplButton === 'clickMyAccount';
 

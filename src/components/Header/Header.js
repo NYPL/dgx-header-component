@@ -134,7 +134,6 @@ class Header extends React.Component {
       patronInitial: this.state.patronInitial,
       patronDataReceived: this.state.patronDataReceived,
       isFeatureFlagsActivated: {},
-      logOutUrl: this.state.logOutUrl,
     });
   }
 

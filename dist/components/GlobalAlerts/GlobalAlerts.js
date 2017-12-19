@@ -176,15 +176,11 @@ var GlobalAlerts = function (_React$Component) {
           style: styles,
           role: 'complementary'
         },
-        _react2.default.createElement(
-          'div',
-          { className: this.props.className + '-Wrapper' },
-          _react2.default.createElement(_AlertsBox2.default, {
-            alerts: currentGlobalAlerts,
-            id: this.props.className + '-box',
-            className: this.props.className + '-box'
-          })
-        )
+        _react2.default.createElement(_AlertsBox2.default, {
+          alerts: currentGlobalAlerts,
+          id: this.props.className + '-box',
+          className: this.props.className + '-box'
+        })
       ) : null;
     }
   }]);

@@ -108,14 +108,6 @@ var styles = {
     lineHeight: 'normal',
     verticalAlign: '0px'
   },
-  patronInitial: {
-    color: '#497629',
-    display: 'inline-block',
-    fontSize: '1.8em',
-    lineHeight: 'normal',
-    margin: '0 5px 0 0',
-    verticalAlign: '8px'
-  },
   activeMyNyplButton: {
     color: '#FFF',
     backgroundColor: '#2B2B2B'
@@ -139,15 +131,6 @@ var styles = {
   inactiveSearchButton: {
     color: '#000',
     backgroundColor: '#FFF'
-  },
-  searchDialog: {
-    position: 'absolute',
-    margin: 0,
-    padding: 0,
-    left: 0,
-    width: '100%',
-    backgroundColor: '#1B7FA7',
-    zIndex: '1000'
   },
   menuButton: {
     margin: 0,
@@ -369,15 +352,20 @@ var MobileHeader = function (_React$Component) {
       var mobileSearchClass = '';
       var icon = _react2.default.createElement(_dgxSvgIcons.SearchIcon, { ariaHidden: true, fill: '#000' });
       var buttonStyles = styles.inactiveSearchButton;
-      var buttonLabel = 'Open Search Dialog';
-      var dialogWindow = null;
+      var buttonLabel = 'Open Search';
+      var active = this.state.activeButton === 'search';
 
-      if (this.state.activeButton === 'search') {
+      if (active) {
         mobileSearchClass = ' active';
         icon = _react2.default.createElement(_dgxSvgIcons.XIcon, { ariaHidden: true, fill: '#FFF' });
         buttonStyles = styles.activeSearchButton;
-        buttonLabel = 'Close Search Dialog';
-        dialogWindow = _react2.default.createElement(
+        buttonLabel = 'Close Search';
+      }
+
+      return _react2.default.createElement(
+        'li',
+        { style: styles.listItem },
+        _react2.default.createElement(
           _focusTrapReact2.default,
           {
             className: this.props.className + '-searchDialog',
@@ -386,36 +374,32 @@ var MobileHeader = function (_React$Component) {
               initialFocus: '.' + this.props.className + '-searchForm-legend',
               clickOutsideDeactivates: true
             },
-            style: styles.searchDialog
+            active: active
           },
-          _react2.default.createElement(_SearchBox2.default, {
+          _react2.default.createElement(
+            _reactTappable2.default,
+            {
+              className: this.props.className + '-searchButton' + mobileSearchClass,
+              component: 'button',
+              style: (0, _underscore.extend)(styles.searchButton, buttonStyles),
+              onTap: function onTap() {
+                return _this3.toggleMobileMenuButton('clickSearch');
+              },
+              'aria-haspopup': 'true',
+              'aria-expanded': active ? true : null
+            },
+            _react2.default.createElement(
+              'span',
+              { className: 'visuallyHidden' },
+              buttonLabel
+            ),
+            icon
+          ),
+          active && _react2.default.createElement(_SearchBox2.default, {
             className: this.props.className + '-searchForm',
             type: 'mobile'
           })
-        );
-      }
-
-      return _react2.default.createElement(
-        'li',
-        { style: styles.listItem },
-        _react2.default.createElement(
-          _reactTappable2.default,
-          {
-            className: this.props.className + '-searchButton' + mobileSearchClass,
-            component: 'button',
-            style: (0, _underscore.extend)(styles.searchButton, buttonStyles),
-            onTap: function onTap() {
-              return _this3.toggleMobileMenuButton('clickSearch');
-            }
-          },
-          _react2.default.createElement(
-            'span',
-            { className: 'visuallyHidden' },
-            buttonLabel
-          ),
-          icon
-        ),
-        dialogWindow
+        )
       );
     }
 
@@ -476,7 +460,9 @@ var MobileHeader = function (_React$Component) {
               style: (0, _underscore.extend)(styles.menuButton, buttonStyles),
               onTap: function onTap() {
                 return _this4.toggleMobileMenuButton('mobileMenu');
-              }
+              },
+              'aria-haspopup': 'true',
+              'aria-expanded': active ? true : null
             },
             _react2.default.createElement(
               'span',

@@ -73,14 +73,6 @@ const styles = {
     lineHeight: 'normal',
     verticalAlign: '0px',
   },
-  patronInitial: {
-    color: '#497629',
-    display: 'inline-block',
-    fontSize: '1.8em',
-    lineHeight: 'normal',
-    margin: '0 5px 0 0',
-    verticalAlign: '8px',
-  },
   activeMyNyplButton: {
     color: '#FFF',
     backgroundColor: '#2B2B2B',
@@ -104,15 +96,6 @@ const styles = {
   inactiveSearchButton: {
     color: '#000',
     backgroundColor: '#FFF',
-  },
-  searchDialog: {
-    position: 'absolute',
-    margin: 0,
-    padding: 0,
-    left: 0,
-    width: '100%',
-    backgroundColor: '#1B7FA7',
-    zIndex: '1000',
   },
   menuButton: {
     margin: 0,
@@ -287,15 +270,18 @@ class MobileHeader extends React.Component {
     let mobileSearchClass = '';
     let icon = <SearchIcon ariaHidden fill="#000" />;
     let buttonStyles = styles.inactiveSearchButton;
-    let buttonLabel = 'Open Search Dialog';
-    let dialogWindow = null;
+    let buttonLabel = 'Open Search';
+    const active = this.state.activeButton === 'search';
 
-    if (this.state.activeButton === 'search') {
+    if (active) {
       mobileSearchClass = ' active';
       icon = <XIcon ariaHidden fill="#FFF" />;
       buttonStyles = styles.activeSearchButton;
-      buttonLabel = 'Close Search Dialog';
-      dialogWindow = (
+      buttonLabel = 'Close Search';
+    }
+
+    return (
+      <li style={styles.listItem}>
         <FocusTrap
           className={`${this.props.className}-searchDialog`}
           focusTrapOptions={{
@@ -303,28 +289,27 @@ class MobileHeader extends React.Component {
             initialFocus: `.${this.props.className}-searchForm-legend`,
             clickOutsideDeactivates: true,
           }}
-          style={styles.searchDialog}
+          active={active}
         >
-          <SearchBox
-            className={`${this.props.className}-searchForm`}
-            type="mobile"
-          />
+          <ReactTappable
+            className={`${this.props.className}-searchButton${mobileSearchClass}`}
+            component="button"
+            style={_extend(styles.searchButton, buttonStyles)}
+            onTap={() => this.toggleMobileMenuButton('clickSearch')}
+            aria-haspopup="true"
+            aria-expanded={active ? true : null}
+          >
+            <span className="visuallyHidden">{buttonLabel}</span>
+            {icon}
+          </ReactTappable>
+          {
+            active &&
+              <SearchBox
+                className={`${this.props.className}-searchForm`}
+                type="mobile"
+              />
+          }
         </FocusTrap>
-      );
-    }
-
-    return (
-      <li style={styles.listItem}>
-        <ReactTappable
-          className={`${this.props.className}-searchButton${mobileSearchClass}`}
-          component="button"
-          style={_extend(styles.searchButton, buttonStyles)}
-          onTap={() => this.toggleMobileMenuButton('clickSearch')}
-        >
-          <span className="visuallyHidden">{buttonLabel}</span>
-          {icon}
-        </ReactTappable>
-        {dialogWindow}
       </li>
     );
   }
@@ -377,6 +362,8 @@ class MobileHeader extends React.Component {
             component="button"
             style={_extend(styles.menuButton, buttonStyles)}
             onTap={() => this.toggleMobileMenuButton('mobileMenu')}
+            aria-haspopup="true"
+            aria-expanded={active ? true : null}
           >
             <span className="visuallyHidden">{buttonLabel}</span>
             {icon}

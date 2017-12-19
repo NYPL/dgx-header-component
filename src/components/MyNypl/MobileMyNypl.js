@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { extend as _extend } from 'underscore';
 import {
@@ -75,6 +76,14 @@ const styles = {
 };
 
 class MobileMyNypl extends React.Component {
+  componentDidMount() {
+    if (this.refs.loginGreeting) {
+      ReactDOM.findDOMNode(this.refs.loginGreeting).focus();
+    } else {
+      ReactDOM.findDOMNode(this.refs.catalogLoginLink).focus();
+    }
+  }
+
   /**
    * renderLoginLinks()
    * Returns the href addresses for catalog and research catalog buttons
@@ -106,7 +115,7 @@ class MobileMyNypl extends React.Component {
     return (this.props.isLoggedIn) ?
       <a
         href={this.props.logOutLink}
-        className={`${this.props.className}-Catalog-Link`}
+        className={`${this.props.className}-catalog-link`}
         onClick={() => utils.trackHeader('My Account', 'Log Out')}
         style={styles.logOutLink}
       >
@@ -120,15 +129,15 @@ class MobileMyNypl extends React.Component {
    */
   renderGreeting() {
     return (this.props.patronName && this.props.isLoggedIn) ?
-      <div className={`${this.props.className}-Greeting`}>
-        <p className="Login-Indication">You are logged in as:</p>
-        <p className="Login-Name">{this.props.patronName}</p>
+      <div className={`${this.props.className}-greeting`} ref="loginGreeting" tabIndex="0">
+        <p className="login-indication">You are logged in as:</p>
+        <p className="login-name">{this.props.patronName}</p>
       </div> : null;
   }
 
   render() {
-    const catalogLinkClass = 'CatalogLink';
-    const researchLinkClass = 'ResearchLink';
+    const catalogLinkClass = 'catalogLink';
+    const researchLinkClass = 'researchLink';
     const catalogLink = this.renderLoginLinks().catalogLink;
     const researchLink = this.renderLoginLinks().researchLink;
     const catalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
@@ -149,14 +158,15 @@ class MobileMyNypl extends React.Component {
           className={catalogLinkClass}
           style={_extend(styles.links, loggedInMarginTop)}
           onClick={() => utils.trackHeader(gaAction, 'Catalog')}
+          ref="catalogLoginLink"
         >
           <span
-            className={`${catalogLinkClass}-Wrapper`}
+            className={`${catalogLinkClass}-wrapper`}
             style={_extend(styles.wrapper, styles.catalogLinkWrapper)}
           >
             <LoginIcon fill="#fff" ariaHidden />
             <span
-              className={`${catalogLinkClass}-Label`}
+              className={`${catalogLinkClass}-label`}
               style={_extend(styles.catalogLinkLabel, styles.label)}
             >
               {catalogLinkLabel}
@@ -170,12 +180,12 @@ class MobileMyNypl extends React.Component {
           onClick={() => utils.trackHeader(gaAction, 'Research')}
         >
           <span
-            className={`${researchLinkClass}-Wrapper`}
+            className={`${researchLinkClass}-wrapper`}
             style={_extend(styles.wrapper, styles.researchLinkWrapper)}
           >
             <BuildingIcon fill="#fff" ariaHidden />
             <span
-              className={`${researchLinkClass}-Label`}
+              className={`${researchLinkClass}-label`}
               style={_extend(styles.researchLinkLabel, styles.label)}
             >
               {researchCatalogLinkLabel}
@@ -202,7 +212,7 @@ MobileMyNypl.propTypes = {
 
 MobileMyNypl.defaultProps = {
   lang: 'en',
-  className: 'MobileMyNypl',
+  className: 'mobileMyNypl',
   loginCatalogLink: appConfig.loginMyNyplLinks.catalog,
   loginResearchLink: appConfig.loginMyNyplLinks.research,
   catalogLink: appConfig.myNyplLinks.catalog,

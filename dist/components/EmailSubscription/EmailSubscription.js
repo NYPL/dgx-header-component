@@ -220,7 +220,7 @@ var EmailSubscription = function (_React$Component) {
       var status = this.state.formStatus;
       var isLoading = this.state.formProcessing;
       var notValidEmail = this.state.notValidEmail;
-      var formClass = 'EmailSubscribeForm';
+      var formClass = 'emailSubscribeForm';
       var emailAddressField = 'emailAddressField';
       var errorClass = (0, _classnames2.default)({ active: notValidEmail });
       var subscribeContent = void 0;
@@ -232,15 +232,15 @@ var EmailSubscription = function (_React$Component) {
           { role: 'dialog' },
           _react2.default.createElement(
             'div',
-            { className: 'SubscribeMessageBox ' + status, tabIndex: '0' },
-            _react2.default.createElement('div', { className: 'SubscribeMessageBox-Eyebrow' }),
+            { className: 'subscribeMessageBox ' + status, tabIndex: '0' },
+            _react2.default.createElement('div', { className: 'subscribeMessageBox-eyebrow' }),
             _react2.default.createElement(
               'div',
-              { className: 'SubscribeMessageBox-Title' },
+              { className: 'subscribeMessageBox-title' },
               'Get the ',
               _react2.default.createElement(
                 'span',
-                { className: 'SubscribeMessageBox-Title-BestNYPL' },
+                { className: 'subscribeMessageBox-title-bestNYPL' },
                 'best of NYPL'
               ),
               ' in your inbox'
@@ -250,7 +250,7 @@ var EmailSubscription = function (_React$Component) {
             'form',
             {
               ref: 'EmailSubscribeForm',
-              id: 'EmailSubscribeForm',
+              id: 'emailSubscribeForm',
               className: formClass,
               action: this.props.target,
               method: this.props.form_method,
@@ -272,7 +272,7 @@ var EmailSubscription = function (_React$Component) {
               ),
               _react2.default.createElement('input', {
                 'aria-label': 'Enter your email address',
-                className: formClass + '-Input',
+                className: formClass + '-input',
                 type: 'email',
                 name: 'Email Address',
                 placeholder: this.props.placeholder,
@@ -285,7 +285,7 @@ var EmailSubscription = function (_React$Component) {
               }),
               _react2.default.createElement(
                 'div',
-                { className: formClass + '-Error ' + errorClass },
+                { className: formClass + '-error ' + errorClass },
                 _react2.default.createElement('span', { className: 'nypl-icon-solo-x icon', 'aria-hidden': 'true' }),
                 _react2.default.createElement(
                   'span',
@@ -295,7 +295,7 @@ var EmailSubscription = function (_React$Component) {
               ),
               _react2.default.createElement(
                 'div',
-                { className: formClass + '-Submit' },
+                { className: formClass + '-submit' },
                 _react2.default.createElement('span', { className: 'nypl-icon-check-solo icon', 'aria-hidden': 'true' }),
                 _react2.default.createElement('input', {
                   'aria-label': 'Sign up',
@@ -320,7 +320,7 @@ var EmailSubscription = function (_React$Component) {
             }),
             _react2.default.createElement(
               'div',
-              { className: this.props.className + '-NewEmail' },
+              { className: this.props.className + '-newEmail' },
               _react2.default.createElement(
                 'button',
                 { onClick: this.initForm, style: styles.resubmitButton },
@@ -329,14 +329,14 @@ var EmailSubscription = function (_React$Component) {
             ),
             _react2.default.createElement(
               'div',
-              { className: this.props.className + '-FollowUs' },
+              { className: this.props.className + '-followUs' },
               _react2.default.createElement(
                 'p',
                 null,
                 'Follow us:'
               ),
               _react2.default.createElement(_SocialMediaLinksWidget2.default, {
-                className: this.props.className + '-SocialMediaWidget',
+                className: this.props.className + '-socialMediaWidget',
                 links: _appConfig2.default.socialMediaLinks,
                 displayOnlyList: ['facebook', 'twitter']
               })
@@ -352,7 +352,7 @@ var EmailSubscription = function (_React$Component) {
             _react2.default.createElement(_SubscribeMessageBox2.default, { status: status, msg: 'Looks like you\'re already signed up!' }),
             _react2.default.createElement(
               'div',
-              { className: this.props.className + '-NewEmail' },
+              { className: this.props.className + '-newEmail' },
               _react2.default.createElement(
                 'button',
                 { style: styles.resubmitButton, onClick: this.initForm },
@@ -366,7 +366,7 @@ var EmailSubscription = function (_React$Component) {
           _utils2.default.trackHeader('Subscribe', 'Error');
           subscribeContent = _react2.default.createElement(
             'div',
-            { className: this.props.className + '-Misc-Error' },
+            { className: this.props.className + '-misc-error' },
             _react2.default.createElement(
               'div',
               null,
@@ -446,7 +446,7 @@ EmailSubscription.propTypes = {
 
 EmailSubscription.defaultProps = {
   id: 'EmailSubscription',
-  className: 'EmailSubscription',
+  className: 'emailSubscription',
   lang: 'en',
   target: 'http://cl.exct.net/subscribe.aspx',
   form_name: 'subscribeForm',

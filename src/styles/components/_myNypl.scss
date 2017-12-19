@@ -1,4 +1,4 @@
-.MyNyplButton {
+.myNyplButton {
   @include Kievit-Bold;
   @include border-radius(0px);
   font-size: 13px;
@@ -30,7 +30,7 @@
   }
 }
 
-.MyNypl-Wrapper {
+.myNypl-wrapper {
   text-transform: none;
   display: none;
   box-sizing: content-box;
@@ -44,25 +44,25 @@
     display: block;
   }
 
-  .MyNypl {
+  .myNypl {
     &-Links {
       color: #fff;
     }
 
-    &-Eyebrow {
+    &-eyebrow {
       border-top: 2px solid #FFF;
       color: #fff;
       margin-bottom: 10px;
       width: 25px;
     }
-    &-Title {
+    &-title {
       color: #fff;
       font-size: 20px;
       @include Kievit-Book;
       font-weight: normal;
       line-height: 1.2em;
     }
-    &-Patron-Greeting {
+    &-patron-greeting {
       color: #fff;
       @include Kievit-Book;
       font-weight: normal;
@@ -71,11 +71,11 @@
       margin: 0;
       text-align: left;
 
-      &.Login-Indication {
+      &.login-indication {
         margin: 0 0 6px 0;
       }
     }
-    &-Login-List {
+    &-login-list {
       text-align: left;
       list-style: none;
       padding: 0px;
@@ -96,11 +96,11 @@
       }
     }
 
-    &-Catalog-Btn {
+    &-catalog-btn {
       min-width: 170px;
     }
 
-    &-Research-Btn {
+    &-research-btn {
       min-width: 265px;
     }
 
@@ -119,12 +119,9 @@
   }
 }
 
-.MobileMyNypl-Wrapper {
-  display: none;
-  position: absolute;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
+.mobileMyNypl-wrapper {
+  display: inline-block;
+  position: inherit;
 
   &.active {
     display: block;
@@ -135,7 +132,7 @@
   }
 }
 
-.LoginIcon {
+.loginIcon {
   &.active {
     stroke: none;
   }
@@ -151,8 +148,8 @@
   }
 }
 
-.MyNyplButton {
-  &.LoginIcon {
+.myNyplButton {
+  &.loginIcon {
     &-loggedIn {
       height: 20px;
       left: 143px;
@@ -160,20 +157,30 @@
       top: 7px;
     }
   }
-  &-IconWrapper {
+  &-iconWrapper {
     margin: 0 0 0 22px;
   }
 }
 
-.MobileMyNypl {
-  &-Greeting {
+.mobileMyNypl {
+  display: none;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
+  &.active {
+    display: block;
+  }
+
+  &-greeting {
     box-sizing: content-box;
     color: #FFF;
     text-align: left;
     padding: 22px 0 0 11px;
     position: absolute;
     width: 100%;
-    .Login-Indication {
+    .login-indication {
       margin: 0 0 30px 0;
     }
   }
@@ -185,6 +192,6 @@
   }
 }
 
-.Login-Indication {
+.login-indication {
   font-style: italic;
 }

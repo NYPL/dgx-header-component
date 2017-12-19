@@ -24,11 +24,11 @@ class SocialMediaLinksWidget extends React.Component {
         `nypl-icon-${key}-circle-hover animateHover fadeInSlow` : `nypl-icon-${key}-circle`;
 
       return (
-        <li key={key} className={`${this.props.className}-ListItem`}>
+        <li key={key} className={`${this.props.className}-listItem`}>
           <a
             href={item}
             onClick={() => this.trackHeader('Click', `Social Media - ${key}`)}
-            className={`${this.props.className}-Link ${hoverClass}`}
+            className={`${this.props.className}-link ${hoverClass}`}
             onMouseEnter={() => this.handleOnMouseEnter(key)}
             onMouseLeave={this.handleOnMouseLeave}
           >
@@ -64,7 +64,7 @@ class SocialMediaLinksWidget extends React.Component {
 
     return (
       <div className={this.props.className}>
-        <ul className={`${this.props.className}-List`}>
+        <ul className={`${this.props.className}-list`}>
           {socialLinks}
         </ul>
       </div>

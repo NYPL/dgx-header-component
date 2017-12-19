@@ -11,7 +11,7 @@
  * -- Following BEM naming convention
  * -- Mobile First approach
 */
-.Header {
+.header {
   @include Kievit-Book;
   width: 100%;
   background-color: #FFF;
@@ -32,7 +32,7 @@
   /* MOBILE HEADER
    * -------------
   */
-  &-Mobile {
+  &-mobile {
     min-width: 320px;
     display: block;
 
@@ -41,7 +41,7 @@
       display: none;
     }
 
-    &-Logo {
+    &-logo {
       width: 45px;
       height: 45px;
     }
@@ -54,9 +54,15 @@
 
     // Mobile Search
     @import 'components/_mobileSearch';
+
+    &-wrapper {
+      width: 100%;
+      position: absolute;
+      left: 0;
+    }
   }
 
-  &-Wrapper {
+  &-wrapper {
     position: relative;
     border-bottom: 2px solid #ED1C24;
   }
@@ -65,7 +71,7 @@
    * ----------------------
    * Sets the max-width on a desktop and up device.
   */
-  &-TopWrapper {
+  &-topWrapper {
     display: none;
 
     @include min-screen(769px) {
@@ -85,7 +91,7 @@
    * Defined width for desktop.
    * position adjustments left.
   */
-  &-Logo {
+  &-logo {
     overflow: hidden;
     @include min-screen(769px) {
       display: block;
@@ -126,7 +132,7 @@
    * - Library Card
    * - Donate
   */
-  &-Buttons {
+  &-buttons {
     ul {
       margin: 0;
       list-style-type: none;
@@ -153,7 +159,7 @@
       }
     }
 
-    .DonateButton {
+    .donateButton {
       @include border-radius(4px);
     }
 

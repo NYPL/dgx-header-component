@@ -70,8 +70,8 @@ const NavMenuMobileButtons = ({
   libraryCardLink,
   subscribeLink,
 }) => {
-  const libraryCardClass = 'LibraryCardLink';
-  const subscribeLinkClass = 'SubscribeLink';
+  const libraryCardClass = 'libraryCardLink';
+  const subscribeLinkClass = 'subscribeLink';
 
   return (
     <div className={className} style={styles.base}>
@@ -82,17 +82,17 @@ const NavMenuMobileButtons = ({
         onClick={() => utils.trackHeader('Click', 'Mobile Bottom Buttons - Library Card')}
       >
         <span
-          className={`${libraryCardClass}-Wrapper`}
+          className={`${libraryCardClass}-wrapper`}
           style={_extend(styles.wrapper, styles.libraryCardLinkWrapper)}
         >
           <span
-            className={`${libraryCardClass}-Icon nypl-icon-card`}
+            className={`${libraryCardClass}-icon nypl-icon-card`}
             style={styles.icon}
             aria-hidden="true"
           >
           </span>
           <span
-            className={`${libraryCardClass}-Label`}
+            className={`${libraryCardClass}-label`}
             style={_extend(styles.libraryCardLinkLabel, styles.label)}
           >
             Get a Library Card
@@ -106,17 +106,17 @@ const NavMenuMobileButtons = ({
         onClick={() => utils.trackHeader('Click', 'Mobile Bottom Buttons - Email Updates')}
       >
         <span
-          className={`${subscribeLinkClass}-Wrapper`}
+          className={`${subscribeLinkClass}-wrapper`}
           style={_extend(styles.wrapper, styles.subscribeLinkWrapper)}
         >
           <span
-            className={`${subscribeLinkClass}-Icon nypl-icon-mail`}
+            className={`${subscribeLinkClass}-icon nypl-icon-mail`}
             style={styles.icon}
             aria-hidden="true"
           >
           </span>
           <span
-            className={`${subscribeLinkClass}-Label`}
+            className={`${subscribeLinkClass}-label`}
             style={_extend(styles.subscribeLinkLabel, styles.label)}
           >
             Get Email Updates
@@ -124,8 +124,8 @@ const NavMenuMobileButtons = ({
         </span>
       </a>
       <DonateButton
-        id="MobileNav-DonateButton"
-        className="DonateLink"
+        id="mobileNav-donateButton"
+        className="donateLink"
         style={styles.donateLink}
         gaLabel="Mobile Buttons Donate"
       />
@@ -142,7 +142,7 @@ NavMenuMobileButtons.propTypes = {
 
 NavMenuMobileButtons.defaultProps = {
   lang: 'en',
-  className: 'NavMenuMobileButtons',
+  className: 'navMenuMobileButtons',
   libraryCardLink: '//www.nypl.org/library-card',
   subscribeLink: '//pages.email.nypl.org/page.aspx' +
     '?QS=3935619f7de112ef7250fe02b84fb2f9ab74e4ea015814b7',

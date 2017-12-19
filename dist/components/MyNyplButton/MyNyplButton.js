@@ -171,7 +171,7 @@ var MyNyplButton = function (_React$Component) {
       return _react2.default.createElement(
         'a',
         {
-          className: 'MyNyplButton ' + buttonClass + labelColorClass + loggedInFadeInAnimation,
+          className: 'myNyplButton ' + buttonClass + labelColorClass + loggedInFadeInAnimation,
           onClick: this.handleClick,
           style: (0, _underscore.extend)(styles.MyNyplButton, this.props.style),
           href: this.props.target,
@@ -190,7 +190,7 @@ var MyNyplButton = function (_React$Component) {
       return this.state.visible ? _react2.default.createElement(
         'div',
         {
-          className: 'MyNypl-Wrapper active animatedFast fadeIn' + boxHeight,
+          className: 'myNypl-wrapper active animatedFast fadeIn' + boxHeight,
           style: styles.MyNyplWrapper
         },
         _react2.default.createElement(_MyNypl2.default, {
@@ -211,7 +211,7 @@ var MyNyplButton = function (_React$Component) {
             clickOutsideDeactivates: true
           },
           active: this.state.visible,
-          className: 'MyNyplButton-Wrapper',
+          className: 'myNyplButton-wrapper',
           style: (0, _underscore.extend)(styles.base, this.props.style)
         },
         this.renderMyNyplButton(),

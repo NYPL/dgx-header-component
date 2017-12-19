@@ -13,8 +13,7 @@ import SkipNavigation from 'dgx-skip-navigation-link';
 import navConfig from '../../navConfig';
 import featureFlagConfig from '../../featureFlagConfig';
 import config from '../../appConfig';
-// ALT Flux
-import HeaderStore from '../../stores/HeaderStore';
+
 // NYPL Components
 import Logo from '../Logo/Logo';
 import DonateButton from '../DonateButton/DonateButton';
@@ -104,13 +103,11 @@ class Header extends React.Component {
         isFeatureFlagsActivated: {},
         logOutUrl: '',
       },
-      HeaderStore.getState(),
       { featureFlagsStore: FeatureFlags.store.getState() },
     );
   }
 
   componentDidMount() {
-    HeaderStore.listen(this.onChange.bind(this));
     // Listen on FeatureFlags Store updates
     FeatureFlags.store.listen(this.onFeatureFlagsChange.bind(this));
     // Set the log out link to state
@@ -125,26 +122,9 @@ class Header extends React.Component {
   }
 
   componentWillUnmount() {
-    HeaderStore.unlisten(this.onChange.bind(this));
     // Listen on FeatureFlags Store updates
     FeatureFlags.store.unlisten(this.onFeatureFlagsChange.bind(this));
     // Removing event listener to minimize garbage collection
-  }
-
-  onChange() {
-    this.setState(
-      _extend(
-        {
-          loginCookieValue: this.state.loginCookieValue,
-          patronName: this.state.patronName,
-          patronInitial: this.state.patronInitial,
-          patronDataReceived: this.state.patronDataReceived,
-          isFeatureFlagsActivated: {},
-          logOutUrl: this.state.logOutUrl,
-        },
-        HeaderStore.getState()
-      )
-    );
   }
 
   onFeatureFlagsChange() {
@@ -207,9 +187,8 @@ class Header extends React.Component {
   }
 
   render() {
-    const headerClass = this.props.className || 'Header';
-    const skipNav = this.props.skipNav ?
-      (<SkipNavigation {...this.props.skipNav} />) : '';
+    const headerClass = this.props.className;
+    const skipNav = this.props.skipNav ? (<SkipNavigation {...this.props.skipNav} />) : '';
     const isLoggedIn = !!this.state.patronDataReceived;
     const gaAction = (isLoggedIn) ? 'My Account' : 'Log In';
 
@@ -219,10 +198,10 @@ class Header extends React.Component {
         className={headerClass}
       >
         {skipNav}
-        <GlobalAlerts className={`${headerClass}-GlobalAlerts`} />
-        <div className={`${headerClass}-Wrapper`}>
+        <GlobalAlerts className={`${headerClass}-globalAlerts`} />
+        <div className={`${headerClass}-wrapper`}>
           <MobileHeader
-            className={`${headerClass}-Mobile`}
+            className={`${headerClass}-mobile`}
             locatorUrl={
               (this.props.urlType === 'absolute') ?
                 '//www.nypl.org/locations/map?nearme=true' : '/locations/map?nearme=true'
@@ -235,15 +214,15 @@ class Header extends React.Component {
             urlType={this.props.urlType}
           />
           <div
-            className={`${headerClass}-TopWrapper`}
+            className={`${headerClass}-topWrapper`}
             style={styles.wrapper}
           >
             <Logo
-              className={`${headerClass}-Logo`}
+              className={`${headerClass}-logo`}
               target={(this.props.urlType === 'absolute') ? '//www.nypl.org' : '/'}
             />
             <nav
-              className={`${headerClass}-Buttons`}
+              className={`${headerClass}-buttons`}
               style={styles.topButtons}
               aria-label="Header top links"
             >
@@ -263,8 +242,8 @@ class Header extends React.Component {
                       (this.props.urlType === 'absolute') ?
                         '//www.nypl.org/locations/map' : '/locations/map'
                     }
-                    className="LocationsTopLink"
-                    id="LocationsTopLink"
+                    className="locationsTopLink"
+                    id="locationsTopLink"
                     gaAction="Locations"
                     gaLabel="Header Top Links"
                     style={styles.locationsTopLink}
@@ -277,8 +256,8 @@ class Header extends React.Component {
                       (this.props.urlType === 'absolute') ?
                         '//www.nypl.org/library-card' : '/library-card'
                     }
-                    className="LibraryCardButton"
-                    id="LibraryCardButton"
+                    className="libraryCardButton"
+                    id="libraryCardButton"
                     gaAction="Get a Library Card"
                     gaLabel="Header Top Links"
                     style={styles.libraryCardButton}
@@ -293,7 +272,7 @@ class Header extends React.Component {
                 </li>
                 <li>
                   <DonateButton
-                    id="Top-DonateButton"
+                    id="top-DonateButton"
                     lang={this.props.lang}
                     style={styles.donateButton}
                     gaLabel="Header Top Links"
@@ -315,7 +294,7 @@ class Header extends React.Component {
             </nav>
           </div>
           <NavMenu
-            className={`${headerClass}-NavMenu`}
+            className={`${headerClass}-navMenu`}
             lang={this.props.lang}
             items={this.state.navData}
             urlType={this.props.urlType}
@@ -351,7 +330,7 @@ Header.propTypes = {
 
 Header.defaultProps = {
   lang: 'en',
-  className: 'Header',
+  className: 'header',
   id: 'nyplHeader',
   skipNav: null,
   urlType: 'relative',

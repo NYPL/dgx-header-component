@@ -37,10 +37,6 @@ var _appConfig = require('../../appConfig');
 
 var _appConfig2 = _interopRequireDefault(_appConfig);
 
-var _HeaderStore = require('../../stores/HeaderStore');
-
-var _HeaderStore2 = _interopRequireDefault(_HeaderStore);
-
 var _Logo = require('../Logo/Logo');
 
 var _Logo2 = _interopRequireDefault(_Logo);
@@ -94,7 +90,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 // Nav Config
 
-// ALT Flux
 
 // NYPL Components
 
@@ -178,14 +173,13 @@ var Header = function (_React$Component) {
       patronDataReceived: patron.loggedIn || false,
       isFeatureFlagsActivated: {},
       logOutUrl: ''
-    }, _HeaderStore2.default.getState(), { featureFlagsStore: _dgxFeatureFlags2.default.store.getState() });
+    }, { featureFlagsStore: _dgxFeatureFlags2.default.store.getState() });
     return _this;
   }
 
   _createClass(Header, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      _HeaderStore2.default.listen(this.onChange.bind(this));
       // Listen on FeatureFlags Store updates
       _dgxFeatureFlags2.default.store.listen(this.onFeatureFlagsChange.bind(this));
       // Set the log out link to state
@@ -199,22 +193,9 @@ var Header = function (_React$Component) {
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      _HeaderStore2.default.unlisten(this.onChange.bind(this));
       // Listen on FeatureFlags Store updates
       _dgxFeatureFlags2.default.store.unlisten(this.onFeatureFlagsChange.bind(this));
       // Removing event listener to minimize garbage collection
-    }
-  }, {
-    key: 'onChange',
-    value: function onChange() {
-      this.setState((0, _underscore.extend)({
-        loginCookieValue: this.state.loginCookieValue,
-        patronName: this.state.patronName,
-        patronInitial: this.state.patronInitial,
-        patronDataReceived: this.state.patronDataReceived,
-        isFeatureFlagsActivated: {},
-        logOutUrl: this.state.logOutUrl
-      }, _HeaderStore2.default.getState()));
     }
   }, {
     key: 'onFeatureFlagsChange',
@@ -285,7 +266,7 @@ var Header = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var headerClass = this.props.className || 'Header';
+      var headerClass = this.props.className;
       var skipNav = this.props.skipNav ? _react2.default.createElement(_dgxSkipNavigationLink2.default, this.props.skipNav) : '';
       var isLoggedIn = !!this.state.patronDataReceived;
       var gaAction = isLoggedIn ? 'My Account' : 'Log In';
@@ -297,12 +278,12 @@ var Header = function (_React$Component) {
           className: headerClass
         },
         skipNav,
-        _react2.default.createElement(_GlobalAlerts2.default, { className: headerClass + '-GlobalAlerts' }),
+        _react2.default.createElement(_GlobalAlerts2.default, { className: headerClass + '-globalAlerts' }),
         _react2.default.createElement(
           'div',
-          { className: headerClass + '-Wrapper' },
+          { className: headerClass + '-wrapper' },
           _react2.default.createElement(_MobileHeader2.default, {
-            className: headerClass + '-Mobile',
+            className: headerClass + '-mobile',
             locatorUrl: this.props.urlType === 'absolute' ? '//www.nypl.org/locations/map?nearme=true' : '/locations/map?nearme=true',
             nyplRootUrl: this.props.urlType === 'absolute' ? '//www.nypl.org' : '/',
             isLoggedIn: isLoggedIn,
@@ -314,17 +295,17 @@ var Header = function (_React$Component) {
           _react2.default.createElement(
             'div',
             {
-              className: headerClass + '-TopWrapper',
+              className: headerClass + '-topWrapper',
               style: styles.wrapper
             },
             _react2.default.createElement(_Logo2.default, {
-              className: headerClass + '-Logo',
+              className: headerClass + '-logo',
               target: this.props.urlType === 'absolute' ? '//www.nypl.org' : '/'
             }),
             _react2.default.createElement(
               'nav',
               {
-                className: headerClass + '-Buttons',
+                className: headerClass + '-buttons',
                 style: styles.topButtons,
                 'aria-label': 'Header top links'
               },
@@ -347,8 +328,8 @@ var Header = function (_React$Component) {
                   _react2.default.createElement(_SimpleLink2.default, {
                     label: 'Locations',
                     target: this.props.urlType === 'absolute' ? '//www.nypl.org/locations/map' : '/locations/map',
-                    className: 'LocationsTopLink',
-                    id: 'LocationsTopLink',
+                    className: 'locationsTopLink',
+                    id: 'locationsTopLink',
                     gaAction: 'Locations',
                     gaLabel: 'Header Top Links',
                     style: styles.locationsTopLink
@@ -360,8 +341,8 @@ var Header = function (_React$Component) {
                   _react2.default.createElement(_SimpleLink2.default, {
                     label: 'Get a Library Card',
                     target: this.props.urlType === 'absolute' ? '//www.nypl.org/library-card' : '/library-card',
-                    className: 'LibraryCardButton',
-                    id: 'LibraryCardButton',
+                    className: 'libraryCardButton',
+                    id: 'libraryCardButton',
                     gaAction: 'Get a Library Card',
                     gaLabel: 'Header Top Links',
                     style: styles.libraryCardButton
@@ -380,7 +361,7 @@ var Header = function (_React$Component) {
                   'li',
                   null,
                   _react2.default.createElement(_DonateButton2.default, {
-                    id: 'Top-DonateButton',
+                    id: 'top-DonateButton',
                     lang: this.props.lang,
                     style: styles.donateButton,
                     gaLabel: 'Header Top Links'
@@ -403,7 +384,7 @@ var Header = function (_React$Component) {
             )
           ),
           _react2.default.createElement(_NavMenu2.default, {
-            className: headerClass + '-NavMenu',
+            className: headerClass + '-navMenu',
             lang: this.props.lang,
             items: this.state.navData,
             urlType: this.props.urlType,
@@ -439,7 +420,7 @@ Header.propTypes = {
 
 Header.defaultProps = {
   lang: 'en',
-  className: 'Header',
+  className: 'header',
   id: 'nyplHeader',
   skipNav: null,
   urlType: 'relative',

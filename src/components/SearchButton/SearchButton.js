@@ -106,7 +106,7 @@ class SearchButton extends React.Component {
 
   render() {
     return (
-      <div className={`${this.props.className}-searchBox-Wrapper`}>
+      <div className={`${this.props.className}-searchBox-wrapper`}>
         <FocusTrap
           focusTrapOptions={{
             onDeactivate: this.handleOnClickOut,

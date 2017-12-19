@@ -1,86 +1,70 @@
-&-GlobalAlerts {
-	position: relative;
-	border-bottom: 1px solid #908034;
+&-globalAlerts {
+  position: relative;
+  border-bottom: 1px solid #908034;
 
-	/* No red bottom-border on tablet and up */
-	@include min-screen(769px) {
-		border-bottom: none;
-	}
+  /* No red bottom-border on tablet and up */
+  @include min-screen(769px) {
+    border-bottom: none;
+  }
 
-	&.hide {
-		display: none;
-	}
+  &.hide {
+    display: none;
+  }
 
-	&-Wrapper {
-		margin: 0;
+  &-wrapper {
+    margin: 0;
 
-		@include min-screen(769px) {
-  		display: block;
-  		max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
-  		margin: 0 auto;
-  		position: relative;
-		}
-	}
+    @include min-screen(769px) {
+      display: block;
+      max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
+      margin: 0 auto;
+      position: relative;
+    }
+  }
 
-	/* NOTE: Temporarily removed */
-	&-CloseButton {
-		position: absolute;
-		font-size: 24px;
-		right: 17px;
-		top: 15px;
-		color: #908034;
-		display: block;
-		z-index: 1;
+  &-box {
+    position: relative;
+    margin: .5em 1.2em .5em 1.2em;
 
-		@include min-screen(769px) {
-			top: -15px;
-			right: 5px;
-		}
-	}
+    @include min-screen(769px) {
+      margin-right: 20px;
+    }
 
-	&-Box {
-		position: relative;
-		margin: .5em 1.2em .5em 1.2em;
+    @include min-screen(1025px) {
+      margin-left: 138px;
+    }
 
-		@include min-screen(769px) {
-			margin-right: 20px;
-		}
+    &-item {
+      font-size: 16px;
+      margin: .5em 0;
+      line-height: 1.2em;
 
-		@include min-screen(1025px) {
-			margin-left: 138px;
-		}
+      p {
+        display: block;
+        line-height: 1.2em;
+        font-size: 16px;
+        max-width: 100% !important;
+      }
 
-		&-Item {
-			font-size: 16px;
-			margin: .5em 0;
-			line-height: 1.2em;
+      a {
+        text-decoration: underline;
+        color: #333;
 
-			p {
-				display: block;
-				line-height: 1.2em;
-				font-size: 16px;
-				max-width: 100% !important;
-			}
+        &:visited, &:active {
+          color: #333;
+        }
+      }
 
-			a {
-				text-decoration: underline;
-				color: #333;
+      strong {
+        @include Kievit-Bold;
+        font-weight: normal;
+      }
 
-				&:visited, &:active {
-					color: #333;
-				}
-			}
-
-			strong {
-				@include Kievit-Bold;
-				font-weight: normal;
-			}
-
-			* {
-				font-size: 16px;
-				margin: 0;
-				padding: 0;
-			}
-		}
-	}
+      * {
+        font-size: 16px;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
 }

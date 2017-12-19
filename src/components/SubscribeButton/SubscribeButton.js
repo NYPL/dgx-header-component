@@ -146,8 +146,8 @@ class SubscribeButton extends React.Component {
 
     return (
       <a
-        id="SubscribeButton"
-        className={`SubscribeButton ${buttonClass}`}
+        id="subscribeButton"
+        className={`subscribeButton ${buttonClass}`}
         href={this.state.target}
         onClick={this.handleClick}
         style={styles.subscribeButton}
@@ -164,7 +164,7 @@ class SubscribeButton extends React.Component {
   renderEmailDialog() {
     return this.state.visible ? (
       <div
-        className="EmailSubscription-Wrapper active animatedFast fadeIn"
+        className="emailSubscription-wrapper active animatedFast fadeIn"
         style={styles.EmailSubscribeForm}
       >
         <EmailSubscription
@@ -181,10 +181,10 @@ class SubscribeButton extends React.Component {
         focusTrapOptions={{
           onDeactivate: this.handleOnClickOut,
           clickOutsideDeactivates: true,
-          initialFocus: '.SubscribeMessageBox',
+          initialFocus: '.subscribeMessageBox',
         }}
         active={this.state.visible}
-        className="SubscribeButton-Wrapper"
+        className="subscribeButton-wrapper"
         style={_extend(styles.base, this.props.style)}
       >
         {this.renderEmailButton()}

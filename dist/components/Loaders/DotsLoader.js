@@ -55,7 +55,7 @@ var DotsLoader = function DotsLoader(_ref) {
 
   return _react2.default.createElement(
     'div',
-    { className: className + '-Wrapper' },
+    { className: className + '-wrapper' },
     _react2.default.createElement(
       'span',
       { style: styles.text },

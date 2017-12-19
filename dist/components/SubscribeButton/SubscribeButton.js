@@ -200,8 +200,8 @@ var SubscribeButton = function (_React$Component) {
       return _react2.default.createElement(
         'a',
         {
-          id: 'SubscribeButton',
-          className: 'SubscribeButton ' + buttonClass,
+          id: 'subscribeButton',
+          className: 'subscribeButton ' + buttonClass,
           href: this.state.target,
           onClick: this.handleClick,
           style: styles.subscribeButton,
@@ -223,7 +223,7 @@ var SubscribeButton = function (_React$Component) {
       return this.state.visible ? _react2.default.createElement(
         'div',
         {
-          className: 'EmailSubscription-Wrapper active animatedFast fadeIn',
+          className: 'emailSubscription-wrapper active animatedFast fadeIn',
           style: styles.EmailSubscribeForm
         },
         _react2.default.createElement(_EmailSubscription2.default, {
@@ -241,10 +241,10 @@ var SubscribeButton = function (_React$Component) {
           focusTrapOptions: {
             onDeactivate: this.handleOnClickOut,
             clickOutsideDeactivates: true,
-            initialFocus: '.SubscribeMessageBox'
+            initialFocus: '.subscribeMessageBox'
           },
           active: this.state.visible,
-          className: 'SubscribeButton-Wrapper',
+          className: 'subscribeButton-wrapper',
           style: (0, _underscore.extend)(styles.base, this.props.style)
         },
         this.renderEmailButton(),

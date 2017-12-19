@@ -167,7 +167,7 @@ var SearchButton = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: this.props.className + '-searchBox-Wrapper' },
+        { className: this.props.className + '-searchBox-wrapper' },
         _react2.default.createElement(
           _focusTrapReact2.default,
           {

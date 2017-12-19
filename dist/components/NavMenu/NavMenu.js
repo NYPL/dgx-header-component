@@ -142,7 +142,7 @@ var NavMenu = function (_React$Component) {
           _react2.default.createElement('span', { className: 'MobileLogoText nypl-icon-logo-type', 'aria-hidden': 'true' }),
           _react2.default.createElement(
             'ul',
-            { className: this.props.className + '-List', id: 'NavMenu-List' },
+            { className: this.props.className + '-List' },
             this.renderNavMenu(this.props.items)
           ),
           _react2.default.createElement(_SearchButton2.default, {

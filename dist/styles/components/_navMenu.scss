@@ -24,12 +24,6 @@
         width: initial;
       }
 
-      /* Displays NavMenu on Mobile with proper class on parent */
-      #NavMenu-List {
-        display: block;
-        line-height: normal;
-      }
-
       /* Only display Logo Text on Mobile */
       .MobileLogoText {
         display: block;
@@ -48,13 +42,11 @@
         color: #FFF;
         font-size: 85px;
       }
-
     }
   }
 
   // <ul> list holding each NavMenuItem and link
   &-List {
-    display: none;
     background-color: #2B2B2B;
     padding: 10px 0;
     margin: 0;

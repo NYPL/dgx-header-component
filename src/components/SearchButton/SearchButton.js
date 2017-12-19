@@ -4,10 +4,13 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import FocusTrap from 'focus-trap-react';
 // Import components
-import { SearchIcon } from 'dgx-svg-icons';
-import SearchBox from '../SearchBox/SearchBox.js';
+import {
+  SearchIcon,
+  XIcon,
+} from 'dgx-svg-icons';
+import SearchBox from '../SearchBox/SearchBox';
 // GA Utility Library
-import utils from '../../utils/utils.js';
+import utils from '../../utils/utils';
 
 class SearchButton extends React.Component {
   constructor(props) {
@@ -57,22 +60,32 @@ class SearchButton extends React.Component {
   renderSearchButton() {
     const classes = cx({ active: this.state.active });
 
+    let label = 'Search';
+    let iconComponentType = SearchIcon;
+    // If active, change to "Close x" mode:
+    if (this.state.active) {
+      label = 'Close';
+      iconComponentType = XIcon;
+    }
+    const icon = React.createElement(iconComponentType, {
+      className: `${this.props.className}-searchButton-icon`,
+      ariaHidden: true,
+      fill: '#FFF',
+      width: '20',
+      height: '20',
+    });
+
     return (
       <button
         className={`${this.props.className}-searchButton ${classes}`}
         id={`${this.props.className}-searchButton`}
         name="Search Button"
-        onClick={(e) => this.handleOnClick(e)}
+        onClick={e => this.handleOnClick(e)}
       >
         <span className={`${this.props.className}-searchButton-text`}>
-          Search
+          { label }
         </span>
-        <SearchIcon
-          className={`${this.props.className}-searchButton-icon`}
-          width="20"
-          height="20"
-          ariaHidden
-        />
+        {icon}
       </button>
     );
   }

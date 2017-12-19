@@ -85,7 +85,7 @@ class NavMenu extends React.Component {
           aria-label="Main Navigation"
         >
           <span className="MobileLogoText nypl-icon-logo-type" aria-hidden="true" />
-          <ul className={`${this.props.className}-List`} id="NavMenu-List">
+          <ul className={`${this.props.className}-List`}>
             {this.renderNavMenu(this.props.items)}
           </ul>
           <SearchButton

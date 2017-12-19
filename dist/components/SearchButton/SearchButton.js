@@ -24,11 +24,11 @@ var _focusTrapReact2 = _interopRequireDefault(_focusTrapReact);
 
 var _dgxSvgIcons = require('dgx-svg-icons');
 
-var _SearchBox = require('../SearchBox/SearchBox.js');
+var _SearchBox = require('../SearchBox/SearchBox');
 
 var _SearchBox2 = _interopRequireDefault(_SearchBox);
 
-var _utils = require('../../utils/utils.js');
+var _utils = require('../../utils/utils');
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -112,6 +112,21 @@ var SearchButton = function (_React$Component) {
 
       var classes = (0, _classnames2.default)({ active: this.state.active });
 
+      var label = 'Search';
+      var iconComponentType = _dgxSvgIcons.SearchIcon;
+      // If active, change to "Close x" mode:
+      if (this.state.active) {
+        label = 'Close';
+        iconComponentType = _dgxSvgIcons.XIcon;
+      }
+      var icon = _react2.default.createElement(iconComponentType, {
+        className: this.props.className + '-searchButton-icon',
+        ariaHidden: true,
+        fill: '#FFF',
+        width: '20',
+        height: '20'
+      });
+
       return _react2.default.createElement(
         'button',
         {
@@ -125,14 +140,9 @@ var SearchButton = function (_React$Component) {
         _react2.default.createElement(
           'span',
           { className: this.props.className + '-searchButton-text' },
-          'Search'
+          label
         ),
-        _react2.default.createElement(_dgxSvgIcons.SearchIcon, {
-          className: this.props.className + '-searchButton-icon',
-          width: '20',
-          height: '20',
-          ariaHidden: true
-        })
+        icon
       );
     }
 

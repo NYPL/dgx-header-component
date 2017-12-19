@@ -45,8 +45,8 @@ var NavMenuItem = function NavMenuItem(_ref) {
       'a',
       {
         href: urlType === 'absolute' ? target : convertUrlRelative(target),
-        className: 'NavMenuItem-Link',
-        id: navId ? 'NavMenuItem-Link-' + navId : 'NavMenuItem-Link',
+        className: 'navMenuItem-link',
+        id: navId ? 'navMenuItem-link-' + navId : 'navMenuItem-link',
         onClick: function onClick() {
           return _utils2.default.trackHeader('Go to...', '' + label[lang].text);
         }
@@ -68,7 +68,7 @@ NavMenuItem.propTypes = {
 };
 
 NavMenuItem.defaultProps = {
-  className: 'NavMenuItem',
+  className: 'navMenuItem',
   lang: 'en',
   target: '#'
 };

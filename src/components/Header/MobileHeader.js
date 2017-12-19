@@ -12,9 +12,7 @@ import {
   XIcon,
 } from 'dgx-svg-icons';
 import { extend as _extend } from 'underscore';
-// ALT FLUX
-import HeaderStore from '../../stores/HeaderStore';
-import Actions from '../../actions/Actions';
+
 import utils from '../../utils/utils';
 // NYPL Components
 import MobileMyNypl from '../MyNypl/MobileMyNypl';
@@ -139,109 +137,41 @@ class MobileHeader extends React.Component {
     super(props);
 
     this.state = {
-      activeMobileButton: HeaderStore.getState().activeMobileButton,
-      searchButtonAction: HeaderStore.getState().searchButtonAction,
-      mobileMyNyplButton: HeaderStore.getState().mobileMyNyplButton,
+      activeButton: '',
     };
 
-    this.closeMyNyplDialog = this.closeMyNyplDialog.bind(this);
-    this.closeSearchDialog = this.closeSearchDialog.bind(this);
-  }
-
-  componentDidMount() {
-    HeaderStore.listen(this.onChange.bind(this));
-  }
-
-  componentWillUnmount() {
-    HeaderStore.unlisten(this.onChange.bind(this));
-  }
-
-  onChange() {
-    this.setState({
-      activeMobileButton: HeaderStore.getState().activeMobileButton,
-      searchButtonAction: HeaderStore.getState().searchButtonAction,
-      mobileMyNyplButton: HeaderStore.getState().mobileMyNyplButton,
-    });
+    this.closeDropDown = this.closeDropDown.bind(this);
   }
 
   /**
    * toggleMobileMenuButton(activeButton)
-   * Verifies that the activeButton does not
-   * match the HeaderStore's current value
-   * and set's it as the param activeButton.
-   * If it matches, it clears the HeaderStore's
-   * current value.
+   * This function either activates or deactivates the state of the button that was clicked on,
+   * to track the active state SCSS styles.
    *
    * @param {String} activeButton
    */
   toggleMobileMenuButton(activeButton) {
     if (activeButton === 'clickSearch') {
-      if (HeaderStore.getSearchButtonActionValue() !== activeButton) {
-        Actions.searchButtonActionValue(activeButton);
-        Actions.setMobileMenuButtonValue('');
-        Actions.setMobileMyNyplButtonValue('');
-      } else {
-        Actions.searchButtonActionValue('');
-      }
+      const searchActive = this.state.activeButton === 'search' ? '' : 'search';
+      this.setState({ activeButton: searchActive });
     } else if (activeButton === 'mobileMenu') {
-      if (HeaderStore.getMobileMenuBtnValue() !== activeButton) {
-        Actions.setMobileMenuButtonValue(activeButton);
-        Actions.searchButtonActionValue('');
-        Actions.setMobileMyNyplButtonValue('');
-      } else {
-        Actions.setMobileMenuButtonValue('');
-      }
+      const navMenuActive = this.state.activeButton === 'navMenu' ? '' : 'navMenu';
+      this.setState({ activeButton: navMenuActive });
     } else if (activeButton === 'clickLogIn' || activeButton === 'clickMyAccount') {
-      if (HeaderStore.getMobileMyNyplButtonValue() !== activeButton) {
-        Actions.setMobileMyNyplButtonValue(activeButton);
-        Actions.searchButtonActionValue('');
-        Actions.setMobileMenuButtonValue('');
-      } else {
-        Actions.setMobileMyNyplButtonValue('');
-      }
+      const menuActive = this.state.activeButton === 'myNypl' ? '' : 'myNypl';
+      this.setState({ activeButton: menuActive });
     }
 
     utils.trackHeader('Click', `Mobile ${activeButton}`);
   }
 
   /**
-   * closeMyNyplDialog()
-   * Verifies the current state.mobileMyNyplButton matches
-   * 'clickMyNypl' and fires the Action method to reset.
+   * closeDropDown()
    * This is necessary for the FocusTrap component to execute
    * the proper deactivateMethod for each dialog.
    */
-  closeMyNyplDialog() {
-    if (this.state.mobileMyNyplButton === 'clickLogIn' ||
-      this.state.mobileMyNyplButton === 'clickMyAccount') {
-      Actions.setMobileMyNyplButtonValue('');
-    }
-  }
-
-  /**
-   * closeSearchDialog()
-   * Verifies the current state.searchButtonAction matches
-   * 'clickSearch' and fires the Action method to reset.
-   * This is necessary for the FocusTrap component to execute
-   * the proper deactivateMethod for each dialog.
-   */
-  closeSearchDialog() {
-    if (this.state.searchButtonAction === 'clickSearch') {
-      Actions.searchButtonActionValue('');
-    }
-  }
-
-  /**
-   * closeMenuDialog()
-   * Verifies the current state.activeMobileButton matches
-   * 'mobileMenu' and fires the Action method to reset.
-   * This is necessary for the FocusTrap component to execute
-   * the proper deactivateMethod for each dialog.
-   */
-  closeMenuDialog() {
-    if (this.state.activeMobileButton === 'mobileMenu') {
-      Actions.setMobileMenuButtonValue('');
-    }
+  closeDropDown() {
+    this.setState({ activeButton: '' });
   }
 
   /**
@@ -258,7 +188,7 @@ class MobileHeader extends React.Component {
         aria-label={this.props.alt}
       >
         <span className="visuallyHidden">{this.props.alt}</span>
-        <LionLogoIcon ariaHidden className={`${this.props.className}-Logo`} />
+        <LionLogoIcon ariaHidden className={`${this.props.className}-logo`} />
       </a>
     );
   }
@@ -272,17 +202,16 @@ class MobileHeader extends React.Component {
   renderMyNyplButton() {
     let myNyplClass = '';
     const gaAction = (this.props.patronName) ? 'MyAccount' : 'LogIn';
-    let icon = <LoginIcon className="LoginIcon" ariaHidden />;
+    let icon = <LoginIcon className="loginIcon" ariaHidden />;
     if (this.props.patronName) {
-      icon = <LoginIconSolid className="LoginIcon-loggedIn animated fadeIn" ariaHidden />;
+      icon = <LoginIconSolid className="loginIcon-loggedIn animated fadeIn" ariaHidden />;
     }
     let buttonStyles = styles.inactiveMyNyplButton;
-    let buttonLabel = (this.props.patronName) ? 'My Account' : 'Log In';
-    const active = this.state.mobileMyNyplButton === 'clickLogIn' ||
-      this.state.mobileMyNyplButton === 'clickMyAccount';
+    let buttonLabel = (this.props.patronName) ? 'My Account' : 'Login';
+    const active = this.state.activeButton === 'myNypl';
 
     if (active) {
-      myNyplClass = ' active';
+      myNyplClass = 'active';
       icon = <XIcon ariaHidden fill="#FFF" ariaHidden />;
       buttonStyles = styles.activeMyNyplButton;
       buttonLabel = 'Close';
@@ -291,17 +220,16 @@ class MobileHeader extends React.Component {
     return (
       <li style={styles.listItem}>
         <FocusTrap
-          className="MobileMyNypl-Wrapper"
+          className="mobileMyNypl-wrapper"
           focusTrapOptions={{
-            onDeactivate: this.closeMyNyplDialog,
+            onDeactivate: this.closeDropDown,
             clickOutsideDeactivates: true,
           }}
           active={active}
         >
           <ReactTappable
-            className={`${this.props.className}-MyNyplButton`}
+            className={`${this.props.className}-myNyplButton`}
             component="button"
-            ref="MobileMyNyplButton"
             style={_extend(styles.myNyplButton, buttonStyles)}
             onTap={() => this.toggleMobileMenuButton(`click${gaAction}`)}
             aria-haspopup="true"
@@ -313,7 +241,7 @@ class MobileHeader extends React.Component {
           {
             active &&
               <MobileMyNypl
-                className={`${myNyplClass} MobileMyNypl`}
+                className={`${myNyplClass} mobileMyNypl`}
                 isLoggedIn={this.props.isLoggedIn}
                 patronName={this.props.patronName}
                 logOutLink={this.props.logOutLink}
@@ -339,7 +267,7 @@ class MobileHeader extends React.Component {
           style={styles.locationsLink}
           href={locatorUrl}
           onClick={() => utils.trackHeader('Click', 'Mobile Locations Button')}
-          className={`${this.props.className}-Locator`}
+          className={`${this.props.className}-locator`}
           aria-label="NYPL Locations Near Me"
         >
           <span className="visuallyHidden">NYPL Locations Near Me</span>
@@ -362,7 +290,7 @@ class MobileHeader extends React.Component {
     let buttonLabel = 'Open Search Dialog';
     let dialogWindow = null;
 
-    if (this.state.searchButtonAction === 'clickSearch') {
+    if (this.state.activeButton === 'search') {
       mobileSearchClass = ' active';
       icon = <XIcon ariaHidden fill="#FFF" />;
       buttonStyles = styles.activeSearchButton;
@@ -371,7 +299,7 @@ class MobileHeader extends React.Component {
         <FocusTrap
           className={`${this.props.className}-searchDialog`}
           focusTrapOptions={{
-            onDeactivate: this.closeSearchDialog,
+            onDeactivate: this.closeDropDown,
             initialFocus: `.${this.props.className}-searchForm-legend`,
             clickOutsideDeactivates: true,
           }}
@@ -388,7 +316,7 @@ class MobileHeader extends React.Component {
     return (
       <li style={styles.listItem}>
         <ReactTappable
-          className={`${this.props.className}-SearchButton${mobileSearchClass}`}
+          className={`${this.props.className}-searchButton${mobileSearchClass}`}
           component="button"
           style={_extend(styles.searchButton, buttonStyles)}
           onTap={() => this.toggleMobileMenuButton('clickSearch')}
@@ -413,21 +341,23 @@ class MobileHeader extends React.Component {
     let buttonStyles = styles.inactiveMenuButton;
     let buttonLabel = 'Open Menu Dialog';
     let dialogWindow = null;
+    const active = this.state.activeButton === 'navMenu';
 
-    if (this.state.activeMobileButton === 'mobileMenu') {
+    if (active) {
       mobileMenuClass = ' active';
       icon = <XIcon ariaHidden fill="#FFF" />;
       buttonStyles = styles.activeMenuButton;
       buttonLabel = 'Close Menu Dialog';
       dialogWindow = (
         <NavMenu
-          className={`${this.props.className}-NavMenu`}
+          className={`${this.props.className}-navMenu`}
           lang={this.props.lang}
           items={this.props.navData}
           urlType={this.props.urlType}
           isLoggedIn={this.props.isLoggedIn}
           patronName={this.state.patronName}
           logOutLink={this.state.logOutUrl}
+          mobileActive={active}
         />
       );
     }
@@ -436,14 +366,14 @@ class MobileHeader extends React.Component {
       <li style={styles.listItem}>
         <FocusTrap
           focusTrapOptions={{
-            initialFocus: 'ul.Header-Mobile-NavMenu-List li:first-of-type a',
-            onDeactivate: () => this.closeMenuDialog(),
+            initialFocus: 'ul.header-mobile-navMenu-list li:first-of-type a',
+            onDeactivate: this.closeDropDown,
             clickOutsideDeactivates: true,
           }}
-          active={this.state.activeMobileButton === 'mobileMenu'}
+          active={active}
         >
           <ReactTappable
-            className={`${this.props.className}-MenuButton${mobileMenuClass}`}
+            className={`${this.props.className}-menuButton${mobileMenuClass}`}
             component="button"
             style={_extend(styles.menuButton, buttonStyles)}
             onTap={() => this.toggleMobileMenuButton('mobileMenu')}
@@ -451,7 +381,7 @@ class MobileHeader extends React.Component {
             <span className="visuallyHidden">{buttonLabel}</span>
             {icon}
           </ReactTappable>
-          <div className={`Header-Mobile-Wrapper${mobileMenuClass}`}>
+          <div className={`header-mobile-wrapper${mobileMenuClass}`}>
             {dialogWindow}
           </div>
         </FocusTrap>
@@ -491,7 +421,7 @@ MobileHeader.defaultProps = {
   lang: 'en',
   isLoggedIn: false,
   patronName: null,
-  className: 'MobileHeader',
+  className: 'mobileHeader',
   nyplRootUrl: '/',
   alt: 'The New York Public Library',
 };

@@ -118,13 +118,13 @@ class GlobalAlerts extends React.Component {
         className={`${this.props.className} ${classes}`}
         id={this.props.id}
         style={styles}
-        role='complementary'
+        role="complementary"
       >
         <div className={`${this.props.className}-Wrapper`}>
           <AlertsBox
             alerts={currentGlobalAlerts}
-            id={`${this.props.className}-Box`}
-            className={`${this.props.className}-Box`}
+            id={`${this.props.className}-box`}
+            className={`${this.props.className}-box`}
           />
         </div>
       </div>
@@ -140,8 +140,8 @@ GlobalAlerts.propTypes = {
 
 GlobalAlerts.defaultProps = {
   lang: 'en',
-  className: 'GlobalAlerts',
-  id: 'GlobalAlerts',
+  className: 'globalAlerts',
+  id: 'globalAlerts',
 };
 
 export default GlobalAlerts;

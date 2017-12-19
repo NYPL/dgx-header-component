@@ -61,13 +61,13 @@ class SearchButton extends React.Component {
     const classes = cx({ active: this.state.active });
 
     let label = 'Search';
-    let iconClass = SearchIcon;
+    let iconComponentType = SearchIcon;
     // If active, change to "Close x" mode:
     if (this.state.active) {
       label = 'Close';
-      iconClass = XIcon;
+      iconComponentType = XIcon;
     }
-    const icon = React.createElement(iconClass, {
+    const icon = React.createElement(iconComponentType, {
       className: `${this.props.className}-searchButton-icon`,
       ariaHidden: true,
       fill: '#FFF',

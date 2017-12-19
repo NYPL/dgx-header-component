@@ -194,7 +194,7 @@ describe('MyNypl', () => {
         expect(renderedInstance.props.href).to.equal(
           logOutLink
         );
-        expect(renderedInstance.props.className).to.equal('MyNypl-Catalog-Link');
+        expect(renderedInstance.props.className).to.equal('myNypl-catalog-link');
         expect(renderedInstance.props.children[1]).to.equal('LOG OUT');
 
         component.find('.myNypl-catalog-link').simulate('click');
@@ -324,7 +324,7 @@ describe('MyNypl', () => {
 
     it('should have two <p>. One is with the class name ' +
       '"myNypl-patron-greeting.login-indication". And its text equals "You are logged in as:". ' +
-      'The other is with the class name "myNypl-patron-greeting.Login-Name". ' +
+      'The other is with the class name "myNypl-patron-greeting.login-name". ' +
       'And its text equals "Stewart, Darren"',
       () => {
         expect(component.find('p')).to.have.length(2);
@@ -332,8 +332,8 @@ describe('MyNypl', () => {
         expect(component.find('.myNypl-patron-greeting.login-indication').text()).to.equal(
           'You are logged in as:'
         );
-        expect(component.find('.myNypl-patron-greeting.Login-Name').type()).to.equal('p');
-        expect(component.find('.myNypl-patron-greeting.Login-Name').text()).to.equal(
+        expect(component.find('.myNypl-patron-greeting.login-name').type()).to.equal('p');
+        expect(component.find('.myNypl-patron-greeting.login-name').text()).to.equal(
           'Stewart, Darren'
         );
       }

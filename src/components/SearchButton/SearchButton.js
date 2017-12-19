@@ -8,9 +8,9 @@ import {
   SearchIcon,
   XIcon,
 } from 'dgx-svg-icons';
-import SearchBox from '../SearchBox/SearchBox.js';
+import SearchBox from '../SearchBox/SearchBox';
 // GA Utility Library
-import utils from '../../utils/utils.js';
+import utils from '../../utils/utils';
 
 class SearchButton extends React.Component {
   constructor(props) {
@@ -60,8 +60,13 @@ class SearchButton extends React.Component {
   renderSearchButton() {
     const classes = cx({ active: this.state.active });
 
-    const label = this.state.active ? 'Close' : 'Search';
-    const iconClass = this.state.active ? XIcon : SearchIcon;
+    let label = 'Search';
+    let iconClass = SearchIcon;
+    // If active, change to "Close x" mode:
+    if (this.state.active) {
+      label = 'Close';
+      iconClass = XIcon;
+    }
     const icon = React.createElement(iconClass, {
       className: `${this.props.className}-searchButton-icon`,
       ariaHidden: true,

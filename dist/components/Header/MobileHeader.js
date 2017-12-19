@@ -434,7 +434,7 @@ var MobileHeader = function (_React$Component) {
       var mobileMenuClass = '';
       var icon = _react2.default.createElement(_dgxSvgIcons.MenuIcon, { ariaHidden: true, fill: '#000' });
       var buttonStyles = styles.inactiveMenuButton;
-      var buttonLabel = 'Open Menu Dialog';
+      var buttonLabel = 'Open Navigation';
       var dialogWindow = null;
       var active = this.state.activeButton === 'navMenu';
 
@@ -442,7 +442,7 @@ var MobileHeader = function (_React$Component) {
         mobileMenuClass = ' active';
         icon = _react2.default.createElement(_dgxSvgIcons.XIcon, { ariaHidden: true, fill: '#FFF' });
         buttonStyles = styles.activeMenuButton;
-        buttonLabel = 'Close Menu Dialog';
+        buttonLabel = 'Close Navigation';
         dialogWindow = _react2.default.createElement(_NavMenu2.default, {
           className: this.props.className + '-navMenu',
           lang: this.props.lang,

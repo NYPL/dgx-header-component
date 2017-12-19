@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 const SubscribeMessageBox = ({ className, status, msg }) => (
   <div className={`${className} ${status}`}>
-    <div className={`${className}-Eyebrow`}></div>
-    <div className={`${className}-Title`}>
+    <div className={`${className}-eyebrow`}></div>
+    <div className={`${className}-title`}>
       {msg}
     </div>
   </div>
@@ -18,7 +18,7 @@ SubscribeMessageBox.propTypes = {
 
 SubscribeMessageBox.defaultProps = {
   msg: 'Thank you for subscribing to our email updates.',
-  className: 'SubscribeMessageBox',
+  className: 'subscribeMessageBox',
 };
 
 export default SubscribeMessageBox;

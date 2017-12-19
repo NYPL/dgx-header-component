@@ -37,14 +37,14 @@ describe('MobileMyNypl', () => {
     });
 
     it('should have a <div> with class name "MobileMyNypl" as a wrapper', () => {
-      expect(component.find('.MobileMyNypl').type()).to.equal('div');
+      expect(component.find('.mobileMyNypl').type()).to.equal('div');
     });
 
     it('should have two <a>. Their class names are "CatalogLink" and "ResearchLink"',
       () => {
         expect(component.find('a')).to.have.length(2);
-        expect(component.find('.CatalogLink').type()).to.equal('a');
-        expect(component.find('.ResearchLink').type()).to.equal('a');
+        expect(component.find('.catalogLink').type()).to.equal('a');
+        expect(component.find('.researchLink').type()).to.equal('a');
       }
     );
 
@@ -57,14 +57,14 @@ describe('MobileMyNypl', () => {
 
     it('should have an <a> with class name "CatalogLink". Its text equals ' +
       '"Log in to your accountLOG INTO THE CATALOG"', () => {
-      expect(component.find('.CatalogLink').text())
+      expect(component.find('.catalogLink').text())
         .to.equal('Log in to your accountLOG INTO THE CATALOG');
     });
 
     it('should have the <a> with class name "CatalogLink". Its href equals ' +
       '"https://beta-oauth.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount"',
       () => {
-        expect(component.find('.CatalogLink').props().href).to.equal(
+        expect(component.find('.catalogLink').props().href).to.equal(
           catalog
         );
       }
@@ -72,27 +72,27 @@ describe('MobileMyNypl', () => {
 
     it('should have the <a> with class name "ResearchLink". Its text equals ' +
       '"NYPL Building IconLOG INTO THE RESEARCH CATALOG"', () => {
-      expect(component.find('.ResearchLink').text())
+      expect(component.find('.researchLink').text())
         .to.equal('NYPL Building IconLOG INTO THE RESEARCH CATALOG');
     });
 
     it('should have the <a> with class name "ResearchLink". Its href equals to ' +
       '"https://beta-oauth.nypl.org/auth/login?redirect_uri=https://catalog.nypl.org/patroninfo/top"',
       () => {
-        expect(component.find('.ResearchLink').props().href).to.equal(
+        expect(component.find('.researchLink').props().href).to.equal(
           research
         );
       }
     );
 
     it('should call GA event tracker when "CatalogLink" is clicked', () => {
-      component.find('.CatalogLink').simulate('click');
+      component.find('.catalogLink').simulate('click');
       expect(onClick.calledOnce).to.equal(true);
       expect(onClick.calledWith('Mobile Log In', 'Catalog')).to.equal(true);
     });
 
     it('should call GA event tracker when "ResearchLink" is clicked', () => {
-      component.find('.ResearchLink').simulate('click');
+      component.find('.researchLink').simulate('click');
       expect(onClick.calledOnce).to.equal(true);
       expect(onClick.calledWith('Mobile Log In', 'Research')).to.equal(true);
     });
@@ -129,45 +129,45 @@ describe('MobileMyNypl', () => {
     it('should have three <a>. Their class names are "CatalogLink",' +
       '"ResearchLink", and "MobileMyNypl-Catalog-Link"', () => {
       expect(component.find('a')).to.have.length(3);
-      expect(component.find('.MobileMyNypl-Catalog-Link').type()).to.equal('a');
-      expect(component.find('.CatalogLink').type()).to.equal('a');
-      expect(component.find('.ResearchLink').type()).to.equal('a');
+      expect(component.find('.mobileMyNypl-catalog-link').type()).to.equal('a');
+      expect(component.find('.catalogLink').type()).to.equal('a');
+      expect(component.find('.researchLink').type()).to.equal('a');
     });
 
     it('should have the <a> with class name "CatalogLink". Its text equals ' +
       '"Log in to your accountGO TO THE CATALOG"', () => {
-      expect(component.find('.CatalogLink').text())
+      expect(component.find('.catalogLink').text())
         .to.equal('Log in to your accountGO TO THE CATALOG');
     });
 
     it('should have the <a> with class name "ResearchLink". Its text equals ' +
       '"NYPL Building IconGO TO THE RESEARCH CATALOG"', () => {
-      expect(component.find('.ResearchLink').text())
+      expect(component.find('.researchLink').text())
         .to.equal('NYPL Building IconGO TO THE RESEARCH CATALOG');
     });
 
     it('should have the <a> with class name "CatalogLink". Its href equals ' +
       '"https://browse.nypl.org/iii/encore/myaccount"', () => {
-      expect(component.find('.CatalogLink').props().href).to.equal(
+      expect(component.find('.catalogLink').props().href).to.equal(
         'https://browse.nypl.org/iii/encore/myaccount'
       );
     });
 
     it('should have the <a> with class name "ResearchLink". Its href equals ' +
       '"https://catalog.nypl.org/patroninfo/top"', () => {
-      expect(component.find('.ResearchLink').props().href).to.equal(
+      expect(component.find('.researchLink').props().href).to.equal(
         'https://catalog.nypl.org/patroninfo/top'
       );
     });
 
     it('should call GA event tracker when "CatalogLink" is clicked', () => {
-      component.find('.CatalogLink').simulate('click');
+      component.find('.catalogLink').simulate('click');
       expect(onClick.calledOnce).to.equal(true);
       expect(onClick.calledWith('Mobile Go To', 'Catalog')).to.equal(true);
     });
 
     it('should call GA event tracker when "ResearchLink" is clicked', () => {
-      component.find('.ResearchLink').simulate('click');
+      component.find('.researchLink').simulate('click');
       expect(onClick.calledOnce).to.equal(true);
       expect(onClick.calledWith('Mobile Go To', 'Research')).to.equal(true);
     });
@@ -182,10 +182,10 @@ describe('MobileMyNypl', () => {
         expect(renderedInstance.props.href).to.equal(
           logOutLink
         );
-        expect(renderedInstance.props.className).to.equal('MobileMyNypl-Catalog-Link');
+        expect(renderedInstance.props.className).to.equal('mobileMyNypl-catalog-link');
         expect(renderedInstance.props.children).to.equal('LOG OUT');
 
-        component.find('.MobileMyNypl-Catalog-Link').simulate('click');
+        component.find('.mobileMyNypl-catalog-link').simulate('click');
         expect(onClick.calledOnce).to.equal(true);
         expect(onClick.calledWith('My Account', 'Log Out')).to.equal(true);
       }
@@ -219,33 +219,33 @@ describe('MobileMyNypl', () => {
       it('should have three <a>. Their class names are "CatalogLink",' +
         '"ResearchLink", and "MobileMyNypl-Catalog-Link"', () => {
         expect(component.find('a')).to.have.length(3);
-        expect(component.find('.MobileMyNypl-Catalog-Link').type()).to.equal('a');
-        expect(component.find('.CatalogLink').type()).to.equal('a');
-        expect(component.find('.ResearchLink').type()).to.equal('a');
+        expect(component.find('.mobileMyNypl-catalog-link').type()).to.equal('a');
+        expect(component.find('.catalogLink').type()).to.equal('a');
+        expect(component.find('.researchLink').type()).to.equal('a');
       });
 
       it('should have the <a> with class name "CatalogLink". Its text equals to ' +
         '"Log in to your accountGO TO THE CATALOG"', () => {
-        expect(component.find('.CatalogLink')
+        expect(component.find('.catalogLink')
           .text()).to.equal('Log in to your accountGO TO THE CATALOG');
       });
 
       it('should have the <a> with class name "ResearchLink". Its text equals to ' +
         '"NYPL Building IconGO TO THE RESEARCH CATALOG"', () => {
-        expect(component.find('.ResearchLink').text())
+        expect(component.find('.researchLink').text())
           .to.equal('NYPL Building IconGO TO THE RESEARCH CATALOG');
       });
 
       it('should have the <a> with class name "CatalogLink". Its href equals to ' +
         '"https://browse.nypl.org/iii/encore/myaccount"', () => {
-        expect(component.find('.CatalogLink').props().href).to.equal(
+        expect(component.find('.catalogLink').props().href).to.equal(
           'https://browse.nypl.org/iii/encore/myaccount'
         );
       });
 
       it('should have the <a> with class name "ResearchLink". Its href equals to ' +
         '"https://catalog.nypl.org/patroninfo/top"', () => {
-        expect(component.find('.ResearchLink').props().href).to.equal(
+        expect(component.find('.researchLink').props().href).to.equal(
           'https://catalog.nypl.org/patroninfo/top'
         );
       });
@@ -260,12 +260,12 @@ describe('MobileMyNypl', () => {
           expect(renderedInstance.props.href).to.equal(
             `${logOutLink}?redirect_uri=https://www.nypl.org`
           );
-          expect(renderedInstance.props.className).to.equal('MobileMyNypl-Catalog-Link');
+          expect(renderedInstance.props.className).to.equal('mobileMyNypl-catalog-link');
           expect(renderedInstance.props.children).to.equal('LOG OUT');
 
           const onClick = sinon.spy(utils, 'trackHeader');
 
-          component.find('.MobileMyNypl-Catalog-Link').simulate('click');
+          component.find('.mobileMyNypl-catalog-link').simulate('click');
           expect(onClick.calledOnce).to.equal(true);
           expect(onClick.calledWith('My Account', 'Log Out')).to.equal(true);
 
@@ -314,10 +314,10 @@ describe('MobileMyNypl', () => {
       it('should have a <div> with class name "MobileMyNypl-Greeting". It has two <p>' +
         'and their texts equal to "You are logged in as:" and "Stewart, Darren"',
         () => {
-          expect(component.find('.MobileMyNypl-Greeting').type()).to.equal('div');
+          expect(component.find('.mobileMyNypl-greeting').type()).to.equal('div');
           expect(component.find('p')).to.have.length(2);
-          expect(component.find('.Login-Indication').text()).to.equal('You are logged in as:');
-          expect(component.find('.Login-Name').text()).to.equal('Stewart, Darren');
+          expect(component.find('.login-indication').text()).to.equal('You are logged in as:');
+          expect(component.find('.login-name').text()).to.equal('Stewart, Darren');
         }
       );
     }

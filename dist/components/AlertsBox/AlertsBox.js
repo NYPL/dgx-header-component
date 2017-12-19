@@ -27,7 +27,7 @@ var AlertsBox = function AlertsBox(_ref) {
     var alertDescription = item.attributes['alert-text'][lang];
     return _react2.default.createElement('div', {
       key: index,
-      className: className + '-Item',
+      className: className + '-item',
       dangerouslySetInnerHTML: { __html: alertDescription.text }
     });
   });
@@ -53,8 +53,8 @@ AlertsBox.propTypes = {
 
 AlertsBox.defaultProps = {
   lang: 'en',
-  className: 'AlertsBox',
-  id: 'AlertsBox'
+  className: 'alertsBox',
+  id: 'alertsBox'
 };
 
 exports.default = AlertsBox;

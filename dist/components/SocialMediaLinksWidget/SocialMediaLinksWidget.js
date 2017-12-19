@@ -58,13 +58,13 @@ var SocialMediaLinksWidget = function (_React$Component) {
 
         return _react2.default.createElement(
           'li',
-          { key: key, className: _this2.props.className + '-ListItem' },
+          { key: key, className: _this2.props.className + '-listItem' },
           _react2.default.createElement('a', {
             href: item,
             onClick: function onClick() {
               return _this2.trackHeader('Click', 'Social Media - ' + key);
             },
-            className: _this2.props.className + '-Link ' + hoverClass,
+            className: _this2.props.className + '-link ' + hoverClass,
             onMouseEnter: function onMouseEnter() {
               return _this2.handleOnMouseEnter(key);
             },
@@ -110,7 +110,7 @@ var SocialMediaLinksWidget = function (_React$Component) {
         { className: this.props.className },
         _react2.default.createElement(
           'ul',
-          { className: this.props.className + '-List' },
+          { className: this.props.className + '-list' },
           socialLinks
         )
       );

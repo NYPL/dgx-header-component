@@ -46,18 +46,18 @@ class NavMenu extends React.Component {
     return (
       <div className={this.props.className}>
         <nav
-          className={`${this.props.className}-Wrapper ${mobileActiveClass}`}
+          className={`${this.props.className}-wrapper ${mobileActiveClass}`}
           aria-label="Main Navigation"
         >
-          <span className="MobileLogoText nypl-icon-logo-type" aria-hidden="true" />
-          <ul className={`${this.props.className}-List`} id="NavMenu-List">
+          <span className="mobileLogoText nypl-icon-logo-type" aria-hidden="true" />
+          <ul className={`${this.props.className}-list`} id="navMenu-List">
             {this.renderNavMenu(this.props.items)}
           </ul>
           <SearchButton
             className={this.props.className}
           />
           <NavMenuBottomButtons
-            className="MobileBottomButtons"
+            className="mobileBottomButtons"
             libraryCardLink={
               (this.props.urlType === 'absolute') ? '//www.nypl.org/library-card' : '/library-card'
             }
@@ -78,7 +78,7 @@ NavMenu.propTypes = {
 
 NavMenu.defaultProps = {
   lang: 'en',
-  className: 'NavMenu',
+  className: 'navMenu',
   urlType: 'relative',
   mobileActive: false,
 };

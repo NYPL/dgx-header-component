@@ -91,20 +91,20 @@ var NavMenu = function (_React$Component) {
         _react2.default.createElement(
           'nav',
           {
-            className: this.props.className + '-Wrapper ' + mobileActiveClass,
+            className: this.props.className + '-wrapper ' + mobileActiveClass,
             'aria-label': 'Main Navigation'
           },
-          _react2.default.createElement('span', { className: 'MobileLogoText nypl-icon-logo-type', 'aria-hidden': 'true' }),
+          _react2.default.createElement('span', { className: 'mobileLogoText nypl-icon-logo-type', 'aria-hidden': 'true' }),
           _react2.default.createElement(
             'ul',
-            { className: this.props.className + '-List', id: 'NavMenu-List' },
+            { className: this.props.className + '-list', id: 'navMenu-List' },
             this.renderNavMenu(this.props.items)
           ),
           _react2.default.createElement(_SearchButton2.default, {
             className: this.props.className
           }),
           _react2.default.createElement(_NavMenuMobileButtons2.default, {
-            className: 'MobileBottomButtons',
+            className: 'mobileBottomButtons',
             libraryCardLink: this.props.urlType === 'absolute' ? '//www.nypl.org/library-card' : '/library-card'
           })
         )
@@ -125,7 +125,7 @@ NavMenu.propTypes = {
 
 NavMenu.defaultProps = {
   lang: 'en',
-  className: 'NavMenu',
+  className: 'navMenu',
   urlType: 'relative',
   mobileActive: false
 };

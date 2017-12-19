@@ -91,8 +91,8 @@ var NavMenuMobileButtons = function NavMenuMobileButtons(_ref) {
       libraryCardLink = _ref.libraryCardLink,
       subscribeLink = _ref.subscribeLink;
 
-  var libraryCardClass = 'LibraryCardLink';
-  var subscribeLinkClass = 'SubscribeLink';
+  var libraryCardClass = 'libraryCardLink';
+  var subscribeLinkClass = 'subscribeLink';
 
   return _react2.default.createElement(
     'div',
@@ -110,18 +110,18 @@ var NavMenuMobileButtons = function NavMenuMobileButtons(_ref) {
       _react2.default.createElement(
         'span',
         {
-          className: libraryCardClass + '-Wrapper',
+          className: libraryCardClass + '-wrapper',
           style: (0, _underscore.extend)(styles.wrapper, styles.libraryCardLinkWrapper)
         },
         _react2.default.createElement('span', {
-          className: libraryCardClass + '-Icon nypl-icon-card',
+          className: libraryCardClass + '-icon nypl-icon-card',
           style: styles.icon,
           'aria-hidden': 'true'
         }),
         _react2.default.createElement(
           'span',
           {
-            className: libraryCardClass + '-Label',
+            className: libraryCardClass + '-label',
             style: (0, _underscore.extend)(styles.libraryCardLinkLabel, styles.label)
           },
           'Get a Library Card'
@@ -141,18 +141,18 @@ var NavMenuMobileButtons = function NavMenuMobileButtons(_ref) {
       _react2.default.createElement(
         'span',
         {
-          className: subscribeLinkClass + '-Wrapper',
+          className: subscribeLinkClass + '-wrapper',
           style: (0, _underscore.extend)(styles.wrapper, styles.subscribeLinkWrapper)
         },
         _react2.default.createElement('span', {
-          className: subscribeLinkClass + '-Icon nypl-icon-mail',
+          className: subscribeLinkClass + '-icon nypl-icon-mail',
           style: styles.icon,
           'aria-hidden': 'true'
         }),
         _react2.default.createElement(
           'span',
           {
-            className: subscribeLinkClass + '-Label',
+            className: subscribeLinkClass + '-label',
             style: (0, _underscore.extend)(styles.subscribeLinkLabel, styles.label)
           },
           'Get Email Updates'
@@ -160,8 +160,8 @@ var NavMenuMobileButtons = function NavMenuMobileButtons(_ref) {
       )
     ),
     _react2.default.createElement(_DonateButton2.default, {
-      id: 'MobileNav-DonateButton',
-      className: 'DonateLink',
+      id: 'mobileNav-donateButton',
+      className: 'donateLink',
       style: styles.donateLink,
       gaLabel: 'Mobile Buttons Donate'
     })
@@ -177,7 +177,7 @@ NavMenuMobileButtons.propTypes = {
 
 NavMenuMobileButtons.defaultProps = {
   lang: 'en',
-  className: 'NavMenuMobileButtons',
+  className: 'navMenuMobileButtons',
   libraryCardLink: '//www.nypl.org/library-card',
   subscribeLink: '//pages.email.nypl.org/page.aspx' + '?QS=3935619f7de112ef7250fe02b84fb2f9ab74e4ea015814b7'
 };

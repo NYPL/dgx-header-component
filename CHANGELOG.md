@@ -1,5 +1,8 @@
 ### CHANGE LOG
 
+### v2.4.1
+> Updating Header component to track GA events in LogIn button.
+
 #### v2.4.0
 > This is the first release (of two) with accessibility updates. This update includes:
 > Update to the focus ring.

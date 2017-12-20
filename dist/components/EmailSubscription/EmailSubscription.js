@@ -249,7 +249,6 @@ var EmailSubscription = function (_React$Component) {
           _react2.default.createElement(
             'form',
             {
-              ref: 'EmailSubscribeForm',
               id: 'emailSubscribeForm',
               className: formClass,
               action: this.props.target,
@@ -336,7 +335,7 @@ var EmailSubscription = function (_React$Component) {
                 'Follow us:'
               ),
               _react2.default.createElement(_SocialMediaLinksWidget2.default, {
-                className: this.props.className + '-socialMediaWidget',
+                className: this.props.className + '-socialMediaLinksWidget',
                 links: _appConfig2.default.socialMediaLinks,
                 displayOnlyList: ['facebook', 'twitter']
               })
@@ -349,7 +348,10 @@ var EmailSubscription = function (_React$Component) {
           subscribeContent = _react2.default.createElement(
             'div',
             null,
-            _react2.default.createElement(_SubscribeMessageBox2.default, { status: status, msg: 'Looks like you\'re already signed up!' }),
+            _react2.default.createElement(_SubscribeMessageBox2.default, {
+              status: status,
+              msg: 'Looks like you\'re already signed up!'
+            }),
             _react2.default.createElement(
               'div',
               { className: this.props.className + '-newEmail' },

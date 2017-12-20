@@ -120,13 +120,11 @@ class GlobalAlerts extends React.Component {
         style={styles}
         role="complementary"
       >
-        <div className={`${this.props.className}-Wrapper`}>
-          <AlertsBox
-            alerts={currentGlobalAlerts}
-            id={`${this.props.className}-box`}
-            className={`${this.props.className}-box`}
-          />
-        </div>
+        <AlertsBox
+          alerts={currentGlobalAlerts}
+          id={`${this.props.className}-box`}
+          className={`${this.props.className}-box`}
+        />
       </div>
     ) : null;
   }

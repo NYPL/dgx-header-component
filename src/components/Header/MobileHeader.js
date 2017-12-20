@@ -324,7 +324,7 @@ class MobileHeader extends React.Component {
     let mobileMenuClass = '';
     let icon = <MenuIcon ariaHidden fill="#000" />;
     let buttonStyles = styles.inactiveMenuButton;
-    let buttonLabel = 'Open Menu Dialog';
+    let buttonLabel = 'Open Navigation';
     let dialogWindow = null;
     const active = this.state.activeButton === 'navMenu';
 
@@ -332,7 +332,7 @@ class MobileHeader extends React.Component {
       mobileMenuClass = ' active';
       icon = <XIcon ariaHidden fill="#FFF" />;
       buttonStyles = styles.activeMenuButton;
-      buttonLabel = 'Close Menu Dialog';
+      buttonLabel = 'Close Navigation';
       dialogWindow = (
         <NavMenu
           className={`${this.props.className}-navMenu`}

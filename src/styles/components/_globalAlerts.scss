@@ -11,17 +11,6 @@
     display: none;
   }
 
-  &-wrapper {
-    margin: 0;
-
-    @include min-screen(769px) {
-      display: block;
-      max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
-      margin: 0 auto;
-      position: relative;
-    }
-  }
-
   &-box {
     position: relative;
     margin: .5em 1.2em .5em 1.2em;

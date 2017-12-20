@@ -272,7 +272,7 @@ class Header extends React.Component {
                 </li>
                 <li>
                   <DonateButton
-                    id="top-DonateButton"
+                    id="donateButton"
                     lang={this.props.lang}
                     style={styles.donateButton}
                     gaLabel="Header Top Links"

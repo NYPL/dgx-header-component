@@ -144,7 +144,7 @@ NavMenuMobileButtons.defaultProps = {
   lang: 'en',
   className: 'navMenuMobileButtons',
   libraryCardLink: '//www.nypl.org/library-card',
-  subscribeLink: '//pages.email.nypl.org/page.aspx' +
+  subscribeLink: 'http://pages.email.nypl.org/page.aspx' +
     '?QS=3935619f7de112ef7250fe02b84fb2f9ab74e4ea015814b7',
 };
 

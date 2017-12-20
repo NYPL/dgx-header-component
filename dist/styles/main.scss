@@ -127,49 +127,9 @@
     }
   }
 
-  /* TOP HEADER BUTTONS (excludes subscribe)
-   * ---------------------------------------
-   * - Library Card
-   * - Donate
-  */
-  &-buttons {
-    ul {
-      margin: 0;
-      list-style-type: none;
+  @import 'components/_buttons.scss';
 
-      li {
-        display: inline-block;
-        margin-right: 0.18em;
-      }
-    }
-
-    // First instance top-level <a> tags
-    li > a,
-    & > a {
-      @include Kievit-Bold;
-      font-size: 13px;
-      letter-spacing: .04em;
-      margin: 0 10px 0 0;
-
-      &:visited {
-        color: #000;
-      }
-      &:last-child {
-        margin: 0;
-      }
-    }
-
-    .donateButton {
-      @include border-radius(4px);
-    }
-
-    .shopTopLink {
-      display: none;
-      @include min-screen(860px) {
-        display: inline-block;
-      }
-    }
-  }
+  @import 'components/_socialMediaLinksWidget.scss';
 
   /* Skip Navigation
    * ---------------
@@ -186,7 +146,7 @@
    * - Includes Button rules (also for MyNYPL)
    * - Includes Email Signup rules
   */
-  @import 'components/_emailSubscribeButton';
+  @import 'components/_emailSubscription';
 
   /* MYNYPL LOGIN BUTTON
    * ---------------------------

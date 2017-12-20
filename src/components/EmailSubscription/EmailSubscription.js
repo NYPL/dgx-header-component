@@ -185,7 +185,6 @@ class EmailSubscription extends React.Component {
           </div>
 
           <form
-            ref="EmailSubscribeForm"
             id="emailSubscribeForm"
             className={formClass}
             action={this.props.target}
@@ -251,7 +250,7 @@ class EmailSubscription extends React.Component {
             <div className={`${this.props.className}-followUs`}>
               <p>Follow us:</p>
               <SocialMediaLinksWidget
-                className={`${this.props.className}-socialMediaWidget`}
+                className={`${this.props.className}-socialMediaLinksWidget`}
                 links={config.socialMediaLinks}
                 displayOnlyList={['facebook', 'twitter']}
               />
@@ -264,7 +263,10 @@ class EmailSubscription extends React.Component {
         utils.trackHeader('Subscribe', 'Error -- already subscribed');
         subscribeContent = (
           <div>
-            <SubscribeMessageBox status={status} msg="Looks like you're already signed up!" />
+            <SubscribeMessageBox
+              status={status}
+              msg="Looks like you're already signed up!"
+            />
             <div className={`${this.props.className}-newEmail`}>
               <button style={styles.resubmitButton} onClick={this.initForm}>
                 Enter a different email address

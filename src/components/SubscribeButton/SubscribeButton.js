@@ -181,7 +181,6 @@ class SubscribeButton extends React.Component {
         focusTrapOptions={{
           onDeactivate: this.handleOnClickOut,
           clickOutsideDeactivates: true,
-          initialFocus: '.subscribeMessageBox',
         }}
         active={this.state.visible}
         className="subscribeButton-wrapper"

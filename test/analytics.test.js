@@ -1,7 +1,10 @@
 /* eslint-env mocha */
+import sinon from 'sinon';
 import { expect } from 'chai';
 import React from 'react';
 import { mount } from 'enzyme';
+
+import { mockExternalDependencies } from './helpers/mocks';
 
 import { Header, navConfig } from '../src/components/Header/Header';
 
@@ -12,16 +15,26 @@ describe('Google Analytics', function () {
 
   let gaEvents = null;
   let component = null;
+  let mockAxios = null;
+  let mockGa = null;
 
   before(() => {
-    utils.trackHeader = (action, label, value) => {
+    // Mock standard external dependencies:
+    mockAxios = mockExternalDependencies();
+
+    mockGa = sinon.stub(utils, 'trackHeader').callsFake((action, label, value) => {
       gaEvents.push({
         category: 'Global Header',
         action,
         label,
         value,
       });
-    };
+    });
+  });
+
+  after(() => {
+    mockAxios.restore();
+    mockGa.restore();
   });
 
   beforeEach(() => {
@@ -86,14 +99,35 @@ describe('Google Analytics', function () {
     });
   });
 
-  describe('Get a Library Card link', () => {
+  describe.only('Get a Library Card link', () => {
+    it('fires no events', () => {
+      const navButton = component.find('nav.header-buttons a.libraryCardButton');
+      expect(navButton).to.be.a('object');
+
+      navButton.simulate('click');
+
+      expect(gaEvents.length).to.equal(1);
+      expect(gaEvents[0]).to.be.a('object');
+      expect(gaEvents[0].category).to.equal('Global Header');
+      expect(gaEvents[0].action).to.equal('Get a Library Card');
+      expect(gaEvents[0].label).to.equal('Header Top Links');
+      expect(gaEvents[0].value).to.equal(undefined);
+    });
+  });
+
+  describe.only('Get Email Updates link', () => {
     it('fires no events', () => {
       const navButton = component.find('nav.header-buttons a.subscribeButton');
       expect(navButton).to.be.a('object');
 
       navButton.simulate('click');
 
-      expect(gaEvents.length).to.equal(0);
+      expect(gaEvents.length).to.equal(1);
+      expect(gaEvents[0]).to.be.a('object');
+      expect(gaEvents[0].category).to.equal('Global Header');
+      expect(gaEvents[0].action).to.equal('Click');
+      expect(gaEvents[0].label).to.equal('Subscribe - Open');
+      expect(gaEvents[0].value).to.equal(undefined);
     });
   });
 

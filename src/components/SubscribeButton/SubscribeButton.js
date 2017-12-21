@@ -5,7 +5,7 @@ import FocusTrap from 'focus-trap-react';
 import {
   DownWedgeIcon,
   XIcon,
-} from 'dgx-svg-icons';
+} from '@nypl/dgx-svg-icons';
 import axios from 'axios';
 
 import EmailSubscription from '../EmailSubscription/EmailSubscription.js';

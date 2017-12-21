@@ -10,7 +10,7 @@ import {
   LoginIconSolid,
   SearchIcon,
   XIcon,
-} from 'dgx-svg-icons';
+} from '@nypl/dgx-svg-icons';
 import { extend as _extend } from 'underscore';
 
 import utils from '../../utils/utils';

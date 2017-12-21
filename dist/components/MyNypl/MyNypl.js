@@ -26,7 +26,7 @@ var _appConfig = require('../../appConfig.js');
 
 var _appConfig2 = _interopRequireDefault(_appConfig);
 
-var _dgxSvgIcons = require('dgx-svg-icons');
+var _dgxSvgIcons = require('@nypl/dgx-svg-icons');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

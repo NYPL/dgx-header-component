@@ -5,7 +5,7 @@ import { extend as _extend } from 'underscore';
 import {
   BuildingIcon,
   LoginIcon,
-} from 'dgx-svg-icons';
+} from '@nypl/dgx-svg-icons';
 
 // Config and Utility
 import utils from '../../utils/utils.js';

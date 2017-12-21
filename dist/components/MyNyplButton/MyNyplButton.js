@@ -20,7 +20,7 @@ var _focusTrapReact = require('focus-trap-react');
 
 var _focusTrapReact2 = _interopRequireDefault(_focusTrapReact);
 
-var _dgxSvgIcons = require('dgx-svg-icons');
+var _dgxSvgIcons = require('@nypl/dgx-svg-icons');
 
 var _utils = require('../../utils/utils.js');
 

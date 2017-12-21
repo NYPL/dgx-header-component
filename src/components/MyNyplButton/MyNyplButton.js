@@ -5,7 +5,7 @@ import FocusTrap from 'focus-trap-react';
 import {
   DownWedgeIcon,
   XIcon,
-} from 'dgx-svg-icons';
+} from '@nypl/dgx-svg-icons';
 // GA Utilities
 import utils from '../../utils/utils.js';
 // Component Dependencies

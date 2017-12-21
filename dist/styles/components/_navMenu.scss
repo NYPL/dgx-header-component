@@ -31,22 +31,31 @@
       }
 
       /* Only display Logo Text on Mobile */
-      .mobileLogoText {
+      svg {
         display: block;
       }
 
       /* Only display BottomButtons on Mobile */
       .mobileBottomButtons {
         display: block;
+
+        svg {
+          position: absolute;
+          fill: #fff;
+          margin-left: 30px;
+        }
       }
 
-      .mobileLogoText {
-        /* Hide on all viewports, trigger display based on class */
-        position: absolute;
+      .nyplLionLogo {
         top: 20px;
-        left: 15px;
-        color: #FFF;
-        font-size: 85px;
+        left: -110px;
+        fill: #fff;
+        position: absolute;
+        height: 120px;
+
+        &-lion {
+          display: none;
+        }
       }
     }
   }
@@ -133,14 +142,8 @@
       display: none;
     }
 
-    .mobileLogoText {
-      /* Hide on all viewports, trigger display based on class */
+    .nyplLionLogo {
       display: none;
-      position: absolute;
-      top: 20px;
-      left: 15px;
-      color: #FFF;
-      font-size: 85px;
     }
   }
 
@@ -161,7 +164,6 @@
 
     // Top level <li> items
     .navMenuItem {
-
       display: inline-block;
       padding: 0;
       line-height: normal !important;

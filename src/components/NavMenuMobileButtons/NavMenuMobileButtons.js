@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { extend as _extend } from 'underscore';
+import {
+  LibraryCardIcon,
+  EnvelopeIcon,
+  XIcon,
+} from '@nypl/dgx-svg-icons';
+
 import utils from '../../utils/utils.js';
 // Dependent NYPL React Component
 import DonateButton from '../DonateButton/DonateButton.js';
@@ -85,12 +91,7 @@ const NavMenuMobileButtons = ({
           className={`${libraryCardClass}-wrapper`}
           style={_extend(styles.wrapper, styles.libraryCardLinkWrapper)}
         >
-          <span
-            className={`${libraryCardClass}-icon nypl-icon-card`}
-            style={styles.icon}
-            aria-hidden="true"
-          >
-          </span>
+          <XIcon ariaHidden />
           <span
             className={`${libraryCardClass}-label`}
             style={_extend(styles.libraryCardLinkLabel, styles.label)}
@@ -109,12 +110,7 @@ const NavMenuMobileButtons = ({
           className={`${subscribeLinkClass}-wrapper`}
           style={_extend(styles.wrapper, styles.subscribeLinkWrapper)}
         >
-          <span
-            className={`${subscribeLinkClass}-icon nypl-icon-mail`}
-            style={styles.icon}
-            aria-hidden="true"
-          >
-          </span>
+          <XIcon ariaHidden />
           <span
             className={`${subscribeLinkClass}-label`}
             style={_extend(styles.subscribeLinkLabel, styles.label)}

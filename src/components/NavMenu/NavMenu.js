@@ -7,6 +7,7 @@ import {
   contains as _contains,
   isArray as _isArray,
 } from 'underscore';
+import { LionLogoWithText } from '@nypl/dgx-svg-icons';
 
 // Dependent Components
 import SearchButton from '../SearchButton/SearchButton';
@@ -49,7 +50,7 @@ class NavMenu extends React.Component {
           className={`${this.props.className}-wrapper ${mobileActiveClass}`}
           aria-label="Main Navigation"
         >
-          <span className="mobileLogoText nypl-icon-logo-type" aria-hidden="true" />
+          <LionLogoWithText ariaHidden />
           <ul className={`${this.props.className}-list`} id="navMenu-List">
             {this.renderNavMenu(this.props.items)}
           </ul>

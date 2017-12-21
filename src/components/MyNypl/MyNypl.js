@@ -9,7 +9,7 @@ import {
   LogoutIcon,
   BuildingIcon,
   LoginIcon,
-} from 'dgx-svg-icons';
+} from '@nypl/dgx-svg-icons';
 
 const styles = {
   logOutLink: {

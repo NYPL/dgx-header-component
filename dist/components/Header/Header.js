@@ -319,7 +319,8 @@ var Header = function (_React$Component) {
                     refId: 'desktopLogin',
                     isLoggedIn: isLoggedIn,
                     patronName: this.state.patronName,
-                    logOutLink: this.state.logOutUrl
+                    logOutLink: this.state.logOutUrl,
+                    gaAction: gaAction
                   })
                 ),
                 _react2.default.createElement(

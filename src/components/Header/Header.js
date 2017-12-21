@@ -190,7 +190,6 @@ class Header extends React.Component {
     const headerClass = this.props.className;
     const skipNav = this.props.skipNav ? (<SkipNavigation {...this.props.skipNav} />) : '';
     const isLoggedIn = !!this.state.patronDataReceived;
-    const gaAction = (isLoggedIn) ? 'My Account' : 'Log In';
 
     return (
       <header
@@ -233,6 +232,7 @@ class Header extends React.Component {
                     isLoggedIn={isLoggedIn}
                     patronName={this.state.patronName}
                     logOutLink={this.state.logOutUrl}
+                    gaAction={isLoggedIn ? 'My Account' : 'Log In'}
                   />
                 </li>
                 <li>
@@ -301,7 +301,6 @@ class Header extends React.Component {
             isLoggedIn={isLoggedIn}
             patronName={this.state.patronName}
             logOutLink={this.state.logOutUrl}
-            gaAction={gaAction}
           />
         </div>
         { FeatureFlags.store._isFeatureActive(config.fundraising.experimentName) &&

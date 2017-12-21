@@ -269,7 +269,6 @@ var Header = function (_React$Component) {
       var headerClass = this.props.className;
       var skipNav = this.props.skipNav ? _react2.default.createElement(_dgxSkipNavigationLink2.default, this.props.skipNav) : '';
       var isLoggedIn = !!this.state.patronDataReceived;
-      var gaAction = isLoggedIn ? 'My Account' : 'Log In';
 
       return _react2.default.createElement(
         'header',
@@ -319,7 +318,8 @@ var Header = function (_React$Component) {
                     refId: 'desktopLogin',
                     isLoggedIn: isLoggedIn,
                     patronName: this.state.patronName,
-                    logOutLink: this.state.logOutUrl
+                    logOutLink: this.state.logOutUrl,
+                    gaAction: isLoggedIn ? 'My Account' : 'Log In'
                   })
                 ),
                 _react2.default.createElement(
@@ -390,8 +390,7 @@ var Header = function (_React$Component) {
             urlType: this.props.urlType,
             isLoggedIn: isLoggedIn,
             patronName: this.state.patronName,
-            logOutLink: this.state.logOutUrl,
-            gaAction: gaAction
+            logOutLink: this.state.logOutUrl
           })
         ),
         _dgxFeatureFlags2.default.store._isFeatureActive(_appConfig2.default.fundraising.experimentName) && _react2.default.createElement(_FundraisingBanner2.default, {

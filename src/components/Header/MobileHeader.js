@@ -44,7 +44,7 @@ const styles = {
     backgroundColor: '#FFF',
     textDecoration: 'none',
     display: 'inline-block',
-    height: '50px',
+    height: 50,
     width: '50px',
     position: 'absolute',
     left: '10px',
@@ -171,7 +171,12 @@ class MobileHeader extends React.Component {
         aria-label={this.props.alt}
       >
         <span className="visuallyHidden">{this.props.alt}</span>
-        <LionLogoIcon ariaHidden className={`${this.props.className}-logo`} />
+        <LionLogoIcon
+          ariaHidden
+          className={`${this.props.className}-logo`}
+          height={30}
+          width={30}
+        />
       </a>
     );
   }

@@ -79,7 +79,7 @@ var styles = {
     backgroundColor: '#FFF',
     textDecoration: 'none',
     display: 'inline-block',
-    height: '50px',
+    height: 50,
     width: '50px',
     position: 'absolute',
     left: '10px',
@@ -226,7 +226,12 @@ var MobileHeader = function (_React$Component) {
           { className: 'visuallyHidden' },
           this.props.alt
         ),
-        _react2.default.createElement(_dgxSvgIcons.LionLogoIcon, { ariaHidden: true, className: this.props.className + '-logo' })
+        _react2.default.createElement(_dgxSvgIcons.LionLogoIcon, {
+          ariaHidden: true,
+          className: this.props.className + '-logo',
+          height: 30,
+          width: 30
+        })
       );
     }
 

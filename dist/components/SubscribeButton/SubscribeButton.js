@@ -240,8 +240,7 @@ var SubscribeButton = function (_React$Component) {
         {
           focusTrapOptions: {
             onDeactivate: this.handleOnClickOut,
-            clickOutsideDeactivates: true,
-            initialFocus: '.subscribeMessageBox'
+            clickOutsideDeactivates: true
           },
           active: this.state.visible,
           className: 'subscribeButton-wrapper',

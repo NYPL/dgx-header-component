@@ -5,7 +5,7 @@ import axios from 'axios';
 import cx from 'classnames';
 import { extend as _extend } from 'underscore';
 import {
-  CheckIcon,
+  CheckSoloIcon,
   LeftArrowIcon,
   XIcon,
 } from '@nypl/dgx-svg-icons';
@@ -227,7 +227,7 @@ class EmailSubscription extends React.Component {
               </div>
 
               <div className={`${formClass}-submit`}>
-                <XIcon ariaHidden />
+                <CheckSoloIcon ariaHidden />
                 <input
                   aria-label="Sign up"
                   type="submit"

@@ -203,7 +203,7 @@ var MyNypl = function (_React$Component) {
                   return _utils2.default.trackHeader(gaAction, 'Research');
                 }
               },
-              _react2.default.createElement(_dgxSvgIcons.BuildingIcon, { fill: '#fff', ariaHidden: true }),
+              _react2.default.createElement(_dgxSvgIcons.BuildingIcon, { ariaHidden: true }),
               researchCatalogLinkLabel
             )
           )

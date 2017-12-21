@@ -39,10 +39,17 @@
       .mobileBottomButtons {
         display: block;
 
+        .subscribeLink {
+          svg {
+            margin-left: 40px;
+          }
+        }
+
         svg {
           position: absolute;
           fill: #fff;
-          margin-left: 30px;
+          margin-left: 20px;
+          height: 20px;
         }
       }
 

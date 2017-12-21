@@ -91,7 +91,7 @@ const NavMenuMobileButtons = ({
           className={`${libraryCardClass}-wrapper`}
           style={_extend(styles.wrapper, styles.libraryCardLinkWrapper)}
         >
-          <XIcon ariaHidden />
+          <LibraryCardIcon iconId="libraryCardSVG" ariaHidden />
           <span
             className={`${libraryCardClass}-label`}
             style={_extend(styles.libraryCardLinkLabel, styles.label)}
@@ -110,7 +110,7 @@ const NavMenuMobileButtons = ({
           className={`${subscribeLinkClass}-wrapper`}
           style={_extend(styles.wrapper, styles.subscribeLinkWrapper)}
         >
-          <XIcon ariaHidden />
+          <EnvelopeIcon iconId="envelopSVG" ariaHidden />
           <span
             className={`${subscribeLinkClass}-label`}
             style={_extend(styles.subscribeLinkLabel, styles.label)}

@@ -297,7 +297,7 @@ var EmailSubscription = function (_React$Component) {
               _react2.default.createElement(
                 'div',
                 { className: formClass + '-submit' },
-                _react2.default.createElement(_dgxSvgIcons.XIcon, { ariaHidden: true }),
+                _react2.default.createElement(_dgxSvgIcons.CheckSoloIcon, { ariaHidden: true }),
                 _react2.default.createElement('input', {
                   'aria-label': 'Sign up',
                   type: 'submit',

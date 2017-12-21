@@ -64,7 +64,8 @@ var styles = {
     width: '250px',
     minHeight: '210px',
     backgroundColor: '#1B7FA7',
-    padding: '25px 30px'
+    padding: '25px 30px',
+    marginTop: '10px'
   },
   hide: {
     display: 'none'
@@ -188,7 +189,7 @@ var SubscribeButton = function (_React$Component) {
     key: 'renderEmailButton',
     value: function renderEmailButton() {
       var buttonClass = '';
-      var icon = _react2.default.createElement(_dgxSvgIcons.DownWedgeIcon, { className: 'dropDownIcon', ariaHidden: true });
+      var icon = _react2.default.createElement(_dgxSvgIcons.GenericWedgeIcon, { className: 'dropDownIcon', ariaHidden: true });
       var label = this.props.label;
 
       if (this.state.visible) {

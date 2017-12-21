@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { extend as _extend } from 'underscore';
 import FocusTrap from 'focus-trap-react';
 import {
-  DownWedgeIcon,
+  GenericWedgeIcon,
   XIcon,
 } from '@nypl/dgx-svg-icons';
 // GA Utilities
@@ -36,6 +36,7 @@ const styles = {
     minWidth: '250px',
     backgroundColor: '#1B7FA7',
     padding: '25px 30px',
+    marginTop: '10px',
   },
 };
 
@@ -102,7 +103,7 @@ class MyNyplButton extends React.Component {
    */
   renderMyNyplButton() {
     let buttonClass = '';
-    let icon = <DownWedgeIcon className="dropDownIcon" ariaHidden />;
+    let icon = <GenericWedgeIcon className="dropDownIcon" ariaHidden />;
     let myNyplButtonLabel = (this.props.patronName) ? 'My Account' : 'Log In';
     const labelColorClass = (this.props.isLoggedIn) ? ' loggedIn' : '';
     const loggedInFadeInAnimation = (this.props.patronName) ? ' animated fadeIn' : '';

@@ -139,7 +139,7 @@ class MyNypl extends React.Component {
               className={`${this.props.className}-research-btn`}
               onClick={() => utils.trackHeader(gaAction, 'Research')}
             >
-              <BuildingIcon fill="#fff" ariaHidden />
+              <BuildingIcon ariaHidden />
               {researchCatalogLinkLabel}
             </a>
           </li>

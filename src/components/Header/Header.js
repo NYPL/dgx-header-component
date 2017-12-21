@@ -233,6 +233,7 @@ class Header extends React.Component {
                     isLoggedIn={isLoggedIn}
                     patronName={this.state.patronName}
                     logOutLink={this.state.logOutUrl}
+                    gaAction={gaAction}
                   />
                 </li>
                 <li>

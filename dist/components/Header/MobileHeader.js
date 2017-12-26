@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -167,7 +171,7 @@ var MobileHeader = function (_React$Component) {
   }
 
   /**
-   * toggleMobileMenuButton(activeButton)
+   * toggleMobileActiveBtn(activeButton)
    * This function either activates or deactivates the state of the button that was clicked on,
    * to track the active state SCSS styles.
    *
@@ -176,8 +180,8 @@ var MobileHeader = function (_React$Component) {
 
 
   _createClass(MobileHeader, [{
-    key: 'toggleMobileMenuButton',
-    value: function toggleMobileMenuButton(activeButton) {
+    key: 'toggleMobileActiveBtn',
+    value: function toggleMobileActiveBtn(activeButton) {
       if (activeButton === 'clickSearch') {
         var searchActive = this.state.activeButton === 'search' ? '' : 'search';
         this.setState({ activeButton: searchActive });
@@ -200,8 +204,9 @@ var MobileHeader = function (_React$Component) {
 
   }, {
     key: 'closeDropDown',
-    value: function closeDropDown() {
+    value: function closeDropDown(focusElem) {
       this.setState({ activeButton: '' });
+      _reactDom2.default.findDOMNode(this.refs[focusElem]).focus();
     }
 
     /**
@@ -272,7 +277,9 @@ var MobileHeader = function (_React$Component) {
           {
             className: 'mobileMyNypl-wrapper',
             focusTrapOptions: {
-              onDeactivate: this.closeDropDown,
+              onDeactivate: function onDeactivate() {
+                return _this2.closeDropDown('myNyplBtnFocus');
+              },
               clickOutsideDeactivates: true
             },
             active: active
@@ -284,10 +291,11 @@ var MobileHeader = function (_React$Component) {
               component: 'button',
               style: (0, _underscore.extend)(styles.myNyplButton, buttonStyles),
               onTap: function onTap() {
-                return _this2.toggleMobileMenuButton('click' + gaAction);
+                return _this2.toggleMobileActiveBtn('click' + gaAction);
               },
               'aria-haspopup': 'true',
-              'aria-expanded': active ? true : null
+              'aria-expanded': active ? true : null,
+              ref: 'myNyplBtnFocus'
             },
             _react2.default.createElement(
               'span',
@@ -375,7 +383,9 @@ var MobileHeader = function (_React$Component) {
           {
             className: this.props.className + '-searchDialog',
             focusTrapOptions: {
-              onDeactivate: this.closeDropDown,
+              onDeactivate: function onDeactivate() {
+                return _this3.closeDropDown('searchBtnFocus');
+              },
               initialFocus: '.' + this.props.className + '-searchForm-legend',
               clickOutsideDeactivates: true
             },
@@ -388,10 +398,11 @@ var MobileHeader = function (_React$Component) {
               component: 'button',
               style: (0, _underscore.extend)(styles.searchButton, buttonStyles),
               onTap: function onTap() {
-                return _this3.toggleMobileMenuButton('clickSearch');
+                return _this3.toggleMobileActiveBtn('clickSearch');
               },
               'aria-haspopup': 'true',
-              'aria-expanded': active ? true : null
+              'aria-expanded': active ? true : null,
+              ref: 'searchBtnFocus'
             },
             _react2.default.createElement(
               'span',
@@ -452,7 +463,9 @@ var MobileHeader = function (_React$Component) {
           {
             focusTrapOptions: {
               initialFocus: 'ul.header-mobile-navMenu-list li:first-of-type a',
-              onDeactivate: this.closeDropDown,
+              onDeactivate: function onDeactivate() {
+                return _this4.closeDropDown('navMenuBtnFocus');
+              },
               clickOutsideDeactivates: true
             },
             active: active
@@ -464,10 +477,11 @@ var MobileHeader = function (_React$Component) {
               component: 'button',
               style: (0, _underscore.extend)(styles.menuButton, buttonStyles),
               onTap: function onTap() {
-                return _this4.toggleMobileMenuButton('mobileMenu');
+                return _this4.toggleMobileActiveBtn('mobileMenu');
               },
               'aria-haspopup': 'true',
-              'aria-expanded': active ? true : null
+              'aria-expanded': active ? true : null,
+              ref: 'navMenuBtnFocus'
             },
             _react2.default.createElement(
               'span',

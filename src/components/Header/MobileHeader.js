@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import ReactTappable from 'react-tappable';
 import FocusTrap from 'focus-trap-react';
@@ -127,13 +128,13 @@ class MobileHeader extends React.Component {
   }
 
   /**
-   * toggleMobileMenuButton(activeButton)
+   * toggleMobileActiveBtn(activeButton)
    * This function either activates or deactivates the state of the button that was clicked on,
    * to track the active state SCSS styles.
    *
    * @param {String} activeButton
    */
-  toggleMobileMenuButton(activeButton) {
+  toggleMobileActiveBtn(activeButton) {
     if (activeButton === 'clickSearch') {
       const searchActive = this.state.activeButton === 'search' ? '' : 'search';
       this.setState({ activeButton: searchActive });
@@ -153,8 +154,9 @@ class MobileHeader extends React.Component {
    * This is necessary for the FocusTrap component to execute
    * the proper deactivateMethod for each dialog.
    */
-  closeDropDown() {
+  closeDropDown(focusElem) {
     this.setState({ activeButton: '' });
+    ReactDOM.findDOMNode(this.refs[focusElem]).focus();
   }
 
   /**
@@ -210,7 +212,7 @@ class MobileHeader extends React.Component {
         <FocusTrap
           className="mobileMyNypl-wrapper"
           focusTrapOptions={{
-            onDeactivate: this.closeDropDown,
+            onDeactivate: () => this.closeDropDown('myNyplBtnFocus'),
             clickOutsideDeactivates: true,
           }}
           active={active}
@@ -219,9 +221,10 @@ class MobileHeader extends React.Component {
             className={`${this.props.className}-myNyplButton`}
             component="button"
             style={_extend(styles.myNyplButton, buttonStyles)}
-            onTap={() => this.toggleMobileMenuButton(`click${gaAction}`)}
+            onTap={() => this.toggleMobileActiveBtn(`click${gaAction}`)}
             aria-haspopup="true"
             aria-expanded={active ? true : null}
+            ref="myNyplBtnFocus"
           >
             <span className="visuallyHidden">{buttonLabel}</span>
             {icon}
@@ -290,7 +293,7 @@ class MobileHeader extends React.Component {
         <FocusTrap
           className={`${this.props.className}-searchDialog`}
           focusTrapOptions={{
-            onDeactivate: this.closeDropDown,
+            onDeactivate: () => this.closeDropDown('searchBtnFocus'),
             initialFocus: `.${this.props.className}-searchForm-legend`,
             clickOutsideDeactivates: true,
           }}
@@ -300,9 +303,10 @@ class MobileHeader extends React.Component {
             className={`${this.props.className}-searchButton${mobileSearchClass}`}
             component="button"
             style={_extend(styles.searchButton, buttonStyles)}
-            onTap={() => this.toggleMobileMenuButton('clickSearch')}
+            onTap={() => this.toggleMobileActiveBtn('clickSearch')}
             aria-haspopup="true"
             aria-expanded={active ? true : null}
+            ref="searchBtnFocus"
           >
             <span className="visuallyHidden">{buttonLabel}</span>
             {icon}
@@ -357,7 +361,7 @@ class MobileHeader extends React.Component {
         <FocusTrap
           focusTrapOptions={{
             initialFocus: 'ul.header-mobile-navMenu-list li:first-of-type a',
-            onDeactivate: this.closeDropDown,
+            onDeactivate: () => this.closeDropDown('navMenuBtnFocus'),
             clickOutsideDeactivates: true,
           }}
           active={active}
@@ -366,9 +370,10 @@ class MobileHeader extends React.Component {
             className={`${this.props.className}-menuButton${mobileMenuClass}`}
             component="button"
             style={_extend(styles.menuButton, buttonStyles)}
-            onTap={() => this.toggleMobileMenuButton('mobileMenu')}
+            onTap={() => this.toggleMobileActiveBtn('mobileMenu')}
             aria-haspopup="true"
             aria-expanded={active ? true : null}
+            ref="navMenuBtnFocus"
           >
             <span className="visuallyHidden">{buttonLabel}</span>
             {icon}

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { extend as _extend } from 'underscore';
 import FocusTrap from 'focus-trap-react';
 import {
-  DownWedgeIcon,
+  GenericWedgeIcon,
   XIcon,
-} from 'dgx-svg-icons';
+} from '@nypl/dgx-svg-icons';
 import axios from 'axios';
 
 import EmailSubscription from '../EmailSubscription/EmailSubscription.js';
@@ -33,6 +33,7 @@ const styles = {
     minHeight: '210px',
     backgroundColor: '#1B7FA7',
     padding: '25px 30px',
+    marginTop: '10px',
   },
   hide: {
     display: 'none',
@@ -135,7 +136,7 @@ class SubscribeButton extends React.Component {
 
   renderEmailButton() {
     let buttonClass = '';
-    let icon = <DownWedgeIcon className="dropDownIcon" ariaHidden />;
+    let icon = <GenericWedgeIcon className="dropDownIcon" ariaHidden />;
     let label = this.props.label;
 
     if (this.state.visible) {

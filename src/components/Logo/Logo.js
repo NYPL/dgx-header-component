@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { LionLogoWithText } from 'dgx-svg-icons';
+import { LionLogoWithText } from '@nypl/dgx-svg-icons';
 import utils from '../../utils/utils.js';
 
 const Logo = (props) =>

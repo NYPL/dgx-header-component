@@ -83,11 +83,11 @@
         display: block;
       }
 
-      .icon {
-        color: rgba(0, 0, 0, 0.5);
-        font-size: 22px;
-        margin-right: 5px;
+      .x-icon {
+        height: 20px;
         vertical-align: middle;
+        margin-right: 0px;
+        fill: #fff;
       }
     }
     &-input {
@@ -111,12 +111,12 @@
         border-radius: 20px;
       }
 
-      .icon {
-        color: #fff;
-        font-size: 30px;
+      .check-solo-icon {
         position: absolute;
-        margin-top: 53px;
-        margin-left: 5px;
+        margin-top: 66px;
+        height: 25px;
+        margin-left: 4px;
+        fill: #fff;
       }
     }
   }

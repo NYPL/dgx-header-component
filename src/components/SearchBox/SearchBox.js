@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {
   SearchIcon,
   RightWedgeIcon,
-} from 'dgx-svg-icons';
+} from '@nypl/dgx-svg-icons';
 // GA Utility Library
 import utils from '../../utils/utils.js';
 import gaConfig from '../../gaConfig.js';

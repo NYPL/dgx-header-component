@@ -14,6 +14,8 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _underscore = require('underscore');
 
+var _dgxSvgIcons = require('@nypl/dgx-svg-icons');
+
 var _utils = require('../../utils/utils.js');
 
 var _utils2 = _interopRequireDefault(_utils);
@@ -113,11 +115,7 @@ var NavMenuMobileButtons = function NavMenuMobileButtons(_ref) {
           className: libraryCardClass + '-wrapper',
           style: (0, _underscore.extend)(styles.wrapper, styles.libraryCardLinkWrapper)
         },
-        _react2.default.createElement('span', {
-          className: libraryCardClass + '-icon nypl-icon-card',
-          style: styles.icon,
-          'aria-hidden': 'true'
-        }),
+        _react2.default.createElement(_dgxSvgIcons.LibraryCardIcon, { iconId: 'libraryCardSVG', ariaHidden: true }),
         _react2.default.createElement(
           'span',
           {
@@ -144,11 +142,7 @@ var NavMenuMobileButtons = function NavMenuMobileButtons(_ref) {
           className: subscribeLinkClass + '-wrapper',
           style: (0, _underscore.extend)(styles.wrapper, styles.subscribeLinkWrapper)
         },
-        _react2.default.createElement('span', {
-          className: subscribeLinkClass + '-icon nypl-icon-mail',
-          style: styles.icon,
-          'aria-hidden': 'true'
-        }),
+        _react2.default.createElement(_dgxSvgIcons.EnvelopeIcon, { iconId: 'envelopSVG', ariaHidden: true }),
         _react2.default.createElement(
           'span',
           {

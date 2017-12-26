@@ -16,6 +16,8 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _underscore = require('underscore');
 
+var _dgxSvgIcons = require('@nypl/dgx-svg-icons');
+
 var _SearchButton = require('../SearchButton/SearchButton');
 
 var _SearchButton2 = _interopRequireDefault(_SearchButton);
@@ -94,7 +96,7 @@ var NavMenu = function (_React$Component) {
             className: this.props.className + '-wrapper ' + mobileActiveClass,
             'aria-label': 'Main Navigation'
           },
-          _react2.default.createElement('span', { className: 'mobileLogoText nypl-icon-logo-type', 'aria-hidden': 'true' }),
+          _react2.default.createElement(_dgxSvgIcons.LionLogoWithText, { ariaHidden: true }),
           _react2.default.createElement(
             'ul',
             { className: this.props.className + '-list', id: 'navMenu-List' },

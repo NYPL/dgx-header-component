@@ -4,7 +4,7 @@ import { pick as _pick, map as _map } from 'underscore';
 import {
   FaceBookIcon,
   TwitterIcon,
-} from 'dgx-svg-icons';
+} from '@nypl/dgx-svg-icons';
 
 // GA Utility
 import utils from '../../utils/utils.js';

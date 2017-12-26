@@ -26,7 +26,7 @@ var _appConfig = require('../../appConfig.js');
 
 var _appConfig2 = _interopRequireDefault(_appConfig);
 
-var _dgxSvgIcons = require('dgx-svg-icons');
+var _dgxSvgIcons = require('@nypl/dgx-svg-icons');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -203,7 +203,7 @@ var MyNypl = function (_React$Component) {
                   return _utils2.default.trackHeader(gaAction, 'Research');
                 }
               },
-              _react2.default.createElement(_dgxSvgIcons.BuildingIcon, { fill: '#fff', ariaHidden: true }),
+              _react2.default.createElement(_dgxSvgIcons.BuildingIcon, { ariaHidden: true }),
               researchCatalogLinkLabel
             )
           )

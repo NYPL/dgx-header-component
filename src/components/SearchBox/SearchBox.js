@@ -1,7 +1,10 @@
 // Import React libraries
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SearchIcon } from 'dgx-svg-icons';
+import {
+  SearchIcon,
+  RightWedgeIcon,
+} from '@nypl/dgx-svg-icons';
 // GA Utility Library
 import utils from '../../utils/utils.js';
 import gaConfig from '../../gaConfig.js';
@@ -242,7 +245,7 @@ class SearchBox extends React.Component {
           autoComplete="off"
           autoFocus
         />
-        <span className="nypl-icon-magnifier-thin icon" aria-hidden="true"></span>
+        <SearchIcon ariaHidden />
       </div>
     );
   }
@@ -255,14 +258,14 @@ class SearchBox extends React.Component {
           onClick={() => this.submitSearchRequest('catalog')}
         >
           <span className="label">CATALOG</span>
-          <span className="nypl-icon-wedge-right icon"></span>
+          <RightWedgeIcon ariaHidden />
         </button>
         <button
           aria-label="Submit NYPL Website Search"
           onClick={() => this.submitSearchRequest('website')}
         >
           <span className="label">NYPL.ORG</span>
-          <span className="nypl-icon-wedge-right icon"></span>
+          <RightWedgeIcon ariaHidden />
         </button>
       </div>
     );

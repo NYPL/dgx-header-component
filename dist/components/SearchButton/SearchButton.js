@@ -22,7 +22,7 @@ var _focusTrapReact = require('focus-trap-react');
 
 var _focusTrapReact2 = _interopRequireDefault(_focusTrapReact);
 
-var _dgxSvgIcons = require('dgx-svg-icons');
+var _dgxSvgIcons = require('@nypl/dgx-svg-icons');
 
 var _SearchBox = require('../SearchBox/SearchBox');
 
@@ -159,7 +159,7 @@ var SearchButton = function (_React$Component) {
       return this.state.active ? _react2.default.createElement(
         'div',
         { className: this.props.className + '-desktopSearchBox animatedFast fadeIn' },
-        _react2.default.createElement(_SearchBox2.default, { className: 'desktopSearch-Form' })
+        _react2.default.createElement(_SearchBox2.default, { className: 'desktopSearch-form' })
       ) : null;
     }
   }, {

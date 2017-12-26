@@ -14,7 +14,7 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _dgxSvgIcons = require('dgx-svg-icons');
+var _dgxSvgIcons = require('@nypl/dgx-svg-icons');
 
 var _utils = require('../../utils/utils.js');
 
@@ -301,7 +301,7 @@ var SearchBox = function (_React$Component) {
           autoComplete: 'off',
           autoFocus: true
         }),
-        _react2.default.createElement('span', { className: 'nypl-icon-magnifier-thin icon', 'aria-hidden': 'true' })
+        _react2.default.createElement(_dgxSvgIcons.SearchIcon, { ariaHidden: true })
       );
     }
   }, {
@@ -325,7 +325,7 @@ var SearchBox = function (_React$Component) {
             { className: 'label' },
             'CATALOG'
           ),
-          _react2.default.createElement('span', { className: 'nypl-icon-wedge-right icon' })
+          _react2.default.createElement(_dgxSvgIcons.RightWedgeIcon, { ariaHidden: true })
         ),
         _react2.default.createElement(
           'button',
@@ -340,7 +340,7 @@ var SearchBox = function (_React$Component) {
             { className: 'label' },
             'NYPL.ORG'
           ),
-          _react2.default.createElement('span', { className: 'nypl-icon-wedge-right icon' })
+          _react2.default.createElement(_dgxSvgIcons.RightWedgeIcon, { ariaHidden: true })
         )
       );
     }

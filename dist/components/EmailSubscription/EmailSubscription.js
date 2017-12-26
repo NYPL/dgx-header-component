@@ -28,6 +28,8 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 var _underscore = require('underscore');
 
+var _dgxSvgIcons = require('@nypl/dgx-svg-icons');
+
 var _appConfig = require('../../appConfig.js');
 
 var _appConfig2 = _interopRequireDefault(_appConfig);
@@ -70,7 +72,7 @@ var styles = {
     fontSize: '14px',
     height: '38px',
     letterSpacing: '.03em',
-    margin: '50px 0 0 0',
+    margin: '60px 0 0 0',
     padding: '0 0 0 21px',
     lineHeight: 'normal',
     width: '100px'
@@ -285,7 +287,7 @@ var EmailSubscription = function (_React$Component) {
               _react2.default.createElement(
                 'div',
                 { className: formClass + '-error ' + errorClass },
-                _react2.default.createElement('span', { className: 'nypl-icon-solo-x icon', 'aria-hidden': 'true' }),
+                _react2.default.createElement(_dgxSvgIcons.XIcon, { ariaHidden: true }),
                 _react2.default.createElement(
                   'span',
                   null,
@@ -295,7 +297,7 @@ var EmailSubscription = function (_React$Component) {
               _react2.default.createElement(
                 'div',
                 { className: formClass + '-submit' },
-                _react2.default.createElement('span', { className: 'nypl-icon-check-solo icon', 'aria-hidden': 'true' }),
+                _react2.default.createElement(_dgxSvgIcons.CheckSoloIcon, { ariaHidden: true }),
                 _react2.default.createElement('input', {
                   'aria-label': 'Sign up',
                   type: 'submit',
@@ -387,7 +389,7 @@ var EmailSubscription = function (_React$Component) {
             _react2.default.createElement(
               'a',
               { href: '', onClick: this.initForm, style: styles.tryAgainButton },
-              _react2.default.createElement('span', { className: 'nypl-icon-arrow-left icon', 'aria-hidden': 'true' }),
+              _react2.default.createElement(_dgxSvgIcons.LeftArrowIcon, { ariaHidden: true }),
               'TRY AGAIN'
             )
           );

@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
@@ -22,7 +26,7 @@ var _focusTrapReact = require('focus-trap-react');
 
 var _focusTrapReact2 = _interopRequireDefault(_focusTrapReact);
 
-var _dgxSvgIcons = require('dgx-svg-icons');
+var _dgxSvgIcons = require('@nypl/dgx-svg-icons');
 
 var _underscore = require('underscore');
 
@@ -79,7 +83,7 @@ var styles = {
     backgroundColor: '#FFF',
     textDecoration: 'none',
     display: 'inline-block',
-    height: '50px',
+    height: 50,
     width: '50px',
     position: 'absolute',
     left: '10px',
@@ -108,14 +112,6 @@ var styles = {
     lineHeight: 'normal',
     verticalAlign: '0px'
   },
-  patronInitial: {
-    color: '#497629',
-    display: 'inline-block',
-    fontSize: '1.8em',
-    lineHeight: 'normal',
-    margin: '0 5px 0 0',
-    verticalAlign: '8px'
-  },
   activeMyNyplButton: {
     color: '#FFF',
     backgroundColor: '#2B2B2B'
@@ -139,15 +135,6 @@ var styles = {
   inactiveSearchButton: {
     color: '#000',
     backgroundColor: '#FFF'
-  },
-  searchDialog: {
-    position: 'absolute',
-    margin: 0,
-    padding: 0,
-    left: 0,
-    width: '100%',
-    backgroundColor: '#1B7FA7',
-    zIndex: '1000'
   },
   menuButton: {
     margin: 0,
@@ -184,7 +171,7 @@ var MobileHeader = function (_React$Component) {
   }
 
   /**
-   * toggleMobileMenuButton(activeButton)
+   * toggleMobileActiveBtn(activeButton)
    * This function either activates or deactivates the state of the button that was clicked on,
    * to track the active state SCSS styles.
    *
@@ -193,8 +180,8 @@ var MobileHeader = function (_React$Component) {
 
 
   _createClass(MobileHeader, [{
-    key: 'toggleMobileMenuButton',
-    value: function toggleMobileMenuButton(activeButton) {
+    key: 'toggleMobileActiveBtn',
+    value: function toggleMobileActiveBtn(activeButton) {
       if (activeButton === 'clickSearch') {
         var searchActive = this.state.activeButton === 'search' ? '' : 'search';
         this.setState({ activeButton: searchActive });
@@ -217,8 +204,9 @@ var MobileHeader = function (_React$Component) {
 
   }, {
     key: 'closeDropDown',
-    value: function closeDropDown() {
+    value: function closeDropDown(focusElem) {
       this.setState({ activeButton: '' });
+      _reactDom2.default.findDOMNode(this.refs[focusElem]).focus();
     }
 
     /**
@@ -243,7 +231,12 @@ var MobileHeader = function (_React$Component) {
           { className: 'visuallyHidden' },
           this.props.alt
         ),
-        _react2.default.createElement(_dgxSvgIcons.LionLogoIcon, { ariaHidden: true, className: this.props.className + '-logo' })
+        _react2.default.createElement(_dgxSvgIcons.LionLogoIcon, {
+          ariaHidden: true,
+          className: this.props.className + '-logo',
+          height: 30,
+          width: 30
+        })
       );
     }
 
@@ -266,7 +259,7 @@ var MobileHeader = function (_React$Component) {
         icon = _react2.default.createElement(_dgxSvgIcons.LoginIconSolid, { className: 'loginIcon-loggedIn animated fadeIn', ariaHidden: true });
       }
       var buttonStyles = styles.inactiveMyNyplButton;
-      var buttonLabel = this.props.patronName ? 'My Account' : 'Login';
+      var buttonLabel = this.props.patronName ? 'My Account' : 'Log In';
       var active = this.state.activeButton === 'myNypl';
 
       if (active) {
@@ -284,7 +277,9 @@ var MobileHeader = function (_React$Component) {
           {
             className: 'mobileMyNypl-wrapper',
             focusTrapOptions: {
-              onDeactivate: this.closeDropDown,
+              onDeactivate: function onDeactivate() {
+                return _this2.closeDropDown('myNyplBtnFocus');
+              },
               clickOutsideDeactivates: true
             },
             active: active
@@ -296,10 +291,11 @@ var MobileHeader = function (_React$Component) {
               component: 'button',
               style: (0, _underscore.extend)(styles.myNyplButton, buttonStyles),
               onTap: function onTap() {
-                return _this2.toggleMobileMenuButton('click' + gaAction);
+                return _this2.toggleMobileActiveBtn('click' + gaAction);
               },
               'aria-haspopup': 'true',
-              'aria-expanded': active ? true : null
+              'aria-expanded': active ? true : null,
+              ref: 'myNyplBtnFocus'
             },
             _react2.default.createElement(
               'span',
@@ -369,53 +365,57 @@ var MobileHeader = function (_React$Component) {
       var mobileSearchClass = '';
       var icon = _react2.default.createElement(_dgxSvgIcons.SearchIcon, { ariaHidden: true, fill: '#000' });
       var buttonStyles = styles.inactiveSearchButton;
-      var buttonLabel = 'Open Search Dialog';
-      var dialogWindow = null;
+      var buttonLabel = 'Open Search';
+      var active = this.state.activeButton === 'search';
 
-      if (this.state.activeButton === 'search') {
+      if (active) {
         mobileSearchClass = ' active';
         icon = _react2.default.createElement(_dgxSvgIcons.XIcon, { ariaHidden: true, fill: '#FFF' });
         buttonStyles = styles.activeSearchButton;
-        buttonLabel = 'Close Search Dialog';
-        dialogWindow = _react2.default.createElement(
-          _focusTrapReact2.default,
-          {
-            className: this.props.className + '-searchDialog',
-            focusTrapOptions: {
-              onDeactivate: this.closeDropDown,
-              initialFocus: '.' + this.props.className + '-searchForm-legend',
-              clickOutsideDeactivates: true
-            },
-            style: styles.searchDialog
-          },
-          _react2.default.createElement(_SearchBox2.default, {
-            className: this.props.className + '-searchForm',
-            type: 'mobile'
-          })
-        );
+        buttonLabel = 'Close Search';
       }
 
       return _react2.default.createElement(
         'li',
         { style: styles.listItem },
         _react2.default.createElement(
-          _reactTappable2.default,
+          _focusTrapReact2.default,
           {
-            className: this.props.className + '-searchButton' + mobileSearchClass,
-            component: 'button',
-            style: (0, _underscore.extend)(styles.searchButton, buttonStyles),
-            onTap: function onTap() {
-              return _this3.toggleMobileMenuButton('clickSearch');
-            }
+            className: this.props.className + '-searchDialog',
+            focusTrapOptions: {
+              onDeactivate: function onDeactivate() {
+                return _this3.closeDropDown('searchBtnFocus');
+              },
+              initialFocus: '.' + this.props.className + '-searchForm-legend',
+              clickOutsideDeactivates: true
+            },
+            active: active
           },
           _react2.default.createElement(
-            'span',
-            { className: 'visuallyHidden' },
-            buttonLabel
+            _reactTappable2.default,
+            {
+              className: this.props.className + '-searchButton' + mobileSearchClass,
+              component: 'button',
+              style: (0, _underscore.extend)(styles.searchButton, buttonStyles),
+              onTap: function onTap() {
+                return _this3.toggleMobileActiveBtn('clickSearch');
+              },
+              'aria-haspopup': 'true',
+              'aria-expanded': active ? true : null,
+              ref: 'searchBtnFocus'
+            },
+            _react2.default.createElement(
+              'span',
+              { className: 'visuallyHidden' },
+              buttonLabel
+            ),
+            icon
           ),
-          icon
-        ),
-        dialogWindow
+          active && _react2.default.createElement(_SearchBox2.default, {
+            className: this.props.className + '-searchForm',
+            type: 'mobile'
+          })
+        )
       );
     }
 
@@ -463,7 +463,9 @@ var MobileHeader = function (_React$Component) {
           {
             focusTrapOptions: {
               initialFocus: 'ul.header-mobile-navMenu-list li:first-of-type a',
-              onDeactivate: this.closeDropDown,
+              onDeactivate: function onDeactivate() {
+                return _this4.closeDropDown('navMenuBtnFocus');
+              },
               clickOutsideDeactivates: true
             },
             active: active
@@ -475,8 +477,11 @@ var MobileHeader = function (_React$Component) {
               component: 'button',
               style: (0, _underscore.extend)(styles.menuButton, buttonStyles),
               onTap: function onTap() {
-                return _this4.toggleMobileMenuButton('mobileMenu');
-              }
+                return _this4.toggleMobileActiveBtn('mobileMenu');
+              },
+              'aria-haspopup': 'true',
+              'aria-expanded': active ? true : null,
+              ref: 'navMenuBtnFocus'
             },
             _react2.default.createElement(
               'span',

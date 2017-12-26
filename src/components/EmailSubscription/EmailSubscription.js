@@ -4,6 +4,12 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import cx from 'classnames';
 import { extend as _extend } from 'underscore';
+import {
+  CheckSoloIcon,
+  LeftArrowIcon,
+  XIcon,
+} from '@nypl/dgx-svg-icons';
+
 import config from '../../appConfig.js';
 import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWidget.js';
 import SubscribeMessageBox from './SubscribeMessageBox.js';
@@ -24,7 +30,7 @@ const styles = {
     fontSize: '14px',
     height: '38px',
     letterSpacing: '.03em',
-    margin: '50px 0 0 0',
+    margin: '60px 0 0 0',
     padding: '0 0 0 21px',
     lineHeight: 'normal',
     width: '100px',
@@ -216,12 +222,12 @@ class EmailSubscription extends React.Component {
               />
 
               <div className={`${formClass}-error ${errorClass}`}>
-                <span className="nypl-icon-solo-x icon" aria-hidden="true"></span>
+                <XIcon ariaHidden />
                 <span>Please enter a valid email address</span>
               </div>
 
               <div className={`${formClass}-submit`}>
-                <span className="nypl-icon-check-solo icon" aria-hidden="true"></span>
+                <CheckSoloIcon ariaHidden />
                 <input
                   aria-label="Sign up"
                   type="submit"
@@ -284,7 +290,7 @@ class EmailSubscription extends React.Component {
             <div>Something isn&apos;t quite right.</div>
             <div>Please try again.</div>
             <a href="" onClick={this.initForm} style={styles.tryAgainButton}>
-              <span className="nypl-icon-arrow-left icon" aria-hidden="true"></span>
+              <LeftArrowIcon ariaHidden />
               TRY AGAIN
             </a>
           </div>

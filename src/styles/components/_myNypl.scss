@@ -90,7 +90,7 @@
         svg {
           vertical-align: middle;
           width: 28px;
-          padding-right: 3px;
+          padding-right: 5px;
           height: 28px;
         }
       }
@@ -109,6 +109,12 @@
       color: rgba(255, 255, 255, 0.6);
       vertical-align: middle;
       margin-right: 5px;
+    }
+
+    .bldgIcon {
+      fill: #fff;
+      margin: 2px 0;
+      height: 20px;
     }
 
     .logoutIcon {
@@ -188,7 +194,14 @@
   a:first-child {
     svg {
       vertical-align: bottom;
+      margin-top: 5px;
     }
+  }
+
+  .bldgIcon {
+    fill: #fff;
+    height: 25px;
+    margin: 5px 0;
   }
 }
 

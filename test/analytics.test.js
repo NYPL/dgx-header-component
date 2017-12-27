@@ -289,7 +289,7 @@ describe('Google Analytics', function () {
     });
 
     describe('Books/Music/Movies link', () => {
-      it('fires event with "Go to..." action, "Books/Music/DVDs" label', () => {
+      it('fires event with "Go to..." action, "Books/Music/Movies" label', () => {
         // This is brittle, but seems like the best way to identify the Books/Music/Movies link:
         const navButton = component.find('nav.header-navMenu-wrapper a.navMenuItem-link[href="/books-music-dvds"]');
         expect(navButton.length).to.equal(1);
@@ -300,7 +300,7 @@ describe('Google Analytics', function () {
         expect(gaEvents[0]).to.be.a('object');
         expect(gaEvents[0].category).to.equal('Global Header');
         expect(gaEvents[0].action).to.equal('Go to...');
-        expect(gaEvents[0].label).to.equal('Books/Music/DVDs');
+        expect(gaEvents[0].label).to.equal('Books/Music/Movies');
         expect(gaEvents[0].value).to.equal(undefined);
       });
     });

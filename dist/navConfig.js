@@ -36,7 +36,7 @@ var previous = [{
       type: 'text-group',
       en: {
         type: 'text-single',
-        text: 'Books/Music/DVDs'
+        text: 'Books/Music/Movies'
       }
     },
     sort: 0
@@ -572,7 +572,7 @@ var current = [{
     type: 'text-group',
     en: {
       type: 'text-single',
-      text: 'Books/Music/DVDs'
+      text: 'Books/Music/Movies'
     }
   },
   sort: 100,

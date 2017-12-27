@@ -16,6 +16,8 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _underscore = require('underscore');
 
+var _dgxSvgIcons = require('@nypl/dgx-svg-icons');
+
 var _utils = require('../../utils/utils.js');
 
 var _utils2 = _interopRequireDefault(_utils);
@@ -27,8 +29,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 // GA Utility
 
+
+var icons = {
+  twitter: _react2.default.createElement(_dgxSvgIcons.TwitterIcon, { iconId: 'email-twitter' }),
+  facebook: _react2.default.createElement(_dgxSvgIcons.FaceBookIcon, { iconId: 'email-fb' })
+};
 
 var SocialMediaLinksWidget = function (_React$Component) {
   _inherits(SocialMediaLinksWidget, _React$Component);
@@ -54,22 +62,27 @@ var SocialMediaLinksWidget = function (_React$Component) {
       var socialLinksList = displayOnlyList && displayOnlyList.length ? (0, _underscore.pick)(list, displayOnlyList) : list;
 
       return (0, _underscore.map)(socialLinksList, function (item, key) {
-        var hoverClass = _this2.state.linkClass === key ? 'nypl-icon-' + key + '-circle-hover animateHover fadeInSlow' : 'nypl-icon-' + key + '-circle';
+        var hoverClass = _this2.state.linkClass === key ? 'animateHover fadeInSlow' : '';
+        var icon = icons[key];
 
         return _react2.default.createElement(
           'li',
           { key: key, className: _this2.props.className + '-listItem' },
-          _react2.default.createElement('a', {
-            href: item,
-            onClick: function onClick() {
-              return _this2.trackHeader('Click', 'Social Media - ' + key);
+          _react2.default.createElement(
+            'a',
+            {
+              href: item,
+              onClick: function onClick() {
+                return _this2.trackHeader('Click', 'Social Media - ' + key);
+              },
+              className: _this2.props.className + '-link ' + hoverClass,
+              onMouseEnter: function onMouseEnter() {
+                return _this2.handleOnMouseEnter(key);
+              },
+              onMouseLeave: _this2.handleOnMouseLeave
             },
-            className: _this2.props.className + '-link ' + hoverClass,
-            onMouseEnter: function onMouseEnter() {
-              return _this2.handleOnMouseEnter(key);
-            },
-            onMouseLeave: _this2.handleOnMouseLeave
-          })
+            icon
+          )
         );
       });
     }
@@ -129,7 +142,7 @@ SocialMediaLinksWidget.propTypes = {
 
 SocialMediaLinksWidget.defaultProps = {
   lang: 'en',
-  className: 'SocialMediaLinksWidget'
+  className: 'socialMediaLinksWidget'
 };
 
 exports.default = SocialMediaLinksWidget;

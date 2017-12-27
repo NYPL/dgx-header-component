@@ -20,7 +20,7 @@ var _focusTrapReact = require('focus-trap-react');
 
 var _focusTrapReact2 = _interopRequireDefault(_focusTrapReact);
 
-var _dgxSvgIcons = require('dgx-svg-icons');
+var _dgxSvgIcons = require('@nypl/dgx-svg-icons');
 
 var _utils = require('../../utils/utils.js');
 
@@ -70,7 +70,8 @@ var styles = {
     left: '0',
     minWidth: '250px',
     backgroundColor: '#1B7FA7',
-    padding: '25px 30px'
+    padding: '25px 30px',
+    marginTop: '10px'
   }
 };
 
@@ -157,7 +158,7 @@ var MyNyplButton = function (_React$Component) {
     key: 'renderMyNyplButton',
     value: function renderMyNyplButton() {
       var buttonClass = '';
-      var icon = _react2.default.createElement(_dgxSvgIcons.DownWedgeIcon, { className: 'dropDownIcon', ariaHidden: true });
+      var icon = _react2.default.createElement(_dgxSvgIcons.GenericWedgeIcon, { className: 'dropDownIcon', ariaHidden: true });
       var myNyplButtonLabel = this.props.patronName ? 'My Account' : 'Log In';
       var labelColorClass = this.props.isLoggedIn ? ' loggedIn' : '';
       var loggedInFadeInAnimation = this.props.patronName ? ' animated fadeIn' : '';

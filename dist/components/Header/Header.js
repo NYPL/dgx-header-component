@@ -361,7 +361,7 @@ var Header = function (_React$Component) {
                   'li',
                   null,
                   _react2.default.createElement(_DonateButton2.default, {
-                    id: 'top-DonateButton',
+                    id: 'donateButton',
                     lang: this.props.lang,
                     style: styles.donateButton,
                     gaLabel: 'Header Top Links'

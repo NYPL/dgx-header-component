@@ -7,7 +7,7 @@ import FocusTrap from 'focus-trap-react';
 import {
   SearchIcon,
   XIcon,
-} from 'dgx-svg-icons';
+} from '@nypl/dgx-svg-icons';
 import SearchBox from '../SearchBox/SearchBox';
 // GA Utility Library
 import utils from '../../utils/utils';
@@ -83,7 +83,7 @@ class SearchButton extends React.Component {
         onClick={e => this.handleOnClick(e)}
       >
         <span className={`${this.props.className}-searchButton-text`}>
-          { label }
+          {label}
         </span>
         {icon}
       </button>
@@ -99,7 +99,7 @@ class SearchButton extends React.Component {
   renderSearchBox() {
     return (this.state.active) ? (
       <div className={`${this.props.className}-desktopSearchBox animatedFast fadeIn`}>
-        <SearchBox className="desktopSearch-Form" />
+        <SearchBox className="desktopSearch-form" />
       </div>
     ) : null;
   }

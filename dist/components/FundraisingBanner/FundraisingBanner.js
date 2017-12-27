@@ -71,59 +71,6 @@ var FundraisingBanner = function (_React$Component) {
     }
 
     /**
-     * closeFundraisingBanner()
-     * Sets the `closeFundraisingBanner` cookie to expire in 24 hours and updates the `isBannerVisible`
-     * boolean to false which will hide the banner.
-     */
-
-  }, {
-    key: 'closeFundraisingBanner',
-    value: function closeFundraisingBanner() {
-      _utils2.default.setCookie(this.props.hideBannerCookieName, 'true', cookieExpInSeconds);
-      this.setState({ isBannerVisible: false });
-      // Fire the GA event only if the prop gaLabel is not empty
-      if (!(0, _underscore.isEmpty)(this.props.gaLabel)) {
-        _utils2.default.trackHeader('Close banner button clicked', this.props.gaLabel);
-      }
-    }
-
-    /**
-     * fetchFundraisingData(apiUrl, currentBannerData)
-     * Performs a GET request to the fundraising API only if no data exists. Upon a successful GET
-     * request, it will update the `isBannerVisible` boolean to true and populate the `bannerData`
-     * object with the API data.
-     *
-     * @param {string} apiUrl - The API endpoint to fetch fundraising data
-     * @param {object} currentBannerData - The object containing the fundraising data
-     */
-
-  }, {
-    key: 'fetchFundraisingData',
-    value: function fetchFundraisingData(apiUrl, currentBannerData) {
-      var _this2 = this;
-
-      if (!(0, _underscore.isEmpty)(apiUrl) && (0, _underscore.isEmpty)(currentBannerData)) {
-        return _axios2.default.get(apiUrl).then(function (result) {
-          if (result.data) {
-            _this2.setState({ bannerData: result.data, isBannerVisible: true });
-          } else {
-            console.warn('Missing response from GET request: ' + apiUrl, result);
-          }
-        }).catch(function (error) {
-          console.warn('Error on Axios GET request: ' + apiUrl);
-          if (error instanceof Error) {
-            console.warn(error.message);
-          } else {
-            // The request was made, but the server responded with a status code
-            // that falls out of the range of 2xx
-            console.warn(error.data);
-            console.warn(error.status);
-          }
-        });
-      }
-    }
-
-    /**
      * getBackgroundImageStyles(primaryImage, secondaryImage)
      * Assigns default background CSS styles and specific backgroundImage properties
      * if the `primaryImage` and `secondaryImage` paths are defined
@@ -150,6 +97,61 @@ var FundraisingBanner = function (_React$Component) {
       }
 
       return styles;
+    }
+
+    /**
+     * fetchFundraisingData(url, currentBannerData)
+     * Performs a GET request to the fundraising API only if no data exists. Upon a successful GET
+     * request, it will update the `isBannerVisible` boolean to true and populate the `bannerData`
+     * object with the API data.
+     *
+     * @param {string} url - The API endpoint to fetch fundraising data
+     * @param {object} currentBannerData - The object containing the fundraising data
+     */
+
+  }, {
+    key: 'fetchFundraisingData',
+    value: function fetchFundraisingData(url, currentBannerData) {
+      var _this2 = this;
+
+      if (!(0, _underscore.isEmpty)(url) && (0, _underscore.isEmpty)(currentBannerData)) {
+        return _axios2.default.get(url).then(function (result) {
+          if (result.data) {
+            _this2.setState({ bannerData: result.data, isBannerVisible: true });
+          } else {
+            console.warn('Missing response from GET request: ' + url, result);
+          }
+        }).catch(function (error) {
+          console.warn('Error on Axios GET request: ' + url);
+          if (error instanceof Error) {
+            console.warn(error.message);
+          } else {
+            // The request was made, but the server responded with a status code
+            // that falls out of the range of 2xx
+            console.warn(error.data);
+            console.warn(error.status);
+          }
+        });
+      }
+
+      return null;
+    }
+
+    /**
+     * closeFundraisingBanner()
+     * Sets the `closeFundraisingBanner` cookie to expire in 24 hours and
+     * updates the `isBannerVisible` boolean to false which will hide the banner.
+     */
+
+  }, {
+    key: 'closeFundraisingBanner',
+    value: function closeFundraisingBanner() {
+      _utils2.default.setCookie(this.props.hideBannerCookieName, 'true', cookieExpInSeconds);
+      this.setState({ isBannerVisible: false });
+      // Fire the GA event only if the prop gaLabel is not empty
+      if (!(0, _underscore.isEmpty)(this.props.gaLabel)) {
+        _utils2.default.trackHeader('Close banner button clicked', this.props.gaLabel);
+      }
     }
 
     /**
@@ -208,7 +210,8 @@ var FundraisingBanner = function (_React$Component) {
      * Generates the DOM for the description text if the `desc` parameter is not empty
      *
      * @param {string} closeText - String of the close text button element (default: `Close`)
-     * @param {string} ariaLabel - String of the aria-label property (default: `Close Fundraising banner`)
+     * @param {string} ariaLabel - String of the aria-label property
+     *  (default: `Close Fundraising banner`)
      */
 
   }, {
@@ -283,8 +286,8 @@ FundraisingBanner.propTypes = {
 };
 
 FundraisingBanner.defaultProps = {
-  className: 'FundraisingBanner',
-  id: 'FundraisingBanner',
+  className: 'fundraisingBanner',
+  id: 'fundraisingBanner',
   bannerData: {}
 };
 

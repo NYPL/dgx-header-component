@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { extend as _extend } from 'underscore';
+import {
+  LibraryCardIcon,
+  EnvelopeIcon,
+  XIcon,
+} from '@nypl/dgx-svg-icons';
+
 import utils from '../../utils/utils.js';
 // Dependent NYPL React Component
 import DonateButton from '../DonateButton/DonateButton.js';
@@ -85,12 +91,7 @@ const NavMenuMobileButtons = ({
           className={`${libraryCardClass}-wrapper`}
           style={_extend(styles.wrapper, styles.libraryCardLinkWrapper)}
         >
-          <span
-            className={`${libraryCardClass}-icon nypl-icon-card`}
-            style={styles.icon}
-            aria-hidden="true"
-          >
-          </span>
+          <LibraryCardIcon iconId="libraryCardSVG" ariaHidden />
           <span
             className={`${libraryCardClass}-label`}
             style={_extend(styles.libraryCardLinkLabel, styles.label)}
@@ -109,12 +110,7 @@ const NavMenuMobileButtons = ({
           className={`${subscribeLinkClass}-wrapper`}
           style={_extend(styles.wrapper, styles.subscribeLinkWrapper)}
         >
-          <span
-            className={`${subscribeLinkClass}-icon nypl-icon-mail`}
-            style={styles.icon}
-            aria-hidden="true"
-          >
-          </span>
+          <EnvelopeIcon iconId="envelopSVG" ariaHidden />
           <span
             className={`${subscribeLinkClass}-label`}
             style={_extend(styles.subscribeLinkLabel, styles.label)}
@@ -144,7 +140,7 @@ NavMenuMobileButtons.defaultProps = {
   lang: 'en',
   className: 'navMenuMobileButtons',
   libraryCardLink: '//www.nypl.org/library-card',
-  subscribeLink: '//pages.email.nypl.org/page.aspx' +
+  subscribeLink: 'http://pages.email.nypl.org/page.aspx' +
     '?QS=3935619f7de112ef7250fe02b84fb2f9ab74e4ea015814b7',
 };
 

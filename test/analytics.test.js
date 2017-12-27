@@ -11,8 +11,6 @@ import { Header, navConfig } from '../src/components/Header/Header';
 const utils = require('../src/utils/utils');
 
 describe('Google Analytics', function () {
-  this.timeout(10000);
-
   let gaEvents = null;
   let component = null;
   let mockAxios = null;
@@ -50,116 +48,292 @@ describe('Google Analytics', function () {
     });
   });
 
-  describe('MyNypl link', () => {
-    it('fires "Log In"/"MyNyplButton - Open" event for non-logged-in user', () => {
-      const navButton = component.find('nav.header-buttons .myNyplButton-wrapper a');
-      expect(navButton).to.be.a('object');
+  describe('Mobile', () => {
+    describe('MyNypl link', () => {
+      it('fires "Click" action, "Mobile clickLogIn" label event for non-logged-in user', (done) => {
+        const navButton = component.find('button.header-mobile-myNyplButton');
+        expect(navButton).to.be.a('object');
 
-      navButton.simulate('click');
+        // We can't use ReactWrapper.simulate('click') here because Tappable
+        // doesn't attach to clicks; Have to emulate a touch:
+        navButton.simulate('mouseDown');
 
-      expect(gaEvents.length).to.equal(1);
-      expect(gaEvents[0]).to.be.a('object');
-      expect(gaEvents[0].category).to.equal('Global Header');
-      expect(gaEvents[0].action).to.equal('Log In');
-      expect(gaEvents[0].label).to.equal('MyNyplButton - Open');
-      expect(gaEvents[0].value).to.equal(undefined);
-    });
+        setTimeout(() => {
+          navButton.simulate('mouseUp');
 
-    it('fires "My Account"/"MyNyplButton - Open" event for logged-in user', () => {
-      component.setState({
-        patronDataReceived: true,
+          expect(gaEvents.length).to.equal(1);
+          expect(gaEvents[0]).to.be.a('object');
+          expect(gaEvents[0].category).to.equal('Global Header');
+          expect(gaEvents[0].action).to.equal('Click');
+          expect(gaEvents[0].label).to.equal('Mobile clickLogIn');
+          expect(gaEvents[0].value).to.equal(undefined);
+
+          done();
+        }, 10);
       });
-      const navButton = component.find('nav.header-buttons .myNyplButton-wrapper a');
-      expect(navButton).to.be.a('object');
 
-      navButton.simulate('click');
+      it('fires "Click" action, "Mobile clickMyAccount" label event for non-logged-in user', (done) => {
+        component.setState({
+          patronName: 'Patience',
+        });
+        const navButton = component.find('button.header-mobile-myNyplButton');
+        expect(navButton).to.be.a('object');
 
-      expect(gaEvents.length).to.equal(1);
-      expect(gaEvents[0]).to.be.a('object');
-      expect(gaEvents[0].category).to.equal('Global Header');
-      expect(gaEvents[0].action).to.equal('My Account');
-      expect(gaEvents[0].label).to.equal('MyNyplButton - Open');
-      expect(gaEvents[0].value).to.equal(undefined);
+        // We can't use ReactWrapper.simulate('click') here because Tappable
+        // doesn't attach to clicks; Have to emulate a touch:
+        navButton.simulate('mouseDown');
+
+        setTimeout(() => {
+          navButton.simulate('mouseUp');
+
+          expect(gaEvents.length).to.equal(1);
+          expect(gaEvents[0]).to.be.a('object');
+          expect(gaEvents[0].category).to.equal('Global Header');
+          expect(gaEvents[0].action).to.equal('Click');
+          expect(gaEvents[0].label).to.equal('Mobile clickMyAccount');
+          expect(gaEvents[0].value).to.equal(undefined);
+
+          done();
+        }, 100);
+      });
     });
+
+    describe('Locations link', () => {
+      it('fires "Click" action, "Mobile Locations Button" label event', () => {
+        const navButton = component.find('a.header-mobile-locator');
+        expect(navButton).to.be.a('object');
+
+        navButton.simulate('click');
+
+        expect(gaEvents.length).to.equal(1);
+        expect(gaEvents[0]).to.be.a('object');
+        expect(gaEvents[0].category).to.equal('Global Header');
+        expect(gaEvents[0].action).to.equal('Click');
+        expect(gaEvents[0].label).to.equal('Mobile Locations Button');
+        expect(gaEvents[0].value).to.equal(undefined);
+      });
+    });
+
+    /*
+     * TODO I can't get these two tests to pass due to FocusTrap throwing
+     * "Uncaught Error: `initialFocus` refers to no known node" on nodes
+     * that absolutely exist and are known so :shruggie:
+     *
+    describe('Menu button', () => {
+      it('fires "??" action, "Mobile ??" label event for non-logged-in user', (done) => {
+        // const wrapper = component.find('.header-mobile').getDOMNode();
+
+        const navButton = component.find('button.header-mobile-menuButton');
+        expect(navButton).to.be.a('object');
+
+        // We can't use ReactWrapper.simulate('click') here because Tappable
+        // doesn't attach to clicks; Have to emulate a touch:
+        navButton.simulate('mouseDown');
+
+        setTimeout(() => {
+          navButton.simulate('mouseUp');
+
+          expect(gaEvents.length).to.equal(1);
+          expect(gaEvents[0]).to.be.a('object');
+          expect(gaEvents[0].category).to.equal('Global Header');
+          expect(gaEvents[0].action).to.equal('Click');
+          expect(gaEvents[0].label).to.equal('Mobile ??');
+          expect(gaEvents[0].value).to.equal(undefined);
+
+          done();
+        }, 100);
+      });
+    });
+
+    describe('Search link', () => {
+      it('fires "Click" action, "Mobile clickSearch" label event for non-logged-in user', (done) => {
+        // const wrapper = component.find('.header-mobile').getDOMNode();
+
+        const navButton = component.find('button.header-mobile-searchButton');
+        expect(navButton).to.be.a('object');
+
+        // We can't use ReactWrapper.simulate('click') here because Tappable
+        // doesn't attach to clicks; Have to emulate a touch:
+        navButton.simulate('mouseDown');
+
+        setTimeout(() => {
+          navButton.simulate('mouseUp');
+          component.update();
+
+          expect(gaEvents.length).to.equal(1);
+          expect(gaEvents[0]).to.be.a('object');
+          expect(gaEvents[0].category).to.equal('Global Header');
+          expect(gaEvents[0].action).to.equal('Click');
+          expect(gaEvents[0].label).to.equal('Mobile clickSearch');
+          expect(gaEvents[0].value).to.equal(undefined);
+
+          done();
+        }, 100);
+      });
+    });
+    */
   });
 
-  describe('Locations link', () => {
-    it('fires "Locations" event', () => {
-      const navButton = component.find('nav.header-buttons a.locationsTopLink');
-      expect(navButton).to.be.a('object');
+  describe('Desktop', () => {
+    describe('MyNypl link', () => {
+      it('fires "Log In"/"MyNyplButton - Open" event for non-logged-in user', () => {
+        const navButton = component.find('nav.header-buttons .myNyplButton-wrapper a');
+        expect(navButton).to.be.a('object');
 
-      navButton.simulate('click');
+        navButton.simulate('click');
 
-      expect(gaEvents.length).to.equal(1);
-      expect(gaEvents[0]).to.be.a('object');
-      expect(gaEvents[0].category).to.equal('Global Header');
-      expect(gaEvents[0].action).to.equal('Locations');
-      expect(gaEvents[0].label).to.equal('Header Top Links');
-      expect(gaEvents[0].value).to.equal(undefined);
+        expect(gaEvents.length).to.equal(1);
+        expect(gaEvents[0]).to.be.a('object');
+        expect(gaEvents[0].category).to.equal('Global Header');
+        expect(gaEvents[0].action).to.equal('Log In');
+        expect(gaEvents[0].label).to.equal('MyNyplButton - Open');
+        expect(gaEvents[0].value).to.equal(undefined);
+      });
+
+      it('fires "My Account"/"MyNyplButton - Open" event for logged-in user', () => {
+        component.setState({
+          patronDataReceived: true,
+        });
+        const navButton = component.find('nav.header-buttons .myNyplButton-wrapper a');
+        expect(navButton).to.be.a('object');
+
+        navButton.simulate('click');
+
+        expect(gaEvents.length).to.equal(1);
+        expect(gaEvents[0]).to.be.a('object');
+        expect(gaEvents[0].category).to.equal('Global Header');
+        expect(gaEvents[0].action).to.equal('My Account');
+        expect(gaEvents[0].label).to.equal('MyNyplButton - Open');
+        expect(gaEvents[0].value).to.equal(undefined);
+      });
     });
-  });
 
-  describe.only('Get a Library Card link', () => {
-    it('fires no events', () => {
-      const navButton = component.find('nav.header-buttons a.libraryCardButton');
-      expect(navButton).to.be.a('object');
+    describe('Locations link', () => {
+      it('fires event with "Locations" action', () => {
+        const navButton = component.find('nav.header-buttons a.locationsTopLink');
+        expect(navButton).to.be.a('object');
 
-      navButton.simulate('click');
+        navButton.simulate('click');
 
-      expect(gaEvents.length).to.equal(1);
-      expect(gaEvents[0]).to.be.a('object');
-      expect(gaEvents[0].category).to.equal('Global Header');
-      expect(gaEvents[0].action).to.equal('Get a Library Card');
-      expect(gaEvents[0].label).to.equal('Header Top Links');
-      expect(gaEvents[0].value).to.equal(undefined);
+        expect(gaEvents.length).to.equal(1);
+        expect(gaEvents[0]).to.be.a('object');
+        expect(gaEvents[0].category).to.equal('Global Header');
+        expect(gaEvents[0].action).to.equal('Locations');
+        expect(gaEvents[0].label).to.equal('Header Top Links');
+        expect(gaEvents[0].value).to.equal(undefined);
+      });
     });
-  });
 
-  describe.only('Get Email Updates link', () => {
-    it('fires no events', () => {
-      const navButton = component.find('nav.header-buttons a.subscribeButton');
-      expect(navButton).to.be.a('object');
+    describe('Get a Library Card link', () => {
+      it('fires event with "Get a Library Card" action', () => {
+        const navButton = component.find('nav.header-buttons a.libraryCardButton');
+        expect(navButton).to.be.a('object');
 
-      navButton.simulate('click');
+        navButton.simulate('click');
 
-      expect(gaEvents.length).to.equal(1);
-      expect(gaEvents[0]).to.be.a('object');
-      expect(gaEvents[0].category).to.equal('Global Header');
-      expect(gaEvents[0].action).to.equal('Click');
-      expect(gaEvents[0].label).to.equal('Subscribe - Open');
-      expect(gaEvents[0].value).to.equal(undefined);
+        expect(gaEvents.length).to.equal(1);
+        expect(gaEvents[0]).to.be.a('object');
+        expect(gaEvents[0].category).to.equal('Global Header');
+        expect(gaEvents[0].action).to.equal('Get a Library Card');
+        expect(gaEvents[0].label).to.equal('Header Top Links');
+        expect(gaEvents[0].value).to.equal(undefined);
+      });
     });
-  });
 
-  describe('Donate link', () => {
-    it('fires no events', () => {
-      const navButton = component.find('nav.header-buttons a.donateButton');
-      expect(navButton).to.be.a('object');
+    describe('Get Email Updates link', () => {
+      it('fires event with "Click" action, "Subscribe - Open" label', () => {
+        const navButton = component.find('nav.header-buttons a.subscribeButton');
+        expect(navButton).to.be.a('object');
 
-      navButton.simulate('click');
+        navButton.simulate('click');
 
-      expect(gaEvents.length).to.equal(1);
-      expect(gaEvents[0]).to.be.a('object');
-      expect(gaEvents[0].category).to.equal('Global Header');
-      expect(gaEvents[0].action).to.equal('Donate');
-      expect(gaEvents[0].label).to.equal('Header Top Links');
-      expect(gaEvents[0].value).to.equal(undefined);
+        expect(gaEvents.length).to.equal(1);
+        expect(gaEvents[0]).to.be.a('object');
+        expect(gaEvents[0].category).to.equal('Global Header');
+        expect(gaEvents[0].action).to.equal('Click');
+        expect(gaEvents[0].label).to.equal('Subscribe - Open');
+        expect(gaEvents[0].value).to.equal(undefined);
+      });
     });
-  });
 
-  describe('Shop link', () => {
-    it('fires no events', () => {
-      const navButton = component.find('nav.header-buttons a.shopTopLink');
-      expect(navButton).to.be.a('object');
+    describe('Donate link', () => {
+      it('fires event with "Donate" action', () => {
+        const navButton = component.find('nav.header-buttons a.donateButton');
+        expect(navButton).to.be.a('object');
 
-      navButton.simulate('click');
+        navButton.simulate('click');
 
-      expect(gaEvents.length).to.equal(1);
-      expect(gaEvents[0]).to.be.a('object');
-      expect(gaEvents[0].category).to.equal('Global Header');
-      expect(gaEvents[0].action).to.equal('Shop');
-      expect(gaEvents[0].label).to.equal('Header Top Links');
-      expect(gaEvents[0].value).to.equal(undefined);
+        expect(gaEvents.length).to.equal(1);
+        expect(gaEvents[0]).to.be.a('object');
+        expect(gaEvents[0].category).to.equal('Global Header');
+        expect(gaEvents[0].action).to.equal('Donate');
+        expect(gaEvents[0].label).to.equal('Header Top Links');
+        expect(gaEvents[0].value).to.equal(undefined);
+      });
+    });
+
+    describe('Shop link', () => {
+      it('fires event with "Shop" action', () => {
+        const navButton = component.find('nav.header-buttons a.shopTopLink');
+        expect(navButton).to.be.a('object');
+
+        navButton.simulate('click');
+
+        expect(gaEvents.length).to.equal(1);
+        expect(gaEvents[0]).to.be.a('object');
+        expect(gaEvents[0].category).to.equal('Global Header');
+        expect(gaEvents[0].action).to.equal('Shop');
+        expect(gaEvents[0].label).to.equal('Header Top Links');
+        expect(gaEvents[0].value).to.equal(undefined);
+      });
+    });
+
+    describe('Books/Music/Movies link', () => {
+      it('fires event with "Go to..." action, "Books/Music/DVDs" label', () => {
+        // This is brittle, but seems like the best way to identify the Books/Music/Movies link:
+        const navButton = component.find('nav.header-navMenu-wrapper a.navMenuItem-link[href="/books-music-dvds"]');
+        expect(navButton.length).to.equal(1);
+
+        navButton.simulate('click');
+
+        expect(gaEvents.length).to.equal(1);
+        expect(gaEvents[0]).to.be.a('object');
+        expect(gaEvents[0].category).to.equal('Global Header');
+        expect(gaEvents[0].action).to.equal('Go to...');
+        expect(gaEvents[0].label).to.equal('Books/Music/DVDs');
+        expect(gaEvents[0].value).to.equal(undefined);
+      });
+    });
+
+    describe('Search link', () => {
+      it('fires event with "Search" action, "(Open|Close) Menu" label', (done) => {
+        // This is brittle, but seems like the best way to identify the Books/Music/Movies link:
+        const navButton = component.find('nav.header-navMenu-wrapper button.header-navMenu-searchButton');
+        expect(navButton.length).to.equal(1);
+
+        navButton.simulate('click');
+
+        expect(gaEvents.length).to.equal(1);
+        expect(gaEvents[0]).to.be.a('object');
+        expect(gaEvents[0].category).to.equal('Global Header');
+        expect(gaEvents[0].action).to.equal('Search');
+        expect(gaEvents[0].label).to.equal('Open Menu');
+        expect(gaEvents[0].value).to.equal(undefined);
+
+        navButton.simulate('click');
+
+        // Close event is sent on a 200ms delay, so wait 201ms:
+        setTimeout(() => {
+          expect(gaEvents.length).to.equal(2);
+          expect(gaEvents[1]).to.be.a('object');
+          expect(gaEvents[1].category).to.equal('Global Header');
+          expect(gaEvents[1].action).to.equal('Search');
+          expect(gaEvents[1].label).to.equal('Close Menu');
+          expect(gaEvents[1].value).to.equal(undefined);
+
+          done();
+        }, 201);
+      });
     });
   });
 });

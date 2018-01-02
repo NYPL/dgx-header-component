@@ -5,14 +5,29 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const rootPath = path.resolve(__dirname);
 
 if (process.env.NODE_ENV !== 'development') {
+  const loaders = [
+    {
+      loader: 'css-loader',
+      options: {
+        sourceMap: true,
+      },
+    },
+    {
+      loader: 'sass-loader',
+      options: {
+        sourceMap: true,
+      },
+    },
+  ];
   module.exports = {
     devtool: 'source-map',
-    entry: [
-      'babel-polyfill',
-      path.resolve(rootPath, './src/components/Header/Header.js'),
-    ],
+    entry: {
+      app: [
+        path.resolve(rootPath, './src/components/Header/Header.js'),
+      ],
+    },
     resolve: {
-      extensions: ['', '.js', '.jsx', '.scss'],
+      extensions: ['.js', '.jsx', '.scss'],
     },
     output: {
       path: path.join(__dirname, 'dist'),
@@ -29,37 +44,42 @@ if (process.env.NODE_ENV !== 'development') {
       },
     },
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.jsx?$/,
           exclude: /(node_modules|bower_components)/,
-          loader: 'babel',
+          use: 'babel-loader',
         },
         {
           test: /\.scss$/,
           include: path.resolve(rootPath, 'src'),
-          loader: ExtractTextPlugin.extract(
-            // activate source maps via loader query
-            'css?sourceMap!' +
-            'sass?sourceMap'
-          ),
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: loaders,
+          }),
         },
       ],
     },
     plugins: [
       new ExtractTextPlugin('main.scss'),
       new cleanBuild(['dist']),
+      new webpack.DefinePlugin({
+        'process.env': {
+          NODE_ENV: JSON.stringify('production'),
+        },
+      }),
     ],
   };
 } else {
   module.exports = {
     devtool: 'eval',
-    entry: [
-      'webpack-dev-server/client?http://localhost:3000',
-      'webpack/hot/only-dev-server',
-      'babel-polyfill',
-      './src/app.js',
-    ],
+    entry: {
+      app: [
+        'webpack-dev-server/client?http://localhost:3000',
+        'webpack/hot/only-dev-server',
+        './src/app.js',
+      ],
+    },
     output: {
       path: path.join(__dirname, 'dist'),
       filename: 'index.min.js',
@@ -75,18 +95,22 @@ if (process.env.NODE_ENV !== 'development') {
       }),
     ],
     resolve: {
-      extensions: ['', '.js', '.jsx', '.scss'],
+      extensions: ['.js', '.jsx', '.scss'],
     },
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.jsx?$/,
           exclude: /(node_modules|bower_components)/,
-          loader: 'babel',
+          use: 'babel-loader',
         },
         {
           test: /\.scss$/,
-          loader: 'style!css!sass',
+          use: [
+            'style-loader',
+            'css-loader',
+            'sass-loader',
+          ],
           include: path.resolve(rootPath, 'src'),
         },
       ],

@@ -35,7 +35,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://bitbucket.org/NYPL/dgx-header-component.git"
+    "url": "git+https://github.com/NYPL/dgx-header-component.git"
   },
   "keywords": [
     "webpack",

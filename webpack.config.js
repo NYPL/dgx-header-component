@@ -42,6 +42,18 @@ if (process.env.NODE_ENV !== 'development') {
         commonjs: 'react',
         amd: 'react',
       },
+      'react-dom': {
+        root: 'ReactDOM',
+        commonjs2: 'react-dom',
+        commonjs: 'react-dom',
+        amd: 'react-dom',
+      },
+      underscore: {
+        root: 'underscore',
+        commonjs2: 'underscore',
+        commonjs: 'underscore',
+        amd: 'underscore',
+      },
     },
     module: {
       rules: [

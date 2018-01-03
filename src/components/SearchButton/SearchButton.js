@@ -81,6 +81,8 @@ class SearchButton extends React.Component {
         id={`${this.props.className}-searchButton`}
         name="Search Button"
         onClick={e => this.handleOnClick(e)}
+        aria-haspopup="true"
+        aria-expanded={this.state.active ? true : null}
       >
         <span className={`${this.props.className}-searchButton-text`}>
           {label}

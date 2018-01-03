@@ -23,6 +23,21 @@ class SearchButton extends React.Component {
   }
 
   /**
+   * Calculate and return rendered width of inactive button label
+   */
+  getInactiveLabelWidth() {
+    if (!this.searchButtonLabel) return null;
+
+    // Calculate horiz padding to remove from clientWidth:
+    const horizontalPadding = ['paddingLeft', 'paddingRight']
+      .map(prop => getComputedStyle(this.searchButtonLabel)[prop])
+      .map(v => parseInt(v, 10))
+      .filter(val => val && val > 0)
+      .reduce((sum, val) => sum + val, 0);
+    return this.searchButtonLabel.clientWidth - horizontalPadding;
+  }
+
+  /**
    * handleOnClick(e)
    * Handles the event when the Search button is clicked
    */
@@ -31,10 +46,7 @@ class SearchButton extends React.Component {
     if (this.state.active) {
       this.handleOnClickOut();
     } else {
-      // Record rendered clientWidth of inactive label so that width is fixed.
-      // Subtract 20 from clientWidth to account for padding:
-      const inactiveLabelWidth = this.searchButtonLabel.clientWidth - 20;
-
+      const inactiveLabelWidth = this.getInactiveLabelWidth();
       this.setState({ active: true, inactiveLabelWidth });
       // Fire GA event to track when the Search Menu is open
       utils.trackHeader('Search', 'Open Menu');

@@ -61,22 +61,43 @@ var SearchButton = function (_React$Component) {
   }
 
   /**
-   * handleOnClick(e)
-   * Handles the event when the Search button is clicked
+   * Calculate and return rendered width of inactive button label
    */
 
 
   _createClass(SearchButton, [{
+    key: 'getInactiveLabelWidth',
+    value: function getInactiveLabelWidth() {
+      var _this2 = this;
+
+      if (!this.searchButtonLabel) return null;
+
+      // Calculate horiz padding to remove from clientWidth:
+      var horizontalPadding = ['paddingLeft', 'paddingRight'].map(function (prop) {
+        return getComputedStyle(_this2.searchButtonLabel)[prop];
+      }).map(function (v) {
+        return parseInt(v, 10);
+      }).filter(function (val) {
+        return val && val > 0;
+      }).reduce(function (sum, val) {
+        return sum + val;
+      }, 0);
+      return this.searchButtonLabel.clientWidth - horizontalPadding;
+    }
+
+    /**
+     * handleOnClick(e)
+     * Handles the event when the Search button is clicked
+     */
+
+  }, {
     key: 'handleOnClick',
     value: function handleOnClick(e) {
       e.preventDefault();
       if (this.state.active) {
         this.handleOnClickOut();
       } else {
-        // Record rendered clientWidth of inactive label so that width is fixed.
-        // Subtract 20 from clientWidth to account for padding:
-        var inactiveLabelWidth = this.searchButtonLabel.clientWidth - 20;
-
+        var inactiveLabelWidth = this.getInactiveLabelWidth();
         this.setState({ active: true, inactiveLabelWidth: inactiveLabelWidth });
         // Fire GA event to track when the Search Menu is open
         _utils2.default.trackHeader('Search', 'Open Menu');
@@ -91,12 +112,12 @@ var SearchButton = function (_React$Component) {
   }, {
     key: 'handleOnClickOut',
     value: function handleOnClickOut() {
-      var _this2 = this;
+      var _this3 = this;
 
       // Update active state only if ACTIVE is true
       if (this.state.active) {
         setTimeout(function () {
-          _this2.setState({ active: false });
+          _this3.setState({ active: false });
           _utils2.default.trackHeader('Search', 'Close Menu');
         }, 200);
       }
@@ -112,7 +133,7 @@ var SearchButton = function (_React$Component) {
   }, {
     key: 'renderSearchButton',
     value: function renderSearchButton() {
-      var _this3 = this;
+      var _this4 = this;
 
       var classes = (0, _classnames2.default)({ active: this.state.active });
 
@@ -142,7 +163,7 @@ var SearchButton = function (_React$Component) {
           id: this.props.className + '-searchButton',
           name: 'Search Button',
           onClick: function onClick(e) {
-            return _this3.handleOnClick(e);
+            return _this4.handleOnClick(e);
           }
         },
         _react2.default.createElement(
@@ -150,7 +171,7 @@ var SearchButton = function (_React$Component) {
           {
             className: this.props.className + '-searchButton-text',
             ref: function ref(el) {
-              _this3.searchButtonLabel = el;
+              _this4.searchButtonLabel = el;
             },
             style: labelStyle
           },

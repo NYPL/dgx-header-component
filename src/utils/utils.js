@@ -371,9 +371,8 @@ function Utils() {
   this.getNodeWidthWithoutPadding = (node) => {
     if (!node) return null;
 
-    // Calculate horiz padding to remove from clientWidth:
+    // Calculate horiz padding to remove from offsetWidth:
     const computedStyle = getComputedStyle(node);
-    console.log('consider computed style: ', node, computedStyle);
     const horizontalPadding = ['paddingLeft', 'paddingRight']
       .map(prop => computedStyle[prop])
       .map(val => parseInt(val, 10))

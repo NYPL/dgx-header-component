@@ -69,7 +69,7 @@ class SearchButton extends React.Component {
     if (this.state.active) {
       label = 'Close';
       iconComponentType = XIcon;
-      // If we have recorded the rendered clientWidth of the inactive label,
+      // If we have recorded the rendered width of the inactive label,
       // use it on the *active* label:
       if (this.state.inactiveLabelWidth) labelStyle.width = `${this.state.inactiveLabelWidth}px`;
     }

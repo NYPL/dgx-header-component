@@ -360,6 +360,27 @@ function Utils() {
       _dgxFeatureFlags2.default.utils.activateFeature(name);
     }
   };
+
+  /**
+   * Calculate and return rendered px width of element (minus padding)
+   */
+  this.getNodeWidthWithoutPadding = function (node) {
+    if (!node) return null;
+
+    // Calculate horiz padding to remove from clientWidth:
+    var computedStyle = getComputedStyle(node);
+    console.log('consider computed style: ', node, computedStyle);
+    var horizontalPadding = ['paddingLeft', 'paddingRight'].map(function (prop) {
+      return computedStyle[prop];
+    }).map(function (val) {
+      return parseInt(val, 10);
+    }).filter(function (val) {
+      return val && val > 0;
+    }).reduce(function (sum, val) {
+      return sum + val;
+    }, 0);
+    return node.offsetWidth - horizontalPadding;
+  };
 }
 
 exports.default = new Utils();

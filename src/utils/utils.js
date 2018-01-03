@@ -364,6 +364,23 @@ function Utils() {
       FeatureFlags.utils.activateFeature(name);
     }
   };
+
+  /**
+   * Calculate and return rendered px width of element (minus padding)
+   */
+  this.getNodeWidthWithoutPadding = (node) => {
+    if (!node) return null;
+
+    // Calculate horiz padding to remove from clientWidth:
+    const computedStyle = getComputedStyle(node);
+    console.log('consider computed style: ', node, computedStyle);
+    const horizontalPadding = ['paddingLeft', 'paddingRight']
+      .map(prop => computedStyle[prop])
+      .map(val => parseInt(val, 10))
+      .filter(val => val && val > 0)
+      .reduce((sum, val) => sum + val, 0);
+    return node.offsetWidth - horizontalPadding;
+  };
 }
 
 export default new Utils();

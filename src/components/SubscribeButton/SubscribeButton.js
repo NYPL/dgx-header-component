@@ -92,6 +92,13 @@ class SubscribeButton extends React.Component {
     if (this.state.target === '#') {
       e.preventDefault();
       const visibleState = this.state.visible ? 'Closed' : 'Open';
+
+      // If presently closed, capture rendered width of label:
+      if (!this.state.visible) {
+        const inactiveLabelWidth = utils.getNodeWidthWithoutPadding(this.subscribeButtonLabel);
+        this.setState({ inactiveLabelWidth });
+      }
+
       this.setState({ visible: !this.state.visible });
       utils.trackHeader('Click', `Subscribe - ${visibleState}`);
     }
@@ -138,11 +145,15 @@ class SubscribeButton extends React.Component {
     let buttonClass = '';
     let icon = <GenericWedgeIcon className="dropDownIcon" ariaHidden />;
     let label = this.props.label;
+    let labelStyle = styles.subscribeLabel;
 
     if (this.state.visible) {
       buttonClass = 'active';
       label = 'Close';
       icon = <XIcon className="dropDownIcon" ariaHidden fill="#fff" />;
+
+      // Set explicit width of label to match *inactive* state:
+      if (this.state.inactiveLabelWidth) labelStyle = Object.assign({}, labelStyle, { display: 'inline-block', 'text-align': 'center', width: `${this.state.inactiveLabelWidth}px` });
     }
 
     return (
@@ -156,7 +167,14 @@ class SubscribeButton extends React.Component {
         aria-haspopup="true"
         aria-expanded={this.state.visible ? true : null}
       >
-        <span style={styles.subscribeLabel}>{label}</span>
+        <span
+          style={labelStyle}
+          ref={(el) => {
+            this.subscribeButtonLabel = el;
+          }}
+        >
+          {label}
+        </span>
         {icon}
       </a>
     );

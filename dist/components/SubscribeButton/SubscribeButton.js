@@ -139,6 +139,13 @@ var SubscribeButton = function (_React$Component) {
       if (this.state.target === '#') {
         e.preventDefault();
         var visibleState = this.state.visible ? 'Closed' : 'Open';
+
+        // If presently closed, capture rendered width of label:
+        if (!this.state.visible) {
+          var inactiveLabelWidth = _utils2.default.getNodeWidthWithoutPadding(this.subscribeButtonLabel);
+          this.setState({ inactiveLabelWidth: inactiveLabelWidth });
+        }
+
         this.setState({ visible: !this.state.visible });
         _utils2.default.trackHeader('Click', 'Subscribe - ' + visibleState);
       }
@@ -188,14 +195,20 @@ var SubscribeButton = function (_React$Component) {
   }, {
     key: 'renderEmailButton',
     value: function renderEmailButton() {
+      var _this3 = this;
+
       var buttonClass = '';
       var icon = _react2.default.createElement(_dgxSvgIcons.GenericWedgeIcon, { className: 'dropDownIcon', ariaHidden: true });
       var label = this.props.label;
+      var labelStyle = styles.subscribeLabel;
 
       if (this.state.visible) {
         buttonClass = 'active';
         label = 'Close';
         icon = _react2.default.createElement(_dgxSvgIcons.XIcon, { className: 'dropDownIcon', ariaHidden: true, fill: '#fff' });
+
+        // Set explicit width of label to match *inactive* state:
+        if (this.state.inactiveLabelWidth) labelStyle = Object.assign({}, labelStyle, { display: 'inline-block', 'text-align': 'center', width: this.state.inactiveLabelWidth + 'px' });
       }
 
       return _react2.default.createElement(
@@ -212,7 +225,12 @@ var SubscribeButton = function (_React$Component) {
         },
         _react2.default.createElement(
           'span',
-          { style: styles.subscribeLabel },
+          {
+            style: labelStyle,
+            ref: function ref(el) {
+              _this3.subscribeButtonLabel = el;
+            }
+          },
           label
         ),
         icon

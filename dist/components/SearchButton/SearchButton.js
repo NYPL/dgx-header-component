@@ -73,7 +73,11 @@ var SearchButton = function (_React$Component) {
       if (this.state.active) {
         this.handleOnClickOut();
       } else {
-        this.setState({ active: true });
+        // Record rendered clientWidth of inactive label so that width is fixed.
+        // Subtract 20 from clientWidth to account for padding:
+        var inactiveLabelWidth = this.searchButtonLabel.clientWidth - 20;
+
+        this.setState({ active: true, inactiveLabelWidth: inactiveLabelWidth });
         // Fire GA event to track when the Search Menu is open
         _utils2.default.trackHeader('Search', 'Open Menu');
       }
@@ -114,10 +118,14 @@ var SearchButton = function (_React$Component) {
 
       var label = 'Search';
       var iconComponentType = _dgxSvgIcons.SearchIcon;
+      var labelStyle = {};
       // If active, change to "Close x" mode:
       if (this.state.active) {
         label = 'Close';
         iconComponentType = _dgxSvgIcons.XIcon;
+        // If we have recorded the rendered clientWidth of the inactive label,
+        // use it on the *active* label:
+        if (this.state.inactiveLabelWidth) labelStyle.width = this.state.inactiveLabelWidth + 'px';
       }
       var icon = _react2.default.createElement(iconComponentType, {
         className: this.props.className + '-searchButton-icon',
@@ -139,7 +147,13 @@ var SearchButton = function (_React$Component) {
         },
         _react2.default.createElement(
           'span',
-          { className: this.props.className + '-searchButton-text' },
+          {
+            className: this.props.className + '-searchButton-text',
+            ref: function ref(el) {
+              _this3.searchButtonLabel = el;
+            },
+            style: labelStyle
+          },
           label
         ),
         icon

@@ -164,7 +164,9 @@ var SearchButton = function (_React$Component) {
           name: 'Search Button',
           onClick: function onClick(e) {
             return _this4.handleOnClick(e);
-          }
+          },
+          'aria-haspopup': 'true',
+          'aria-expanded': this.state.active ? true : null
         },
         _react2.default.createElement(
           'span',

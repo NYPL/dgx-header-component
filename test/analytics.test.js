@@ -114,15 +114,8 @@ describe('Google Analytics', function () {
       });
     });
 
-    /*
-     * TODO I can't get these two tests to pass due to FocusTrap throwing
-     * "Uncaught Error: `initialFocus` refers to no known node" on nodes
-     * that absolutely exist and are known so :shruggie:
-     *
     describe('Menu button', () => {
-      it('fires "??" action, "Mobile ??" label event for non-logged-in user', (done) => {
-        // const wrapper = component.find('.header-mobile').getDOMNode();
-
+      it('fires "Click" action, "Mobile mobileMenu" label event for non-logged-in user', (done) => {
         const navButton = component.find('button.header-mobile-menuButton');
         expect(navButton).to.be.a('object');
 
@@ -137,7 +130,7 @@ describe('Google Analytics', function () {
           expect(gaEvents[0]).to.be.a('object');
           expect(gaEvents[0].category).to.equal('Global Header');
           expect(gaEvents[0].action).to.equal('Click');
-          expect(gaEvents[0].label).to.equal('Mobile ??');
+          expect(gaEvents[0].label).to.equal('Mobile mobileMenu');
           expect(gaEvents[0].value).to.equal(undefined);
 
           done();
@@ -147,8 +140,6 @@ describe('Google Analytics', function () {
 
     describe('Search link', () => {
       it('fires "Click" action, "Mobile clickSearch" label event for non-logged-in user', (done) => {
-        // const wrapper = component.find('.header-mobile').getDOMNode();
-
         const navButton = component.find('button.header-mobile-searchButton');
         expect(navButton).to.be.a('object');
 
@@ -171,7 +162,6 @@ describe('Google Analytics', function () {
         }, 100);
       });
     });
-    */
   });
 
   describe('Desktop', () => {

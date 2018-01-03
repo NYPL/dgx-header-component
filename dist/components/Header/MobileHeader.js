@@ -375,6 +375,8 @@ var MobileHeader = function (_React$Component) {
         buttonLabel = 'Close Search';
       }
 
+      // The desired initialFocus selector only exists when active:
+      var initialFocus = active ? '.' + this.props.className + '-searchForm-legend' : null;
       return _react2.default.createElement(
         'li',
         { style: styles.listItem },
@@ -386,7 +388,7 @@ var MobileHeader = function (_React$Component) {
               onDeactivate: function onDeactivate() {
                 return _this3.closeDropDown('searchBtnFocus');
               },
-              initialFocus: '.' + this.props.className + '-searchForm-legend',
+              initialFocus: initialFocus,
               clickOutsideDeactivates: true
             },
             active: active
@@ -455,6 +457,9 @@ var MobileHeader = function (_React$Component) {
         });
       }
 
+      // The desired initialFocus selector only exists when active:
+      var initialFocus = active ? 'ul.header-mobile-navMenu-list li:first-of-type a' : null;
+
       return _react2.default.createElement(
         'li',
         { style: styles.listItem },
@@ -462,7 +467,7 @@ var MobileHeader = function (_React$Component) {
           _focusTrapReact2.default,
           {
             focusTrapOptions: {
-              initialFocus: 'ul.header-mobile-navMenu-list li:first-of-type a',
+              initialFocus: initialFocus,
               onDeactivate: function onDeactivate() {
                 return _this4.closeDropDown('navMenuBtnFocus');
               },

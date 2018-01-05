@@ -18,6 +18,8 @@ class SearchBox extends React.Component {
       searchOption: 'catalog',
       placeholder: this.props.placeholder,
       placeholderAnimation: null,
+      isSearchRequested: false,
+      isGAResponseReceived: false,
     };
 
     this.handleSearchInputChange = this.handleSearchInputChange.bind(this);
@@ -173,6 +175,8 @@ class SearchBox extends React.Component {
     // For GA "Search" Catalog, "Query Sent" Action Event
     // GASearchedRepo indicates which kind of search is sent
     let GASearchedRepo = 'Unknown';
+    const isSearchRequested = this.state.isSearchRequested;
+    const isGAResponseReceived = this.state.isGAResponseReceived;
 
     if (this.isSearchInputValid(searchInputValue)) {
       // Explicit checks for mobile search
@@ -207,15 +211,30 @@ class SearchBox extends React.Component {
         // Set a dynamic value for custom dimension2
         gaConfig.customDimensions.dimension2 = GASearchedRepo;
 
-        // Send GA "Search" Catalog, "Query Sent" Action Event
-        utils.trackSearchQuerySend(
-          searchInputValue,
-          gaConfig.customDimensions,
-          () => {
-            // Go to the proper search page
-            window.location.assign(requestUrl);
-          }
-        );
+
+        // 3 phase to handle GA event. We need to prevent sending extra GA events after the search
+        // request is made.
+        if (isSearchRequested && !isGAResponseReceived) {
+          return false;
+        }
+
+        if (isSearchRequested && isGAResponseReceived) {
+          return true;
+        }
+
+        if (!isSearchRequested && !isGAResponseReceived) {
+          this.setState({ isSearchRequested: true });
+          // Send GA "Search" Catalog, "Query Sent" Action Event
+          utils.trackSearchQuerySend(
+            searchInputValue,
+            gaConfig.customDimensions,
+            () => {
+              this.setState({ isGAResponseReceived: true });
+              // Go to the proper search page
+              window.location.assign(requestUrl);
+            }
+          );
+        }
       }
     } else {
       event.preventDefault();
@@ -224,6 +243,8 @@ class SearchBox extends React.Component {
       this.animationTimer();
       this.refs.headerSearchInputField.focus();
     }
+
+    return true;
   }
 
   renderSearchInputField() {

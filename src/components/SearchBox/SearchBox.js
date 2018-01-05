@@ -33,7 +33,7 @@ class SearchBox extends React.Component {
     const catalogUrl = catalogBaseUrl || '//www.nypl.org/search/apachesolr_search/';
 
     if (searchString) {
-      return catalogUrl + encodeURIComponent(searchString);
+      return catalogUrl + encodeURIComponent(searchString) + this.generateQueriesForGA();
     }
     return null;
   }
@@ -207,7 +207,7 @@ class SearchBox extends React.Component {
         // Set a dynamic value for custom dimension2
         gaConfig.customDimensions.dimension2 = GASearchedRepo;
 
-        // Send GA "Search" Catalog, "Query Sent" Action Event <= need the callback as the third parameter
+        // Send GA "Search" Catalog, "Query Sent" Action Event
         utils.trackSearchQuerySend(
           searchInputValue,
           gaConfig.customDimensions,

@@ -18,5 +18,3 @@ server.listen(3000, 'localhost', (err) => {
   console.log('Currently building: ' + pkg.name);
   console.log('Webpack Development Server listening at localhost:3000');
 });
-
-module.exports = server;

@@ -177,11 +177,15 @@ class SubscribeButton extends React.Component {
   }
 
   render() {
+    // The desired initialFocus selector only exists when modal visible:
+    const initialFocus = this.state.visible ? '.subscribeMessageBox' : null;
+
     return (
       <FocusTrap
         focusTrapOptions={{
           onDeactivate: this.handleOnClickOut,
           clickOutsideDeactivates: true,
+          initialFocus,
         }}
         active={this.state.visible}
         className="subscribeButton-wrapper"

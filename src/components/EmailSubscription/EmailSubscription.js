@@ -319,6 +319,7 @@ class EmailSubscription extends React.Component {
         </div>
       );
     }
+
     return (
       <div className={this.props.className}>
         <DotsLoader />

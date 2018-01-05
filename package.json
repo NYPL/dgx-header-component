@@ -2,11 +2,10 @@
   "name": "@nypl/dgx-header-component",
   "version": "2.4.1",
   "description": "NYPL Header as a React component.",
-  "main": "dist/components/Header/Header.js",
+  "main": "dist/index.min.js",
   "scripts": {
     "start": "NODE_ENV=development node server.js",
-    "babel-build": "./node_modules/.bin/babel src -d dist && cp -r src/styles/ dist/styles",
-    "build": "NODE_ENV=production node_modules/.bin/webpack -p --config webpack.config.js",
+    "dist": "NODE_ENV=production ./node_modules/.bin/webpack --config webpack.config.js && cp -r src/styles/ dist/styles",
     "test": "./node_modules/.bin/mocha test/helpers/browser.js test/*.test.js",
     "test-file": "node_modules/.bin/mocha -w test/helpers/browser.js",
     "test-with-coverage": "./node_modules/.bin/nyc ./node_modules/.bin/mocha test/helpers/browser.js test/*.test.js",
@@ -36,7 +35,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://bitbucket.org/NYPL/dgx-header-component.git"
+    "url": "git+https://github.com/NYPL/dgx-header-component.git"
   },
   "keywords": [
     "webpack",
@@ -71,21 +70,21 @@
     "chai": "3.5.0",
     "clean-webpack-plugin": "0.1.17",
     "create-react-class": "15.5.3",
-    "css-loader": "0.23.1",
+    "css-loader": "0.28.7",
     "dgx-react-ga": "git+https://git@bitbucket.org/NYPL/dgx-react-ga.git#master",
     "enzyme": "2.9.1",
-    "extract-text-webpack-plugin": "0.8.2",
+    "extract-text-webpack-plugin": "2.1.2",
     "jsdom": "9.8.3",
     "mocha": "4.0.1",
-    "node-sass": "3.7.0",
+    "node-sass": "3.8.0",
     "nyc": "10.0.0",
     "react-a11y": "0.3.3",
     "react-addons-test-utils": "15.5.0",
-    "react-hot-loader": "1.3.0",
-    "sass-loader": "1.0.4",
+    "react-hot-loader": "1.2.8",
+    "sass-loader": "5.0.0",
     "sinon": "4.0.1",
-    "style-loader": "0.12.3",
-    "webpack": "1.15.0",
-    "webpack-dev-server": "1.12.1"
+    "style-loader": "0.19.1",
+    "webpack": "2.7.0",
+    "webpack-dev-server": "2.9.7"
   }
 }

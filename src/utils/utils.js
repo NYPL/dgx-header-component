@@ -101,6 +101,30 @@ function Utils() {
   this.trackHeader = gaUtils.trackEvent('Global Header');
 
   /**
+   * createFunctionWithTimeout(callback, optTimeout)
+   * The function serves as a pipe to return the function that is passed to it.
+   * It also searves as a timer to execute that function after a certain amount of time.
+   *
+   * @param {Function} callback - The function to be executed after the time of optTimeout
+   * @param {Number} optTimeout
+   * @return {Function}
+   */
+  this.createFunctionWithTimeout = (callback, optTimeout) => {
+  let called = false;
+
+  const fn = () => {
+    if (!called) {
+      called = true;
+      callback();
+    }
+  };
+
+  setTimeout(fn, optTimeout || 500);
+
+  return fn;
+};
+
+  /**
    * trackSearchQuerySend = (label ='', dimensions = {})
    * Track a GA click event with custom dimensions.
    * The parameter "dimensions" should be an object with dimensions listed as the following format,
@@ -108,20 +132,19 @@ function Utils() {
    *
    * @param {string} label - Label for GA event.
    * @param {object} dimensions - the object that consists the custom dimensions for the event.
+   * @param {function} hitCallback - the function to be executed after sending GA is completed.
    */
-  this.trackSearchQuerySend = (label = '', dimensions = {}) => {
-    let eventObj = {
-      category: gaConfig.eventCategory,
-      action: gaConfig.eventAction,
+  this.trackSearchQuerySend = (label, dimensions = {}, hitCallback) => {
+    ga.ga(
+      'send',
+      'event',
+      gaConfig.eventCategory,
+      gaConfig.eventAction,
       label,
-      value: 0,
-    };
-
-    if (!_isEmpty(dimensions)) {
-      eventObj = _extend(eventObj, dimensions);
-    }
-
-    ga.event(eventObj);
+      0,
+      { dimensions: dimensions },
+      { hitCallback: this.createFunctionWithTimeout(hitCallback) }
+    );
   };
 
   /**

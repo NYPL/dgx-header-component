@@ -207,11 +207,15 @@ class SearchBox extends React.Component {
         // Set a dynamic value for custom dimension2
         gaConfig.customDimensions.dimension2 = GASearchedRepo;
 
-        // Send GA "Search" Catalog, "Query Sent" Action Event
-        utils.trackSearchQuerySend(searchInputValue, gaConfig.customDimensions);
-
-        // Go to the proper search page
-        window.location.assign(requestUrl);
+        // Send GA "Search" Catalog, "Query Sent" Action Event <= need the callback as the third parameter
+        utils.trackSearchQuerySend(
+          searchInputValue,
+          gaConfig.customDimensions,
+          () => {
+            // Go to the proper search page
+            window.location.assign(requestUrl);
+          }
+        );
       }
     } else {
       event.preventDefault();

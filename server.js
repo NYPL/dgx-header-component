@@ -3,15 +3,13 @@ const WebpackDevServer = require('webpack-dev-server');
 const config = require('./webpack.config');
 const pkg = require('./package.json');
 
-const server = new WebpackDevServer(webpack(config), {
+new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
   hot: true,
   stats: false,
   inline: true,
   historyApiFallback: true,
-});
-
-server.listen(3000, 'localhost', (err) => {
+}).listen(3000, 'localhost', (err) => {
   if (err) {
     console.log(err);
   }

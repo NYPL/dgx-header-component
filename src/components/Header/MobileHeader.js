@@ -288,13 +288,15 @@ class MobileHeader extends React.Component {
       buttonLabel = 'Close Search';
     }
 
+    // The desired initialFocus selector only exists when active:
+    const initialFocus = active ? `.${this.props.className}-searchForm-legend` : null;
     return (
       <li style={styles.listItem}>
         <FocusTrap
           className={`${this.props.className}-searchDialog`}
           focusTrapOptions={{
             onDeactivate: () => this.closeDropDown('searchBtnFocus'),
-            initialFocus: `.${this.props.className}-searchForm-legend`,
+            initialFocus,
             clickOutsideDeactivates: true,
           }}
           active={active}
@@ -356,11 +358,14 @@ class MobileHeader extends React.Component {
       );
     }
 
+    // The desired initialFocus selector only exists when active:
+    const initialFocus = active ? 'ul.header-mobile-navMenu-list li:first-of-type a' : null;
+
     return (
       <li style={styles.listItem}>
         <FocusTrap
           focusTrapOptions={{
-            initialFocus: 'ul.header-mobile-navMenu-list li:first-of-type a',
+            initialFocus,
             onDeactivate: () => this.closeDropDown('navMenuBtnFocus'),
             clickOutsideDeactivates: true,
           }}

@@ -75,7 +75,7 @@
     "extract-text-webpack-plugin": "2.1.2",
     "jsdom": "9.8.3",
     "mocha": "4.0.1",
-    "node-sass": "^3.8.0",
+    "node-sass": "3.8.0",
     "nyc": "10.0.0",
     "react-a11y": "0.3.3",
     "react-addons-test-utils": "15.5.0",

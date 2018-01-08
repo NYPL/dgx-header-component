@@ -2,7 +2,7 @@
   "name": "@nypl/dgx-header-component",
   "version": "2.4.2",
   "description": "NYPL Header as a React component.",
-  "main": "dist/components/Header/Header.js",
+  "main": "dist/index.min.js",
   "scripts": {
     "start": "NODE_ENV=development node server.js",
     "babel-build": "./node_modules/.bin/babel src -d dist && cp -r src/styles/ dist/styles",

@@ -54,6 +54,12 @@ if (process.env.NODE_ENV !== 'development') {
         commonjs: 'underscore',
         amd: 'underscore',
       },
+      'dgx-react-ga': {
+        root: 'dgx-react-ga',
+        commonjs2: 'dgx-react-ga',
+        commonjs: 'dgx-react-ga',
+        amd: 'dgx-react-ga',
+      }
     },
     module: {
       rules: [

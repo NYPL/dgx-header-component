@@ -4,6 +4,9 @@
 > Updating the function of trackSearchQuerySend in utils.js to send GA events with a callback.
 > Updating the URL queries when making a search request to apachesolr search/site search.
 
+### v2.4.2
+> Adding missing GA code from Bitbucket remote.
+
 ### v2.4.1
 > Second accessibility update! This update includes:
 > Updating Header component to track GA events in LogIn button.

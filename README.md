@@ -1,3 +1,10 @@
+# Deprecated
+Please go to [Github](https://github.com/NYPL/dgx-header-component) for the updated codebase for this header component.
+
+Why?
+We are already serving this component on npm but moving it to Github allows us more open source reachability. A big plus is integrating the unit tests with TravisCI and our larger goal of
+automating header and apps that use the header deployments.
+
 # NYPL Header React NPM Component
 
 [![GitHub version](https://badge.fury.io/gh/nypl%2Fdgx-header-component.svg)](https://badge.fury.io/gh/nypl%2Fdgx-header-component)

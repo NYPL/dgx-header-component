@@ -4,6 +4,12 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import cx from 'classnames';
 import { extend as _extend } from 'underscore';
+import {
+  CheckSoloIcon,
+  LeftArrowIcon,
+  XIcon,
+} from '@nypl/dgx-svg-icons';
+
 import config from '../../appConfig.js';
 import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWidget.js';
 import SubscribeMessageBox from './SubscribeMessageBox.js';
@@ -24,7 +30,7 @@ const styles = {
     fontSize: '14px',
     height: '38px',
     letterSpacing: '.03em',
-    margin: '50px 0 0 0',
+    margin: '60px 0 0 0',
     padding: '0 0 0 21px',
     lineHeight: 'normal',
     width: '100px',
@@ -167,7 +173,7 @@ class EmailSubscription extends React.Component {
     const status = this.state.formStatus;
     const isLoading = this.state.formProcessing;
     const notValidEmail = this.state.notValidEmail;
-    const formClass = 'EmailSubscribeForm';
+    const formClass = 'emailSubscribeForm';
     const emailAddressField = 'emailAddressField';
     const errorClass = cx({ active: notValidEmail });
     let subscribeContent;
@@ -176,17 +182,16 @@ class EmailSubscription extends React.Component {
       // The default view
       subscribeContent = (
         <div role="dialog">
-          <div className={`SubscribeMessageBox ${status}`} tabIndex="0">
-            <div className="SubscribeMessageBox-Eyebrow"></div>
-            <div className="SubscribeMessageBox-Title">
-              Get the <span className="SubscribeMessageBox-Title-BestNYPL">
+          <div className={`subscribeMessageBox ${status}`} tabIndex="0">
+            <div className="subscribeMessageBox-eyebrow"></div>
+            <div className="subscribeMessageBox-title">
+              Get the <span className="subscribeMessageBox-title-bestNYPL">
               best of NYPL</span> in your inbox
             </div>
           </div>
 
           <form
-            ref="EmailSubscribeForm"
-            id="EmailSubscribeForm"
+            id="emailSubscribeForm"
             className={formClass}
             action={this.props.target}
             method={this.props.form_method}
@@ -204,7 +209,7 @@ class EmailSubscription extends React.Component {
               </label>
               <input
                 aria-label="Enter your email address"
-                className={`${formClass}-Input`}
+                className={`${formClass}-input`}
                 type="email"
                 name="Email Address"
                 placeholder={this.props.placeholder}
@@ -216,13 +221,13 @@ class EmailSubscription extends React.Component {
                 autoFocus
               />
 
-              <div className={`${formClass}-Error ${errorClass}`}>
-                <span className="nypl-icon-solo-x icon" aria-hidden="true"></span>
+              <div className={`${formClass}-error ${errorClass}`}>
+                <XIcon ariaHidden />
                 <span>Please enter a valid email address</span>
               </div>
 
-              <div className={`${formClass}-Submit`}>
-                <span className="nypl-icon-check-solo icon" aria-hidden="true"></span>
+              <div className={`${formClass}-submit`}>
+                <CheckSoloIcon ariaHidden />
                 <input
                   aria-label="Sign up"
                   type="submit"
@@ -243,15 +248,15 @@ class EmailSubscription extends React.Component {
               status={status}
               msg="Thank you for subscribing to our email updates."
             />
-            <div className={`${this.props.className}-NewEmail`}>
+            <div className={`${this.props.className}-newEmail`}>
               <button onClick={this.initForm} style={styles.resubmitButton}>
                 Enter another email address
               </button>
             </div>
-            <div className={`${this.props.className}-FollowUs`}>
+            <div className={`${this.props.className}-followUs`}>
               <p>Follow us:</p>
               <SocialMediaLinksWidget
-                className={`${this.props.className}-SocialMediaWidget`}
+                className={`${this.props.className}-socialMediaLinksWidget`}
                 links={config.socialMediaLinks}
                 displayOnlyList={['facebook', 'twitter']}
               />
@@ -264,8 +269,11 @@ class EmailSubscription extends React.Component {
         utils.trackHeader('Subscribe', 'Error -- already subscribed');
         subscribeContent = (
           <div>
-            <SubscribeMessageBox status={status} msg="Looks like you're already signed up!" />
-            <div className={`${this.props.className}-NewEmail`}>
+            <SubscribeMessageBox
+              status={status}
+              msg="Looks like you're already signed up!"
+            />
+            <div className={`${this.props.className}-newEmail`}>
               <button style={styles.resubmitButton} onClick={this.initForm}>
                 Enter a different email address
               </button>
@@ -277,12 +285,12 @@ class EmailSubscription extends React.Component {
       if (status === 'error' || status === 'Internal Server Error') {
         utils.trackHeader('Subscribe', 'Error');
         subscribeContent = (
-          <div className={`${this.props.className}-Misc-Error`}>
+          <div className={`${this.props.className}-misc-error`}>
             <div>Hmm...</div>
             <div>Something isn&apos;t quite right.</div>
             <div>Please try again.</div>
             <a href="" onClick={this.initForm} style={styles.tryAgainButton}>
-              <span className="nypl-icon-arrow-left icon" aria-hidden="true"></span>
+              <LeftArrowIcon ariaHidden />
               TRY AGAIN
             </a>
           </div>
@@ -311,6 +319,7 @@ class EmailSubscription extends React.Component {
         </div>
       );
     }
+
     return (
       <div className={this.props.className}>
         <DotsLoader />
@@ -335,7 +344,7 @@ EmailSubscription.propTypes = {
 
 EmailSubscription.defaultProps = {
   id: 'EmailSubscription',
-  className: 'EmailSubscription',
+  className: 'emailSubscription',
   lang: 'en',
   target: 'http://cl.exct.net/subscribe.aspx',
   form_name: 'subscribeForm',

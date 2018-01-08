@@ -2,11 +2,13 @@
 
 [![GitHub version](https://badge.fury.io/gh/nypl%2Fdgx-header-component.svg)](https://badge.fury.io/gh/nypl%2Fdgx-header-component)
 
+[![npm version](https://badge.fury.io/js/%40nypl%2Fdgx-header-component.svg)](https://badge.fury.io/js/%40nypl%2Fdgx-header-component)
+
 This repository is for the header component used in React applications at NYPL.
 
 ### Version
 
-> v2.4.0
+> v2.4.1
 
 ### App Installation
 

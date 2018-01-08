@@ -1,8 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { pick as _pick, map as _map } from 'underscore';
+import {
+  FaceBookIcon,
+  TwitterIcon,
+} from '@nypl/dgx-svg-icons';
+
 // GA Utility
 import utils from '../../utils/utils.js';
+
+const icons = {
+  twitter: <TwitterIcon iconId="email-twitter" />,
+  facebook: <FaceBookIcon iconId="email-fb" />,
+};
 
 class SocialMediaLinksWidget extends React.Component {
   constructor(props) {
@@ -20,18 +30,19 @@ class SocialMediaLinksWidget extends React.Component {
       _pick(list, displayOnlyList) : list;
 
     return _map(socialLinksList, (item, key) => {
-      const hoverClass = this.state.linkClass === key ?
-        `nypl-icon-${key}-circle-hover animateHover fadeInSlow` : `nypl-icon-${key}-circle`;
+      const hoverClass = this.state.linkClass === key ? 'animateHover fadeInSlow' : '';
+      const icon = icons[key];
 
       return (
-        <li key={key} className={`${this.props.className}-ListItem`}>
+        <li key={key} className={`${this.props.className}-listItem`}>
           <a
             href={item}
             onClick={() => this.trackHeader('Click', `Social Media - ${key}`)}
-            className={`${this.props.className}-Link ${hoverClass}`}
+            className={`${this.props.className}-link ${hoverClass}`}
             onMouseEnter={() => this.handleOnMouseEnter(key)}
             onMouseLeave={this.handleOnMouseLeave}
           >
+            {icon}
           </a>
         </li>
       );
@@ -64,7 +75,7 @@ class SocialMediaLinksWidget extends React.Component {
 
     return (
       <div className={this.props.className}>
-        <ul className={`${this.props.className}-List`}>
+        <ul className={`${this.props.className}-list`}>
           {socialLinks}
         </ul>
       </div>
@@ -81,7 +92,7 @@ SocialMediaLinksWidget.propTypes = {
 
 SocialMediaLinksWidget.defaultProps = {
   lang: 'en',
-  className: 'SocialMediaLinksWidget',
+  className: 'socialMediaLinksWidget',
 };
 
 export default SocialMediaLinksWidget;

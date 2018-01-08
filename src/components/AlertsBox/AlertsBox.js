@@ -8,7 +8,7 @@ const AlertsBox = ({ className, id, lang, style, alerts }) => {
     return (
       <div
         key={index}
-        className={`${className}-Item`}
+        className={`${className}-item`}
         dangerouslySetInnerHTML={{ __html: alertDescription.text }}
       />
     );
@@ -35,8 +35,8 @@ AlertsBox.propTypes = {
 
 AlertsBox.defaultProps = {
   lang: 'en',
-  className: 'AlertsBox',
-  id: 'AlertsBox',
+  className: 'alertsBox',
+  id: 'alertsBox',
 };
 
 export default AlertsBox;

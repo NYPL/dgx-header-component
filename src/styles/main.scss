@@ -11,7 +11,7 @@
  * -- Following BEM naming convention
  * -- Mobile First approach
 */
-.Header {
+.header {
   @include Kievit-Book;
   width: 100%;
   background-color: #FFF;
@@ -32,7 +32,7 @@
   /* MOBILE HEADER
    * -------------
   */
-  &-Mobile {
+  &-mobile {
     min-width: 320px;
     display: block;
 
@@ -41,9 +41,9 @@
       display: none;
     }
 
-    &-Logo {
-      width: 45px;
-      height: 45px;
+    &-logo {
+      width: 50px;
+      height: 55px;
     }
 
     ul {
@@ -54,9 +54,15 @@
 
     // Mobile Search
     @import 'components/_mobileSearch';
+
+    &-wrapper {
+      width: 100%;
+      position: absolute;
+      left: 0;
+    }
   }
 
-  &-Wrapper {
+  &-wrapper {
     position: relative;
     border-bottom: 2px solid #ED1C24;
   }
@@ -65,7 +71,7 @@
    * ----------------------
    * Sets the max-width on a desktop and up device.
   */
-  &-TopWrapper {
+  &-topWrapper {
     display: none;
 
     @include min-screen(769px) {
@@ -85,7 +91,7 @@
    * Defined width for desktop.
    * position adjustments left.
   */
-  &-Logo {
+  &-logo {
     overflow: hidden;
     @include min-screen(769px) {
       display: block;
@@ -121,49 +127,9 @@
     }
   }
 
-  /* TOP HEADER BUTTONS (excludes subscribe)
-   * ---------------------------------------
-   * - Library Card
-   * - Donate
-  */
-  &-Buttons {
-    ul {
-      margin: 0;
-      list-style-type: none;
+  @import 'components/_buttons.scss';
 
-      li {
-        display: inline-block;
-        margin-right: 0.18em;
-      }
-    }
-
-    // First instance top-level <a> tags
-    li > a,
-    & > a {
-      @include Kievit-Bold;
-      font-size: 13px;
-      letter-spacing: .04em;
-      margin: 0 10px 0 0;
-
-      &:visited {
-        color: #000;
-      }
-      &:last-child {
-        margin: 0;
-      }
-    }
-
-    .DonateButton {
-      @include border-radius(4px);
-    }
-
-    .shopTopLink {
-      display: none;
-      @include min-screen(860px) {
-        display: inline-block;
-      }
-    }
-  }
+  @import 'components/_socialMediaLinksWidget.scss';
 
   /* Skip Navigation
    * ---------------
@@ -180,7 +146,7 @@
    * - Includes Button rules (also for MyNYPL)
    * - Includes Email Signup rules
   */
-  @import 'components/_emailSubscribeButton';
+  @import 'components/_emailSubscription';
 
   /* MYNYPL LOGIN BUTTON
    * ---------------------------

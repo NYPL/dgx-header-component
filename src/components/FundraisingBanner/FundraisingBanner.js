@@ -28,54 +28,6 @@ class FundraisingBanner extends React.Component {
   }
 
   /**
-   * closeFundraisingBanner()
-   * Sets the `closeFundraisingBanner` cookie to expire in 24 hours and updates the `isBannerVisible`
-   * boolean to false which will hide the banner.
-   */
-  closeFundraisingBanner() {
-    utils.setCookie(this.props.hideBannerCookieName, 'true', cookieExpInSeconds);
-    this.setState({ isBannerVisible: false });
-    // Fire the GA event only if the prop gaLabel is not empty
-    if (!_isEmpty(this.props.gaLabel)) {
-      utils.trackHeader('Close banner button clicked', this.props.gaLabel);
-    }
-  }
-
-  /**
-   * fetchFundraisingData(apiUrl, currentBannerData)
-   * Performs a GET request to the fundraising API only if no data exists. Upon a successful GET
-   * request, it will update the `isBannerVisible` boolean to true and populate the `bannerData`
-   * object with the API data.
-   *
-   * @param {string} apiUrl - The API endpoint to fetch fundraising data
-   * @param {object} currentBannerData - The object containing the fundraising data
-   */
-  fetchFundraisingData(apiUrl, currentBannerData) {
-    if (!_isEmpty(apiUrl) && _isEmpty(currentBannerData)) {
-      return axios
-        .get(apiUrl)
-        .then(result => {
-          if (result.data) {
-            this.setState({ bannerData: result.data, isBannerVisible: true });
-          } else {
-            console.warn(`Missing response from GET request: ${apiUrl}`, result);
-          }
-        })
-        .catch(error => {
-          console.warn(`Error on Axios GET request: ${apiUrl}`);
-          if (error instanceof Error) {
-            console.warn(error.message);
-          } else {
-            // The request was made, but the server responded with a status code
-            // that falls out of the range of 2xx
-            console.warn(error.data);
-            console.warn(error.status);
-          }
-        });
-    }
-  }
-
-  /**
    * getBackgroundImageStyles(primaryImage, secondaryImage)
    * Assigns default background CSS styles and specific backgroundImage properties
    * if the `primaryImage` and `secondaryImage` paths are defined
@@ -92,13 +44,64 @@ class FundraisingBanner extends React.Component {
         styles.backgroundRepeat = 'repeat-x, repeat-x';
         styles.backgroundPosition = '0 150%, 55% -110%';
       } else {
-        styles.backgroundImage = `url(${primaryImage}), url(${primaryImage}), url(${secondaryImage})`;
+        styles.backgroundImage =
+          `url(${primaryImage}), url(${primaryImage}), url(${secondaryImage})`;
         styles.backgroundRepeat = 'repeat-x, repeat-x, repeat';
         styles.backgroundPosition = '0 150%, 55% -110%, 50% 50%';
       }
     }
 
     return styles;
+  }
+
+  /**
+   * fetchFundraisingData(url, currentBannerData)
+   * Performs a GET request to the fundraising API only if no data exists. Upon a successful GET
+   * request, it will update the `isBannerVisible` boolean to true and populate the `bannerData`
+   * object with the API data.
+   *
+   * @param {string} url - The API endpoint to fetch fundraising data
+   * @param {object} currentBannerData - The object containing the fundraising data
+   */
+  fetchFundraisingData(url, currentBannerData) {
+    if (!_isEmpty(url) && _isEmpty(currentBannerData)) {
+      return axios
+        .get(url)
+        .then(result => {
+          if (result.data) {
+            this.setState({ bannerData: result.data, isBannerVisible: true });
+          } else {
+            console.warn(`Missing response from GET request: ${url}`, result);
+          }
+        })
+        .catch(error => {
+          console.warn(`Error on Axios GET request: ${url}`);
+          if (error instanceof Error) {
+            console.warn(error.message);
+          } else {
+            // The request was made, but the server responded with a status code
+            // that falls out of the range of 2xx
+            console.warn(error.data);
+            console.warn(error.status);
+          }
+        });
+    }
+
+    return null;
+  }
+
+  /**
+   * closeFundraisingBanner()
+   * Sets the `closeFundraisingBanner` cookie to expire in 24 hours and
+   * updates the `isBannerVisible` boolean to false which will hide the banner.
+   */
+  closeFundraisingBanner() {
+    utils.setCookie(this.props.hideBannerCookieName, 'true', cookieExpInSeconds);
+    this.setState({ isBannerVisible: false });
+    // Fire the GA event only if the prop gaLabel is not empty
+    if (!_isEmpty(this.props.gaLabel)) {
+      utils.trackHeader('Close banner button clicked', this.props.gaLabel);
+    }
   }
 
   /**
@@ -148,7 +151,8 @@ class FundraisingBanner extends React.Component {
    * Generates the DOM for the description text if the `desc` parameter is not empty
    *
    * @param {string} closeText - String of the close text button element (default: `Close`)
-   * @param {string} ariaLabel - String of the aria-label property (default: `Close Fundraising banner`)
+   * @param {string} ariaLabel - String of the aria-label property
+   *  (default: `Close Fundraising banner`)
    */
   renderCloseButton(closeText = 'Close', ariaLabel = 'Close Fundraising banner') {
     return (
@@ -170,25 +174,25 @@ class FundraisingBanner extends React.Component {
         className={`${this.props.className} ${isBannerVisible ? 'show' : ''}`}
         id={this.props.id}
         style={this.getBackgroundImageStyles(primaryBgImage, secondaryBgImage)}
-        role='complementary'
+        role="complementary"
       >
       {
         !_isEmpty(bannerData) &&
-        <div className={`${this.props.className}-wrapper`}>
-          <a
-            onClick={() => {
-              !_isEmpty(this.props.gaLabel) && !_isEmpty(bannerData.url) ?
-                utils.trackHeader(bannerData.url, this.props.gaLabel) : null
-            }}
-            href={!_isEmpty(bannerData.url) ? bannerData.url : '#'}
-          >
-            {this.renderBannerImage(bannerData.imageUrl)}
-            {this.renderBannerHeadline(bannerData.title)}
-            {this.renderBannerDescription(bannerData.description)}
-            <span className={`${this.props.className}-button`}>Donate</span>
-          </a>
-          {this.renderCloseButton()}
-        </div>
+          <div className={`${this.props.className}-wrapper`}>
+            <a
+              onClick={() => {
+                !_isEmpty(this.props.gaLabel) && !_isEmpty(bannerData.url) ?
+                  utils.trackHeader(bannerData.url, this.props.gaLabel) : null;
+              }}
+              href={!_isEmpty(bannerData.url) ? bannerData.url : '#'}
+            >
+              {this.renderBannerImage(bannerData.imageUrl)}
+              {this.renderBannerHeadline(bannerData.title)}
+              {this.renderBannerDescription(bannerData.description)}
+              <span className={`${this.props.className}-button`}>Donate</span>
+            </a>
+            {this.renderCloseButton()}
+          </div>
       }
       </div>
     );
@@ -204,8 +208,8 @@ FundraisingBanner.propTypes = {
 };
 
 FundraisingBanner.defaultProps = {
-  className: 'FundraisingBanner',
-  id: 'FundraisingBanner',
+  className: 'fundraisingBanner',
+  id: 'fundraisingBanner',
   bannerData: {},
 };
 

@@ -1,6 +1,9 @@
 language: node_js
 node_js:
-  - 5
+  - 8
+cache:
+  directories:
+    - node_modules
 install: npm install
-before_script: npm run babel-build
+before_script: npm run dist
 script: npm test

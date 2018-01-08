@@ -32,7 +32,7 @@ const previous = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: 'Books/Music/DVDs',
+          text: 'Books/Music/Movies',
         },
       },
       sort: 0,
@@ -569,14 +569,14 @@ const current = [
       type: 'text-group',
       en: {
         type: 'text-single',
-        text: 'http://www.nypl.org/books-music-dvds',
+        text: 'http://www.nypl.org/books-music-movies',
       },
     },
     name: {
       type: 'text-group',
       en: {
         type: 'text-single',
-        text: 'Books/Music/DVDs',
+        text: 'Books/Music/Movies',
       },
     },
     sort: 100,
@@ -641,7 +641,7 @@ const current = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: 'http://www.nypl.org/books-music-dvds/recommendations',
+          text: 'http://www.nypl.org/books-music-movies/recommendations',
         },
       },
       name: {

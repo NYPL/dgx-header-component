@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { extend as _extend } from 'underscore';
 import FocusTrap from 'focus-trap-react';
 import {
-  DownWedgeIcon,
+  GenericWedgeIcon,
   XIcon,
-} from 'dgx-svg-icons';
+} from '@nypl/dgx-svg-icons';
 import axios from 'axios';
 
 import EmailSubscription from '../EmailSubscription/EmailSubscription.js';
@@ -33,6 +33,7 @@ const styles = {
     minHeight: '210px',
     backgroundColor: '#1B7FA7',
     padding: '25px 30px',
+    marginTop: '10px',
   },
   hide: {
     display: 'none',
@@ -135,7 +136,7 @@ class SubscribeButton extends React.Component {
 
   renderEmailButton() {
     let buttonClass = '';
-    let icon = <DownWedgeIcon className="dropDownIcon" ariaHidden />;
+    let icon = <GenericWedgeIcon className="dropDownIcon" ariaHidden />;
     let label = this.props.label;
 
     if (this.state.visible) {
@@ -146,8 +147,8 @@ class SubscribeButton extends React.Component {
 
     return (
       <a
-        id="SubscribeButton"
-        className={`SubscribeButton ${buttonClass}`}
+        id="subscribeButton"
+        className={`subscribeButton ${buttonClass}`}
         href={this.state.target}
         onClick={this.handleClick}
         style={styles.subscribeButton}
@@ -164,7 +165,7 @@ class SubscribeButton extends React.Component {
   renderEmailDialog() {
     return this.state.visible ? (
       <div
-        className="EmailSubscription-Wrapper active animatedFast fadeIn"
+        className="emailSubscription-wrapper active animatedFast fadeIn"
         style={styles.EmailSubscribeForm}
       >
         <EmailSubscription
@@ -176,15 +177,18 @@ class SubscribeButton extends React.Component {
   }
 
   render() {
+    // The desired initialFocus selector only exists when modal visible:
+    const initialFocus = this.state.visible ? '.subscribeMessageBox' : null;
+
     return (
       <FocusTrap
         focusTrapOptions={{
           onDeactivate: this.handleOnClickOut,
           clickOutsideDeactivates: true,
-          initialFocus: '.SubscribeMessageBox',
+          initialFocus,
         }}
         active={this.state.visible}
-        className="SubscribeButton-Wrapper"
+        className="subscribeButton-wrapper"
         style={_extend(styles.base, this.props.style)}
       >
         {this.renderEmailButton()}

@@ -9,7 +9,7 @@ import {
   LogoutIcon,
   BuildingIcon,
   LoginIcon,
-} from 'dgx-svg-icons';
+} from '@nypl/dgx-svg-icons';
 
 const styles = {
   logOutLink: {
@@ -81,10 +81,10 @@ class MyNypl extends React.Component {
 
     return (
       <div tabIndex="0" className="patron-greeting-wrapper" ref="patronGreetingWrapper">
-        <p className={`${this.props.className}-Patron-Greeting Login-Indication`}>
+        <p className={`${this.props.className}-patron-greeting login-indication`}>
           You are logged in as:
         </p>
-        <p className={`${this.props.className}-Patron-Greeting Login-Name`}>
+        <p className={`${this.props.className}-patron-greeting login-name`}>
           {this.props.patronName}
         </p>
       </div>
@@ -99,7 +99,7 @@ class MyNypl extends React.Component {
     return (this.props.isLoggedIn) ?
       <a
         href={this.props.logOutLink}
-        className={`${this.props.className}-Catalog-Link`}
+        className={`${this.props.className}-catalog-link`}
         onClick={() => utils.trackHeader('My Account', 'Log Out')}
         style={styles.logOutLink}
       >
@@ -119,13 +119,13 @@ class MyNypl extends React.Component {
     return (
       <div className={this.props.className} role="dialog">
        {this.renderGreeting()}
-        <ul className={`${this.props.className}-Login-List`}>
+        <ul className={`${this.props.className}-login-list`}>
           <li>
             <a
               ref="catalogLink"
               href={catalogLink}
               style={styles.loginButtons}
-              className={`${this.props.className}-Catalog-Btn`}
+              className={`${this.props.className}-catalog-btn`}
               onClick={() => utils.trackHeader(gaAction, 'Catalog')}
             >
               <LoginIcon fill="#fff" ariaHidden />
@@ -136,10 +136,10 @@ class MyNypl extends React.Component {
             <a
               href={researchLink}
               style={styles.loginButtons}
-              className={`${this.props.className}-Research-Btn`}
+              className={`${this.props.className}-research-btn`}
               onClick={() => utils.trackHeader(gaAction, 'Research')}
             >
-              <BuildingIcon fill="#fff" ariaHidden />
+              <BuildingIcon ariaHidden />
               {researchCatalogLinkLabel}
             </a>
           </li>
@@ -164,7 +164,7 @@ MyNypl.propTypes = {
 };
 
 MyNypl.defaultProps = {
-  className: 'MyNypl',
+  className: 'myNypl',
   lang: 'en',
   loginCatalogLink: appConfig.loginMyNyplLinks.catalog,
   loginResearchLink: appConfig.loginMyNyplLinks.research,

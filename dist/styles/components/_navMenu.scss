@@ -1,7 +1,7 @@
 /*
   This is the Mobile (i.e. min-screen(769px)) instance of NavMenu
 */
-&-Mobile-NavMenu {
+&-mobile-navMenu {
   position: relative;
   display: block;
 
@@ -9,7 +9,7 @@
   @import '_desktopSearch';
 
   // NavMenu Wrapper
-  &-Wrapper {
+  &-wrapper {
     /* Controls the display of Mobile View */
     &.mobileActive {
       margin-top: -2.5px;
@@ -25,35 +25,50 @@
       }
 
       /* Displays NavMenu on Mobile with proper class on parent */
-      #NavMenu-List {
+      #navMenu-List {
         display: block;
         line-height: normal;
       }
 
       /* Only display Logo Text on Mobile */
-      .MobileLogoText {
+      svg {
         display: block;
       }
 
       /* Only display BottomButtons on Mobile */
-      .MobileBottomButtons {
+      .mobileBottomButtons {
         display: block;
+
+        .subscribeLink {
+          svg {
+            margin-left: 40px;
+          }
+        }
+
+        svg {
+          position: absolute;
+          fill: #fff;
+          margin-left: 20px;
+          height: 20px;
+        }
       }
 
-      .MobileLogoText {
-        /* Hide on all viewports, trigger display based on class */
-        position: absolute;
+      .nyplLionLogo {
         top: 20px;
-        left: 15px;
-        color: #FFF;
-        font-size: 85px;
-      }
+        left: -110px;
+        fill: #fff;
+        position: absolute;
+        height: 120px;
 
+        &-lion {
+          display: none;
+        }
+      }
     }
   }
 
   // <ul> list holding each NavMenuItem and link
-  &-List {
+  &-list {
     display: none;
     background-color: #2B2B2B;
     padding: 10px 0;
@@ -63,7 +78,7 @@
     vertical-align: middle;
 
     // Top level <li> items
-    .NavMenuItem {
+    .navMenuItem {
       padding: 8px 0;
       margin: 3.5px 15px 0px 0;
       display: block;
@@ -80,7 +95,7 @@
       }
 
       // <a> tag for each top level NavMenu item
-      &-Link {
+      &-link {
         position: relative;
         display: inline-block;
         padding: 0;
@@ -107,7 +122,7 @@
 /*
   This is the Desktop instance of NavMenu
 */
-&-NavMenu {
+&-navMenu {
   display: block;
 
   position: absolute;
@@ -124,29 +139,23 @@
   @import '_desktopSearch';
 
   // NavMenu Wrapper
-  &-Wrapper {
+  &-wrapper {
     max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
     text-align: right;
     margin: 0 auto;
 
-    .MobileBottomButtons {
+    .mobileBottomButtons {
       /* Hide on all viewports, trigger display based on class */
       display: none;
     }
 
-    .MobileLogoText {
-      /* Hide on all viewports, trigger display based on class */
+    .nyplLionLogo {
       display: none;
-      position: absolute;
-      top: 20px;
-      left: 15px;
-      color: #FFF;
-      font-size: 85px;
     }
   }
 
   // <ul> list holding each NavMenuItem and link
-  &-List {
+  &-list {
     display: none;
     list-style-type: none;
     text-align: right;
@@ -155,14 +164,13 @@
     margin: 0;
     background-color: #FFF;
     padding: 0;
-  
+
     @include min-screen(769px) {
       display: inline-table;
     }
 
     // Top level <li> items
-    .NavMenuItem {
-
+    .navMenuItem {
       display: inline-block;
       padding: 0;
       line-height: normal !important;
@@ -173,7 +181,7 @@
       }
 
       // <a> tag for each top level NavMenu item
-      &-Link {
+      &-link {
         position: relative;
         display: inline-block;
         margin: 0;

@@ -1,5 +1,5 @@
 // Desktop SearchBox Wrapper
-&-searchBox-Wrapper {
+&-searchBox-wrapper {
   display: block;
 
   @include min-screen($TABLET_PORTRAIT_BP) {
@@ -49,7 +49,7 @@
   &-text {
     @include Kievit-Book;
     display: inline-block;
-    font-size: 19px;
+    font-size: 18px;
     line-height: 1em;
     padding: 0 20px 0 0;
     border-bottom: 3px solid $BG_MENU_SEARCH;
@@ -81,7 +81,7 @@
     top: 44px;
   }
 
-  .desktopSearch-Form {
+  .desktopSearch-form {
     position: relative;
     margin: 0 auto;
     max-width: 1312px;
@@ -138,7 +138,7 @@
         }
       }
 
-      .icon {
+      svg {
         display: none;
       }
     }

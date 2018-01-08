@@ -1,0 +1,123 @@
+.emailSubscription-wrapper {
+  text-transform: none;
+  display: none;
+
+  &.active {
+    display: block;
+  }
+
+  .emailSubscription {
+    .subscribeMessageBox {
+      width: 85%;
+
+      &-eyebrow {
+        border-top: 2px solid #FFF;
+        color: #fff;
+        margin-bottom: 10px;
+        width: 25px;
+      }
+      &-title {
+        color: #fff;
+        font-size: 20px;
+        @include Kievit-Book;
+        font-weight: normal;
+        letter-spacing: .03em;
+        line-height: 1.2em;
+
+        &-bestNYPL {
+          @include Kievit-Medium;
+          font-weight: normal;
+        }
+      }
+    }
+
+    &-newEmail {
+      margin-top: 20px;
+      font-size: 14px;
+      text-transform: uppercase;
+      @include Kievit-Book;
+
+      a {
+        border-bottom: 1px solid #fff;
+        color: #fff;
+      }
+    }
+
+    &-followUs {
+      color: #fff;
+      text-transform: uppercase;
+      margin-top: 40px;
+      font-size: 14px;
+    }
+
+    &-misc-error {
+      color: #fff;
+      font-size: 20px;
+      line-height: 1.2em;
+      padding-top: 40px;
+      @include Kievit-Book;
+
+      a {
+        border-radius: 20px;
+      }
+
+      .icon {
+        vertical-align: middle;
+        font-size: 25px;
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .emailSubscribeForm {
+    &-error {
+      @include Kievit-Book;
+      display: none;
+      position: absolute;
+      margin-top: 15px;
+      margin-left: 5px;
+      font-size: 13px;
+      color: #fff;
+
+      &.active {
+        display: block;
+      }
+
+      .x-icon {
+        height: 20px;
+        vertical-align: middle;
+        margin-right: 0px;
+        fill: #fff;
+      }
+    }
+    &-input {
+      display: table-cell;
+      border-radius: 5px;
+      padding: 2px 5px 2px 11px;
+      height: 35px;
+      margin: 2px 0 0 0;
+      width: 95%;
+      font-size: 14.5px;
+      border: 3px solid #1B7FA7;
+      color: #837e77;
+      @include Kievit-Book-Italic;
+
+      &:focus {
+        border: 3px solid #1B7FA7;
+      }
+    }
+    &-submit {
+      input {
+        border-radius: 20px;
+      }
+
+      .check-solo-icon {
+        position: absolute;
+        margin-top: 66px;
+        height: 25px;
+        margin-left: 4px;
+        fill: #fff;
+      }
+    }
+  }
+}

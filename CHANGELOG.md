@@ -1,5 +1,8 @@
 ### CHANGE LOG
 
+### v2.4.2
+> Adding missing GA code from Bitbucket remote.
+
 ### v2.4.1
 > Second accessibility update! This update includes:
 > Updating Header component to track GA events in LogIn button.

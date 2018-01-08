@@ -5,7 +5,13 @@
 > Updating the URL queries when making a search request to apachesolr search/site search.
 
 ### v2.4.1
+> Second accessibility update! This update includes:
 > Updating Header component to track GA events in LogIn button.
+> Updating mobile and desktop dropdown usability and handling of focus within each dropdown.
+> Better labels for buttons.
+> Updated all icons to use SVGs from the @nypl/dgx-svg-icons.
+> Better build using webpack 2.
+> Bumping up npm package versions.
 
 #### v2.4.0
 > This is the first release (of two) with accessibility updates. This update includes:

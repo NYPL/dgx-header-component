@@ -5,6 +5,7 @@
   "main": "dist/index.min.js",
   "scripts": {
     "start": "NODE_ENV=development node server.js",
+    "babel-build": "./node_modules/.bin/babel src -d dist && cp -r src/styles/ dist/styles",
     "dist": "NODE_ENV=production ./node_modules/.bin/webpack --config webpack.config.js && cp -r src/styles/ dist/styles",
     "test": "./node_modules/.bin/mocha test/helpers/browser.js test/*.test.js",
     "test-file": "node_modules/.bin/mocha -w test/helpers/browser.js",

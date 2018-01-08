@@ -1,6 +1,6 @@
 {
   "name": "@nypl/dgx-header-component",
-  "version": "2.4.2",
+  "version": "2.4.3",
   "description": "NYPL Header as a React component.",
   "main": "dist/index.min.js",
   "scripts": {

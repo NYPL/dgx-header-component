@@ -1,6 +1,6 @@
 ### CHANGE LOG
 
-### v2.4.2
+### v2.4.3
 > Updating the function of trackSearchQuerySend in utils.js to send GA events with a callback.
 > Updating the URL queries when making a search request to apachesolr search/site search.
 

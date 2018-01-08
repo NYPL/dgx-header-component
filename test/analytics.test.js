@@ -281,7 +281,7 @@ describe('Google Analytics', function () {
     describe('Books/Music/Movies link', () => {
       it('fires event with "Go to..." action, "Books/Music/Movies" label', () => {
         // This is brittle, but seems like the best way to identify the Books/Music/Movies link:
-        const navButton = component.find('nav.header-navMenu-wrapper a.navMenuItem-link[href="/books-music-dvds"]');
+        const navButton = component.find('nav.header-navMenu-wrapper a.navMenuItem-link[href="/books-music-movies"]');
         expect(navButton.length).to.equal(1);
 
         navButton.simulate('click');

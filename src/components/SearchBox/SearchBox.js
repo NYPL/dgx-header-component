@@ -211,7 +211,6 @@ class SearchBox extends React.Component {
         // Set a dynamic value for custom dimension2
         gaConfig.customDimensions.dimension2 = GASearchedRepo;
 
-
         // 3 phase to handle GA event. We need to prevent sending extra GA events after the search
         // request is made.
         if (isSearchRequested && !isGAResponseReceived) {

@@ -142,7 +142,7 @@ function Utils() {
       gaConfig.eventAction,
       label,
       0,
-      { dimensions: dimensions },
+      dimensions,
       { hitCallback: this.createFunctionWithTimeout(hitCallback) }
     );
   };

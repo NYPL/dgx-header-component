@@ -569,7 +569,7 @@ const current = [
       type: 'text-group',
       en: {
         type: 'text-single',
-        text: 'http://www.nypl.org/books-music-dvds',
+        text: 'http://www.nypl.org/books-music-movies',
       },
     },
     name: {
@@ -641,7 +641,7 @@ const current = [
         type: 'text-group',
         en: {
           type: 'text-single',
-          text: 'http://www.nypl.org/books-music-dvds/recommendations',
+          text: 'http://www.nypl.org/books-music-movies/recommendations',
         },
       },
       name: {

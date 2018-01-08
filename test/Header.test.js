@@ -8,11 +8,11 @@ import { expect } from 'chai';
 import { mount } from 'enzyme';
 
 // Import the component that is going to be tested
-import { Header } from './../src/components/Header/Header.js';
+import { Header } from './../src/components/Header/Header';
 
 // Import related functions
-import utils from './../src/utils/utils.js';
-import appConfig from './../src/appConfig.js';
+import utils from './../src/utils/utils';
+import appConfig from './../src/appConfig';
 
 // Import mock up data
 import {
@@ -20,10 +20,9 @@ import {
   mockErrorResponseData,
   mockExpiredResponseData,
   mockLoginCookie,
-} from './authApiMockResponse.js';
+} from './authApiMockResponse';
 
-const mock = new MockAdapter(axios);
-const mockApi = `${appConfig.patronApiUrl}eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwc` +
+const mockPatronApiEndpoint = `${appConfig.patronApiUrl}eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwc` +
   'zpcL1wvd3d3Lm55cGwub3JnIiwic3ViIjoiNjM2NzAyOCIsImF1ZCI6ImFwcF9sb2dpbiIsImlhdCI6MTQ4MjE3NjQ3MC' +
   'wiZXhwIjoxNDgyMTgwMDcwLCJhdXRoX3RpbWUiOjE0ODIxNzY0NzAsInNjb3BlIjoib3BlbmlkIG9mZmxpbmVfYWNjZXN' +
   'zIGNvb2tpZSBwYXRyb246cmVhZCJ9.JO7VbOqCC7HyjRmeyHD4zM1Gl0JBk5RdxjAkCp0h6sfVe-xs5FyY7biYqs19k4d' +
@@ -34,7 +33,7 @@ const mockApi = `${appConfig.patronApiUrl}eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.e
 describe('Header', () => {
   const patronApiCall = (component = {}, refreshApi = '/refresh', refreshFailCb = {}) => {
     axios
-      .get(mockApi)
+      .get(mockPatronApiEndpoint)
       .then((response) => {
         if (response.data && response.data.data) {
           const patronNameObject = utils.modelPatronName(utils.extractPatronName(response.data));
@@ -46,7 +45,7 @@ describe('Header', () => {
           });
         }
       })
-      .catch(response => {
+      .catch((response) => {
         if (response instanceof Error) {
           console.warn(response.message);
         } else {
@@ -71,12 +70,22 @@ describe('Header', () => {
                   patronDataReceived: true,
                 });
               },
-              refreshFailCb
+              refreshFailCb,
             );
           }
         }
       });
   };
+
+  let mock = null;
+
+  before(() => {
+    mock = new MockAdapter(axios);
+  });
+
+  after(() => {
+    mock.restore();
+  });
 
   describe('when "nyplIdentityPatron" cookie exists', () => {
     let component;
@@ -108,7 +117,7 @@ describe('Header', () => {
 
       // mock up of the API call to get patron's data
       mock
-        .onGet(mockApi)
+        .onGet(mockPatronApiEndpoint)
         .reply(200, mockResponseData);
 
       component = mount(<Header />);
@@ -166,7 +175,7 @@ describe('Header', () => {
 
       before(() => {
         mock
-          .onGet(mockApi)
+          .onGet(mockPatronApiEndpoint)
           .reply(400, mockErrorResponseData);
 
         component = mount(<Header />);
@@ -208,7 +217,7 @@ describe('Header', () => {
           .returns(true);
 
         mock
-          .onGet(mockApi)
+          .onGet(mockPatronApiEndpoint)
           .reply(401, mockExpiredResponseData)
           .onGet('/refresh')
           .reply(200)

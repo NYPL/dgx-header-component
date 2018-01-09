@@ -2,6 +2,8 @@
 
 ### v2.4.2
 > Adding missing GA code from Bitbucket remote.
+> Adding CSS vendor prefixes to arrow transforms.
+> Reverting back to using babel instead of webpack for building the min files.
 
 ### v2.4.1
 > Second accessibility update! This update includes:

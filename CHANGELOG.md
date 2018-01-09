@@ -4,6 +4,7 @@
 > Adding missing GA code from Bitbucket remote.
 > Adding CSS vendor prefixes to arrow transforms.
 > Reverting back to using babel instead of webpack for building the min files.
+> Adding CSS fix for transform rule not working on iOS.
 
 ### v2.4.1
 > Second accessibility update! This update includes:

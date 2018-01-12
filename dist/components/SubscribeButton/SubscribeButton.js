@@ -46,7 +46,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var styles = {
   base: {
-    position: 'relative'
+    position: 'relative',
+    lineHeight: '1px'
   },
   subscribeButton: {
     display: 'inline',

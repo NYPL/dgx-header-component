@@ -15,6 +15,7 @@ import utils from '../../utils/utils.js';
 const styles = {
   base: {
     position: 'relative',
+    lineHeight: '1px',
   },
   subscribeButton: {
     display: 'inline',

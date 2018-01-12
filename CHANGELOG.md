@@ -1,5 +1,8 @@
 ### CHANGE LOG
 
+### v2.4.3
+> Hotfix to get line-height properly set for the dropdowns, which get overridden in a few apps.
+
 ### v2.4.2
 > Adding missing GA code from Bitbucket remote.
 > Adding CSS vendor prefixes to arrow transforms.

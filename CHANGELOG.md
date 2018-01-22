@@ -1,11 +1,17 @@
 ### CHANGE LOG
 
-### v2.4.3
+### v2.4.4
 > Updating the function of trackSearchQuerySend in utils.js to send GA events with a callback.
 > Updating the URL queries when making a search request to apachesolr search/site search.
 
+### v2.4.3
+> Hotfix to get line-height properly set for the dropdowns, which get overridden in a few apps.
+
 ### v2.4.2
 > Adding missing GA code from Bitbucket remote.
+> Adding CSS vendor prefixes to arrow transforms.
+> Reverting back to using babel instead of webpack for building the min files.
+> Adding CSS fix for transform rule not working on iOS.
 
 ### v2.4.1
 > Second accessibility update! This update includes:

@@ -272,6 +272,8 @@ var SearchBox = function (_React$Component) {
           }
 
           if (isSearchRequested && isGAResponseReceived) {
+            window.location.assign(requestUrl);
+
             return true;
           }
 

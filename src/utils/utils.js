@@ -110,22 +110,22 @@ function Utils() {
    * @return {Function}
    */
   this.createFunctionWithTimeout = (callback, optTimeout) => {
-  let called = false;
+    let called = false;
 
-  const fn = () => {
-    if (!called) {
-      called = true;
-      callback();
-    }
+    const fn = () => {
+      if (!called) {
+        called = true;
+        callback();
+      }
+    };
+
+    setTimeout(fn, optTimeout || 500);
+
+    return fn;
   };
 
-  setTimeout(fn, optTimeout || 500);
-
-  return fn;
-};
-
   /**
-   * trackSearchQuerySend = (label ='', dimensions = {})
+   * trackSearchQuerySend = (label = '', dimensions = {})
    * Track a GA click event with custom dimensions.
    * The parameter "dimensions" should be an object with dimensions listed as the following format,
    * { dimensions1: 'value1', dimensions2: 'value2', ... }
@@ -136,7 +136,7 @@ function Utils() {
    * @param {object} dimensions - the object that consists the custom dimensions for the event.
    * @param {function} hitCallback - the function to be executed after sending GA is completed.
    */
-  this.trackSearchQuerySend = (label, dimensions = {}, hitCallback) => {
+  this.trackSearchQuerySend = (label = '', dimensions = {}, hitCallback) => {
     ga.ga(
       'send',
       'event',

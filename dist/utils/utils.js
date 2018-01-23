@@ -133,7 +133,7 @@ function Utils() {
   };
 
   /**
-   * trackSearchQuerySend = (label ='', dimensions = {})
+   * trackSearchQuerySend = (label = '', dimensions = {})
    * Track a GA click event with custom dimensions.
    * The parameter "dimensions" should be an object with dimensions listed as the following format,
    * { dimensions1: 'value1', dimensions2: 'value2', ... }
@@ -144,7 +144,8 @@ function Utils() {
    * @param {object} dimensions - the object that consists the custom dimensions for the event.
    * @param {function} hitCallback - the function to be executed after sending GA is completed.
    */
-  this.trackSearchQuerySend = function (label) {
+  this.trackSearchQuerySend = function () {
+    var label = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
     var dimensions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     var hitCallback = arguments[2];
 

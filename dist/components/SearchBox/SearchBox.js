@@ -99,11 +99,11 @@ var SearchBox = function (_React$Component) {
     value: function setEncoreUrl(searchInput, baseUrl, language, scopeString) {
       var searchTerm = this.encoreEncodeSearchString(searchInput);
       var rootUrl = baseUrl || 'https://browse.nypl.org/iii/encore/search/';
-      var defaultLang = language ? '?lang=' + language : '';
+      var defaultLang = language ? '&lang=' + language : '';
       var finalEncoreUrl = void 0;
 
       if (searchTerm) {
-        finalEncoreUrl = this.encoreAddScope(rootUrl, searchTerm, scopeString) + defaultLang + this.generateQueriesForGA();
+        finalEncoreUrl = this.encoreAddScope(rootUrl, searchTerm, scopeString) + this.generateQueriesForGA() + defaultLang;
       }
 
       return finalEncoreUrl;
@@ -123,7 +123,7 @@ var SearchBox = function (_React$Component) {
       // the time stamp here is for the purpose of telling when this search query is made.
       var currentTimeStamp = new Date().getTime();
 
-      return currentTimeStamp ? '&searched_from=header_search&timestamp=' + currentTimeStamp : '&searched_from=header_search';
+      return currentTimeStamp ? '?searched_from=header_search&timestamp=' + currentTimeStamp : '&searched_from=header_search';
     }
 
     /**

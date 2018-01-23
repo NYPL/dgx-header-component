@@ -60,12 +60,12 @@ class SearchBox extends React.Component {
   setEncoreUrl(searchInput, baseUrl, language, scopeString) {
     const searchTerm = this.encoreEncodeSearchString(searchInput);
     const rootUrl = baseUrl || 'https://browse.nypl.org/iii/encore/search/';
-    const defaultLang = (language) ? `?lang=${language}` : '';
+    const defaultLang = (language) ? `&lang=${language}` : '';
     let finalEncoreUrl;
 
     if (searchTerm) {
-      finalEncoreUrl = this.encoreAddScope(rootUrl, searchTerm, scopeString) + defaultLang +
-        this.generateQueriesForGA();
+      finalEncoreUrl = this.encoreAddScope(rootUrl, searchTerm, scopeString) +
+        this.generateQueriesForGA() + defaultLang;
     }
 
     return finalEncoreUrl;
@@ -82,7 +82,7 @@ class SearchBox extends React.Component {
     // the time stamp here is for the purpose of telling when this search query is made.
     const currentTimeStamp = new Date().getTime();
 
-    return (currentTimeStamp) ? `&searched_from=header_search&timestamp=${currentTimeStamp}` :
+    return (currentTimeStamp) ? `?searched_from=header_search&timestamp=${currentTimeStamp}` :
       '&searched_from=header_search';
   }
 

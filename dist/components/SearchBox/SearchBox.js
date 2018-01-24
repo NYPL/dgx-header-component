@@ -123,7 +123,7 @@ var SearchBox = function (_React$Component) {
       // the time stamp here is for the purpose of telling when this search query is made.
       var currentTimeStamp = new Date().getTime();
 
-      return currentTimeStamp ? '?searched_from=header_search&timestamp=' + currentTimeStamp : '&searched_from=header_search';
+      return currentTimeStamp ? '?searched_from=header_search&timestamp=' + currentTimeStamp : '?searched_from=header_search';
     }
 
     /**

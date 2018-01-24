@@ -83,7 +83,7 @@ class SearchBox extends React.Component {
     const currentTimeStamp = new Date().getTime();
 
     return (currentTimeStamp) ? `?searched_from=header_search&timestamp=${currentTimeStamp}` :
-      '&searched_from=header_search';
+      '?searched_from=header_search';
   }
 
   /**

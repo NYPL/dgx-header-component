@@ -1,7 +1,7 @@
 ### CHANGE LOG
 
 ### v2.4.5
-> Updating the version for fixing version tag issue on npm platform.
+> Updating the version to fix v2.4.4 is not able to be fully downloaded on NPM platform.
 
 ### v2.4.4
 > Updating the function of trackSearchQuerySend in utils.js to send GA events with a callback.

@@ -8,7 +8,7 @@ This repository is for the header component used in React applications at NYPL.
 
 ### Version
 
-> v2.4.3
+> v2.4.4
 
 ### App Installation
 

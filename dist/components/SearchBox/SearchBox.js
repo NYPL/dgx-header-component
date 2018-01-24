@@ -47,7 +47,9 @@ var SearchBox = function (_React$Component) {
       searchInput: '',
       searchOption: 'catalog',
       placeholder: _this.props.placeholder,
-      placeholderAnimation: null
+      placeholderAnimation: null,
+      isSearchRequested: false,
+      isGAResponseReceived: false
     };
 
     _this.handleSearchInputChange = _this.handleSearchInputChange.bind(_this);
@@ -68,7 +70,7 @@ var SearchBox = function (_React$Component) {
       var catalogUrl = catalogBaseUrl || '//www.nypl.org/search/apachesolr_search/';
 
       if (searchString) {
-        return catalogUrl + encodeURIComponent(searchString);
+        return catalogUrl + encodeURIComponent(searchString) + this.generateQueriesForGA();
       }
       return null;
     }
@@ -97,11 +99,11 @@ var SearchBox = function (_React$Component) {
     value: function setEncoreUrl(searchInput, baseUrl, language, scopeString) {
       var searchTerm = this.encoreEncodeSearchString(searchInput);
       var rootUrl = baseUrl || 'https://browse.nypl.org/iii/encore/search/';
-      var defaultLang = language ? '?lang=' + language : '';
+      var defaultLang = language ? '&lang=' + language : '';
       var finalEncoreUrl = void 0;
 
       if (searchTerm) {
-        finalEncoreUrl = this.encoreAddScope(rootUrl, searchTerm, scopeString) + defaultLang + this.generateQueriesForGA();
+        finalEncoreUrl = this.encoreAddScope(rootUrl, searchTerm, scopeString) + this.generateQueriesForGA() + defaultLang;
       }
 
       return finalEncoreUrl;
@@ -121,7 +123,7 @@ var SearchBox = function (_React$Component) {
       // the time stamp here is for the purpose of telling when this search query is made.
       var currentTimeStamp = new Date().getTime();
 
-      return currentTimeStamp ? '&searched_from=header_search&timestamp=' + currentTimeStamp : '&searched_from=header_search';
+      return currentTimeStamp ? '?searched_from=header_search&timestamp=' + currentTimeStamp : '?searched_from=header_search';
     }
 
     /**
@@ -216,6 +218,8 @@ var SearchBox = function (_React$Component) {
   }, {
     key: 'submitSearchRequest',
     value: function submitSearchRequest(searchType) {
+      var _this3 = this;
+
       var requestUrl = void 0;
       var gaSearchLabel = void 0;
       var searchInputValue = this.state.searchInput;
@@ -225,6 +229,8 @@ var SearchBox = function (_React$Component) {
       // For GA "Search" Catalog, "Query Sent" Action Event
       // GASearchedRepo indicates which kind of search is sent
       var GASearchedRepo = 'Unknown';
+      var isSearchRequested = this.state.isSearchRequested;
+      var isGAResponseReceived = this.state.isGAResponseReceived;
 
       if (this.isSearchInputValid(searchInputValue)) {
         // Explicit checks for mobile search
@@ -259,11 +265,27 @@ var SearchBox = function (_React$Component) {
           // Set a dynamic value for custom dimension2
           _gaConfig2.default.customDimensions.dimension2 = GASearchedRepo;
 
-          // Send GA "Search" Catalog, "Query Sent" Action Event
-          _utils2.default.trackSearchQuerySend(searchInputValue, _gaConfig2.default.customDimensions);
+          // 3 phase to handle GA event. We need to prevent sending extra GA events after the search
+          // request is made.
+          if (isSearchRequested && !isGAResponseReceived) {
+            return false;
+          }
 
-          // Go to the proper search page
-          window.location.assign(requestUrl);
+          if (isSearchRequested && isGAResponseReceived) {
+            window.location.assign(requestUrl);
+
+            return true;
+          }
+
+          if (!isSearchRequested && !isGAResponseReceived) {
+            this.setState({ isSearchRequested: true });
+            // Send GA "Search" Catalog, "Query Sent" Action Event
+            _utils2.default.trackSearchQuerySend(searchInputValue, _gaConfig2.default.customDimensions, function () {
+              _this3.setState({ isGAResponseReceived: true });
+              // Go to the proper search page
+              window.location.assign(requestUrl);
+            });
+          }
         }
       } else {
         event.preventDefault();
@@ -272,6 +294,8 @@ var SearchBox = function (_React$Component) {
         this.animationTimer();
         this.refs.headerSearchInputField.focus();
       }
+
+      return true;
     }
   }, {
     key: 'renderSearchInputField',
@@ -307,7 +331,7 @@ var SearchBox = function (_React$Component) {
   }, {
     key: 'renderMobileControls',
     value: function renderMobileControls() {
-      var _this3 = this;
+      var _this4 = this;
 
       return _react2.default.createElement(
         'div',
@@ -317,7 +341,7 @@ var SearchBox = function (_React$Component) {
           {
             'aria-label': 'Submit Catalog Search',
             onClick: function onClick() {
-              return _this3.submitSearchRequest('catalog');
+              return _this4.submitSearchRequest('catalog');
             }
           },
           _react2.default.createElement(
@@ -332,7 +356,7 @@ var SearchBox = function (_React$Component) {
           {
             'aria-label': 'Submit NYPL Website Search',
             onClick: function onClick() {
-              return _this3.submitSearchRequest('website');
+              return _this4.submitSearchRequest('website');
             }
           },
           _react2.default.createElement(
@@ -347,7 +371,7 @@ var SearchBox = function (_React$Component) {
   }, {
     key: 'renderDesktopControls',
     value: function renderDesktopControls() {
-      var _this4 = this;
+      var _this5 = this;
 
       return _react2.default.createElement(
         'div',
@@ -381,7 +405,7 @@ var SearchBox = function (_React$Component) {
         _react2.default.createElement(
           'button',
           { type: 'submit', onClick: function onClick() {
-              return _this4.submitSearchRequest(null);
+              return _this5.submitSearchRequest(null);
             } },
           _react2.default.createElement(
             'span',

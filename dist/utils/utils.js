@@ -109,30 +109,47 @@ function Utils() {
   this.trackHeader = _dgxReactGa.gaUtils.trackEvent('Global Header');
 
   /**
-   * trackSearchQuerySend = (label ='', dimensions = {})
+   * createFunctionWithTimeout(callback, optTimeout)
+   * The function serves as a pipe to return the function that is passed to it.
+   * It also searves as a timer to execute that function after a certain amount of time.
+   *
+   * @param {Function} callback - The function to be executed after the time of optTimeout
+   * @param {Number} optTimeout
+   * @return {Function}
+   */
+  this.createFunctionWithTimeout = function (callback, optTimeout) {
+    var called = false;
+
+    var fn = function fn() {
+      if (!called) {
+        called = true;
+        callback();
+      }
+    };
+
+    setTimeout(fn, optTimeout || 500);
+
+    return fn;
+  };
+
+  /**
+   * trackSearchQuerySend = (label = '', dimensions = {})
    * Track a GA click event with custom dimensions.
    * The parameter "dimensions" should be an object with dimensions listed as the following format,
    * { dimensions1: 'value1', dimensions2: 'value2', ... }
+   * This function will send GA event first, and after it is completed, it will trigger the
+   * original event.
    *
    * @param {string} label - Label for GA event.
    * @param {object} dimensions - the object that consists the custom dimensions for the event.
+   * @param {function} hitCallback - the function to be executed after sending GA is completed.
    */
   this.trackSearchQuerySend = function () {
     var label = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
     var dimensions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    var hitCallback = arguments[2];
 
-    var eventObj = {
-      category: _gaConfig2.default.eventCategory,
-      action: _gaConfig2.default.eventAction,
-      label: label,
-      value: 0
-    };
-
-    if (!(0, _underscore.isEmpty)(dimensions)) {
-      eventObj = (0, _underscore.extend)(eventObj, dimensions);
-    }
-
-    _dgxReactGa.ga.event(eventObj);
+    _dgxReactGa.ga.ga('send', 'event', _gaConfig2.default.eventCategory, _gaConfig2.default.eventAction, label, 0, dimensions, { hitCallback: _this.createFunctionWithTimeout(hitCallback) });
   };
 
   /**

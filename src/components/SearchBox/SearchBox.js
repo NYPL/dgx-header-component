@@ -18,6 +18,8 @@ class SearchBox extends React.Component {
       searchOption: 'catalog',
       placeholder: this.props.placeholder,
       placeholderAnimation: null,
+      isSearchRequested: false,
+      isGAResponseReceived: false,
     };
 
     this.handleSearchInputChange = this.handleSearchInputChange.bind(this);
@@ -33,7 +35,7 @@ class SearchBox extends React.Component {
     const catalogUrl = catalogBaseUrl || '//www.nypl.org/search/apachesolr_search/';
 
     if (searchString) {
-      return catalogUrl + encodeURIComponent(searchString);
+      return catalogUrl + encodeURIComponent(searchString) + this.generateQueriesForGA();
     }
     return null;
   }
@@ -58,12 +60,12 @@ class SearchBox extends React.Component {
   setEncoreUrl(searchInput, baseUrl, language, scopeString) {
     const searchTerm = this.encoreEncodeSearchString(searchInput);
     const rootUrl = baseUrl || 'https://browse.nypl.org/iii/encore/search/';
-    const defaultLang = (language) ? `?lang=${language}` : '';
+    const defaultLang = (language) ? `&lang=${language}` : '';
     let finalEncoreUrl;
 
     if (searchTerm) {
-      finalEncoreUrl = this.encoreAddScope(rootUrl, searchTerm, scopeString) + defaultLang +
-        this.generateQueriesForGA();
+      finalEncoreUrl = this.encoreAddScope(rootUrl, searchTerm, scopeString) +
+        this.generateQueriesForGA() + defaultLang;
     }
 
     return finalEncoreUrl;
@@ -80,8 +82,8 @@ class SearchBox extends React.Component {
     // the time stamp here is for the purpose of telling when this search query is made.
     const currentTimeStamp = new Date().getTime();
 
-    return (currentTimeStamp) ? `&searched_from=header_search&timestamp=${currentTimeStamp}` :
-      '&searched_from=header_search';
+    return (currentTimeStamp) ? `?searched_from=header_search&timestamp=${currentTimeStamp}` :
+      '?searched_from=header_search';
   }
 
   /**
@@ -173,6 +175,8 @@ class SearchBox extends React.Component {
     // For GA "Search" Catalog, "Query Sent" Action Event
     // GASearchedRepo indicates which kind of search is sent
     let GASearchedRepo = 'Unknown';
+    const isSearchRequested = this.state.isSearchRequested;
+    const isGAResponseReceived = this.state.isGAResponseReceived;
 
     if (this.isSearchInputValid(searchInputValue)) {
       // Explicit checks for mobile search
@@ -207,11 +211,31 @@ class SearchBox extends React.Component {
         // Set a dynamic value for custom dimension2
         gaConfig.customDimensions.dimension2 = GASearchedRepo;
 
-        // Send GA "Search" Catalog, "Query Sent" Action Event
-        utils.trackSearchQuerySend(searchInputValue, gaConfig.customDimensions);
+        // 3 phase to handle GA event. We need to prevent sending extra GA events after the search
+        // request is made.
+        if (isSearchRequested && !isGAResponseReceived) {
+          return false;
+        }
 
-        // Go to the proper search page
-        window.location.assign(requestUrl);
+        if (isSearchRequested && isGAResponseReceived) {
+          window.location.assign(requestUrl);
+
+          return true;
+        }
+
+        if (!isSearchRequested && !isGAResponseReceived) {
+          this.setState({ isSearchRequested: true });
+          // Send GA "Search" Catalog, "Query Sent" Action Event
+          utils.trackSearchQuerySend(
+            searchInputValue,
+            gaConfig.customDimensions,
+            () => {
+              this.setState({ isGAResponseReceived: true });
+              // Go to the proper search page
+              window.location.assign(requestUrl);
+            }
+          );
+        }
       }
     } else {
       event.preventDefault();
@@ -220,6 +244,8 @@ class SearchBox extends React.Component {
       this.animationTimer();
       this.refs.headerSearchInputField.focus();
     }
+
+    return true;
   }
 
   renderSearchInputField() {

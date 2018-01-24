@@ -1,5 +1,8 @@
 ### CHANGE LOG
 
+### v2.4.5
+> Updating the version for fixing version tag issue on npm platform.
+
 ### v2.4.4
 > Updating the function of trackSearchQuerySend in utils.js to send GA events with a callback.
 > Updating the URL queries when making a search request to apachesolr search/site search.

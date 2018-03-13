@@ -1,6 +1,6 @@
 {
   "name": "@nypl/dgx-header-component",
-  "version": "2.4.5",
+  "version": "2.4.6",
   "description": "NYPL Header as a React component.",
   "main": "dist/components/Header/Header.js",
   "scripts": {
@@ -31,6 +31,10 @@
     {
       "name": "Sean Redmond",
       "email": "seanredmond@nypl.org"
+    },
+    {
+      "name": "Ricardo E. Galvez",
+      "email": "ricardogalvez@nypl.org"
     }
   ],
   "license": "MIT",

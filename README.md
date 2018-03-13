@@ -187,10 +187,23 @@ https://bitbucket.org/NYPL/dgx-feature-flags
 
 We use a specific NYPL patron log in cookie to decide the logged in status. For more details, please see [PATRONCOOKIE.md](./PATRONCOOKIE.md).
 
-### Contribute
+### Contributing is fun and easy!
 
-1. Fork this repo.
-2. Create a feature branch - `git checkout -b new-feature`.
-3. Commit your changes - `git commit -am 'Description of feature'`.
-4. Push the branch - `git push origin new-feature`.
-5. Create a new Pull Request.
+1. Clone this repo.
+2. Checkout & create a feature branch from `development` - `git checkout development && git checkout -b new-feature`, do your good works.
+3. When your work is ready to commit, run `npm run babel build`
+4. Commit your changes - `git commit -am 'Description of feature'`.
+5. Push the branch - `git push origin new-feature`.
+6. Create a new Pull Request and make sure it is pointed at the `development` branch.
+7. Upon approval, merge to `development`
+8. Create release branch: `git checkout -b release-v.x.x.x`
+9. Update `package.json` with new version number, update the `README.md` & `CHANGELOG.md` with relevant info.
+10. Commit those changes and merge back to development: `git merge --no-ff release-x.x.x`
+11. Push `development` to the remote origin
+12. Checkout `master` & `git merge --no-ff development`
+13. Tag `master` with the new release `git tag vx.x.x`
+14. Push `master` to the remote origin
+15. Push the tags to the remote origin `git push --tags`
+16. Update the release version on the remote in this case [https://github.com/NYPL/dgx-header-component/releases](https://github.com/NYPL/dgx-header-component/releases)
+17. Update the `npm` module: Return to your command line, and run `npm publish` from the project root.
+18. Pat self on back.

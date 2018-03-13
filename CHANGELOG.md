@@ -1,5 +1,9 @@
 ### CHANGE LOG
 
+### v2.4.6
+> no more questionable Futurama based ipsum, now w/ more Starwars ipsum.
+> Updated the contribution work flow on the README.md
+
 ### v2.4.5
 > Updating the version to fix v2.4.4 is not able to be fully downloaded on NPM platform.
 

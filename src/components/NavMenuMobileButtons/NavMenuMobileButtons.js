@@ -34,7 +34,6 @@ const styles = {
   label: {
     fontSize: '16px',
     margin: '0 0 0 5px',
-    textTransform: 'uppercase',
     display: 'inline-block',
   },
   wrapper: {

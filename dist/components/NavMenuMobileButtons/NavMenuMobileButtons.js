@@ -61,18 +61,12 @@ var styles = {
   subscribeLinkWrapper: {
     borderLeft: '1px solid #363636'
   },
-  subscribeLinkLabel: {
-    // width: '85px',
-  },
   libraryCardLinkWrapper: {
     borderRight: '1px solid #363636'
   },
   shopLinkWrapper: {
     display: 'flex',
     justifyContent: 'center'
-  },
-  libraryCardLinkLabel: {
-    // width: '110px',
   },
   icon: {
     fontSize: '32px',
@@ -89,7 +83,8 @@ var styles = {
     fontSize: '16px',
     lineHeight: 'normal'
   },
-  shopLink: { display: 'inline-table',
+  shopLink: {
+    display: 'inline-table',
     color: '#FFF',
     backgroundColor: '#2B2B2B',
     borderTop: '2px solid #363636',
@@ -138,7 +133,7 @@ var NavMenuMobileButtons = function NavMenuMobileButtons(_ref) {
           'span',
           {
             className: libraryCardClass + '-label',
-            style: (0, _underscore.extend)(styles.libraryCardLinkLabel, styles.label)
+            style: (0, _underscore.extend)({}, styles.label)
           },
           'Get a Library Card'
         )
@@ -165,7 +160,7 @@ var NavMenuMobileButtons = function NavMenuMobileButtons(_ref) {
           'span',
           {
             className: subscribeLinkClass + '-label',
-            style: (0, _underscore.extend)(styles.subscribeLinkLabel, styles.label)
+            style: (0, _underscore.extend)({}, styles.label)
           },
           'Get Email Updates'
         )

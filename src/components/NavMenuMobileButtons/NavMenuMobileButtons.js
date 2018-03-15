@@ -47,18 +47,12 @@ const styles = {
   subscribeLinkWrapper: {
     borderLeft: '1px solid #363636',
   },
-  subscribeLinkLabel: {
-    // width: '85px',
-  },
   libraryCardLinkWrapper: {
     borderRight: '1px solid #363636',
   },
   shopLinkWrapper: {
     display: 'flex',
     justifyContent: 'center',
-  },
-  libraryCardLinkLabel: {
-    // width: '110px',
   },
   icon: {
     fontSize: '32px',
@@ -75,7 +69,8 @@ const styles = {
     fontSize: '16px',
     lineHeight: 'normal',
   },
-  shopLink: {  display: 'inline-table',
+  shopLink: {
+    display: 'inline-table',
     color: '#FFF',
     backgroundColor: '#2B2B2B',
     borderTop: '2px solid #363636',
@@ -113,7 +108,7 @@ const NavMenuMobileButtons = ({
           <LibraryCardIcon iconId="libraryCardSVG" ariaHidden />
           <span
             className={`${libraryCardClass}-label`}
-            style={_extend(styles.libraryCardLinkLabel, styles.label)}
+            style={_extend({}, styles.label)}
           >
             Get a Library Card
           </span>
@@ -132,7 +127,7 @@ const NavMenuMobileButtons = ({
           <EnvelopeIcon iconId="envelopSVG" ariaHidden />
           <span
             className={`${subscribeLinkClass}-label`}
-            style={_extend(styles.subscribeLinkLabel, styles.label)}
+            style={_extend({}, styles.label)}
           >
             Get Email Updates
           </span>

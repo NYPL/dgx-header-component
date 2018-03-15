@@ -41,19 +41,20 @@
 
         .subscribeLink {
           svg {
+            height: 20px;
             margin-left: 10px;
+            width: 30px;
           }
         }
 
         svg {
-          //position: absolute;
           fill: #fff;
-          //margin-left: 20px;
           height: 20px;
         }
 
         .library-card-icon {
           height: 20px;
+          margin-left: 10px;
           width: 33px;
         }
 

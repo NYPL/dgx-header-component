@@ -33,7 +33,7 @@ const styles = {
   },
   label: {
     fontSize: '16px',
-    margin: '0 0 0 5px',
+    margin: '0 3px 0 5px',
     display: 'inline-block',
   },
   wrapper: {
@@ -48,7 +48,7 @@ const styles = {
     borderLeft: '1px solid #363636',
   },
   subscribeLinkLabel: {
-    width: '85px',
+    // width: '85px',
   },
   libraryCardLinkWrapper: {
     borderRight: '1px solid #363636',
@@ -58,7 +58,7 @@ const styles = {
     justifyContent: 'center',
   },
   libraryCardLinkLabel: {
-    width: '110px',
+    // width: '110px',
   },
   icon: {
     fontSize: '32px',

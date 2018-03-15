@@ -1,0 +1,195 @@
+@import 'utils/fonts';
+@import 'utils/normalize';
+@import 'utils/globals';
+@import 'utils/colors';
+@import 'utils/viewports';
+@import 'utils/mixins';
+@import 'utils/animations';
+
+/* NYPL HEADER
+ * -----------
+ * -- Following BEM naming convention
+ * -- Mobile First approach
+*/
+.header {
+  @include Kievit-Book;
+  width: 100%;
+  background-color: #FFF;
+  @extend %clearfix;
+
+  /* Global rules for repetitive link elements */
+  a {
+    text-decoration: none;
+  }
+
+  // Accessibility outline rule
+  a, button, input {
+    &:focus, &::-moz-focus-inner {
+      outline: 3px auto #3b99fc;
+    }
+  }
+
+  /* MOBILE HEADER
+   * -------------
+  */
+  &-mobile {
+    min-width: 320px;
+    display: block;
+
+    /* Hide MobileHeader on Tablet larger viewports */
+    @include min-screen(769px) {
+      display: none;
+    }
+
+    &-logo {
+      width: 50px;
+      height: 55px;
+    }
+
+    ul {
+      button {
+        border-radius: 0;
+      }
+    }
+
+    // Mobile Search
+    @import 'components/_mobileSearch';
+
+    &-wrapper {
+      width: 100%;
+      position: absolute;
+      left: 0;
+    }
+  }
+
+  &-wrapper {
+    position: relative;
+    border-bottom: 2px solid #ED1C24;
+  }
+
+  /* DESKTOP HEADER WRAPPER
+   * ----------------------
+   * Sets the max-width on a desktop and up device.
+  */
+  &-topWrapper {
+    display: none;
+
+    @include min-screen(769px) {
+      display: block;
+      max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
+      margin: 0px 20px;
+      min-height: 160px;
+    }
+
+    @include min-screen(1025px) {
+      margin: 0px auto;
+    }
+  }
+
+  /* DESKTOP LOGO
+   * ------------
+   * Defined width for desktop.
+   * position adjustments left.
+  */
+  &-logo {
+    overflow: hidden;
+    @include min-screen(769px) {
+      display: block;
+      position: relative;
+      margin: 0;
+      max-width: 90px;
+    }
+
+    @include min-screen(1025px) {
+      max-width: 260px;
+      left: 27px;
+      top: 20px;
+    }
+
+    .nyplLionLogo {
+      width: 200px;
+      height: 112px;
+
+      @include min-screen(1025px) {
+        width: 225px;
+        height: 126px;
+      }
+
+      &-text {
+        @include min-screen(769px) {
+          display: none;
+        }
+
+        @include min-screen(1025px) {
+          display: block;
+        }
+      }
+    }
+  }
+
+  @import 'components/_buttons.scss';
+
+  @import 'components/_socialMediaLinksWidget.scss';
+
+  /* Skip Navigation
+   * ---------------
+   */
+  @import 'components/_skipNav.scss';
+
+  /* Global Alerts
+   * -------------
+  */
+  @import 'components/_globalAlerts';
+
+  /* EMAIL SUBSCRIBE BUTTON/FORM
+   * ---------------------------
+   * - Includes Button rules (also for MyNYPL)
+   * - Includes Email Signup rules
+  */
+  @import 'components/_emailSubscription';
+
+  /* MYNYPL LOGIN BUTTON
+   * ---------------------------
+   * - Includes MyNypl Login rules
+  */
+  @import 'components/_myNypl';
+
+  /* MAIN NAVIGATION
+   * ---------------
+   * - Includes MegaMenu's
+   * - Includes Logo text for mobile
+   * - Arrows on NavMenu Top Links
+  */
+  @import 'components/_navMenu';
+
+  @import 'components/_fundraisingBanner';
+}
+
+/* CSS for Screen Reader Texts */
+// Taken from H5BP
+.visuallyHidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+
+  &:focus, &:active {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+  }
+}
+
+.dropDownIcon {
+  width: 15px;
+  vertical-align: middle;
+  margin: 0 0 0 5px;
+  padding-bottom: 3px;
+}

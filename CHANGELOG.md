@@ -1,5 +1,9 @@
 ### CHANGE LOG
 
+### v2.4.7
+> Fixes #39 where the icons were not layiing out properly for email & library card buttons in the mobile header. flexbox to the rescue
+> Added the Shop button / link to mobile header w/ new shopping bag icon added in from [dgx-svg-icons](https://github.com/NYPL/dgx-svg-icons)
+
 ### v2.4.6
 > no more questionable Futurama based ipsum, now w/ more Starwars ipsum.
 > Updated the contribution work flow on the README.md

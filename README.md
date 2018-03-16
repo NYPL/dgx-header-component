@@ -8,7 +8,7 @@ This repository is for the header component used in React applications at NYPL.
 
 ### Version
 
-> v2.4.6
+> v2.4.7
 
 ### App Installation
 
@@ -191,7 +191,7 @@ We use a specific NYPL patron log in cookie to decide the logged in status. For 
 
 1. Clone this repo.
 2. Checkout & create a feature branch from `development` - `git checkout development && git checkout -b new-feature`, do your good works.
-3. When your work is ready to commit, run `npm run babel build`
+3. When your work is ready to commit, run `npm run babel-build`
 4. Commit your changes - `git commit -am 'Description of feature'`.
 5. Push the branch - `git push origin new-feature`.
 6. Create a new Pull Request and make sure it is pointed at the `development` branch.

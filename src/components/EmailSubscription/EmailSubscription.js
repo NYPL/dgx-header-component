@@ -69,7 +69,7 @@ const styles = {
   },
   emailFormLabel: {
     color: '#FFF',
-    margin: '15px 0 0 5px',
+    margin: '15px 0 0 0',
     display: 'inline-block',
   },
   resubmitButton: {

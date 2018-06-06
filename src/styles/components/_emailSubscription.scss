@@ -103,7 +103,7 @@
       @include Kievit-Book-Italic;
 
       &:focus {
-        border: 3px solid #1B7FA7;
+        border: 3px solid $focus-color;
       }
     }
     &-submit {

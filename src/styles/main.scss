@@ -23,9 +23,13 @@
   }
 
   // Accessibility outline rule
-  a, button, input {
-    &:focus, &::-moz-focus-inner {
-      outline: 3px auto #3b99fc;
+  a,
+   button,
+   input {
+    &:focus,
+    &::-moz-focus-inner {
+      box-shadow: 1px 1px 2px 2px darken($focus-color, 10%);
+      outline: 3px auto $focus-color;
     }
   }
 

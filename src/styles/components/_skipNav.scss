@@ -25,15 +25,16 @@
     z-index: 1000;
 
     &:focus, &:active {
-      box-shadow: 0 0 7px rgba(39, 153, 197, 0.75);
-      outline: 0;
-      left: auto;
-      width: auto;
+      box-shadow: 1px 1px 2px 2px darken($focus-color, 10%);
       height: auto;
-      top: 10px;
+      left: auto;
+      outline: 0;
       overflow: visible;
+      top: 10px;
+      width: auto;
+
       @include min-screen(769px) {
-        top: auto;
+         top: auto;
       }
     }
   }

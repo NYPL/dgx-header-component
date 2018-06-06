@@ -133,8 +133,8 @@
 
         &:focus,
         &:active {
-          outline: 3px auto #3b99fc;
-          box-shadow: none;
+          box-shadow: 1px 1px 2px 2px darken($focus-color, 10%);
+          outline: 3px auto $focus-color;
         }
       }
 
@@ -188,7 +188,7 @@
 
       // Focus effect on label
       input[type=radio]:focus + label {
-        outline: 3px auto #3b99fc;
+        outline: 3px auto $focus-color;
       }
 
       .catalogOption {

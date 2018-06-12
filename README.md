@@ -206,4 +206,4 @@ We use a specific NYPL patron log in cookie to decide the logged in status. For 
 15. Push the tags to the remote origin `git push --tags`
 16. Update the release version on the remote in this case [https://github.com/NYPL/dgx-header-component/releases](https://github.com/NYPL/dgx-header-component/releases)
 17. Update the `npm` module: Return to your command line, and run `npm publish` from the project root.
-18. Pat self on back.
+18. Pat self on back. Enjoy a nice 🌮 dinner.

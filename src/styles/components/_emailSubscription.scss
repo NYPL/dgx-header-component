@@ -17,9 +17,9 @@
         width: 25px;
       }
       &-title {
+        @include Kievit-Book;
         color: #fff;
         font-size: 20px;
-        @include Kievit-Book;
         font-weight: normal;
         letter-spacing: .03em;
         line-height: 1.2em;
@@ -91,32 +91,37 @@
       }
     }
     &-input {
-      display: table-cell;
+      @include Kievit-Book-Italic;
+      border: 3px solid #1B7FA7;
       border-radius: 5px;
+      display: table-cell;
       padding: 2px 5px 2px 11px;
       height: 35px;
       margin: 10px 0 0 -3px;
       width: 95%;
       font-size: 14.5px;
-      border: 3px solid #1B7FA7;
       color: #837e77;
-      @include Kievit-Book-Italic;
 
       &:focus {
-        border: 3px solid $focus-color;
+        @include button-focus;
       }
     }
+
     &-submit {
       input {
         border-radius: 20px;
+
+        &:focus {
+          @include button-focus;
+        }
       }
 
       .check-solo-icon {
-        position: absolute;
-        margin-top: 66px;
-        height: 25px;
-        margin-left: 4px;
         fill: #fff;
+        height: 25px;
+        margin-top: 66px;
+        margin-left: 4px;
+        position: absolute;
       }
     }
   }

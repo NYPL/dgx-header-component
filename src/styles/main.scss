@@ -181,7 +181,8 @@
   padding: 0;
   position: absolute;
 
-  &:focus, &:active {
+  &:focus, 
+  &:active {
     clip: auto;
     height: auto;
     margin: 0;

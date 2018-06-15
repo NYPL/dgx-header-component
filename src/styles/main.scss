@@ -12,10 +12,10 @@
  * -- Mobile First approach
 */
 .header {
-  @include Kievit-Book;
-  width: 100%;
-  background-color: #FFF;
   @extend %clearfix;
+  @include Kievit-Book;
+  background-color: #FFF;
+  width: 100%;
 
   /* Global rules for repetitive link elements */
   a {
@@ -26,9 +26,13 @@
   a,
    button,
    input {
-    &:focus,
-    &::-moz-focus-inner {
-      box-shadow: 1px 1px 2px 2px darken($focus-color, 10%);
+    // &:focus,
+    // &::-moz-focus-inner {
+    //   box-shadow: 1px 1px 2px 2px darken($focus-color, 10%);
+    //   outline: 3px auto $focus-color;
+    // }
+    &:focus {
+      @include button-focus;
       outline: 3px auto $focus-color;
     }
   }

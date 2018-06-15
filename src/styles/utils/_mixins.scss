@@ -1,3 +1,20 @@
+@import 'utils/colors';
+
+/* VENDOR PREFIXER
+* 
+*   Params: 
+*   @name: The name of the property to be prefixed
+*      ex: transform
+*   @value: The value supplied
+*       ex: rotate(42.5deg) 
+*/
+
+@mixin vendor-prefixer($name, $value) {
+  @each $vendor in ('-webkit-', '-moz-', '-ms-', '-o-', '') {
+    #{$vendor}#{$name}: #{$value};
+  }
+}
+
 /* FONT FACE MIXIN
  * ---------------
  * Usage: @include font-face('Kievit-Book', 'http://...');
@@ -48,17 +65,17 @@
 */
 @mixin up-arrow($color, $left: 25%, $bottom-or-top: 'top', $distance: 0px, $border-width: 10px) {
   &:before, &:after {
-    content: ' ';
-    height: 0;
-    position: absolute;
-    width: 0;
     border-style: solid;
     border-width: $border-width;
     border-top-color: transparent;
     border-left-color: transparent;
     border-right-color: transparent;
     border-bottom-color: $color;
+    content: ' ';
     left: $left;
+    height: 0;
+    position: absolute;
+    width: 0;
 
     @if ($bottom-or-top == 'top') {
       top: $distance;
@@ -124,15 +141,19 @@
  *
  *
 */
+$focus-width: .1875em;
 
 @mixin basic-focus {
-  outline-color: $focus-color;
+  box-shadow: 1px 1px 1px 1px darken($focus-color, 10%);
+  //outline-color: $focus-color;
+  @include vendor-prefixer(outline-color, $focus-color);
   outline-style: solid;
   outline-width: $focus-width;
 }
 
+
 /// For Buttons found in header dropdowns for Login & Newsletter
 @mixin button-focus {
-  box-shadow: inset 0 0 0 3px $focus-color;
+  box-shadow: 1px 1px 2px 2px darken($focus-color, 10%);
   outline: 0;
 }

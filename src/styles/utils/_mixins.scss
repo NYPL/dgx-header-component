@@ -141,7 +141,7 @@
  *
  *
 */
-$focus-width: .1875em;
+$focus-width: 0.1875em;
 
 @mixin basic-focus {
   box-shadow: 1px 1px 1px 1px darken($focus-color, 10%);
@@ -153,6 +153,8 @@ $focus-width: .1875em;
 
 
 /// For Buttons found in header dropdowns for Login & Newsletter
+/// Typically these represent a "pill" shaped button
+
 @mixin button-focus {
   box-shadow: 1px 1px 2px 2px darken($focus-color, 10%);
   outline: 0;

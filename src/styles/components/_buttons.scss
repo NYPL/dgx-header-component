@@ -56,14 +56,15 @@
     letter-spacing: .04em;
 
     &.active {
+      @include transition(background-color .2s linear 0s, color .2s linear 0s);
       background-color: #135772;
       color: #FFF;
-      @include transition(background-color .2s linear 0s, color .2s linear 0s);
 
       &:visited {
         color: #FFF;
       }
     }
+
     &:focus {
       @include basic-focus;
     }

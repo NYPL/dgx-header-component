@@ -33,7 +33,7 @@
     // }
     &:focus {
       @include button-focus;
-      outline: 3px auto $focus-color;
+      outline: $focus-color solid 3px;
     }
   }
 

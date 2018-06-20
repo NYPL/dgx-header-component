@@ -191,7 +191,7 @@
 
       // Focus effect on label
       input[type=radio]:focus + label {
-        outline: 3px auto $focus-color;
+        @include basic-focus;
       }
 
       .catalogOption {

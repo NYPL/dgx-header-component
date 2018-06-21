@@ -1,0 +1,145 @@
+.emailSubscription-wrapper {
+  text-transform: none;
+  display: none;
+
+  &.active {
+    display: block;
+  }
+
+  .emailSubscription {
+
+    &-pp-link {
+      &:focus {
+        box-shadow: 0;
+      }
+    }
+
+    .subscribeMessageBox {
+      width: 85%;
+
+      &:focus {
+        outline: $focus-color solid 3px;
+      }
+
+      &-eyebrow {
+        border-top: 2px solid #FFF;
+        color: #fff;
+        margin-bottom: 10px;
+        width: 25px;
+      }
+
+       &-title {
+        @include Kievit-Book;
+        color: #fff;
+        font-size: 20px;
+        font-weight: normal;
+        letter-spacing: .03em;
+        line-height: 1.2em;
+
+        &-bestNYPL {
+          @include Kievit-Medium;
+          font-weight: normal;
+        }
+      }
+    }
+
+    &-newEmail {
+      @include Kievit-Book;
+      font-size: 14px;
+      margin-top: 20px;
+      text-transform: uppercase;
+
+      a {
+        border-bottom: 1px solid #fff;
+        color: #fff;
+      }
+    }
+
+    &-followUs {
+      color: #fff;
+      text-transform: uppercase;
+      margin-top: 40px;
+      font-size: 14px;
+    }
+
+    &-misc-error {
+      color: #fff;
+      font-size: 20px;
+      line-height: 1.2em;
+      padding-top: 40px;
+      @include Kievit-Book;
+
+      a {
+        border-radius: 20px;
+      }
+
+      .icon {
+        vertical-align: middle;
+        font-size: 25px;
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .emailSubscribeForm {
+    &-error {
+      @include Kievit-Book;
+      display: none;
+      position: absolute;
+      margin-top: 15px;
+      margin-left: 0;
+      font-size: 13px;
+      color: #fff;
+
+      &.active {
+        display: block;
+      }
+
+      .x-icon {
+        height: 20px;
+        vertical-align: middle;
+        margin-right: 0px;
+        fill: #fff;
+      }
+    }
+    &-input {
+      @include Kievit-Book;
+      border: 3px solid #1B7FA7;
+      border-radius: 5px;
+      color: $nypl-gray;
+      display: table-cell;
+      font-size: 1em;
+      height: 35px;
+      margin: 10px 0 0 -3px;
+      padding: 2px 5px 2px 11px;
+      width: 95%;
+
+      &:focus,
+      &:active {
+        background-color: darken(#fff, 10%);
+        border-radius: 0;
+        box-shadow: inset 0 0 0 ($focus-width * 1.25) $focus-color;
+        color: #000;
+        outline: 0;
+      }
+    }
+
+    &-submit {
+      input {
+        border-radius: 20px;
+
+        &:focus {
+          @include button-focus;
+        }
+      }
+
+      .check-solo-icon {
+        fill: #fff;
+        height: 25px;
+        margin-top: 66px;
+        margin-left: 4px;
+        position: absolute;
+      }
+    }
+  }
+}

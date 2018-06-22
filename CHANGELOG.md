@@ -1,5 +1,9 @@
 ### CHANGE LOG
 
+### v2.4.9
+> updated :focus style for links, button, and the forms found in the header
+> fixed up some css ordering of rules
+
 ### v2.4.8
 > Small CSS bug fixes, specifically to the dropdowns. The logged in dropdown had a huge log out SVG icon, and the email updates dropdown's input field was misaligned.
 

@@ -3,6 +3,7 @@
 ### v2.4.9
 > updated :focus style for links, button, and the forms found in the header
 > fixed up some css ordering of rules
+> now using `node-sass 4.6.0` if it gives problems for your version of node, try rolling back to 3.8.0 
 
 ### v2.4.8
 > Small CSS bug fixes, specifically to the dropdowns. The logged in dropdown had a huge log out SVG icon, and the email updates dropdown's input field was misaligned.

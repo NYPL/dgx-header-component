@@ -12,10 +12,10 @@
  * -- Mobile First approach
 */
 .header {
-  @include Kievit-Book;
-  width: 100%;
-  background-color: #FFF;
   @extend %clearfix;
+  @include Kievit-Book;
+  background-color: #FFF;
+  width: 100%;
 
   /* Global rules for repetitive link elements */
   a {
@@ -23,9 +23,12 @@
   }
 
   // Accessibility outline rule
-  a, button, input {
-    &:focus, &::-moz-focus-inner {
-      outline: 3px auto #3b99fc;
+  a,
+   button,
+   input {
+    &:focus {
+      @include button-focus;
+      outline: $focus-color solid 3px;
     }
   }
 
@@ -177,7 +180,8 @@
   padding: 0;
   position: absolute;
 
-  &:focus, &:active {
+  &:focus, 
+  &:active {
     clip: auto;
     height: auto;
     margin: 0;

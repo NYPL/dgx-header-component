@@ -1,3 +1,6 @@
+@import 'utils/mixins';
+
+
 /* TOP HEADER BUTTONS (excludes subscribe)
  * ---------------------------------------
  * - Library Card
@@ -25,8 +28,14 @@
     &:visited {
       color: #000;
     }
+
     &:last-child {
       margin: 0;
+    }
+
+    &:focus {
+      @include basic-focus;
+      padding: 12px;
     }
   }
 
@@ -47,13 +56,17 @@
     letter-spacing: .04em;
 
     &.active {
+      @include transition(background-color .2s linear 0s, color .2s linear 0s);
       background-color: #135772;
       color: #FFF;
-      @include transition(background-color .2s linear 0s, color .2s linear 0s);
 
       &:visited {
         color: #FFF;
       }
+    }
+
+    &:focus {
+      @include basic-focus;
     }
 
     &:visited {

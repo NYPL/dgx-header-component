@@ -69,9 +69,8 @@ var styles = {
     border: '2px solid #FFF',
     color: '#FFF',
     fontFamily: 'Kievit-Book',
-    fontSize: '14px',
+    fontSize: '0.875em',
     height: '38px',
-    letterSpacing: '.03em',
     margin: '60px 0 0 0',
     padding: '0 0 0 21px',
     lineHeight: 'normal',
@@ -83,31 +82,28 @@ var styles = {
     color: 'white',
     padding: '5px 15px 5px 5px',
     width: '90px',
-    fontSize: '14px',
+    fontSize: '0.875em',
     backgroundColor: '#1B7FA7',
     fontFamily: 'Kievit-Book',
     marginTop: '25px'
   },
   privacyLink: {
     textDecoration: 'underline',
-    fontSize: '12px',
+    fontSize: '0.875em',
     color: '#FFF',
     fontWeight: '400',
-    textTransform: 'uppercase',
-    position: 'absolute',
-    bottom: '45px',
-    right: '30px'
+    position: 'relative',
+    bottom: '10px',
+    left: '55px'
   },
   scLink: {
     textDecoration: 'underline',
-    fontSize: '12px',
+    fontSize: '0.875em',
     color: 'white',
     fontWeight: '200',
-    textTransform: 'uppercase',
-    position: 'absolute',
-    bottom: '68px',
-    right: '30px',
-    letterSpacing: '0.03em'
+    position: 'relative',
+    bottom: '33px',
+    left: '139px'
   },
   emailFormLabel: {
     color: '#FFF',
@@ -119,11 +115,11 @@ var styles = {
     borderLeft: 'none',
     borderRight: 'none',
     borderBottom: '2px solid #FFF',
+    boxShadow: '0',
     color: '#FFF',
     backgroundColor: 'transparent',
     fontSize: '16px',
-    padding: '0 0 2px 0',
-    letterSpacing: '0.03em'
+    padding: '0 0 2px 0'
   }
 };
 

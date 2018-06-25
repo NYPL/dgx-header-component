@@ -12,9 +12,9 @@
   }
 
   &.active {
+    @include transition(background-color .2s linear 0s, color .2s linear 0s);
     background-color: #135772;
     color: #FFF;
-    @include transition(background-color .2s linear 0s, color .2s linear 0s);
 
     &:visited {
       color: #FFF;
@@ -85,6 +85,10 @@
         a {
           border-radius: 28px;
           box-sizing: content-box;
+
+          &:focus {
+            @include button-focus;
+          }
         }
 
         svg {

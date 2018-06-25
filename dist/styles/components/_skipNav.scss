@@ -6,32 +6,34 @@
   }
 
   a {
-    display: block;
-    position: absolute;
-    left: -10000px;
-    top: auto;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
     @include Kievit-Bold;
     background-color: #FFFFFF;
     color: #1B7FA7;
-    text-transform: uppercase;
+    display: block;
     font-size: 13px;
     font-weight: 400;
+    height: 1px;
+    left: -10000px;
     line-height: 22px;
     margin: 5px;
+    overflow: hidden;
     padding: 5px 10px;
+    position: absolute;
+    text-transform: uppercase;
+    top: auto;
+    width: 1px;
     z-index: 1000;
 
-    &:focus, &:active {
-      box-shadow: 0 0 7px rgba(39, 153, 197, 0.75);
-      outline: 0;
-      left: auto;
-      width: auto;
+    &:focus,
+    &:active {
+      box-shadow: 1px 1px 2px 2px darken($focus-color, 10%);
       height: auto;
-      top: 10px;
+      left: auto;
+      outline: 0;
       overflow: visible;
+      top: 10px;
+      width: auto;
+
       @include min-screen(769px) {
         top: auto;
       }

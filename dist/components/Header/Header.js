@@ -110,14 +110,14 @@ var styles = {
     display: 'inline-block',
     color: '#000',
     backgroundColor: '#FFF',
-    padding: '5px 15px 5px 5px',
+    padding: '12px',
     verticalAlign: 'baseline'
   },
   libraryCardButton: {
     display: 'inline-block',
     color: '#000',
     backgroundColor: '#FFF',
-    padding: '5px',
+    padding: '12px',
     verticalAlign: 'baseline'
   },
   subscribeButton: {

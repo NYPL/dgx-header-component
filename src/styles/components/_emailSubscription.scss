@@ -9,9 +9,17 @@
   .emailSubscription {
 
     &-pp-link {
+      bottom: 11px;
+      left: 60px;
+
       &:focus {
         box-shadow: 0;
       }
+    }
+
+    &-sc-link {
+      bottom: 33px;
+      left: 140px;
     }
 
     .subscribeMessageBox {
@@ -39,6 +47,20 @@
         &-bestNYPL {
           @include Kievit-Medium;
           font-weight: normal;
+        }
+      }
+    }
+
+    &-alreadySubscribed {
+      ~ .emailSubscription {
+        &-sc-link {
+          left: 140px;
+          top: 70px;
+        }
+
+        &-pp-link {
+          left: 60px;
+          top: 95px;
         }
       }
     }

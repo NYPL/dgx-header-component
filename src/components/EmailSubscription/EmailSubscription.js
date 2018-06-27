@@ -51,8 +51,6 @@ const styles = {
     color: '#FFF',
     fontWeight: '400',
     position: 'relative',
-    bottom: '10px',
-    left: '55px',
   },
   scLink: {
     textDecoration: 'underline',
@@ -60,8 +58,6 @@ const styles = {
     color: 'white',
     fontWeight: '200',
     position: 'relative',
-    bottom: '33px',
-    left: '139px',
   },
   emailFormLabel: {
     color: '#FFF',
@@ -264,7 +260,7 @@ class EmailSubscription extends React.Component {
       if (status === 'exists') {
         utils.trackHeader('Subscribe', 'Error -- already subscribed');
         subscribeContent = (
-          <div>
+          <div className = {`${this.props.className}-alreadySubscribed`}>
             <SubscribeMessageBox
               status={status}
               msg="Looks like you're already signed up!"

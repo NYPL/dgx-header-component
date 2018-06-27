@@ -144,7 +144,7 @@
 $focus-width: 0.1875em;
 
 @mixin basic-focus {
-  box-shadow: 1px 1px 1px 1px darken($focus-color, 10%);
+  box-shadow: 1px 1px 1px 1px $focus-color;
   //outline-color: $focus-color;
   @include vendor-prefixer(outline-color, $focus-color);
   outline-style: solid;
@@ -156,6 +156,6 @@ $focus-width: 0.1875em;
 /// Typically these represent a "pill" shaped button
 
 @mixin button-focus {
-  box-shadow: 1px 1px 2px 2px darken($focus-color, 10%);
+  box-shadow: 1px 1px 2px 2px $focus-color;
   outline: 0;
 }

@@ -25,7 +25,7 @@ const styles = {
     color: '#FFF',
     backgroundColor: '#2B2B2B',
     padding: 0,
-    margin: 0,
+    margin: '0 0 0 3px',
     width: '49%',
     textAlign: 'center',
     textDecoration: 'none',

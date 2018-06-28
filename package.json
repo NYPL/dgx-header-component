@@ -48,7 +48,7 @@
     "nypl"
   ],
   "dependencies": {
-    "@nypl/dgx-svg-icons": "git+https://git@github.com/NYPL/dgx-svg-icons.git#update-focusable-for-generic-wedge",
+    "@nypl/dgx-svg-icons": "git+https://git@github.com/NYPL/dgx-svg-icons.git#update-focusable-for-icons",
     "@nypl/design-toolkit": "0.1.36",
     "axios": "0.9.1",
     "classnames": "2.1.3",

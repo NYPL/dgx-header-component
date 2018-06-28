@@ -40,7 +40,7 @@ var styles = {
     backgroundColor: '#2B2B2B',
     padding: 0,
     margin: '0 0 0 3px',
-    width: '49%',
+    width: '48%',
     textAlign: 'center',
     textDecoration: 'none',
     lineHeight: 'normal'
@@ -59,7 +59,7 @@ var styles = {
     width: '100%'
   },
   subscribeLinkWrapper: {
-    borderLeft: '1px solid #363636'
+    borderLeft: '0'
   },
   libraryCardLinkWrapper: {
     borderRight: '1px solid #363636'
@@ -75,13 +75,14 @@ var styles = {
     backgroundColor: '#2B2B2B'
   },
   donateLink: {
-    padding: '1.75em 0',
     display: 'block',
-    width: '100%',
+    fontSize: '16px',
+    lineHeight: 'normal',
+    margin: '0 0 0 3px',
+    padding: '1.75em 0',
     textAlign: 'center',
     textTransform: 'uppercase',
-    fontSize: '16px',
-    lineHeight: 'normal'
+    width: '98%'
   },
   shopLink: {
     display: 'inline-table',
@@ -89,8 +90,8 @@ var styles = {
     backgroundColor: '#2B2B2B',
     borderTop: '2px solid #363636',
     padding: 0,
-    margin: 0,
-    width: '100%',
+    margin: '0 0 0 3px',
+    width: '98%',
     textAlign: 'center',
     textDecoration: 'none',
     lineHeight: 'normal'

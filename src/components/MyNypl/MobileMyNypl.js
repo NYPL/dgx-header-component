@@ -24,7 +24,7 @@ const styles = {
     padding: 0,
     margin: '60px 0 0 0',
     width: '50%',
-    minHeight: '90px',
+    minHeight: '100px',
     float: 'left',
     textAlign: 'center',
     textDecoration: 'none',

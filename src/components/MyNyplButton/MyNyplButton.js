@@ -110,7 +110,7 @@ class MyNyplButton extends React.Component {
 
     if (this.state.visible) {
       buttonClass = 'active';
-      icon = <XIcon className="dropDownIcon" ariaHidden fill="#fff" />;
+      icon = <XIcon className="dropDownIcon" ariaHidden fill="#fff" focusable={false} />;
       myNyplButtonLabel = 'Close';
     }
 

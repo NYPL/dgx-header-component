@@ -124,7 +124,8 @@ var SearchButton = function (_React$Component) {
         ariaHidden: true,
         fill: '#FFF',
         width: '20',
-        height: '20'
+        height: '20',
+        focusable: false
       });
 
       return _react2.default.createElement(

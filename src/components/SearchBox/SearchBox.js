@@ -271,7 +271,7 @@ class SearchBox extends React.Component {
           autoComplete="off"
           autoFocus
         />
-        <SearchIcon ariaHidden />
+        <SearchIcon ariaHidden focusable={false} />
       </div>
     );
   }
@@ -284,14 +284,14 @@ class SearchBox extends React.Component {
           onClick={() => this.submitSearchRequest('catalog')}
         >
           <span className="label">CATALOG</span>
-          <RightWedgeIcon ariaHidden />
+          <RightWedgeIcon ariaHidden focusable={false} />
         </button>
         <button
           aria-label="Submit NYPL Website Search"
           onClick={() => this.submitSearchRequest('website')}
         >
           <span className="label">NYPL.ORG</span>
-          <RightWedgeIcon ariaHidden />
+          <RightWedgeIcon ariaHidden focusable={false} />
         </button>
       </div>
     );

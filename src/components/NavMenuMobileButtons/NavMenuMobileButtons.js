@@ -4,7 +4,6 @@ import { extend as _extend } from 'underscore';
 import {
   LibraryCardIcon,
   EnvelopeIcon,
-  XIcon,
   ShoppingBagIcon,
 } from '@nypl/dgx-svg-icons';
 
@@ -105,7 +104,7 @@ const NavMenuMobileButtons = ({
           className={`${libraryCardClass}-wrapper`}
           style={_extend({}, styles.wrapper, styles.libraryCardLinkWrapper)}
         >
-          <LibraryCardIcon iconId="libraryCardSVG" ariaHidden />
+          <LibraryCardIcon iconId="libraryCardSVG" ariaHidden focusable={false} />
           <span
             className={`${libraryCardClass}-label`}
             style={_extend({}, styles.label)}
@@ -124,7 +123,7 @@ const NavMenuMobileButtons = ({
           className={`${subscribeLinkClass}-wrapper`}
           style={_extend({}, styles.wrapper, styles.subscribeLinkWrapper)}
         >
-          <EnvelopeIcon iconId="envelopSVG" ariaHidden />
+          <EnvelopeIcon iconId="envelopSVG" ariaHidden focusable={false} />
           <span
             className={`${subscribeLinkClass}-label`}
             style={_extend({}, styles.label)}
@@ -144,7 +143,7 @@ const NavMenuMobileButtons = ({
           className={`${shopLinkClass}-wrapper`}
           style={_extend({}, styles.wrapper, styles.shopLinkWrapper)}
         >
-          <ShoppingBagIcon iconId="shoppingBagSVG" ariaHidden />
+          <ShoppingBagIcon iconId="shoppingBagSVG" ariaHidden focusable={false} />
           <span
             className={`${shopLinkClass}-label`}
             style={_extend(styles.shopLinkLabel, styles.label)}

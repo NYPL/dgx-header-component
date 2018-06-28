@@ -165,7 +165,7 @@ var MyNyplButton = function (_React$Component) {
 
       if (this.state.visible) {
         buttonClass = 'active';
-        icon = _react2.default.createElement(_dgxSvgIcons.XIcon, { className: 'dropDownIcon', ariaHidden: true, fill: '#fff' });
+        icon = _react2.default.createElement(_dgxSvgIcons.XIcon, { className: 'dropDownIcon', ariaHidden: true, fill: '#fff', focusable: false });
         myNyplButtonLabel = 'Close';
       }
 

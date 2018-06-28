@@ -96,7 +96,7 @@ var NavMenu = function (_React$Component) {
             className: this.props.className + '-wrapper ' + mobileActiveClass,
             'aria-label': 'Main Navigation'
           },
-          _react2.default.createElement(_dgxSvgIcons.LionLogoWithText, { ariaHidden: true }),
+          _react2.default.createElement(_dgxSvgIcons.LionLogoWithText, { ariaHidden: true, focusable: false }),
           _react2.default.createElement(
             'ul',
             { className: this.props.className + '-list', id: 'navMenu-List' },

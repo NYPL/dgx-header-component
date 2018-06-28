@@ -143,7 +143,7 @@ class SubscribeButton extends React.Component {
     if (this.state.visible) {
       buttonClass = 'active';
       label = 'Close';
-      icon = <XIcon className="dropDownIcon" ariaHidden fill="#fff" />;
+      icon = <XIcon className="dropDownIcon" ariaHidden fill="#fff" focusable={false} />;
     }
 
     return (

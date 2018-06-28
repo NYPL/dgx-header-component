@@ -10,8 +10,8 @@ import {
 import utils from '../../utils/utils.js';
 
 const icons = {
-  twitter: <TwitterIcon iconId="email-twitter" />,
-  facebook: <FaceBookIcon iconId="email-fb" />,
+  twitter: <TwitterIcon iconId="email-twitter" focusable={false} />,
+  facebook: <FaceBookIcon iconId="email-fb" focusable={false} />,
 };
 
 class SocialMediaLinksWidget extends React.Component {

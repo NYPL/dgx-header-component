@@ -137,7 +137,7 @@ class SubscribeButton extends React.Component {
 
   renderEmailButton() {
     let buttonClass = '';
-    let icon = <GenericWedgeIcon className="dropDownIcon" ariaHidden />;
+    let icon = <GenericWedgeIcon className="dropDownIcon" ariaHidden focusable={false} />;
     let label = this.props.label;
 
     if (this.state.visible) {

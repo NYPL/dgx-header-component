@@ -34,13 +34,24 @@ var styles = {
     margin: 0,
     padding: 0
   },
-  links: {
+  subscribeLinks: {
+    display: 'inline-table',
+    color: '#FFF',
+    backgroundColor: '#2b2b2b',
+    padding: 0,
+    margin: '0 0 0 3px',
+    width: '49%',
+    textAlign: 'center',
+    textDecoration: 'none',
+    lineHeight: 'normal'
+  },
+  galcLinks: {
     display: 'inline-table',
     color: '#FFF',
     backgroundColor: '#2B2B2B',
     padding: 0,
     margin: '0 0 0 3px',
-    width: '48%',
+    width: '49%',
     textAlign: 'center',
     textDecoration: 'none',
     lineHeight: 'normal'
@@ -82,19 +93,19 @@ var styles = {
     padding: '1.75em 0',
     textAlign: 'center',
     textTransform: 'uppercase',
-    width: '98%'
+    width: '98.5%'
   },
   shopLink: {
-    display: 'inline-table',
-    color: '#FFF',
     backgroundColor: '#2B2B2B',
     borderTop: '2px solid #363636',
-    padding: 0,
+    color: '#FFF',
+    display: 'inline-table',
+    lineHeight: 'normal',
     margin: '0 0 0 3px',
-    width: '98%',
+    padding: 0,
     textAlign: 'center',
-    textDecoration: 'none',
-    lineHeight: 'normal'
+    textDecoration: 'none'
+
   }
 };
 // Dependent NYPL React Component
@@ -118,7 +129,7 @@ var NavMenuMobileButtons = function NavMenuMobileButtons(_ref) {
       {
         href: libraryCardLink,
         className: libraryCardClass,
-        style: styles.links,
+        style: styles.galcLinks,
         onClick: function onClick() {
           return _utils2.default.trackHeader('Click', 'Mobile Bottom Buttons - Library Card');
         }
@@ -145,7 +156,7 @@ var NavMenuMobileButtons = function NavMenuMobileButtons(_ref) {
       {
         href: subscribeLink,
         className: subscribeLinkClass,
-        style: styles.links,
+        style: styles.subscribeLinks,
         onClick: function onClick() {
           return _utils2.default.trackHeader('Click', 'Mobile Bottom Buttons - Email Updates');
         }

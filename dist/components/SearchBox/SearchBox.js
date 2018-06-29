@@ -412,7 +412,7 @@ var SearchBox = function (_React$Component) {
             { className: 'visuallyHidden' },
             'Search'
           ),
-          _react2.default.createElement(_dgxSvgIcons.SearchIcon, { ariaHidden: true, fill: '#FFF' })
+          _react2.default.createElement(_dgxSvgIcons.SearchIcon, { ariaHidden: true, fill: '#FFF', focusable: false })
         )
       );
     }

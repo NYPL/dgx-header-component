@@ -320,7 +320,7 @@ class SearchBox extends React.Component {
         <label htmlFor="websiteSearch" className="websiteOption">Search NYPL.org</label>
         <button type="submit" onClick={() => this.submitSearchRequest(null)}>
           <span className="visuallyHidden">Search</span>
-          <SearchIcon ariaHidden fill="#FFF" />
+          <SearchIcon ariaHidden fill="#FFF" focusable={false} />
         </button>
       </div>
     );

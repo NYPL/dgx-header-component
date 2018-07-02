@@ -10,4 +10,4 @@ $nypl-blue-dark: #135772;
 $nypl-gray: #776e64;
 
 // Accessible, high contrast orange yellow for focus rings
-$focus-color: darken($nypl-blue-dark, 10%);
+$focus-color: $nypl-blue-dark;

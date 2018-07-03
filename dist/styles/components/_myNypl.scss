@@ -239,7 +239,8 @@
 
    // This is a bit confusing, but this class handles the LOGOUT link, and is visible only when logged in:
    & + .mobileMyNypl-catalog-link {
-     margin-bottom: 60px;
+     borde-bottom: 2px solid #000;
+     margin-bottom: 0;
    }
   }
   

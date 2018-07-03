@@ -185,14 +185,16 @@
 
   &.active {
     display: flex;
+    flex-flow: row wrap;
   }
 
   &-greeting {
     box-sizing: content-box;
     color: #FFF;
-    text-align: left;
+    flex:1 100%;
     padding: 22px 0 0 11px;
     position: absolute;
+    text-align: left;
     width: 100%;
 
     .login-indication {
@@ -222,11 +224,13 @@
   }
 
   .catalogLink {
+    flex: 1 1 44%;
     margin-left: 2px;
     margin-right: 1px;
   }
 
   .researchLink {
+    flex:1 1 44%;
     margin-left: 1px;
     margin-right: 2px;
   }

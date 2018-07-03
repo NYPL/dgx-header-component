@@ -51,7 +51,6 @@ var styles = {
     display: 'flex',
     backgroundColor: '#E32B31',
     color: '#FFF',
-    flex: '1 1 auto',
     padding: 0,
     marginTop: '60px',
     minHeight: '100px',
@@ -78,14 +77,14 @@ var styles = {
     display: 'none'
   },
   logOutLink: {
-    display: 'block',
     color: '#fff',
+    display: 'block',
+    flex: '1 100%',
     textAlign: 'center',
     padding: '35px',
     fontSize: '18px',
     textTransform: 'uppercase',
-    textDecoration: 'underline',
-    clear: 'both'
+    textDecoration: 'underline'
   },
   researchLinkWrapper: {
     alignItems: 'center',

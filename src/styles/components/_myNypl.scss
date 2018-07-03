@@ -104,6 +104,12 @@
       min-width: 170px;
     }
 
+    &-catalog-link {
+      &:focus {
+        @include button-focus;
+      }
+    }
+
     &-research-btn {
       min-width: 265px;
     }

@@ -184,9 +184,9 @@
   z-index: 1000;
 
   &.active {
+    box-shadow: 2px 2px 3px 4px rgba(100, 100, 100, 0.25);
     display: flex;
     flex-flow: row wrap;
-    padding: 0 0 60px 0;
   }
 
   &-greeting {
@@ -225,15 +225,17 @@
 
   .catalogLink {
     border-right: solid 2px #2b2b2b;
-    flex: 1 1 44%;
-    margin-left: 2px;
-    margin-right: 1px;
+    flex: 1 1 40%;
+    margin: 0 1px 50px 2px;
+    // margin-left: 2px;
+    // margin-right: 1px;
   }
 
   .researchLink {
-    flex:1 1 44%;
-    margin-left: 1px;
-    margin-right: 2px;
+    flex:1 1 40%;
+    margin: 0 1px 50px 2px;
+    // margin-left: 1px;
+    // margin-right: 2px;
   }
   // This is a bit confusing, but this class handles the LOGOUT link, and is visible only when logged in:
   &-catalog-link {

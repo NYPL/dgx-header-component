@@ -234,8 +234,6 @@
   .researchLink {
     flex: 1 1 40%;
     margin: 0 1px 50px 2px;
-    // margin-left: 1px;
-    // margin-right: 2px;
 
    // This is a bit confusing, but this class handles the LOGOUT link, and is visible only when logged in:
    & + .mobileMyNypl-catalog-link {

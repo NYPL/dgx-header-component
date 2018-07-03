@@ -1,5 +1,11 @@
 ### CHANGE LOG
 
+### v2.4.10
+> More updates to focus styles for mobile context
+  - covers logged in and logged out states
+  - now using flex box
+> Fixes a broken layout in Subscribe dropdown when a user has already signed up [WWW-389](https://jira.nypl.org/browse/WWW-389)
+
 ### v2.4.9
 > updated :focus style for links, button, and the forms found in the header
 > fixed up some css ordering of rules

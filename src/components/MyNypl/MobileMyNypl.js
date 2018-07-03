@@ -15,7 +15,6 @@ const styles = {
   base: {
     backgroundColor: '#2B2B2B',
     margin: 0,
-    padding: '0 0 60px 0',
   },
   links: {
     display: 'flex',

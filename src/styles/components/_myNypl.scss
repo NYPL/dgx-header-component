@@ -186,6 +186,7 @@
   &.active {
     display: flex;
     flex-flow: row wrap;
+    padding: 0 0 60px 0;
   }
 
   &-greeting {
@@ -195,7 +196,6 @@
     padding: 22px 0 0 11px;
     position: absolute;
     text-align: left;
-    width: 100%;
 
     .login-indication {
       margin: 0 0 30px;
@@ -224,6 +224,7 @@
   }
 
   .catalogLink {
+    border-right: solid 2px #2b2b2b;
     flex: 1 1 44%;
     margin-left: 2px;
     margin-right: 1px;
@@ -233,6 +234,10 @@
     flex:1 1 44%;
     margin-left: 1px;
     margin-right: 2px;
+  }
+  // This is a bit confusing, but this class handles the LOGOUT link, and is visible only when logged in:
+  &-catalog-link {
+    margin-bottom: 60px;
   }
 }
 

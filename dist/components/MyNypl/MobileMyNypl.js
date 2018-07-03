@@ -44,8 +44,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var styles = {
   base: {
     backgroundColor: '#2B2B2B',
-    margin: 0,
-    padding: '0 0 60px 0'
+    margin: 0
   },
   links: {
     display: 'flex',

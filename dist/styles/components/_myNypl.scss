@@ -198,7 +198,7 @@
   &-greeting {
     box-sizing: content-box;
     color: #FFF;
-    flex:1 100%;
+    flex: 1 100%;
     padding: 22px 0 0 11px;
     position: absolute;
     text-align: left;
@@ -233,8 +233,6 @@
     border-right: solid 2px #2b2b2b;
     flex: 1 1 40%;
     margin: 0 1px 50px 2px;
-    // margin-left: 2px;
-    // margin-right: 1px;
   }
 
   .researchLink {
@@ -243,7 +241,7 @@
 
    // This is a bit confusing, but this class handles the LOGOUT link, and is visible only when logged in:
    & + .mobileMyNypl-catalog-link {
-     borde-bottom: 2px solid #000;
+     border-bottom: 2px solid #000;
      margin-bottom: 0;
    }
   }

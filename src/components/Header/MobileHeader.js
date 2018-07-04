@@ -178,6 +178,7 @@ class MobileHeader extends React.Component {
           className={`${this.props.className}-logo`}
           height={30}
           width={30}
+          focusable={false}
         />
       </a>
     );
@@ -192,9 +193,15 @@ class MobileHeader extends React.Component {
   renderMyNyplButton() {
     let myNyplClass = '';
     const gaAction = (this.props.patronName) ? 'MyAccount' : 'LogIn';
-    let icon = <LoginIcon className="loginIcon" ariaHidden />;
+    let icon = <LoginIcon className="loginIcon" ariaHidden focusable={false} />;
     if (this.props.patronName) {
-      icon = <LoginIconSolid className="loginIcon-loggedIn animated fadeIn" ariaHidden />;
+      icon = (
+        <LoginIconSolid
+          className="loginIcon-loggedIn animated fadeIn"
+          ariaHidden
+          focusable={false}
+        />
+      );
     }
     let buttonStyles = styles.inactiveMyNyplButton;
     let buttonLabel = (this.props.patronName) ? 'My Account' : 'Log In';
@@ -202,7 +209,7 @@ class MobileHeader extends React.Component {
 
     if (active) {
       myNyplClass = 'active';
-      icon = <XIcon ariaHidden fill="#FFF" ariaHidden />;
+      icon = <XIcon ariaHidden fill="#FFF" ariaHidden focusable={false} />;
       buttonStyles = styles.activeMyNyplButton;
       buttonLabel = 'Close';
     }
@@ -262,7 +269,7 @@ class MobileHeader extends React.Component {
           aria-label="NYPL Locations Near Me"
         >
           <span className="visuallyHidden">NYPL Locations Near Me</span>
-          <LocatorIcon ariaHidden fill="#000" />
+          <LocatorIcon ariaHidden fill="#000" focusable={false} />
         </a>
       </li>
     );
@@ -276,14 +283,14 @@ class MobileHeader extends React.Component {
   */
   renderSearchButton() {
     let mobileSearchClass = '';
-    let icon = <SearchIcon ariaHidden fill="#000" />;
+    let icon = <SearchIcon ariaHidden fill="#000" focusable={false} />;
     let buttonStyles = styles.inactiveSearchButton;
     let buttonLabel = 'Open Search';
     const active = this.state.activeButton === 'search';
 
     if (active) {
       mobileSearchClass = ' active';
-      icon = <XIcon ariaHidden fill="#FFF" />;
+      icon = <XIcon ariaHidden fill="#FFF" focusable={false} />;
       buttonStyles = styles.activeSearchButton;
       buttonLabel = 'Close Search';
     }
@@ -333,7 +340,7 @@ class MobileHeader extends React.Component {
   */
   renderMenuButton() {
     let mobileMenuClass = '';
-    let icon = <MenuIcon ariaHidden fill="#000" />;
+    let icon = <MenuIcon ariaHidden fill="#000" focusable={false} />;
     let buttonStyles = styles.inactiveMenuButton;
     let buttonLabel = 'Open Navigation';
     let dialogWindow = null;
@@ -341,7 +348,7 @@ class MobileHeader extends React.Component {
 
     if (active) {
       mobileMenuClass = ' active';
-      icon = <XIcon ariaHidden fill="#FFF" />;
+      icon = <XIcon ariaHidden fill="#FFF" focusable={false} />;
       buttonStyles = styles.activeMenuButton;
       buttonLabel = 'Close Navigation';
       dialogWindow = (

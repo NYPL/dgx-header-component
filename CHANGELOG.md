@@ -1,5 +1,10 @@
 ### CHANGE LOG
 
+### v2.4.10
+> updated dgx-svg-icons to v0.3.7, and the relate changes for the new icons.
+> updated the paths for importing `_mixin.scss` and `_buttons.scss`.
+
+
 ### v2.4.9
 > updated :focus style for links, button, and the forms found in the header
 > fixed up some css ordering of rules

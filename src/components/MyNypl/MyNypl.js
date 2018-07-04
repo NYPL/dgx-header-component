@@ -103,7 +103,7 @@ class MyNypl extends React.Component {
         onClick={() => utils.trackHeader('My Account', 'Log Out')}
         style={styles.logOutLink}
       >
-        <LogoutIcon className="logoutIcon" ariaHidden />
+        <LogoutIcon className="logoutIcon" ariaHidden focusable={false} />
         LOG OUT
       </a> : null;
   }
@@ -128,7 +128,7 @@ class MyNypl extends React.Component {
               className={`${this.props.className}-catalog-btn`}
               onClick={() => utils.trackHeader(gaAction, 'Catalog')}
             >
-              <LoginIcon fill="#fff" ariaHidden />
+              <LoginIcon fill="#fff" ariaHidden focusable={false} />
               {catalogLinkLabel}
             </a>
           </li>
@@ -139,7 +139,7 @@ class MyNypl extends React.Component {
               className={`${this.props.className}-research-btn`}
               onClick={() => utils.trackHeader(gaAction, 'Research')}
             >
-              <BuildingIcon ariaHidden />
+              <BuildingIcon ariaHidden focusable={false} />
               {researchCatalogLinkLabel}
             </a>
           </li>

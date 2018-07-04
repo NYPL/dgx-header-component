@@ -325,7 +325,7 @@ var SearchBox = function (_React$Component) {
           autoComplete: 'off',
           autoFocus: true
         }),
-        _react2.default.createElement(_dgxSvgIcons.SearchIcon, { ariaHidden: true })
+        _react2.default.createElement(_dgxSvgIcons.SearchIcon, { ariaHidden: true, focusable: false })
       );
     }
   }, {
@@ -349,7 +349,7 @@ var SearchBox = function (_React$Component) {
             { className: 'label' },
             'CATALOG'
           ),
-          _react2.default.createElement(_dgxSvgIcons.RightWedgeIcon, { ariaHidden: true })
+          _react2.default.createElement(_dgxSvgIcons.RightWedgeIcon, { ariaHidden: true, focusable: false })
         ),
         _react2.default.createElement(
           'button',
@@ -364,7 +364,7 @@ var SearchBox = function (_React$Component) {
             { className: 'label' },
             'NYPL.ORG'
           ),
-          _react2.default.createElement(_dgxSvgIcons.RightWedgeIcon, { ariaHidden: true })
+          _react2.default.createElement(_dgxSvgIcons.RightWedgeIcon, { ariaHidden: true, focusable: false })
         )
       );
     }
@@ -412,7 +412,7 @@ var SearchBox = function (_React$Component) {
             { className: 'visuallyHidden' },
             'Search'
           ),
-          _react2.default.createElement(_dgxSvgIcons.SearchIcon, { ariaHidden: true, fill: '#FFF' })
+          _react2.default.createElement(_dgxSvgIcons.SearchIcon, { ariaHidden: true, fill: '#FFF', focusable: false })
         )
       );
     }

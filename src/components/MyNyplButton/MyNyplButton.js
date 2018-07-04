@@ -103,14 +103,14 @@ class MyNyplButton extends React.Component {
    */
   renderMyNyplButton() {
     let buttonClass = '';
-    let icon = <GenericWedgeIcon className="dropDownIcon" ariaHidden />;
+    let icon = <GenericWedgeIcon className="dropDownIcon" ariaHidden focusable={false} />;
     let myNyplButtonLabel = (this.props.patronName) ? 'My Account' : 'Log In';
     const labelColorClass = (this.props.isLoggedIn) ? ' loggedIn' : '';
     const loggedInFadeInAnimation = (this.props.patronName) ? ' animated fadeIn' : '';
 
     if (this.state.visible) {
       buttonClass = 'active';
-      icon = <XIcon className="dropDownIcon" ariaHidden fill="#fff" />;
+      icon = <XIcon className="dropDownIcon" ariaHidden fill="#fff" focusable={false} />;
       myNyplButtonLabel = 'Close';
     }
 

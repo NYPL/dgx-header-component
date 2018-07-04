@@ -228,7 +228,7 @@ var MobileMyNypl = function (_React$Component) {
               className: catalogLinkClass + '-wrapper',
               style: (0, _underscore.extend)(styles.wrapper, styles.catalogLinkWrapper)
             },
-            _react2.default.createElement(_dgxSvgIcons.LoginIcon, { fill: '#fff', ariaHidden: true }),
+            _react2.default.createElement(_dgxSvgIcons.LoginIcon, { fill: '#fff', ariaHidden: true, focusable: false }),
             _react2.default.createElement(
               'span',
               {
@@ -255,7 +255,7 @@ var MobileMyNypl = function (_React$Component) {
               className: researchLinkClass + '-wrapper',
               style: (0, _underscore.extend)(styles.wrapper, styles.researchLinkWrapper)
             },
-            _react2.default.createElement(_dgxSvgIcons.BuildingIcon, { fill: '#fff', ariaHidden: true }),
+            _react2.default.createElement(_dgxSvgIcons.BuildingIcon, { fill: '#fff', ariaHidden: true, focusable: false }),
             _react2.default.createElement(
               'span',
               {

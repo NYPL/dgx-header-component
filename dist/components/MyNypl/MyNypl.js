@@ -152,7 +152,7 @@ var MyNypl = function (_React$Component) {
           },
           style: styles.logOutLink
         },
-        _react2.default.createElement(_dgxSvgIcons.LogoutIcon, { className: 'logoutIcon', ariaHidden: true }),
+        _react2.default.createElement(_dgxSvgIcons.LogoutIcon, { className: 'logoutIcon', ariaHidden: true, focusable: false }),
         'LOG OUT'
       ) : null;
     }
@@ -186,7 +186,7 @@ var MyNypl = function (_React$Component) {
                   return _utils2.default.trackHeader(gaAction, 'Catalog');
                 }
               },
-              _react2.default.createElement(_dgxSvgIcons.LoginIcon, { fill: '#fff', ariaHidden: true }),
+              _react2.default.createElement(_dgxSvgIcons.LoginIcon, { fill: '#fff', ariaHidden: true, focusable: false }),
               catalogLinkLabel
             )
           ),
@@ -203,7 +203,7 @@ var MyNypl = function (_React$Component) {
                   return _utils2.default.trackHeader(gaAction, 'Research');
                 }
               },
-              _react2.default.createElement(_dgxSvgIcons.BuildingIcon, { ariaHidden: true }),
+              _react2.default.createElement(_dgxSvgIcons.BuildingIcon, { ariaHidden: true, focusable: false }),
               researchCatalogLinkLabel
             )
           )

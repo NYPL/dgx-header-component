@@ -107,14 +107,15 @@ var styles = {
     display: 'inline-block'
   },
   resubmitButton: {
+    backgroundColor: 'transparent',
     borderTop: 'none',
     borderLeft: 'none',
     borderRight: 'none',
     borderBottom: '2px solid #FFF',
     boxShadow: '0',
     color: '#FFF',
-    backgroundColor: 'transparent',
-    fontSize: '16px',
+    fontSize: '1.125em',
+    height: '1.5em',
     padding: '0 0 2px 0'
   }
 };

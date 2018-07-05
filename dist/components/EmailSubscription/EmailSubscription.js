@@ -88,18 +88,20 @@ var styles = {
     marginTop: '25px'
   },
   privacyLink: {
-    textDecoration: 'underline',
-    fontSize: '0.875em',
+    backgroundColor: '#1B7FA7',
     color: '#FFF',
+    fontSize: '0.875em',
     fontWeight: '400',
-    position: 'relative'
+    position: 'relative',
+    textDecoration: 'underline'
   },
   scLink: {
-    textDecoration: 'underline',
+    backgroundColor: '#1B7FA7',
+    color: '#FFF',
     fontSize: '0.875em',
-    color: 'white',
-    fontWeight: '200',
-    position: 'relative'
+    fontWeight: '400',
+    position: 'relative',
+    textDecoration: 'underline'
   },
   emailFormLabel: {
     color: '#FFF',

@@ -5,6 +5,8 @@
   - covers logged in and logged out states
   - now using flex box
 > Fixes a broken layout in Subscribe dropdown when a user has already signed up [WWW-389](https://jira.nypl.org/browse/WWW-389)
+> updated dgx-svg-icons to v0.3.7, and the relate changes for the new icons.
+> updated the paths for importing `_mixin.scss` and `_buttons.scss`.
 
 ### v2.4.9
 > updated :focus style for links, button, and the forms found in the header

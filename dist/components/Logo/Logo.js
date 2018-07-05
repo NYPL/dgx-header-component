@@ -32,7 +32,7 @@ var Logo = function Logo(props) {
       },
       style: props.style
     },
-    _react2.default.createElement(_dgxSvgIcons.LionLogoWithText, null),
+    _react2.default.createElement(_dgxSvgIcons.LionLogoWithText, { focusable: false }),
     _react2.default.createElement(
       'span',
       { className: 'visuallyHidden' },

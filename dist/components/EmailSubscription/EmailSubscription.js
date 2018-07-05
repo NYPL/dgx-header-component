@@ -282,7 +282,7 @@ var EmailSubscription = function (_React$Component) {
               _react2.default.createElement(
                 'div',
                 { className: formClass + '-error ' + errorClass },
-                _react2.default.createElement(_dgxSvgIcons.XIcon, { ariaHidden: true }),
+                _react2.default.createElement(_dgxSvgIcons.XIcon, { ariaHidden: true, focusable: false }),
                 _react2.default.createElement(
                   'span',
                   null,
@@ -292,7 +292,7 @@ var EmailSubscription = function (_React$Component) {
               _react2.default.createElement(
                 'div',
                 { className: formClass + '-submit' },
-                _react2.default.createElement(_dgxSvgIcons.CheckSoloIcon, { ariaHidden: true }),
+                _react2.default.createElement(_dgxSvgIcons.CheckSoloIcon, { ariaHidden: true, focusable: false }),
                 _react2.default.createElement('input', {
                   'aria-label': 'Sign up',
                   type: 'submit',
@@ -384,7 +384,7 @@ var EmailSubscription = function (_React$Component) {
             _react2.default.createElement(
               'a',
               { href: '', onClick: this.initForm, style: styles.tryAgainButton },
-              _react2.default.createElement(_dgxSvgIcons.LeftArrowIcon, { ariaHidden: true }),
+              _react2.default.createElement(_dgxSvgIcons.LeftArrowIcon, { ariaHidden: true, focusable: false }),
               'TRY AGAIN'
             )
           );

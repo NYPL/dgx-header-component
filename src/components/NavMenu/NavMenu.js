@@ -50,7 +50,7 @@ class NavMenu extends React.Component {
           className={`${this.props.className}-wrapper ${mobileActiveClass}`}
           aria-label="Main Navigation"
         >
-          <LionLogoWithText ariaHidden />
+          <LionLogoWithText ariaHidden focusable={false} />
           <ul className={`${this.props.className}-list`} id="navMenu-List">
             {this.renderNavMenu(this.props.items)}
           </ul>

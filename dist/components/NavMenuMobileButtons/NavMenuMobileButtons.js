@@ -140,7 +140,7 @@ var NavMenuMobileButtons = function NavMenuMobileButtons(_ref) {
           className: libraryCardClass + '-wrapper',
           style: (0, _underscore.extend)({}, styles.wrapper, styles.libraryCardLinkWrapper)
         },
-        _react2.default.createElement(_dgxSvgIcons.LibraryCardIcon, { iconId: 'libraryCardSVG', ariaHidden: true }),
+        _react2.default.createElement(_dgxSvgIcons.LibraryCardIcon, { iconId: 'libraryCardSVG', ariaHidden: true, focusable: false }),
         _react2.default.createElement(
           'span',
           {
@@ -167,7 +167,7 @@ var NavMenuMobileButtons = function NavMenuMobileButtons(_ref) {
           className: subscribeLinkClass + '-wrapper',
           style: (0, _underscore.extend)({}, styles.wrapper, styles.subscribeLinkWrapper)
         },
-        _react2.default.createElement(_dgxSvgIcons.EnvelopeIcon, { iconId: 'envelopSVG', ariaHidden: true }),
+        _react2.default.createElement(_dgxSvgIcons.EnvelopeIcon, { iconId: 'envelopSVG', ariaHidden: true, focusable: false }),
         _react2.default.createElement(
           'span',
           {
@@ -194,7 +194,7 @@ var NavMenuMobileButtons = function NavMenuMobileButtons(_ref) {
           className: shopLinkClass + '-wrapper',
           style: (0, _underscore.extend)({}, styles.wrapper, styles.shopLinkWrapper)
         },
-        _react2.default.createElement(_dgxSvgIcons.ShoppingBagIcon, { iconId: 'shoppingBagSVG', ariaHidden: true }),
+        _react2.default.createElement(_dgxSvgIcons.ShoppingBagIcon, { iconId: 'shoppingBagSVG', ariaHidden: true, focusable: false }),
         _react2.default.createElement(
           'span',
           {

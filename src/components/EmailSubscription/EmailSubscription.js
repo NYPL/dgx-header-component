@@ -217,12 +217,12 @@ class EmailSubscription extends React.Component {
               />
 
               <div className={`${formClass}-error ${errorClass}`}>
-                <XIcon ariaHidden />
+                <XIcon ariaHidden focusable={false} />
                 <span>Please enter a valid email address</span>
               </div>
 
               <div className={`${formClass}-submit`}>
-                <CheckSoloIcon ariaHidden />
+                <CheckSoloIcon ariaHidden focusable={false} />
                 <input
                   aria-label="Sign up"
                   type="submit"
@@ -285,7 +285,7 @@ class EmailSubscription extends React.Component {
             <div>Something isn&apos;t quite right.</div>
             <div>Please try again.</div>
             <a href="" onClick={this.initForm} style={styles.tryAgainButton}>
-              <LeftArrowIcon ariaHidden />
+              <LeftArrowIcon ariaHidden focusable={false} />
               TRY AGAIN
             </a>
           </div>

@@ -11,7 +11,7 @@ const Logo = (props) =>
     onClick={() => utils.trackHeader('Click Logo', '')}
     style={props.style}
   >
-    <LionLogoWithText />
+    <LionLogoWithText focusable={false} />
     <span className="visuallyHidden">{props.alt}</span>
   </a>;
 

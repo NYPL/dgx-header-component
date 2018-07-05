@@ -168,7 +168,7 @@ class MobileMyNypl extends React.Component {
             className={`${catalogLinkClass}-wrapper`}
             style={_extend(styles.wrapper, styles.catalogLinkWrapper)}
           >
-            <LoginIcon fill="#fff" ariaHidden />
+            <LoginIcon fill="#fff" ariaHidden focusable={false} />
             <span
               className={`${catalogLinkClass}-label`}
               style={_extend(styles.catalogLinkLabel, styles.label)}
@@ -187,7 +187,7 @@ class MobileMyNypl extends React.Component {
             className={`${researchLinkClass}-wrapper`}
             style={_extend(styles.wrapper, styles.researchLinkWrapper)}
           >
-            <BuildingIcon fill="#fff" ariaHidden />
+            <BuildingIcon fill="#fff" ariaHidden focusable={false} />
             <span
               className={`${researchLinkClass}-label`}
               style={_extend(styles.researchLinkLabel, styles.label)}

@@ -44,18 +44,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var styles = {
   base: {
     backgroundColor: '#2B2B2B',
-    margin: 0,
-    padding: 0
+    margin: 0
   },
   links: {
-    display: 'block',
+    display: 'flex',
     backgroundColor: '#E32B31',
     color: '#FFF',
     padding: 0,
-    margin: '60px 0 0 0',
-    width: '50%',
-    minHeight: '90px',
-    float: 'left',
+    marginTop: '60px',
+    minHeight: '100px',
     textAlign: 'center',
     textDecoration: 'none',
     lineHeight: 'normal'
@@ -75,25 +72,32 @@ var styles = {
     margin: '0',
     padding: '1.75em 0'
   },
+  notLoggedIn: {
+    display: 'none'
+  },
   logOutLink: {
-    display: 'block',
     color: '#fff',
+    display: 'block',
+    flex: '1 100%',
     textAlign: 'center',
     padding: '35px',
     fontSize: '18px',
     textTransform: 'uppercase',
-    textDecoration: 'underline',
-    clear: 'both'
+    textDecoration: 'underline'
   },
   researchLinkWrapper: {
-    borderLeft: '1.25px solid #b92b1a',
-    padding: '1.2em 0 1.75em'
+    alignItems: 'center',
+    borderLeft: 0,
+    display: 'flex',
+    flex: '1 1 auto',
+    justifyContent: 'center',
+    padding: '1.56em 0 1.85em'
   },
   researchLinkLabel: {
     width: '125px'
   },
   catalogLinkWrapper: {
-    borderRight: '1.25px solid #b92b1a'
+    borderRight: 0
   },
   catalogLinkLabel: {
     width: '102px'
@@ -165,7 +169,7 @@ var MobileMyNypl = function (_React$Component) {
           style: styles.logOutLink
         },
         'LOG OUT'
-      ) : _react2.default.createElement('div', { style: styles.logOutLink });
+      ) : _react2.default.createElement('div', { style: styles.notLoggedIn });
     }
 
     /**

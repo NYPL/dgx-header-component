@@ -135,6 +135,12 @@
       width: 1.3rem;
       margin: 5px 10px 5px 0;
     }
+
+    .patron-greeting-wrapper {
+      &:focus {
+        @include button-focus;
+      }
+    }
   }
 }
 
@@ -206,6 +212,10 @@
     .login-indication {
       margin: 0 0 30px;
     }
+
+    &:focus {
+      @include vendor-prefixer(outline-color, #fff);
+    }
   }
 
   a:focus {
@@ -245,7 +255,7 @@
      margin-bottom: 0;
    }
   }
-  
+
 }
 
 .login-indication {

@@ -215,6 +215,9 @@
 
     &:focus {
       @include vendor-prefixer(outline-color, #fff);
+      outline: inset;
+      outline-style: solid;
+      outline-width: $focus-width;
     }
   }
 

@@ -11,17 +11,17 @@
 ### v2.4.9
 > updated :focus style for links, button, and the forms found in the header
 > fixed up some css ordering of rules
-> now using `node-sass 4.6.0` if it gives problems for your version of node, try rolling back to 3.8.0 
+> now using `node-sass 4.6.0` if it gives problems for your version of node, try rolling back to 3.8.0.
 
 ### v2.4.8
 > Small CSS bug fixes, specifically to the dropdowns. The logged in dropdown had a huge log out SVG icon, and the email updates dropdown's input field was misaligned.
 
 ### v2.4.7
-> Fixes #39 where the icons were not layiing out properly for email & library card buttons in the mobile header. flexbox to the rescue
+> Fixes #39 where the icons were not laying out properly for email & library card buttons in the mobile header. flexbox to the rescue
 > Added the Shop button / link to mobile header w/ new shopping bag icon added in from [dgx-svg-icons](https://github.com/NYPL/dgx-svg-icons)
 
 ### v2.4.6
-> no more questionable Futurama based ipsum, now w/ more Starwars ipsum.
+> No more questionable Futurama based ipsum, now with more Starwars ipsum.
 > Updated the contribution work flow on the README.md
 
 ### v2.4.5

@@ -1,19 +1,27 @@
 ### CHANGE LOG
 
+### v2.4.10
+> More updates to focus styles for mobile context
+  - covers logged in and logged out states
+  - now using flex box
+> Fixes a broken layout in Subscribe dropdown when a user has already signed up [WWW-389](https://jira.nypl.org/browse/WWW-389)
+> updated dgx-svg-icons to v0.3.7, and the relate changes for the new icons.
+> updated the paths for importing `_mixin.scss` and `_buttons.scss`.
+
 ### v2.4.9
 > updated :focus style for links, button, and the forms found in the header
 > fixed up some css ordering of rules
-> now using `node-sass 4.6.0` if it gives problems for your version of node, try rolling back to 3.8.0 
+> now using `node-sass 4.6.0` if it gives problems for your version of node, try rolling back to 3.8.0.
 
 ### v2.4.8
 > Small CSS bug fixes, specifically to the dropdowns. The logged in dropdown had a huge log out SVG icon, and the email updates dropdown's input field was misaligned.
 
 ### v2.4.7
-> Fixes #39 where the icons were not layiing out properly for email & library card buttons in the mobile header. flexbox to the rescue
+> Fixes #39 where the icons were not laying out properly for email & library card buttons in the mobile header. flexbox to the rescue
 > Added the Shop button / link to mobile header w/ new shopping bag icon added in from [dgx-svg-icons](https://github.com/NYPL/dgx-svg-icons)
 
 ### v2.4.6
-> no more questionable Futurama based ipsum, now w/ more Starwars ipsum.
+> No more questionable Futurama based ipsum, now with more Starwars ipsum.
 > Updated the contribution work flow on the README.md
 
 ### v2.4.5

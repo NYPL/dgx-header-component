@@ -235,7 +235,8 @@ var MobileHeader = function (_React$Component) {
           ariaHidden: true,
           className: this.props.className + '-logo',
           height: 30,
-          width: 30
+          width: 30,
+          focusable: false
         })
       );
     }
@@ -254,17 +255,23 @@ var MobileHeader = function (_React$Component) {
 
       var myNyplClass = '';
       var gaAction = this.props.patronName ? 'MyAccount' : 'LogIn';
-      var icon = _react2.default.createElement(_dgxSvgIcons.LoginIcon, { className: 'loginIcon', ariaHidden: true });
+      var icon = _react2.default.createElement(_dgxSvgIcons.LoginIcon, { className: 'loginIcon', ariaHidden: true, focusable: false });
       if (this.props.patronName) {
-        icon = _react2.default.createElement(_dgxSvgIcons.LoginIconSolid, { className: 'loginIcon-loggedIn animated fadeIn', ariaHidden: true });
+        icon = _react2.default.createElement(_dgxSvgIcons.LoginIconSolid, {
+          className: 'loginIcon-loggedIn animated fadeIn',
+          ariaHidden: true,
+          focusable: false
+        });
       }
       var buttonStyles = styles.inactiveMyNyplButton;
       var buttonLabel = this.props.patronName ? 'My Account' : 'Log In';
       var active = this.state.activeButton === 'myNypl';
 
       if (active) {
+        var _React$createElement;
+
         myNyplClass = 'active';
-        icon = _react2.default.createElement(_dgxSvgIcons.XIcon, _defineProperty({ ariaHidden: true, fill: '#FFF' }, 'ariaHidden', true));
+        icon = _react2.default.createElement(_dgxSvgIcons.XIcon, (_React$createElement = { ariaHidden: true, fill: '#FFF' }, _defineProperty(_React$createElement, 'ariaHidden', true), _defineProperty(_React$createElement, 'focusable', false), _React$createElement));
         buttonStyles = styles.activeMyNyplButton;
         buttonLabel = 'Close';
       }
@@ -345,7 +352,7 @@ var MobileHeader = function (_React$Component) {
             { className: 'visuallyHidden' },
             'NYPL Locations Near Me'
           ),
-          _react2.default.createElement(_dgxSvgIcons.LocatorIcon, { ariaHidden: true, fill: '#000' })
+          _react2.default.createElement(_dgxSvgIcons.LocatorIcon, { ariaHidden: true, fill: '#000', focusable: false })
         )
       );
     }
@@ -363,14 +370,14 @@ var MobileHeader = function (_React$Component) {
       var _this3 = this;
 
       var mobileSearchClass = '';
-      var icon = _react2.default.createElement(_dgxSvgIcons.SearchIcon, { ariaHidden: true, fill: '#000' });
+      var icon = _react2.default.createElement(_dgxSvgIcons.SearchIcon, { ariaHidden: true, fill: '#000', focusable: false });
       var buttonStyles = styles.inactiveSearchButton;
       var buttonLabel = 'Open Search';
       var active = this.state.activeButton === 'search';
 
       if (active) {
         mobileSearchClass = ' active';
-        icon = _react2.default.createElement(_dgxSvgIcons.XIcon, { ariaHidden: true, fill: '#FFF' });
+        icon = _react2.default.createElement(_dgxSvgIcons.XIcon, { ariaHidden: true, fill: '#FFF', focusable: false });
         buttonStyles = styles.activeSearchButton;
         buttonLabel = 'Close Search';
       }
@@ -434,7 +441,7 @@ var MobileHeader = function (_React$Component) {
       var _this4 = this;
 
       var mobileMenuClass = '';
-      var icon = _react2.default.createElement(_dgxSvgIcons.MenuIcon, { ariaHidden: true, fill: '#000' });
+      var icon = _react2.default.createElement(_dgxSvgIcons.MenuIcon, { ariaHidden: true, fill: '#000', focusable: false });
       var buttonStyles = styles.inactiveMenuButton;
       var buttonLabel = 'Open Navigation';
       var dialogWindow = null;
@@ -442,7 +449,7 @@ var MobileHeader = function (_React$Component) {
 
       if (active) {
         mobileMenuClass = ' active';
-        icon = _react2.default.createElement(_dgxSvgIcons.XIcon, { ariaHidden: true, fill: '#FFF' });
+        icon = _react2.default.createElement(_dgxSvgIcons.XIcon, { ariaHidden: true, fill: '#FFF', focusable: false });
         buttonStyles = styles.activeMenuButton;
         buttonLabel = 'Close Navigation';
         dialogWindow = _react2.default.createElement(_NavMenu2.default, {

@@ -4,7 +4,6 @@ import { extend as _extend } from 'underscore';
 import {
   LibraryCardIcon,
   EnvelopeIcon,
-  XIcon,
   ShoppingBagIcon,
 } from '@nypl/dgx-svg-icons';
 
@@ -20,12 +19,23 @@ const styles = {
     margin: 0,
     padding: 0,
   },
-  links: {
+  subscribeLinks: {
+    display: 'inline-table',
+    color: '#FFF',
+    backgroundColor: '#2b2b2b',
+    padding: 0,
+    margin: '0 0 0 3px',
+    width: '49%',
+    textAlign: 'center',
+    textDecoration: 'none',
+    lineHeight: 'normal',
+  },
+  galcLinks: {
     display: 'inline-table',
     color: '#FFF',
     backgroundColor: '#2B2B2B',
     padding: 0,
-    margin: 0,
+    margin: '0 0 0 3px',
     width: '49%',
     textAlign: 'center',
     textDecoration: 'none',
@@ -45,7 +55,7 @@ const styles = {
     width: '100%',
   },
   subscribeLinkWrapper: {
-    borderLeft: '1px solid #363636',
+    borderLeft: '0',
   },
   libraryCardLinkWrapper: {
     borderRight: '1px solid #363636',
@@ -61,25 +71,26 @@ const styles = {
     backgroundColor: '#2B2B2B',
   },
   donateLink: {
-    padding: '1.75em 0',
     display: 'block',
-    width: '100%',
-    textAlign: 'center',
-    textTransform: 'uppercase',
     fontSize: '16px',
     lineHeight: 'normal',
+    margin: '0 0 0 3px',
+    padding: '1.75em 0',
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    width: '98.5%',
   },
   shopLink: {
-    display: 'inline-table',
-    color: '#FFF',
     backgroundColor: '#2B2B2B',
     borderTop: '2px solid #363636',
+    color: '#FFF',
+    display: 'inline-table',
+    lineHeight: 'normal',
+    margin: '0 0 0 3px',
     padding: 0,
-    margin: 0,
-    width: '100%',
     textAlign: 'center',
     textDecoration: 'none',
-    lineHeight: 'normal',
+    
   },
 };
 
@@ -98,14 +109,14 @@ const NavMenuMobileButtons = ({
       <a
         href={libraryCardLink}
         className={libraryCardClass}
-        style={styles.links}
+        style={styles.galcLinks}
         onClick={() => utils.trackHeader('Click', 'Mobile Bottom Buttons - Library Card')}
       >
         <span
           className={`${libraryCardClass}-wrapper`}
           style={_extend({}, styles.wrapper, styles.libraryCardLinkWrapper)}
         >
-          <LibraryCardIcon iconId="libraryCardSVG" ariaHidden />
+          <LibraryCardIcon iconId="libraryCardSVG" ariaHidden focusable={false} />
           <span
             className={`${libraryCardClass}-label`}
             style={_extend({}, styles.label)}
@@ -117,14 +128,14 @@ const NavMenuMobileButtons = ({
       <a
         href={subscribeLink}
         className={subscribeLinkClass}
-        style={styles.links}
+        style={styles.subscribeLinks}
         onClick={() => utils.trackHeader('Click', 'Mobile Bottom Buttons - Email Updates')}
       >
         <span
           className={`${subscribeLinkClass}-wrapper`}
           style={_extend({}, styles.wrapper, styles.subscribeLinkWrapper)}
         >
-          <EnvelopeIcon iconId="envelopSVG" ariaHidden />
+          <EnvelopeIcon iconId="envelopSVG" ariaHidden focusable={false} />
           <span
             className={`${subscribeLinkClass}-label`}
             style={_extend({}, styles.label)}
@@ -144,7 +155,7 @@ const NavMenuMobileButtons = ({
           className={`${shopLinkClass}-wrapper`}
           style={_extend({}, styles.wrapper, styles.shopLinkWrapper)}
         >
-          <ShoppingBagIcon iconId="shoppingBagSVG" ariaHidden />
+          <ShoppingBagIcon iconId="shoppingBagSVG" ariaHidden focusable={false} />
           <span
             className={`${shopLinkClass}-label`}
             style={_extend(styles.shopLinkLabel, styles.label)}

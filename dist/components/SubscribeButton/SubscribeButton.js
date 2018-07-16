@@ -190,13 +190,13 @@ var SubscribeButton = function (_React$Component) {
     key: 'renderEmailButton',
     value: function renderEmailButton() {
       var buttonClass = '';
-      var icon = _react2.default.createElement(_dgxSvgIcons.GenericWedgeIcon, { className: 'dropDownIcon', ariaHidden: true });
+      var icon = _react2.default.createElement(_dgxSvgIcons.GenericWedgeIcon, { className: 'dropDownIcon', ariaHidden: true, focusable: false });
       var label = this.props.label;
 
       if (this.state.visible) {
         buttonClass = 'active';
         label = 'Close';
-        icon = _react2.default.createElement(_dgxSvgIcons.XIcon, { className: 'dropDownIcon', ariaHidden: true, fill: '#fff' });
+        icon = _react2.default.createElement(_dgxSvgIcons.XIcon, { className: 'dropDownIcon', ariaHidden: true, fill: '#fff', focusable: false });
       }
 
       return _react2.default.createElement(

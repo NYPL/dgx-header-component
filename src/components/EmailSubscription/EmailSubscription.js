@@ -46,22 +46,20 @@ const styles = {
     marginTop: '25px',
   },
   privacyLink: {
-    textDecoration: 'underline',
-    fontSize: '0.875em',
+    backgroundColor: '#1B7FA7',
     color: '#FFF',
+    fontSize: '0.875em',
     fontWeight: '400',
     position: 'relative',
-    bottom: '10px',
-    left: '55px',
+    textDecoration: 'underline',
   },
   scLink: {
-    textDecoration: 'underline',
+    backgroundColor: '#1B7FA7',
+    color: '#FFF',
     fontSize: '0.875em',
-    color: 'white',
-    fontWeight: '200',
+    fontWeight: '400',
     position: 'relative',
-    bottom: '33px',
-    left: '139px',
+    textDecoration: 'underline',
   },
   emailFormLabel: {
     color: '#FFF',
@@ -69,14 +67,15 @@ const styles = {
     display: 'inline-block',
   },
   resubmitButton: {
+    backgroundColor: 'transparent',
     borderTop: 'none',
     borderLeft: 'none',
     borderRight: 'none',
     borderBottom: '2px solid #FFF',
     boxShadow: '0',
     color: '#FFF',
-    backgroundColor: 'transparent',
-    fontSize: '16px',
+    fontSize: '1.125em',
+    height: '1.5em',
     padding: '0 0 2px 0',
   },
 };
@@ -218,12 +217,12 @@ class EmailSubscription extends React.Component {
               />
 
               <div className={`${formClass}-error ${errorClass}`}>
-                <XIcon ariaHidden />
+                <XIcon ariaHidden focusable={false} />
                 <span>Please enter a valid email address</span>
               </div>
 
               <div className={`${formClass}-submit`}>
-                <CheckSoloIcon ariaHidden />
+                <CheckSoloIcon ariaHidden focusable={false} />
                 <input
                   aria-label="Sign up"
                   type="submit"
@@ -264,7 +263,7 @@ class EmailSubscription extends React.Component {
       if (status === 'exists') {
         utils.trackHeader('Subscribe', 'Error -- already subscribed');
         subscribeContent = (
-          <div>
+          <div className = {`${this.props.className}-alreadySubscribed`}>
             <SubscribeMessageBox
               status={status}
               msg="Looks like you're already signed up!"
@@ -286,7 +285,7 @@ class EmailSubscription extends React.Component {
             <div>Something isn&apos;t quite right.</div>
             <div>Please try again.</div>
             <a href="" onClick={this.initForm} style={styles.tryAgainButton}>
-              <LeftArrowIcon ariaHidden />
+              <LeftArrowIcon ariaHidden focusable={false} />
               TRY AGAIN
             </a>
           </div>

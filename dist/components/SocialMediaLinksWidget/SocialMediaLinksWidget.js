@@ -34,8 +34,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var icons = {
-  twitter: _react2.default.createElement(_dgxSvgIcons.TwitterIcon, { iconId: 'email-twitter' }),
-  facebook: _react2.default.createElement(_dgxSvgIcons.FaceBookIcon, { iconId: 'email-fb' })
+  twitter: _react2.default.createElement(_dgxSvgIcons.TwitterIcon, { iconId: 'email-twitter', focusable: false }),
+  facebook: _react2.default.createElement(_dgxSvgIcons.FaceBookIcon, { iconId: 'email-fb', focusable: false })
 };
 
 var SocialMediaLinksWidget = function (_React$Component) {

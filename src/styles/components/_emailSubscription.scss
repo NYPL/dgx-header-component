@@ -9,9 +9,17 @@
   .emailSubscription {
 
     &-pp-link {
+      bottom: 11px;
+      left: 60px;
+
       &:focus {
         box-shadow: 0;
       }
+    }
+
+    &-sc-link {
+      bottom: 33px;
+      left: 140px;
     }
 
     .subscribeMessageBox {
@@ -43,11 +51,25 @@
       }
     }
 
+    &-alreadySubscribed {
+      ~ .emailSubscription {
+        &-sc-link {
+          left: 140px;
+          top: 70px;
+        }
+
+        &-pp-link {
+          left: 60px;
+          top: 95px;
+        }
+      }
+    }
+
     &-newEmail {
       @include Kievit-Book;
+      display: block;
       font-size: 14px;
       margin-top: 20px;
-      text-transform: uppercase;
 
       a {
         border-bottom: 1px solid #fff;
@@ -102,6 +124,7 @@
         fill: #fff;
       }
     }
+
     &-input {
       @include Kievit-Book;
       border: 3px solid #1B7FA7;

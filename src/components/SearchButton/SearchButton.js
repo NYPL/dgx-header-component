@@ -73,6 +73,7 @@ class SearchButton extends React.Component {
       fill: '#FFF',
       width: '20',
       height: '20',
+      focusable: false,
     });
 
     return (

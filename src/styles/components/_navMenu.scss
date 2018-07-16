@@ -12,11 +12,12 @@
   &-wrapper {
     /* Controls the display of Mobile View */
     &.mobileActive {
+      box-shadow: 0 6px 4px rgba(100, 100, 100, 0.4);
+      line-height: normal;
       margin-top: -2.5px;
       position: absolute;
       width: 100%;
       z-index: 1000;
-      line-height: normal;
 
       @include min-screen(769px) {
         position: initial;
@@ -39,12 +40,23 @@
       .mobileBottomButtons {
         display: block;
 
+        a:focus {
+          @include vendor-prefixer(outline-color, #fff);
+          outline: inset;
+          outline-style: solid;
+          outline-width: $focus-width;
+          position: relative;
+        }
+
         .subscribeLink {
           svg {
             height: 20px;
             margin-left: 10px;
             width: 30px;
           }
+        }
+        .shopLink {
+          width: 98.5%;
         }
 
         svg {
@@ -124,6 +136,13 @@
         &:focus,
         &:hover {
           text-decoration: none;
+        }
+
+        &:focus {
+          box-shadow: 1px 1px 1px 1px #fff;
+          @include vendor-prefixer(outline-color, #fff);
+          outline-style: solid;
+          outline-width: $focus-width;
         }
       }
     }

@@ -66,18 +66,6 @@ const styles = {
     margin: '15px 0 0 0',
     display: 'inline-block',
   },
-  resubmitButton: {
-    backgroundColor: 'transparent',
-    borderTop: 'none',
-    borderLeft: 'none',
-    borderRight: 'none',
-    borderBottom: '2px solid #FFF',
-    boxShadow: '0',
-    color: '#FFF',
-    fontSize: '1.125em',
-    height: '1.5em',
-    padding: '0 0 2px 0',
-  },
 };
 
 class EmailSubscription extends React.Component {

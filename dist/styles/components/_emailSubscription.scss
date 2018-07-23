@@ -103,6 +103,20 @@
     }
   }
 
+  .emailSubscription-newEmail {
+    button {
+      background-color: transparent;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: 2px solid #FFF;
+      color: #FFF;
+      font-size: 1.125em;
+      height: 1.5em;
+      padding: 0 0 2px 0;
+    }
+  }
+
   .emailSubscribeForm {
     &-error {
       @include Kievit-Book;
@@ -163,6 +177,10 @@
         margin-left: 4px;
         position: absolute;
       }
+    }
+
+    &-resubmit {
+
     }
   }
 }

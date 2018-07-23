@@ -4,6 +4,7 @@
 ### v2.4.11
 > Fixes outstanding HTML conformance issues
   - Fixes CSS: border-radius: Too many values or values are not recognized
+> Fixes line height of .emailSubscription-newEmail button to remove the text struck out effect.
 
 ### v2.4.10
 > Fixes outstanding HTML conformance issues

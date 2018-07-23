@@ -1,5 +1,8 @@
 ### CHANGE LOG
 
+### v2.4.11
+> Fixes line height of .emailSubscription-newEmail button to remove the text struck out effect.
+
 ### v2.4.10
 > More updates to focus styles for mobile context
   - covers logged in and logged out states

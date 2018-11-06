@@ -32,7 +32,7 @@ class SearchBox extends React.Component {
    * Returns the final URL for the catalog search.
    */
   setCatalogUrl(searchString, catalogBaseUrl) {
-    const catalogUrl = catalogBaseUrl || '//www.nypl.org/search/apachesolr_search/';
+    const catalogUrl = catalogBaseUrl || '//www.nypl.org/search/';
 
     if (searchString) {
       return catalogUrl + encodeURIComponent(searchString) + this.generateQueriesForGA();
@@ -171,7 +171,7 @@ class SearchBox extends React.Component {
     const searchInputValue = this.state.searchInput;
     const searchOptionValue = this.state.searchOption;
     const encoreBaseUrl = 'https://browse.nypl.org/iii/encore/search/';
-    const catalogBaseUrl = '//www.nypl.org/search/apachesolr_search/';
+    const catalogBaseUrl = '//www.nypl.org/search/';
     // For GA "Search" Catalog, "Query Sent" Action Event
     // GASearchedRepo indicates which kind of search is sent
     let GASearchedRepo = 'Unknown';

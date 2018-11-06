@@ -67,7 +67,7 @@ var SearchBox = function (_React$Component) {
   _createClass(SearchBox, [{
     key: 'setCatalogUrl',
     value: function setCatalogUrl(searchString, catalogBaseUrl) {
-      var catalogUrl = catalogBaseUrl || '//www.nypl.org/search/apachesolr_search/';
+      var catalogUrl = catalogBaseUrl || '//www.nypl.org/search/';
 
       if (searchString) {
         return catalogUrl + encodeURIComponent(searchString) + this.generateQueriesForGA();
@@ -225,7 +225,7 @@ var SearchBox = function (_React$Component) {
       var searchInputValue = this.state.searchInput;
       var searchOptionValue = this.state.searchOption;
       var encoreBaseUrl = 'https://browse.nypl.org/iii/encore/search/';
-      var catalogBaseUrl = '//www.nypl.org/search/apachesolr_search/';
+      var catalogBaseUrl = '//www.nypl.org/search/';
       // For GA "Search" Catalog, "Query Sent" Action Event
       // GASearchedRepo indicates which kind of search is sent
       var GASearchedRepo = 'Unknown';

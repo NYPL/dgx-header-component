@@ -171,7 +171,7 @@ class SearchBox extends React.Component {
     const searchInputValue = this.state.searchInput;
     const searchOptionValue = this.state.searchOption;
     const encoreBaseUrl = 'https://browse.nypl.org/iii/encore/search/';
-    const catalogBaseUrl = '//www.nypl.org/search/';
+    const catalogBaseUrl = (nodeEnv === 'production' ? '//www.nypl.org/search/' : '//dev-www.nypl.org/search/');
     // For GA "Search" Catalog, "Query Sent" Action Event
     // GASearchedRepo indicates which kind of search is sent
     let GASearchedRepo = 'Unknown';

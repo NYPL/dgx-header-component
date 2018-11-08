@@ -1,6 +1,9 @@
 ### CHANGE LOG
 
 =======
+### v2.4.13
+> Updates catalogBaseUrl to //dev-www.nypl.org/search/ in development environment
+
 ### v2.4.12
 > Points website searches to /search/ instead of /apachesolr_search/
 

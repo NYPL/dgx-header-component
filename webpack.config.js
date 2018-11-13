@@ -5,6 +5,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const rootPath = path.resolve(__dirname);
 
 if (process.env.NODE_ENV !== 'development') {
+  let appEnv = process.env.APP_ENV ? process.env.APP_ENV : 'production';
   const loaders = [
     {
       loader: 'css-loader',
@@ -84,11 +85,13 @@ if (process.env.NODE_ENV !== 'development') {
       new webpack.DefinePlugin({
         'process.env': {
           NODE_ENV: JSON.stringify('production'),
+          appEnv: JSON.stringify(appEnv)
         },
       }),
     ],
   };
 } else {
+  let appEnv = process.env.APP_ENV ? process.env.APP_ENV : 'development';
   module.exports = {
     devtool: 'eval',
     entry: {
@@ -110,6 +113,7 @@ if (process.env.NODE_ENV !== 'development') {
       new webpack.DefinePlugin({
         loadA11y: process.env.loadA11y || false,
         nodeEnv: JSON.stringify('development'),
+        appEnv: JSON.stringify(appEnv)
       }),
     ],
     resolve: {

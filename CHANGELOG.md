@@ -1,6 +1,9 @@
 ### CHANGE LOG
 
 =======
+### v2.4.14
+> Uses APP_ENV to update catalogBaseUrl
+
 ### v2.4.13
 > Updates catalogBaseUrl to //dev-www.nypl.org/search/ in development environment
 

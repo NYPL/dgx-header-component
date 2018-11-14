@@ -225,7 +225,15 @@ var SearchBox = function (_React$Component) {
       var searchInputValue = this.state.searchInput;
       var searchOptionValue = this.state.searchOption;
       var encoreBaseUrl = 'https://browse.nypl.org/iii/encore/search/';
-      var catalogBaseUrl = appEnv !== 'development' ? '//www.nypl.org/search/' : '//dev-www.nypl.org/search/';
+      var catalogBaseUrl = void 0;
+      if (appEnv === 'development') {
+        catalogBaseUrl = '//dev-www.nypl.org/search/';
+      } else if (appEnv === 'qa') {
+        catalogBaseUrl = '//qa-www.nypl.org/search/';
+      } else {
+        catalogBaseUrl = '//www.nypl.org/search/';
+      };
+
       // For GA "Search" Catalog, "Query Sent" Action Event
       // GASearchedRepo indicates which kind of search is sent
       var GASearchedRepo = 'Unknown';

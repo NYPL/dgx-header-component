@@ -1,6 +1,9 @@
 ### CHANGE LOG
 
 =======
+### v2.4.15
+> Adds a check for QA in APP_ENV
+
 ### v2.4.14
 > Uses APP_ENV to update catalogBaseUrl
 

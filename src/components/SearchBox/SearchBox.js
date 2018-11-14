@@ -171,7 +171,15 @@ class SearchBox extends React.Component {
     const searchInputValue = this.state.searchInput;
     const searchOptionValue = this.state.searchOption;
     const encoreBaseUrl = 'https://browse.nypl.org/iii/encore/search/';
-    const catalogBaseUrl = appEnv !== 'development' ? '//www.nypl.org/search/' : '//dev-www.nypl.org/search/';
+    let catalogBaseUrl;
+    if (appEnv === 'development') {
+      catalogBaseUrl = '//dev-www.nypl.org/search/';
+    } else if (appEnv === 'qa') {
+      catalogBaseUrl = '//qa-www.nypl.org/search/';
+    } else {
+      catalogBaseUrl = '//www.nypl.org/search/';
+    };
+
     // For GA "Search" Catalog, "Query Sent" Action Event
     // GASearchedRepo indicates which kind of search is sent
     let GASearchedRepo = 'Unknown';

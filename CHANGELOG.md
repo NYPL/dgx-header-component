@@ -1,6 +1,9 @@
 ### CHANGE LOG
 
 =======
+### v2.4.17
+> Hard-codes appEnv to production.
+
 ### v2.4.16
 > Sets catalogBaseUrl when appEnv is undefined
 

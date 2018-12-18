@@ -1,6 +1,9 @@
 ### CHANGE LOG
 
 =======
+### v2.4.18
+> Run babel-build so that the dist directory is updated.
+
 ### v2.4.17
 > Hard-codes appEnv to production.
 

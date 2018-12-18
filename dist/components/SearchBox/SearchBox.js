@@ -226,6 +226,7 @@ var SearchBox = function (_React$Component) {
       var searchOptionValue = this.state.searchOption;
       var encoreBaseUrl = 'https://browse.nypl.org/iii/encore/search/';
       var catalogBaseUrl = void 0;
+      var appEnv = 'production';
       if (!appEnv) {
         catalogBaseUrl = '//www.nypl.org/search/';
       } else if (appEnv === 'development') {

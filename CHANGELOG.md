@@ -1,6 +1,9 @@
 ### CHANGE LOG
 
 =======
+### v2.4.16
+> Sets catalogBaseUrl when appEnv is undefined
+
 ### v2.4.15
 > Adds a check for QA in APP_ENV
 

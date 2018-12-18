@@ -172,7 +172,9 @@ class SearchBox extends React.Component {
     const searchOptionValue = this.state.searchOption;
     const encoreBaseUrl = 'https://browse.nypl.org/iii/encore/search/';
     let catalogBaseUrl;
-    if (appEnv === 'development') {
+    if (!appEnv) {
+      catalogBaseUrl = '//www.nypl.org/search/';
+    } else if (appEnv === 'development') {
       catalogBaseUrl = '//dev-www.nypl.org/search/';
     } else if (appEnv === 'qa') {
       catalogBaseUrl = '//qa-www.nypl.org/search/';

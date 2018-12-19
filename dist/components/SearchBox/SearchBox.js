@@ -226,16 +226,18 @@ var SearchBox = function (_React$Component) {
       var searchOptionValue = this.state.searchOption;
       var encoreBaseUrl = 'https://browse.nypl.org/iii/encore/search/';
       var catalogBaseUrl = void 0;
-      var appEnv = 'production';
-      if (!appEnv) {
+      try {
+        if (appEnv === 'development') {
+          catalogBaseUrl = '//dev-www.nypl.org/search/';
+        } else if (appEnv === 'qa') {
+          catalogBaseUrl = '//qa-www.nypl.org/search/';
+        } else {
+          catalogBaseUrl = '//www.nypl.org/search/';
+        };
+      } catch (err) {
+        // When the header is on old/new Drupal, appEnv will not be set so it will always get caught here.
         catalogBaseUrl = '//www.nypl.org/search/';
-      } else if (appEnv === 'development') {
-        catalogBaseUrl = '//dev-www.nypl.org/search/';
-      } else if (appEnv === 'qa') {
-        catalogBaseUrl = '//qa-www.nypl.org/search/';
-      } else {
-        catalogBaseUrl = '//www.nypl.org/search/';
-      };
+      }
 
       // For GA "Search" Catalog, "Query Sent" Action Event
       // GASearchedRepo indicates which kind of search is sent

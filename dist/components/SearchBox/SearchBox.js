@@ -226,14 +226,18 @@ var SearchBox = function (_React$Component) {
       var searchOptionValue = this.state.searchOption;
       var encoreBaseUrl = 'https://browse.nypl.org/iii/encore/search/';
       var catalogBaseUrl = void 0;
-      var appEnv = 'production';
+      console.log('December 19 - 0');
       if (!appEnv) {
+        console.log('December 19 - 1');
         catalogBaseUrl = '//www.nypl.org/search/';
       } else if (appEnv === 'development') {
+        console.log('December 19 - 2');
         catalogBaseUrl = '//dev-www.nypl.org/search/';
       } else if (appEnv === 'qa') {
+        console.log('December 19 - 3');
         catalogBaseUrl = '//qa-www.nypl.org/search/';
       } else {
+        console.log('December 19 - 4');
         catalogBaseUrl = '//www.nypl.org/search/';
       };
 

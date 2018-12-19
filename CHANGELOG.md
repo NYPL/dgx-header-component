@@ -1,6 +1,9 @@
 ### CHANGE LOG
 
 =======
+### v2.4.19
+> Remove the hardcoding to test that dist was the solution.
+
 ### v2.4.18
 > Run babel-build so that the dist directory is updated.
 

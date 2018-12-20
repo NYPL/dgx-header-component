@@ -182,7 +182,8 @@ class SearchBox extends React.Component {
       };
     }
     catch(err) {
-      // When the header is on old/new Drupal, appEnv will not be set so it will always get caught here.
+      // For the header markup and static assets import, appEnv will not be set so it will always get caught here.
+      // One example is the Drupal import.
       catalogBaseUrl = '//www.nypl.org/search/';
     }
 

@@ -4,7 +4,7 @@ For NYPL's patron to log in, our OAuth service will assign the cookie `nyplIdent
 
 #### Cookie Expired and Refresh
 
-The cookie has a specific expired time. Once it is expired, the header will try to refresh it if patron click any link or simply refresh the page. NYPL's OAuth service offers a refresh API link for this need. The API link will check the cookie's refresh token section to execute the refresh process. Once it is successfully refreshed, the logged in status will remain.
+The cookie has a specific expired time. Once it is expired, the header will try to refresh it if the patron clicks any links or simply refreshes the page. NYPL's OAuth service offers a refresh API link for this need. The API link will check the cookie's refresh token section to execute the refresh process. Once it is successfully refreshed, the logged in status will remain.
 
 #### Failed Cookie Refreshing
 

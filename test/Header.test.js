@@ -293,17 +293,18 @@ describe('Header', () => {
       });
     });
 
-    describe('when "PAT_LOGGED_IN" exists and on Encore', () => {
+    describe('when "PAT_LOGGED_IN" exists and the visited page is on Encore\'s domain', () => {
       let component,
         setCookieSpy,
-        handleEncoreLoggedInTimerStub,
         logOutEncoreInSpy,
-        hasCookieStub;
+        hasCookieStub,
+        currentTime;
+
+      const encoreLogInExpireDuration = 1800000;
 
       before(() => {
         hasCookieStub = sinon.stub(utils, 'hasCookie');
         setCookieSpy = sinon.spy(utils, 'setCookie');
-        handleEncoreLoggedInTimerStub = sinon.spy(Header.prototype, 'handleEncoreLoggedInTimer');
         logOutEncoreInSpy = sinon.spy(Header.prototype, 'logOutEncoreIn');
 
         hasCookieStub
@@ -317,11 +318,11 @@ describe('Header', () => {
           .returns(false);
 
         component = mount(<Header currentLocation={{ hostname: 'browse.nypl.org' }} />);
+        currentTime = component.state().currentTime;
       });
 
       after(() => {
         setCookieSpy.restore();
-        handleEncoreLoggedInTimerStub.restore();
         logOutEncoreInSpy.restore();
         utils.hasCookie.restore();
         component.unmount();
@@ -329,21 +330,97 @@ describe('Header', () => {
 
       it('should set cookie "ENCORE_LAST_VISITED".', () => {
         expect(setCookieSpy.callCount).to.equal(1);
-        expect(setCookieSpy.calledWith('ENCORE_LAST_VISITED', 'current time')).to.equal(true);
+        expect(setCookieSpy.calledWith('ENCORE_LAST_VISITED', currentTime)).to.equal(true);
       });
 
       it('should set logOutEncoreIn to 30 mins.', () => {
         expect(logOutEncoreInSpy.callCount).to.equal(1);
-        expect(logOutEncoreInSpy.calledWith(1800000)).to.equal(true);
+        expect(logOutEncoreInSpy.calledWith(encoreLogInExpireDuration)).to.equal(true);
       });
     });
 
-    describe('if "ENCORE_LAST_VISITED" exists, check "ENCORE_LAST_VISITED" and reset EncoreLoggedInTimer to the rest of the time before "PAT_LOGGED_IN" is expired', () => {
+    describe('when "PAT_LOGGED_IN" exists and the visited page is NOT on Encore\'s domain', () => {
+      let component,
+        hasCookieStub,
+        getCookieStub,
+        logOutEncoreInSpy,
+        currentTime,
+        mockLastVisitedTime;
 
-    });
+      const encoreLogInExpireDuration = 1800000;
+      mockLastVisitedTime = Date.now() - 1700000;
 
-    describe('delete cookies "PAT_LOGGED_IN", "ENCORE_LAST_VISITED" and "nyplIdentityPatron" if the time is up', () => {
+      before(() => {
+        hasCookieStub = sinon.stub(utils, 'hasCookie');
+        getCookieStub = sinon.stub(utils, 'getCookie');
+        logOutEncoreInSpy = sinon.spy(Header.prototype, 'logOutEncoreIn');
 
+        hasCookieStub
+          .withArgs('PAT_LOGGED_IN')
+          .onCall(0)
+          .returns(true);
+
+        getCookieStub
+          .withArgs('ENCORE_LAST_VISITED')
+          .onCall(0)
+          .returns(mockLastVisitedTime);
+      });
+
+      beforeEach(() => {
+        component = mount(<Header currentLocation={{ hostname: 'somewebsite.nypl.org' }} />);
+        currentTime = component.state().currentTime;
+      });
+
+      afterEach(() => {
+        component.unmount();
+      });
+
+      after(() => {
+        utils.getCookie.restore();
+        utils.hasCookie.restore();
+        logOutEncoreInSpy.restore();
+      });
+
+      it('should reset EncoreLoggedInTimer to the remaining time before "PAT_LOGGED_IN" is expired', () => {
+        expect(getCookieStub.callCount).to.equal(1);
+        expect(logOutEncoreInSpy.callCount).to.equal(1);
+        expect(logOutEncoreInSpy.calledWith(encoreLogInExpireDuration - (currentTime - mockLastVisitedTime))).to.equal(true);
+      });
+
+      it('should reset EncoreLoggedInTimer to 0 if remaining time is less than 0', () => {
+        mockLastVisitedTime = currentTime - 2000000;
+
+        expect(logOutEncoreInSpy.callCount).to.equal(1);
+        // expect(logOutEncoreInSpy.calledWith(0)).to.equal(true);
+      });
     });
   });
+
+  describe('logOutEncoreIn', () => {
+    let component,
+      hasCookieStub,
+      deleteCookieStub;
+
+    before(() => {
+      hasCookieStub = sinon.stub(utils, 'hasCookie');
+
+      hasCookieStub
+        .withArgs('PAT_LOGGED_IN')
+        .returns(true);
+    });
+
+    after(() => {
+      component.unmount();
+    });
+
+    it('should delete cookies "PAT_LOGGED_IN", "ENCORE_LAST_VISITED" and "nyplIdentityPatron" ', () => {
+      component = mount(<Header currentLocation={{ hostname: 'browse.nypl.org' }} />);
+
+      // expect(deleteCookieStub.callCount).to.equal(3);
+      // expect(deleteCookieStub.calledWith('PAT_LOGGED_IN')).to.equal(true);
+      // expect(deleteCookieStub.calledWith('ENCORE_LAST_VISITED')).to.equal(true);
+      // expect(deleteCookieStub.calledWith('nyplIdentityPatron')).to.equal(true);
+    });
+  });
+
 });

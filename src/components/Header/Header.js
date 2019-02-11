@@ -89,6 +89,7 @@ class Header extends React.Component {
       patron,
       navData,
       currentLocation = window.location || {},
+      currentTime = Date.now() || undefined,
     } = this.props;
 
     const patronNameObject = !_isEmpty(patron) && patron.names && patron.names.length ?
@@ -106,6 +107,7 @@ class Header extends React.Component {
         logOutUrl: '',
         featureFlagsStore: FeatureFlags.store.getState(),
         currentLocation,
+        currentTime,
       },
     );
   }
@@ -123,7 +125,7 @@ class Header extends React.Component {
       featureFlagConfig.featureFlagList, this.state.isFeatureFlagsActivated
     );
     // Check if the cookie "PAT_LOGGED_IN" exists and then set the cookie and timer
-    this.handleEncoreLoggedInTimer(this.state.currentLocation);
+    this.handleEncoreLoggedInTimer(this.state.currentLocation, this.state.currentTime);
   }
 
   componentWillUnmount() {
@@ -132,26 +134,25 @@ class Header extends React.Component {
     // Removing event listener to minimize garbage collection
   }
 
-  handleEncoreLoggedInTimer(currentLocation) {
+  handleEncoreLoggedInTimer(currentLocation, currentTime) {
     const encoreLogInExpireDuration = 1800000;
 
     // See if the user has logged in Encore
     if (utils.hasCookie('PAT_LOGGED_IN')) {
       // Then check if the user is visiting a new Encore page
       if (currentLocation.hostname && currentLocation.hostname == 'browse.nypl.org') {
-        console.log('run this function');
-        utils.setCookie('ENCORE_LAST_VISITED', 'current time');
+        utils.setCookie('ENCORE_LAST_VISITED', currentTime);
         this.logOutEncoreIn(encoreLogInExpireDuration);
       } else {
-        console.log('not run this function');
-        const timeTillLogOut = utils.getCookie('ENCORE_LAST_VISITED')
-          ? encoreLogInExpireDuration - (Date.now() - utils.getCookie('ENCORE_LAST_VISITED'))
+        const lastVisitedEncoreTime = utils.getCookie('ENCORE_LAST_VISITED');
+        const timeTillLogOut = lastVisitedEncoreTime
+          ? encoreLogInExpireDuration - (currentTime - lastVisitedEncoreTime)
           : undefined;
 
         if (timeTillLogOut > 0) {
           this.logOutEncoreIn(timeTillLogOut);
         } else {
-          this.logOutEncoreIn();
+          this.logOutEncoreIn(0);
         }
       }
     }

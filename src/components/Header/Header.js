@@ -88,7 +88,9 @@ class Header extends React.Component {
     const {
       patron,
       navData,
+      currentLocation = window.location || {},
     } = this.props;
+
     const patronNameObject = !_isEmpty(patron) && patron.names && patron.names.length ?
       utils.modelPatronName(patron.names[0]) : {};
 
@@ -102,8 +104,9 @@ class Header extends React.Component {
         patronDataReceived: patron.loggedIn || false,
         isFeatureFlagsActivated: {},
         logOutUrl: '',
+        featureFlagsStore: FeatureFlags.store.getState(),
+        currentLocation,
       },
-      { featureFlagsStore: FeatureFlags.store.getState() },
     );
   }
 
@@ -119,12 +122,47 @@ class Header extends React.Component {
     utils.checkFeatureFlagActivated(
       featureFlagConfig.featureFlagList, this.state.isFeatureFlagsActivated
     );
+    // Check if the cookie "PAT_LOGGED_IN" exists and then set the cookie and timer
+    this.handleEncoreLoggedInTimer(this.state.currentLocation);
   }
 
   componentWillUnmount() {
     // Listen on FeatureFlags Store updates
     FeatureFlags.store.unlisten(this.onFeatureFlagsChange.bind(this));
     // Removing event listener to minimize garbage collection
+  }
+
+  handleEncoreLoggedInTimer(currentLocation) {
+    const encoreLogInExpireDuration = 1800000;
+
+    // See if the user has logged in Encore
+    if (utils.hasCookie('PAT_LOGGED_IN')) {
+      // Then check if the user is visiting a new Encore page
+      if (currentLocation.hostname && currentLocation.hostname == 'browse.nypl.org') {
+        console.log('run this function');
+        utils.setCookie('ENCORE_LAST_VISITED', 'current time');
+        this.logOutEncoreIn(encoreLogInExpireDuration);
+      } else {
+        console.log('not run this function');
+        const timeTillLogOut = utils.getCookie('ENCORE_LAST_VISITED')
+          ? encoreLogInExpireDuration - (Date.now() - utils.getCookie('ENCORE_LAST_VISITED'))
+          : undefined;
+
+        if (timeTillLogOut > 0) {
+          this.logOutEncoreIn(timeTillLogOut);
+        } else {
+          this.logOutEncoreIn();
+        }
+      }
+    }
+  }
+
+  logOutEncoreIn(timeTillLogOut = 0) {
+    setTimeout(() => {
+      utils.deleteCookie('PAT_LOGGED_IN');
+      utils.deleteCookie('ENCORE_LAST_VISITED');
+      utils.deleteCookie('nyplIdentityPatron');
+    }, timeTillLogOut);
   }
 
   onFeatureFlagsChange() {

@@ -23,7 +23,8 @@ import {
   mockLoginCookie,
 } from './authApiMockResponse';
 
-const mockPatronApiEndpoint = `${appConfig.patronApiUrl}eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwc` +
+const mockPatronApiEndpoint =
+  `${appConfig.patronApiUrl}eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwc` +
   'zpcL1wvd3d3Lm55cGwub3JnIiwic3ViIjoiNjM2NzAyOCIsImF1ZCI6ImFwcF9sb2dpbiIsImlhdCI6MTQ4MjE3NjQ3MC' +
   'wiZXhwIjoxNDgyMTgwMDcwLCJhdXRoX3RpbWUiOjE0ODIxNzY0NzAsInNjb3BlIjoib3BlbmlkIG9mZmxpbmVfYWNjZXN' +
   'zIGNvb2tpZSBwYXRyb246cmVhZCJ9.JO7VbOqCC7HyjRmeyHD4zM1Gl0JBk5RdxjAkCp0h6sfVe-xs5FyY7biYqs19k4d' +
@@ -246,25 +247,30 @@ describe('Header', () => {
           }, 1500);
         });
 
-        it('should delete "nyplIdentityPatron" cookie, if calling the refesh link fails', (done) => {
-          patronApiCall(component, '/refreshError', deleteNyplIdentityPatronCookie);
-          setTimeout(() => {
-            expect(deleteNyplIdentityPatronCookie.calledOnce).to.equal(true);
-            done();
-          }, 1500);
-        });
+        it('should delete "nyplIdentityPatron" cookie, if calling the refesh link fails',
+          (done) => {
+            patronApiCall(component, '/refreshError', deleteNyplIdentityPatronCookie);
+            setTimeout(() => {
+              expect(deleteNyplIdentityPatronCookie.calledOnce).to.equal(true);
+              done();
+            }, 1500);
+          }
+        );
       }
     );
   });
 
   describe('handleEncoreLoggedInTimer', () => {
-    describe('when cookie "PAT_LOGGED_IN" does not exist', () => {
-      let component,
-        setCookieSpy,
-        handleEncoreLoggedInTimerSpy,
-        logOutEncoreInSpy,
-        hasCookieStub;
+    let component;
+    let setCookieSpy;
+    let handleEncoreLoggedInTimerSpy;
+    let logOutEncoreInSpy;
+    let hasCookieStub;
+    let getCookieStub;
+    let currentTime;
+    let mockLastVisitedTime;
 
+    describe('when cookie "PAT_LOGGED_IN" does not exist', () => {
       before(() => {
         setCookieSpy = sinon.stub(utils, 'setCookie');
         handleEncoreLoggedInTimerSpy = sinon.spy(Header.prototype, 'handleEncoreLoggedInTimer');
@@ -295,12 +301,6 @@ describe('Header', () => {
     });
 
     describe('when "PAT_LOGGED_IN" exists and the visited page is on Encore\'s domain', () => {
-      let component,
-        setCookieSpy,
-        logOutEncoreInSpy,
-        hasCookieStub,
-        currentTime;
-
       const encoreLogInExpireDuration = accountConfig.patLoggedInCookieExpiredTime;
 
       before(() => {
@@ -341,14 +341,9 @@ describe('Header', () => {
     });
 
     describe('when "PAT_LOGGED_IN" exists and the visited page is NOT on Encore\'s domain', () => {
-      let component,
-        hasCookieStub,
-        getCookieStub,
-        logOutEncoreInSpy,
-        currentTime,
-        mockLastVisitedTime;
-
       const encoreLogInExpireDuration = accountConfig.patLoggedInCookieExpiredTime;
+
+      // Mock the time as it has only passed 1700000 milliseconds
       mockLastVisitedTime = Date.now() - 1700000;
 
       before(() => {
@@ -377,27 +372,31 @@ describe('Header', () => {
         component.unmount();
       });
 
-      it('should reset EncoreLoggedInTimer to the remaining time before "PAT_LOGGED_IN" is expired', () => {
-        expect(getCookieStub.callCount).to.equal(1);
-        expect(logOutEncoreInSpy.callCount).to.equal(1);
-        expect(logOutEncoreInSpy.calledWith(encoreLogInExpireDuration - (currentTime - mockLastVisitedTime))).to.equal(true);
-      });
+      it('should reset EncoreLoggedInTimer to the remaining time before "PAT_LOGGED_IN" is expired',
+        () => {
+          expect(getCookieStub.callCount).to.equal(1);
+          expect(logOutEncoreInSpy.callCount).to.equal(1);
+          expect(
+            logOutEncoreInSpy.calledWith(encoreLogInExpireDuration
+              - (currentTime - mockLastVisitedTime))
+          ).to.equal(true);
+        }
+        );
     });
   });
 
   describe('logOutEncoreIn', () => {
     describe('when no new Encore pages have been visited longer than timeout time', () => {
-      let component,
-        hasCookieStub,
-        getCookieStub,
-        deleteCookieSpy,
-        logOutEncoreInSpy,
-        currentTime,
-        mockLastVisitedTime,
-        mockLastVisitedTimeLongerThanExp;
+      let component;
+      let hasCookieStub;
+      let getCookieStub;
+      let deleteCookieSpy;
+      let logOutEncoreInSpy;
 
-      mockLastVisitedTime = Date.now() - 200000;
-      mockLastVisitedTimeLongerThanExp = Date.now() - 2000000;
+      // Mock the time as it has only passed 200000 milliseconds
+      const mockLastVisitedTime = Date.now() - 200000;
+      // Mock the time as it has passed 2000000 milliseconds
+      const mockLastVisitedTimeLongerThanExp = Date.now() - 2000000;
 
       before(() => {
         hasCookieStub = sinon.stub(utils, 'hasCookie');
@@ -419,7 +418,6 @@ describe('Header', () => {
 
       beforeEach(() => {
         component = mount(<Header currentLocation={{ hostname: 'somewebsite.nypl.org' }} />);
-        currentTime = component.state().currentTime;
       });
 
       afterEach(() => {
@@ -433,23 +431,28 @@ describe('Header', () => {
         deleteCookieSpy.restore();
         Header.prototype.logOutEncoreIn.restore();
       });
-        
-      it('should not yet delete cookies "PAT_LOGGED_IN", "ENCORE_LAST_VISITED" and "nyplIdentityPatron"', () => {
-        expect(logOutEncoreInSpy.callCount).to.equal(1);
-        expect(deleteCookieSpy.calledWith('PAT_LOGGED_IN')).to.equal(false);
-        expect(deleteCookieSpy.calledWith('ENCORE_LAST_VISITED')).to.equal(false);
-        expect(deleteCookieSpy.calledWith('nyplIdentityPatron')).to.equal(false);
-      });
 
-      it('should delete cookies "PAT_LOGGED_IN", "ENCORE_LAST_VISITED" and "nyplIdentityPatron"', (done) => {
-        expect(logOutEncoreInSpy.callCount).to.equal(2);
-        setTimeout(() => {
-          expect(deleteCookieSpy.calledWith('PAT_LOGGED_IN')).to.equal(true);
-          expect(deleteCookieSpy.calledWith('ENCORE_LAST_VISITED')).to.equal(true);
-          expect(deleteCookieSpy.calledWith('nyplIdentityPatron')).to.equal(true);
-          done();
-        }, 100);
-      });
+      it('should not yet delete cookies "PAT_LOGGED_IN", "ENCORE_LAST_VISITED" and ' +
+        '"nyplIdentityPatron"',
+        () => {
+          expect(logOutEncoreInSpy.callCount).to.equal(1);
+          expect(deleteCookieSpy.calledWith('PAT_LOGGED_IN')).to.equal(false);
+          expect(deleteCookieSpy.calledWith('ENCORE_LAST_VISITED')).to.equal(false);
+          expect(deleteCookieSpy.calledWith('nyplIdentityPatron')).to.equal(false);
+        }
+      );
+
+      it('should delete cookies "PAT_LOGGED_IN", "ENCORE_LAST_VISITED" and "nyplIdentityPatron"',
+        // Use async here because the original code has setTimeout as well
+        (done) => {
+          expect(logOutEncoreInSpy.callCount).to.equal(2);
+          setTimeout(() => {
+            expect(deleteCookieSpy.calledWith('PAT_LOGGED_IN')).to.equal(true);
+            expect(deleteCookieSpy.calledWith('ENCORE_LAST_VISITED')).to.equal(true);
+            expect(deleteCookieSpy.calledWith('nyplIdentityPatron')).to.equal(true);
+            done();
+          }, 100);
+        });
     });
   });
 });

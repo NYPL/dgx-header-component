@@ -117,7 +117,7 @@ class Header extends React.Component {
     // Listen on FeatureFlags Store updates
     FeatureFlags.store.listen(this.onFeatureFlagsChange.bind(this));
     // Set the log out link to state
-    this.setLogOutLink(window.location.href);
+    this.setLogOutLink(this.state.currentLocation.href);
     // Set nyplIdentityPatron cookie to the state.
     this.setLoginCookie(this.state.loginCookieName);
     // Set feature flag cookies to the state

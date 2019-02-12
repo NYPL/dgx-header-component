@@ -149,16 +149,14 @@ class Header extends React.Component {
           ? encoreLogInExpireDuration - (currentTime - lastVisitedEncoreTime)
           : undefined;
 
-        if (timeTillLogOut > 0) {
-          this.logOutEncoreIn(timeTillLogOut);
-        } else {
-          this.logOutEncoreIn(0);
-        }
+        this.logOutEncoreIn(timeTillLogOut);
       }
     }
   }
 
-  logOutEncoreIn(timeTillLogOut = 0) {
+  logOutEncoreIn(time) {
+    const timeTillLogOut = (time > 0) ? time : 0;
+
     setTimeout(() => {
       utils.deleteCookie('PAT_LOGGED_IN');
       utils.deleteCookie('ENCORE_LAST_VISITED');

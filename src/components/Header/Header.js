@@ -13,6 +13,7 @@ import SkipNavigation from 'dgx-skip-navigation-link';
 import navConfig from '../../navConfig';
 import featureFlagConfig from '../../featureFlagConfig';
 import config from '../../appConfig';
+import accountConfig from '../../accountConfig';
 
 // NYPL Components
 import Logo from '../Logo/Logo';
@@ -124,7 +125,7 @@ class Header extends React.Component {
     utils.checkFeatureFlagActivated(
       featureFlagConfig.featureFlagList, this.state.isFeatureFlagsActivated
     );
-    // Check if the cookie "PAT_LOGGED_IN" exists and then set the cookie and timer
+    // Check if the cookie "PAT_LOGGED_IN" exists and then set the timer for deleting it
     this.handleEncoreLoggedInTimer(this.state.currentLocation, this.state.currentTime);
   }
 
@@ -135,7 +136,7 @@ class Header extends React.Component {
   }
 
   handleEncoreLoggedInTimer(currentLocation, currentTime) {
-    const encoreLogInExpireDuration = 1800000;
+    const encoreLogInExpireDuration = accountConfig.patLoggedInCookieExpiredTime;
 
     // See if the user has logged in Encore
     if (utils.hasCookie('PAT_LOGGED_IN')) {

@@ -37,6 +37,10 @@ var _appConfig = require('../../appConfig');
 
 var _appConfig2 = _interopRequireDefault(_appConfig);
 
+var _accountConfig = require('../../accountConfig');
+
+var _accountConfig2 = _interopRequireDefault(_accountConfig);
+
 var _Logo = require('../Logo/Logo');
 
 var _Logo2 = _interopRequireDefault(_Logo);
@@ -160,7 +164,12 @@ var Header = function (_React$Component) {
 
     var _this$props = _this.props,
         patron = _this$props.patron,
-        navData = _this$props.navData;
+        navData = _this$props.navData,
+        _this$props$currentLo = _this$props.currentLocation,
+        currentLocation = _this$props$currentLo === undefined ? window.location || {} : _this$props$currentLo,
+        _this$props$currentTi = _this$props.currentTime,
+        currentTime = _this$props$currentTi === undefined ? Date.now() || undefined : _this$props$currentTi;
+
 
     var patronNameObject = !(0, _underscore.isEmpty)(patron) && patron.names && patron.names.length ? _utils2.default.modelPatronName(patron.names[0]) : {};
 
@@ -172,8 +181,11 @@ var Header = function (_React$Component) {
       patronInitial: patronNameObject.initial || '',
       patronDataReceived: patron.loggedIn || false,
       isFeatureFlagsActivated: {},
-      logOutUrl: ''
-    }, { featureFlagsStore: _dgxFeatureFlags2.default.store.getState() });
+      logOutUrl: '',
+      featureFlagsStore: _dgxFeatureFlags2.default.store.getState(),
+      currentLocation: currentLocation,
+      currentTime: currentTime
+    });
     return _this;
   }
 
@@ -189,6 +201,8 @@ var Header = function (_React$Component) {
       // Set feature flag cookies to the state
       // We don't have any feature flags set in the config list at this moment though
       _utils2.default.checkFeatureFlagActivated(_featureFlagConfig2.default.featureFlagList, this.state.isFeatureFlagsActivated);
+      // Check if the cookie "PAT_LOGGED_IN" exists and then set the timer for deleting it
+      this.handleEncoreLoggedInTimer(this.state.currentLocation, this.state.currentTime);
     }
   }, {
     key: 'componentWillUnmount',
@@ -196,6 +210,36 @@ var Header = function (_React$Component) {
       // Listen on FeatureFlags Store updates
       _dgxFeatureFlags2.default.store.unlisten(this.onFeatureFlagsChange.bind(this));
       // Removing event listener to minimize garbage collection
+    }
+  }, {
+    key: 'handleEncoreLoggedInTimer',
+    value: function handleEncoreLoggedInTimer(currentLocation, currentTime) {
+      var encoreLogInExpireDuration = _accountConfig2.default.patLoggedInCookieExpiredTime;
+
+      // See if the user has logged in Encore
+      if (_utils2.default.hasCookie('PAT_LOGGED_IN')) {
+        // Then check if the user is visiting a new Encore page
+        if (currentLocation.hostname && currentLocation.hostname == 'browse.nypl.org') {
+          _utils2.default.setCookie('ENCORE_LAST_VISITED', currentTime);
+          this.logOutEncoreIn(encoreLogInExpireDuration);
+        } else {
+          var lastVisitedEncoreTime = _utils2.default.getCookie('ENCORE_LAST_VISITED');
+          var timeTillLogOut = lastVisitedEncoreTime ? encoreLogInExpireDuration - (currentTime - lastVisitedEncoreTime) : undefined;
+
+          this.logOutEncoreIn(timeTillLogOut);
+        }
+      }
+    }
+  }, {
+    key: 'logOutEncoreIn',
+    value: function logOutEncoreIn(time) {
+      var timeTillLogOut = time > 0 ? time : 0;
+
+      setTimeout(function () {
+        _utils2.default.deleteCookie('PAT_LOGGED_IN');
+        _utils2.default.deleteCookie('ENCORE_LAST_VISITED');
+        _utils2.default.deleteCookie('nyplIdentityPatron');
+      }, timeTillLogOut);
     }
   }, {
     key: 'onFeatureFlagsChange',

@@ -13,6 +13,7 @@ import { Header } from './../src/components/Header/Header';
 // Import related functions
 import utils from './../src/utils/utils';
 import appConfig from './../src/appConfig';
+import accountConfig from '../src/accountConfig';
 
 // Import mock up data
 import {
@@ -300,7 +301,7 @@ describe('Header', () => {
         hasCookieStub,
         currentTime;
 
-      const encoreLogInExpireDuration = 1800000;
+      const encoreLogInExpireDuration = accountConfig.patLoggedInCookieExpiredTime;
 
       before(() => {
         hasCookieStub = sinon.stub(utils, 'hasCookie');
@@ -347,7 +348,7 @@ describe('Header', () => {
         currentTime,
         mockLastVisitedTime;
 
-      const encoreLogInExpireDuration = 1800000;
+      const encoreLogInExpireDuration = accountConfig.patLoggedInCookieExpiredTime;
       mockLastVisitedTime = Date.now() - 1700000;
 
       before(() => {

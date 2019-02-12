@@ -135,6 +135,16 @@ class Header extends React.Component {
     // Removing event listener to minimize garbage collection
   }
 
+  /**
+   * handleEncoreLoggedInTimer(currentLocation, currentTime)
+   * This method is to set the timer to delete ‘PAT_LOGGED_IN’ cookie after its expiration time.
+   * This is to keep the logged in status consisitent with Encore server,
+   * so the patrons don’t have to log in when they are using non-account-requied operations,
+   * such as searching items.
+   * The default expiration time is 30 mins.
+   * @param {object} - The window.location object
+   * @param {number} - The milliseconds elapsed since January 1, 1970
+   */
   handleEncoreLoggedInTimer(currentLocation, currentTime) {
     const encoreLogInExpireDuration = accountConfig.patLoggedInCookieExpiredTime;
 
@@ -155,6 +165,11 @@ class Header extends React.Component {
     }
   }
 
+  /**
+   * logOutEncoreIn(time)
+   * The timer to delete log in related cookies. It is called by handleEncoreLoggedInTimer.
+   * @param {time} - The milliseconds for the timer to count down
+   */
   logOutEncoreIn(time) {
     const timeTillLogOut = (time > 0) ? time : 0;
 

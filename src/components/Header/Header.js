@@ -89,7 +89,7 @@ class Header extends React.Component {
     const {
       patron,
       navData,
-      currentLocation = window.location || {},
+      currentLocation,
       currentTime = Date.now() || undefined,
     } = this.props;
 
@@ -107,7 +107,7 @@ class Header extends React.Component {
         isFeatureFlagsActivated: {},
         logOutUrl: '',
         featureFlagsStore: FeatureFlags.store.getState(),
-        currentLocation,
+        currentLocation: this.props.currentLocation || {},
         currentTime,
       },
     );

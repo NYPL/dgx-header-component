@@ -165,8 +165,7 @@ var Header = function (_React$Component) {
     var _this$props = _this.props,
         patron = _this$props.patron,
         navData = _this$props.navData,
-        _this$props$currentLo = _this$props.currentLocation,
-        currentLocation = _this$props$currentLo === undefined ? window.location || {} : _this$props$currentLo,
+        currentLocation = _this$props.currentLocation,
         _this$props$currentTi = _this$props.currentTime,
         currentTime = _this$props$currentTi === undefined ? Date.now() || undefined : _this$props$currentTi;
 
@@ -183,7 +182,7 @@ var Header = function (_React$Component) {
       isFeatureFlagsActivated: {},
       logOutUrl: '',
       featureFlagsStore: _dgxFeatureFlags2.default.store.getState(),
-      currentLocation: currentLocation,
+      currentLocation: _this.props.currentLocation || {},
       currentTime: currentTime
     });
     return _this;

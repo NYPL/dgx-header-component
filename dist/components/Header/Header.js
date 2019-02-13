@@ -211,55 +211,6 @@ var Header = function (_React$Component) {
       _dgxFeatureFlags2.default.store.unlisten(this.onFeatureFlagsChange.bind(this));
       // Removing event listener to minimize garbage collection
     }
-
-    /**
-     * handleEncoreLoggedInTimer(currentLocation, currentTime)
-     * This method is to set the timer to delete ‘PAT_LOGGED_IN’ cookie after its expiration time.
-     * This is to keep the logged in status consisitent with Encore server,
-     * so the patrons don’t have to log in when they are using non-account-requied operations,
-     * such as searching items.
-     * The default expiration time is 30 mins.
-     * @param {object} - The window.location object
-     * @param {number} - The milliseconds elapsed since January 1, 1970
-     */
-
-  }, {
-    key: 'handleEncoreLoggedInTimer',
-    value: function handleEncoreLoggedInTimer(currentLocation, currentTime) {
-      var encoreLogInExpireDuration = _accountConfig2.default.patLoggedInCookieExpiredTime;
-
-      // See if the user has logged in Encore
-      if (_utils2.default.hasCookie('PAT_LOGGED_IN')) {
-        // Then check if the user is visiting a new Encore page
-        if (currentLocation.hostname && currentLocation.hostname == 'browse.nypl.org') {
-          _utils2.default.setCookie('ENCORE_LAST_VISITED', currentTime);
-          this.logOutEncoreIn(encoreLogInExpireDuration);
-        } else {
-          var lastVisitedEncoreTime = _utils2.default.getCookie('ENCORE_LAST_VISITED');
-          var timeTillLogOut = lastVisitedEncoreTime ? encoreLogInExpireDuration - (currentTime - lastVisitedEncoreTime) : undefined;
-
-          this.logOutEncoreIn(timeTillLogOut);
-        }
-      }
-    }
-
-    /**
-     * logOutEncoreIn(time)
-     * The timer to delete log in related cookies. It is called by handleEncoreLoggedInTimer.
-     * @param {time} - The milliseconds for the timer to count down
-     */
-
-  }, {
-    key: 'logOutEncoreIn',
-    value: function logOutEncoreIn(time) {
-      var timeTillLogOut = time > 0 ? time : 0;
-
-      setTimeout(function () {
-        _utils2.default.deleteCookie('PAT_LOGGED_IN');
-        _utils2.default.deleteCookie('ENCORE_LAST_VISITED');
-        _utils2.default.deleteCookie('nyplIdentityPatron');
-      }, timeTillLogOut);
-    }
   }, {
     key: 'onFeatureFlagsChange',
     value: function onFeatureFlagsChange() {
@@ -297,6 +248,55 @@ var Header = function (_React$Component) {
     key: 'setLogOutLink',
     value: function setLogOutLink(location) {
       this.setState({ logOutUrl: _utils2.default.renderDynamicLogOutLink(location) });
+    }
+
+    /**
+     * handleEncoreLoggedInTimer(currentLocation, currentTime)
+     * This method is to set the timer to delete ‘PAT_LOGGED_IN’ cookie after its expiration time.
+     * This is to keep the logged in status consisitent with Encore server,
+     * so the patrons don’t have to log in when they are using non-account-requied operations,
+     * such as searching items.
+     * The default expiration time is 30 mins.
+     * @param {object} - The window.location object
+     * @param {number} - The milliseconds elapsed since January 1, 1970
+     */
+
+  }, {
+    key: 'handleEncoreLoggedInTimer',
+    value: function handleEncoreLoggedInTimer(currentLocation, currentTime) {
+      var encoreLogInExpireDuration = _accountConfig2.default.patLoggedInCookieExpiredTime;
+
+      // See if the user has logged in Encore
+      if (_utils2.default.hasCookie('PAT_LOGGED_IN')) {
+        // Then check if the user is visiting a new Encore page
+        if (currentLocation.hostname && currentLocation.hostname === 'browse.nypl.org') {
+          _utils2.default.setCookie('ENCORE_LAST_VISITED', currentTime);
+          this.logOutEncoreIn(encoreLogInExpireDuration);
+        } else {
+          var lastVisitedEncoreTime = _utils2.default.getCookie('ENCORE_LAST_VISITED');
+          var timeTillLogOut = lastVisitedEncoreTime ? encoreLogInExpireDuration - (currentTime - lastVisitedEncoreTime) : undefined;
+
+          this.logOutEncoreIn(timeTillLogOut);
+        }
+      }
+    }
+
+    /**
+     * logOutEncoreIn(time)
+     * The timer to delete log in related cookies. It is called by handleEncoreLoggedInTimer.
+     * @param {time} - The milliseconds for the timer to count down
+     */
+
+  }, {
+    key: 'logOutEncoreIn',
+    value: function logOutEncoreIn(time) {
+      var timeTillLogOut = time > 0 ? time : 0;
+
+      setTimeout(function () {
+        _utils2.default.deleteCookie('PAT_LOGGED_IN');
+        _utils2.default.deleteCookie('ENCORE_LAST_VISITED');
+        _utils2.default.deleteCookie('nyplIdentityPatron');
+      }, timeTillLogOut);
     }
 
     /**
@@ -473,6 +473,8 @@ Header.propTypes = {
   id: _propTypes2.default.string,
   navData: _propTypes2.default.arrayOf(_propTypes2.default.object).isRequired,
   skipNav: _propTypes2.default.shape(_dgxSkipNavigationLink2.default.propTypes),
+  currentLocation: _propTypes2.default.objectOf(_propTypes2.default.any),
+  currentTime: _propTypes2.default.number,
   patron: _propTypes2.default.shape({
     names: _propTypes2.default.arrayOf(_propTypes2.default.string),
     loggedIn: _propTypes2.default.bool

@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var accountConfig = {
-  patLoggedInCookieExpiredTime: 60000
+  patLoggedInCookieExpiredTime: 1800000
 };
 
 exports.default = accountConfig;

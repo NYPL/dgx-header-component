@@ -271,25 +271,25 @@ var Header = function (_React$Component) {
         // Then check if the user is visiting a new Encore page
         if (currentLocation.hostname && currentLocation.hostname === 'browse.nypl.org') {
           _utils2.default.setCookie('ENCORE_LAST_VISITED', currentTime);
-          this.logOutEncoreIn(encoreLogInExpireDuration);
+          this.logOutFromEncoreIn(encoreLogInExpireDuration);
         } else {
           var lastVisitedEncoreTime = _utils2.default.getCookie('ENCORE_LAST_VISITED');
           var timeTillLogOut = lastVisitedEncoreTime ? encoreLogInExpireDuration - (currentTime - lastVisitedEncoreTime) : undefined;
 
-          this.logOutEncoreIn(timeTillLogOut);
+          this.logOutFromEncoreIn(timeTillLogOut);
         }
       }
     }
 
     /**
-     * logOutEncoreIn(time)
+     * logOutFromEncoreIn(time)
      * The timer to delete log in related cookies. It is called by handleEncoreLoggedInTimer.
      * @param {time} - The milliseconds for the timer to count down
      */
 
   }, {
-    key: 'logOutEncoreIn',
-    value: function logOutEncoreIn(time) {
+    key: 'logOutFromEncoreIn',
+    value: function logOutFromEncoreIn(time) {
       var timeTillLogOut = time > 0 ? time : 0;
 
       setTimeout(function () {

@@ -184,24 +184,24 @@ class Header extends React.Component {
       // Then check if the user is visiting a new Encore page
       if (currentLocation.hostname && currentLocation.hostname === 'browse.nypl.org') {
         utils.setCookie('ENCORE_LAST_VISITED', currentTime);
-        this.logOutEncoreIn(encoreLogInExpireDuration);
+        this.logOutFromEncoreIn(encoreLogInExpireDuration);
       } else {
         const lastVisitedEncoreTime = utils.getCookie('ENCORE_LAST_VISITED');
         const timeTillLogOut = lastVisitedEncoreTime
           ? encoreLogInExpireDuration - (currentTime - lastVisitedEncoreTime)
           : undefined;
 
-        this.logOutEncoreIn(timeTillLogOut);
+        this.logOutFromEncoreIn(timeTillLogOut);
       }
     }
   }
 
   /**
-   * logOutEncoreIn(time)
+   * logOutFromEncoreIn(time)
    * The timer to delete log in related cookies. It is called by handleEncoreLoggedInTimer.
    * @param {time} - The milliseconds for the timer to count down
    */
-  logOutEncoreIn(time) {
+  logOutFromEncoreIn(time) {
     const timeTillLogOut = (time > 0) ? time : 0;
 
     setTimeout(() => {

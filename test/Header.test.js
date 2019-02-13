@@ -264,7 +264,7 @@ describe('Header', () => {
     let component;
     let setCookieSpy;
     let handleEncoreLoggedInTimerSpy;
-    let logOutEncoreInSpy;
+    let logOutFromEncoreInSpy;
     let hasCookieStub;
     let getCookieStub;
     let currentTime;
@@ -274,7 +274,7 @@ describe('Header', () => {
       before(() => {
         setCookieSpy = sinon.stub(utils, 'setCookie');
         handleEncoreLoggedInTimerSpy = sinon.spy(Header.prototype, 'handleEncoreLoggedInTimer');
-        logOutEncoreInSpy = sinon.spy(Header.prototype, 'logOutEncoreIn');
+        logOutFromEncoreInSpy = sinon.spy(Header.prototype, 'logOutFromEncoreIn');
         hasCookieStub = sinon.stub(utils, 'hasCookie');
 
         hasCookieStub
@@ -288,7 +288,7 @@ describe('Header', () => {
       after(() => {
         setCookieSpy.restore();
         handleEncoreLoggedInTimerSpy.restore();
-        logOutEncoreInSpy.restore();
+        logOutFromEncoreInSpy.restore();
         utils.hasCookie.restore();
         component.unmount();
       });
@@ -296,7 +296,7 @@ describe('Header', () => {
       it('should do nothing.', () => {
         expect(handleEncoreLoggedInTimerSpy.callCount).to.equal(1);
         expect(setCookieSpy.callCount).to.equal(0);
-        expect(logOutEncoreInSpy.callCount).to.equal(0);
+        expect(logOutFromEncoreInSpy.callCount).to.equal(0);
       });
     });
 
@@ -306,7 +306,7 @@ describe('Header', () => {
       before(() => {
         hasCookieStub = sinon.stub(utils, 'hasCookie');
         setCookieSpy = sinon.spy(utils, 'setCookie');
-        logOutEncoreInSpy = sinon.spy(Header.prototype, 'logOutEncoreIn');
+        logOutFromEncoreInSpy = sinon.spy(Header.prototype, 'logOutFromEncoreIn');
 
         hasCookieStub
           .withArgs('PAT_LOGGED_IN')
@@ -324,7 +324,7 @@ describe('Header', () => {
 
       after(() => {
         setCookieSpy.restore();
-        logOutEncoreInSpy.restore();
+        logOutFromEncoreInSpy.restore();
         utils.hasCookie.restore();
         component.unmount();
       });
@@ -334,9 +334,9 @@ describe('Header', () => {
         expect(setCookieSpy.calledWith('ENCORE_LAST_VISITED', currentTime)).to.equal(true);
       });
 
-      it('should set logOutEncoreIn to 30 mins.', () => {
-        expect(logOutEncoreInSpy.callCount).to.equal(1);
-        expect(logOutEncoreInSpy.calledWith(encoreLogInExpireDuration)).to.equal(true);
+      it('should set logOutFromEncoreIn to 30 mins.', () => {
+        expect(logOutFromEncoreInSpy.callCount).to.equal(1);
+        expect(logOutFromEncoreInSpy.calledWith(encoreLogInExpireDuration)).to.equal(true);
       });
     });
 
@@ -349,7 +349,7 @@ describe('Header', () => {
       before(() => {
         hasCookieStub = sinon.stub(utils, 'hasCookie');
         getCookieStub = sinon.stub(utils, 'getCookie');
-        logOutEncoreInSpy = sinon.spy(Header.prototype, 'logOutEncoreIn');
+        logOutFromEncoreInSpy = sinon.spy(Header.prototype, 'logOutFromEncoreIn');
 
         hasCookieStub
           .withArgs('PAT_LOGGED_IN')
@@ -368,16 +368,16 @@ describe('Header', () => {
       after(() => {
         utils.getCookie.restore();
         utils.hasCookie.restore();
-        logOutEncoreInSpy.restore();
+        logOutFromEncoreInSpy.restore();
         component.unmount();
       });
 
       it('should reset EncoreLoggedInTimer to the remaining time before "PAT_LOGGED_IN" is expired',
         () => {
           expect(getCookieStub.callCount).to.equal(1);
-          expect(logOutEncoreInSpy.callCount).to.equal(1);
+          expect(logOutFromEncoreInSpy.callCount).to.equal(1);
           expect(
-            logOutEncoreInSpy.calledWith(encoreLogInExpireDuration
+            logOutFromEncoreInSpy.calledWith(encoreLogInExpireDuration
               - (currentTime - mockLastVisitedTime))
           ).to.equal(true);
         }
@@ -385,12 +385,12 @@ describe('Header', () => {
     });
   });
 
-  describe('logOutEncoreIn', () => {
+  describe('logOutFromEncoreIn', () => {
     let component;
     let hasCookieStub;
     let getCookieStub;
     let deleteCookieSpy;
-    let logOutEncoreInSpy;
+    let logOutFromEncoreInSpy;
 
     // Mock the time as it has only passed 200000 milliseconds
     const mockLastVisitedTime = Date.now() - 200000;
@@ -402,7 +402,7 @@ describe('Header', () => {
         hasCookieStub = sinon.stub(utils, 'hasCookie');
         getCookieStub = sinon.stub(utils, 'getCookie');
         deleteCookieSpy = sinon.spy(utils, 'deleteCookie');
-        logOutEncoreInSpy = sinon.spy(Header.prototype, 'logOutEncoreIn');
+        logOutFromEncoreInSpy = sinon.spy(Header.prototype, 'logOutFromEncoreIn');
 
         hasCookieStub
           .withArgs('PAT_LOGGED_IN')
@@ -419,7 +419,7 @@ describe('Header', () => {
         utils.hasCookie.restore();
         utils.getCookie.restore();
         deleteCookieSpy.restore();
-        Header.prototype.logOutEncoreIn.restore();
+        Header.prototype.logOutFromEncoreIn.restore();
         deleteCookieSpy.reset();
         component.unmount();
       });
@@ -428,7 +428,7 @@ describe('Header', () => {
         '"nyplIdentityPatron"',
         (done) => {
           setTimeout(() => {
-            expect(logOutEncoreInSpy.callCount).to.equal(1);
+            expect(logOutFromEncoreInSpy.callCount).to.equal(1);
             expect(deleteCookieSpy.calledWith('PAT_LOGGED_IN')).to.equal(false);
             expect(deleteCookieSpy.calledWith('ENCORE_LAST_VISITED')).to.equal(false);
             expect(deleteCookieSpy.calledWith('nyplIdentityPatron')).to.equal(false);
@@ -443,7 +443,7 @@ describe('Header', () => {
         hasCookieStub = sinon.stub(utils, 'hasCookie');
         getCookieStub = sinon.stub(utils, 'getCookie');
         deleteCookieSpy = sinon.spy(utils, 'deleteCookie');
-        logOutEncoreInSpy = sinon.spy(Header.prototype, 'logOutEncoreIn');
+        logOutFromEncoreInSpy = sinon.spy(Header.prototype, 'logOutFromEncoreIn');
 
         hasCookieStub
           .withArgs('PAT_LOGGED_IN')
@@ -460,7 +460,7 @@ describe('Header', () => {
         utils.hasCookie.restore();
         utils.getCookie.restore();
         deleteCookieSpy.restore();
-        Header.prototype.logOutEncoreIn.restore();
+        Header.prototype.logOutFromEncoreIn.restore();
         deleteCookieSpy.reset();
         component.unmount();
       });
@@ -468,7 +468,7 @@ describe('Header', () => {
       it('should delete cookies "PAT_LOGGED_IN", "ENCORE_LAST_VISITED" and "nyplIdentityPatron"',
         // Use async here because the original code has setTimeout as well
         (done) => {
-          expect(logOutEncoreInSpy.callCount).to.equal(1);
+          expect(logOutFromEncoreInSpy.callCount).to.equal(1);
           setTimeout(() => {
             expect(deleteCookieSpy.calledWith('PAT_LOGGED_IN')).to.equal(true);
             expect(deleteCookieSpy.calledWith('ENCORE_LAST_VISITED')).to.equal(true);

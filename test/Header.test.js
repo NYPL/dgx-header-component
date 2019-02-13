@@ -141,13 +141,13 @@ describe('Header', () => {
       it('should call the function to check if the cookie "nyplIdentityPatron" exists', () => {
         expect(setLoginCookie.calledOnce).to.equal(true);
         expect(hasNyplIdentityPatronCookie.calledOnce).to.equal(true);
-        hasNyplIdentityPatronCookie.alwaysCalledWithExactly('nyplIdentityPatron');
+        expect(hasNyplIdentityPatronCookie.alwaysCalledWithExactly('nyplIdentityPatron')).to.equal(true);
       });
 
       it('should call the function to get the value of "nyplIdentityPatron" cookie, ' +
         'if the cookie exists', () => {
         expect(getNyplIdentityPatronCookie.calledOnce).to.equal(true);
-        getNyplIdentityPatronCookie.alwaysCalledWithExactly('nyplIdentityPatron');
+        expect(getNyplIdentityPatronCookie.alwaysCalledWithExactly('nyplIdentityPatron')).to.equal(true);
       });
 
       it('should call the API endpoint to get logged in patron\'s data with the cookie we got',

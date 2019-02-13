@@ -386,18 +386,18 @@ describe('Header', () => {
   });
 
   describe('logOutEncoreIn', () => {
-    describe('when no new Encore pages have been visited longer than timeout time', () => {
-      let component;
-      let hasCookieStub;
-      let getCookieStub;
-      let deleteCookieSpy;
-      let logOutEncoreInSpy;
+    let component;
+    let hasCookieStub;
+    let getCookieStub;
+    let deleteCookieSpy;
+    let logOutEncoreInSpy;
 
-      // Mock the time as it has only passed 200000 milliseconds
-      const mockLastVisitedTime = Date.now() - 200000;
-      // Mock the time as it has passed 2000000 milliseconds
-      const mockLastVisitedTimeLongerThanExp = Date.now() - 2000000;
+    // Mock the time as it has only passed 200000 milliseconds
+    const mockLastVisitedTime = Date.now() - 200000;
+    // Mock the time as it has passed 2000000 milliseconds
+    const mockLastVisitedTimeLongerThanExp = Date.now() - 2000000;
 
+    describe('when no new Encore pages have been visited shorter than timeout time', () => {
       before(() => {
         hasCookieStub = sinon.stub(utils, 'hasCookie');
         getCookieStub = sinon.stub(utils, 'getCookie');
@@ -410,19 +410,9 @@ describe('Header', () => {
 
         getCookieStub
           .withArgs('ENCORE_LAST_VISITED')
-          .onCall(0)
-          .returns(mockLastVisitedTime)
-          .onCall(1)
-          .returns(mockLastVisitedTimeLongerThanExp);
-      });
+          .returns(mockLastVisitedTime);
 
-      beforeEach(() => {
         component = mount(<Header currentLocation={{ hostname: 'somewebsite.nypl.org' }} />);
-      });
-
-      afterEach(() => {
-        deleteCookieSpy.reset();
-        component.unmount();
       });
 
       after(() => {
@@ -430,22 +420,55 @@ describe('Header', () => {
         utils.getCookie.restore();
         deleteCookieSpy.restore();
         Header.prototype.logOutEncoreIn.restore();
+        deleteCookieSpy.reset();
+        component.unmount();
       });
 
       it('should not yet delete cookies "PAT_LOGGED_IN", "ENCORE_LAST_VISITED" and ' +
         '"nyplIdentityPatron"',
-        () => {
-          expect(logOutEncoreInSpy.callCount).to.equal(1);
-          expect(deleteCookieSpy.calledWith('PAT_LOGGED_IN')).to.equal(false);
-          expect(deleteCookieSpy.calledWith('ENCORE_LAST_VISITED')).to.equal(false);
-          expect(deleteCookieSpy.calledWith('nyplIdentityPatron')).to.equal(false);
+        (done) => {
+          setTimeout(() => {
+            expect(logOutEncoreInSpy.callCount).to.equal(1);
+            expect(deleteCookieSpy.calledWith('PAT_LOGGED_IN')).to.equal(false);
+            expect(deleteCookieSpy.calledWith('ENCORE_LAST_VISITED')).to.equal(false);
+            expect(deleteCookieSpy.calledWith('nyplIdentityPatron')).to.equal(false);
+            done();
+          }, 100);
         }
       );
+    });
+
+    describe('when no new Encore pages have been visited longer than timeout time', () => {
+      before(() => {
+        hasCookieStub = sinon.stub(utils, 'hasCookie');
+        getCookieStub = sinon.stub(utils, 'getCookie');
+        deleteCookieSpy = sinon.spy(utils, 'deleteCookie');
+        logOutEncoreInSpy = sinon.spy(Header.prototype, 'logOutEncoreIn');
+
+        hasCookieStub
+          .withArgs('PAT_LOGGED_IN')
+          .returns(true);
+
+        getCookieStub
+          .withArgs('ENCORE_LAST_VISITED')
+          .returns(mockLastVisitedTimeLongerThanExp);
+
+        component = mount(<Header currentLocation={{ hostname: 'somewebsite.nypl.org' }} />);
+      });
+
+      after(() => {
+        utils.hasCookie.restore();
+        utils.getCookie.restore();
+        deleteCookieSpy.restore();
+        Header.prototype.logOutEncoreIn.restore();
+        deleteCookieSpy.reset();
+        component.unmount();
+      });
 
       it('should delete cookies "PAT_LOGGED_IN", "ENCORE_LAST_VISITED" and "nyplIdentityPatron"',
         // Use async here because the original code has setTimeout as well
         (done) => {
-          expect(logOutEncoreInSpy.callCount).to.equal(2);
+          expect(logOutEncoreInSpy.callCount).to.equal(1);
           setTimeout(() => {
             expect(deleteCookieSpy.calledWith('PAT_LOGGED_IN')).to.equal(true);
             expect(deleteCookieSpy.calledWith('ENCORE_LAST_VISITED')).to.equal(true);

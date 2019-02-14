@@ -41,6 +41,7 @@ Call the instance in your application component:
 <Header
   skipNav={{ target: 'mainContent' }}
   navData={navConfig.current}
+  currentLocation={window.location}
 />
 ```
 

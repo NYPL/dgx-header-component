@@ -117,7 +117,7 @@ class Header extends React.Component {
     // Listen on FeatureFlags Store updates
     FeatureFlags.store.listen(this.onFeatureFlagsChange.bind(this));
     // Set the log out link to state
-    this.setLogOutLink(this.state.currentLocation.href);
+    this.setLogOutLink(this.state.currentLocation);
     // Set nyplIdentityPatron cookie to the state.
     this.setLoginCookie(this.state.loginCookieName);
     // Set feature flag cookies to the state
@@ -162,8 +162,8 @@ class Header extends React.Component {
    * Generate the full log out url including the redirect URI, and update the state with it.
    * @param {location} - The URI for redirect request
    */
-  setLogOutLink(location) {
-    this.setState({ logOutUrl: utils.renderDynamicLogOutLink(location) });
+  setLogOutLink(location = window.location) {
+    this.setState({ logOutUrl: utils.renderDynamicLogOutLink(location.href) });
   }
 
   /**
@@ -176,7 +176,7 @@ class Header extends React.Component {
    * @param {object} - The window.location object
    * @param {number} - The milliseconds elapsed since January 1, 1970 from Date.now()
    */
-  handleEncoreLoggedInTimer(currentLocation, currentTime) {
+  handleEncoreLoggedInTimer(currentLocation = window.location, currentTime) {
     const encoreLogInExpireDuration = accountConfig.patLoggedInCookieExpiredTime;
 
     // See if the user has logged in Encore

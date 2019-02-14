@@ -193,7 +193,7 @@ var Header = function (_React$Component) {
       // Listen on FeatureFlags Store updates
       _dgxFeatureFlags2.default.store.listen(this.onFeatureFlagsChange.bind(this));
       // Set the log out link to state
-      this.setLogOutLink(this.state.currentLocation.href);
+      this.setLogOutLink(this.state.currentLocation);
       // Set nyplIdentityPatron cookie to the state.
       this.setLoginCookie(this.state.loginCookieName);
       // Set feature flag cookies to the state
@@ -244,8 +244,10 @@ var Header = function (_React$Component) {
 
   }, {
     key: 'setLogOutLink',
-    value: function setLogOutLink(location) {
-      this.setState({ logOutUrl: _utils2.default.renderDynamicLogOutLink(location) });
+    value: function setLogOutLink() {
+      var location = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : window.location;
+
+      this.setState({ logOutUrl: _utils2.default.renderDynamicLogOutLink(location.href) });
     }
 
     /**
@@ -261,7 +263,10 @@ var Header = function (_React$Component) {
 
   }, {
     key: 'handleEncoreLoggedInTimer',
-    value: function handleEncoreLoggedInTimer(currentLocation, currentTime) {
+    value: function handleEncoreLoggedInTimer() {
+      var currentLocation = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : window.location;
+      var currentTime = arguments[1];
+
       var encoreLogInExpireDuration = _accountConfig2.default.patLoggedInCookieExpiredTime;
 
       // See if the user has logged in Encore

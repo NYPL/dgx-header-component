@@ -106,10 +106,10 @@ class Header extends React.Component {
         patronDataReceived: patron.loggedIn || false,
         isFeatureFlagsActivated: {},
         logOutUrl: '',
-        featureFlagsStore: FeatureFlags.store.getState(),
-        currentLocation: this.props.currentLocation || {},
+        currentLocation: currentLocation || {},
         currentTime,
       },
+      { featureFlagsStore: FeatureFlags.store.getState() },
     );
   }
 

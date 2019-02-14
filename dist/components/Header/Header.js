@@ -181,10 +181,9 @@ var Header = function (_React$Component) {
       patronDataReceived: patron.loggedIn || false,
       isFeatureFlagsActivated: {},
       logOutUrl: '',
-      featureFlagsStore: _dgxFeatureFlags2.default.store.getState(),
-      currentLocation: _this.props.currentLocation || {},
+      currentLocation: currentLocation || {},
       currentTime: currentTime
-    });
+    }, { featureFlagsStore: _dgxFeatureFlags2.default.store.getState() });
     return _this;
   }
 

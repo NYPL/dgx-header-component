@@ -138,7 +138,7 @@ describe('logOutFromEncoreIn', () => {
 
       const currentTime = Date.now();
       // Mock the time as it has only passed 200000 milliseconds
-      const mockLastVisitedTime = currentTime - 200000;
+      const mockLastVisitedTime = currentTime - 170000;
 
       hasCookieStub
         .withArgs('PAT_LOGGED_IN')

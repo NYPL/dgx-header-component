@@ -158,18 +158,18 @@ describe('logOutFromEncoreIn', () => {
       logOutFromEncoreInSpy.restore();
     });
 
-    it('should not yet delete cookies "PAT_LOGGED_IN", "ENCORE_LAST_VISITED" and ' +
-      '"nyplIdentityPatron"',
-      (done) => {
-        setTimeout(() => {
-          expect(logOutFromEncoreInSpy.callCount).to.equal(1);
-          expect(deleteCookieSpy.calledWith('PAT_LOGGED_IN')).to.equal(false);
-          expect(deleteCookieSpy.calledWith('ENCORE_LAST_VISITED')).to.equal(false);
-          expect(deleteCookieSpy.calledWith('nyplIdentityPatron')).to.equal(false);
-          done();
-        }, 100);
-      }
-    );
+    // it('should not yet delete cookies "PAT_LOGGED_IN", "ENCORE_LAST_VISITED" and ' +
+    //   '"nyplIdentityPatron"',
+    //   (done) => {
+    //     setTimeout(() => {
+    //       expect(logOutFromEncoreInSpy.callCount).to.equal(1);
+    //       expect(deleteCookieSpy.calledWith('PAT_LOGGED_IN')).to.equal(false);
+    //       expect(deleteCookieSpy.calledWith('ENCORE_LAST_VISITED')).to.equal(false);
+    //       expect(deleteCookieSpy.calledWith('nyplIdentityPatron')).to.equal(false);
+    //       done();
+    //     }, 100);
+    //   }
+    // );
   });
 
   describe('when no new Encore pages have been visited longer than timeout time', () => {

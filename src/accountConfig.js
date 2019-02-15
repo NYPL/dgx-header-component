@@ -1,5 +1,5 @@
 const accountConfig = {
-  patLoggedInCookieExpiredTime: 180000,
+  patLoggedInCookieExpiredTime: 1800000,
 };
 
 export default accountConfig;

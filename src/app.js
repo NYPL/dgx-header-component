@@ -34,7 +34,6 @@ ReactDOM.render(
   <Header
     skipNav={{ target: 'maincontent' }}
     navData={navConfig.current}
-    currentLocation={window.location}
   />,
   document.getElementById('app')
 );

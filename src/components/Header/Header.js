@@ -13,7 +13,6 @@ import SkipNavigation from 'dgx-skip-navigation-link';
 import navConfig from '../../navConfig';
 import featureFlagConfig from '../../featureFlagConfig';
 import config from '../../appConfig';
-import accountConfig from '../../accountConfig';
 
 // NYPL Components
 import Logo from '../Logo/Logo';
@@ -27,6 +26,7 @@ import GlobalAlerts from '../GlobalAlerts/GlobalAlerts';
 import FundraisingBanner from '../FundraisingBanner/FundraisingBanner';
 // Utility Library
 import utils from '../../utils/utils';
+import EncoreLogOutTimer from '../../utils/encoreLogOutTimer';
 
 const styles = {
   wrapper: {
@@ -89,7 +89,6 @@ class Header extends React.Component {
     const {
       patron,
       navData,
-      currentLocation,
       currentTime = Date.now() || undefined,
     } = this.props;
 
@@ -106,7 +105,6 @@ class Header extends React.Component {
         patronDataReceived: patron.loggedIn || false,
         isFeatureFlagsActivated: {},
         logOutUrl: '',
-        currentLocation: currentLocation || {},
         currentTime,
       },
       { featureFlagsStore: FeatureFlags.store.getState() },
@@ -117,7 +115,7 @@ class Header extends React.Component {
     // Listen on FeatureFlags Store updates
     FeatureFlags.store.listen(this.onFeatureFlagsChange.bind(this));
     // Set the log out link to state
-    this.setLogOutLink(this.state.currentLocation);
+    this.setLogOutLink(window.location.href);
     // Set nyplIdentityPatron cookie to the state.
     this.setLoginCookie(this.state.loginCookieName);
     // Set feature flag cookies to the state
@@ -126,7 +124,7 @@ class Header extends React.Component {
       featureFlagConfig.featureFlagList, this.state.isFeatureFlagsActivated
     );
     // Check if the cookie "PAT_LOGGED_IN" exists and then set the timer for deleting it
-    this.handleEncoreLoggedInTimer(this.state.currentLocation, this.state.currentTime);
+    EncoreLogOutTimer.setEncoreLoggedInTimer(window.location, this.state.currentTime);
   }
 
   componentWillUnmount() {
@@ -162,53 +160,8 @@ class Header extends React.Component {
    * Generate the full log out url including the redirect URI, and update the state with it.
    * @param {location} - The URI for redirect request
    */
-  setLogOutLink(location = window.location) {
-    this.setState({ logOutUrl: utils.renderDynamicLogOutLink(location.href) });
-  }
-
-  /**
-   * handleEncoreLoggedInTimer(currentLocation, currentTime)
-   * This method is to set the timer to delete ‘PAT_LOGGED_IN’ cookie after its expiration time.
-   * This is to keep the logged in status consistent with Encore server,
-   * so the patrons don’t have to log in when they are using non-account-required operations,
-   * such as searching items.
-   * The default expiration time is 30 mins.
-   * @param {object} - The window.location object
-   * @param {number} - The milliseconds elapsed since January 1, 1970 from Date.now()
-   */
-  handleEncoreLoggedInTimer(currentLocation = window.location, currentTime) {
-    const encoreLogInExpireDuration = accountConfig.patLoggedInCookieExpiredTime;
-
-    // See if the user has logged in Encore
-    if (utils.hasCookie('PAT_LOGGED_IN')) {
-      // Then check if the user is visiting a new Encore page
-      if (currentLocation.hostname && currentLocation.hostname === 'browse.nypl.org') {
-        utils.setCookie('ENCORE_LAST_VISITED', currentTime);
-        this.logOutFromEncoreIn(encoreLogInExpireDuration);
-      } else {
-        const lastVisitedEncoreTime = utils.getCookie('ENCORE_LAST_VISITED');
-        const timeTillLogOut = lastVisitedEncoreTime
-          ? encoreLogInExpireDuration - (currentTime - lastVisitedEncoreTime)
-          : undefined;
-
-        this.logOutFromEncoreIn(timeTillLogOut);
-      }
-    }
-  }
-
-  /**
-   * logOutFromEncoreIn(time)
-   * The timer to delete log in related cookies. It is called by handleEncoreLoggedInTimer.
-   * @param {time} - The milliseconds for the timer to count down
-   */
-  logOutFromEncoreIn(time) {
-    const timeTillLogOut = (time > 0) ? time : 0;
-
-    setTimeout(() => {
-      utils.deleteCookie('PAT_LOGGED_IN');
-      utils.deleteCookie('ENCORE_LAST_VISITED');
-      utils.deleteCookie('nyplIdentityPatron');
-    }, timeTillLogOut);
+  setLogOutLink(location) {
+    this.setState({ logOutUrl: utils.renderDynamicLogOutLink(location) });
   }
 
   /**
@@ -373,7 +326,6 @@ Header.propTypes = {
   id: PropTypes.string,
   navData: PropTypes.arrayOf(PropTypes.object).isRequired,
   skipNav: PropTypes.shape(SkipNavigation.propTypes),
-  currentLocation: PropTypes.objectOf(PropTypes.any),
   currentTime: PropTypes.number,
   patron: PropTypes.shape({
     names: PropTypes.arrayOf(PropTypes.string),

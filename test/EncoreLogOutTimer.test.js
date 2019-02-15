@@ -26,7 +26,9 @@ describe('EncoreLogOutTimer', () => {
         .onCall(0)
         .returns(false);
 
-      EncoreLogOutTimer.setEncoreLoggedInTimer('browse.nypl.org', Date.now());
+      // Set the test flag, the third parameter, to true, so Mocha won't wait the timer to end for
+      // 30 mins
+      EncoreLogOutTimer.setEncoreLoggedInTimer('browse.nypl.org', Date.now(), true);
     });
 
     after(() => {
@@ -60,7 +62,9 @@ describe('EncoreLogOutTimer', () => {
         .onCall(0)
         .returns(false);
 
-      EncoreLogOutTimer.setEncoreLoggedInTimer('browse.nypl.org', currentTime);
+      // Set the test flag, the third parameter, to true, so Mocha won't wait the timer to end for
+      // 30 mins
+      EncoreLogOutTimer.setEncoreLoggedInTimer('browse.nypl.org', currentTime, true);
     });
 
     after(() => {
@@ -102,7 +106,7 @@ describe('EncoreLogOutTimer', () => {
         .onCall(0)
         .returns(mockLastVisitedTime);
 
-      EncoreLogOutTimer.setEncoreLoggedInTimer('somewebsite.nypl.org', currentTime);
+      EncoreLogOutTimer.setEncoreLoggedInTimer('somewebsite.nypl.org', currentTime, true);
     });
 
     after(() => {
@@ -119,7 +123,8 @@ describe('EncoreLogOutTimer', () => {
           logOutFromEncoreInSpy.calledWith(encoreLogInExpireDuration
             - (currentTime - mockLastVisitedTime))
         ).to.equal(true);
-      });
+      }
+    );
   });
 });
 
@@ -148,7 +153,7 @@ describe('logOutFromEncoreIn', () => {
         .withArgs('ENCORE_LAST_VISITED')
         .returns(mockLastVisitedTime);
 
-      EncoreLogOutTimer.setEncoreLoggedInTimer('somewebsite.nypl.org', currentTime);
+      EncoreLogOutTimer.setEncoreLoggedInTimer('somewebsite.nypl.org', currentTime, true);
     });
 
     after(() => {
@@ -158,18 +163,18 @@ describe('logOutFromEncoreIn', () => {
       logOutFromEncoreInSpy.restore();
     });
 
-    // it('should not yet delete cookies "PAT_LOGGED_IN", "ENCORE_LAST_VISITED" and ' +
-    //   '"nyplIdentityPatron"',
-    //   (done) => {
-    //     setTimeout(() => {
-    //       expect(logOutFromEncoreInSpy.callCount).to.equal(1);
-    //       expect(deleteCookieSpy.calledWith('PAT_LOGGED_IN')).to.equal(false);
-    //       expect(deleteCookieSpy.calledWith('ENCORE_LAST_VISITED')).to.equal(false);
-    //       expect(deleteCookieSpy.calledWith('nyplIdentityPatron')).to.equal(false);
-    //       done();
-    //     }, 100);
-    //   }
-    // );
+    it('should not yet delete cookies "PAT_LOGGED_IN", "ENCORE_LAST_VISITED" and ' +
+      '"nyplIdentityPatron"',
+      (done) => {
+        setTimeout(() => {
+          expect(logOutFromEncoreInSpy.callCount).to.equal(1);
+          expect(deleteCookieSpy.calledWith('PAT_LOGGED_IN')).to.equal(false);
+          expect(deleteCookieSpy.calledWith('ENCORE_LAST_VISITED')).to.equal(false);
+          expect(deleteCookieSpy.calledWith('nyplIdentityPatron')).to.equal(false);
+          done();
+        }, 100);
+      }
+    );
   });
 
   describe('when no new Encore pages have been visited longer than timeout time', () => {
@@ -191,7 +196,7 @@ describe('logOutFromEncoreIn', () => {
         .withArgs('ENCORE_LAST_VISITED')
         .returns(mockLastVisitedTimeLongerThanExp);
 
-      EncoreLogOutTimer.setEncoreLoggedInTimer('somewebsite.nypl.org', currentTime);
+      EncoreLogOutTimer.setEncoreLoggedInTimer('somewebsite.nypl.org', currentTime, true);
     });
 
     after(() => {

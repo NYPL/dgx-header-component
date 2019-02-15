@@ -51,6 +51,5 @@ if (!window.dgxFeatureFlags) {
  */
 _reactDom2.default.render(_react2.default.createElement(_Header.Header, {
   skipNav: { target: 'maincontent' },
-  navData: _Header.navConfig.current,
-  currentLocation: window.location
+  navData: _Header.navConfig.current
 }), document.getElementById('app'));

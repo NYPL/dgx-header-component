@@ -7,9 +7,9 @@
     "start": "NODE_ENV=development node server.js",
     "babel-build": "./node_modules/.bin/babel src -d dist && cp -r src/styles/ dist/styles",
     "dist": "NODE_ENV=production ./node_modules/.bin/webpack --config webpack.config.js && cp -r src/styles/ dist/styles",
-    "test": "./node_modules/.bin/mocha test/helpers/browser.js test/*.test.js",
-    "test-file": "node_modules/.bin/mocha -w test/helpers/browser.js",
-    "test-with-coverage": "./node_modules/.bin/nyc ./node_modules/.bin/mocha test/helpers/browser.js test/*.test.js",
+    "test": "IS_TEST_ENV=true ./node_modules/.bin/mocha test/helpers/browser.js test/*.test.js",
+    "test-file": "IS_TEST_ENV=true node_modules/.bin/mocha -w test/helpers/browser.js",
+    "test-with-coverage": "IS_TEST_ENV=true ./node_modules/.bin/nyc ./node_modules/.bin/mocha test/helpers/browser.js test/*.test.js",
     "coverage": "BABEL_ENV=test node_modules/.bin/nyc --require mocha npm test",
     "coverage-report": "BABEL_ENV=test node_modules/.bin/nyc report --reporter=lcov",
     "coverage-report-html": "BABEL_ENV=test ./node_modules/.bin/nyc report --reporter=html && open -a 'Google Chrome' ./coverage/index.html"

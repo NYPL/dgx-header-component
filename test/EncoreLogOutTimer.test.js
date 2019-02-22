@@ -14,6 +14,7 @@ describe('EncoreLogOutTimer', () => {
   let hasCookieStub;
   let getCookieStub;
   let mockLastVisitedTime;
+  const is_test = process.env.IS_TEST_ENV;
 
   describe('when cookie "PAT_LOGGED_IN" does not exist', () => {
     before(() => {
@@ -28,7 +29,7 @@ describe('EncoreLogOutTimer', () => {
 
       // Set the test flag, the third parameter, to true, so Mocha won't wait the timer to end for
       // 30 mins
-      EncoreLogOutTimer.setEncoreLoggedInTimer('browse.nypl.org', Date.now(), true);
+      EncoreLogOutTimer.setEncoreLoggedInTimer('browse.nypl.org', Date.now(), is_test);
     });
 
     after(() => {
@@ -64,7 +65,7 @@ describe('EncoreLogOutTimer', () => {
 
       // Set the test flag, the third parameter, to true, so Mocha won't wait the timer to end for
       // 30 mins
-      EncoreLogOutTimer.setEncoreLoggedInTimer('browse.nypl.org', currentTime, true);
+      EncoreLogOutTimer.setEncoreLoggedInTimer('browse.nypl.org', currentTime, is_test);
     });
 
     after(() => {
@@ -106,7 +107,7 @@ describe('EncoreLogOutTimer', () => {
         .onCall(0)
         .returns(mockLastVisitedTime);
 
-      EncoreLogOutTimer.setEncoreLoggedInTimer('somewebsite.nypl.org', currentTime, true);
+      EncoreLogOutTimer.setEncoreLoggedInTimer('somewebsite.nypl.org', currentTime, is_test);
     });
 
     after(() => {
@@ -133,6 +134,7 @@ describe('logOutFromEncoreIn', () => {
   let getCookieStub;
   let deleteCookieSpy;
   let logOutFromEncoreInSpy;
+  const is_test = process.env.IS_TEST_ENV;
 
   describe('when no new Encore pages have been visited shorter than timeout time', () => {
     before(() => {
@@ -153,7 +155,7 @@ describe('logOutFromEncoreIn', () => {
         .withArgs('ENCORE_LAST_VISITED')
         .returns(mockLastVisitedTime);
 
-      EncoreLogOutTimer.setEncoreLoggedInTimer('somewebsite.nypl.org', currentTime, true);
+      EncoreLogOutTimer.setEncoreLoggedInTimer('somewebsite.nypl.org', currentTime, is_test);
     });
 
     after(() => {
@@ -196,7 +198,7 @@ describe('logOutFromEncoreIn', () => {
         .withArgs('ENCORE_LAST_VISITED')
         .returns(mockLastVisitedTimeLongerThanExp);
 
-      EncoreLogOutTimer.setEncoreLoggedInTimer('somewebsite.nypl.org', currentTime, true);
+      EncoreLogOutTimer.setEncoreLoggedInTimer('somewebsite.nypl.org', currentTime, is_test);
     });
 
     after(() => {

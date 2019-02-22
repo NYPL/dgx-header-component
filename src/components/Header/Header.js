@@ -26,6 +26,7 @@ import GlobalAlerts from '../GlobalAlerts/GlobalAlerts';
 import FundraisingBanner from '../FundraisingBanner/FundraisingBanner';
 // Utility Library
 import utils from '../../utils/utils';
+import EncoreLogOutTimer from '../../utils/encoreLogOutTimer';
 
 const styles = {
   wrapper: {
@@ -88,7 +89,9 @@ class Header extends React.Component {
     const {
       patron,
       navData,
+      currentTime = Date.now() || undefined,
     } = this.props;
+
     const patronNameObject = !_isEmpty(patron) && patron.names && patron.names.length ?
       utils.modelPatronName(patron.names[0]) : {};
 
@@ -102,6 +105,7 @@ class Header extends React.Component {
         patronDataReceived: patron.loggedIn || false,
         isFeatureFlagsActivated: {},
         logOutUrl: '',
+        currentTime,
       },
       { featureFlagsStore: FeatureFlags.store.getState() },
     );
@@ -119,6 +123,8 @@ class Header extends React.Component {
     utils.checkFeatureFlagActivated(
       featureFlagConfig.featureFlagList, this.state.isFeatureFlagsActivated
     );
+    // Check if the cookie "PAT_LOGGED_IN" exists and then set the timer for deleting it
+    EncoreLogOutTimer.setEncoreLoggedInTimer(window.location, this.state.currentTime);
   }
 
   componentWillUnmount() {
@@ -303,7 +309,7 @@ class Header extends React.Component {
             logOutLink={this.state.logOutUrl}
           />
         </div>
-        { FeatureFlags.store._isFeatureActive(config.fundraising.experimentName) &&
+        {FeatureFlags.store._isFeatureActive(config.fundraising.experimentName) &&
           <FundraisingBanner
             hideBannerCookieName="closeFundraiserBanner"
             gaLabel="Header Fundraising Banner"
@@ -320,6 +326,7 @@ Header.propTypes = {
   id: PropTypes.string,
   navData: PropTypes.arrayOf(PropTypes.object).isRequired,
   skipNav: PropTypes.shape(SkipNavigation.propTypes),
+  currentTime: PropTypes.number,
   patron: PropTypes.shape({
     names: PropTypes.arrayOf(PropTypes.string),
     loggedIn: PropTypes.bool,

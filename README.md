@@ -8,7 +8,7 @@ This repository is for the header component used in React applications at NYPL.
 
 ### Version
 
-> v2.4.19
+> v2.5.0
 
 ### App Installation
 
@@ -89,6 +89,8 @@ entry: [
 ### Test
 
 To run unit tests, run `npm test` in the terminal. Or run `npm run test-with-coverage` to run the test and see the test coverage.
+
+Running unit tests with those commands will set the environment variable `IS_TEST_ENV` to be true.
 
 ### Navigation Configuration
 The current navigation can be used by importing `navConfig` from the module and passing it as a prop. Custom navigation can be passed if it follows a similar structure to what is in `/src/navConfig.js`.

@@ -77,6 +77,10 @@ var _utils = require('../../utils/utils');
 
 var _utils2 = _interopRequireDefault(_utils);
 
+var _encoreLogOutTimer = require('../../utils/encoreLogOutTimer');
+
+var _encoreLogOutTimer2 = _interopRequireDefault(_encoreLogOutTimer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -160,7 +164,10 @@ var Header = function (_React$Component) {
 
     var _this$props = _this.props,
         patron = _this$props.patron,
-        navData = _this$props.navData;
+        navData = _this$props.navData,
+        _this$props$currentTi = _this$props.currentTime,
+        currentTime = _this$props$currentTi === undefined ? Date.now() || undefined : _this$props$currentTi;
+
 
     var patronNameObject = !(0, _underscore.isEmpty)(patron) && patron.names && patron.names.length ? _utils2.default.modelPatronName(patron.names[0]) : {};
 
@@ -172,7 +179,8 @@ var Header = function (_React$Component) {
       patronInitial: patronNameObject.initial || '',
       patronDataReceived: patron.loggedIn || false,
       isFeatureFlagsActivated: {},
-      logOutUrl: ''
+      logOutUrl: '',
+      currentTime: currentTime
     }, { featureFlagsStore: _dgxFeatureFlags2.default.store.getState() });
     return _this;
   }
@@ -189,6 +197,8 @@ var Header = function (_React$Component) {
       // Set feature flag cookies to the state
       // We don't have any feature flags set in the config list at this moment though
       _utils2.default.checkFeatureFlagActivated(_featureFlagConfig2.default.featureFlagList, this.state.isFeatureFlagsActivated);
+      // Check if the cookie "PAT_LOGGED_IN" exists and then set the timer for deleting it
+      _encoreLogOutTimer2.default.setEncoreLoggedInTimer(window.location, this.state.currentTime);
     }
   }, {
     key: 'componentWillUnmount',
@@ -410,6 +420,7 @@ Header.propTypes = {
   id: _propTypes2.default.string,
   navData: _propTypes2.default.arrayOf(_propTypes2.default.object).isRequired,
   skipNav: _propTypes2.default.shape(_dgxSkipNavigationLink2.default.propTypes),
+  currentTime: _propTypes2.default.number,
   patron: _propTypes2.default.shape({
     names: _propTypes2.default.arrayOf(_propTypes2.default.string),
     loggedIn: _propTypes2.default.bool

@@ -1,6 +1,9 @@
 ### CHANGE LOG
 
-=======
+========
+### v2.5.0
+> Add the mechanism to remove log in related cookies from Encore, so the patron's log in status will be consistent with Encore server.
+
 ### v2.4.19
 > Remove the hardcoding to test that dist was the solution.
 

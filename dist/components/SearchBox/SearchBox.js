@@ -226,6 +226,7 @@ var SearchBox = function (_React$Component) {
       var searchOptionValue = this.state.searchOption;
       var encoreBaseUrl = 'https://browse.nypl.org/iii/encore/search/';
       var catalogBaseUrl = void 0;
+
       try {
         if (appEnv === 'development') {
           catalogBaseUrl = '//dev-www.nypl.org/search/';
@@ -235,7 +236,8 @@ var SearchBox = function (_React$Component) {
           catalogBaseUrl = '//www.nypl.org/search/';
         };
       } catch (err) {
-        // When the header is on old/new Drupal, appEnv will not be set so it will always get caught here.
+        // For the header markup and static assets import, appEnv will not be set so it will always get caught here.
+        // One example is the Drupal import.
         catalogBaseUrl = '//www.nypl.org/search/';
       }
 

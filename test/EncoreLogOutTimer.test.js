@@ -14,7 +14,7 @@ describe('EncoreLogOutTimer', () => {
   let hasCookieStub;
   let getCookieStub;
   let mockLastVisitedTime;
-  const is_test = process.env.IS_TEST_ENV;
+  const is_test = process.env.IS_TEST_ENV || true;
 
   describe('when cookie "PAT_LOGGED_IN" does not exist', () => {
     before(() => {
@@ -134,7 +134,7 @@ describe('logOutFromEncoreIn', () => {
   let getCookieStub;
   let deleteCookieSpy;
   let logOutFromEncoreInSpy;
-  const is_test = process.env.IS_TEST_ENV;
+  const is_test = process.env.IS_TEST_ENV || true;
 
   describe('when no new Encore pages have been visited shorter than timeout time', () => {
     before(() => {

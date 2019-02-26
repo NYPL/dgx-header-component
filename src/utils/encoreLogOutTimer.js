@@ -30,6 +30,12 @@ function EncoreLogOutTimer() {
 
         this.logOutFromEncoreIn(timeTillLogOut, isTest);
       }
+    } else {
+      // Delete cookie "nyplIdentityPatron" to show Header logged out if cookie "PAT_LOGGED_IN"
+      // does not exist
+      if (utils.hasCookie('nyplIdentityPatron')) {
+        utils.deleteCookie('nyplIdentityPatron');
+      }
     }
   };
 

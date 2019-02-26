@@ -97,7 +97,7 @@ describe('Header', () => {
       let fetchPatronData;
 
       // functions in utils.js
-      let hasNyplIdentityPatronCookie;
+      let hasCookie;
       let getNyplIdentityPatronCookie;
       let getPatronData;
       let modelPatronName;
@@ -108,7 +108,9 @@ describe('Header', () => {
         fetchPatronData = sinon.spy(Header.prototype, 'fetchPatronData');
 
         // functions in utils.js
-        hasNyplIdentityPatronCookie = sinon.stub(utils, 'hasCookie')
+        hasCookie = sinon.stub(utils, 'hasCookie')
+          .withArgs('PAT_LOGGED_IN')
+          .returns(true)
           .withArgs('nyplIdentityPatron')
           .returns(true);
         getNyplIdentityPatronCookie = sinon.stub(utils, 'getCookie')
@@ -139,9 +141,8 @@ describe('Header', () => {
 
       it('should call the function to check if the cookie "nyplIdentityPatron" exists', () => {
         expect(setLoginCookie.calledOnce).to.equal(true);
-        expect(hasNyplIdentityPatronCookie.calledOnce).to.equal(true);
-        expect(hasNyplIdentityPatronCookie.alwaysCalledWithExactly('nyplIdentityPatron'))
-          .to.equal(true);
+        expect(hasCookie.calledOnce).to.equal(true);
+        expect(hasCookie.calledWith('nyplIdentityPatron')).to.equal(true);
       });
 
       it('should call the function to get the value of "nyplIdentityPatron" cookie, ' +
@@ -212,12 +213,20 @@ describe('Header', () => {
         let refreshAccessToken;
         // functions in utils.js
         let deleteNyplIdentityPatronCookie;
+        let hasCookie;
 
         before(() => {
           refreshAccessToken = sinon.spy(utils, 'refreshAccessToken');
           // functions in utils.js
           deleteNyplIdentityPatronCookie = sinon.stub(utils, 'deleteCookie')
             .withArgs('nyplIdentityPatron')
+            .returns(true);
+
+          // The stub here is to make sure cookie 'nyplIdentityPatron' is not deleted because
+          // cookie 'PAT_LOGGED_IN' does not exist
+          hasCookie = sinon.stub(utils, 'hasCookie')
+            .withArgs('PAT_LOGGED_IN')
+            .onCall(0)
             .returns(true);
 
           mock
@@ -235,6 +244,7 @@ describe('Header', () => {
           mock.reset();
           refreshAccessToken.restore();
           utils.deleteCookie.restore();
+          utils.hasCookie.restore();
         });
 
         it('should call the cookie refresh API endpoint', (done) => {
@@ -252,7 +262,7 @@ describe('Header', () => {
           (done) => {
             patronApiCall(component, '/refreshError', deleteNyplIdentityPatronCookie);
             setTimeout(() => {
-              expect(deleteNyplIdentityPatronCookie.calledOnce).to.equal(true);
+              expect(deleteNyplIdentityPatronCookie.calledTwice).to.equal(true);
               done();
             }, 1500);
           }

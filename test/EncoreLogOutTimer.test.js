@@ -9,6 +9,7 @@ import utils from './../src/utils/utils';
 import accountConfig from '../src/accountConfig';
 
 describe('EncoreLogOutTimer', () => {
+  let deleteCookieSpy;
   let setCookieSpy;
   let logOutFromEncoreInSpy;
   let hasCookieStub;
@@ -20,12 +21,16 @@ describe('EncoreLogOutTimer', () => {
     before(() => {
       setCookieSpy = sinon.stub(utils, 'setCookie');
       logOutFromEncoreInSpy = sinon.spy(EncoreLogOutTimer, 'logOutFromEncoreIn');
+      deleteCookieSpy = sinon.spy(utils, 'deleteCookie');
       hasCookieStub = sinon.stub(utils, 'hasCookie');
 
       hasCookieStub
         .withArgs('PAT_LOGGED_IN')
         .onCall(0)
-        .returns(false);
+        .returns(false)
+        .withArgs('nyplIdentityPatron')
+        .onCall(0)
+        .returns(true);
 
       // Set the test flag, the third parameter, to true, so Mocha won't wait the timer to end for
       // 30 mins
@@ -34,13 +39,16 @@ describe('EncoreLogOutTimer', () => {
 
     after(() => {
       setCookieSpy.restore();
+      deleteCookieSpy.restore();
       logOutFromEncoreInSpy.restore();
       utils.hasCookie.restore();
     });
 
-    it('should do nothing.', () => {
+    it('should check if cookie "nyplIdentityPatron" exists and delete it if it does.', () => {
       expect(setCookieSpy.callCount).to.equal(0);
       expect(logOutFromEncoreInSpy.callCount).to.equal(0);
+      expect(deleteCookieSpy.callCount).to.equal(1);
+      expect(deleteCookieSpy.calledWith('nyplIdentityPatron')).to.equal(true);
     });
   });
 

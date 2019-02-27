@@ -223,8 +223,8 @@ describe('Header', () => {
             .withArgs('nyplIdentityPatron')
             .returns(true);
 
-          // The stub here is to make sure cookie 'nyplIdentityPatron' is not deleted because
-          // cookie 'PAT_LOGGED_IN' does not exist
+          // Set `hasCookie` to say that `PAT_LOGGED_IN` exists
+          // so that `nyplIdentityPatron` does not get deleted
           hasCookie = sinon.stub(utils, 'hasCookie')
             .withArgs('PAT_LOGGED_IN')
             .onCall(0)

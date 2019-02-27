@@ -214,6 +214,7 @@ describe('Header', () => {
         // functions in utils.js
         let deleteNyplIdentityPatronCookie;
         let hasCookie;
+        let getCookie;
 
         before(() => {
           refreshAccessToken = sinon.spy(utils, 'refreshAccessToken');
@@ -228,6 +229,12 @@ describe('Header', () => {
             .withArgs('PAT_LOGGED_IN')
             .onCall(0)
             .returns(true);
+
+          getCookie = sinon.stub(utils, 'getCookie')
+            .withArgs('ENCORE_LAST_VISITED')
+            // Set a mock last visit time for Encore timer
+            // So cookie "nyplIdentityPatron" will be kept until we test it's access token
+            .returns(Date.now() - 1795000);
 
           mock
             .onGet(mockPatronApiEndpoint)
@@ -245,6 +252,7 @@ describe('Header', () => {
           refreshAccessToken.restore();
           utils.deleteCookie.restore();
           utils.hasCookie.restore();
+          utils.getCookie.restore();
         });
 
         it('should call the cookie refresh API endpoint', (done) => {
@@ -262,7 +270,7 @@ describe('Header', () => {
           (done) => {
             patronApiCall(component, '/refreshError', deleteNyplIdentityPatronCookie);
             setTimeout(() => {
-              expect(deleteNyplIdentityPatronCookie.calledTwice).to.equal(true);
+              expect(deleteNyplIdentityPatronCookie.calledOnce).to.equal(true);
               done();
             }, 1500);
           }

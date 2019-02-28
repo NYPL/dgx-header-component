@@ -1,6 +1,9 @@
 ### CHANGE LOG
 
 ========
+### v2.5.1
+> Add the mechanism to make sure that Header is shown to be logged out if the log in related cookies from Encore are deleted.
+
 ### v2.5.0
 > Add the mechanism to remove log in related cookies from Encore, so the patron's log in status will be consistent with Encore server.
 

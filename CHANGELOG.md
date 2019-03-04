@@ -1,6 +1,9 @@
 ### CHANGE LOG
 
 ========
+### v2.5.2
+> Add the mechanism to delete the cookie that holds the last visit time for Encore if the user is not logged in.
+
 ### v2.5.1
 > Add the mechanism to make sure that Header is shown to be logged out if the log in related cookies from Encore are deleted.
 

@@ -36,6 +36,12 @@ function EncoreLogOutTimer() {
       if (utils.hasCookie('nyplIdentityPatron')) {
         utils.deleteCookie('nyplIdentityPatron');
       }
+
+      // Delete cookie "ENCORE_LAST_VISITED" which holds the last time the user visited Encore
+      // if the cookie "PAT_LOGGED_IN" does not exist
+      if (utils.hasCookie('ENCORE_LAST_VISITED')) {
+        utils.deleteCookie('ENCORE_LAST_VISITED');
+      }
     }
   };
 

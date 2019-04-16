@@ -45,6 +45,20 @@ function EncoreLogOutTimer() {
 
         _this.logOutFromEncoreIn(timeTillLogOut, isTest);
       }
+    } else {
+      // Delete cookie "nyplIdentityPatron" to show Header logged out if cookie "PAT_LOGGED_IN"
+      // does not exist
+      if (_utils2.default.hasCookie('nyplIdentityPatron')) {
+        _utils2.default.deleteCookie('nyplIdentityPatron');
+      }
+
+      // Delete cookie "ENCORE_LAST_VISITED" which holds the last time the user visited Encore
+      // if the cookie "PAT_LOGGED_IN" does not exist
+      if (_utils2.default.hasCookie('ENCORE_LAST_VISITED')) {
+        _utils2.default.deleteCookie('ENCORE_LAST_VISITED');
+      }
+
+      _this.loadLogoutIframe();
     }
   };
 
@@ -66,7 +80,30 @@ function EncoreLogOutTimer() {
       _utils2.default.deleteCookie('PAT_LOGGED_IN');
       _utils2.default.deleteCookie('ENCORE_LAST_VISITED');
       _utils2.default.deleteCookie('nyplIdentityPatron');
+      _this.loadLogoutIframe();
     }, timeTillLogOut);
+  };
+
+  /**
+   * loadLogoutIframe()
+   * The function that loads a temporary iframe with the log out endpoint
+   * to completely log out the user from Encore. It then deletes the iframe right away.
+   * The reason to use this way to load the endpoint is to bypass the CORS loading from the client
+   * since III does not want to provide us a real log out API URI.
+   */
+  this.loadLogoutIframe = function () {
+    var logoutIframe = document.createElement('iframe');
+    var body = document.getElementsByTagName('body')[0];
+
+    logoutIframe.setAttribute(
+    // The endpoint is the URL for logging out from Encore
+    'src', 'https://browse.nypl.org/iii/encore/logoutFilterRedirect?suite=def');
+    // Assigns the ID for CSS ussage
+    logoutIframe.setAttribute('id', 'logoutIframe');
+    body.appendChild(logoutIframe);
+    setTimeout(function () {
+      body.removeChild(logoutIframe);
+    }, 100);
   };
 }
 

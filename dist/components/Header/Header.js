@@ -192,13 +192,13 @@ var Header = function (_React$Component) {
       _dgxFeatureFlags2.default.store.listen(this.onFeatureFlagsChange.bind(this));
       // Set the log out link to state
       this.setLogOutLink(window.location.href);
+      // Check if the cookie "PAT_LOGGED_IN" exists and then set the timer for deleting it
+      _encoreLogOutTimer2.default.setEncoreLoggedInTimer(window.location, this.state.currentTime);
       // Set nyplIdentityPatron cookie to the state.
       this.setLoginCookie(this.state.loginCookieName);
       // Set feature flag cookies to the state
       // We don't have any feature flags set in the config list at this moment though
       _utils2.default.checkFeatureFlagActivated(_featureFlagConfig2.default.featureFlagList, this.state.isFeatureFlagsActivated);
-      // Check if the cookie "PAT_LOGGED_IN" exists and then set the timer for deleting it
-      _encoreLogOutTimer2.default.setEncoreLoggedInTimer(window.location, this.state.currentTime);
     }
   }, {
     key: 'componentWillUnmount',

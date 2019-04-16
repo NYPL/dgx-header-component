@@ -2,10 +2,10 @@ import sinon from 'sinon';
 import { expect } from 'chai';
 
 // Import the component that is going to be tested
-import EncoreLogOutTimer from './../src/utils/encoreLogOutTimer';
+import EncoreLogOutTimer from '../src/utils/encoreLogOutTimer';
 
 // Import related functions
-import utils from './../src/utils/utils';
+import utils from '../src/utils/utils';
 import accountConfig from '../src/accountConfig';
 
 describe('EncoreLogOutTimer', () => {
@@ -16,7 +16,7 @@ describe('EncoreLogOutTimer', () => {
   let getCookieStub;
   let mockLastVisitedTime;
   let loadLogoutIframeSpy;
-  const is_test = process.env.IS_TEST_ENV || true;
+  const isTest = process.env.IS_TEST_ENV || true;
 
   describe('when cookie "PAT_LOGGED_IN" does not exist', () => {
     before(() => {
@@ -39,7 +39,7 @@ describe('EncoreLogOutTimer', () => {
 
       // Set the test flag, the third parameter, to true, so Mocha won't wait the timer to end for
       // 30 mins
-      EncoreLogOutTimer.setEncoreLoggedInTimer('browse.nypl.org', Date.now(), is_test);
+      EncoreLogOutTimer.setEncoreLoggedInTimer('browse.nypl.org', Date.now(), isTest);
     });
 
     after(() => {
@@ -84,7 +84,7 @@ describe('EncoreLogOutTimer', () => {
 
       // Set the test flag, the third parameter, to true, so Mocha won't wait the timer to end for
       // 30 mins
-      EncoreLogOutTimer.setEncoreLoggedInTimer('browse.nypl.org', currentTime, is_test);
+      EncoreLogOutTimer.setEncoreLoggedInTimer('browse.nypl.org', currentTime, isTest);
     });
 
     after(() => {
@@ -126,7 +126,7 @@ describe('EncoreLogOutTimer', () => {
         .onCall(0)
         .returns(mockLastVisitedTime);
 
-      EncoreLogOutTimer.setEncoreLoggedInTimer('somewebsite.nypl.org', currentTime, is_test);
+      EncoreLogOutTimer.setEncoreLoggedInTimer('somewebsite.nypl.org', currentTime, isTest);
     });
 
     after(() => {
@@ -141,10 +141,9 @@ describe('EncoreLogOutTimer', () => {
         expect(logOutFromEncoreInSpy.callCount).to.equal(1);
         expect(
           logOutFromEncoreInSpy.calledWith(encoreLogInExpireDuration
-            - (currentTime - mockLastVisitedTime))
+            - (currentTime - mockLastVisitedTime)),
         ).to.equal(true);
-      }
-    );
+      });
   });
 });
 
@@ -154,7 +153,7 @@ describe('logOutFromEncoreIn', () => {
   let deleteCookieSpy;
   let logOutFromEncoreInSpy;
   let loadLogoutIframeSpy;
-  const is_test = process.env.IS_TEST_ENV || true;
+  const isTest = process.env.IS_TEST_ENV || true;
 
   describe('when no new Encore pages have been visited shorter than timeout time', () => {
     before(() => {
@@ -176,7 +175,7 @@ describe('logOutFromEncoreIn', () => {
         .withArgs('ENCORE_LAST_VISITED')
         .returns(mockLastVisitedTime);
 
-      EncoreLogOutTimer.setEncoreLoggedInTimer('somewebsite.nypl.org', currentTime, is_test);
+      EncoreLogOutTimer.setEncoreLoggedInTimer('somewebsite.nypl.org', currentTime, isTest);
     });
 
     after(() => {
@@ -187,19 +186,18 @@ describe('logOutFromEncoreIn', () => {
       loadLogoutIframeSpy.restore();
     });
 
-    it('should not yet delete cookies "PAT_LOGGED_IN", "ENCORE_LAST_VISITED" and ' +
-      '"nyplIdentityPatron"',
-      (done) => {
-        setTimeout(() => {
-          expect(logOutFromEncoreInSpy.callCount).to.equal(1);
-          expect(deleteCookieSpy.calledWith('PAT_LOGGED_IN')).to.equal(false);
-          expect(deleteCookieSpy.calledWith('ENCORE_LAST_VISITED')).to.equal(false);
-          expect(deleteCookieSpy.calledWith('nyplIdentityPatron')).to.equal(false);
-          expect(loadLogoutIframeSpy.callCount).to.equal(0);
-          done();
-        }, 100);
-      }
-    );
+    it('should not yet delete cookies "PAT_LOGGED_IN", "ENCORE_LAST_VISITED" and '
+    + '"nyplIdentityPatron"',
+    (done) => {
+      setTimeout(() => {
+        expect(logOutFromEncoreInSpy.callCount).to.equal(1);
+        expect(deleteCookieSpy.calledWith('PAT_LOGGED_IN')).to.equal(false);
+        expect(deleteCookieSpy.calledWith('ENCORE_LAST_VISITED')).to.equal(false);
+        expect(deleteCookieSpy.calledWith('nyplIdentityPatron')).to.equal(false);
+        expect(loadLogoutIframeSpy.callCount).to.equal(0);
+        done();
+      }, 100);
+    });
   });
 
   describe('when no new Encore pages have been visited longer than timeout time', () => {
@@ -222,7 +220,7 @@ describe('logOutFromEncoreIn', () => {
         .withArgs('ENCORE_LAST_VISITED')
         .returns(mockLastVisitedTimeLongerThanExp);
 
-      EncoreLogOutTimer.setEncoreLoggedInTimer('somewebsite.nypl.org', currentTime, is_test);
+      EncoreLogOutTimer.setEncoreLoggedInTimer('somewebsite.nypl.org', currentTime, isTest);
     });
 
     after(() => {

@@ -15,12 +15,14 @@ describe('EncoreLogOutTimer', () => {
   let hasCookieStub;
   let getCookieStub;
   let mockLastVisitedTime;
+  let loadLogoutIframeSpy;
   const is_test = process.env.IS_TEST_ENV || true;
 
   describe('when cookie "PAT_LOGGED_IN" does not exist', () => {
     before(() => {
       setCookieSpy = sinon.stub(utils, 'setCookie');
       logOutFromEncoreInSpy = sinon.spy(EncoreLogOutTimer, 'logOutFromEncoreIn');
+      loadLogoutIframeSpy = sinon.spy(EncoreLogOutTimer, 'loadLogoutIframe');
       deleteCookieSpy = sinon.spy(utils, 'deleteCookie');
       hasCookieStub = sinon.stub(utils, 'hasCookie');
 
@@ -44,6 +46,7 @@ describe('EncoreLogOutTimer', () => {
       setCookieSpy.restore();
       deleteCookieSpy.restore();
       logOutFromEncoreInSpy.restore();
+      loadLogoutIframeSpy.restore();
       utils.hasCookie.restore();
     });
 
@@ -53,6 +56,10 @@ describe('EncoreLogOutTimer', () => {
       expect(deleteCookieSpy.callCount).to.equal(2);
       expect(deleteCookieSpy.calledWith('nyplIdentityPatron')).to.equal(true);
       expect(deleteCookieSpy.calledWith('ENCORE_LAST_VISITED')).to.equal(true);
+    });
+
+    it('should load the log out iframe to completely log out the user from Encore.', () => {
+      expect(loadLogoutIframeSpy.callCount).to.equal(1);
     });
   });
 
@@ -146,6 +153,7 @@ describe('logOutFromEncoreIn', () => {
   let getCookieStub;
   let deleteCookieSpy;
   let logOutFromEncoreInSpy;
+  let loadLogoutIframeSpy;
   const is_test = process.env.IS_TEST_ENV || true;
 
   describe('when no new Encore pages have been visited shorter than timeout time', () => {
@@ -154,6 +162,7 @@ describe('logOutFromEncoreIn', () => {
       getCookieStub = sinon.stub(utils, 'getCookie');
       deleteCookieSpy = sinon.spy(utils, 'deleteCookie');
       logOutFromEncoreInSpy = sinon.spy(EncoreLogOutTimer, 'logOutFromEncoreIn');
+      loadLogoutIframeSpy = sinon.spy(EncoreLogOutTimer, 'loadLogoutIframe');
 
       const currentTime = Date.now();
       // Mock the time as it has only passed 200000 milliseconds
@@ -175,6 +184,7 @@ describe('logOutFromEncoreIn', () => {
       utils.getCookie.restore();
       deleteCookieSpy.restore();
       logOutFromEncoreInSpy.restore();
+      loadLogoutIframeSpy.restore();
     });
 
     it('should not yet delete cookies "PAT_LOGGED_IN", "ENCORE_LAST_VISITED" and ' +
@@ -185,6 +195,7 @@ describe('logOutFromEncoreIn', () => {
           expect(deleteCookieSpy.calledWith('PAT_LOGGED_IN')).to.equal(false);
           expect(deleteCookieSpy.calledWith('ENCORE_LAST_VISITED')).to.equal(false);
           expect(deleteCookieSpy.calledWith('nyplIdentityPatron')).to.equal(false);
+          expect(loadLogoutIframeSpy.callCount).to.equal(0);
           done();
         }, 100);
       }
@@ -197,6 +208,7 @@ describe('logOutFromEncoreIn', () => {
       getCookieStub = sinon.stub(utils, 'getCookie');
       deleteCookieSpy = sinon.spy(utils, 'deleteCookie');
       logOutFromEncoreInSpy = sinon.spy(EncoreLogOutTimer, 'logOutFromEncoreIn');
+      loadLogoutIframeSpy = sinon.spy(EncoreLogOutTimer, 'loadLogoutIframe');
 
       const currentTime = Date.now();
       // Mock the time as it has passed 2000000 milliseconds
@@ -217,7 +229,8 @@ describe('logOutFromEncoreIn', () => {
       utils.hasCookie.restore();
       utils.getCookie.restore();
       deleteCookieSpy.restore();
-      EncoreLogOutTimer.logOutFromEncoreIn.restore();
+      logOutFromEncoreInSpy.restore();
+      loadLogoutIframeSpy.restore();
     });
 
     it('should delete cookies "PAT_LOGGED_IN", "ENCORE_LAST_VISITED" and "nyplIdentityPatron"',
@@ -228,6 +241,7 @@ describe('logOutFromEncoreIn', () => {
           expect(deleteCookieSpy.calledWith('PAT_LOGGED_IN')).to.equal(true);
           expect(deleteCookieSpy.calledWith('ENCORE_LAST_VISITED')).to.equal(true);
           expect(deleteCookieSpy.calledWith('nyplIdentityPatron')).to.equal(true);
+          expect(loadLogoutIframeSpy.callCount).to.equal(1);
           done();
         }, 100);
       });

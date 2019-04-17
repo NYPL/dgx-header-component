@@ -4,7 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _accountConfig = require('./../accountConfig.js');
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _accountConfig = require('../accountConfig');
 
 var _accountConfig2 = _interopRequireDefault(_accountConfig);
 
@@ -32,20 +34,15 @@ function EncoreLogOutTimer() {
     var isTest = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
     var encoreLogInExpireDuration = _accountConfig2.default.patLoggedInCookieExpiredTime;
+    var isOnEncore = currentLocation === 'browse.nypl.org';
+    var isLoggedIn = _utils2.default.hasCookie('PAT_LOGGED_IN');
 
-    // See if the user has logged in Encore
-    if (_utils2.default.hasCookie('PAT_LOGGED_IN')) {
-      // Then check if the user is visiting a new Encore page
-      if (currentLocation === 'browse.nypl.org') {
+    if (!isLoggedIn) {
+      // Set the cookie "ENCORE_LAST_VISITED" once the user visited Encore
+      if (isOnEncore) {
         _utils2.default.setCookie('ENCORE_LAST_VISITED', currentTime);
-        _this.logOutFromEncoreIn(encoreLogInExpireDuration, isTest);
-      } else {
-        var lastVisitedEncoreTime = _utils2.default.getCookie('ENCORE_LAST_VISITED');
-        var timeTillLogOut = lastVisitedEncoreTime ? encoreLogInExpireDuration - (currentTime - lastVisitedEncoreTime) : undefined;
-
-        _this.logOutFromEncoreIn(timeTillLogOut, isTest);
       }
-    } else {
+
       // Delete cookie "nyplIdentityPatron" to show Header logged out if cookie "PAT_LOGGED_IN"
       // does not exist
       if (_utils2.default.hasCookie('nyplIdentityPatron')) {
@@ -58,7 +55,17 @@ function EncoreLogOutTimer() {
         _utils2.default.deleteCookie('ENCORE_LAST_VISITED');
       }
 
+      // Completely log out the user
       _this.loadLogoutIframe();
+    } else if (isOnEncore) {
+      // Set the cookie "ENCORE_LAST_VISITED" once the user visited Encore
+      _utils2.default.setCookie('ENCORE_LAST_VISITED', currentTime);
+      _this.logOutFromEncoreIn(encoreLogInExpireDuration, isTest);
+    } else {
+      var lastVisitedEncoreTime = _utils2.default.getCookie('ENCORE_LAST_VISITED');
+      var timeTillLogOut = lastVisitedEncoreTime ? encoreLogInExpireDuration - (currentTime - lastVisitedEncoreTime) : undefined;
+
+      _this.logOutFromEncoreIn(timeTillLogOut, isTest);
     }
   };
 
@@ -93,7 +100,10 @@ function EncoreLogOutTimer() {
    */
   this.loadLogoutIframe = function () {
     var logoutIframe = document.createElement('iframe');
-    var body = document.getElementsByTagName('body')[0];
+
+    var _document$getElements = document.getElementsByTagName('body'),
+        _document$getElements2 = _slicedToArray(_document$getElements, 1),
+        body = _document$getElements2[0];
 
     logoutIframe.setAttribute(
     // The endpoint is the URL for logging out from Encore

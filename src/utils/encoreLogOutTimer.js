@@ -1,4 +1,4 @@
-import accountConfig from './../accountConfig.js';
+import accountConfig from '../accountConfig';
 import utils from './utils';
 
 function EncoreLogOutTimer() {
@@ -15,22 +15,15 @@ function EncoreLogOutTimer() {
    */
   this.setEncoreLoggedInTimer = (currentLocation, currentTime, isTest = false) => {
     const encoreLogInExpireDuration = accountConfig.patLoggedInCookieExpiredTime;
+    const isOnEncore = currentLocation === 'browse.nypl.org';
+    const isLoggedIn = utils.hasCookie('PAT_LOGGED_IN');
 
-    // See if the user has logged in Encore
-    if (utils.hasCookie('PAT_LOGGED_IN')) {
-      // Then check if the user is visiting a new Encore page
-      if (currentLocation === 'browse.nypl.org') {
+    if (!isLoggedIn) {
+      // Set the cookie "ENCORE_LAST_VISITED" once the user visited Encore
+      if (isOnEncore) {
         utils.setCookie('ENCORE_LAST_VISITED', currentTime);
-        this.logOutFromEncoreIn(encoreLogInExpireDuration, isTest);
-      } else {
-        const lastVisitedEncoreTime = utils.getCookie('ENCORE_LAST_VISITED');
-        const timeTillLogOut = lastVisitedEncoreTime
-          ? encoreLogInExpireDuration - (currentTime - lastVisitedEncoreTime)
-          : undefined;
-
-        this.logOutFromEncoreIn(timeTillLogOut, isTest);
       }
-    } else {
+
       // Delete cookie "nyplIdentityPatron" to show Header logged out if cookie "PAT_LOGGED_IN"
       // does not exist
       if (utils.hasCookie('nyplIdentityPatron')) {
@@ -43,7 +36,19 @@ function EncoreLogOutTimer() {
         utils.deleteCookie('ENCORE_LAST_VISITED');
       }
 
+      // Completely log out the user
       this.loadLogoutIframe();
+    } else if (isOnEncore) {
+      // Set the cookie "ENCORE_LAST_VISITED" once the user visited Encore
+      utils.setCookie('ENCORE_LAST_VISITED', currentTime);
+      this.logOutFromEncoreIn(encoreLogInExpireDuration, isTest);
+    } else {
+      const lastVisitedEncoreTime = utils.getCookie('ENCORE_LAST_VISITED');
+      const timeTillLogOut = lastVisitedEncoreTime
+        ? encoreLogInExpireDuration - (currentTime - lastVisitedEncoreTime)
+        : undefined;
+
+      this.logOutFromEncoreIn(timeTillLogOut, isTest);
     }
   };
 
@@ -78,11 +83,11 @@ function EncoreLogOutTimer() {
    */
   this.loadLogoutIframe = () => {
     const logoutIframe = document.createElement('iframe');
-    const body = document.getElementsByTagName('body')[0];
+    const [body] = document.getElementsByTagName('body');
 
     logoutIframe.setAttribute(
       // The endpoint is the URL for logging out from Encore
-      'src', 'https://browse.nypl.org/iii/encore/logoutFilterRedirect?suite=def'
+      'src', 'https://browse.nypl.org/iii/encore/logoutFilterRedirect?suite=def',
     );
     // Assigns the ID for CSS ussage
     logoutIframe.setAttribute('id', 'logoutIframe');

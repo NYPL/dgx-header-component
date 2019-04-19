@@ -44,17 +44,25 @@ function EncoreLogOutTimer() {
         _utils2.default.deleteCookie('nyplIdentityPatron');
       }
 
+      // Delete cookie "ENCORE_LAST_VISITED" which holds the last time the user visited Encore
+      // if the cookie "PAT_LOGGED_IN" does not exist
+      if (_utils2.default.hasCookie('ENCORE_LAST_VISITED')) {
+        _utils2.default.deleteCookie('ENCORE_LAST_VISITED');
+      }
+
       // Completely log out the user
       _this.loadLogoutIframe();
-    } else if (isOnEncore) {
-      // Set the cookie "ENCORE_LAST_VISITED" once the user visited Encore
-      _utils2.default.setCookie('ENCORE_LAST_VISITED', currentTime);
-      _this.logOutFromEncoreIn(encoreLogInExpireDuration, isTest);
     } else {
-      var lastVisitedEncoreTime = _utils2.default.getCookie('ENCORE_LAST_VISITED');
-      var timeTillLogOut = lastVisitedEncoreTime ? encoreLogInExpireDuration - (currentTime - lastVisitedEncoreTime) : undefined;
+      if (isOnEncore) {
+        // Set the cookie "ENCORE_LAST_VISITED" once the user visited Encore
+        _utils2.default.setCookie('ENCORE_LAST_VISITED', currentTime);
+        _this.logOutFromEncoreIn(encoreLogInExpireDuration, isTest);
+      } else {
+        var lastVisitedEncoreTime = _utils2.default.getCookie('ENCORE_LAST_VISITED');
+        var timeTillLogOut = lastVisitedEncoreTime ? encoreLogInExpireDuration - (currentTime - lastVisitedEncoreTime) : undefined;
 
-      _this.logOutFromEncoreIn(timeTillLogOut, isTest);
+        _this.logOutFromEncoreIn(timeTillLogOut, isTest);
+      }
     }
   };
 

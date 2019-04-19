@@ -193,7 +193,7 @@ var Header = function (_React$Component) {
       // Set the log out link to state
       this.setLogOutLink(window.location.href);
       // Check if the cookie "PAT_LOGGED_IN" exists and then set the timer for deleting it
-      _encoreLogOutTimer2.default.setEncoreLoggedInTimer(window.location, this.state.currentTime);
+      _encoreLogOutTimer2.default.setEncoreLoggedInTimer(window.location.host, this.state.currentTime);
       // Set nyplIdentityPatron cookie to the state.
       this.setLoginCookie(this.state.loginCookieName);
       // Set feature flag cookies to the state

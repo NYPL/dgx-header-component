@@ -82,7 +82,7 @@ function EncoreLogOutTimer() {
   this.loadLogoutIframe = (isTest) => {
     const logoutIframe = document.createElement('iframe');
     const [body] = document.getElementsByTagName('body');
-    const iframeExistingTime = isTest ? 100 : 100000;
+    const iframeExistingTime = isTest ? 100 : 10000;
 
     logoutIframe.setAttribute(
       // The endpoint is the URL for logging out from Encore

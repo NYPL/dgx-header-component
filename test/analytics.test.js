@@ -41,6 +41,7 @@ describe('Google Analytics', function () {
     component = mount(React.createElement(Header, {
       skipNav: { target: 'maincontent' },
       navData: navConfig.current,
+      isTest: true,
     }));
 
     component.setState({

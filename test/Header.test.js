@@ -124,7 +124,7 @@ describe('Header', () => {
           .onGet(mockPatronApiEndpoint)
           .reply(200, mockResponseData);
 
-        component = mount(<Header />);
+        component = mount(<Header isTest={true} />);
       });
 
       after(() => {
@@ -183,7 +183,7 @@ describe('Header', () => {
             .onGet(mockPatronApiEndpoint)
             .reply(400, mockErrorResponseData);
 
-          component = mount(<Header />);
+          component = mount(<Header isTest={true} />);
         });
 
         after(() => {
@@ -234,7 +234,7 @@ describe('Header', () => {
             .withArgs('ENCORE_LAST_VISITED')
             // Set a mock last visit time for Encore timer
             // So cookie "nyplIdentityPatron" will be kept until we test it's access token
-            .returns(Date.now() - 1795000);
+            .returns(Date.now());
 
           mock
             .onGet(mockPatronApiEndpoint)
@@ -244,7 +244,7 @@ describe('Header', () => {
             .onGet('/refreshError')
             .reply(400);
 
-          component = mount(<Header />);
+          component = mount(<Header isTest={true} />);
         });
 
         after(() => {

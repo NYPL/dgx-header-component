@@ -51,7 +51,7 @@ function EncoreLogOutTimer() {
       }
 
       // Completely log out the user
-      _this.loadLogoutIframe();
+      _this.loadLogoutIframe(isTest);
     } else {
       if (isOnEncore) {
         // Set the cookie "ENCORE_LAST_VISITED" once the user visited Encore
@@ -76,31 +76,34 @@ function EncoreLogOutTimer() {
     var timeTillLogOut = time > 0 ? time : 0;
 
     // Only for testing. If the function is run for tests, set the timeout no longer than 2 seconds
-    if (isTest && timeTillLogOut > 2000) {
-      timeTillLogOut = 2000;
+    if (isTest && timeTillLogOut > 8000) {
+      timeTillLogOut = 8000;
     }
 
     setTimeout(function () {
       _utils2.default.deleteCookie('PAT_LOGGED_IN');
       _utils2.default.deleteCookie('ENCORE_LAST_VISITED');
       _utils2.default.deleteCookie('nyplIdentityPatron');
-      _this.loadLogoutIframe();
+      _this.loadLogoutIframe(isTest);
     }, timeTillLogOut);
   };
 
   /**
-   * loadLogoutIframe()
+   * loadLogoutIframe(isTest)
    * The function that loads a temporary iframe with the log out endpoint
    * to completely log out the user from Encore. It then deletes the iframe right away.
    * The reason to use this way to load the endpoint is to bypass the CORS loading from the client
    * since III does not want to provide us a real log out API URI.
+   * * @param {isTest} - If running this method for testing, delete the iframe right away
    */
-  this.loadLogoutIframe = function () {
+  this.loadLogoutIframe = function (isTest) {
     var logoutIframe = document.createElement('iframe');
 
     var _document$getElements = document.getElementsByTagName('body'),
         _document$getElements2 = _slicedToArray(_document$getElements, 1),
         body = _document$getElements2[0];
+
+    var iframeExistingTime = isTest ? 100 : 100000;
 
     logoutIframe.setAttribute(
     // The endpoint is the URL for logging out from Encore
@@ -110,7 +113,7 @@ function EncoreLogOutTimer() {
     body.appendChild(logoutIframe);
     setTimeout(function () {
       body.removeChild(logoutIframe);
-    }, 10000);
+    }, iframeExistingTime);
   };
 }
 

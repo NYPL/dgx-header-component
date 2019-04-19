@@ -90,6 +90,7 @@ class Header extends React.Component {
       patron,
       navData,
       currentTime = Date.now() || undefined,
+      isTest = false,
     } = this.props;
 
     const patronNameObject = !_isEmpty(patron) && patron.names && patron.names.length ?
@@ -106,6 +107,7 @@ class Header extends React.Component {
         isFeatureFlagsActivated: {},
         logOutUrl: '',
         currentTime,
+        isTest,
       },
       { featureFlagsStore: FeatureFlags.store.getState() },
     );
@@ -117,7 +119,11 @@ class Header extends React.Component {
     // Set the log out link to state
     this.setLogOutLink(window.location.href);
     // Check if the cookie "PAT_LOGGED_IN" exists and then set the timer for deleting it
-    EncoreLogOutTimer.setEncoreLoggedInTimer(window.location.host, this.state.currentTime);
+    EncoreLogOutTimer.setEncoreLoggedInTimer(
+      window.location.host,
+      this.state.currentTime,
+      this.state.isTest
+    );
     // Set nyplIdentityPatron cookie to the state.
     this.setLoginCookie(this.state.loginCookieName);
     // Set feature flag cookies to the state
@@ -327,6 +333,7 @@ Header.propTypes = {
   navData: PropTypes.arrayOf(PropTypes.object).isRequired,
   skipNav: PropTypes.shape(SkipNavigation.propTypes),
   currentTime: PropTypes.number,
+  isTest: PropTypes.bool,
   patron: PropTypes.shape({
     names: PropTypes.arrayOf(PropTypes.string),
     loggedIn: PropTypes.bool,

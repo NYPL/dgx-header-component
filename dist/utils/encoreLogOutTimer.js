@@ -20,39 +20,28 @@ function EncoreLogOutTimer() {
   var _this = this;
 
   /**
-   * setEncoreLoggedInTimer(currentLocation, currentTime, isTest)
+   * setEncoreLoggedInTimer(currentLocationHost, currentTime, isTest)
    * This method is to set the timer to delete ‘PAT_LOGGED_IN’ cookie after its expiration time.
    * This is to keep the logged in status consistent with Encore server,
    * so the patrons don’t have to log in when they are using non-account-required operations,
    * such as searching items.
    * The default expiration time is 30 mins.
-   * @param {object} - The window.location object
+   * @param {object} - The current location's host
    * @param {number} - The milliseconds elapsed since January 1, 1970 from Date.now()
    * @param {boolean} - The flag to determine if the function is run for tests
    */
-  this.setEncoreLoggedInTimer = function (currentLocation, currentTime) {
+  this.setEncoreLoggedInTimer = function (currentLocationHost, currentTime) {
     var isTest = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
     var encoreLogInExpireDuration = _accountConfig2.default.patLoggedInCookieExpiredTime;
-    var isOnEncore = currentLocation === 'browse.nypl.org';
+    var isOnEncore = currentLocationHost === 'browse.nypl.org';
     var isLoggedIn = _utils2.default.hasCookie('PAT_LOGGED_IN');
 
     if (!isLoggedIn) {
-      // Set the cookie "ENCORE_LAST_VISITED" once the user visited Encore
-      if (isOnEncore) {
-        _utils2.default.setCookie('ENCORE_LAST_VISITED', currentTime);
-      }
-
       // Delete cookie "nyplIdentityPatron" to show Header logged out if cookie "PAT_LOGGED_IN"
       // does not exist
       if (_utils2.default.hasCookie('nyplIdentityPatron')) {
         _utils2.default.deleteCookie('nyplIdentityPatron');
-      }
-
-      // Delete cookie "ENCORE_LAST_VISITED" which holds the last time the user visited Encore
-      // if the cookie "PAT_LOGGED_IN" does not exist
-      if (_utils2.default.hasCookie('ENCORE_LAST_VISITED')) {
-        _utils2.default.deleteCookie('ENCORE_LAST_VISITED');
       }
 
       // Completely log out the user

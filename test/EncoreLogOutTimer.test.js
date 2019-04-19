@@ -50,8 +50,8 @@ describe('EncoreLogOutTimer', () => {
       utils.hasCookie.restore();
     });
 
-    it('should check if cookie "nyplIdentityPatron" and "ENCORE_LAST_VISITED" exist and ' +
-      'delete it if it does.', () => {
+    it('should check if cookie "nyplIdentityPatron" and "ENCORE_LAST_VISITED" exist and '
+      + 'delete it if it does.', () => {
       expect(logOutFromEncoreInSpy.callCount).to.equal(0);
       expect(deleteCookieSpy.callCount).to.equal(2);
       expect(deleteCookieSpy.calledWith('nyplIdentityPatron')).to.equal(true);

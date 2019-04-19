@@ -89,7 +89,7 @@ function EncoreLogOutTimer() {
     // Assigns the ID for CSS ussage
     logoutIframe.setAttribute('id', 'logoutIframe');
     body.appendChild(logoutIframe);
-    setTimeout(() => { body.removeChild(logoutIframe); }, 100);
+    setTimeout(() => { body.removeChild(logoutIframe); }, 10000);
   };
 }
 

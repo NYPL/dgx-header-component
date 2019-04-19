@@ -110,7 +110,7 @@ function EncoreLogOutTimer() {
     body.appendChild(logoutIframe);
     setTimeout(function () {
       body.removeChild(logoutIframe);
-    }, 100);
+    }, 10000);
   };
 }
 

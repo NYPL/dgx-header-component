@@ -168,6 +168,10 @@
   @import 'components/_fundraisingBanner';
 }
 
+#logoutIframe {
+  display: none;
+}
+
 /* CSS for Screen Reader Texts */
 // Taken from H5BP
 .visuallyHidden {

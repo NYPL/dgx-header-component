@@ -166,7 +166,9 @@ var Header = function (_React$Component) {
         patron = _this$props.patron,
         navData = _this$props.navData,
         _this$props$currentTi = _this$props.currentTime,
-        currentTime = _this$props$currentTi === undefined ? Date.now() || undefined : _this$props$currentTi;
+        currentTime = _this$props$currentTi === undefined ? Date.now() || undefined : _this$props$currentTi,
+        _this$props$isTest = _this$props.isTest,
+        isTest = _this$props$isTest === undefined ? false : _this$props$isTest;
 
 
     var patronNameObject = !(0, _underscore.isEmpty)(patron) && patron.names && patron.names.length ? _utils2.default.modelPatronName(patron.names[0]) : {};
@@ -180,7 +182,8 @@ var Header = function (_React$Component) {
       patronDataReceived: patron.loggedIn || false,
       isFeatureFlagsActivated: {},
       logOutUrl: '',
-      currentTime: currentTime
+      currentTime: currentTime,
+      isTest: isTest
     }, { featureFlagsStore: _dgxFeatureFlags2.default.store.getState() });
     return _this;
   }
@@ -192,13 +195,13 @@ var Header = function (_React$Component) {
       _dgxFeatureFlags2.default.store.listen(this.onFeatureFlagsChange.bind(this));
       // Set the log out link to state
       this.setLogOutLink(window.location.href);
+      // Check if the cookie "PAT_LOGGED_IN" exists and then set the timer for deleting it
+      _encoreLogOutTimer2.default.setEncoreLoggedInTimer(window.location.host, this.state.currentTime, this.state.isTest);
       // Set nyplIdentityPatron cookie to the state.
       this.setLoginCookie(this.state.loginCookieName);
       // Set feature flag cookies to the state
       // We don't have any feature flags set in the config list at this moment though
       _utils2.default.checkFeatureFlagActivated(_featureFlagConfig2.default.featureFlagList, this.state.isFeatureFlagsActivated);
-      // Check if the cookie "PAT_LOGGED_IN" exists and then set the timer for deleting it
-      _encoreLogOutTimer2.default.setEncoreLoggedInTimer(window.location, this.state.currentTime);
     }
   }, {
     key: 'componentWillUnmount',
@@ -421,6 +424,7 @@ Header.propTypes = {
   navData: _propTypes2.default.arrayOf(_propTypes2.default.object).isRequired,
   skipNav: _propTypes2.default.shape(_dgxSkipNavigationLink2.default.propTypes),
   currentTime: _propTypes2.default.number,
+  isTest: _propTypes2.default.bool,
   patron: _propTypes2.default.shape({
     names: _propTypes2.default.arrayOf(_propTypes2.default.string),
     loggedIn: _propTypes2.default.bool

@@ -1,3 +1,63 @@
 {
-  "extends": "airbnb"
+  "extends": [
+    "airbnb"
+  ],
+  "rules": {
+    "function-paren-newline": ["error", "consistent"],
+    "jsx-a11y/label-has-associated-control": [ "error", {
+    "required": {
+        "some": [ "nesting", "id"  ]
+      }
+    }],
+    "jsx-a11y/label-has-for": [ "error", {
+      "required": {
+        "some": [ "nesting", "id"  ]
+      }
+    }],
+    "prefer-destructuring": ["error", {
+      "VariableDeclarator": {
+        "array": true,
+        "object": true
+      },
+      "AssignmentExpression": {
+        "array": false,
+        "object": false
+      }
+    }, {
+      "enforceForRenamedProperties": false
+    }],
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error"
+  },
+  "overrides": [
+    {
+      "files": ["*.test.js"],
+      "rules": {
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+      }
+    },
+    {
+      "files": ["src/app/actions/Actions.js"],
+      "rules": {
+        "class-methods-use-this": [1]
+      }
+    }
+  ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true,
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "plugins": [
+    "react"
+  ],
+  "env": {
+    "es6": true,
+    "mocha": true
+  }
 }

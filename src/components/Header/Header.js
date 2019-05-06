@@ -26,7 +26,7 @@ import GlobalAlerts from '../GlobalAlerts/GlobalAlerts';
 import FundraisingBanner from '../FundraisingBanner/FundraisingBanner';
 // Utility Library
 import utils from '../../utils/utils';
-import EncoreLogOutTimer from '../../utils/encoreLogOutTimer';
+import EncoreCatalogLogOutTimer from '../../utils/encoreCatalogLogOutTimer';
 
 const styles = {
   wrapper: {
@@ -118,8 +118,9 @@ class Header extends React.Component {
     FeatureFlags.store.listen(this.onFeatureFlagsChange.bind(this));
     // Set the log out link to state
     this.setLogOutLink(window.location.href);
-    // Check if the cookie "PAT_LOGGED_IN" exists and then set the timer for deleting it
-    EncoreLogOutTimer.setEncoreLoggedInTimer(
+    // Check if the cookie "PAT_LOGGED_IN" exists and then set the timer to log out the user from
+    // Encore and Catalog(as a side effect)
+    EncoreCatalogLogOutTimer.setEncoreLoggedInTimer(
       window.location.host,
       this.state.currentTime,
       this.state.isTest

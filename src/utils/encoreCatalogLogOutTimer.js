@@ -4,12 +4,12 @@ import utils from './utils';
 function EncoreCatalogLogOutTimer() {
   /**
    * setEncoreLoggedInTimer(currentLocationHost, currentTime, isTest)
-   * This method is to set the timer to delete related cookies and completely to log out from Encore
+   * This method is to set the timer to delete related cookies and completely log out from Encore
    * after its expiration time.
    * This is to keep the logged in status consistent with Encore server
    * so the patrons don’t have to log in when they are using non-account-required operations
    * such as searching items.
-   * Unforetunately, the user will be logged out from Catalog as well, so we have to keep tracking
+   * Unfortunately, the user will be logged out from Catalog as well, so we have to keep tracking
    * the users' activites on Catalog too.
    * The default expiration time is 30 mins.
    * @param {object} - The current location's host
@@ -58,7 +58,7 @@ function EncoreCatalogLogOutTimer() {
 
   /**
    * logOutFromEncoreAndCatalogIn(time, isTest)
-   * The timer to delete log in related cookies and call the metod to complete log out from Encore
+   * The timer to delete log in related cookies and call the method to completely log out from Encore
    * and Catalog. It is called by setEncoreLoggedInTimer.
    * @param {time} - The milliseconds for the timer to count down
    * @param {boolean} - The flag to determine if the function is run for tests

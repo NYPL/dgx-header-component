@@ -77,9 +77,9 @@ var _utils = require('../../utils/utils');
 
 var _utils2 = _interopRequireDefault(_utils);
 
-var _encoreLogOutTimer = require('../../utils/encoreLogOutTimer');
+var _encoreCatalogLogOutTimer = require('../../utils/encoreCatalogLogOutTimer');
 
-var _encoreLogOutTimer2 = _interopRequireDefault(_encoreLogOutTimer);
+var _encoreCatalogLogOutTimer2 = _interopRequireDefault(_encoreCatalogLogOutTimer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -195,8 +195,9 @@ var Header = function (_React$Component) {
       _dgxFeatureFlags2.default.store.listen(this.onFeatureFlagsChange.bind(this));
       // Set the log out link to state
       this.setLogOutLink(window.location.href);
-      // Check if the cookie "PAT_LOGGED_IN" exists and then set the timer for deleting it
-      _encoreLogOutTimer2.default.setEncoreLoggedInTimer(window.location.host, this.state.currentTime, this.state.isTest);
+      // Set the timer to log out the user from Encore and Catalog
+      // (mainly for Encore while Catalog as a side effect)
+      _encoreCatalogLogOutTimer2.default.setEncoreLoggedInTimer(window.location.host, this.state.currentTime, this.state.isTest);
       // Set nyplIdentityPatron cookie to the state.
       this.setLoginCookie(this.state.loginCookieName);
       // Set feature flag cookies to the state

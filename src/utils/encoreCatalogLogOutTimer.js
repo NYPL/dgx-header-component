@@ -1,21 +1,28 @@
 import accountConfig from '../accountConfig';
 import utils from './utils';
 
-function EncoreLogOutTimer() {
+function EncoreCatalogLogOutTimer() {
   /**
    * setEncoreLoggedInTimer(currentLocationHost, currentTime, isTest)
-   * This method is to set the timer to delete ‘PAT_LOGGED_IN’ cookie after its expiration time.
-   * This is to keep the logged in status consistent with Encore server,
-   * so the patrons don’t have to log in when they are using non-account-required operations,
+   * This method is to set the timer to delete related cookies and completely log out from Encore
+   * after its expiration time.
+   * This is to keep the logged in status consistent with Encore server
+   * so the patrons don’t have to log in when they are using non-account-required operations
    * such as searching items.
+   * Unfortunately, the user will be logged out from Catalog as well, so we have to keep tracking
+   * the users' activites on Catalog too.
    * The default expiration time is 30 mins.
    * @param {object} - The current location's host
    * @param {number} - The milliseconds elapsed since January 1, 1970 from Date.now()
    * @param {boolean} - The flag to determine if the function is run for tests
    */
   this.setEncoreLoggedInTimer = (currentLocationHost, currentTime, isTest = false) => {
+    const domainsForExtendingLogIn = [
+      'browse.nypl.org', // the domain of Encore's pages
+      'catalog.nypl.org', // the domain of Catalog's pages
+    ];
     const encoreLogInExpireDuration = accountConfig.patLoggedInCookieExpiredTime;
-    const isOnEncore = currentLocationHost === 'browse.nypl.org';
+    const isOnValidDomain = domainsForExtendingLogIn.some(d => d === currentLocationHost);
     const isLoggedIn = utils.hasCookie('PAT_LOGGED_IN');
 
     if (!isLoggedIn) {
@@ -25,37 +32,38 @@ function EncoreLogOutTimer() {
         utils.deleteCookie('nyplIdentityPatron');
       }
 
-      // Delete cookie "ENCORE_LAST_VISITED" which holds the last time the user visited Encore
-      // if the cookie "PAT_LOGGED_IN" does not exist
-      if (utils.hasCookie('ENCORE_LAST_VISITED')) {
-        utils.deleteCookie('ENCORE_LAST_VISITED');
+      // Delete cookie "VALID_DOMAIN_LAST_VISITED" which holds the last time the user visited
+      // the valid domain if the cookie "PAT_LOGGED_IN" does not exist
+      if (utils.hasCookie('VALID_DOMAIN_LAST_VISITED')) {
+        utils.deleteCookie('VALID_DOMAIN_LAST_VISITED');
       }
 
       // Completely log out the user
       this.loadLogoutIframe(isTest);
     } else {
-      if (isOnEncore) {
-        // Set the cookie "ENCORE_LAST_VISITED" once the user visited Encore
-        utils.setCookie('ENCORE_LAST_VISITED', currentTime);
-        this.logOutFromEncoreIn(encoreLogInExpireDuration, isTest);
+      if (isOnValidDomain) {
+        // Set the cookie "VALID_DOMAIN_LAST_VISITED" once the user visited Encore or Catalog
+        utils.setCookie('VALID_DOMAIN_LAST_VISITED', currentTime);
+        this.logOutFromEncoreAndCatalogIn(encoreLogInExpireDuration, isTest);
       } else {
-        const lastVisitedEncoreTime = utils.getCookie('ENCORE_LAST_VISITED');
-        const timeTillLogOut = lastVisitedEncoreTime
-          ? encoreLogInExpireDuration - (currentTime - lastVisitedEncoreTime)
+        const lastVisitedValidDomainTime = utils.getCookie('VALID_DOMAIN_LAST_VISITED');
+        const timeTillLogOut = lastVisitedValidDomainTime
+          ? encoreLogInExpireDuration - (currentTime - lastVisitedValidDomainTime)
           : undefined;
 
-        this.logOutFromEncoreIn(timeTillLogOut, isTest);
+        this.logOutFromEncoreAndCatalogIn(timeTillLogOut, isTest);
       }
     }
   };
 
   /**
-   * logOutFromEncoreIn(time, isTest)
-   * The timer to delete log in related cookies. It is called by setEncoreLoggedInTimer.
+   * logOutFromEncoreAndCatalogIn(time, isTest)
+   * The timer to delete log in related cookies and call the method to completely log out from Encore
+   * and Catalog. It is called by setEncoreLoggedInTimer.
    * @param {time} - The milliseconds for the timer to count down
    * @param {boolean} - The flag to determine if the function is run for tests
    */
-  this.logOutFromEncoreIn = (time, isTest) => {
+  this.logOutFromEncoreAndCatalogIn = (time, isTest) => {
     let timeTillLogOut = (time > 0) ? time : 0;
 
     // Only for testing. If the function is run for tests, set the timeout no longer than 2 seconds
@@ -65,7 +73,7 @@ function EncoreLogOutTimer() {
 
     setTimeout(() => {
       utils.deleteCookie('PAT_LOGGED_IN');
-      utils.deleteCookie('ENCORE_LAST_VISITED');
+      utils.deleteCookie('VALID_DOMAIN_LAST_VISITED');
       utils.deleteCookie('nyplIdentityPatron');
       this.loadLogoutIframe(isTest);
     }, timeTillLogOut);
@@ -74,7 +82,7 @@ function EncoreLogOutTimer() {
   /**
    * loadLogoutIframe(isTest)
    * The function that loads a temporary iframe with the log out endpoint
-   * to completely log out the user from Encore. It then deletes the iframe right away.
+   * to completely log out the user from Encore and Catalog. It then deletes the iframe right away.
    * The reason to use this way to load the endpoint is to bypass the CORS loading from the client
    * since III does not want to provide us a real log out API URI.
    * * @param {isTest} - If running this method for testing, delete the iframe right away
@@ -95,4 +103,4 @@ function EncoreLogOutTimer() {
   };
 }
 
-export default new EncoreLogOutTimer();
+export default new EncoreCatalogLogOutTimer();

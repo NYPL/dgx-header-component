@@ -231,7 +231,7 @@ describe('Header', () => {
             .returns(true);
 
           getCookie = sinon.stub(utils, 'getCookie')
-            .withArgs('ENCORE_LAST_VISITED')
+            .withArgs('VALID_DOMAIN_LAST_VISITED')
             // Set a mock last visit time for Encore timer
             // So cookie "nyplIdentityPatron" will be kept until we test it's access token
             .returns(Date.now());

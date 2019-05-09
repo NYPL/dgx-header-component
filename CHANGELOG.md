@@ -1,6 +1,9 @@
 ### CHANGE LOG
 
 ========
+### v2.5.4
+> Update the method that logs out users from Encore to check the domain of Catalog also since it will log out the users from Catalog at the same time as a side effect.
+
 ### v2.5.3
 > Add the method to completely log out the users by loading the log out endpoint with an invisible iframe.
 > Update the eslint rules and the scripts in package.json to run lint.

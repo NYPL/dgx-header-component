@@ -18,7 +18,6 @@ describe('Utils', () => {
       utils.setCookie('TEST_COOKIE', 'thisisthetestvalue');
 
       expect(document.cookie).to.equal('TEST_COOKIE=thisisthetestvalue');
-      // need to test domain and path
     });
     it('should just terminate the function if no valid name or value passed to the method.', () => {
       utils.setCookie();

@@ -221,8 +221,6 @@ function Utils() {
     var pathAndDomain = '; path=/; domain=.nypl.org;';
 
     document.cookie = encodeURI(name) + '=' + encodeURI(value) + expires + pathAndDomain;
-
-    console.log(document.cookie);
   };
 
   /**

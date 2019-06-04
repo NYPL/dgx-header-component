@@ -212,10 +212,10 @@ function Utils() {
       return false;
     }
 
-    const expires = `; max-age=${maxAge}`;
-    const pathAndDomain= '; path=/; domain=.nypl.org;';
+    const expires = ` max-age=${maxAge};`;
+    const pathAndDomain= ' path=/; domain=.nypl.org;';
 
-    document.cookie = `${encodeURI(name)}=${encodeURI(value)}${expires}${pathAndDomain}`;
+    document.cookie = `${encodeURI(name)}=${encodeURI(value)};${expires}${pathAndDomain}`;
   };
 
   /**

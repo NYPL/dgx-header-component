@@ -217,10 +217,10 @@ function Utils() {
       return false;
     }
 
-    var expires = '; max-age=' + maxAge;
-    var pathAndDomain = '; path=/; domain=.nypl.org;';
+    var expires = ' max-age=' + maxAge + ';';
+    var pathAndDomain = ' path=/; domain=.nypl.org;';
 
-    document.cookie = encodeURI(name) + '=' + encodeURI(value) + expires + pathAndDomain;
+    document.cookie = encodeURI(name) + '=' + encodeURI(value) + ';' + expires + pathAndDomain;
   };
 
   /**

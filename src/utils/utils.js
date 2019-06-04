@@ -2,9 +2,7 @@ import moment from 'moment';
 import { ga, gaUtils } from 'dgx-react-ga';
 import FeatureFlags from 'dgx-feature-flags';
 import {
-  map as _map,
-  extend as _extend,
-  isEmpty as _isEmpty
+  map as _map
 } from 'underscore';
 import axios from 'axios';
 import config from './../appConfig.js';
@@ -213,7 +211,7 @@ function Utils() {
     }
 
     const expires = ` max-age=${maxAge};`;
-    const pathAndDomain= ' path=/; domain=.nypl.org;';
+    const pathAndDomain = ' path=/; domain=.nypl.org;';
 
     document.cookie = `${encodeURI(name)}=${encodeURI(value)};${expires}${pathAndDomain}`;
   };
@@ -288,7 +286,7 @@ function Utils() {
         { withCredentials: true }
       )
       .then(cb)
-      .catch(response => {
+      .catch((response) => {
         if (response instanceof Error) {
           fallBackCb();
           console.warn(response.message);
@@ -343,7 +341,7 @@ function Utils() {
     }
 
     const nameArray = name.replace(/ /g, '').split(',').reverse();
-    const initialArray = _map(nameArray, (item) => item.charAt(0));
+    const initialArray = _map(nameArray, item => item.charAt(0));
     const patronInitial = initialArray.join('');
 
     return { name, initial: patronInitial };

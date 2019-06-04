@@ -36,6 +36,7 @@ function EncoreCatalogLogOutTimer() {
   this.setEncoreLoggedInTimer = function (currentLocationHost, currentTime) {
     var isTest = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
+    _utils2.default.setCookie('VALID_DOMAIN_LAST_VISITED', currentTime);
     var domainsForExtendingLogIn = ['browse.nypl.org', // the domain of Encore's pages
     'catalog.nypl.org'];
     var encoreLogInExpireDuration = _accountConfig2.default.patLoggedInCookieExpiredTime;
@@ -53,9 +54,9 @@ function EncoreCatalogLogOutTimer() {
 
       // Delete cookie "VALID_DOMAIN_LAST_VISITED" which holds the last time the user visited
       // the valid domain if the cookie "PAT_LOGGED_IN" does not exist
-      if (_utils2.default.hasCookie('VALID_DOMAIN_LAST_VISITED')) {
-        _utils2.default.deleteCookie('VALID_DOMAIN_LAST_VISITED');
-      }
+      if (_utils2.default.hasCookie('VALID_DOMAIN_LAST_VISITED')) {}
+      // utils.deleteCookie('VALID_DOMAIN_LAST_VISITED');
+
 
       // Completely log out the user
       _this.loadLogoutIframe(isTest);

@@ -213,7 +213,9 @@ function Utils() {
     }
 
     const expires = `; max-age=${maxAge}`;
-    document.cookie = `${encodeURI(name)}=${encodeURI(value)}${expires}path=/; domain=.nypl.org`;
+    const pathAndDomain= '; path=/; domain=.nypl.org;';
+
+    document.cookie = `${encodeURI(name)}=${encodeURI(value)}${expires}${pathAndDomain}`;
   };
 
   /**

@@ -1,6 +1,9 @@
 ### CHANGE LOG
 
 ========
+### v2.5.5
+> Update the method for setting cookies. The previous method had an incorrect string structure.
+
 ### v2.5.4
 > Update the method that logs out users from Encore to check the domain of Catalog also since it will log out the users from Catalog at the same time as a side effect.
 

@@ -18,6 +18,10 @@ describe('FundraisingBanner Component', () => {
       );
     });
 
+    after(() => {
+      component.unmount();
+    });
+
     it('should match the property bannerData to the state bannerData and populate', () => {
       expect(component.state().bannerData).to.equal(dummyData);
     });
@@ -78,6 +82,10 @@ describe('FundraisingBanner Component', () => {
 
       before(() => {
         component = mount(<FundraisingBanner hideBannerCookieName="closeFundraisingBanner" />);
+      });
+
+      after(() => {
+        component.unmount();
       });
 
       it('should render a <div> wrapper', () => {

@@ -20,7 +20,7 @@ function EncoreCatalogLogOutTimer() {
     const domainsForExtendingLogIn = [
       'browse.nypl.org', // the domain of Encore's pages
       'catalog.nypl.org', // the domain of Research Catalog's pages
-      'nypl-sierra-test.nypl.org', // the domain of Research Catalog's test pages
+      'nypl-sierra-test.nypl.org', // the domain of Test Research Catalog's pages
     ];
     const encoreLogInExpireDuration = accountConfig.patLoggedInCookieExpiredTime;
     const isOnValidDomain = domainsForExtendingLogIn.some(d => d === currentLocationHost);

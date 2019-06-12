@@ -1,0 +1,158 @@
+/* VENDOR PREFIXER
+* 
+*   Params: 
+*   @name: The name of the property to be prefixed
+*      ex: transform
+*   @value: The value supplied
+*       ex: rotate(42.5deg) 
+*/
+
+@mixin vendor-prefixer($name, $value) {
+  @each $vendor in ('-webkit-', '-moz-', '-ms-', '-o-', '') {
+    #{$vendor}#{$name}: #{$value};
+  }
+}
+
+/* FONT FACE MIXIN
+ * ---------------
+ * Usage: @include font-face('Kievit-Book', 'http://...');
+ * Desc: Do not include the font file extension, this mixin
+ * will generate the proper extensions.
+*/
+@mixin font-face($font-family, $file-path) {
+  @font-face {
+    font-family: $font-family;
+    src: url('#{$file-path}.eot');
+    src: url('#{$file-path}.eot?#iefix') format('embedded-opentype'),
+         url('#{$file-path}.woff') format('woff'),
+         url('#{$file-path}.ttf') format('truetype');
+  }
+}
+
+/* BORDER RADIUS MIXIN
+ * -------------------
+ * Usage: @include border-radius(5px);
+ * Desc: Creates a border radius
+*/
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  border-radius: $radius;
+  background-clip: padding-box;
+}
+
+/* OPACITY MIXIN
+ * ---------------
+ * Usage: @include opacity(0.8);
+ * Desc: Supports cross-browser Opacity rules
+*/
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+/* UP ARROW MIXIN
+ * ---------------
+ * Usage: @include up-arrow(#EEE);
+ * Desc: Creates a CSS3 arrow using pseudo :before,:after
+ * Params: @color - HEX,RGB color of arrow
+ *         @left - Distance from the left of the parent wrapper
+ *         @bottom-or-top - String representation of either distance from the TOP or BOTTOM
+ *         @distance - Distance from either TOP or BOTTOM
+ *         @border-width - pixel width of arrow
+*/
+@mixin up-arrow($color, $left: 25%, $bottom-or-top: 'top', $distance: 0px, $border-width: 10px) {
+  &:before, &:after {
+    border-style: solid;
+    border-width: $border-width;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: $color;
+    content: ' ';
+    left: $left;
+    height: 0;
+    position: absolute;
+    width: 0;
+
+    @if ($bottom-or-top == 'top') {
+      top: $distance;
+    } @else {
+      bottom: $distance;
+    }
+  }
+  /* top-stacked, smaller arrow */
+  &:before {
+    z-index: 2;
+  }
+  /* arrow which acts as a background shadow */
+  &:after {
+    z-index: 1;
+  }
+}
+
+/* CLEARFIX EXTEND MIXIN
+ * ---------------------
+ * Usage: @extend %clearfix;
+ * Desc: Provides IE6 and up support
+ * to clear floated elements.
+*/
+%clearfix {
+  *zoom: 1;
+  &:before, &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+/* VALUE CALCULATION MIXIN
+ * -----------------------
+ * Usage: Makes the properties of an element
+ * can be defined by both percentage
+ * and pixels.
+*/
+
+@mixin calculation($property, $expression) {
+  #{$property}: -webkit-calc(#{$expression});
+  #{$property}: -moz-calc(#{$expression});
+  #{$property}: calc(#{$expression});
+}
+
+/* TRANSITION MIXIN
+ * ----------------
+ * Usage: Applies set argument transition across
+ * various browser prefixes.
+*/
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+/* FOCUS RINGS
+ * ----------------
+ *
+ *
+*/
+$focus-width: 0.1875em;
+
+@mixin basic-focus {
+  box-shadow: 1px 1px 1px 1px $focus-color;
+  @include vendor-prefixer(outline-color, $focus-color);
+  outline-style: solid;
+  outline-width: $focus-width;
+}
+
+
+/// For Buttons found in header dropdowns for Login & Newsletter
+/// Typically these represent a "pill" shaped button
+
+@mixin button-focus {
+  box-shadow: 1px 1px 2px 2px darken($focus-color, 5%);
+  outline: 0;
+}

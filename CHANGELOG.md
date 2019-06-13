@@ -1,6 +1,9 @@
 ### CHANGE LOG
 
 ========
+### v2.5.6
+> Update the method that logs out users from Encore to also check the domain of Test Research Catalog for QA use.
+
 ### v2.5.5
 > Update the method for setting cookies. The previous method had an incorrect string structure.
 

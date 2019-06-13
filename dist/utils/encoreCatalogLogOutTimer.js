@@ -27,7 +27,7 @@ function EncoreCatalogLogOutTimer() {
    * so the patrons don’t have to log in when they are using non-account-required operations
    * such as searching items.
    * Unfortunately, the user will be logged out from Catalog as well, so we have to keep tracking
-   * the users' activites on Catalog too.
+   * the users' activites on Catalog too. Also, we add Test Classic Catalog for QA use.
    * The default expiration time is 30 mins.
    * @param {object} - The current location's host
    * @param {number} - The milliseconds elapsed since January 1, 1970 from Date.now()
@@ -37,7 +37,8 @@ function EncoreCatalogLogOutTimer() {
     var isTest = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
     var domainsForExtendingLogIn = ['browse.nypl.org', // the domain of Encore's pages
-    'catalog.nypl.org'];
+    'catalog.nypl.org', // the domain of Research Catalog's pages
+    'nypl-sierra-test.nypl.org'];
     var encoreLogInExpireDuration = _accountConfig2.default.patLoggedInCookieExpiredTime;
     var isOnValidDomain = domainsForExtendingLogIn.some(function (d) {
       return d === currentLocationHost;

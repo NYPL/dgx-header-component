@@ -42,8 +42,13 @@ function EncoreCatalogLogOutTimer() {
       // Completely log out the user
       this.loadLogoutIframe(isTest);
     } else {
-      if (isOnValidDomain) {
-        // Set the cookie "VALID_DOMAIN_LAST_VISITED" once the user visited Encore or Catalog
+      // Update VALID_DOMAIN_LAST_VISITED in two scenarios:
+      //  1. Patron is on a Sierra hosted page, so actively refreshing their
+      //     session
+      //  2. The VALID_DOMAIN_LAST_VISITED cookie doesn't exist, which will
+      //     only happen if the patron logged in through a redirect, without
+      //     running JS on a "valid domain"
+      if (isOnValidDomain || !utils.hasCookie('VALID_DOMAIN_LAST_VISITED')) {
         utils.setCookie('VALID_DOMAIN_LAST_VISITED', currentTime);
         this.logOutFromEncoreAndCatalogIn(encoreLogInExpireDuration, isTest);
       } else {

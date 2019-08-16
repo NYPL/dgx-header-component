@@ -240,6 +240,7 @@ describe('EncoreLogOutTimer', () => {
           // Expect logout timer called with full time:
           logOutFromEncoreAndCatalogInSpy.calledWith(accountConfig.patLoggedInCookieExpiredTime)
         ).to.equal(true);
+        expect(setCookieSpy.calledWith('VALID_DOMAIN_LAST_VISITED', currentTime)).to.equal(true);
       });
   });
 

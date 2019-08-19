@@ -25,7 +25,6 @@ describe('EncoreLogOutTimer', () => {
         EncoreCatalogLogOutTimer,
         'logOutFromEncoreAndCatalogIn',
       );
-      loadLogoutIframeSpy = sinon.spy(EncoreCatalogLogOutTimer, 'loadLogoutIframe');
       deleteCookieSpy = sinon.spy(utils, 'deleteCookie');
       hasCookieStub = sinon.stub(utils, 'hasCookie');
 
@@ -49,7 +48,6 @@ describe('EncoreLogOutTimer', () => {
       setCookieSpy.restore();
       deleteCookieSpy.restore();
       logOutFromEncoreAndCatalogInSpy.restore();
-      loadLogoutIframeSpy.restore();
       utils.hasCookie.restore();
     });
 
@@ -59,10 +57,6 @@ describe('EncoreLogOutTimer', () => {
       expect(deleteCookieSpy.callCount).to.equal(2);
       expect(deleteCookieSpy.calledWith('nyplIdentityPatron')).to.equal(true);
       expect(deleteCookieSpy.calledWith('VALID_DOMAIN_LAST_VISITED')).to.equal(true);
-    });
-
-    it('should load the log out iframe to completely log out the user from Encore.', () => {
-      expect(loadLogoutIframeSpy.callCount).to.equal(1);
     });
   });
 

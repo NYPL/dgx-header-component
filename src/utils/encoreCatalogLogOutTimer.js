@@ -38,9 +38,6 @@ function EncoreCatalogLogOutTimer() {
       if (utils.hasCookie('VALID_DOMAIN_LAST_VISITED')) {
         utils.deleteCookie('VALID_DOMAIN_LAST_VISITED');
       }
-
-      // Completely log out the user
-      this.loadLogoutIframe(isTest);
     } else {
       // Update VALID_DOMAIN_LAST_VISITED in two scenarios:
       //  1. Patron is on a Sierra hosted page, so actively refreshing their

@@ -8,14 +8,6 @@ import EncoreCatalogLogOutTimer from '../src/utils/encoreCatalogLogOutTimer';
 import utils from '../src/utils/utils';
 import accountConfig from '../src/accountConfig';
 
-// Matcher to fuzzily match a Unix ms value to within a few seconds:
-let matchWithinACoupleSecondsOf = (expectedTime, threshold = 2000) => {
-  return sinon.match(function (actualTime) {
-    console.log(`Fuzzy matching a timestamp. Actual: ${actualTime}, Expected: ${expectedTime}, Difference: ${Math.abs(expectedTime - actualTime)}`)
-    return Math.abs(expectedTime - actualTime) <= threshold
-  })
-}
-
 describe('EncoreLogOutTimer', () => {
   let deleteCookieSpy;
   let setCookieSpy;
@@ -246,7 +238,7 @@ describe('EncoreLogOutTimer', () => {
         ).to.equal(true);
 
         // Verify cookie created with a value that's extremely recent
-        expect(setCookieSpy.calledWith('VALID_DOMAIN_LAST_VISITED', matchWithinACoupleSecondsOf(Date.now(), 3000))).to.equal(true);
+        expect(setCookieSpy.calledWith('VALID_DOMAIN_LAST_VISITED', currentTime)).to.equal(true);
       });
   });
 

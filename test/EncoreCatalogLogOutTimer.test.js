@@ -25,7 +25,6 @@ describe('EncoreLogOutTimer', () => {
         EncoreCatalogLogOutTimer,
         'logOutFromEncoreAndCatalogIn',
       );
-      loadLogoutIframeSpy = sinon.spy(EncoreCatalogLogOutTimer, 'loadLogoutIframe');
       deleteCookieSpy = sinon.spy(utils, 'deleteCookie');
       hasCookieStub = sinon.stub(utils, 'hasCookie');
 
@@ -49,7 +48,6 @@ describe('EncoreLogOutTimer', () => {
       setCookieSpy.restore();
       deleteCookieSpy.restore();
       logOutFromEncoreAndCatalogInSpy.restore();
-      loadLogoutIframeSpy.restore();
       utils.hasCookie.restore();
     });
 
@@ -59,10 +57,6 @@ describe('EncoreLogOutTimer', () => {
       expect(deleteCookieSpy.callCount).to.equal(2);
       expect(deleteCookieSpy.calledWith('nyplIdentityPatron')).to.equal(true);
       expect(deleteCookieSpy.calledWith('VALID_DOMAIN_LAST_VISITED')).to.equal(true);
-    });
-
-    it('should load the log out iframe to completely log out the user from Encore.', () => {
-      expect(loadLogoutIframeSpy.callCount).to.equal(1);
     });
   });
 
@@ -154,7 +148,7 @@ describe('EncoreLogOutTimer', () => {
     });
   });
 
-  describe('when "PAT_LOGGED_IN" exists and the visited page is NOT on a valid domain '
+  describe('when "PAT_LOGGED_IN" and "VALID_DOMAIN_LAST_VISITED" exist and the visited page is NOT on a valid domain '
     + '(neither Encore or Catalog)', () => {
     const encoreLogInExpireDuration = accountConfig.patLoggedInCookieExpiredTime;
     const currentTime = Date.now();
@@ -175,6 +169,10 @@ describe('EncoreLogOutTimer', () => {
         .onCall(0)
         .returns(true);
 
+      hasCookieStub
+        .withArgs('VALID_DOMAIN_LAST_VISITED')
+        .returns(true);
+
       getCookieStub
         .withArgs('VALID_DOMAIN_LAST_VISITED')
         .onCall(0)
@@ -191,7 +189,7 @@ describe('EncoreLogOutTimer', () => {
 
     it('should reset EncoreLoggedInTimer to the remaining time before "PAT_LOGGED_IN" is expired',
       () => {
-        expect(getCookieStub.callCount).to.equal(1);
+        expect(hasCookieStub.callCount).to.equal(2);
         expect(logOutFromEncoreAndCatalogInSpy.callCount).to.equal(1);
         expect(
           logOutFromEncoreAndCatalogInSpy.calledWith(encoreLogInExpireDuration
@@ -199,6 +197,51 @@ describe('EncoreLogOutTimer', () => {
         ).to.equal(true);
       });
   });
+
+  describe('when "PAT_LOGGED_IN" exists but "VALID_DOMAIN_LAST_VISITED" does not on an invalid domain'
+    + '(i.e. following a login redirect)', () => {
+    const encoreLogInExpireDuration = accountConfig.patLoggedInCookieExpiredTime;
+    const currentTime = Date.now();
+
+    // Mock the time as it has only passed 1700000 milliseconds
+    mockLastVisitedTime = Date.now() - 1700000;
+
+    before(() => {
+      hasCookieStub = sinon.stub(utils, 'hasCookie')
+        .withArgs('PAT_LOGGED_IN')
+        .returns(true)
+        .withArgs('VALID_DOMAIN_LAST_VISITED')
+        .returns(false);
+      logOutFromEncoreAndCatalogInSpy = sinon.spy(
+        EncoreCatalogLogOutTimer,
+        'logOutFromEncoreAndCatalogIn',
+      );
+      setCookieSpy = sinon.stub(utils, 'setCookie');
+
+      EncoreCatalogLogOutTimer.setEncoreLoggedInTimer('somewebsite.nypl.org', currentTime, isTest);
+    });
+
+    after(() => {
+      setCookieSpy.restore();
+      utils.hasCookie.restore();
+      logOutFromEncoreAndCatalogInSpy.restore();
+    });
+
+    it('should drop VALID_DOMAIN_LAST_VISITED and set EncoreLoggedInTimer to the full default time',
+      () => {
+        expect(hasCookieStub.withArgs('PAT_LOGGED_IN').callCount).to.equal(1);
+        expect(hasCookieStub.withArgs('VALID_DOMAIN_LAST_VISITED').callCount).to.equal(1);
+        expect(logOutFromEncoreAndCatalogInSpy.callCount).to.equal(1);
+        expect(
+          // Expect logout timer called with full time:
+          logOutFromEncoreAndCatalogInSpy.calledWith(accountConfig.patLoggedInCookieExpiredTime)
+        ).to.equal(true);
+
+        // Verify cookie created with a value that's extremely recent
+        expect(setCookieSpy.calledWith('VALID_DOMAIN_LAST_VISITED', currentTime)).to.equal(true);
+      });
+  });
+
 });
 
 describe('logOutFromEncoreAndCatalogIn', () => {
@@ -275,6 +318,10 @@ describe('logOutFromEncoreAndCatalogIn', () => {
 
       hasCookieStub
         .withArgs('PAT_LOGGED_IN')
+        .returns(true);
+
+      hasCookieStub
+        .withArgs('VALID_DOMAIN_LAST_VISITED')
         .returns(true);
 
       getCookieStub

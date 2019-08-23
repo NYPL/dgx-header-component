@@ -8,7 +8,7 @@ This repository is for the header component used in React applications at NYPL.
 
 ### Version
 
-> v2.5.6
+> v2.5.8
 
 ### App Installation
 
@@ -192,20 +192,20 @@ We use a specific NYPL patron log in cookie to decide the logged in status. For 
 ### Contributing is fun and easy!
 
 1. Clone this repo.
-2. Checkout & create a feature branch from `development` - `git checkout development && git checkout -b new-feature`, do your good works.
-3. When your work is ready to commit, run `npm run babel-build`
-4. Commit your changes - `git commit -am 'Description of feature'`.
-5. Push the branch - `git push origin new-feature`.
-6. Create a new Pull Request and make sure it is pointed at the `development` branch.
-7. Upon approval, merge to `development`
-8. Create release branch: `git checkout -b release-v.x.x.x`
-9. Update `package.json` with new version number, update the `README.md` & `CHANGELOG.md` with relevant info.
-10. Commit those changes and merge back to development: `git merge --no-ff release-x.x.x`
-11. Push `development` to the remote origin
-12. Checkout `master` & `git merge --no-ff development`
-13. Tag `master` with the new release `git tag vx.x.x`
-14. Push `master` to the remote origin
-15. Push the tags to the remote origin `git push --tags`
-16. Update the release version on the remote in this case [https://github.com/NYPL/dgx-header-component/releases](https://github.com/NYPL/dgx-header-component/releases)
-17. Update the `npm` module: Return to your command line, and run `npm publish` from the project root.
-18. Pat self on back. Enjoy a nice 🌮 dinner.
+2. Checkout the `development` branch and run `npm install`.
+3. Create a feature branch from `development` - `git checkout -b new-feature`.
+4. When your work is ready to commit, run `npm run babel-build` to build the minified bundle.
+5. Update `package.json` with new version number, update the `README.md` & `CHANGELOG.md` with relevant info.
+6. Commit your changes - `git commit -am 'Description of feature'`.
+7. Push the branch to Github - `git push origin new-feature`.
+8. Create a new pull request and make sure it is pointed at the `development` branch.
+9. Upon approval, merge the pull request to `development`.
+10. Create a new pull request on Github for `development` ->  `master`.
+11. Upon approval, merge into master and then locally pull the latest.
+12. Tag `master` with the new release `git tag vx.x.x`.
+13. Push the tags to the remote origin `git push --tags`.
+14. Update the release version on the remote in this case [https://github.com/NYPL/dgx-header-component/releases](https://github.com/NYPL/dgx-header-component/releases).
+15. Update the `npm` module: Return to your command line, and run `npm publish` from the project root.
+16. Pat self on back. Enjoy a nice 🌮 dinner.
+
+The steps may change if many features are being worked on in parallel. In that case, it is best to create a release branch `release-x.x.x` from `development`, and point all new feature pull requests to that release branch. Then, once all the features are complete and QA-ed, merge in `release-x.x.x` into `development`.

@@ -1,6 +1,14 @@
 ### CHANGE LOG
 
 ========
+### v2.5.8
+> Fix bugs introduced in 2.5.6:
+  - Logging in with a non-catalog redirect_uri causes immediate logout
+  - Logout iframe is loaded recklessly for users that are not logged in
+
+### v2.5.7
+> Update package-lock.json file that prevent newer version of packages to load and locally build the app properly. Updated documented git workflow for contributing.
+
 ### v2.5.6
 > Update the method that logs out users from Encore to also check the domain of Test Research Catalog for QA use.
 

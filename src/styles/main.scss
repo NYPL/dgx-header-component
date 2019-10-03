@@ -13,7 +13,7 @@
 */
 .header {
   @extend %clearfix;
-  @include Kievit-Book;
+  @include System-Book;
   background-color: #FFF;
   width: 100%;
 
@@ -184,7 +184,7 @@
   padding: 0;
   position: absolute;
 
-  &:focus, 
+  &:focus,
   &:active {
     clip: auto;
     height: auto;

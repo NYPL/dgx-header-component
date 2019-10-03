@@ -149,7 +149,7 @@ $BANNER_XLARGE_SCREEN: 1120px;
   &-button {
     line-height: normal;
     color: #FFF;
-    @include Kievit-Bold;
+    @include System-Bold;
     background-color: $libraryRed;
     padding: 10px 20px;
     text-transform: uppercase;

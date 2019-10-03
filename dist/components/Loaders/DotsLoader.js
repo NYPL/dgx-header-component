@@ -17,7 +17,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var styles = {
   text: {
     display: 'inline-block',
-    fontFamily: 'Kievit-Book, Helvetica, arial',
+    fontFamily: 'system-ui, "Segoe UI", Tahoma',
+    fontWeight: 400,
     color: '#FFF',
     fontSize: '20px',
     margin: '0 5px 0 0'

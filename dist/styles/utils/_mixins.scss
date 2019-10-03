@@ -1,10 +1,10 @@
 /* VENDOR PREFIXER
-* 
-*   Params: 
+*
+*   Params:
 *   @name: The name of the property to be prefixed
 *      ex: transform
 *   @value: The value supplied
-*       ex: rotate(42.5deg) 
+*       ex: rotate(42.5deg)
 */
 
 @mixin vendor-prefixer($name, $value) {
@@ -15,7 +15,7 @@
 
 /* FONT FACE MIXIN
  * ---------------
- * Usage: @include font-face('Kievit-Book', 'http://...');
+ * Usage: @include font-face('System-Book', 'http://...');
  * Desc: Do not include the font file extension, this mixin
  * will generate the proper extensions.
 */

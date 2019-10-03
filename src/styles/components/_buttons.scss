@@ -17,7 +17,7 @@
   // First instance top-level <a> tags
   li > a,
   & > a {
-    @include Kievit-Bold;
+    @include System-Bold;
     font-size: 13px;
     letter-spacing: .04em;
     margin: 0 10px 0 0;
@@ -46,7 +46,7 @@
 
   .subscribeButton,
   .myNyplButton {
-    @include Kievit-Bold;
+    @include System-Bold;
     font-size: 13px;
     color: #000;
     background-color: #FFF;

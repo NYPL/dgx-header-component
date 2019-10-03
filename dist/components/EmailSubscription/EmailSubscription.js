@@ -68,7 +68,8 @@ var styles = {
     backgroundColor: '#1B7FA7',
     border: '2px solid #FFF',
     color: '#FFF',
-    fontFamily: 'Kievit-Book',
+    fontFamily: 'system-ui, "Segoe UI", Tahoma',
+    fontWeight: 400,
     fontSize: '0.875em',
     height: '38px',
     margin: '60px 0 0 0',
@@ -84,7 +85,8 @@ var styles = {
     width: '90px',
     fontSize: '0.875em',
     backgroundColor: '#1B7FA7',
-    fontFamily: 'Kievit-Book',
+    fontFamily: 'system-ui, "Segoe UI", Tahoma',
+    fontWeight: 400,
     marginTop: '25px'
   },
   privacyLink: {

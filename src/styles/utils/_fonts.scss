@@ -13,9 +13,6 @@ $SECONDARY_FONT_MILO: 'serif';
  * ---------------------------
 */
 
-/* KIEVIT Small Caps */
-//@include font-face(Kievit-SC, '#{$FONT_PATH}/ff_kievit_web/KievitScWeb');
-
 /* MILO INCLUDES */
 /* Milo Slab Light */
 @include font-face(Milo-Light, '#{$FONT_PATH}/milo-web/milo-slab-pro-light/MiloSlabWebPro-Light');
@@ -29,11 +26,10 @@ $SECONDARY_FONT_MILO: 'serif';
 @include font-face(Milo-Medium, '#{$FONT_PATH}/milo-web/milo-slab-pro-medium/MiloSlabWebPro-Medium');
 
 /* System MIXINS */
-// Map all the instances of Kievit-Regular to Kievit-Book... please.
-// @mixin Kievit-Regular {
-//   font-family: 'Kievit-Regular', $SECONDARY_FONT_KIEVIT, $THIRD_FONT_KIEVIT;
+// Map all the instances of System-Regular to System-Book... please.
+// @mixin System-Regular {
+//   font-family: 'System-Regular', $SECONDARY_FONT_SYSTEM, $THIRD_FONT_SYSTEM;
 // }
-// FOR REFERENCE SEE THIS URL:http://nypl.github.io/dgx-styleguide/kievit.html
 @mixin System-Book {
   font-family: 'system-ui', "Segoe UI", Tahoma, $SECONDARY_FONT_SYSTEM, $THIRD_FONT_SYSTEM;
   font-weight: 400;
@@ -60,14 +56,6 @@ $SECONDARY_FONT_MILO: 'serif';
   font-family: 'system-ui', "Segoe UI", Tahoma, $SECONDARY_FONT_SYSTEM, $THIRD_FONT_SYSTEM;
   font-weight: 300;
 }
-
-//@mixin Kievit-Thin {
-//  font-family: 'Kievit-Thin', $SECONDARY_FONT_KIEVIT, $THIRD_FONT_KIEVIT;
-//}
-
-//@mixin Kievit-SC {
-//  font-family: 'Kievit-SC', $SECONDARY_FONT_KIEVIT, $THIRD_FONT_KIEVIT;
-//}
 
 /* MILO MIXINS */
 // FOR REFERENCE SEE THIS URL: http://nypl.github.io/dgx-styleguide/milo.html

@@ -12,22 +12,6 @@ $SECONDARY_FONT_MILO: 'serif';
 /* FONT DEFINITIONS
  * ---------------------------
 */
-/* KIEVIT INCLUDES */
-// @include font-face(Kievit-Regular, '#{$FONT_PATH}/ff_kievit_web/KievitWeb');
-/* Kievit Book */
-@include font-face(Kievit-Book, '#{$FONT_PATH}/ff_kievit_web/KievitWeb-Book');
-/* Kievit Book Italic */
-@include font-face(Kievit-Book-Italic, '#{$FONT_PATH}/ff_kievit_web/KievitWeb-BookIta');
-/* Kievit Meduim */
-@include font-face(Kievit-Medium, '#{$FONT_PATH}/ff_kievit_web/KievitWeb-Medi');
-/* Kievit Meduim Italic */
-@include font-face(Kievit-Medium-Italic, '#{$FONT_PATH}/ff_kievit_web/KievitWeb-MediIta');
-/* Kievit Bold */
-@include font-face(Kievit-Bold, '#{$FONT_PATH}/ff_kievit_web/KievitWeb-Bold');
-/* Kievit Light */
-// Used in the main Search Field Text only
-@include font-face(Kievit-Light, '#{$FONT_PATH}/ff_kievit_web/KievitWeb-Light');
-// @include font-face(Kievit-Thin, '#{$FONT_PATH}/ff_kievit_web/KievitWeb-Thin');
 
 /* KIEVIT Small Caps */
 //@include font-face(Kievit-SC, '#{$FONT_PATH}/ff_kievit_web/KievitScWeb');

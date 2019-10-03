@@ -1,11 +1,12 @@
 @import 'mixins';
+@import 'system-font';
 //@import url('//fonts.googleapis.com/css?family=Roboto+Slab:400,300,100,700');
 
 $FONT_PATH: '//d2znry4lg8s0tq.cloudfront.net';
 
-$SECONDARY_FONT_KIEVIT: 'Helvetica';
-$THIRD_FONT_KIEVIT: 'arial';
-$FOURTH_FONT_KIEVIT: 'sans-serif';
+$SECONDARY_FONT_SYSTEM: 'Helvetica';
+$THIRD_FONT_SYSTEM: 'arial';
+$FOURTH_FONT_SYSTEM: 'sans-serif';
 
 $SECONDARY_FONT_MILO: 'serif';
 
@@ -44,31 +45,37 @@ $SECONDARY_FONT_MILO: 'serif';
 /* Milo Slab Medium  */
 @include font-face(Milo-Medium, '#{$FONT_PATH}/milo-web/milo-slab-pro-medium/MiloSlabWebPro-Medium');
 
-/* KIEVIT MIXINS */
+/* System MIXINS */
 // Map all the instances of Kievit-Regular to Kievit-Book... please.
 // @mixin Kievit-Regular {
 //   font-family: 'Kievit-Regular', $SECONDARY_FONT_KIEVIT, $THIRD_FONT_KIEVIT;
 // }
 // FOR REFERENCE SEE THIS URL:http://nypl.github.io/dgx-styleguide/kievit.html
-@mixin Kievit-Book {
-  font-family: 'Kievit-Book', $SECONDARY_FONT_KIEVIT, $THIRD_FONT_KIEVIT;
+@mixin System-Book {
+  font-family: 'system-ui', "Segoe UI", Tahoma, $SECONDARY_FONT_SYSTEM, $THIRD_FONT_SYSTEM;
+  font-weight: 400;
 }
 
-@mixin Kievit-Book-Italic {
-  font-family: 'Kievit-Book-Italic', $SECONDARY_FONT_KIEVIT, $THIRD_FONT_KIEVIT;
+@mixin System-Book-Italic {
+  font-family: 'system-ui', "Segoe UI", Tahoma, $SECONDARY_FONT_SYSTEM, $THIRD_FONT_SYSTEM;
+  font-weight: 400;
+  font-style: italic;
 }
 
-@mixin Kievit-Medium {
-  font-family: 'Kievit-Medium', $SECONDARY_FONT_KIEVIT, $THIRD_FONT_KIEVIT;
+@mixin System-Medium {
+  font-family: 'system-ui', "Segoe UI", Tahoma, $SECONDARY_FONT_SYSTEM, $THIRD_FONT_SYSTEM;
+  font-weight: 500;
 }
 
-@mixin Kievit-Bold {
-  font-family: 'Kievit-Bold', $SECONDARY_FONT_KIEVIT, $THIRD_FONT_KIEVIT;
+@mixin System-Bold {
+  font-family: 'system-ui', "Segoe UI", Tahoma, $SECONDARY_FONT_SYSTEM, $THIRD_FONT_SYSTEM;
+  font-weight: 700;
 }
 
 
-@mixin Kievit-Light {
-  font-family: 'Kievit-Light', $SECONDARY_FONT_KIEVIT, $THIRD_FONT_KIEVIT;
+@mixin System-Light {
+  font-family: 'system-ui', "Segoe UI", Tahoma, $SECONDARY_FONT_SYSTEM, $THIRD_FONT_SYSTEM;
+  font-weight: 300;
 }
 
 //@mixin Kievit-Thin {

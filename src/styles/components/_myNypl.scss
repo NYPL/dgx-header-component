@@ -1,5 +1,5 @@
 .myNyplButton {
-  @include Kievit-Bold;
+  @include System-Bold;
   @include border-radius(0px);
   font-size: 13px;
   color: #000;
@@ -58,13 +58,13 @@
     &-title {
       color: #fff;
       font-size: 20px;
-      @include Kievit-Book;
+      @include System-Book;
       font-weight: normal;
       line-height: 1.2em;
     }
     &-patron-greeting {
       color: #fff;
-      @include Kievit-Book;
+      @include System-Book;
       font-weight: normal;
       letter-spacing: .03em;
       line-height: 1.2em;

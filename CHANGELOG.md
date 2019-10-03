@@ -1,6 +1,9 @@
 ### CHANGE LOG
 
 ========
+### v2.6.0
+> Remove Kievit font
+
 ### v2.5.8
 > Fix bugs introduced in 2.5.6:
   - Logging in with a non-catalog redirect_uri causes immediate logout

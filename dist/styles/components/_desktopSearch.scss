@@ -47,7 +47,7 @@
   }
 
   &-text {
-    @include Kievit-Book;
+    @include System-Book;
     display: inline-block;
     font-size: 18px;
     line-height: 1em;
@@ -116,7 +116,7 @@
       }
 
       input {
-        @include Kievit-Book;
+        @include System-Book;
         @include border-radius(5px);
         background-color: #fff;
         border: 0;

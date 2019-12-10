@@ -1,6 +1,6 @@
 'use strict';
 
-require('babel-polyfill');
+require('@babel/polyfill/noConflict');
 
 var _react = require('react');
 

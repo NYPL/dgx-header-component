@@ -50,6 +50,7 @@
     "nypl"
   ],
   "dependencies": {
+    "@babel/polyfill": "^7.7.0",
     "@nypl/design-toolkit": "0.1.36",
     "@nypl/dgx-svg-icons": "0.3.7",
     "axios": "0.9.1",

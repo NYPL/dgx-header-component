@@ -200,6 +200,7 @@ class Header extends React.Component {
   }
 
   render() {
+    console.log('babeling')
     const headerClass = this.props.className;
     const skipNav = this.props.skipNav ? (<SkipNavigation {...this.props.skipNav} />) : '';
     const isLoggedIn = !!this.state.patronDataReceived;

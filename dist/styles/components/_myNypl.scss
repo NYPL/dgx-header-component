@@ -1,0 +1,266 @@
+.myNyplButton {
+  @include System-Bold;
+  @include border-radius(0px);
+  font-size: 13px;
+  color: #000;
+  display: block;
+  letter-spacing: .04em;
+  background-color: #FFF;
+
+  &.loggedIn {
+    color: #000;
+  }
+
+  &.active {
+    @include transition(background-color .2s linear 0s, color .2s linear 0s);
+    background-color: #135772;
+    color: #FFF;
+
+    &:visited {
+      color: #FFF;
+    }
+  }
+
+  &:visited {
+    color: #000;
+  }
+
+  .icon {
+    @include opacity(0.8);
+  }
+}
+
+.myNypl-wrapper {
+  text-transform: none;
+  display: none;
+  box-sizing: content-box;
+  min-height: 180px;
+
+  &.loggedInHeight {
+    min-height: 250px;
+  }
+
+  &.active {
+    display: block;
+  }
+
+  .myNypl {
+    &-Links {
+      color: #fff;
+    }
+
+    &-eyebrow {
+      border-top: 2px solid #FFF;
+      color: #fff;
+      margin-bottom: 10px;
+      width: 25px;
+    }
+    &-title {
+      color: #fff;
+      font-size: 20px;
+      @include System-Book;
+      font-weight: normal;
+      line-height: 1.2em;
+    }
+    &-patron-greeting {
+      color: #fff;
+      @include System-Book;
+      font-weight: normal;
+      letter-spacing: .03em;
+      line-height: 1.2em;
+      margin: 0;
+      text-align: left;
+
+      &.login-indication {
+        margin: 0 0 6px 0;
+      }
+    }
+    &-login-list {
+      text-align: left;
+      list-style: none;
+      padding: 0px;
+      margin: 0px;
+
+      li {
+        a {
+          border-radius: 28px;
+          box-sizing: content-box;
+
+          &:focus {
+            @include button-focus;
+          }
+        }
+
+        svg {
+          vertical-align: middle;
+          width: 28px;
+          padding-right: 5px;
+          height: 28px;
+        }
+      }
+    }
+
+    &-catalog-btn {
+      min-width: 170px;
+    }
+
+    &-catalog-link {
+      &:focus {
+        @include button-focus;
+      }
+    }
+
+    &-research-btn {
+      min-width: 265px;
+    }
+
+    .icon {
+      font-size: 25px;
+      color: rgba(255, 255, 255, 0.6);
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+
+    .bldgIcon {
+      fill: #fff;
+      margin: 2px 0;
+      height: 20px;
+    }
+
+    .logoutIcon {
+      fill: #1B7FA7;
+      margin: 0 10px 0 0;
+      vertical-align: -11px;
+      height: 1.3rem;
+      width: 1.3rem;
+      margin: 5px 10px 5px 0;
+    }
+
+    .patron-greeting-wrapper {
+      &:focus {
+        @include button-focus;
+      }
+    }
+  }
+}
+
+.mobileMyNypl-wrapper {
+  display: inline-block;
+  position: inherit;
+
+  &.active {
+    display: block;
+
+    @include min-screen(769px) {
+      display: none;
+    }
+  }
+}
+
+.loginIcon {
+  &.active {
+    stroke: none;
+  }
+
+  &-loggedIn {
+    fill: #000;
+    stroke: none;
+
+    &.active {
+      fill: #FFF;
+      opacity: 1;
+    }
+  }
+}
+
+.myNyplButton {
+  &.loginIcon {
+    &-loggedIn {
+      height: 20px;
+      left: 143px;
+      position: absolute;
+      top: 7px;
+    }
+  }
+
+  &-iconWrapper {
+    margin: 0 0 0 22px;
+  }
+}
+
+.mobileMyNypl {
+  display: none;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
+  &.active {
+    box-shadow: 2px 2px 3px 4px rgba(100, 100, 100, 0.25);
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  &-greeting {
+    box-sizing: content-box;
+    color: #FFF;
+    flex: 1 100%;
+    padding: 22px 0 0 11px;
+    position: absolute;
+    text-align: left;
+
+    .login-indication {
+      margin: 0 0 30px;
+    }
+
+    &:focus {
+      @include vendor-prefixer(outline-color, #fff);
+      outline: inset;
+      outline-style: solid;
+      outline-width: $focus-width;
+    }
+  }
+
+  a:focus {
+    @include vendor-prefixer(outline-color, #fff);
+    outline: inset;
+    outline-style: solid;
+    outline-width: $focus-width;
+    position: relative;
+  }
+
+  a:first-child {
+    svg {
+      vertical-align: bottom;
+      margin-top: 5px;
+    }
+  }
+
+  .bldgIcon {
+    fill: #fff;
+    height: 25px;
+    margin: 5px 0;
+  }
+
+  .catalogLink {
+    border-right: solid 2px #2b2b2b;
+    flex: 1 1 40%;
+    margin: 0 1px 50px 2px;
+  }
+
+  .researchLink {
+    flex: 1 1 40%;
+    margin: 0 1px 50px 2px;
+
+   // This is a bit confusing, but this class handles the LOGOUT link, and is visible only when logged in:
+   & + .mobileMyNypl-catalog-link {
+     border-bottom: 2px solid #000;
+     margin-bottom: 0;
+   }
+  }
+
+}
+
+.login-indication {
+  font-style: italic;
+}

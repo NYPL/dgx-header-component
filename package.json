@@ -94,7 +94,7 @@
     "node-sass": "4.6.0",
     "nyc": "10.0.0",
     "react-a11y": "0.3.3",
-    "react-addons-test-utils": "15.5.0",
+    "react-addons-test-utils": "^15.5.0",
     "react-hot-loader": "1.2.8",
     "sass-loader": "5.0.0",
     "sinon": "4.0.1",

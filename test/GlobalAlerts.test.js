@@ -84,11 +84,16 @@ describe('GlobalAlerts Component', () => {
     })
 
     it('should render only the single alert valid for current time', () => {
+      // This component does an ajax call in componentDidMount,
+      // so update the component in the tests to make sure the data propogated
+      // correctly and it renders with the intended data.
+      component.update();
       expect(component.find('.globalAlerts-box-item').length).to.equal(1);
       expect(component.find('.globalAlerts-box-item').text()).to.equal('More People Reading More')
     });
 
     it('should render a <div> wrapper with @role="complementary"', () => {
+      component.update();
       expect(component.find('[role="complementary"]').length).to.equal(1);
     });
   });

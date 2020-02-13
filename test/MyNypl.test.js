@@ -38,7 +38,7 @@ describe('MyNypl', () => {
 
     it('should have a <div> with class name "myNypl" as a wrapper', () => {
       expect(component.find('div')).to.have.length(1);
-      expect(component.find('.myNypl').type()).to.equal('div');
+      expect(component.find('div.myNypl').type()).to.equal('div');
     });
 
     it('should have a <ul> with class name "myNypl-login-list" as a wrapper for log in links',

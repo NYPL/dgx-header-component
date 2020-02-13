@@ -37,7 +37,7 @@ describe('MobileMyNypl', () => {
     });
 
     it('should have a <div> with class name "MobileMyNypl" as a wrapper', () => {
-      expect(component.find('.mobileMyNypl').type()).to.equal('div');
+      expect(component.find('div.mobileMyNypl').type()).to.equal('div');
     });
 
     it('should have two <a>. Their class names are "CatalogLink" and "ResearchLink"',

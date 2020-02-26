@@ -1,4 +1,4 @@
-const authServerDomain = 'https://login.nypl.org/auth';
+const authServerDomain = 'http://dev-oauth-app.us-east-1.amazonaws.com/auth';
 
 const config = {
   appTitle: 'NYPL | React Header Component',

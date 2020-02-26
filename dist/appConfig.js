@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var authServerDomain = 'https://login.nypl.org/auth';
+var authServerDomain = 'http://dev-oauth-app.us-east-1.amazonaws.com/auth';
 
 var config = {
   appTitle: 'NYPL | React Header Component',

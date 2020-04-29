@@ -1,25 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
-const cleanBuild = require('clean-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 const rootPath = path.resolve(__dirname);
 
 if (process.env.NODE_ENV !== 'development') {
-  let appEnv = process.env.APP_ENV ? process.env.APP_ENV : 'production';
-  const loaders = [
-    {
-      loader: 'css-loader',
-      options: {
-        sourceMap: true,
-      },
-    },
-    {
-      loader: 'sass-loader',
-      options: {
-        sourceMap: true,
-      },
-    },
-  ];
+  const appEnv = process.env.APP_ENV ? process.env.APP_ENV : 'production';
   module.exports = {
     devtool: 'source-map',
     entry: {
@@ -31,7 +18,7 @@ if (process.env.NODE_ENV !== 'development') {
       extensions: ['.js', '.jsx', '.scss'],
     },
     output: {
-      path: path.join(__dirname, 'dist'),
+      path: path.join(__dirname, '/dist'),
       filename: 'index.min.js',
       libraryTarget: 'umd',
       library: 'dgxHeaderComponent',
@@ -60,7 +47,7 @@ if (process.env.NODE_ENV !== 'development') {
         commonjs2: 'dgx-react-ga',
         commonjs: 'dgx-react-ga',
         amd: 'dgx-react-ga',
-      }
+      },
     },
     module: {
       rules: [
@@ -72,26 +59,23 @@ if (process.env.NODE_ENV !== 'development') {
         {
           test: /\.scss$/,
           include: path.resolve(rootPath, 'src'),
-          use: ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            use: loaders,
-          }),
+          use: ['style-loader'],
         },
       ],
     },
     plugins: [
-      new ExtractTextPlugin('main.scss'),
-      new cleanBuild(['dist']),
+      new MiniCssExtractPlugin('main.scss'),
+      new CleanWebpackPlugin(),
       new webpack.DefinePlugin({
         'process.env': {
           NODE_ENV: JSON.stringify('production'),
-          appEnv: JSON.stringify(appEnv)
+          appEnv: JSON.stringify(appEnv),
         },
       }),
     ],
   };
 } else {
-  let appEnv = process.env.APP_ENV ? process.env.APP_ENV : 'development';
+  const appEnv = process.env.APP_ENV ? process.env.APP_ENV : 'development';
   module.exports = {
     devtool: 'eval',
     entry: {
@@ -102,18 +86,18 @@ if (process.env.NODE_ENV !== 'development') {
       ],
     },
     output: {
-      path: path.join(__dirname, 'dist'),
+      path: path.join(__dirname, '/dist'),
       filename: 'index.min.js',
-      publicPath: '/',
+      publicPath: 'http://localhost:3000',
     },
     plugins: [
-      new cleanBuild(['dist']),
-      new ExtractTextPlugin('main.scss'),
+      new CleanWebpackPlugin(),
+      new MiniCssExtractPlugin('main.scss'),
       new webpack.HotModuleReplacementPlugin(),
       new webpack.DefinePlugin({
         loadA11y: process.env.loadA11y || false,
         nodeEnv: JSON.stringify('development'),
-        appEnv: JSON.stringify(appEnv)
+        appEnv: JSON.stringify(appEnv),
       }),
     ],
     resolve: {

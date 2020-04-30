@@ -4,8 +4,9 @@ import { extend as _extend } from 'underscore';
 import utils from '../../utils/utils.js';
 
 const defaultStyles = {
-  backgroundColor: '#E32B31',
+  backgroundColor: '#BB1D12',
   color: '#FFFFFF',
+  padding: '13px 19px 10px 18px',
 };
 
 const DonateButton = ({ id, className, target, label, gaLabel, style }) => (

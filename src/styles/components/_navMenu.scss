@@ -172,7 +172,7 @@
   &-wrapper {
     max-width: $PAGE_WIDTH_WRAPPER_DESKTOP;
     text-align: right;
-    margin: 0 auto;
+    margin: -3% auto 0 auto;
 
     .mobileBottomButtons {
       /* Hide on all viewports, trigger display based on class */

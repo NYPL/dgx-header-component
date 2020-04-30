@@ -14,5 +14,5 @@ new WebpackDevServer(webpack(config), {
     console.log(err);
   }
   console.log('Currently building: ' + pkg.name);
-  console.log('Webpack Development Server listening at localhost:3000');
+  console.log('Webpack Development Server listening at http://localhost:3000');
 });

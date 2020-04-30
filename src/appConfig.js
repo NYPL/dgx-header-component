@@ -18,7 +18,6 @@ const config = {
     facebook: 'https://www.facebook.com/nypl',
     twitter: 'https://twitter.com/nypl',
     instagram: 'https://instagram.com/nypl',
-    tumblr: 'http://nypl.tumblr.com/',
     youtube: 'https://www.youtube.com/user/NewYorkPublicLibrary',
     soundcloud: 'https://soundcloud.com/nypl',
   },

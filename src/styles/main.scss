@@ -15,6 +15,7 @@
   @extend %clearfix;
   @include System-Book;
   background-color: #FFF;
+  filter: drop-shadow(0px 10px 0px #BB1D12);
   width: 100%;
 
   /* Global rules for repetitive link elements */
@@ -67,7 +68,6 @@
 
   &-wrapper {
     position: relative;
-    border-bottom: 2px solid #ED1C24;
   }
 
   /* DESKTOP HEADER WRAPPER
@@ -184,7 +184,7 @@
   padding: 0;
   position: absolute;
 
-  &:focus,
+  &:focus, 
   &:active {
     clip: auto;
     height: auto;

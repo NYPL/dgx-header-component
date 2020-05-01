@@ -20,7 +20,8 @@
     }
 
     @include min-screen(1025px) {
-      margin-left: 138px;
+      max-width: 1147px;
+      margin: auto;
     }
 
     &-item {

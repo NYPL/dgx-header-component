@@ -25,7 +25,6 @@ const styles = {
     display: 'inline',
     border: 'none',
     padding: '11px 10px 11px 12px',
-    textTransform: 'uppercase',
     lineHeight: 'normal',
     verticalAlign: 'baseline',
   },

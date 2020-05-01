@@ -17,8 +17,7 @@
   // First instance top-level <a> tags
   li > a,
   & > a {
-    @include System-Bold;
-    font-size: 13px;
+    font-size: 14px;
     letter-spacing: .04em;
     margin: 0 10px 0 0;
 
@@ -46,7 +45,6 @@
 
   .subscribeButton,
   .myNyplButton {
-    @include System-Bold;
     font-size: 13px;
     color: #000;
     background-color: #FFF;
@@ -69,14 +67,11 @@
     &:visited {
       color: #000;
     }
-
-    .icon {
-      @include opacity(0.8);
-    }
   }
 
   .donateButton {
     @include border-radius(4px);
+    @include System-Bold;
   }
 
   .shopTopLink {

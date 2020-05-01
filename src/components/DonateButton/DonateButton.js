@@ -6,7 +6,6 @@ import utils from '../../utils/utils.js';
 const defaultStyles = {
   backgroundColor: '#BB1D12',
   color: '#FFFFFF',
-  padding: '13px 19px 10px 18px',
 };
 
 const DonateButton = ({ id, className, target, label, gaLabel, style }) => (

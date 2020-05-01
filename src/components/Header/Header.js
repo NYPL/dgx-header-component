@@ -35,7 +35,6 @@ const styles = {
   topButtons: {
     position: 'absolute',
     top: '20px',
-    textTransform: 'uppercase',
     display: 'block',
   },
   locationsTopLink: {
@@ -54,13 +53,11 @@ const styles = {
   },
   subscribeButton: {
     display: 'inline-block',
-    margin: '0px 10px 0px 0px',
     verticalAlign: 'baseline',
   },
   donateButton: {
     display: 'inline-block',
     padding: '10px 18px',
-    margin: '0 5px 0 0',
     lineHeight: 'normal',
     verticalAlign: 'baseline',
   },
@@ -68,7 +65,7 @@ const styles = {
     color: '#000',
     backgroundColor: '#FFF',
     padding: '10px 15px',
-    margin: '0 0 0 5px',
+    margin: '0 5px 0 5px',
     verticalAlign: 'baseline',
   },
   mobileMyNypl: {
@@ -284,14 +281,6 @@ class Header extends React.Component {
                   />
                 </li>
                 <li>
-                  <DonateButton
-                    id="donateButton"
-                    lang={this.props.lang}
-                    style={styles.donateButton}
-                    gaLabel="Header Top Links"
-                  />
-                </li>
-                <li>
                   <SimpleLink
                     label="Shop"
                     target={'http://shop.nypl.org/?utm_campaign=NYPLHeaderButton&utm_' +
@@ -301,6 +290,14 @@ class Header extends React.Component {
                     gaAction="Shop"
                     gaLabel="Header Top Links"
                     style={styles.shopLink}
+                  />
+                </li>
+                <li>
+                  <DonateButton
+                    id="donateButton"
+                    lang={this.props.lang}
+                    style={styles.donateButton}
+                    gaLabel="Header Top Links"
                   />
                 </li>
               </ul>

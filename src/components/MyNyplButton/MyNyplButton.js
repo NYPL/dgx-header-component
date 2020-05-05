@@ -15,7 +15,6 @@ import appConfig from '../../appConfig.js';
 
 const styles = {
   base: {
-    margin: '0px 10px 0px 0px',
     position: 'relative',
     display: 'inline-block',
     verticalAlign: 'baseline',
@@ -24,8 +23,7 @@ const styles = {
   MyNyplButton: {
     display: 'inline',
     border: 'none',
-    padding: '11px 10px 11px 12px',
-    textTransform: 'uppercase',
+    padding: '11px 0 11px 12px',
     lineHeight: 'normal',
     verticalAlign: 'baseline',
   },

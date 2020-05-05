@@ -11,6 +11,10 @@
     li {
       display: inline-block;
       margin-right: 0.18em;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
     }
   }
 
@@ -39,13 +43,9 @@
     right: 0px;
   }
 
-  @include min-screen(1025px) {
-    right: 20px;
-  }
-
   .subscribeButton,
   .myNyplButton {
-    font-size: 13px;
+    font-size: 14px;
     color: #000;
     background-color: #FFF;
     letter-spacing: .04em;
@@ -71,7 +71,7 @@
 
   .donateButton {
     @include border-radius(4px);
-    @include System-Bold;
+    font-size: 18px;
   }
 
   .shopTopLink {

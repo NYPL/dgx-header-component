@@ -88,7 +88,6 @@ class SearchButton extends React.Component {
         <span className={`${this.props.className}-searchButton-text`}>
           {label}
         </span>
-        {icon}
       </button>
     );
   }

@@ -24,7 +24,6 @@ const styles = {
   MyNyplButton: {
     display: 'inline',
     border: 'none',
-    padding: '11px 10px 11px 12px',
     lineHeight: 'normal',
     verticalAlign: 'baseline',
   },

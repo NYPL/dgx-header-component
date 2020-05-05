@@ -5,11 +5,11 @@
   @include min-screen($TABLET_PORTRAIT_BP) {
     display: inline-table;
     vertical-align: middle;
-    margin: 0 10px 0 5px;
+    margin: 0 0 0 5px;
   }
   // Progressive enhancement rule to increase left/right margin
   @include min-screen(792px) {
-    margin: 0 10px;
+    margin: 0 0 0 10px;
   }
 }
 
@@ -17,15 +17,15 @@
 &-searchButton {
   display: none;
   position: relative;
-  background-color: transparent;
-  border: none;
-  color: $BG_MENU_SEARCH;
-  background-color: #FFF;
-  padding: 10px 10px 12px;
-  margin: 3px 0 0;
+  color: white;
+  border: 0;
+  border-radius: 4px;
+  background-color: $BG_MENU_SEARCH;
+  padding: 10px 18px;
   line-height: normal !important;
   white-space: normal !important;
-  @include border-radius(0);
+  letter-spacing: .04em;
+
   // Always display the search button after $TABLET_PORTRAIT_BP
   @include min-screen($TABLET_PORTRAIT_BP) {
     display: block;
@@ -51,8 +51,6 @@
     display: inline-block;
     font-size: 18px;
     line-height: 1em;
-    padding: 0 20px 0 0;
-    border-bottom: 3px solid $BG_MENU_SEARCH;
   }
 
   &-icon {
@@ -60,7 +58,6 @@
     position: absolute;
     right: 8px;
     top: 8px;
-    fill: $BG_MENU_SEARCH;
   }
 }
 
@@ -84,7 +81,7 @@
   .desktopSearch-form {
     position: relative;
     margin: 0 auto;
-    max-width: 1312px;
+    max-width: 1280px;
     height: 100%;
     padding: 0;
 
@@ -110,7 +107,6 @@
         color: #FFF;
         display: inline-block;
         font-size: 18px;
-        margin: 0 0 10px 0;
         padding: 0 !important;
         line-height: normal;
       }
@@ -129,7 +125,7 @@
         line-height: normal;
         margin: 0;
         min-height: 2em;
-        padding: 10px 0 10px 20px;
+        padding: 10px 18px;
         width: 85%;
 
         &:focus,

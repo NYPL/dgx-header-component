@@ -105,7 +105,6 @@
 
     @include min-screen(1025px) {
       max-width: 260px;
-      left: 27px;
       top: 20px;
     }
 
@@ -114,7 +113,7 @@
       height: 112px;
 
       @include min-screen(1025px) {
-        width: 225px;
+        width: 200px;
         height: 126px;
       }
 

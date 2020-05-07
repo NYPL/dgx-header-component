@@ -7,7 +7,7 @@ import {
 } from '@nypl/dgx-svg-icons';
 
 // GA Utility
-import utils from '../../utils/utils.js';
+import utils from '../../utils/utils';
 
 const icons = {
   twitter: <TwitterIcon iconId="email-twitter" focusable={false} />,
@@ -86,13 +86,15 @@ class SocialMediaLinksWidget extends React.Component {
 SocialMediaLinksWidget.propTypes = {
   lang: PropTypes.string,
   className: PropTypes.string,
-  links: PropTypes.object,
-  displayOnlyList: PropTypes.array,
+  links: PropTypes.arrayOf(PropTypes.object),
+  displayOnlyList: PropTypes.arrayOf(PropTypes.array),
 };
 
 SocialMediaLinksWidget.defaultProps = {
   lang: 'en',
   className: 'socialMediaLinksWidget',
+  links: {},
+  displayOnlyList: [],
 };
 
 export default SocialMediaLinksWidget;

@@ -1,11 +1,13 @@
 /* eslint-env mocha */
 import React from 'react';
 import { expect } from 'chai';
-import { mount } from 'enzyme';
+import { configure, mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-15';
 import sinon from 'sinon';
 
-import FundraisingBanner from './../src/components/FundraisingBanner/FundraisingBanner';
-import config from './../src/appConfig';
+import FundraisingBanner from '../src/components/FundraisingBanner/FundraisingBanner';
+
+configure({ adapter: new Adapter() });
 
 describe('FundraisingBanner Component', () => {
   describe('Component with default required properties and data passed to bannerData prop', () => {

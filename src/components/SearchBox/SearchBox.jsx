@@ -6,8 +6,8 @@ import {
   RightWedgeIcon,
 } from '@nypl/dgx-svg-icons';
 // GA Utility Library
-import utils from '../../utils/utils.js';
-import gaConfig from '../../gaConfig.js';
+import utils from '../../utils/utils';
+import gaConfig from '../../gaConfig';
 
 class SearchBox extends React.Component {
   constructor(props) {
@@ -369,6 +369,7 @@ SearchBox.propTypes = {
 
 SearchBox.defaultProps = {
   lang: 'en',
+  type: '',
   placeholder: 'What would you like to find?',
   legendText: 'Enter a keyword, then choose to search either the catalog or the website',
 };

@@ -176,24 +176,24 @@ class FundraisingBanner extends React.Component {
         style={this.getBackgroundImageStyles(primaryBgImage, secondaryBgImage)}
         role="complementary"
       >
-      {
-        !_isEmpty(bannerData) &&
-          <div className={`${this.props.className}-wrapper`}>
-            <a
-              onClick={() => {
-                !_isEmpty(this.props.gaLabel) && !_isEmpty(bannerData.url) ?
-                  utils.trackHeader(bannerData.url, this.props.gaLabel) : null;
-              }}
-              href={!_isEmpty(bannerData.url) ? bannerData.url : '#'}
-            >
-              {this.renderBannerImage(bannerData.imageUrl)}
-              {this.renderBannerHeadline(bannerData.title)}
-              {this.renderBannerDescription(bannerData.description)}
-              <span className={`${this.props.className}-button`}>Donate</span>
-            </a>
-            {this.renderCloseButton()}
-          </div>
-      }
+        {
+          !_isEmpty(bannerData) &&
+            <div className={`${this.props.className}-wrapper`}>
+              <a
+                onClick={() => {
+                  !_isEmpty(this.props.gaLabel) && !_isEmpty(bannerData.url) ?
+                    utils.trackHeader(bannerData.url, this.props.gaLabel) : null;
+                }}
+                href={!_isEmpty(bannerData.url) ? bannerData.url : '#'}
+              >
+                {this.renderBannerImage(bannerData.imageUrl)}
+                {this.renderBannerHeadline(bannerData.title)}
+                {this.renderBannerDescription(bannerData.description)}
+                <span className={`${this.props.className}-button`}>Donate</span>
+              </a>
+              {this.renderCloseButton()}
+            </div>
+        }
       </div>
     );
   }
@@ -202,7 +202,7 @@ class FundraisingBanner extends React.Component {
 FundraisingBanner.propTypes = {
   className: PropTypes.string,
   id: PropTypes.string,
-  bannerData: PropTypes.object,
+  bannerData: PropTypes.arrayOf(PropTypes.object),
   gaLabel: PropTypes.string,
   hideBannerCookieName: PropTypes.string.isRequired,
 };
@@ -211,6 +211,7 @@ FundraisingBanner.defaultProps = {
   className: 'fundraisingBanner',
   id: 'fundraisingBanner',
   bannerData: {},
+  gaLabel: '',
 };
 
 export default FundraisingBanner;

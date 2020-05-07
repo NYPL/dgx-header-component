@@ -1,24 +1,24 @@
+import React from 'react-addons-test-utils';
+import ReactDOM from 'react-dom';
+
 jest.dontMock('../SubscribeButton.jsx');
 
-import React from 'react/addons';
+const SubscribeButton = require('../SubscribeButton');
+const ReactTestUtils = ReactDOM.TestUtils;
 
-var SubscribeButton = require('../SubscribeButton.jsx');
-var ReactTestUtils = React.addons.TestUtils;
-
-describe('SubscribeButton Component', function() {
-	
-	var componentInstance = ReactTestUtils.renderIntoDocument(
-    <SubscribeButton label='Subscribe' lang='en' />
+describe('SubscribeButton Component', () => {
+  const componentInstance = ReactTestUtils.renderIntoDocument(
+    <SubscribeButton label='Subscribe' lang='en' />,
   );
 
-  it('should render', function() {
-  	expect(componentInstance).toBeDefined();
-  	expect(componentInstance.refs['SubscribeButton']).toBeDefined();
+  it('should render', () => {
+    expect(componentInstance).toBeDefined();
+    expect(componentInstance.refs['SubscribeButton']).toBeDefined();
   });
 
-  it('should render the proper subscribe button', function() {
-  	var button = ReactTestUtils.scryRenderedDOMComponentsWithTag(componentInstance, 'a');
-  	console.log(button.length);
+  it('should render the proper subscribe button', () => {
+    const button = ReactTestUtils.scryRenderedDOMComponentsWithTag(componentInstance, 'a');
+    console.log(button.length);
   });
 
 });

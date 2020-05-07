@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-// Config and Utility Library
-import utils from '../../utils/utils.js';
-import appConfig from '../../appConfig.js';
-
 import {
   LogoutIcon,
   BuildingIcon,
   LoginIcon,
 } from '@nypl/dgx-svg-icons';
+// Config and Utility Library
+import utils from '../../utils/utils';
+import appConfig from '../../appConfig';
 
 const styles = {
   logOutLink: {
@@ -113,8 +112,7 @@ class MyNypl extends React.Component {
     const catalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
     const researchCatalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE RESEARCH CATALOG' :
       'LOG INTO THE RESEARCH CATALOG';
-    const catalogLink = this.renderLoginLinks().catalogLink;
-    const researchLink = this.renderLoginLinks().researchLink;
+    const { catalogLink, researchLink } = this.renderLoginLinks();
     const gaAction = (this.props.isLoggedIn) ? 'Go To' : 'Log In';
 
     return (
@@ -165,6 +163,7 @@ MyNypl.propTypes = {
 };
 
 MyNypl.defaultProps = {
+  id: '',
   className: 'myNypl',
   lang: 'en',
   loginCatalogLink: appConfig.loginMyNyplLinks.catalog,

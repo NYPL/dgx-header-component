@@ -4,8 +4,8 @@ import cx from 'classnames';
 import moment from 'moment';
 import { filter as _filter } from 'underscore';
 import axios from 'axios';
-import config from '../../appConfig.js';
-import AlertsBox from '../AlertsBox/AlertsBox.js';
+import config from '../../appConfig';
+import AlertsBox from '../AlertsBox/AlertsBox';
 
 const styles = {
   backgroundColor: '#fee24a',

@@ -8,8 +8,8 @@ import {
 } from '@nypl/dgx-svg-icons';
 
 // Config and Utility
-import utils from '../../utils/utils.js';
-import appConfig from '../../appConfig.js';
+import utils from '../../utils/utils';
+import appConfig from '../../appConfig';
 
 const styles = {
   base: {
@@ -142,8 +142,7 @@ class MobileMyNypl extends React.Component {
   render() {
     const catalogLinkClass = 'catalogLink';
     const researchLinkClass = 'researchLink';
-    const catalogLink = this.renderLoginLinks().catalogLink;
-    const researchLink = this.renderLoginLinks().researchLink;
+    const { catalogLink, researchLink } = this.renderLoginLinks();
     const catalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
     const researchCatalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE RESEARCH CATALOG' :
       'LOG INTO THE RESEARCH CATALOG';

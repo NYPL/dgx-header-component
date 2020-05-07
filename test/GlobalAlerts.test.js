@@ -1,13 +1,16 @@
 /* eslint-env mocha */
 import React from 'react';
 import { expect } from 'chai';
-import { mount } from 'enzyme';
+import { configure, mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-15';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import moment from 'moment';
 
-import config from './../src/appConfig.js';
-import GlobalAlerts from './../src/components/GlobalAlerts/GlobalAlerts';
+import config from '../src/appConfig.js';
+import GlobalAlerts from '../src/components/GlobalAlerts/GlobalAlerts';
+
+configure({ adapter: new Adapter() });
 
 var mock = null;
 

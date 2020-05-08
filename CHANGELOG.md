@@ -1,6 +1,9 @@
 ### CHANGE LOG
 
 ========
+### v2.7.0
+> Deprecates some JS-in-CSS styling for buttons. Centers the yellow alert bar on desktop breakpoints.
+
 ### v2.6.0
 > Remove Kievit font
 

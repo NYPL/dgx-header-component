@@ -70,16 +70,6 @@ const styles = {
     color: '#959595',
     backgroundColor: '#2B2B2B',
   },
-  donateLink: {
-    display: 'block',
-    fontSize: '16px',
-    lineHeight: 'normal',
-    margin: '0 0 0 3px',
-    padding: '1.75em 0',
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    width: '98.5%',
-  },
   shopLink: {
     backgroundColor: '#2B2B2B',
     borderTop: '2px solid #363636',
@@ -90,7 +80,6 @@ const styles = {
     padding: 0,
     textAlign: 'center',
     textDecoration: 'none',
-    
   },
 };
 
@@ -169,7 +158,6 @@ const NavMenuMobileButtons = ({
       <DonateButton
         id="mobileNav-donateButton"
         className="donateLink"
-        style={styles.donateLink}
         gaLabel="Mobile Buttons Donate"
       />
     </div>

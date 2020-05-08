@@ -19,22 +19,11 @@ const styles = {
   },
   subscribeButton: {
     display: 'inline',
-    padding: '11px 10px 11px 12px',
     verticalAlign: 'baseline',
   },
   subscribeLabel: {
     display: 'inline',
     verticalAlign: 'baseline',
-  },
-  EmailSubscribeForm: {
-    position: 'absolute',
-    zIndex: 1000,
-    right: '0',
-    width: '250px',
-    minHeight: '210px',
-    backgroundColor: '#1B7FA7',
-    padding: '25px 30px',
-    marginTop: '10px',
   },
   hide: {
     display: 'none',
@@ -167,7 +156,6 @@ class SubscribeButton extends React.Component {
     return this.state.visible ? (
       <div
         className="emailSubscription-wrapper active animatedFast fadeIn"
-        style={styles.EmailSubscribeForm}
       >
         <EmailSubscription
           listId="1061"

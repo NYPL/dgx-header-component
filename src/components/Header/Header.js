@@ -38,39 +38,6 @@ const styles = {
     textTransform: 'uppercase',
     display: 'block',
   },
-  locationsTopLink: {
-    display: 'inline-block',
-    color: '#000',
-    backgroundColor: '#FFF',
-    padding: '12px',
-    verticalAlign: 'baseline',
-  },
-  libraryCardButton: {
-    display: 'inline-block',
-    color: '#000',
-    backgroundColor: '#FFF',
-    padding: '12px',
-    verticalAlign: 'baseline',
-  },
-  subscribeButton: {
-    display: 'inline-block',
-    margin: '0px 10px 0px 0px',
-    verticalAlign: 'baseline',
-  },
-  donateButton: {
-    display: 'inline-block',
-    padding: '10px 18px',
-    margin: '0 5px 0 0',
-    lineHeight: 'normal',
-    verticalAlign: 'baseline',
-  },
-  shopLink: {
-    color: '#000',
-    backgroundColor: '#FFF',
-    padding: '10px 15px',
-    margin: '0 0 0 5px',
-    verticalAlign: 'baseline',
-  },
   mobileMyNypl: {
     position: 'absolute',
     zIndex: 1000,
@@ -238,8 +205,8 @@ class Header extends React.Component {
               style={styles.topButtons}
               aria-label="Header top links"
             >
-              <ul>
-                <li>
+              <ul className="top-links">
+                <li className="top-links__item">
                   <MyNyplButton
                     refId="desktopLogin"
                     isLoggedIn={isLoggedIn}
@@ -248,7 +215,7 @@ class Header extends React.Component {
                     gaAction={isLoggedIn ? 'My Account' : 'Log In'}
                   />
                 </li>
-                <li>
+                <li className="top-links__item">
                   <SimpleLink
                     label="Locations"
                     target={
@@ -259,10 +226,9 @@ class Header extends React.Component {
                     id="locationsTopLink"
                     gaAction="Locations"
                     gaLabel="Header Top Links"
-                    style={styles.locationsTopLink}
                   />
                 </li>
-                <li>
+                <li className="top-links__item">
                   <SimpleLink
                     label="Get a Library Card"
                     target={
@@ -276,22 +242,21 @@ class Header extends React.Component {
                     style={styles.libraryCardButton}
                   />
                 </li>
-                <li>
+                <li className="top-links__item">
                   <SubscribeButton
                     label="Get Email Updates"
                     lang={this.props.lang}
-                    style={styles.subscribeButton}
                   />
                 </li>
-                <li>
+                <li className="top-links__item">
                   <DonateButton
                     id="donateButton"
                     lang={this.props.lang}
-                    style={styles.donateButton}
                     gaLabel="Header Top Links"
+                    className="donateButton"
                   />
                 </li>
-                <li>
+                <li className="top-links__item">
                   <SimpleLink
                     label="Shop"
                     target={'http://shop.nypl.org/?utm_campaign=NYPLHeaderButton&utm_' +
@@ -300,7 +265,6 @@ class Header extends React.Component {
                     id="shopTopLink"
                     gaAction="Shop"
                     gaLabel="Header Top Links"
-                    style={styles.shopLink}
                   />
                 </li>
               </ul>

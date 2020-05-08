@@ -3,39 +3,8 @@
  * - Library Card
  * - Donate
 */
-&-buttons {
-  ul {
-    margin: 0;
-    list-style-type: none;
 
-    li {
-      display: inline-block;
-      margin-right: 0.18em;
-    }
-  }
-
-  // First instance top-level <a> tags
-  li > a,
-  & > a {
-    @include System-Bold;
-    font-size: 13px;
-    letter-spacing: .04em;
-    margin: 0 10px 0 0;
-
-    &:visited {
-      color: #000;
-    }
-
-    &:last-child {
-      margin: 0;
-    }
-
-    &:focus {
-      @include basic-focus;
-      padding: 12px;
-    }
-  }
-
+.header-buttons {
   @include min-screen(769px) {
     right: 0px;
   }
@@ -44,45 +13,66 @@
     right: 20px;
   }
 
-  .subscribeButton,
-  .myNyplButton {
-    @include System-Bold;
-    font-size: 13px;
-    color: #000;
-    background-color: #FFF;
-    letter-spacing: .04em;
+  .top-links {
+    margin: 0;
+    list-style-type: none;
+    text-transform: uppercase;
 
-    &.active {
-      @include transition(background-color .2s linear 0s, color .2s linear 0s);
-      background-color: #135772;
-      color: #FFF;
+    &__item,
+    .subscribeButton,
+    .shopTopLink,
+    .libraryCardButton,
+    .locationsTopLink {
+      @include System-Bold;
+
+      display: inline-block;
+      color: black;
+      background-color: #FFF;
+      font-size: 13px;
+      letter-spacing: .04em;
+      margin-right: 2em;
 
       &:visited {
-        color: #FFF;
+        color: #000;
       }
-    }
 
-    &:focus {
-      @include basic-focus;
-    }
+      &:last-child {
+        margin: 0;
+      }
 
-    &:visited {
-      color: #000;
-    }
-
-    .icon {
-      @include opacity(0.8);
+      &:focus {
+        @include basic-focus;
+        padding: 12px;
+      }
     }
   }
 
-  .donateButton {
+  // .donateLink is for mobile
+  .donateButton,
+  .donateLink {
     @include border-radius(4px);
+
+    background-color: #e32b31;
+    color: white;
+    display: inline-block;
+    line-height: normal;
+    padding: 10px 18px;
+    vertical-align: baseline;
   }
 
   .shopTopLink {
-    display: none;
+    display: none !important;
+
     @include min-screen(860px) {
-      display: inline-block;
+      display: inline-block !important;
+    }
+
+    & .top-links__link {
+      display: none !important;
+
+      @include min-screen(860px) {
+        display: inline-block !important;
+      }
     }
   }
 
@@ -96,4 +86,18 @@
     -webkit-background-clip:padding-box; /* IOS fix */
     background-clip:padding-box; /* IOS fix */
   }
+}
+
+// .donateLink is for mobile
+.donateLink {
+  background-color: #e32b31;
+  color: white;
+  display: block;
+  font-size: 16px;
+  line-height: normal;
+  margin: 0 0 0 3px;
+  padding: 1.75em 0;
+  text-align: center;
+  text-transform: uppercase;
+  width: 98.5%;
 }

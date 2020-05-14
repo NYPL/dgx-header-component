@@ -7,11 +7,11 @@ import {
   XIcon,
 } from '@nypl/dgx-svg-icons';
 // GA Utilities
-import utils from '../../utils/utils.js';
+import utils from '../../utils/utils';
 // Component Dependencies
-import MyNypl from '../MyNypl/MyNypl.js';
+import MyNypl from '../MyNypl/MyNypl';
 // Configs
-import appConfig from '../../appConfig.js';
+import appConfig from '../../appConfig';
 
 const styles = {
   base: {
@@ -166,7 +166,7 @@ class MyNyplButton extends React.Component {
 
 MyNyplButton.propTypes = {
   lang: PropTypes.string,
-  style: PropTypes.object,
+  style: PropTypes.arrayOf(PropTypes.object),
   isLoggedIn: PropTypes.bool,
   patronName: PropTypes.string,
   logOutLink: PropTypes.string,
@@ -176,7 +176,11 @@ MyNyplButton.propTypes = {
 
 MyNyplButton.defaultProps = {
   lang: 'en',
-  label: 'Log In',
+  style: {},
+  isLoggedIn: false,
+  patronName: '',
+  logOutLink: '',
+  gaAction: '',
   target: appConfig.myNyplLinks.catalog,
 };
 

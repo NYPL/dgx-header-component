@@ -10,11 +10,11 @@ import {
   XIcon,
 } from '@nypl/dgx-svg-icons';
 
-import config from '../../appConfig.js';
-import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWidget.js';
-import SubscribeMessageBox from './SubscribeMessageBox.js';
-import DotsLoader from '../Loaders/DotsLoader.js';
-import utils from '../../utils/utils.js';
+import config from '../../appConfig';
+import SocialMediaLinksWidget from '../SocialMediaLinksWidget/SocialMediaLinksWidget';
+import SubscribeMessageBox from './SubscribeMessageBox';
+import DotsLoader from '../Loaders/DotsLoader';
+import utils from '../../utils/utils';
 
 const styles = {
   base: {
@@ -324,7 +324,7 @@ EmailSubscription.propTypes = {
   placeholder: PropTypes.string,
   policyUrl: PropTypes.string,
   subCenterUrl: PropTypes.string,
-  style: PropTypes.object,
+  style: PropTypes.arrayOf(PropTypes.object),
 };
 
 EmailSubscription.defaultProps = {
@@ -338,6 +338,7 @@ EmailSubscription.defaultProps = {
   placeholder: 'Your email address',
   policyUrl: 'http://www.nypl.org/help/about-nypl/legal-notices/privacy-policy',
   subCenterUrl: 'http://pages.email.nypl.org/page.aspx?QS=3935619f7de112ef7250fe02b84fb2f9ab74e4ea015814b7',
+  style: {},
 };
 
 export default EmailSubscription;

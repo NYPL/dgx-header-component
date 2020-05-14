@@ -5,14 +5,15 @@ import axios from 'axios';
 import sinon from 'sinon';
 import MockAdapter from 'axios-mock-adapter';
 import { expect } from 'chai';
-import { mount } from 'enzyme';
+import { configure, mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-15';
 
 // Import the component that is going to be tested
-import { Header } from './../src/components/Header/Header';
+import { Header } from '../src/components/Header/Header';
 
 // Import related functions
-import utils from './../src/utils/utils';
-import appConfig from './../src/appConfig';
+import utils from '../src/utils/utils';
+import appConfig from '../src/appConfig';
 
 // Import mock up data
 import {
@@ -21,6 +22,8 @@ import {
   mockExpiredResponseData,
   mockLoginCookie,
 } from './authApiMockResponse';
+
+configure({ adapter: new Adapter() });
 
 const mockPatronApiEndpoint =
   `${appConfig.patronApiUrl}eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwc` +

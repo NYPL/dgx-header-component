@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { LionLogoWithText } from '@nypl/dgx-svg-icons';
-import utils from '../../utils/utils.js';
+import utils from '../../utils/utils';
 
 const Logo = (props) =>
   <a
@@ -20,7 +20,7 @@ Logo.propTypes = {
   id: PropTypes.string,
   className: PropTypes.string,
   alt: PropTypes.string,
-  style: PropTypes.object,
+  style: PropTypes.arrayOf(PropTypes.object),
 };
 
 Logo.defaultProps = {
@@ -28,6 +28,7 @@ Logo.defaultProps = {
   id: 'Logo',
   className: 'Logo',
   alt: 'The New York Public Library',
+  style: {},
 };
 
 export default Logo;

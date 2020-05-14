@@ -4,13 +4,13 @@
       "@babel/preset-env",
       {
         "targets": {
-          "browsers": [
-            "last 2 versions",
-            "ie >= 10"
-          ]
+          "node": true
         }
       }
     ],
     "@babel/preset-react"
+  ],
+  "plugins": [
+    "add-module-exports"
   ]
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { extend as _extend } from 'underscore';
-import utils from '../../utils/utils.js';
+import utils from '../../utils/utils';
 
 const defaultStyles = {
   backgroundColor: '#E32B31',
@@ -25,15 +25,18 @@ DonateButton.propTypes = {
   className: PropTypes.string,
   target: PropTypes.string,
   label: PropTypes.string,
-  style: PropTypes.object,
+  style: PropTypes.arrayOf(PropTypes.object),
   gaLabel: PropTypes.string,
 };
 
 DonateButton.defaultProps = {
+  id: '',
   label: 'Donate',
   className: 'donateButton',
   target: 'https://secure3.convio.net/nypl/site/Donation2?7825.donation=form1&df_id=7825' +
     '&mfc_pref=T&s_src=FRQ18ZZ_TNN',
+  style: {},
+  gaLabel: '',
 };
 
 export default DonateButton;

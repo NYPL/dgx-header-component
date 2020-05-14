@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // Google Analytics Utility Library
-import utils from '../../utils/utils.js';
+import utils from '../../utils/utils';
 
 const NavMenuItem = ({
   className,
@@ -39,7 +39,7 @@ const NavMenuItem = ({
 
 NavMenuItem.propTypes = {
   className: PropTypes.string,
-  label: PropTypes.object,
+  label: PropTypes.arrayOf(PropTypes.object),
   lang: PropTypes.string,
   navId: PropTypes.string,
   target: PropTypes.string,
@@ -48,8 +48,11 @@ NavMenuItem.propTypes = {
 
 NavMenuItem.defaultProps = {
   className: 'navMenuItem',
+  label: {},
   lang: 'en',
+  navId: '',
   target: '#',
+  urlType: '',
 };
 
 export default NavMenuItem;

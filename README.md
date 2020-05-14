@@ -183,7 +183,7 @@ $ NODE_ENV=production npm start
 ### Using Feature Flags
 
 Please go to NYPL/dgx-feature-flags repository for the step-by-step instruction.
-https://bitbucket.org/NYPL/dgx-feature-flags
+https://github.com/NYPL/dgx-feature-flags
 
 ### How the Patron Log in Cookie Works
 

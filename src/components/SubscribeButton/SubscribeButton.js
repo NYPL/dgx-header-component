@@ -8,9 +8,9 @@ import {
 } from '@nypl/dgx-svg-icons';
 import axios from 'axios';
 
-import EmailSubscription from '../EmailSubscription/EmailSubscription.js';
+import EmailSubscription from '../EmailSubscription/EmailSubscription';
 // Utilities
-import utils from '../../utils/utils.js';
+import utils from '../../utils/utils';
 
 const styles = {
   base: {
@@ -203,7 +203,7 @@ SubscribeButton.propTypes = {
   lang: PropTypes.string,
   label: PropTypes.string,
   target: PropTypes.string,
-  style: PropTypes.object,
+  style: PropTypes.arrayOf(PropTypes.object),
 };
 
 SubscribeButton.defaultProps = {
@@ -211,6 +211,7 @@ SubscribeButton.defaultProps = {
   label: 'Subscribe',
   target: 'http://pages.email.nypl.org/page.aspx' +
     '?QS=3935619f7de112ef7250fe02b84fb2f9ab74e4ea015814b7',
+  style: {},
 };
 
 export default SubscribeButton;

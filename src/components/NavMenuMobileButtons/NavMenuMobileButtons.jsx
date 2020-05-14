@@ -7,9 +7,9 @@ import {
   ShoppingBagIcon,
 } from '@nypl/dgx-svg-icons';
 
-import utils from '../../utils/utils.js';
+import utils from '../../utils/utils';
 // Dependent NYPL React Component
-import DonateButton from '../DonateButton/DonateButton.js';
+import DonateButton from '../DonateButton/DonateButton';
 
 const styles = {
   base: {
@@ -90,7 +90,6 @@ const styles = {
     padding: 0,
     textAlign: 'center',
     textDecoration: 'none',
-    
   },
 };
 

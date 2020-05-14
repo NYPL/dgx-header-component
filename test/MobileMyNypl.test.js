@@ -2,14 +2,16 @@
 import React from 'react';
 import sinon from 'sinon';
 import { expect } from 'chai';
-import { mount } from 'enzyme';
-
+import { configure, mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-15';
 // Import the component that is going to be tested
-import MobileMyNypl from './../src/components/MyNypl/MobileMyNypl.js';
+import MobileMyNypl from '../src/components/MyNypl/MobileMyNypl';
 // Import related functions
-import utils from './../src/utils/utils.js';
+import utils from '../src/utils/utils';
 // Import the configs of the log in links
-import configs from './../src/appConfig.js';
+import configs from '../src/appConfig';
+
+configure({ adapter: new Adapter() });
 
 const {
   loginMyNyplLinks: {

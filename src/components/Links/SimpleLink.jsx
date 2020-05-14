@@ -34,7 +34,7 @@ SimpleLink.propTypes = {
   ref: PropTypes.string,
   className: PropTypes.string,
   lang: PropTypes.string,
-  style: PropTypes.object,
+  style: PropTypes.arrayOf(PropTypes.object),
   target: PropTypes.string,
   label: PropTypes.string,
   onClick: PropTypes.func,
@@ -43,11 +43,16 @@ SimpleLink.propTypes = {
 };
 
 SimpleLink.defaultProps = {
+  id: '',
+  ref: '',
   className: 'simpleLink',
   label: 'Link',
   lang: 'en',
+  style: {},
   target: '#',
   onClick() {},
+  gaAction: '',
+  gaLabel: '',
 };
 
 export default SimpleLink;

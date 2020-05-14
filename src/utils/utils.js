@@ -5,8 +5,8 @@ import {
   map as _map
 } from 'underscore';
 import axios from 'axios';
-import config from './../appConfig.js';
-import gaConfig from './../gaConfig.js';
+import config from './../appConfig';
+import gaConfig from './../gaConfig';
 
 function Utils() {
   this.formatDate = (startDate, endDate) => {

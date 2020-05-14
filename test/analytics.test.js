@@ -2,11 +2,13 @@
 import sinon from 'sinon';
 import { expect } from 'chai';
 import React from 'react';
-import { mount } from 'enzyme';
+import { configure, mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-15';
 
 import { mockExternalDependencies } from './helpers/mocks';
-
 import { Header, navConfig } from '../src/components/Header/Header';
+
+configure({ adapter: new Adapter() });
 
 const utils = require('../src/utils/utils');
 

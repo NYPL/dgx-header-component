@@ -154,11 +154,14 @@ class MyNyplButton extends React.Component {
           clickOutsideDeactivates: true,
         }}
         active={this.state.visible}
-        className="myNyplButton-wrapper"
-        style={_extend(styles.base, this.props.style)}
       >
-        {this.renderMyNyplButton()}
-        {this.renderMyNyplDialog()}
+        <div
+          className="myNyplButton-wrapper"
+          style={_extend(styles.base, this.props.style)}
+        >
+          {this.renderMyNyplButton()}
+          {this.renderMyNyplDialog()}
+        </div>
       </FocusTrap>
     );
   }

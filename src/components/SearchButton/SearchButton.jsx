@@ -117,8 +117,10 @@ class SearchButton extends React.Component {
           }}
           active={this.state.active}
         >
-          {this.renderSearchButton()}
-          {this.renderSearchBox()}
+          <div>
+            {this.renderSearchButton()}
+            {this.renderSearchBox()}
+          </div>
         </FocusTrap>
       </div>
     );

@@ -217,34 +217,35 @@ class MobileHeader extends React.Component {
     return (
       <li style={styles.listItem}>
         <FocusTrap
-          className="mobileMyNypl-wrapper"
           focusTrapOptions={{
             onDeactivate: () => this.closeDropDown('myNyplBtnFocus'),
             clickOutsideDeactivates: true,
           }}
           active={active}
         >
-          <ReactTappable
-            className={`${this.props.className}-myNyplButton`}
-            component="button"
-            style={_extend(styles.myNyplButton, buttonStyles)}
-            onTap={() => this.toggleMobileActiveBtn(`click${gaAction}`)}
-            aria-haspopup="true"
-            aria-expanded={active ? true : null}
-            ref="myNyplBtnFocus"
-          >
-            <span className="visuallyHidden">{buttonLabel}</span>
-            {icon}
-          </ReactTappable>
-          {
-            active &&
-              <MobileMyNypl
-                className={`${myNyplClass} mobileMyNypl`}
-                isLoggedIn={this.props.isLoggedIn}
-                patronName={this.props.patronName}
-                logOutLink={this.props.logOutLink}
-              />
-          }
+          <div className="mobileMyNypl-wrapper">
+            <ReactTappable
+              className={`${this.props.className}-myNyplButton`}
+              component="button"
+              style={_extend(styles.myNyplButton, buttonStyles)}
+              onTap={() => this.toggleMobileActiveBtn(`click${gaAction}`)}
+              aria-haspopup="true"
+              aria-expanded={active ? true : null}
+              ref="myNyplBtnFocus"
+            >
+              <span className="visuallyHidden">{buttonLabel}</span>
+              {icon}
+            </ReactTappable>
+            {
+              active &&
+                <MobileMyNypl
+                  className={`${myNyplClass} mobileMyNypl`}
+                  isLoggedIn={this.props.isLoggedIn}
+                  patronName={this.props.patronName}
+                  logOutLink={this.props.logOutLink}
+                />
+            }
+          </div>
         </FocusTrap>
       </li>
     );
@@ -300,7 +301,6 @@ class MobileHeader extends React.Component {
     return (
       <li style={styles.listItem}>
         <FocusTrap
-          className={`${this.props.className}-searchDialog`}
           focusTrapOptions={{
             onDeactivate: () => this.closeDropDown('searchBtnFocus'),
             initialFocus,
@@ -308,25 +308,27 @@ class MobileHeader extends React.Component {
           }}
           active={active}
         >
-          <ReactTappable
-            className={`${this.props.className}-searchButton${mobileSearchClass}`}
-            component="button"
-            style={_extend(styles.searchButton, buttonStyles)}
-            onTap={() => this.toggleMobileActiveBtn('clickSearch')}
-            aria-haspopup="true"
-            aria-expanded={active ? true : null}
-            ref="searchBtnFocus"
-          >
-            <span className="visuallyHidden">{buttonLabel}</span>
-            {icon}
-          </ReactTappable>
-          {
-            active &&
-              <SearchBox
-                className={`${this.props.className}-searchForm`}
-                type="mobile"
-              />
-          }
+          <div className={`${this.props.className}-searchDialog`}>
+            <ReactTappable
+              className={`${this.props.className}-searchButton${mobileSearchClass}`}
+              component="button"
+              style={_extend(styles.searchButton, buttonStyles)}
+              onTap={() => this.toggleMobileActiveBtn('clickSearch')}
+              aria-haspopup="true"
+              aria-expanded={active ? true : null}
+              ref="searchBtnFocus"
+            >
+              <span className="visuallyHidden">{buttonLabel}</span>
+              {icon}
+            </ReactTappable>
+            {
+              active &&
+                <SearchBox
+                  className={`${this.props.className}-searchForm`}
+                  type="mobile"
+                />
+            }
+          </div>
         </FocusTrap>
       </li>
     );
@@ -378,20 +380,22 @@ class MobileHeader extends React.Component {
           }}
           active={active}
         >
-          <ReactTappable
-            className={`${this.props.className}-menuButton${mobileMenuClass}`}
-            component="button"
-            style={_extend(styles.menuButton, buttonStyles)}
-            onTap={() => this.toggleMobileActiveBtn('mobileMenu')}
-            aria-haspopup="true"
-            aria-expanded={active ? true : null}
-            ref="navMenuBtnFocus"
-          >
-            <span className="visuallyHidden">{buttonLabel}</span>
-            {icon}
-          </ReactTappable>
-          <div className={`header-mobile-wrapper${mobileMenuClass}`}>
-            {dialogWindow}
+          <div>
+            <ReactTappable
+              className={`${this.props.className}-menuButton${mobileMenuClass}`}
+              component="button"
+              style={_extend(styles.menuButton, buttonStyles)}
+              onTap={() => this.toggleMobileActiveBtn('mobileMenu')}
+              aria-haspopup="true"
+              aria-expanded={active ? true : null}
+              ref="navMenuBtnFocus"
+            >
+              <span className="visuallyHidden">{buttonLabel}</span>
+              {icon}
+            </ReactTappable>
+            <div className={`header-mobile-wrapper${mobileMenuClass}`}>
+              {dialogWindow}
+            </div>
           </div>
         </FocusTrap>
       </li>

@@ -191,11 +191,14 @@ class SubscribeButton extends React.Component {
           initialFocus,
         }}
         active={this.state.visible}
-        className="subscribeButton-wrapper"
-        style={_extend(styles.base, this.props.style)}
       >
-        {this.renderEmailButton()}
-        {this.renderEmailDialog()}
+        <div
+          className="subscribeButton-wrapper"
+          style={_extend(styles.base, this.props.style)}
+        >
+          {this.renderEmailButton()}
+          {this.renderEmailDialog()}
+        </div>
       </FocusTrap>
     );
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import utils from '../../utils/utils.js';
+import utils from '../../utils/utils';
 
 class SimpleLink extends React.Component {
   constructor(props) {
@@ -34,7 +34,7 @@ SimpleLink.propTypes = {
   ref: PropTypes.string,
   className: PropTypes.string,
   lang: PropTypes.string,
-  style: PropTypes.arrayOf(PropTypes.object),
+  style: PropTypes.objectOf(PropTypes.string),
   target: PropTypes.string,
   label: PropTypes.string,
   onClick: PropTypes.func,

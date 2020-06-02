@@ -48,10 +48,12 @@ class SubscribeButton extends React.Component {
   constructor(props) {
     super(props);
 
+    const { target } = this.props;
+
     // subscribeFormVisible
     this.state = {
       visible: false,
-      target: this.props.target,
+      target,
     };
 
     this.handleOnClickOut = this.handleOnClickOut.bind(this);
@@ -203,7 +205,7 @@ SubscribeButton.propTypes = {
   lang: PropTypes.string,
   label: PropTypes.string,
   target: PropTypes.string,
-  style: PropTypes.arrayOf(PropTypes.object),
+  style: PropTypes.objectOf(PropTypes.string),
 };
 
 SubscribeButton.defaultProps = {
@@ -211,7 +213,7 @@ SubscribeButton.defaultProps = {
   label: 'Subscribe',
   target: 'http://pages.email.nypl.org/page.aspx' +
     '?QS=3935619f7de112ef7250fe02b84fb2f9ab74e4ea015814b7',
-  style: {},
+  style: [],
 };
 
 export default SubscribeButton;

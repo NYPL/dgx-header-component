@@ -2,11 +2,11 @@ import moment from 'moment';
 import { ga, gaUtils } from 'dgx-react-ga';
 import FeatureFlags from 'dgx-feature-flags';
 import {
-  map as _map
+  map as _map,
 } from 'underscore';
 import axios from 'axios';
-import config from './../appConfig';
-import gaConfig from './../gaConfig';
+import config from '../appConfig';
+import gaConfig from '../gaConfig';
 
 function Utils() {
   this.formatDate = (startDate, endDate) => {
@@ -53,11 +53,11 @@ function Utils() {
       };
 
     if (startDate && endDate) {
-      let sDate = new Date(startDate),
-        eDate   = new Date(endDate),
-        today   = new Date(),
-        daysBetweenStartEnd = numDaysBetween(sDate, eDate),
-        rangeLimit = 365;
+      const sDate = new Date(startDate);
+      const eDate = new Date(endDate);
+      const today = new Date();
+      const daysBetweenStartEnd = numDaysBetween(sDate, eDate);
+      const rangeLimit = 365;
 
       // Current Event and not past 1 year between start and end dates.
       if (sDate.getTime() <= today.getTime()
@@ -247,7 +247,7 @@ function Utils() {
     axios
       .get(endpoint)
       .then(cb)
-      .catch(response => {
+      .catch((response) => {
         if (response instanceof Error) {
           console.warn(response.message);
         } else {
@@ -283,7 +283,7 @@ function Utils() {
     axios
       .get(
         api,
-        { withCredentials: true }
+        { withCredentials: true },
       )
       .then(cb)
       .catch((response) => {

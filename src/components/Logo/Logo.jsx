@@ -20,7 +20,7 @@ Logo.propTypes = {
   id: PropTypes.string,
   className: PropTypes.string,
   alt: PropTypes.string,
-  style: PropTypes.arrayOf(PropTypes.object),
+  style: PropTypes.objectOf(PropTypes.object),
 };
 
 Logo.defaultProps = {

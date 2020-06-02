@@ -324,7 +324,7 @@ EmailSubscription.propTypes = {
   placeholder: PropTypes.string,
   policyUrl: PropTypes.string,
   subCenterUrl: PropTypes.string,
-  style: PropTypes.arrayOf(PropTypes.object),
+  style: PropTypes.objectOf(PropTypes.object),
 };
 
 EmailSubscription.defaultProps = {

@@ -86,7 +86,7 @@ class SocialMediaLinksWidget extends React.Component {
 SocialMediaLinksWidget.propTypes = {
   lang: PropTypes.string,
   className: PropTypes.string,
-  links: PropTypes.arrayOf(PropTypes.object),
+  links: PropTypes.objectOf(PropTypes.object),
   displayOnlyList: PropTypes.arrayOf(PropTypes.array),
 };
 

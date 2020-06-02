@@ -2,17 +2,17 @@
 import sinon from 'sinon';
 import { expect } from 'chai';
 import React from 'react';
-import { configure, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-15';
+import { mount } from 'enzyme';
+// import Adapter from 'enzyme-adapter-react-15';
 
-import { mockExternalDependencies } from './helpers/mocks';
+import mocks from './helpers/mocks';
 import { Header, navConfig } from '../src/components/Header/Header';
 
-configure({ adapter: new Adapter() });
+// configure({ adapter: new Adapter() });
 
 const utils = require('../src/utils/utils');
 
-describe('Google Analytics', function () {
+describe('Google Analytics', () => {
   let gaEvents = null;
   let component = null;
   let mockAxios = null;
@@ -20,7 +20,7 @@ describe('Google Analytics', function () {
 
   before(() => {
     // Mock standard external dependencies:
-    mockAxios = mockExternalDependencies();
+    mockAxios = mocks.mockExternalDependencies();
 
     mockGa = sinon.stub(utils, 'trackHeader').callsFake((action, label, value) => {
       gaEvents.push({

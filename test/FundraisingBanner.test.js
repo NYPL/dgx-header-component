@@ -1,13 +1,13 @@
 /* eslint-env mocha */
 import React from 'react';
 import { expect } from 'chai';
-import { configure, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-15';
+import { mount } from 'enzyme';
+// import Adapter from 'enzyme-adapter-react-15';
 import sinon from 'sinon';
 
 import FundraisingBanner from '../src/components/FundraisingBanner/FundraisingBanner';
 
-configure({ adapter: new Adapter() });
+// configure({ adapter: new Adapter() });
 
 describe('FundraisingBanner Component', () => {
   describe('Component with default required properties and data passed to bannerData prop', () => {
@@ -58,9 +58,9 @@ describe('FundraisingBanner Component', () => {
       const styles = component.find('.fundraisingBanner').prop('style');
       expect(styles).to.have.property(
         'backgroundImage',
-        'url(//d2znry4lg8s0tq.cloudfront.net/fundraising/snowflake_wht_bg.png), ' +
-        'url(//d2znry4lg8s0tq.cloudfront.net/fundraising/snowflake_wht_bg.png), ' +
-        'url(//d2znry4lg8s0tq.cloudfront.net/fundraising/snowflake_teal_bg.png)'
+        'url(//d2znry4lg8s0tq.cloudfront.net/fundraising/snowflake_wht_bg.png), '
+          + 'url(//d2znry4lg8s0tq.cloudfront.net/fundraising/snowflake_wht_bg.png), '
+          + 'url(//d2znry4lg8s0tq.cloudfront.net/fundraising/snowflake_teal_bg.png)',
       );
     });
 
@@ -71,7 +71,7 @@ describe('FundraisingBanner Component', () => {
 
     it('should contain the close button with the proper aria-label', () => {
       expect(
-        component.find('.fundraisingBanner-closeButton').prop('aria-label')
+        component.find('.fundraisingBanner-closeButton').prop('aria-label'),
       ).to.equal('Close Fundraising banner');
     });
 
@@ -104,16 +104,16 @@ describe('FundraisingBanner Component', () => {
           expect(component.state().bannerData).to.be.an('object').that.is.empty;
         });
 
-      it('should set the hideBannerCookieName props to the established string ' +
-        '(closeFundraisingBanner)', () => {
+      it('should set the hideBannerCookieName props to the established string '
+        + '(closeFundraisingBanner)', () => {
         expect(component.props().hideBannerCookieName).to.equal('closeFundraisingBanner');
       });
 
-      it('should immediately call componentDidMount, verify the existence of the cookie and ' +
-        'call fetchFundraisingData if the bannerData is empty', () => {
+      it('should immediately call componentDidMount, verify the existence of the cookie and '
+        + 'call fetchFundraisingData if the bannerData is empty', () => {
         sinon.spy(FundraisingBanner.prototype, 'componentDidMount');
         sinon.spy(FundraisingBanner.prototype, 'fetchFundraisingData');
-        const wrapper = mount(<FundraisingBanner hideBannerCookieName="closeFundraisingBanner" />);
+        mount(<FundraisingBanner hideBannerCookieName="closeFundraisingBanner" />);
 
         expect(FundraisingBanner.prototype.componentDidMount.calledOnce).to.equal(true);
         expect(FundraisingBanner.prototype.fetchFundraisingData.calledOnce).to.equal(true);

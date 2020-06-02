@@ -209,7 +209,7 @@ class FundraisingBanner extends React.Component {
 FundraisingBanner.propTypes = {
   className: PropTypes.string,
   id: PropTypes.string,
-  bannerData: PropTypes.arrayOf(PropTypes.object),
+  bannerData: PropTypes.objectOf(PropTypes.object),
   gaLabel: PropTypes.string,
   hideBannerCookieName: PropTypes.string.isRequired,
 };

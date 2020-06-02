@@ -166,7 +166,7 @@ class MyNyplButton extends React.Component {
 
 MyNyplButton.propTypes = {
   lang: PropTypes.string,
-  style: PropTypes.arrayOf(PropTypes.object),
+  style: PropTypes.objectOf(PropTypes.object),
   isLoggedIn: PropTypes.bool,
   patronName: PropTypes.string,
   logOutLink: PropTypes.string,

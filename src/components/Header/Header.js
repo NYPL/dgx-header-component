@@ -347,7 +347,9 @@ Header.defaultProps = {
   className: 'header',
   id: 'nyplHeader',
   skipNav: null,
+  currentTime: Date.now(),
   urlType: 'relative',
+  isTest: false,
   patron: {},
 };
 

@@ -1,12 +1,11 @@
-// Polyfill Promise for legacy browsers
-import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import a11y from 'react-a11y';
 import { config, gaUtils } from 'dgx-react-ga';
 import FeatureFlags from 'dgx-feature-flags';
-import { Header, navConfig } from './components/Header/Header.js';
+import { Header, navConfig } from './components/Header/Header';
+
 import './styles/main.scss';
-import a11y from 'react-a11y';
 
 if (loadA11y) {
   a11y(React, { ReactDOM, includeSrcNode: true });

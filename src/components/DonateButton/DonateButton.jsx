@@ -25,7 +25,7 @@ DonateButton.propTypes = {
   className: PropTypes.string,
   target: PropTypes.string,
   label: PropTypes.string,
-  style: PropTypes.arrayOf(PropTypes.object),
+  style: PropTypes.objectOf(PropTypes.string),
   gaLabel: PropTypes.string,
 };
 

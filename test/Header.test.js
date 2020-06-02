@@ -5,34 +5,28 @@ import axios from 'axios';
 import sinon from 'sinon';
 import MockAdapter from 'axios-mock-adapter';
 import { expect } from 'chai';
-import { configure, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-15';
+import { mount } from 'enzyme';
+// import Adapter from 'enzyme-adapter-react-15';
 
 // Import the component that is going to be tested
-import { Header } from '../src/components/Header/Header';
+import { Header, navConfig } from '../src/components/Header/Header';
 
 // Import related functions
 import utils from '../src/utils/utils';
 import appConfig from '../src/appConfig';
 
 // Import mock up data
-import {
-  mockResponseData,
-  mockErrorResponseData,
-  mockExpiredResponseData,
-  mockLoginCookie,
-} from './authApiMockResponse';
+import Mocks from './authApiMockResponse';
 
-configure({ adapter: new Adapter() });
+// configure({ adapter: new Adapter() });
 
-const mockPatronApiEndpoint =
-  `${appConfig.patronApiUrl}eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwc` +
-  'zpcL1wvd3d3Lm55cGwub3JnIiwic3ViIjoiNjM2NzAyOCIsImF1ZCI6ImFwcF9sb2dpbiIsImlhdCI6MTQ4MjE3NjQ3MC' +
-  'wiZXhwIjoxNDgyMTgwMDcwLCJhdXRoX3RpbWUiOjE0ODIxNzY0NzAsInNjb3BlIjoib3BlbmlkIG9mZmxpbmVfYWNjZXN' +
-  'zIGNvb2tpZSBwYXRyb246cmVhZCJ9.JO7VbOqCC7HyjRmeyHD4zM1Gl0JBk5RdxjAkCp0h6sfVe-xs5FyY7biYqs19k4d' +
-  'UY2DbFYR5IG3xYt9IdhqyMkSnJxtiCY36WN7X_e0eBF2T1_IWKGaBc4JlbroMj5_aNB5W4nQvclrdlb2mV38Q_HGAMUKe' +
-  '8DDeCmAHctEtqGppNl8DC7IvqkekRS_6zgQwsHHW5kJR-f7zUROi4fvFpdNR-I7J4VNWdFIOijb4vXFOOWRLzdY_GHLJd' +
-  'WvSgxhqzwkceA5BScCicAKeHYHo04vabNp5TvPXoR0ypULqTyGYsNnXnUmh2Mu46j3bcNTACEKS97FBx1IfwttBL1ARtQ';
+const mockPatronApiEndpoint = `${appConfig.patronApiUrl}eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwc`
+    + 'zpcL1wvd3d3Lm55cGwub3JnIiwic3ViIjoiNjM2NzAyOCIsImF1ZCI6ImFwcF9sb2dpbiIsImlhdCI6MTQ4MjE3NjQ3MC'
+    + 'wiZXhwIjoxNDgyMTgwMDcwLCJhdXRoX3RpbWUiOjE0ODIxNzY0NzAsInNjb3BlIjoib3BlbmlkIG9mZmxpbmVfYWNjZXN'
+    + 'zIGNvb2tpZSBwYXRyb246cmVhZCJ9.JO7VbOqCC7HyjRmeyHD4zM1Gl0JBk5RdxjAkCp0h6sfVe-xs5FyY7biYqs19k4d'
+    + 'UY2DbFYR5IG3xYt9IdhqyMkSnJxtiCY36WN7X_e0eBF2T1_IWKGaBc4JlbroMj5_aNB5W4nQvclrdlb2mV38Q_HGAMUKe'
+    + '8DDeCmAHctEtqGppNl8DC7IvqkekRS_6zgQwsHHW5kJR-f7zUROi4fvFpdNR-I7J4VNWdFIOijb4vXFOOWRLzdY_GHLJd'
+    + 'WvSgxhqzwkceA5BScCicAKeHYHo04vabNp5TvPXoR0ypULqTyGYsNnXnUmh2Mu46j3bcNTACEKS97FBx1IfwttBL1ARtQ';
 
 describe('Header', () => {
   describe('cookie "nyplIdentityPatron"', () => {
@@ -66,7 +60,7 @@ describe('Header', () => {
                 refreshApi,
                 () => {
                   const patronNameObject = utils.modelPatronName(
-                    utils.extractPatronName(mockResponseData)
+                    utils.extractPatronName(Mocks.mockResponseData),
                   );
 
                   component.setState({
@@ -118,16 +112,16 @@ describe('Header', () => {
           .returns(true);
         getNyplIdentityPatronCookie = sinon.stub(utils, 'getCookie')
           .withArgs('nyplIdentityPatron')
-          .returns(mockLoginCookie);
+          .returns(Mocks.mockLoginCookie);
         getPatronData = sinon.spy(utils, 'getLoginData');
         modelPatronName = sinon.spy(utils, 'modelPatronName');
 
         // mock up of the API call to get patron's data
         mock
           .onGet(mockPatronApiEndpoint)
-          .reply(200, mockResponseData);
+          .reply(200, Mocks.mockResponseData);
 
-        component = mount(<Header isTest={true} />);
+        component = mount(<Header isTest navData={navConfig.current} />);
       });
 
       after(() => {
@@ -148,8 +142,8 @@ describe('Header', () => {
         expect(hasCookie.calledWith('nyplIdentityPatron')).to.equal(true);
       });
 
-      it('should call the function to get the value of "nyplIdentityPatron" cookie, ' +
-        'if the cookie exists', () => {
+      it('should call the function to get the value of "nyplIdentityPatron" cookie, '
+        + 'if the cookie exists', () => {
         expect(getNyplIdentityPatronCookie.calledOnce).to.equal(true);
         expect(getNyplIdentityPatronCookie.alwaysCalledWithExactly('nyplIdentityPatron'))
           .to.equal(true);
@@ -159,12 +153,11 @@ describe('Header', () => {
         () => {
           expect(fetchPatronData.calledOnce).to.equal(true);
           expect(getPatronData.calledOnce).to.equal(true);
-          expect(getPatronData.alwaysCalledWith(mockLoginCookie)).to.equal(true);
-        }
-      );
+          expect(getPatronData.alwaysCalledWith(Mocks.mockLoginCookie)).to.equal(true);
+        });
 
-      it('should update the states of patronName, patronInitial, and patronDataReceived ' +
-        'if it recevies a valid response from Auth API', (done) => {
+      it('should update the states of patronName, patronInitial, and patronDataReceived '
+        + 'if it recevies a valid response from Auth API', (done) => {
         patronApiCall(component);
         setTimeout(
           () => {
@@ -172,7 +165,7 @@ describe('Header', () => {
             expect(component.state().patronInitial).to.deep.equal('TS');
             expect(component.state().patronDataReceived).to.deep.equal(true);
             done();
-          }, 1500
+          }, 1500,
         );
       });
     });
@@ -184,31 +177,29 @@ describe('Header', () => {
         before(() => {
           mock
             .onGet(mockPatronApiEndpoint)
-            .reply(400, mockErrorResponseData);
+            .reply(400, Mocks.mockErrorResponseData);
 
-          component = mount(<Header isTest={true} />);
+          component = mount(<Header isTest navData={navConfig.current} />);
         });
 
         after(() => {
           mock.reset();
         });
 
-        it('should throw error if the call to get patron\'s data failed, and then the states of ' +
-          'patronName, patronInitial, and patronDataReceived should remain their default values',
-          (done) => {
-            patronApiCall(component);
-            setTimeout(
-              () => {
-                expect(component.state().patronName).to.deep.equal('');
-                expect(component.state().patronInitial).to.deep.equal('');
-                expect(component.state().patronDataReceived).to.deep.equal(false);
-                done();
-              }, 1500
-            );
-          }
-        );
-      }
-    );
+        it('should throw error if the call to get patron\'s data failed, and then the states of '
+          + 'patronName, patronInitial, and patronDataReceived should remain their default values',
+        (done) => {
+          patronApiCall(component);
+          setTimeout(
+            () => {
+              expect(component.state().patronName).to.deep.equal('');
+              expect(component.state().patronInitial).to.deep.equal('');
+              expect(component.state().patronDataReceived).to.deep.equal(false);
+              done();
+            }, 1500,
+          );
+        });
+      });
 
     describe('when "nyplIdentityPatron" cookie exists but its access token is expired',
       () => {
@@ -241,13 +232,13 @@ describe('Header', () => {
 
           mock
             .onGet(mockPatronApiEndpoint)
-            .reply(401, mockExpiredResponseData)
+            .reply(401, Mocks.mockExpiredResponseData)
             .onGet('/refresh')
             .reply(200)
             .onGet('/refreshError')
             .reply(400);
 
-          component = mount(<Header isTest={true} />);
+          component = mount(<Header isTest navData={navConfig.current} />);
         });
 
         after(() => {
@@ -276,9 +267,7 @@ describe('Header', () => {
               expect(deleteNyplIdentityPatronCookie.calledOnce).to.equal(true);
               done();
             }, 1500);
-          }
-        );
-      }
-    );
+          });
+      });
   });
 });

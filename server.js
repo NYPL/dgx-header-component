@@ -9,10 +9,11 @@ new WebpackDevServer(webpack(config), {
   stats: false,
   inline: true,
   historyApiFallback: true,
+  sockPort: 3000,
 }).listen(3000, 'localhost', (err) => {
   if (err) {
     console.log(err);
   }
-  console.log('Currently building: ' + pkg.name);
+  console.log(`Currently building: ${pkg.name}`);
   console.log('Webpack Development Server listening at localhost:3000');
 });

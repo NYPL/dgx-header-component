@@ -1,6 +1,11 @@
 ### CHANGE LOG
 
 ========
+### v3.0.0
+> Upgrade Webpack v4
+> Upgrade Babel v7
+>
+
 ### v2.6.0
 > Remove Kievit font
 

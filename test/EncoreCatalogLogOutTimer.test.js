@@ -234,14 +234,13 @@ describe('EncoreLogOutTimer', () => {
         expect(logOutFromEncoreAndCatalogInSpy.callCount).to.equal(1);
         expect(
           // Expect logout timer called with full time:
-          logOutFromEncoreAndCatalogInSpy.calledWith(accountConfig.patLoggedInCookieExpiredTime)
+          logOutFromEncoreAndCatalogInSpy.calledWith(accountConfig.patLoggedInCookieExpiredTime),
         ).to.equal(true);
 
         // Verify cookie created with a value that's extremely recent
         expect(setCookieSpy.calledWith('VALID_DOMAIN_LAST_VISITED', currentTime)).to.equal(true);
       });
   });
-
 });
 
 describe('logOutFromEncoreAndCatalogIn', () => {

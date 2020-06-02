@@ -1,32 +1,18 @@
 const path = require('path');
 const webpack = require('webpack');
-const cleanBuild = require('clean-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 const rootPath = path.resolve(__dirname);
 
 if (process.env.NODE_ENV !== 'development') {
-  let appEnv = process.env.APP_ENV ? process.env.APP_ENV : 'production';
-  const loaders = [
-    {
-      loader: 'css-loader',
-      options: {
-        sourceMap: true,
-      },
-    },
-    {
-      loader: 'sass-loader',
-      options: {
-        sourceMap: true,
-      },
-    },
-  ];
+  const appEnv = process.env.APP_ENV ? process.env.APP_ENV : 'production';
   module.exports = {
     devtool: 'source-map',
-    entry: {
-      app: [
-        path.resolve(rootPath, './src/components/Header/Header.js'),
-      ],
-    },
+    mode: appEnv,
+    entry: [
+      path.resolve(rootPath, 'src/components/Header/Header.js'),
+    ],
     resolve: {
       extensions: ['.js', '.jsx', '.scss'],
     },
@@ -72,33 +58,37 @@ if (process.env.NODE_ENV !== 'development') {
         {
           test: /\.scss$/,
           include: path.resolve(rootPath, 'src'),
-          use: ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            use: loaders,
-          }),
+          use: [
+            MiniCssExtractPlugin.loader,
+            'css-loader',
+            'sass-loader',
+          ],
         },
       ],
     },
     plugins: [
-      new ExtractTextPlugin('main.scss'),
-      new cleanBuild(['dist']),
+      new CleanWebpackPlugin(),
+      new MiniCssExtractPlugin({
+        filename: 'styles.css',
+      }),
       new webpack.DefinePlugin({
         'process.env': {
           NODE_ENV: JSON.stringify('production'),
-          appEnv: JSON.stringify(appEnv)
+          appEnv: JSON.stringify(appEnv),
         },
       }),
     ],
   };
 } else {
-  let appEnv = process.env.APP_ENV ? process.env.APP_ENV : 'development';
+  const appEnv = process.env.APP_ENV ? process.env.APP_ENV : 'development';
   module.exports = {
+    mode: appEnv,
     devtool: 'eval',
     entry: {
       app: [
         'webpack-dev-server/client?http://localhost:3000',
         'webpack/hot/only-dev-server',
-        './src/app.js',
+        path.resolve(rootPath, 'src/app.jsx'),
       ],
     },
     output: {
@@ -107,13 +97,15 @@ if (process.env.NODE_ENV !== 'development') {
       publicPath: '/',
     },
     plugins: [
-      new cleanBuild(['dist']),
-      new ExtractTextPlugin('main.scss'),
+      new CleanWebpackPlugin(),
+      new MiniCssExtractPlugin({
+        filename: 'styles.css',
+      }),
       new webpack.HotModuleReplacementPlugin(),
       new webpack.DefinePlugin({
         loadA11y: process.env.loadA11y || false,
         nodeEnv: JSON.stringify('development'),
-        appEnv: JSON.stringify(appEnv)
+        appEnv: JSON.stringify(appEnv),
       }),
     ],
     resolve: {

@@ -283,7 +283,6 @@ var Header = function (_React$Component) {
       var headerClass = this.props.className;
       var skipNav = this.props.skipNav ? _react2.default.createElement(_dgxSkipNavigationLink2.default, this.props.skipNav) : '';
       var isLoggedIn = !!this.state.patronDataReceived;
-      console.log("Here I am");
       return _react2.default.createElement(
         'header',
         {

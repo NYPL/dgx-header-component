@@ -116,7 +116,7 @@ We use Webpack to fire off a hot-reloading development server. This allows for c
 This starts the server at localhost:3001 defaulting to `NODE_ENV=development`.
 
 ```sh
-$ npm start
+$ npm run start:dev
 ```
 
 ### Component Props

@@ -18,4 +18,4 @@ function mockExternalDependencies() {
   return mock;
 }
 
-export default { mockExternalDependencies };
+export default mockExternalDependencies;

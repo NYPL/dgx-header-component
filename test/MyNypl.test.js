@@ -2,16 +2,13 @@
 import React from 'react';
 import sinon from 'sinon';
 import { expect } from 'chai';
-import { configure, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-15';
+import { mount } from 'enzyme';
 // Import the component that is going to be tested
 import MyNypl from '../src/components/MyNypl/MyNypl';
 // Import related functions
 import utils from '../src/utils/utils';
 // Import the configs of the log in links
 import configs from '../src/appConfig';
-
-configure({ adapter: new Adapter() });
 
 const {
   loginMyNyplLinks: {
@@ -40,7 +37,7 @@ describe('MyNypl', () => {
 
     it('should have a <div> with class name "myNypl" as a wrapper', () => {
       expect(component.find('div')).to.have.length(1);
-      expect(component.find('.myNypl').type()).to.equal('div');
+      expect(component.find('div.myNypl')).to.have.length(1);
     });
 
     it('should have a <ul> with class name "myNypl-login-list" as a wrapper for log in links',

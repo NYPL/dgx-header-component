@@ -31,8 +31,8 @@ AlertsBox.propTypes = {
   id: PropTypes.string,
   className: PropTypes.string,
   lang: PropTypes.string,
-  style: PropTypes.arrayOf(PropTypes.object),
-  alerts: PropTypes.arrayOf(PropTypes.array),
+  style: PropTypes.object,
+  alerts: PropTypes.arrayOf(PropTypes.object),
 };
 
 AlertsBox.defaultProps = {

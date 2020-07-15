@@ -8,7 +8,8 @@ const rootPath = path.resolve(__dirname);
 if (process.env.NODE_ENV !== 'development') {
   const appEnv = process.env.APP_ENV ? process.env.APP_ENV : 'production';
   module.exports = {
-    devtool: 'source-map',
+    mode: 'production',
+    // devtool: 'source-map',
     entry: {
       app: [
         path.resolve(rootPath, './src/components/Header/Header.js'),
@@ -49,6 +50,16 @@ if (process.env.NODE_ENV !== 'development') {
         amd: 'dgx-react-ga',
       },
     },
+    plugins: [
+      new MiniCssExtractPlugin({ filename: 'main.scss' }),
+      new CleanWebpackPlugin(),
+      new webpack.DefinePlugin({
+        'process.env': {
+          NODE_ENV: JSON.stringify('production'),
+          appEnv: JSON.stringify(appEnv),
+        },
+      }),
+    ],
     module: {
       rules: [
         {
@@ -59,43 +70,31 @@ if (process.env.NODE_ENV !== 'development') {
         {
           test: /\.scss$/,
           include: path.resolve(rootPath, 'src'),
-          use: ['style-loader'],
+          use: [
+            MiniCssExtractPlugin.loader,
+            "css-loader",
+            "sass-loader"
+          ],
         },
       ],
-    },
-    plugins: [
-      new MiniCssExtractPlugin('main.scss'),
-      new CleanWebpackPlugin(),
-      new webpack.DefinePlugin({
-        'process.env': {
-          NODE_ENV: JSON.stringify('production'),
-          appEnv: JSON.stringify(appEnv),
-        },
-      }),
-    ],
+    }
   };
 } else {
   const appEnv = process.env.APP_ENV ? process.env.APP_ENV : 'development';
   module.exports = {
-    devtool: 'eval',
+    mode: 'development',
+    devtool: 'inline-source-maps',
     entry: {
-      app: [
-        'webpack-dev-server/client?http://localhost:3000',
-        'webpack/hot/only-dev-server',
-        './src/app.js',
-      ],
+      app: ['./src/app.js'],
     },
     output: {
-      path: path.join(__dirname, '/dist'),
+      path: path.resolve(__dirname, '/dist'),
       filename: 'index.min.js',
       publicPath: 'http://localhost:3000',
     },
     plugins: [
       new CleanWebpackPlugin(),
-      new MiniCssExtractPlugin('main.scss'),
-      new webpack.HotModuleReplacementPlugin(),
       new webpack.DefinePlugin({
-        loadA11y: process.env.loadA11y || false,
         nodeEnv: JSON.stringify('development'),
         appEnv: JSON.stringify(appEnv),
       }),
@@ -103,12 +102,23 @@ if (process.env.NODE_ENV !== 'development') {
     resolve: {
       extensions: ['.js', '.jsx', '.scss'],
     },
+    // We need this to test for cookies and signing in.
+    devServer: {
+      allowedHosts: [
+        'local.nypl.org'
+      ]
+    },
     module: {
       rules: [
         {
           test: /\.jsx?$/,
           exclude: /(node_modules|bower_components)/,
-          use: 'babel-loader',
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+            },
+          }
         },
         {
           test: /\.scss$/,

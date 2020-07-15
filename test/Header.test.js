@@ -5,8 +5,7 @@ import axios from 'axios';
 import sinon from 'sinon';
 import MockAdapter from 'axios-mock-adapter';
 import { expect } from 'chai';
-import { configure, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-15';
+import { mount } from 'enzyme';
 
 // Import the component that is going to be tested
 import { Header } from '../src/components/Header/Header';
@@ -16,14 +15,13 @@ import utils from '../src/utils/utils';
 import appConfig from '../src/appConfig';
 
 // Import mock up data
-import {
+import authApiMockResponse from './authApiMockResponse';
+const {
   mockResponseData,
   mockErrorResponseData,
   mockExpiredResponseData,
   mockLoginCookie,
-} from './authApiMockResponse';
-
-configure({ adapter: new Adapter() });
+} = authApiMockResponse;
 
 const mockPatronApiEndpoint =
   `${appConfig.patronApiUrl}eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwc` +
@@ -51,17 +49,17 @@ describe('Header', () => {
           }
         })
         .catch((response) => {
-          if (response instanceof Error) {
-            console.warn(response.message);
+          if (response.response instanceof Error) {
+            console.warn(response.response.data.message);
           } else {
             // The request was made, but the server responded with a status code
             // that falls out of the range of 2xx
-            console.warn(response.status);
-            console.warn(response.headers);
-            console.warn(response.config);
+            console.warn(response.response.status);
+            console.warn(response.response.headers);
+            console.warn(response.response.config);
 
             // If the cookie for getting log in Data is expired
-            if (response.data.statusCode === 401 && response.data.expired === true) {
+            if (response.response.data.statusCode === 401 && response.response.data.expired === true) {
               utils.refreshAccessToken(
                 refreshApi,
                 () => {

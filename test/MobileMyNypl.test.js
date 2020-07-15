@@ -2,16 +2,13 @@
 import React from 'react';
 import sinon from 'sinon';
 import { expect } from 'chai';
-import { configure, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-15';
+import { mount } from 'enzyme';
 // Import the component that is going to be tested
 import MobileMyNypl from '../src/components/MyNypl/MobileMyNypl';
 // Import related functions
 import utils from '../src/utils/utils';
 // Import the configs of the log in links
 import configs from '../src/appConfig';
-
-configure({ adapter: new Adapter() });
 
 const {
   loginMyNyplLinks: {
@@ -39,7 +36,7 @@ describe('MobileMyNypl', () => {
     });
 
     it('should have a <div> with class name "MobileMyNypl" as a wrapper', () => {
-      expect(component.find('.mobileMyNypl').type()).to.equal('div');
+      expect(component.find('div.mobileMyNypl').length).to.equal(1);
     });
 
     it('should have two <a>. Their class names are "CatalogLink" and "ResearchLink"',

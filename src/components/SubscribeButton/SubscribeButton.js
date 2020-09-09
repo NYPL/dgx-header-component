@@ -203,7 +203,7 @@ SubscribeButton.propTypes = {
   lang: PropTypes.string,
   label: PropTypes.string,
   target: PropTypes.string,
-  style: PropTypes.arrayOf(PropTypes.object),
+  style: PropTypes.shape({}),
 };
 
 SubscribeButton.defaultProps = {

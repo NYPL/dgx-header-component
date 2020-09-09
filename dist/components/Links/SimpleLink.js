@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -11,7 +11,7 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _utils = _interopRequireDefault(require("../../utils/utils.js"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -25,7 +25,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -53,14 +53,14 @@ var SimpleLink = /*#__PURE__*/function (_React$Component) {
   _createClass(SimpleLink, [{
     key: "handleOnClick",
     value: function handleOnClick() {
-      _utils.default.trackHeader(this.props.gaAction, this.props.gaLabel);
+      _utils["default"].trackHeader(this.props.gaAction, this.props.gaLabel);
 
       this.props.onClick();
     }
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/_react.default.createElement("a", {
+      return /*#__PURE__*/_react["default"].createElement("a", {
         ref: this.props.ref,
         id: this.props.id,
         className: this.props.className,
@@ -72,19 +72,19 @@ var SimpleLink = /*#__PURE__*/function (_React$Component) {
   }]);
 
   return SimpleLink;
-}(_react.default.Component);
+}(_react["default"].Component);
 
 SimpleLink.propTypes = {
-  id: _propTypes.default.string,
-  ref: _propTypes.default.string,
-  className: _propTypes.default.string,
-  lang: _propTypes.default.string,
-  style: _propTypes.default.arrayOf(_propTypes.default.object),
-  target: _propTypes.default.string,
-  label: _propTypes.default.string,
-  onClick: _propTypes.default.func,
-  gaAction: _propTypes.default.string,
-  gaLabel: _propTypes.default.string
+  id: _propTypes["default"].string,
+  ref: _propTypes["default"].string,
+  className: _propTypes["default"].string,
+  lang: _propTypes["default"].string,
+  style: _propTypes["default"].shape({}),
+  target: _propTypes["default"].string,
+  label: _propTypes["default"].string,
+  onClick: _propTypes["default"].func,
+  gaAction: _propTypes["default"].string,
+  gaLabel: _propTypes["default"].string
 };
 SimpleLink.defaultProps = {
   id: '',
@@ -99,4 +99,4 @@ SimpleLink.defaultProps = {
   gaLabel: ''
 };
 var _default = SimpleLink;
-exports.default = _default;
+exports["default"] = _default;

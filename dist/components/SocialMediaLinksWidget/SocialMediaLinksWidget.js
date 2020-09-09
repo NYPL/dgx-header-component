@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -15,7 +15,7 @@ var _dgxSvgIcons = require("@nypl/dgx-svg-icons");
 
 var _utils = _interopRequireDefault(require("../../utils/utils"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -29,7 +29,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -40,11 +40,11 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 var icons = {
-  twitter: /*#__PURE__*/_react.default.createElement(_dgxSvgIcons.TwitterIcon, {
+  twitter: /*#__PURE__*/_react["default"].createElement(_dgxSvgIcons.TwitterIcon, {
     iconId: "email-twitter",
     focusable: false
   }),
-  facebook: /*#__PURE__*/_react.default.createElement(_dgxSvgIcons.FaceBookIcon, {
+  facebook: /*#__PURE__*/_react["default"].createElement(_dgxSvgIcons.FaceBookIcon, {
     iconId: "email-fb",
     focusable: false
   })
@@ -66,7 +66,7 @@ var SocialMediaLinksWidget = /*#__PURE__*/function (_React$Component) {
     };
     _this.handleOnMouseLeave = _this.handleOnMouseLeave.bind(_assertThisInitialized(_this));
     _this.handleOnMouseEnter = _this.handleOnMouseEnter.bind(_assertThisInitialized(_this));
-    _this.trackHeader = _utils.default.trackHeader.bind(_assertThisInitialized(_this));
+    _this.trackHeader = _utils["default"].trackHeader.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -79,10 +79,10 @@ var SocialMediaLinksWidget = /*#__PURE__*/function (_React$Component) {
       return (0, _underscore.map)(socialLinksList, function (item, key) {
         var hoverClass = _this2.state.linkClass === key ? 'animateHover fadeInSlow' : '';
         var icon = icons[key];
-        return /*#__PURE__*/_react.default.createElement("li", {
+        return /*#__PURE__*/_react["default"].createElement("li", {
           key: key,
           className: "".concat(_this2.props.className, "-listItem")
-        }, /*#__PURE__*/_react.default.createElement("a", {
+        }, /*#__PURE__*/_react["default"].createElement("a", {
           href: item,
           onClick: function onClick() {
             return _this2.trackHeader('Click', "Social Media - ".concat(key));
@@ -128,22 +128,22 @@ var SocialMediaLinksWidget = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var socialLinks = this.generateLinksToDisplay(this.props.links, this.props.displayOnlyList);
-      return /*#__PURE__*/_react.default.createElement("div", {
+      return /*#__PURE__*/_react["default"].createElement("div", {
         className: this.props.className
-      }, /*#__PURE__*/_react.default.createElement("ul", {
+      }, /*#__PURE__*/_react["default"].createElement("ul", {
         className: "".concat(this.props.className, "-list")
       }, socialLinks));
     }
   }]);
 
   return SocialMediaLinksWidget;
-}(_react.default.Component);
+}(_react["default"].Component);
 
 SocialMediaLinksWidget.propTypes = {
-  lang: _propTypes.default.string,
-  className: _propTypes.default.string,
-  links: _propTypes.default.arrayOf(_propTypes.default.object),
-  displayOnlyList: _propTypes.default.arrayOf(_propTypes.default.array)
+  lang: _propTypes["default"].string,
+  className: _propTypes["default"].string,
+  links: _propTypes["default"].arrayOf(_propTypes["default"].object),
+  displayOnlyList: _propTypes["default"].arrayOf(_propTypes["default"].array)
 };
 SocialMediaLinksWidget.defaultProps = {
   lang: 'en',
@@ -152,4 +152,4 @@ SocialMediaLinksWidget.defaultProps = {
   displayOnlyList: []
 };
 var _default = SocialMediaLinksWidget;
-exports.default = _default;
+exports["default"] = _default;

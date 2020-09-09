@@ -3,13 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var styles = {
   text: {
@@ -47,7 +47,7 @@ var DotsLoader = function DotsLoader(_ref) {
     var dotsList = [];
 
     for (var i = 0; i < amount; i++) {
-      dotsList.push( /*#__PURE__*/_react.default.createElement("li", {
+      dotsList.push( /*#__PURE__*/_react["default"].createElement("li", {
         key: i,
         style: styles.dots
       }));
@@ -56,23 +56,23 @@ var DotsLoader = function DotsLoader(_ref) {
     return dotsList;
   };
 
-  return /*#__PURE__*/_react.default.createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     className: "".concat(className, "-wrapper")
-  }, /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react["default"].createElement("span", {
     style: styles.text
-  }, "Loading"), /*#__PURE__*/_react.default.createElement("ul", {
+  }, "Loading"), /*#__PURE__*/_react["default"].createElement("ul", {
     className: className,
     style: styles.list
   }, renderDots(dots)));
 };
 
 DotsLoader.propTypes = {
-  className: _propTypes.default.string,
-  dots: _propTypes.default.number
+  className: _propTypes["default"].string,
+  dots: _propTypes["default"].number
 };
 DotsLoader.defaultProps = {
   className: 'DotsLoader',
   dots: 3
 };
 var _default = DotsLoader;
-exports.default = _default;
+exports["default"] = _default;

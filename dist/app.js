@@ -12,7 +12,7 @@ var _Header = require("./components/Header/Header.js");
 
 require("./styles/main.scss");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 // Polyfill Promise for legacy browsers
 // Use for testing GA events
@@ -29,14 +29,14 @@ if (!window.ga) {
 
 
 if (!window.dgxFeatureFlags) {
-  window.dgxFeatureFlags = _dgxFeatureFlags.default.utils;
+  window.dgxFeatureFlags = _dgxFeatureFlags["default"].utils;
 }
 /* app.jsx
  * Used for local development of React Components
  */
 
 
-_reactDom.default.render( /*#__PURE__*/_react.default.createElement(_Header.Header, {
+_reactDom["default"].render( /*#__PURE__*/_react["default"].createElement(_Header.Header, {
   skipNav: {
     target: 'maincontent'
   },

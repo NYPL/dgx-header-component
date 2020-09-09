@@ -13,6 +13,7 @@ if (process.env.NODE_ENV !== 'development') {
     entry: {
       app: [
         path.resolve(rootPath, './src/components/Header/Header.js'),
+        path.resolve(rootPath, './src/styles/main.scss'),
       ],
     },
     resolve: {

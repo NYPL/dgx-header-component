@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -15,7 +15,7 @@ var _utils = _interopRequireDefault(require("../../utils/utils"));
 
 var _gaConfig = _interopRequireDefault(require("../../gaConfig"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -29,7 +29,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -289,10 +289,10 @@ var SearchBox = /*#__PURE__*/function (_React$Component) {
 
         if (gaSearchLabel && requestUrl) {
           // Fire GA event to track Search
-          _utils.default.trackHeader('Search', gaSearchLabel); // Set a dynamic value for custom dimension2
+          _utils["default"].trackHeader('Search', gaSearchLabel); // Set a dynamic value for custom dimension2
 
 
-          _gaConfig.default.customDimensions.dimension2 = GASearchedRepo; // 3 phase to handle GA event. We need to prevent sending extra GA events after the search
+          _gaConfig["default"].customDimensions.dimension2 = GASearchedRepo; // 3 phase to handle GA event. We need to prevent sending extra GA events after the search
           // request is made.
 
           if (isSearchRequested && !isGAResponseReceived) {
@@ -309,7 +309,7 @@ var SearchBox = /*#__PURE__*/function (_React$Component) {
               isSearchRequested: true
             }); // Send GA "Search" Catalog, "Query Sent" Action Event
 
-            _utils.default.trackSearchQuerySend(searchInputValue, _gaConfig.default.customDimensions, function () {
+            _utils["default"].trackSearchQuerySend(searchInputValue, _gaConfig["default"].customDimensions, function () {
               _this3.setState({
                 isGAResponseReceived: true
               }); // Go to the proper search page
@@ -335,12 +335,12 @@ var SearchBox = /*#__PURE__*/function (_React$Component) {
     key: "renderSearchInputField",
     value: function renderSearchInputField() {
       var animationClass = this.getAnimationClass();
-      return /*#__PURE__*/_react.default.createElement("div", {
+      return /*#__PURE__*/_react["default"].createElement("div", {
         className: "".concat(this.props.className, "-inputBox ").concat(animationClass)
-      }, /*#__PURE__*/_react.default.createElement("label", {
+      }, /*#__PURE__*/_react["default"].createElement("label", {
         className: this.props.type === 'mobile' ? 'visuallyHidden' : '',
         htmlFor: "".concat(this.props.className, "-searchInput")
-      }, "Enter Search Keyword"), /*#__PURE__*/_react.default.createElement("input", {
+      }, "Enter Search Keyword"), /*#__PURE__*/_react["default"].createElement("input", {
         id: "".concat(this.props.className, "-searchInput"),
         type: "text",
         ref: "headerSearchInputField",
@@ -352,7 +352,7 @@ var SearchBox = /*#__PURE__*/function (_React$Component) {
         "aria-required": "true",
         autoComplete: "off",
         autoFocus: true
-      }), /*#__PURE__*/_react.default.createElement(_dgxSvgIcons.SearchIcon, {
+      }), /*#__PURE__*/_react["default"].createElement(_dgxSvgIcons.SearchIcon, {
         ariaHidden: true,
         focusable: false
       }));
@@ -362,26 +362,26 @@ var SearchBox = /*#__PURE__*/function (_React$Component) {
     value: function renderMobileControls() {
       var _this4 = this;
 
-      return /*#__PURE__*/_react.default.createElement("div", {
+      return /*#__PURE__*/_react["default"].createElement("div", {
         className: "".concat(this.props.className, "-mobileControls")
-      }, /*#__PURE__*/_react.default.createElement("button", {
+      }, /*#__PURE__*/_react["default"].createElement("button", {
         "aria-label": "Submit Catalog Search",
         onClick: function onClick() {
           return _this4.submitSearchRequest('catalog');
         }
-      }, /*#__PURE__*/_react.default.createElement("span", {
+      }, /*#__PURE__*/_react["default"].createElement("span", {
         className: "label"
-      }, "CATALOG"), /*#__PURE__*/_react.default.createElement(_dgxSvgIcons.RightWedgeIcon, {
+      }, "CATALOG"), /*#__PURE__*/_react["default"].createElement(_dgxSvgIcons.RightWedgeIcon, {
         ariaHidden: true,
         focusable: false
-      })), /*#__PURE__*/_react.default.createElement("button", {
+      })), /*#__PURE__*/_react["default"].createElement("button", {
         "aria-label": "Submit NYPL Website Search",
         onClick: function onClick() {
           return _this4.submitSearchRequest('website');
         }
-      }, /*#__PURE__*/_react.default.createElement("span", {
+      }, /*#__PURE__*/_react["default"].createElement("span", {
         className: "label"
-      }, "NYPL.ORG"), /*#__PURE__*/_react.default.createElement(_dgxSvgIcons.RightWedgeIcon, {
+      }, "NYPL.ORG"), /*#__PURE__*/_react["default"].createElement(_dgxSvgIcons.RightWedgeIcon, {
         ariaHidden: true,
         focusable: false
       })));
@@ -391,36 +391,36 @@ var SearchBox = /*#__PURE__*/function (_React$Component) {
     value: function renderDesktopControls() {
       var _this5 = this;
 
-      return /*#__PURE__*/_react.default.createElement("div", {
+      return /*#__PURE__*/_react["default"].createElement("div", {
         className: "".concat(this.props.className, "-desktopControls")
-      }, /*#__PURE__*/_react.default.createElement("input", {
+      }, /*#__PURE__*/_react["default"].createElement("input", {
         type: "radio",
         name: "catalogWebsiteSearch",
         id: "catalogSearch",
         value: "catalog",
         checked: this.state.searchOption === 'catalog',
         onChange: this.handleSearchOptionChange
-      }), /*#__PURE__*/_react.default.createElement("label", {
+      }), /*#__PURE__*/_react["default"].createElement("label", {
         htmlFor: "catalogSearch",
         className: "catalogOption"
-      }, "Search the Catalog"), /*#__PURE__*/_react.default.createElement("input", {
+      }, "Search the Catalog"), /*#__PURE__*/_react["default"].createElement("input", {
         type: "radio",
         name: "catalogWebsiteSearch",
         id: "websiteSearch",
         value: "website",
         checked: this.state.searchOption === 'website',
         onChange: this.handleSearchOptionChange
-      }), /*#__PURE__*/_react.default.createElement("label", {
+      }), /*#__PURE__*/_react["default"].createElement("label", {
         htmlFor: "websiteSearch",
         className: "websiteOption"
-      }, "Search NYPL.org"), /*#__PURE__*/_react.default.createElement("button", {
+      }, "Search NYPL.org"), /*#__PURE__*/_react["default"].createElement("button", {
         type: "submit",
         onClick: function onClick() {
           return _this5.submitSearchRequest(null);
         }
-      }, /*#__PURE__*/_react.default.createElement("span", {
+      }, /*#__PURE__*/_react["default"].createElement("span", {
         className: "visuallyHidden"
-      }, "Search"), /*#__PURE__*/_react.default.createElement(_dgxSvgIcons.SearchIcon, {
+      }, "Search"), /*#__PURE__*/_react["default"].createElement(_dgxSvgIcons.SearchIcon, {
         ariaHidden: true,
         fill: "#FFF",
         focusable: false
@@ -429,24 +429,24 @@ var SearchBox = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/_react.default.createElement("div", {
+      return /*#__PURE__*/_react["default"].createElement("div", {
         className: this.props.className,
         role: "dialog"
-      }, /*#__PURE__*/_react.default.createElement("fieldset", null, /*#__PURE__*/_react.default.createElement("legend", {
+      }, /*#__PURE__*/_react["default"].createElement("fieldset", null, /*#__PURE__*/_react["default"].createElement("legend", {
         className: "".concat(this.props.className, "-legend visuallyHidden")
       }, this.props.legendText), this.renderSearchInputField(), this.props.type === 'mobile' ? this.renderMobileControls() : this.renderDesktopControls()));
     }
   }]);
 
   return SearchBox;
-}(_react.default.Component);
+}(_react["default"].Component);
 
 SearchBox.propTypes = {
-  lang: _propTypes.default.string,
-  className: _propTypes.default.string.isRequired,
-  type: _propTypes.default.string,
-  placeholder: _propTypes.default.string,
-  legendText: _propTypes.default.string
+  lang: _propTypes["default"].string,
+  className: _propTypes["default"].string.isRequired,
+  type: _propTypes["default"].string,
+  placeholder: _propTypes["default"].string,
+  legendText: _propTypes["default"].string
 };
 SearchBox.defaultProps = {
   lang: 'en',
@@ -455,4 +455,4 @@ SearchBox.defaultProps = {
   legendText: 'Enter a keyword, then choose to search either the catalog or the website'
 };
 var _default = SearchBox;
-exports.default = _default;
+exports["default"] = _default;

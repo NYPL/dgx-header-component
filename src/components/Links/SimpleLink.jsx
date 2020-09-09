@@ -34,7 +34,7 @@ SimpleLink.propTypes = {
   ref: PropTypes.string,
   className: PropTypes.string,
   lang: PropTypes.string,
-  style: PropTypes.arrayOf(PropTypes.object),
+  style: PropTypes.shape({}),
   target: PropTypes.string,
   label: PropTypes.string,
   onClick: PropTypes.func,

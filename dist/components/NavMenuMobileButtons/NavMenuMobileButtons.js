@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -17,7 +17,7 @@ var _utils = _interopRequireDefault(require("../../utils/utils"));
 
 var _DonateButton = _interopRequireDefault(require("../DonateButton/DonateButton"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 // Dependent NYPL React Component
 var styles = {
@@ -110,61 +110,61 @@ var NavMenuMobileButtons = function NavMenuMobileButtons(_ref) {
   var libraryCardClass = 'libraryCardLink';
   var subscribeLinkClass = 'subscribeLink';
   var shopLinkClass = 'shopLink';
-  return /*#__PURE__*/_react.default.createElement("div", {
+  return /*#__PURE__*/_react["default"].createElement("div", {
     className: className,
     style: styles.base
-  }, /*#__PURE__*/_react.default.createElement("a", {
+  }, /*#__PURE__*/_react["default"].createElement("a", {
     href: libraryCardLink,
     className: libraryCardClass,
     style: styles.galcLinks,
     onClick: function onClick() {
-      return _utils.default.trackHeader('Click', 'Mobile Bottom Buttons - Library Card');
+      return _utils["default"].trackHeader('Click', 'Mobile Bottom Buttons - Library Card');
     }
-  }, /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react["default"].createElement("span", {
     className: "".concat(libraryCardClass, "-wrapper"),
     style: (0, _underscore.extend)({}, styles.wrapper, styles.libraryCardLinkWrapper)
-  }, /*#__PURE__*/_react.default.createElement(_dgxSvgIcons.LibraryCardIcon, {
+  }, /*#__PURE__*/_react["default"].createElement(_dgxSvgIcons.LibraryCardIcon, {
     iconId: "libraryCardSVG",
     ariaHidden: true,
     focusable: false
-  }), /*#__PURE__*/_react.default.createElement("span", {
+  }), /*#__PURE__*/_react["default"].createElement("span", {
     className: "".concat(libraryCardClass, "-label"),
     style: (0, _underscore.extend)({}, styles.label)
-  }, "Get a Library Card"))), /*#__PURE__*/_react.default.createElement("a", {
+  }, "Get a Library Card"))), /*#__PURE__*/_react["default"].createElement("a", {
     href: subscribeLink,
     className: subscribeLinkClass,
     style: styles.subscribeLinks,
     onClick: function onClick() {
-      return _utils.default.trackHeader('Click', 'Mobile Bottom Buttons - Email Updates');
+      return _utils["default"].trackHeader('Click', 'Mobile Bottom Buttons - Email Updates');
     }
-  }, /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react["default"].createElement("span", {
     className: "".concat(subscribeLinkClass, "-wrapper"),
     style: (0, _underscore.extend)({}, styles.wrapper, styles.subscribeLinkWrapper)
-  }, /*#__PURE__*/_react.default.createElement(_dgxSvgIcons.EnvelopeIcon, {
+  }, /*#__PURE__*/_react["default"].createElement(_dgxSvgIcons.EnvelopeIcon, {
     iconId: "envelopSVG",
     ariaHidden: true,
     focusable: false
-  }), /*#__PURE__*/_react.default.createElement("span", {
+  }), /*#__PURE__*/_react["default"].createElement("span", {
     className: "".concat(subscribeLinkClass, "-label"),
     style: (0, _underscore.extend)({}, styles.label)
-  }, "Get Email Updates"))), /*#__PURE__*/_react.default.createElement("a", {
+  }, "Get Email Updates"))), /*#__PURE__*/_react["default"].createElement("a", {
     href: shopLink,
     className: shopLinkClass,
     style: styles.shopLink,
     onClick: function onClick() {
-      return _utils.default.trackHeader('Click', 'Mobile Bottom Buttons - Shop NYPL');
+      return _utils["default"].trackHeader('Click', 'Mobile Bottom Buttons - Shop NYPL');
     }
-  }, /*#__PURE__*/_react.default.createElement("span", {
+  }, /*#__PURE__*/_react["default"].createElement("span", {
     className: "".concat(shopLinkClass, "-wrapper"),
     style: (0, _underscore.extend)({}, styles.wrapper, styles.shopLinkWrapper)
-  }, /*#__PURE__*/_react.default.createElement(_dgxSvgIcons.ShoppingBagIcon, {
+  }, /*#__PURE__*/_react["default"].createElement(_dgxSvgIcons.ShoppingBagIcon, {
     iconId: "shoppingBagSVG",
     ariaHidden: true,
     focusable: false
-  }), /*#__PURE__*/_react.default.createElement("span", {
+  }), /*#__PURE__*/_react["default"].createElement("span", {
     className: "".concat(shopLinkClass, "-label"),
     style: (0, _underscore.extend)(styles.shopLinkLabel, styles.label)
-  }, "Shop NYPL"))), /*#__PURE__*/_react.default.createElement(_DonateButton.default, {
+  }, "Shop NYPL"))), /*#__PURE__*/_react["default"].createElement(_DonateButton["default"], {
     id: "mobileNav-donateButton",
     className: "donateLink",
     style: styles.donateLink,
@@ -173,11 +173,11 @@ var NavMenuMobileButtons = function NavMenuMobileButtons(_ref) {
 };
 
 NavMenuMobileButtons.propTypes = {
-  lang: _propTypes.default.string,
-  className: _propTypes.default.string,
-  libraryCardLink: _propTypes.default.string,
-  subscribeLink: _propTypes.default.string,
-  shopLink: _propTypes.default.string
+  lang: _propTypes["default"].string,
+  className: _propTypes["default"].string,
+  libraryCardLink: _propTypes["default"].string,
+  subscribeLink: _propTypes["default"].string,
+  shopLink: _propTypes["default"].string
 };
 NavMenuMobileButtons.defaultProps = {
   lang: 'en',
@@ -187,4 +187,4 @@ NavMenuMobileButtons.defaultProps = {
   shopLink: 'http://shop.nypl.org/?utm_campaign=NYPLMobileHeaderButton&utm_source=nypl.org&utm_medium=referral'
 };
 var _default = NavMenuMobileButtons;
-exports.default = _default;
+exports["default"] = _default;

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -29,7 +29,7 @@ var _DotsLoader = _interopRequireDefault(require("../Loaders/DotsLoader"));
 
 var _utils = _interopRequireDefault(require("../../utils/utils"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -43,7 +43,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -148,7 +148,7 @@ var EmailSubscription = /*#__PURE__*/function (_React$Component) {
       // Prevent re-direct, handle validation
       e.preventDefault();
 
-      var userInput = _reactDom.default.findDOMNode(this.refs.emailAddressField);
+      var userInput = _reactDom["default"].findDOMNode(this.refs.emailAddressField);
 
       if (!this.isValidEmail(userInput.value)) {
         userInput.value = '';
@@ -186,14 +186,14 @@ var EmailSubscription = /*#__PURE__*/function (_React$Component) {
         formProcessing: true
       });
 
-      _axios.default.post(postUrl, {
+      _axios["default"].post(postUrl, {
         email: userEmail
       }).then(function (response) {
         _this2.setState({
           formStatus: response.data.responseStatus,
           formProcessing: false
         });
-      }).catch(function (response) {
+      })["catch"](function (response) {
         _this2.setState({
           formStatus: response.data.responseStatus || response.statusText,
           formProcessing: false
@@ -208,25 +208,25 @@ var EmailSubscription = /*#__PURE__*/function (_React$Component) {
       var notValidEmail = this.state.notValidEmail;
       var formClass = 'emailSubscribeForm';
       var emailAddressField = 'emailAddressField';
-      var errorClass = (0, _classnames.default)({
+      var errorClass = (0, _classnames["default"])({
         active: notValidEmail
       });
       var subscribeContent;
 
       if (!isLoading) {
         // The default view
-        subscribeContent = /*#__PURE__*/_react.default.createElement("div", {
+        subscribeContent = /*#__PURE__*/_react["default"].createElement("div", {
           role: "dialog"
-        }, /*#__PURE__*/_react.default.createElement("div", {
+        }, /*#__PURE__*/_react["default"].createElement("div", {
           className: "subscribeMessageBox ".concat(status),
           tabIndex: "0"
-        }, /*#__PURE__*/_react.default.createElement("div", {
+        }, /*#__PURE__*/_react["default"].createElement("div", {
           className: "subscribeMessageBox-eyebrow"
-        }), /*#__PURE__*/_react.default.createElement("div", {
+        }), /*#__PURE__*/_react["default"].createElement("div", {
           className: "subscribeMessageBox-title"
-        }, "Get the ", /*#__PURE__*/_react.default.createElement("span", {
+        }, "Get the ", /*#__PURE__*/_react["default"].createElement("span", {
           className: "subscribeMessageBox-title-bestNYPL"
-        }, "best of NYPL"), " in your inbox")), /*#__PURE__*/_react.default.createElement("form", {
+        }, "best of NYPL"), " in your inbox")), /*#__PURE__*/_react["default"].createElement("form", {
           id: "emailSubscribeForm",
           className: formClass,
           action: this.props.target,
@@ -234,13 +234,13 @@ var EmailSubscription = /*#__PURE__*/function (_React$Component) {
           name: this.props.form_name,
           onSubmit: this.validateForm,
           style: (0, _underscore.extend)(this.props.style, styles.base)
-        }, /*#__PURE__*/_react.default.createElement("div", {
+        }, /*#__PURE__*/_react["default"].createElement("div", {
           className: "".concat(formClass, "-fields")
-        }, /*#__PURE__*/_react.default.createElement("label", {
+        }, /*#__PURE__*/_react["default"].createElement("label", {
           className: "".concat(formClass, "-label"),
           style: styles.emailFormLabel,
           htmlFor: emailAddressField
-        }, "Email Address"), /*#__PURE__*/_react.default.createElement("input", {
+        }, "Email Address"), /*#__PURE__*/_react["default"].createElement("input", {
           "aria-label": "Enter your email address",
           className: "".concat(formClass, "-input"),
           type: "email",
@@ -252,17 +252,17 @@ var EmailSubscription = /*#__PURE__*/function (_React$Component) {
           "aria-required": "true",
           autoComplete: "off",
           autoFocus: true
-        }), /*#__PURE__*/_react.default.createElement("div", {
+        }), /*#__PURE__*/_react["default"].createElement("div", {
           className: "".concat(formClass, "-error ").concat(errorClass)
-        }, /*#__PURE__*/_react.default.createElement(_dgxSvgIcons.XIcon, {
+        }, /*#__PURE__*/_react["default"].createElement(_dgxSvgIcons.XIcon, {
           ariaHidden: true,
           focusable: false
-        }), /*#__PURE__*/_react.default.createElement("span", null, "Please enter a valid email address")), /*#__PURE__*/_react.default.createElement("div", {
+        }), /*#__PURE__*/_react["default"].createElement("span", null, "Please enter a valid email address")), /*#__PURE__*/_react["default"].createElement("div", {
           className: "".concat(formClass, "-submit")
-        }, /*#__PURE__*/_react.default.createElement(_dgxSvgIcons.CheckSoloIcon, {
+        }, /*#__PURE__*/_react["default"].createElement(_dgxSvgIcons.CheckSoloIcon, {
           ariaHidden: true,
           focusable: false
-        }), /*#__PURE__*/_react.default.createElement("input", {
+        }), /*#__PURE__*/_react["default"].createElement("input", {
           "aria-label": "Sign up",
           type: "submit",
           name: "submit",
@@ -271,94 +271,94 @@ var EmailSubscription = /*#__PURE__*/function (_React$Component) {
         })))));
 
         if (status === 'success') {
-          _utils.default.trackHeader('Subscribe', 'Success');
+          _utils["default"].trackHeader('Subscribe', 'Success');
 
-          subscribeContent = /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_SubscribeMessageBox.default, {
+          subscribeContent = /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement(_SubscribeMessageBox["default"], {
             status: status,
             msg: "Thank you for subscribing to our email updates."
-          }), /*#__PURE__*/_react.default.createElement("div", {
+          }), /*#__PURE__*/_react["default"].createElement("div", {
             className: "".concat(this.props.className, "-newEmail")
-          }, /*#__PURE__*/_react.default.createElement("button", {
+          }, /*#__PURE__*/_react["default"].createElement("button", {
             onClick: this.initForm,
             style: styles.resubmitButton
-          }, "Enter another email address")), /*#__PURE__*/_react.default.createElement("div", {
+          }, "Enter another email address")), /*#__PURE__*/_react["default"].createElement("div", {
             className: "".concat(this.props.className, "-followUs")
-          }, /*#__PURE__*/_react.default.createElement("p", null, "Follow us:"), /*#__PURE__*/_react.default.createElement(_SocialMediaLinksWidget.default, {
+          }, /*#__PURE__*/_react["default"].createElement("p", null, "Follow us:"), /*#__PURE__*/_react["default"].createElement(_SocialMediaLinksWidget["default"], {
             className: "".concat(this.props.className, "-socialMediaLinksWidget"),
-            links: _appConfig.default.socialMediaLinks,
+            links: _appConfig["default"].socialMediaLinks,
             displayOnlyList: ['facebook', 'twitter']
           })));
         }
 
         if (status === 'exists') {
-          _utils.default.trackHeader('Subscribe', 'Error -- already subscribed');
+          _utils["default"].trackHeader('Subscribe', 'Error -- already subscribed');
 
-          subscribeContent = /*#__PURE__*/_react.default.createElement("div", {
+          subscribeContent = /*#__PURE__*/_react["default"].createElement("div", {
             className: "".concat(this.props.className, "-alreadySubscribed")
-          }, /*#__PURE__*/_react.default.createElement(_SubscribeMessageBox.default, {
+          }, /*#__PURE__*/_react["default"].createElement(_SubscribeMessageBox["default"], {
             status: status,
             msg: "Looks like you're already signed up!"
-          }), /*#__PURE__*/_react.default.createElement("div", {
+          }), /*#__PURE__*/_react["default"].createElement("div", {
             className: "".concat(this.props.className, "-newEmail")
-          }, /*#__PURE__*/_react.default.createElement("button", {
+          }, /*#__PURE__*/_react["default"].createElement("button", {
             style: styles.resubmitButton,
             onClick: this.initForm
           }, "Enter a different email address")));
         }
 
         if (status === 'error' || status === 'Internal Server Error') {
-          _utils.default.trackHeader('Subscribe', 'Error');
+          _utils["default"].trackHeader('Subscribe', 'Error');
 
-          subscribeContent = /*#__PURE__*/_react.default.createElement("div", {
+          subscribeContent = /*#__PURE__*/_react["default"].createElement("div", {
             className: "".concat(this.props.className, "-misc-error")
-          }, /*#__PURE__*/_react.default.createElement("div", null, "Hmm..."), /*#__PURE__*/_react.default.createElement("div", null, "Something isn't quite right."), /*#__PURE__*/_react.default.createElement("div", null, "Please try again."), /*#__PURE__*/_react.default.createElement("a", {
+          }, /*#__PURE__*/_react["default"].createElement("div", null, "Hmm..."), /*#__PURE__*/_react["default"].createElement("div", null, "Something isn't quite right."), /*#__PURE__*/_react["default"].createElement("div", null, "Please try again."), /*#__PURE__*/_react["default"].createElement("a", {
             href: "",
             onClick: this.initForm,
             style: styles.tryAgainButton
-          }, /*#__PURE__*/_react.default.createElement(_dgxSvgIcons.LeftArrowIcon, {
+          }, /*#__PURE__*/_react["default"].createElement(_dgxSvgIcons.LeftArrowIcon, {
             ariaHidden: true,
             focusable: false
           }), "TRY AGAIN"));
         } // Always show the privacy link except in the loading phase.
 
 
-        return /*#__PURE__*/_react.default.createElement("div", {
+        return /*#__PURE__*/_react["default"].createElement("div", {
           className: this.props.className
-        }, subscribeContent, /*#__PURE__*/_react.default.createElement("a", {
+        }, subscribeContent, /*#__PURE__*/_react["default"].createElement("a", {
           href: this.props.subCenterUrl,
           className: "".concat(this.props.className, "-sc-link"),
           style: styles.scLink,
           onClick: function onClick() {
-            return _utils.default.trackHeader('Subscribe', 'Subscription Center');
+            return _utils["default"].trackHeader('Subscribe', 'Subscription Center');
           }
-        }, "Subscription Center"), /*#__PURE__*/_react.default.createElement("a", {
+        }, "Subscription Center"), /*#__PURE__*/_react["default"].createElement("a", {
           href: this.props.policyUrl,
           className: "".concat(this.props.className, "-pp-link"),
           style: styles.privacyLink
         }, "Privacy Policy"));
       }
 
-      return /*#__PURE__*/_react.default.createElement("div", {
+      return /*#__PURE__*/_react["default"].createElement("div", {
         className: this.props.className
-      }, /*#__PURE__*/_react.default.createElement(_DotsLoader.default, null));
+      }, /*#__PURE__*/_react["default"].createElement(_DotsLoader["default"], null));
     }
   }]);
 
   return EmailSubscription;
-}(_react.default.Component);
+}(_react["default"].Component);
 
 EmailSubscription.propTypes = {
-  id: _propTypes.default.string,
-  className: _propTypes.default.string,
-  lang: _propTypes.default.string,
-  target: _propTypes.default.string,
-  form_name: _propTypes.default.string,
-  listId: _propTypes.default.string,
-  form_method: _propTypes.default.string,
-  placeholder: _propTypes.default.string,
-  policyUrl: _propTypes.default.string,
-  subCenterUrl: _propTypes.default.string,
-  style: _propTypes.default.arrayOf(_propTypes.default.object)
+  id: _propTypes["default"].string,
+  className: _propTypes["default"].string,
+  lang: _propTypes["default"].string,
+  target: _propTypes["default"].string,
+  form_name: _propTypes["default"].string,
+  listId: _propTypes["default"].string,
+  form_method: _propTypes["default"].string,
+  placeholder: _propTypes["default"].string,
+  policyUrl: _propTypes["default"].string,
+  subCenterUrl: _propTypes["default"].string,
+  style: _propTypes["default"].arrayOf(_propTypes["default"].object)
 };
 EmailSubscription.defaultProps = {
   id: 'EmailSubscription',
@@ -374,4 +374,4 @@ EmailSubscription.defaultProps = {
   style: {}
 };
 var _default = EmailSubscription;
-exports.default = _default;
+exports["default"] = _default;

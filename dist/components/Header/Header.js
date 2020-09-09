@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 Object.defineProperty(exports, "navConfig", {
   enumerable: true,
   get: function get() {
-    return _navConfig.default;
+    return _navConfig["default"];
   }
 });
 exports.Header = void 0;
@@ -49,7 +49,7 @@ var _utils = _interopRequireDefault(require("../../utils/utils"));
 
 var _encoreCatalogLogOutTimer = _interopRequireDefault(require("../../utils/encoreCatalogLogOutTimer"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -63,7 +63,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -145,7 +145,7 @@ var Header = /*#__PURE__*/function (_React$Component) {
         currentTime = _this$props$currentTi === void 0 ? Date.now() || undefined : _this$props$currentTi,
         _this$props$isTest = _this$props.isTest,
         isTest = _this$props$isTest === void 0 ? false : _this$props$isTest;
-    var patronNameObject = !(0, _underscore.isEmpty)(patron) && patron.names && patron.names.length ? _utils.default.modelPatronName(patron.names[0]) : {};
+    var patronNameObject = !(0, _underscore.isEmpty)(patron) && patron.names && patron.names.length ? _utils["default"].modelPatronName(patron.names[0]) : {};
     _this.state = (0, _underscore.extend)({
       navData: navData,
       loginCookieName: 'nyplIdentityPatron',
@@ -158,7 +158,7 @@ var Header = /*#__PURE__*/function (_React$Component) {
       currentTime: currentTime,
       isTest: isTest
     }, {
-      featureFlagsStore: _dgxFeatureFlags.default.store.getState()
+      featureFlagsStore: _dgxFeatureFlags["default"].store.getState()
     });
     return _this;
   }
@@ -167,32 +167,32 @@ var Header = /*#__PURE__*/function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       // Listen on FeatureFlags Store updates
-      _dgxFeatureFlags.default.store.listen(this.onFeatureFlagsChange.bind(this)); // Set the log out link to state
+      _dgxFeatureFlags["default"].store.listen(this.onFeatureFlagsChange.bind(this)); // Set the log out link to state
 
 
       this.setLogOutLink(window.location.href); // Set the timer to log out the user from Encore and Catalog
       // (mainly for Encore while Catalog as a side effect)
 
-      _encoreCatalogLogOutTimer.default.setEncoreLoggedInTimer(window.location.host, this.state.currentTime, this.state.isTest); // Set nyplIdentityPatron cookie to the state.
+      _encoreCatalogLogOutTimer["default"].setEncoreLoggedInTimer(window.location.host, this.state.currentTime, this.state.isTest); // Set nyplIdentityPatron cookie to the state.
 
 
       this.setLoginCookie(this.state.loginCookieName); // Set feature flag cookies to the state
       // We don't have any feature flags set in the config list at this moment though
 
-      _utils.default.checkFeatureFlagActivated(_featureFlagConfig.default.featureFlagList, this.state.isFeatureFlagsActivated);
+      _utils["default"].checkFeatureFlagActivated(_featureFlagConfig["default"].featureFlagList, this.state.isFeatureFlagsActivated);
     }
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       // Listen on FeatureFlags Store updates
-      _dgxFeatureFlags.default.store.unlisten(this.onFeatureFlagsChange.bind(this)); // Removing event listener to minimize garbage collection
+      _dgxFeatureFlags["default"].store.unlisten(this.onFeatureFlagsChange.bind(this)); // Removing event listener to minimize garbage collection
 
     }
   }, {
     key: "onFeatureFlagsChange",
     value: function onFeatureFlagsChange() {
       this.setState({
-        featureFlagsStore: _dgxFeatureFlags.default.store.getState()
+        featureFlagsStore: _dgxFeatureFlags["default"].store.getState()
       });
     }
     /**
@@ -203,8 +203,8 @@ var Header = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "setLoginCookie",
     value: function setLoginCookie(cookie) {
-      if (_utils.default.hasCookie(cookie)) {
-        var loginCookieValue = _utils.default.getCookie(cookie);
+      if (_utils["default"].hasCookie(cookie)) {
+        var loginCookieValue = _utils["default"].getCookie(cookie);
 
         this.setState({
           loginCookieValue: loginCookieValue
@@ -229,7 +229,7 @@ var Header = /*#__PURE__*/function (_React$Component) {
     key: "setLogOutLink",
     value: function setLogOutLink(location) {
       this.setState({
-        logOutUrl: _utils.default.renderDynamicLogOutLink(location)
+        logOutUrl: _utils["default"].renderDynamicLogOutLink(location)
       });
     }
     /**
@@ -245,9 +245,9 @@ var Header = /*#__PURE__*/function (_React$Component) {
     value: function fetchPatronData(cookie) {
       var _this2 = this;
 
-      _utils.default.getLoginData(cookie, function (result) {
+      _utils["default"].getLoginData(cookie, function (result) {
         if (result.data && result.data.data) {
-          var patronNameObject = _utils.default.modelPatronName(_utils.default.extractPatronName(result.data));
+          var patronNameObject = _utils["default"].modelPatronName(_utils["default"].extractPatronName(result.data));
 
           _this2.setState({
             patronName: patronNameObject.name,
@@ -255,7 +255,7 @@ var Header = /*#__PURE__*/function (_React$Component) {
             patronDataReceived: true
           });
         }
-      }, _appConfig.default.loginMyNyplLinks.tokenRefreshLink, function () {
+      }, _appConfig["default"].loginMyNyplLinks.tokenRefreshLink, function () {
         _this2.setLoginCookie(_this2.state.loginCookieName);
       });
     }
@@ -263,16 +263,16 @@ var Header = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var headerClass = this.props.className;
-      var skipNav = this.props.skipNav ? /*#__PURE__*/_react.default.createElement(_dgxSkipNavigationLink.default, this.props.skipNav) : '';
+      var skipNav = this.props.skipNav ? /*#__PURE__*/_react["default"].createElement(_dgxSkipNavigationLink["default"], this.props.skipNav) : '';
       var isLoggedIn = !!this.state.patronDataReceived;
-      return /*#__PURE__*/_react.default.createElement("header", {
+      return /*#__PURE__*/_react["default"].createElement("header", {
         id: this.props.id,
         className: headerClass
-      }, skipNav, /*#__PURE__*/_react.default.createElement(_GlobalAlerts.default, {
+      }, skipNav, /*#__PURE__*/_react["default"].createElement(_GlobalAlerts["default"], {
         className: "".concat(headerClass, "-globalAlerts")
-      }), /*#__PURE__*/_react.default.createElement("div", {
+      }), /*#__PURE__*/_react["default"].createElement("div", {
         className: "".concat(headerClass, "-wrapper")
-      }, /*#__PURE__*/_react.default.createElement(_MobileHeader.default, {
+      }, /*#__PURE__*/_react["default"].createElement(_MobileHeader["default"], {
         className: "".concat(headerClass, "-mobile"),
         locatorUrl: this.props.urlType === 'absolute' ? '//www.nypl.org/locations/map?nearme=true' : '/locations/map?nearme=true',
         nyplRootUrl: this.props.urlType === 'absolute' ? '//www.nypl.org' : '/',
@@ -281,23 +281,23 @@ var Header = /*#__PURE__*/function (_React$Component) {
         logOutLink: this.state.logOutUrl,
         navData: this.props.navData,
         urlType: this.props.urlType
-      }), /*#__PURE__*/_react.default.createElement("div", {
+      }), /*#__PURE__*/_react["default"].createElement("div", {
         className: "".concat(headerClass, "-topWrapper"),
         style: styles.wrapper
-      }, /*#__PURE__*/_react.default.createElement(_Logo.default, {
+      }, /*#__PURE__*/_react["default"].createElement(_Logo["default"], {
         className: "".concat(headerClass, "-logo"),
         target: this.props.urlType === 'absolute' ? '//www.nypl.org' : '/'
-      }), /*#__PURE__*/_react.default.createElement("nav", {
+      }), /*#__PURE__*/_react["default"].createElement("nav", {
         className: "".concat(headerClass, "-buttons"),
         style: styles.topButtons,
         "aria-label": "Header top links"
-      }, /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_MyNyplButton.default, {
+      }, /*#__PURE__*/_react["default"].createElement("ul", null, /*#__PURE__*/_react["default"].createElement("li", null, /*#__PURE__*/_react["default"].createElement(_MyNyplButton["default"], {
         refId: "desktopLogin",
         isLoggedIn: isLoggedIn,
         patronName: this.state.patronName,
         logOutLink: this.state.logOutUrl,
         gaAction: isLoggedIn ? 'My Account' : 'Log In'
-      })), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_SimpleLink.default, {
+      })), /*#__PURE__*/_react["default"].createElement("li", null, /*#__PURE__*/_react["default"].createElement(_SimpleLink["default"], {
         label: "Locations",
         target: this.props.urlType === 'absolute' ? '//www.nypl.org/locations/map' : '/locations/map',
         className: "locationsTopLink",
@@ -305,7 +305,7 @@ var Header = /*#__PURE__*/function (_React$Component) {
         gaAction: "Locations",
         gaLabel: "Header Top Links",
         style: styles.locationsTopLink
-      })), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_SimpleLink.default, {
+      })), /*#__PURE__*/_react["default"].createElement("li", null, /*#__PURE__*/_react["default"].createElement(_SimpleLink["default"], {
         label: "Get a Library Card",
         target: this.props.urlType === 'absolute' ? '//www.nypl.org/library-card' : '/library-card',
         className: "libraryCardButton",
@@ -313,16 +313,16 @@ var Header = /*#__PURE__*/function (_React$Component) {
         gaAction: "Get a Library Card",
         gaLabel: "Header Top Links",
         style: styles.libraryCardButton
-      })), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_SubscribeButton.default, {
+      })), /*#__PURE__*/_react["default"].createElement("li", null, /*#__PURE__*/_react["default"].createElement(_SubscribeButton["default"], {
         label: "Get Email Updates",
         lang: this.props.lang,
         style: styles.subscribeButton
-      })), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_DonateButton.default, {
+      })), /*#__PURE__*/_react["default"].createElement("li", null, /*#__PURE__*/_react["default"].createElement(_DonateButton["default"], {
         id: "donateButton",
         lang: this.props.lang,
         style: styles.donateButton,
         gaLabel: "Header Top Links"
-      })), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_SimpleLink.default, {
+      })), /*#__PURE__*/_react["default"].createElement("li", null, /*#__PURE__*/_react["default"].createElement(_SimpleLink["default"], {
         label: "Shop",
         target: 'http://shop.nypl.org/?utm_campaign=NYPLHeaderButton&utm_' + 'source=nypl.org&utm_medium=referral',
         className: "shopTopLink",
@@ -330,7 +330,7 @@ var Header = /*#__PURE__*/function (_React$Component) {
         gaAction: "Shop",
         gaLabel: "Header Top Links",
         style: styles.shopLink
-      }))))), /*#__PURE__*/_react.default.createElement(_NavMenu.default, {
+      }))))), /*#__PURE__*/_react["default"].createElement(_NavMenu["default"], {
         className: "".concat(headerClass, "-navMenu"),
         lang: this.props.lang,
         items: this.state.navData,
@@ -338,7 +338,7 @@ var Header = /*#__PURE__*/function (_React$Component) {
         isLoggedIn: isLoggedIn,
         patronName: this.state.patronName,
         logOutLink: this.state.logOutUrl
-      })), _dgxFeatureFlags.default.store._isFeatureActive(_appConfig.default.fundraising.experimentName) && /*#__PURE__*/_react.default.createElement(_FundraisingBanner.default, {
+      })), _dgxFeatureFlags["default"].store._isFeatureActive(_appConfig["default"].fundraising.experimentName) && /*#__PURE__*/_react["default"].createElement(_FundraisingBanner["default"], {
         hideBannerCookieName: "closeFundraiserBanner",
         gaLabel: "Header Fundraising Banner"
       }));
@@ -346,22 +346,22 @@ var Header = /*#__PURE__*/function (_React$Component) {
   }]);
 
   return Header;
-}(_react.default.Component);
+}(_react["default"].Component);
 
 exports.Header = Header;
 Header.propTypes = {
-  lang: _propTypes.default.string,
-  className: _propTypes.default.string,
-  id: _propTypes.default.string,
-  navData: _propTypes.default.arrayOf(_propTypes.default.object).isRequired,
-  skipNav: _propTypes.default.shape(_dgxSkipNavigationLink.default.propTypes),
-  currentTime: _propTypes.default.number,
-  isTest: _propTypes.default.bool,
-  patron: _propTypes.default.shape({
-    names: _propTypes.default.arrayOf(_propTypes.default.string),
-    loggedIn: _propTypes.default.bool
+  lang: _propTypes["default"].string,
+  className: _propTypes["default"].string,
+  id: _propTypes["default"].string,
+  navData: _propTypes["default"].arrayOf(_propTypes["default"].object).isRequired,
+  skipNav: _propTypes["default"].shape(_dgxSkipNavigationLink["default"].propTypes),
+  currentTime: _propTypes["default"].number,
+  isTest: _propTypes["default"].bool,
+  patron: _propTypes["default"].shape({
+    names: _propTypes["default"].arrayOf(_propTypes["default"].string),
+    loggedIn: _propTypes["default"].bool
   }),
-  urlType: _propTypes.default.string
+  urlType: _propTypes["default"].string
 };
 Header.defaultProps = {
   lang: 'en',

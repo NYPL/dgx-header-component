@@ -39,7 +39,7 @@ const NavMenuItem = ({
 
 NavMenuItem.propTypes = {
   className: PropTypes.string,
-  label: PropTypes.arrayOf(PropTypes.object),
+  label: PropTypes.shape({}),
   lang: PropTypes.string,
   navId: PropTypes.string,
   target: PropTypes.string,

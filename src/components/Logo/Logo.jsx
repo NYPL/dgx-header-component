@@ -9,7 +9,6 @@ const Logo = (props) =>
     className={props.className}
     href={props.target}
     onClick={() => utils.trackHeader('Click Logo', '')}
-    style={props.style}
   >
     <LionLogoWithText focusable={false} />
     <span className="visuallyHidden">{props.alt}</span>
@@ -20,7 +19,6 @@ Logo.propTypes = {
   id: PropTypes.string,
   className: PropTypes.string,
   alt: PropTypes.string,
-  style: PropTypes.arrayOf(PropTypes.object),
 };
 
 Logo.defaultProps = {
@@ -28,7 +26,6 @@ Logo.defaultProps = {
   id: 'Logo',
   className: 'Logo',
   alt: 'The New York Public Library',
-  style: {},
 };
 
 export default Logo;

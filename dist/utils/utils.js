@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _moment = _interopRequireDefault(require("moment"));
 
@@ -19,13 +19,13 @@ var _appConfig = _interopRequireDefault(require("./../appConfig"));
 
 var _gaConfig = _interopRequireDefault(require("./../gaConfig"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
@@ -39,8 +39,8 @@ function Utils() {
   this.formatDate = function (startDate, endDate) {
     var formattedDate,
         numDaysBetween = function numDaysBetween(start, end) {
-      var s = (0, _moment.default)(start),
-          e = (0, _moment.default)(end);
+      var s = (0, _moment["default"])(start),
+          e = (0, _moment["default"])(end);
       return e.diff(s, 'days');
     },
         dateToString = function dateToString(start, end, type) {
@@ -152,7 +152,7 @@ function Utils() {
     var dimensions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     var hitCallback = arguments.length > 2 ? arguments[2] : undefined;
 
-    _dgxReactGa.ga.ga('send', 'event', _gaConfig.default.eventCategory, _gaConfig.default.eventAction, label, 0, dimensions, {
+    _dgxReactGa.ga.ga('send', 'event', _gaConfig["default"].eventCategory, _gaConfig["default"].eventAction, label, 0, dimensions, {
       hitCallback: _this.createFunctionWithTimeout(hitCallback)
     });
   };
@@ -259,9 +259,9 @@ function Utils() {
 
   this.getLoginData = function (cookie, cb, refreshLink, refreshCookieCb) {
     var decodedToken = JSON.parse(cookie).access_token;
-    var endpoint = "".concat(_appConfig.default.patronApiUrl).concat(decodedToken);
+    var endpoint = "".concat(_appConfig["default"].patronApiUrl).concat(decodedToken);
 
-    _axios.default.get(endpoint).then(cb).catch(function (response) {
+    _axios["default"].get(endpoint).then(cb)["catch"](function (response) {
       if (response instanceof Error) {
         console.warn(response.message);
       } else {
@@ -291,9 +291,9 @@ function Utils() {
 
 
   this.refreshAccessToken = function (api, cb, fallBackCb) {
-    _axios.default.get(api, {
+    _axios["default"].get(api, {
       withCredentials: true
-    }).then(cb).catch(function (response) {
+    }).then(cb)["catch"](function (response) {
       if (response instanceof Error) {
         fallBackCb();
         console.warn(response.message);
@@ -368,10 +368,10 @@ function Utils() {
 
   this.renderDynamicLogOutLink = function (location) {
     if (!location || location === 'about:blank') {
-      return _appConfig.default.loginMyNyplLinks.logOutLink;
+      return _appConfig["default"].loginMyNyplLinks.logOutLink;
     }
 
-    return "".concat(_appConfig.default.loginMyNyplLinks.logOutLink, "?redirect_uri=").concat(location);
+    return "".concat(_appConfig["default"].loginMyNyplLinks.logOutLink, "?redirect_uri=").concat(location);
   };
   /**
    * checkFeatureFlagActivated(featureFlagList, componentStateObject)
@@ -400,11 +400,11 @@ function Utils() {
 
   this.checkFeatureFlagCookie = function (name) {
     if (_this.hasCookie("nyplFeatureFlag".concat(name))) {
-      _dgxFeatureFlags.default.utils.activateFeature(name);
+      _dgxFeatureFlags["default"].utils.activateFeature(name);
     }
   };
 }
 
 var _default = new Utils();
 
-exports.default = _default;
+exports["default"] = _default;

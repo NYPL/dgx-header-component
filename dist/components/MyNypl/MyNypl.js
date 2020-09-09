@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -17,7 +17,7 @@ var _utils = _interopRequireDefault(require("../../utils/utils"));
 
 var _appConfig = _interopRequireDefault(require("../../appConfig"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -31,7 +31,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -84,7 +84,7 @@ var MyNypl = /*#__PURE__*/function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       if (this.refs.patronGreetingWrapper) {
-        _reactDom.default.findDOMNode(this.refs.patronGreetingWrapper).focus();
+        _reactDom["default"].findDOMNode(this.refs.patronGreetingWrapper).focus();
       } else {
         this.refs.catalogLink.focus();
       }
@@ -122,13 +122,13 @@ var MyNypl = /*#__PURE__*/function (_React$Component) {
         return null;
       }
 
-      return /*#__PURE__*/_react.default.createElement("div", {
+      return /*#__PURE__*/_react["default"].createElement("div", {
         tabIndex: "0",
         className: "patron-greeting-wrapper",
         ref: "patronGreetingWrapper"
-      }, /*#__PURE__*/_react.default.createElement("p", {
+      }, /*#__PURE__*/_react["default"].createElement("p", {
         className: "".concat(this.props.className, "-patron-greeting login-indication")
-      }, "You are logged in as:"), /*#__PURE__*/_react.default.createElement("p", {
+      }, "You are logged in as:"), /*#__PURE__*/_react["default"].createElement("p", {
         className: "".concat(this.props.className, "-patron-greeting login-name")
       }, this.props.patronName));
     }
@@ -140,14 +140,14 @@ var MyNypl = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "renderLogOutLink",
     value: function renderLogOutLink() {
-      return this.props.isLoggedIn ? /*#__PURE__*/_react.default.createElement("a", {
+      return this.props.isLoggedIn ? /*#__PURE__*/_react["default"].createElement("a", {
         href: this.props.logOutLink,
         className: "".concat(this.props.className, "-catalog-link"),
         onClick: function onClick() {
-          return _utils.default.trackHeader('My Account', 'Log Out');
+          return _utils["default"].trackHeader('My Account', 'Log Out');
         },
         style: styles.logOutLink
-      }, /*#__PURE__*/_react.default.createElement(_dgxSvgIcons.LogoutIcon, {
+      }, /*#__PURE__*/_react["default"].createElement(_dgxSvgIcons.LogoutIcon, {
         className: "logoutIcon",
         ariaHidden: true,
         focusable: false
@@ -164,31 +164,31 @@ var MyNypl = /*#__PURE__*/function (_React$Component) {
           researchLink = _this$renderLoginLink.researchLink;
 
       var gaAction = this.props.isLoggedIn ? 'Go To' : 'Log In';
-      return /*#__PURE__*/_react.default.createElement("div", {
+      return /*#__PURE__*/_react["default"].createElement("div", {
         className: this.props.className,
         role: "dialog"
-      }, this.renderGreeting(), /*#__PURE__*/_react.default.createElement("ul", {
+      }, this.renderGreeting(), /*#__PURE__*/_react["default"].createElement("ul", {
         className: "".concat(this.props.className, "-login-list")
-      }, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
+      }, /*#__PURE__*/_react["default"].createElement("li", null, /*#__PURE__*/_react["default"].createElement("a", {
         ref: "catalogLink",
         href: catalogLink,
         style: styles.loginButtons,
         className: "".concat(this.props.className, "-catalog-btn"),
         onClick: function onClick() {
-          return _utils.default.trackHeader(gaAction, 'Catalog');
+          return _utils["default"].trackHeader(gaAction, 'Catalog');
         }
-      }, /*#__PURE__*/_react.default.createElement(_dgxSvgIcons.LoginIcon, {
+      }, /*#__PURE__*/_react["default"].createElement(_dgxSvgIcons.LoginIcon, {
         fill: "#fff",
         ariaHidden: true,
         focusable: false
-      }), catalogLinkLabel)), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("a", {
+      }), catalogLinkLabel)), /*#__PURE__*/_react["default"].createElement("li", null, /*#__PURE__*/_react["default"].createElement("a", {
         href: researchLink,
         style: styles.loginButtons,
         className: "".concat(this.props.className, "-research-btn"),
         onClick: function onClick() {
-          return _utils.default.trackHeader(gaAction, 'Research');
+          return _utils["default"].trackHeader(gaAction, 'Research');
         }
-      }, /*#__PURE__*/_react.default.createElement(_dgxSvgIcons.BuildingIcon, {
+      }, /*#__PURE__*/_react["default"].createElement(_dgxSvgIcons.BuildingIcon, {
         ariaHidden: true,
         focusable: false
       }), researchCatalogLinkLabel))), this.renderLogOutLink());
@@ -196,31 +196,31 @@ var MyNypl = /*#__PURE__*/function (_React$Component) {
   }]);
 
   return MyNypl;
-}(_react.default.Component);
+}(_react["default"].Component);
 
 MyNypl.propTypes = {
-  id: _propTypes.default.string,
-  className: _propTypes.default.string,
-  lang: _propTypes.default.string,
-  catalogLink: _propTypes.default.string,
-  researchLink: _propTypes.default.string,
-  loginCatalogLink: _propTypes.default.string,
-  loginResearchLink: _propTypes.default.string,
-  logOutLink: _propTypes.default.string,
-  isLoggedIn: _propTypes.default.bool,
-  patronName: _propTypes.default.string
+  id: _propTypes["default"].string,
+  className: _propTypes["default"].string,
+  lang: _propTypes["default"].string,
+  catalogLink: _propTypes["default"].string,
+  researchLink: _propTypes["default"].string,
+  loginCatalogLink: _propTypes["default"].string,
+  loginResearchLink: _propTypes["default"].string,
+  logOutLink: _propTypes["default"].string,
+  isLoggedIn: _propTypes["default"].bool,
+  patronName: _propTypes["default"].string
 };
 MyNypl.defaultProps = {
   id: '',
   className: 'myNypl',
   lang: 'en',
-  loginCatalogLink: _appConfig.default.loginMyNyplLinks.catalog,
-  loginResearchLink: _appConfig.default.loginMyNyplLinks.research,
-  catalogLink: _appConfig.default.myNyplLinks.catalog,
-  researchLink: _appConfig.default.myNyplLinks.research,
-  logOutLink: _appConfig.default.loginMyNyplLinks.logOutLink,
+  loginCatalogLink: _appConfig["default"].loginMyNyplLinks.catalog,
+  loginResearchLink: _appConfig["default"].loginMyNyplLinks.research,
+  catalogLink: _appConfig["default"].myNyplLinks.catalog,
+  researchLink: _appConfig["default"].myNyplLinks.research,
+  logOutLink: _appConfig["default"].loginMyNyplLinks.logOutLink,
   isLoggedIn: false,
   patronName: ''
 };
 var _default = MyNypl;
-exports.default = _default;
+exports["default"] = _default;

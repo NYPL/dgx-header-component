@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 var authServerDomain = 'https://login.nypl.org/auth';
 var config = {
   appTitle: 'NYPL | React Header Component',
@@ -54,4 +54,4 @@ var config = {
   patronApiUrl: 'https://platform.nypl.org/api/v0.1/auth/patron/tokens/'
 };
 var _default = config;
-exports.default = _default;
+exports["default"] = _default;

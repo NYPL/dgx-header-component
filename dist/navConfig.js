@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 var previous = [{
   id: 'c2793eb2-9ac2-4696-82f2-2730763a4f0d',
   slug: 'browse',
@@ -1224,4 +1224,4 @@ var _default = {
   previous: previous,
   current: current
 };
-exports.default = _default;
+exports["default"] = _default;

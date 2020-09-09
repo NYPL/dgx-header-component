@@ -3,9 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 var FeatureFlagConfig = {
   featureFlagList: []
 };
 var _default = FeatureFlagConfig;
-exports.default = _default;
+exports["default"] = _default;

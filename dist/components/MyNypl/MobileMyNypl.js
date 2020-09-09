@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -19,7 +19,7 @@ var _utils = _interopRequireDefault(require("../../utils/utils"));
 
 var _appConfig = _interopRequireDefault(require("../../appConfig"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -33,7 +33,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -126,9 +126,9 @@ var MobileMyNypl = /*#__PURE__*/function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       if (this.refs.loginGreeting) {
-        _reactDom.default.findDOMNode(this.refs.loginGreeting).focus();
+        _reactDom["default"].findDOMNode(this.refs.loginGreeting).focus();
       } else {
-        _reactDom.default.findDOMNode(this.refs.catalogLoginLink).focus();
+        _reactDom["default"].findDOMNode(this.refs.catalogLoginLink).focus();
       }
     }
     /**
@@ -160,14 +160,14 @@ var MobileMyNypl = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "renderLogOutLink",
     value: function renderLogOutLink() {
-      return this.props.isLoggedIn ? /*#__PURE__*/_react.default.createElement("a", {
+      return this.props.isLoggedIn ? /*#__PURE__*/_react["default"].createElement("a", {
         href: this.props.logOutLink,
         className: "".concat(this.props.className, "-catalog-link"),
         onClick: function onClick() {
-          return _utils.default.trackHeader('My Account', 'Log Out');
+          return _utils["default"].trackHeader('My Account', 'Log Out');
         },
         style: styles.logOutLink
-      }, "LOG OUT") : /*#__PURE__*/_react.default.createElement("div", {
+      }, "LOG OUT") : /*#__PURE__*/_react["default"].createElement("div", {
         style: styles.notLoggedIn
       });
     }
@@ -179,13 +179,13 @@ var MobileMyNypl = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "renderGreeting",
     value: function renderGreeting() {
-      return this.props.patronName && this.props.isLoggedIn ? /*#__PURE__*/_react.default.createElement("div", {
+      return this.props.patronName && this.props.isLoggedIn ? /*#__PURE__*/_react["default"].createElement("div", {
         className: "".concat(this.props.className, "-greeting"),
         ref: "loginGreeting",
         tabIndex: "0"
-      }, /*#__PURE__*/_react.default.createElement("p", {
+      }, /*#__PURE__*/_react["default"].createElement("p", {
         className: "login-indication"
-      }, "You are logged in as:"), /*#__PURE__*/_react.default.createElement("p", {
+      }, "You are logged in as:"), /*#__PURE__*/_react["default"].createElement("p", {
         className: "login-name"
       }, this.props.patronName)) : null;
     }
@@ -203,43 +203,43 @@ var MobileMyNypl = /*#__PURE__*/function (_React$Component) {
       var researchCatalogLinkLabel = this.props.isLoggedIn ? 'GO TO THE RESEARCH CATALOG' : 'LOG INTO THE RESEARCH CATALOG';
       var loggedInMarginTop = this.props.isLoggedIn ? styles.loggedInLinksMarginTop : null;
       var gaAction = this.props.isLoggedIn ? 'Mobile Go To' : 'Mobile Log In';
-      return /*#__PURE__*/_react.default.createElement("div", {
+      return /*#__PURE__*/_react["default"].createElement("div", {
         className: this.props.className,
         style: styles.base,
         role: "dialog"
-      }, this.renderGreeting(), /*#__PURE__*/_react.default.createElement("a", {
+      }, this.renderGreeting(), /*#__PURE__*/_react["default"].createElement("a", {
         href: catalogLink,
         className: catalogLinkClass,
         style: (0, _underscore.extend)(styles.links, loggedInMarginTop),
         onClick: function onClick() {
-          return _utils.default.trackHeader(gaAction, 'Catalog');
+          return _utils["default"].trackHeader(gaAction, 'Catalog');
         },
         ref: "catalogLoginLink"
-      }, /*#__PURE__*/_react.default.createElement("span", {
+      }, /*#__PURE__*/_react["default"].createElement("span", {
         className: "".concat(catalogLinkClass, "-wrapper"),
         style: (0, _underscore.extend)(styles.wrapper, styles.catalogLinkWrapper)
-      }, /*#__PURE__*/_react.default.createElement(_dgxSvgIcons.LoginIcon, {
+      }, /*#__PURE__*/_react["default"].createElement(_dgxSvgIcons.LoginIcon, {
         fill: "#fff",
         ariaHidden: true,
         focusable: false
-      }), /*#__PURE__*/_react.default.createElement("span", {
+      }), /*#__PURE__*/_react["default"].createElement("span", {
         className: "".concat(catalogLinkClass, "-label"),
         style: (0, _underscore.extend)(styles.catalogLinkLabel, styles.label)
-      }, catalogLinkLabel))), /*#__PURE__*/_react.default.createElement("a", {
+      }, catalogLinkLabel))), /*#__PURE__*/_react["default"].createElement("a", {
         href: researchLink,
         className: researchLinkClass,
         style: (0, _underscore.extend)(styles.links, loggedInMarginTop),
         onClick: function onClick() {
-          return _utils.default.trackHeader(gaAction, 'Research');
+          return _utils["default"].trackHeader(gaAction, 'Research');
         }
-      }, /*#__PURE__*/_react.default.createElement("span", {
+      }, /*#__PURE__*/_react["default"].createElement("span", {
         className: "".concat(researchLinkClass, "-wrapper"),
         style: (0, _underscore.extend)(styles.wrapper, styles.researchLinkWrapper)
-      }, /*#__PURE__*/_react.default.createElement(_dgxSvgIcons.BuildingIcon, {
+      }, /*#__PURE__*/_react["default"].createElement(_dgxSvgIcons.BuildingIcon, {
         fill: "#fff",
         ariaHidden: true,
         focusable: false
-      }), /*#__PURE__*/_react.default.createElement("span", {
+      }), /*#__PURE__*/_react["default"].createElement("span", {
         className: "".concat(researchLinkClass, "-label"),
         style: (0, _underscore.extend)(styles.researchLinkLabel, styles.label)
       }, researchCatalogLinkLabel))), this.renderLogOutLink());
@@ -247,29 +247,29 @@ var MobileMyNypl = /*#__PURE__*/function (_React$Component) {
   }]);
 
   return MobileMyNypl;
-}(_react.default.Component);
+}(_react["default"].Component);
 
 MobileMyNypl.propTypes = {
-  lang: _propTypes.default.string,
-  className: _propTypes.default.string,
-  catalogLink: _propTypes.default.string,
-  researchLink: _propTypes.default.string,
-  loginCatalogLink: _propTypes.default.string,
-  loginResearchLink: _propTypes.default.string,
-  isLoggedIn: _propTypes.default.bool,
-  patronName: _propTypes.default.string,
-  logOutLink: _propTypes.default.string
+  lang: _propTypes["default"].string,
+  className: _propTypes["default"].string,
+  catalogLink: _propTypes["default"].string,
+  researchLink: _propTypes["default"].string,
+  loginCatalogLink: _propTypes["default"].string,
+  loginResearchLink: _propTypes["default"].string,
+  isLoggedIn: _propTypes["default"].bool,
+  patronName: _propTypes["default"].string,
+  logOutLink: _propTypes["default"].string
 };
 MobileMyNypl.defaultProps = {
   lang: 'en',
   className: 'mobileMyNypl',
-  loginCatalogLink: _appConfig.default.loginMyNyplLinks.catalog,
-  loginResearchLink: _appConfig.default.loginMyNyplLinks.research,
-  catalogLink: _appConfig.default.myNyplLinks.catalog,
-  researchLink: _appConfig.default.myNyplLinks.research,
-  logOutLink: _appConfig.default.loginMyNyplLinks.logOutLink,
+  loginCatalogLink: _appConfig["default"].loginMyNyplLinks.catalog,
+  loginResearchLink: _appConfig["default"].loginMyNyplLinks.research,
+  catalogLink: _appConfig["default"].myNyplLinks.catalog,
+  researchLink: _appConfig["default"].myNyplLinks.research,
+  logOutLink: _appConfig["default"].loginMyNyplLinks.logOutLink,
   isLoggedIn: false,
   patronName: ''
 };
 var _default = MobileMyNypl;
-exports.default = _default;
+exports["default"] = _default;

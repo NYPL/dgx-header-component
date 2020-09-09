@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -13,7 +13,7 @@ var _underscore = require("underscore");
 
 var _utils = _interopRequireDefault(require("../../utils/utils"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var defaultStyles = {
   backgroundColor: '#E32B31',
@@ -27,24 +27,24 @@ var DonateButton = function DonateButton(_ref) {
       label = _ref.label,
       gaLabel = _ref.gaLabel,
       style = _ref.style;
-  return /*#__PURE__*/_react.default.createElement("a", {
+  return /*#__PURE__*/_react["default"].createElement("a", {
     id: id,
     className: className,
     href: target,
     onClick: function onClick() {
-      return _utils.default.trackHeader('Donate', gaLabel);
+      return _utils["default"].trackHeader('Donate', gaLabel);
     },
     style: (0, _underscore.extend)(style, defaultStyles)
   }, label);
 };
 
 DonateButton.propTypes = {
-  id: _propTypes.default.string,
-  className: _propTypes.default.string,
-  target: _propTypes.default.string,
-  label: _propTypes.default.string,
-  style: _propTypes.default.arrayOf(_propTypes.default.object),
-  gaLabel: _propTypes.default.string
+  id: _propTypes["default"].string,
+  className: _propTypes["default"].string,
+  target: _propTypes["default"].string,
+  label: _propTypes["default"].string,
+  style: _propTypes["default"].shape({}),
+  gaLabel: _propTypes["default"].string
 };
 DonateButton.defaultProps = {
   id: '',
@@ -55,4 +55,4 @@ DonateButton.defaultProps = {
   gaLabel: ''
 };
 var _default = DonateButton;
-exports.default = _default;
+exports["default"] = _default;

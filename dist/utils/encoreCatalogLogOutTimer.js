@@ -3,19 +3,19 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _accountConfig = _interopRequireDefault(require("../accountConfig"));
 
 var _utils = _interopRequireDefault(require("./utils"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
@@ -46,24 +46,24 @@ function EncoreCatalogLogOutTimer() {
     'catalog.nypl.org', // the domain of Research Catalog's pages
     'nypl-sierra-test.nypl.org' // the domain of Test Research Catalog's pages
     ];
-    var encoreLogInExpireDuration = _accountConfig.default.patLoggedInCookieExpiredTime;
+    var encoreLogInExpireDuration = _accountConfig["default"].patLoggedInCookieExpiredTime;
     var isOnValidDomain = domainsForExtendingLogIn.some(function (d) {
       return d === currentLocationHost;
     });
 
-    var isLoggedIn = _utils.default.hasCookie('PAT_LOGGED_IN');
+    var isLoggedIn = _utils["default"].hasCookie('PAT_LOGGED_IN');
 
     if (!isLoggedIn) {
       // Delete cookie "nyplIdentityPatron" to show Header logged out if cookie "PAT_LOGGED_IN"
       // does not exist
-      if (_utils.default.hasCookie('nyplIdentityPatron')) {
-        _utils.default.deleteCookie('nyplIdentityPatron');
+      if (_utils["default"].hasCookie('nyplIdentityPatron')) {
+        _utils["default"].deleteCookie('nyplIdentityPatron');
       } // Delete cookie "VALID_DOMAIN_LAST_VISITED" which holds the last time the user visited
       // the valid domain if the cookie "PAT_LOGGED_IN" does not exist
 
 
-      if (_utils.default.hasCookie('VALID_DOMAIN_LAST_VISITED')) {
-        _utils.default.deleteCookie('VALID_DOMAIN_LAST_VISITED');
+      if (_utils["default"].hasCookie('VALID_DOMAIN_LAST_VISITED')) {
+        _utils["default"].deleteCookie('VALID_DOMAIN_LAST_VISITED');
       }
     } else {
       // Update VALID_DOMAIN_LAST_VISITED in two scenarios:
@@ -72,12 +72,12 @@ function EncoreCatalogLogOutTimer() {
       //  2. The VALID_DOMAIN_LAST_VISITED cookie doesn't exist, which will
       //     only happen if the patron logged in through a redirect, without
       //     running JS on a "valid domain"
-      if (isOnValidDomain || !_utils.default.hasCookie('VALID_DOMAIN_LAST_VISITED')) {
-        _utils.default.setCookie('VALID_DOMAIN_LAST_VISITED', currentTime);
+      if (isOnValidDomain || !_utils["default"].hasCookie('VALID_DOMAIN_LAST_VISITED')) {
+        _utils["default"].setCookie('VALID_DOMAIN_LAST_VISITED', currentTime);
 
         _this.logOutFromEncoreAndCatalogIn(encoreLogInExpireDuration, isTest);
       } else {
-        var lastVisitedValidDomainTime = _utils.default.getCookie('VALID_DOMAIN_LAST_VISITED');
+        var lastVisitedValidDomainTime = _utils["default"].getCookie('VALID_DOMAIN_LAST_VISITED');
 
         var timeTillLogOut = lastVisitedValidDomainTime ? encoreLogInExpireDuration - (currentTime - lastVisitedValidDomainTime) : undefined;
 
@@ -102,11 +102,11 @@ function EncoreCatalogLogOutTimer() {
     }
 
     setTimeout(function () {
-      _utils.default.deleteCookie('PAT_LOGGED_IN');
+      _utils["default"].deleteCookie('PAT_LOGGED_IN');
 
-      _utils.default.deleteCookie('VALID_DOMAIN_LAST_VISITED');
+      _utils["default"].deleteCookie('VALID_DOMAIN_LAST_VISITED');
 
-      _utils.default.deleteCookie('nyplIdentityPatron');
+      _utils["default"].deleteCookie('nyplIdentityPatron');
 
       _this.loadLogoutIframe(isTest);
     }, timeTillLogOut);
@@ -142,4 +142,4 @@ function EncoreCatalogLogOutTimer() {
 
 var _default = new EncoreCatalogLogOutTimer();
 
-exports.default = _default;
+exports["default"] = _default;

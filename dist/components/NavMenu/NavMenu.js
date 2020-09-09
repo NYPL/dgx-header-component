@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -19,7 +19,7 @@ var _NavMenuItem = _interopRequireDefault(require("../NavMenuItem/NavMenuItem"))
 
 var _NavMenuMobileButtons = _interopRequireDefault(require("../NavMenuMobileButtons/NavMenuMobileButtons"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -33,7 +33,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -76,7 +76,7 @@ var NavMenu = /*#__PURE__*/function (_React$Component) {
       }
 
       return (0, _underscore.map)(navItems, function (item, index) {
-        return /*#__PURE__*/_react.default.createElement(_NavMenuItem.default, {
+        return /*#__PURE__*/_react["default"].createElement(_NavMenuItem["default"], {
           label: item.name,
           lang: _this.props.lang,
           target: item.link.en.text,
@@ -90,20 +90,20 @@ var NavMenu = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var mobileActiveClass = this.props.mobileActive ? 'mobileActive' : '';
-      return /*#__PURE__*/_react.default.createElement("div", {
+      return /*#__PURE__*/_react["default"].createElement("div", {
         className: this.props.className
-      }, /*#__PURE__*/_react.default.createElement("nav", {
+      }, /*#__PURE__*/_react["default"].createElement("nav", {
         className: "".concat(this.props.className, "-wrapper ").concat(mobileActiveClass),
         "aria-label": "Main Navigation"
-      }, /*#__PURE__*/_react.default.createElement(_dgxSvgIcons.LionLogoWithText, {
+      }, /*#__PURE__*/_react["default"].createElement(_dgxSvgIcons.LionLogoWithText, {
         ariaHidden: true,
         focusable: false
-      }), /*#__PURE__*/_react.default.createElement("ul", {
+      }), /*#__PURE__*/_react["default"].createElement("ul", {
         className: "".concat(this.props.className, "-list"),
         id: "navMenu-List"
-      }, this.renderNavMenu(this.props.items)), /*#__PURE__*/_react.default.createElement(_SearchButton.default, {
+      }, this.renderNavMenu(this.props.items)), /*#__PURE__*/_react["default"].createElement(_SearchButton["default"], {
         className: this.props.className
-      }), /*#__PURE__*/_react.default.createElement(_NavMenuMobileButtons.default, {
+      }), /*#__PURE__*/_react["default"].createElement(_NavMenuMobileButtons["default"], {
         className: "mobileBottomButtons",
         libraryCardLink: this.props.urlType === 'absolute' ? '//www.nypl.org/library-card' : '/library-card'
       })));
@@ -111,14 +111,14 @@ var NavMenu = /*#__PURE__*/function (_React$Component) {
   }]);
 
   return NavMenu;
-}(_react.default.Component);
+}(_react["default"].Component);
 
 NavMenu.propTypes = {
-  lang: _propTypes.default.string,
-  className: _propTypes.default.string,
-  items: _propTypes.default.arrayOf(_propTypes.default.object).isRequired,
-  urlType: _propTypes.default.string,
-  mobileActive: _propTypes.default.bool
+  lang: _propTypes["default"].string,
+  className: _propTypes["default"].string,
+  items: _propTypes["default"].arrayOf(_propTypes["default"].object).isRequired,
+  urlType: _propTypes["default"].string,
+  mobileActive: _propTypes["default"].bool
 };
 NavMenu.defaultProps = {
   lang: 'en',
@@ -127,4 +127,4 @@ NavMenu.defaultProps = {
   mobileActive: false
 };
 var _default = NavMenu;
-exports.default = _default;
+exports["default"] = _default;

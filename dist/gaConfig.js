@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 var gaConfig = {
   eventCategory: 'Search',
   eventAction: 'QuerySent',
@@ -15,4 +15,4 @@ var gaConfig = {
   }
 };
 var _default = gaConfig;
-exports.default = _default;
+exports["default"] = _default;

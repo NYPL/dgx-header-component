@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -21,7 +21,7 @@ var _MyNypl = _interopRequireDefault(require("../MyNypl/MyNypl"));
 
 var _appConfig = _interopRequireDefault(require("../../appConfig"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -35,7 +35,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -131,7 +131,7 @@ var MyNyplButton = /*#__PURE__*/function (_React$Component) {
         visible: !this.state.visible
       });
 
-      _utils.default.trackHeader(this.props.gaAction, "MyNyplButton - ".concat(visibleState));
+      _utils["default"].trackHeader(this.props.gaAction, "MyNyplButton - ".concat(visibleState));
     }
     /**
      * handleOnClickOut()
@@ -143,7 +143,7 @@ var MyNyplButton = /*#__PURE__*/function (_React$Component) {
     key: "handleOnClickOut",
     value: function handleOnClickOut() {
       if (this.state.visible) {
-        _utils.default.trackHeader(this.props.gaAction, 'MyNyplButton - Closed');
+        _utils["default"].trackHeader(this.props.gaAction, 'MyNyplButton - Closed');
 
         this.setState({
           visible: false
@@ -160,7 +160,7 @@ var MyNyplButton = /*#__PURE__*/function (_React$Component) {
     value: function renderMyNyplButton() {
       var buttonClass = '';
 
-      var icon = /*#__PURE__*/_react.default.createElement(_dgxSvgIcons.GenericWedgeIcon, {
+      var icon = /*#__PURE__*/_react["default"].createElement(_dgxSvgIcons.GenericWedgeIcon, {
         className: "dropDownIcon",
         ariaHidden: true,
         focusable: false
@@ -172,7 +172,7 @@ var MyNyplButton = /*#__PURE__*/function (_React$Component) {
 
       if (this.state.visible) {
         buttonClass = 'active';
-        icon = /*#__PURE__*/_react.default.createElement(_dgxSvgIcons.XIcon, {
+        icon = /*#__PURE__*/_react["default"].createElement(_dgxSvgIcons.XIcon, {
           className: "dropDownIcon",
           ariaHidden: true,
           fill: "#fff",
@@ -181,7 +181,7 @@ var MyNyplButton = /*#__PURE__*/function (_React$Component) {
         myNyplButtonLabel = 'Close';
       }
 
-      return /*#__PURE__*/_react.default.createElement("a", {
+      return /*#__PURE__*/_react["default"].createElement("a", {
         className: "myNyplButton ".concat(buttonClass).concat(labelColorClass).concat(loggedInFadeInAnimation),
         onClick: this.handleClick,
         style: (0, _underscore.extend)(styles.MyNyplButton, this.props.style),
@@ -195,10 +195,10 @@ var MyNyplButton = /*#__PURE__*/function (_React$Component) {
     key: "renderMyNyplDialog",
     value: function renderMyNyplDialog() {
       var boxHeight = this.props.isLoggedIn ? ' loggedInHeight' : null;
-      return this.state.visible ? /*#__PURE__*/_react.default.createElement("div", {
+      return this.state.visible ? /*#__PURE__*/_react["default"].createElement("div", {
         className: "myNypl-wrapper active animatedFast fadeIn".concat(boxHeight),
         style: styles.MyNyplWrapper
-      }, /*#__PURE__*/_react.default.createElement(_MyNypl.default, {
+      }, /*#__PURE__*/_react["default"].createElement(_MyNypl["default"], {
         patronName: this.props.patronName,
         isLoggedIn: this.props.isLoggedIn,
         logOutLink: this.props.logOutLink
@@ -207,7 +207,7 @@ var MyNyplButton = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/_react.default.createElement(_focusTrapReact.default, {
+      return /*#__PURE__*/_react["default"].createElement(_focusTrapReact["default"], {
         focusTrapOptions: {
           onDeactivate: this.handleOnClickOut,
           clickOutsideDeactivates: true
@@ -220,25 +220,23 @@ var MyNyplButton = /*#__PURE__*/function (_React$Component) {
   }]);
 
   return MyNyplButton;
-}(_react.default.Component);
+}(_react["default"].Component);
 
 MyNyplButton.propTypes = {
-  lang: _propTypes.default.string,
-  style: _propTypes.default.arrayOf(_propTypes.default.object),
-  isLoggedIn: _propTypes.default.bool,
-  patronName: _propTypes.default.string,
-  logOutLink: _propTypes.default.string,
-  gaAction: _propTypes.default.string,
-  target: _propTypes.default.string
+  style: _propTypes["default"].shape({}),
+  isLoggedIn: _propTypes["default"].bool,
+  patronName: _propTypes["default"].string,
+  logOutLink: _propTypes["default"].string,
+  gaAction: _propTypes["default"].string,
+  target: _propTypes["default"].string
 };
 MyNyplButton.defaultProps = {
-  lang: 'en',
   style: {},
   isLoggedIn: false,
   patronName: '',
   logOutLink: '',
   gaAction: '',
-  target: _appConfig.default.myNyplLinks.catalog
+  target: _appConfig["default"].myNyplLinks.catalog
 };
 var _default = MyNyplButton;
-exports.default = _default;
+exports["default"] = _default;

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -19,7 +19,7 @@ var _SearchBox = _interopRequireDefault(require("../SearchBox/SearchBox"));
 
 var _utils = _interopRequireDefault(require("../../utils/utils"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -33,7 +33,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -79,7 +79,7 @@ var SearchButton = /*#__PURE__*/function (_React$Component) {
           active: true
         }); // Fire GA event to track when the Search Menu is open
 
-        _utils.default.trackHeader('Search', 'Open Menu');
+        _utils["default"].trackHeader('Search', 'Open Menu');
       }
     }
     /**
@@ -99,7 +99,7 @@ var SearchButton = /*#__PURE__*/function (_React$Component) {
             active: false
           });
 
-          _utils.default.trackHeader('Search', 'Close Menu');
+          _utils["default"].trackHeader('Search', 'Close Menu');
         }, 200);
       }
     }
@@ -115,7 +115,7 @@ var SearchButton = /*#__PURE__*/function (_React$Component) {
     value: function renderSearchButton() {
       var _this3 = this;
 
-      var classes = (0, _classnames.default)({
+      var classes = (0, _classnames["default"])({
         active: this.state.active
       });
       var label = 'Search';
@@ -126,7 +126,7 @@ var SearchButton = /*#__PURE__*/function (_React$Component) {
         iconComponentType = _dgxSvgIcons.XIcon;
       }
 
-      var icon = _react.default.createElement(iconComponentType, {
+      var icon = _react["default"].createElement(iconComponentType, {
         className: "".concat(this.props.className, "-searchButton-icon"),
         ariaHidden: true,
         fill: '#FFF',
@@ -135,7 +135,7 @@ var SearchButton = /*#__PURE__*/function (_React$Component) {
         focusable: false
       });
 
-      return /*#__PURE__*/_react.default.createElement("button", {
+      return /*#__PURE__*/_react["default"].createElement("button", {
         className: "".concat(this.props.className, "-searchButton ").concat(classes),
         id: "".concat(this.props.className, "-searchButton"),
         name: "Search Button",
@@ -144,7 +144,7 @@ var SearchButton = /*#__PURE__*/function (_React$Component) {
         },
         "aria-haspopup": "true",
         "aria-expanded": this.state.active ? true : null
-      }, /*#__PURE__*/_react.default.createElement("span", {
+      }, /*#__PURE__*/_react["default"].createElement("span", {
         className: "".concat(this.props.className, "-searchButton-text")
       }, label), icon);
     }
@@ -158,18 +158,18 @@ var SearchButton = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "renderSearchBox",
     value: function renderSearchBox() {
-      return this.state.active ? /*#__PURE__*/_react.default.createElement("div", {
+      return this.state.active ? /*#__PURE__*/_react["default"].createElement("div", {
         className: "".concat(this.props.className, "-desktopSearchBox animatedFast fadeIn")
-      }, /*#__PURE__*/_react.default.createElement(_SearchBox.default, {
+      }, /*#__PURE__*/_react["default"].createElement(_SearchBox["default"], {
         className: "desktopSearch-form"
       })) : null;
     }
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/_react.default.createElement("div", {
+      return /*#__PURE__*/_react["default"].createElement("div", {
         className: "".concat(this.props.className, "-searchBox-wrapper")
-      }, /*#__PURE__*/_react.default.createElement(_focusTrapReact.default, {
+      }, /*#__PURE__*/_react["default"].createElement(_focusTrapReact["default"], {
         focusTrapOptions: {
           onDeactivate: this.handleOnClickOut,
           clickOutsideDeactivates: true
@@ -180,15 +180,15 @@ var SearchButton = /*#__PURE__*/function (_React$Component) {
   }]);
 
   return SearchButton;
-}(_react.default.Component);
+}(_react["default"].Component);
 
 SearchButton.propTypes = {
-  lang: _propTypes.default.string,
-  className: _propTypes.default.string
+  lang: _propTypes["default"].string,
+  className: _propTypes["default"].string
 };
 SearchButton.defaultProps = {
   lang: 'en',
   className: 'NavMenu'
 };
 var _default = SearchButton;
-exports.default = _default;
+exports["default"] = _default;

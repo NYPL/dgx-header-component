@@ -1,6 +1,9 @@
 ### CHANGE LOG
 
 ========
+### v2.7.0
+> Updates packages for a better build.
+
 ### v2.6.0
 > Remove Kievit font
 

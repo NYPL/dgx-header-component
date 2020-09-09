@@ -1,12 +1,11 @@
 {
   "name": "@nypl/dgx-header-component",
-  "version": "2.6.0",
+  "version": "2.7.0",
   "description": "NYPL Header as a React component.",
-  "main": "dist/components/Header/Header.js",
+  "main": "dist/index.min.js",
   "scripts": {
     "start": "NODE_ENV=production node server.js",
     "start:dev": "NODE_ENV=development webpack-dev-server --open",
-    "babel-build": "./node_modules/.bin/babel src -d dist && cp -r src/styles/ dist/styles",
     "dist": "NODE_ENV=production ./node_modules/.bin/webpack --config webpack.config.js && cp -r src/styles/ dist/styles",
     "test": "IS_TEST_ENV=true ./node_modules/.bin/mocha --require test/helpers/browser.js test/*.test.js",
     "test-file": "IS_TEST_ENV=true node_modules/.bin/mocha -w --require test/helpers/browser.js",
@@ -18,28 +17,6 @@
     "lint-single-file": "eslint"
   },
   "author": "NYPL Digital Experience",
-  "contributors": [
-    {
-      "name": "Edwin Guzman",
-      "email": "edwinguzman@nypl.org"
-    },
-    {
-      "name": "Rafael Hernandez",
-      "email": "rafaelhernandez@nypl.org"
-    },
-    {
-      "name": "Kang Peng",
-      "email": "kangtingpeng@nypl.org"
-    },
-    {
-      "name": "Sean Redmond",
-      "email": "seanredmond@nypl.org"
-    },
-    {
-      "name": "Ricardo E. Galvez",
-      "email": "ricardogalvez@nypl.org"
-    }
-  ],
   "license": "MIT",
   "repository": {
     "type": "git",

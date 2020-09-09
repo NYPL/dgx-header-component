@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const rootPath = path.resolve(__dirname);
 
@@ -9,11 +8,9 @@ if (process.env.NODE_ENV !== 'development') {
   const appEnv = process.env.APP_ENV ? process.env.APP_ENV : 'production';
   module.exports = {
     mode: 'production',
-    // devtool: 'source-map',
     entry: {
       app: [
         path.resolve(rootPath, './src/components/Header/Header.js'),
-        path.resolve(rootPath, './src/styles/main.scss'),
       ],
     },
     resolve: {
@@ -23,6 +20,7 @@ if (process.env.NODE_ENV !== 'development') {
       path: path.join(__dirname, '/dist'),
       filename: 'index.min.js',
       libraryTarget: 'umd',
+      globalObject: 'this',
       library: 'dgxHeaderComponent',
     },
     externals: {
@@ -52,7 +50,6 @@ if (process.env.NODE_ENV !== 'development') {
       },
     },
     plugins: [
-      new MiniCssExtractPlugin({ filename: 'main.scss' }),
       new CleanWebpackPlugin(),
       new webpack.DefinePlugin({
         'process.env': {
@@ -65,20 +62,11 @@ if (process.env.NODE_ENV !== 'development') {
       rules: [
         {
           test: /\.jsx?$/,
-          exclude: /(node_modules|bower_components)/,
+          exclude: /node_modules/,
           use: 'babel-loader',
         },
-        {
-          test: /\.scss$/,
-          include: path.resolve(rootPath, 'src'),
-          use: [
-            MiniCssExtractPlugin.loader,
-            "css-loader",
-            "sass-loader"
-          ],
-        },
       ],
-    }
+    },
   };
 } else {
   const appEnv = process.env.APP_ENV ? process.env.APP_ENV : 'development';
@@ -106,8 +94,8 @@ if (process.env.NODE_ENV !== 'development') {
     // We need this to test for cookies and signing in.
     devServer: {
       allowedHosts: [
-        'local.nypl.org'
-      ]
+        'local.nypl.org',
+      ],
     },
     module: {
       rules: [

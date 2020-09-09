@@ -166,12 +166,12 @@ be given a tab-index of −1. This allows the element to receive programmatic fo
 while being ignored during normal navigation flow.
 
 ### Production Mode
-*TODO: The following needs to be updated with the Webpack update.*
+*TODO: The following needs to be updated with the Webpack update and will currently not run.*
 
 To build the component and serve the minified files, run the following two commands. Setting the `NODE_ENV` flag to production triggers the production environment.
 
 ```sh
-$ npm run babel-build
+$ npm run dist
 $ NODE_ENV=production npm start
 ```
 
@@ -189,7 +189,7 @@ We use a specific NYPL patron log in cookie to decide the logged in status. For 
 1. Clone this repo.
 2. Checkout the `development` branch and run `npm install`.
 3. Create a feature branch from `development` - `git checkout -b new-feature`.
-4. When your work is ready to commit, run `npm run babel-build` to build the minified bundle.
+4. When your work is ready to commit, run `npm run dist` to build the minified bundle.
 5. Update `package.json` with new version number, update the `README.md` & `CHANGELOG.md` with relevant info.
 6. Commit your changes - `git commit -am 'Description of feature'`.
 7. Push the branch to Github - `git push origin new-feature`.

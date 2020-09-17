@@ -11,7 +11,7 @@ var config = {
   port: 3001,
   webpackDevServerPort: 3000,
   favIconPath: '//d2znry4lg8s0tq.cloudfront.net/images/favicon.ico',
-  alertsApiUrl: 'https://refinery.nypl.org/api/nypl/ndo/v0.1/content/alerts?filter%5Bscope%5D=all',
+  alertsApiUrl: 'https://qa-refinery.nypl.org/api/nypl/ndo/v0.1/content/alerts?filter%5Bscope%5D=all',
   fundraising: {
     apiUrl: 'https://platform.nypl.org/api/v0.1/fundraising-banner',
     experimentName: 'FundraisingFall2017',

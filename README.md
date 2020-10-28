@@ -8,7 +8,7 @@ This repository is for the header component used in React applications at NYPL.
 
 ### Version
 
-> v2.6.0
+> v2.7.0
 
 ### App Installation
 
@@ -113,17 +113,10 @@ $ npm install
 ### Development Mode
 We use Webpack to fire off a hot-reloading development server. This allows for continuous code changes without the need to refresh your browser.
 
-This starts the server at localhost:3000 defaulting to `NODE_ENV=development`.
+This starts the server at localhost:3001 defaulting to `NODE_ENV=development`.
 
 ```sh
-$ npm start
-```
-
-### Accessibility with React-a11y
-To use the react-a11y plugin start the development server with the `loadA11y` environment variable set to true (false by default):
-
-```sh
-$ loadA11y=true npm start
+$ npm run start:dev
 ```
 
 ### Component Props
@@ -173,10 +166,12 @@ be given a tab-index of −1. This allows the element to receive programmatic fo
 while being ignored during normal navigation flow.
 
 ### Production Mode
+*TODO: The following needs to be updated with the Webpack update and will currently not run.*
+
 To build the component and serve the minified files, run the following two commands. Setting the `NODE_ENV` flag to production triggers the production environment.
 
 ```sh
-$ npm run babel-build
+$ npm run dist
 $ NODE_ENV=production npm start
 ```
 
@@ -194,7 +189,7 @@ We use a specific NYPL patron log in cookie to decide the logged in status. For 
 1. Clone this repo.
 2. Checkout the `development` branch and run `npm install`.
 3. Create a feature branch from `development` - `git checkout -b new-feature`.
-4. When your work is ready to commit, run `npm run babel-build` to build the minified bundle.
+4. When your work is ready to commit, run `npm run dist` to build the minified bundle.
 5. Update `package.json` with new version number, update the `README.md` & `CHANGELOG.md` with relevant info.
 6. Commit your changes - `git commit -am 'Description of feature'`.
 7. Push the branch to Github - `git push origin new-feature`.

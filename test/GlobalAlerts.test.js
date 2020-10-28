@@ -1,15 +1,15 @@
 /* eslint-env mocha */
 import React from 'react';
 import { expect } from 'chai';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import moment from 'moment';
 
-import config from './../src/appConfig.js';
-import GlobalAlerts from './../src/components/GlobalAlerts/GlobalAlerts';
+import config from '../src/appConfig.js';
+import GlobalAlerts from '../src/components/GlobalAlerts/GlobalAlerts';
 
-var mock = null;
+let mock = null;
 
 describe('GlobalAlerts Component', () => {
   describe('Component with no alerts', () => {
@@ -74,7 +74,7 @@ describe('GlobalAlerts Component', () => {
         ]
       });
 
-      component = mount(
+      component = shallow(
         <GlobalAlerts />
       );
     });
@@ -84,8 +84,9 @@ describe('GlobalAlerts Component', () => {
     })
 
     it('should render only the single alert valid for current time', () => {
-      expect(component.find('.globalAlerts-box-item').length).to.equal(1);
-      expect(component.find('.globalAlerts-box-item').text()).to.equal('More People Reading More')
+      const alerts = component.find('#globalAlerts-box').render();
+      expect(alerts.find('.globalAlerts-box-item').length).to.equal(1);
+      expect(alerts.find('.globalAlerts-box-item').text()).to.equal('More People Reading More')
     });
 
     it('should render a <div> wrapper with @role="complementary"', () => {

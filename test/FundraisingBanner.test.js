@@ -4,8 +4,7 @@ import { expect } from 'chai';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
 
-import FundraisingBanner from './../src/components/FundraisingBanner/FundraisingBanner';
-import config from './../src/appConfig';
+import FundraisingBanner from '../src/components/FundraisingBanner/FundraisingBanner';
 
 describe('FundraisingBanner Component', () => {
   describe('Component with default required properties and data passed to bannerData prop', () => {
@@ -48,7 +47,7 @@ describe('FundraisingBanner Component', () => {
     });
 
     it('should set the background-image url property to match the config file sources', () => {
-      const styles = component.find('.fundraisingBanner').prop('style');
+      const styles = component.find('div.fundraisingBanner').prop('style');
       expect(styles).to.have.property(
         'backgroundImage',
         'url(//d2znry4lg8s0tq.cloudfront.net/fundraising/snowflake_wht_bg.png), ' +
@@ -72,7 +71,7 @@ describe('FundraisingBanner Component', () => {
       () => {
         component.find('.fundraisingBanner-closeButton').simulate('click');
         expect(component.state().isBannerVisible).to.equal(false);
-        expect(component.find('.fundraisingBanner').hasClass('show')).to.equal(false);
+        expect(component.find('div.fundraisingBanner').hasClass('show')).to.equal(false);
       });
   });
 
@@ -89,7 +88,7 @@ describe('FundraisingBanner Component', () => {
       });
 
       it('should render a <div> wrapper', () => {
-        expect(component.find('.fundraisingBanner').length).to.equal(1);
+        expect(component.find('div.fundraisingBanner').length).to.equal(1);
       });
 
       it('should have the bannerData state property set to an empty object if no props are defined',

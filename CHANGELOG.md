@@ -1,6 +1,10 @@
 ### CHANGE LOG
 
 ========
+### v2.7.1
+> Updates packages for a better build.
+> Centers the alert/closing message in global header
+
 ### v2.7.0
 > Updates packages for a better build.
 

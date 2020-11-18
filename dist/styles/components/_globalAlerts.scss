@@ -14,14 +14,7 @@
   &-box {
     position: relative;
     margin: .5em 1.2em .5em 1.2em;
-
-    @include min-screen(769px) {
-      margin-right: 20px;
-    }
-
-    @include min-screen(1025px) {
-      margin-left: 138px;
-    }
+    text-align: center;
 
     &-item {
       font-size: 16px;

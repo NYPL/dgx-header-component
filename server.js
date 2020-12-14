@@ -9,7 +9,7 @@ new WebpackDevServer(webpack(config), {
   stats: false,
   inline: true,
   historyApiFallback: true,
-}).listen(3000, 'local.nypl.org', (err) => {
+}).listen(3000, 'localhost', (err) => {
   if (err) {
     console.log(err);
   }

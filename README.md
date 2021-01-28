@@ -119,13 +119,6 @@ This starts the server at localhost:8080 defaulting to `NODE_ENV=development`.
 $ npm run start:dev
 ```
 
-### Accessibility with React-a11y
-To use the react-a11y plugin start the development server with the `loadA11y` environment variable set to true (false by default):
-
-```sh
-$ loadA11y=true npm start
-```
-
 ### Component Props
 
 - `className`: Class to be assigned to the main header container (String, default: "Header")

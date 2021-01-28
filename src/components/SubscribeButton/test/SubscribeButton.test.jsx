@@ -1,9 +1,10 @@
+import React from 'react-addons-test-utils';
+import ReactDOM from 'react-dom';
+
 jest.dontMock('../SubscribeButton.jsx');
 
-import React from 'react/addons';
-
 var SubscribeButton = require('../SubscribeButton.jsx');
-var ReactTestUtils = React.addons.TestUtils;
+var ReactTestUtils = ReactDOM.TestUtils;
 
 describe('SubscribeButton Component', function() {
 	

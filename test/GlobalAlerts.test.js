@@ -6,10 +6,10 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import moment from 'moment';
 
-import config from './../src/appConfig.js';
-import GlobalAlerts from './../src/components/GlobalAlerts/GlobalAlerts';
+import config from '../src/appConfig.js';
+import GlobalAlerts from '../src/components/GlobalAlerts/GlobalAlerts';
 
-var mock = null;
+let mock = null;
 
 describe('GlobalAlerts Component', () => {
   describe('Component with no alerts', () => {

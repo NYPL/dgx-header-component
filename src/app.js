@@ -4,11 +4,6 @@ import { config, gaUtils } from 'dgx-react-ga';
 import FeatureFlags from 'dgx-feature-flags';
 import { Header, navConfig } from './components/Header/Header.js';
 import './styles/main.scss';
-import a11y from 'react-a11y';
-
-if (loadA11y) {
-  a11y(React, { ReactDOM, includeSrcNode: true });
-}
 
 // Use for testing GA events
 if (!window.ga) {

@@ -8,7 +8,7 @@ This repository is for the header component used in React applications at NYPL.
 
 ### Version
 
-> v2.6.0
+> v2.7.1-r16
 
 ### App Installation
 
@@ -113,10 +113,10 @@ $ npm install
 ### Development Mode
 We use Webpack to fire off a hot-reloading development server. This allows for continuous code changes without the need to refresh your browser.
 
-This starts the server at localhost:3000 defaulting to `NODE_ENV=development`.
+This starts the server at localhost:8080 defaulting to `NODE_ENV=development`.
 
 ```sh
-$ npm start
+$ npm run start:dev
 ```
 
 ### Accessibility with React-a11y
@@ -173,10 +173,12 @@ be given a tab-index of −1. This allows the element to receive programmatic fo
 while being ignored during normal navigation flow.
 
 ### Production Mode
+TODO: The following needs to be updated with the Webpack update and will currently not run.
+
 To build the component and serve the minified files, run the following two commands. Setting the `NODE_ENV` flag to production triggers the production environment.
 
 ```sh
-$ npm run babel-build
+$ npm run dist
 $ NODE_ENV=production npm start
 ```
 

@@ -1,6 +1,10 @@
 ### CHANGE LOG
 
 ========
+
+### v2.7.1-r16
+> Updating packages to be the same as what is on `master`.
+
 ### v2.6.0
 > Remove Kievit font
 

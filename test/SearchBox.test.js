@@ -2,9 +2,8 @@
 import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
-import sinon from 'sinon';
 
-import SearchBox from './../src/components/SearchBox/SearchBox';
+import SearchBox from '../src/components/SearchBox/SearchBox';
 
 describe('SearchBox Component', () => {
   describe('Component with default props', () => {
@@ -23,8 +22,8 @@ describe('SearchBox Component', () => {
       expect(component.find('input[name="catalogWebsiteSearch"]').length).to.equal(2)
       expect(component.find('input[name="catalogWebsiteSearch"]').first().prop('checked')).to.equal(true)
       expect(component.find('input[name="catalogWebsiteSearch"]').last().prop('checked')).to.equal(false)
-    })
-  })
+    });
+  });
 
   describe('Component with custom props', () => {
     let component;

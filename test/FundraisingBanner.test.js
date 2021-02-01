@@ -4,8 +4,7 @@ import { expect } from 'chai';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
 
-import FundraisingBanner from './../src/components/FundraisingBanner/FundraisingBanner';
-import config from './../src/appConfig';
+import FundraisingBanner from '../src/components/FundraisingBanner/FundraisingBanner';
 
 describe('FundraisingBanner Component', () => {
   describe('Component with default required properties and data passed to bannerData prop', () => {

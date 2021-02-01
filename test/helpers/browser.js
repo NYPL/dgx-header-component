@@ -1,25 +1,26 @@
-require('babel-register')();
+require('@babel/register')();
 
-const jsdom = require("jsdom");
-const enzyme = require("enzyme");
-const Adapter = require("enzyme-adapter-react-16");
+const { jsdom } = require('jsdom');
 
-enzyme.configure({ adapter: new Adapter() });
+const exposedProperties = ['window', 'navigator', 'document'];
 
-const doc = jsdom.jsdom('');
-const win = doc.defaultView;
-
-global["document"] = doc;
-global["window"] = win;
-
-Object.keys(window).forEach((key) => {
-  if (!(key in global)) {
-    global[key] = window[key];
+global.document = jsdom('', { runScripts: "dangerously" });
+const { document } = global;
+global.window = document.defaultView;
+Object.keys(document.defaultView).forEach((property) => {
+  if (typeof global[property] === 'undefined') {
+    exposedProperties.push(property);
+    global[property] = document.defaultView[property];
   }
 });
 
 global.navigator = {
-  userAgent: 'node.js'
+  userAgent: 'node.js',
 };
 
-documentRef = document;
+const noop = () => {};
+require.extensions[".png"] = noop;
+
+const Enzyme = require('enzyme');
+const Adapter = require('enzyme-adapter-react-16');
+Enzyme.configure({ adapter: new Adapter() });

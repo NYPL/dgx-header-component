@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { extend as _extend } from 'underscore';
 import utils from '../../utils/utils.js';
 
 const defaultStyles = {
@@ -14,7 +13,7 @@ const DonateButton = ({ id, className, target, label, gaLabel, style }) => (
     className={className}
     href={target}
     onClick={() => utils.trackHeader('Donate', gaLabel)}
-    style={_extend(style, defaultStyles)}
+    style={{...style, ...defaultStyles}}
   >
     {label}
   </a>

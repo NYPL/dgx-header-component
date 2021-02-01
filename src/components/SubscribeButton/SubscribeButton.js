@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { extend as _extend } from 'underscore';
 import FocusTrap from 'focus-trap-react';
 import {
   GenericWedgeIcon,
@@ -190,7 +189,7 @@ class SubscribeButton extends React.Component {
         }}
         active={this.state.visible}
         className="subscribeButton-wrapper"
-        style={_extend(styles.base, this.props.style)}
+        style={{...styles.base, ...this.props.style}}
       >
         {this.renderEmailButton()}
         {this.renderEmailDialog()}

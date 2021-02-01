@@ -5,11 +5,11 @@ import { expect } from 'chai';
 import { mount } from 'enzyme';
 
 // Import the component that is going to be tested
-import MobileMyNypl from './../src/components/MyNypl/MobileMyNypl.js';
+import MobileMyNypl from '../src/components/MyNypl/MobileMyNypl.js';
 // Import related functions
-import utils from './../src/utils/utils.js';
+import utils from '../src/utils/utils.js';
 // Import the configs of the log in links
-import configs from './../src/appConfig.js';
+import configs from '../src/appConfig.js';
 
 const {
   loginMyNyplLinks: {

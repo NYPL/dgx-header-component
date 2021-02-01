@@ -1,27 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
-const cleanBuild = require('clean-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
 const rootPath = path.resolve(__dirname);
 
 if (process.env.NODE_ENV !== 'development') {
   let appEnv = process.env.APP_ENV ? process.env.APP_ENV : 'production';
-  const loaders = [
-    {
-      loader: 'css-loader',
-      options: {
-        sourceMap: true,
-      },
-    },
-    {
-      loader: 'sass-loader',
-      options: {
-        sourceMap: true,
-      },
-    },
-  ];
   module.exports = {
-    devtool: 'source-map',
+    mode: 'production',
     entry: {
       app: [
         path.resolve(rootPath, './src/components/Header/Header.js'),
@@ -31,9 +17,10 @@ if (process.env.NODE_ENV !== 'development') {
       extensions: ['.js', '.jsx', '.scss'],
     },
     output: {
-      path: path.join(__dirname, 'dist'),
+      path: path.join(__dirname, '/dist'),
       filename: 'index.min.js',
       libraryTarget: 'umd',
+      globalObject: 'this',
       library: 'dgxHeaderComponent',
     },
     externals: {
@@ -62,26 +49,8 @@ if (process.env.NODE_ENV !== 'development') {
         amd: 'dgx-react-ga',
       }
     },
-    module: {
-      rules: [
-        {
-          test: /\.jsx?$/,
-          exclude: /(node_modules|bower_components)/,
-          use: 'babel-loader',
-        },
-        {
-          test: /\.scss$/,
-          include: path.resolve(rootPath, 'src'),
-          use: ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            use: loaders,
-          }),
-        },
-      ],
-    },
     plugins: [
-      new ExtractTextPlugin('main.scss'),
-      new cleanBuild(['dist']),
+      new CleanWebpackPlugin(),
       new webpack.DefinePlugin({
         'process.env': {
           NODE_ENV: JSON.stringify('production'),
@@ -89,27 +58,31 @@ if (process.env.NODE_ENV !== 'development') {
         },
       }),
     ],
+    module: {
+      rules: [
+        {
+          test: /\.jsx?$/,
+          exclude: /(node_modules)/,
+          use: 'babel-loader',
+        },
+      ],
+    },
   };
 } else {
   let appEnv = process.env.APP_ENV ? process.env.APP_ENV : 'development';
   module.exports = {
-    devtool: 'eval',
+    mode: 'development',
+    devtool: 'inline-source-maps',
     entry: {
-      app: [
-        'webpack-dev-server/client?http://localhost:3000',
-        'webpack/hot/only-dev-server',
-        './src/app.js',
-      ],
+      app: ['./src/app.js'],
     },
     output: {
-      path: path.join(__dirname, 'dist'),
+      path: path.join(__dirname, '/dist'),
       filename: 'index.min.js',
-      publicPath: '/',
+      publicPath: 'http://localhost:3000',
     },
     plugins: [
-      new cleanBuild(['dist']),
-      new ExtractTextPlugin('main.scss'),
-      new webpack.HotModuleReplacementPlugin(),
+      new CleanWebpackPlugin(),
       new webpack.DefinePlugin({
         loadA11y: process.env.loadA11y || false,
         nodeEnv: JSON.stringify('development'),
@@ -119,12 +92,23 @@ if (process.env.NODE_ENV !== 'development') {
     resolve: {
       extensions: ['.js', '.jsx', '.scss'],
     },
+    // We need this to test for cookies and signing in.
+    devServer: {
+      allowedHosts: [
+        'local.nypl.org',
+      ],
+    },
     module: {
       rules: [
         {
           test: /\.jsx?$/,
           exclude: /(node_modules|bower_components)/,
-          use: 'babel-loader',
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+            },
+          }
         },
         {
           test: /\.scss$/,

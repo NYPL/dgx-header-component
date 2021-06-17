@@ -2,9 +2,6 @@
 
 ========
 
-### v2.7.2-r16
-> Updating NYPL packages to use Github instead of Bitbucket.
-
 ### v2.7.1-r16
 > Updating packages to be the same as what is on `master`.
 

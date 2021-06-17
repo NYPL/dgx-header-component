@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react-addons-test-utils';
 import ReactDOM from 'react-dom';
 
 jest.dontMock('../SubscribeButton.jsx');

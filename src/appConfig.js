@@ -41,14 +41,14 @@ const config = {
     },
   ],
   loginMyNyplLinks: {
-    catalog: `${authServerDomain}/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount`,
-    research: `${authServerDomain}/login?redirect_uri=https://catalog.nypl.org/patroninfo/top`,
+    catalog: `${authServerDomain}/login?redirect_uri=https://nypl-encore-test.nypl.org/iii/encore/myaccount`,
+    research: `${authServerDomain}/login?redirect_uri=https://nypl-sierra-test.nypl.org/patroninfo/top`,
     tokenRefreshLink: `${authServerDomain}/refresh`,
     logOutLink: `${authServerDomain}/logout`,
   },
   myNyplLinks: {
-    catalog: 'https://browse.nypl.org/iii/encore/myaccount',
-    research: 'https://catalog.nypl.org/patroninfo/top',
+    catalog: 'https://nypl-encore-test.nypl.org/iii/encore/myaccount',
+    research: 'https://nypl-sierra-test.nypl.org/patroninfo/top',
   },
   patronApiUrl: 'https://platform.nypl.org/api/v0.1/auth/patron/tokens/',
 };

@@ -42,13 +42,13 @@ const config = {
   ],
   loginMyNyplLinks: {
     catalog: `${authServerDomain}/login?redirect_uri=https://nypl-encore-test.nypl.org/iii/encore/myaccount`,
-    research: `${authServerDomain}/login?redirect_uri=https://nypl-sierra-test.nypl.org/patroninfo/top`,
+    research: `${authServerDomain}/login?redirect_uri=https://qa-www.nypl.org/research/research-catalog/account`,
     tokenRefreshLink: `${authServerDomain}/refresh`,
     logOutLink: `${authServerDomain}/logout`,
   },
   myNyplLinks: {
     catalog: 'https://nypl-encore-test.nypl.org/iii/encore/myaccount',
-    research: 'https://nypl-sierra-test.nypl.org/patroninfo/top',
+    research: 'https://qa-www.nypl.org/research/research-catalog/account',
   },
   patronApiUrl: 'https://platform.nypl.org/api/v0.1/auth/patron/tokens/',
 };

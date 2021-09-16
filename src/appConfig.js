@@ -1,4 +1,4 @@
-const authServerDomain = 'https://login.nypl.org/auth';
+const authServerDomain = 'https://dev-login.nypl.org/auth';
 
 const config = {
   appTitle: 'NYPL | React Header Component',
@@ -41,14 +41,14 @@ const config = {
     },
   ],
   loginMyNyplLinks: {
-    catalog: `${authServerDomain}/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount`,
-    research: `${authServerDomain}/login?redirect_uri=https://catalog.nypl.org/patroninfo/top`,
+    catalog: `${authServerDomain}/login?redirect_uri=https://nypl-encore-test.nypl.org/iii/encore/myaccount`,
+    research: `${authServerDomain}/login?redirect_uri=https://qa-www.nypl.org/research/research-catalog/account`,
     tokenRefreshLink: `${authServerDomain}/refresh`,
     logOutLink: `${authServerDomain}/logout`,
   },
   myNyplLinks: {
-    catalog: 'https://browse.nypl.org/iii/encore/myaccount',
-    research: 'https://catalog.nypl.org/patroninfo/top',
+    catalog: 'https://nypl-encore-test.nypl.org/iii/encore/myaccount',
+    research: 'https://qa-www.nypl.org/research/research-catalog/account',
   },
   patronApiUrl: 'https://platform.nypl.org/api/v0.1/auth/patron/tokens/',
 };

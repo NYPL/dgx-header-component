@@ -72,7 +72,7 @@ if (process.env.NODE_ENV !== 'development') {
   let appEnv = process.env.APP_ENV ? process.env.APP_ENV : 'development';
   module.exports = {
     mode: 'development',
-    devtool: 'inline-source-maps',
+    devtool: 'eval-source-map',
     entry: {
       app: ['./src/app.js'],
     },

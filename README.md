@@ -8,7 +8,7 @@ This repository is for the header component used in React applications at NYPL.
 
 ### Version
 
-> v2.7.1-r16
+> v2.7.1-r17
 
 ### App Installation
 
@@ -28,62 +28,12 @@ Import using ES6 style syntax:
 import { Header, navConfig } from '@nypl/dgx-header-component';
 ```
 
-Import using ES5 style syntax:
-```
-// Application.jsx
-var HeaderComponent =  require('@nypl/dgx-header-component');
-var Header = HeaderComponent.Header;
-var navConfig = HeaderComponent.navConfig;
-```
-
 Call the instance in your application component:
 ```
 <Header
   skipNav={{ target: 'mainContent' }}
   navData={navConfig.current}
 />
-```
-
-Install the polyfill For IE 11 and older version browsers:
-The polyfill for ES6 Promise is essential for the header to be rendered correctly on IE 11 and older browsers, as the version of axios we are using no longer supports ES6 Promise as default.
-
-NPM Install `"babel-polyfill": "6.20.0"` as a dependency to the application you want to import the header component to.
-
-```
-npm install --save babel-polyfill@6.20.0;
-```
-
-For `nypl-dgx-react-header`, as it will be built before uploaded, the polyfill can be installed as
-devDependency.
-
-```
-npm install --save-dev babel-polyfill@6.20.0;
-```
-
-At the very beginning of the entry file of the application, put
-
-```
-import "babel-polyfill";
-```
-
-In the application's `webpack.config.js`, put `'babel-polyfill'` in the `entry` array of each environment. For example,
-
-```
-entry: [
- 'babel-polyfill',
-  path.resolve(ROOT_PATH, 'src/client/App.jsx')
-],
-```
-
-or
-
-```
-entry: [
-  'webpack-dev-server/client?http://localhost:3000',
-  'webpack/hot/only-dev-server',
-  'babel-polyfill',
-  path.resolve(ROOT_PATH, 'src/client/App.jsx')
-],
 ```
 
 ### Test
@@ -174,12 +124,6 @@ To build the component and serve the minified files, run the following two comma
 $ npm run dist
 $ NODE_ENV=production npm start
 ```
-
-### Using Feature Flags
-
-Please go to NYPL/dgx-feature-flags repository for the step-by-step instruction.
-https://bitbucket.org/NYPL/dgx-feature-flags
-
 ### How the Patron Log in Cookie Works
 
 We use a specific NYPL patron log in cookie to decide the logged in status. For more details, please see [PATRONCOOKIE.md](./PATRONCOOKIE.md).

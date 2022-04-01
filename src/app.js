@@ -8,7 +8,7 @@ import './styles/main.scss';
 // Use for testing GA events
 if (!window.ga) {
   console.log('Analytics not available - loading through React.');
-  const isProd = nodeEnv === 'production';
+  const isProd = process.env.NODE_ENV == 'production';
   const gaOpts = { debug: !isProd, titleCase: false };
 
   // Passing false to get the dev GA code.

@@ -224,6 +224,7 @@ class MobileHeader extends React.Component {
           }}
           active={active}
         >
+          <div>
           <ReactTappable
             className={`${this.props.className}-myNyplButton`}
             component="button"
@@ -231,7 +232,7 @@ class MobileHeader extends React.Component {
             onTap={() => this.toggleMobileActiveBtn(`click${gaAction}`)}
             aria-haspopup="true"
             aria-expanded={active ? true : null}
-            ref="myNyplBtnFocus"
+            // ref="myNyplBtnFocus"
           >
             <span className="visuallyHidden">{buttonLabel}</span>
             {icon}
@@ -245,6 +246,7 @@ class MobileHeader extends React.Component {
                 logOutLink={this.props.logOutLink}
               />
           }
+          </div>
         </FocusTrap>
       </li>
     );
@@ -308,6 +310,7 @@ class MobileHeader extends React.Component {
           }}
           active={active}
         >
+          <div>
           <ReactTappable
             className={`${this.props.className}-searchButton${mobileSearchClass}`}
             component="button"
@@ -315,7 +318,7 @@ class MobileHeader extends React.Component {
             onTap={() => this.toggleMobileActiveBtn('clickSearch')}
             aria-haspopup="true"
             aria-expanded={active ? true : null}
-            ref="searchBtnFocus"
+            // ref="searchBtnFocus"
           >
             <span className="visuallyHidden">{buttonLabel}</span>
             {icon}
@@ -327,6 +330,7 @@ class MobileHeader extends React.Component {
                 type="mobile"
               />
           }
+          </div>
         </FocusTrap>
       </li>
     );
@@ -378,6 +382,7 @@ class MobileHeader extends React.Component {
           }}
           active={active}
         >
+          <div>
           <ReactTappable
             className={`${this.props.className}-menuButton${mobileMenuClass}`}
             component="button"
@@ -385,13 +390,14 @@ class MobileHeader extends React.Component {
             onTap={() => this.toggleMobileActiveBtn('mobileMenu')}
             aria-haspopup="true"
             aria-expanded={active ? true : null}
-            ref="navMenuBtnFocus"
+            // ref="navMenuBtnFocus"
           >
             <span className="visuallyHidden">{buttonLabel}</span>
             {icon}
           </ReactTappable>
           <div className={`header-mobile-wrapper${mobileMenuClass}`}>
             {dialogWindow}
+          </div>
           </div>
         </FocusTrap>
       </li>
@@ -404,9 +410,9 @@ class MobileHeader extends React.Component {
         {this.renderLogoLink()}
         <ul style={styles.list}>
           {this.renderMyNyplButton()}
-          {this.renderLocationsLink()}
+          {/* {this.renderLocationsLink()}
           {this.renderSearchButton()}
-          {this.renderMenuButton()}
+          {this.renderMenuButton()} */}
         </ul>
       </div>
     );

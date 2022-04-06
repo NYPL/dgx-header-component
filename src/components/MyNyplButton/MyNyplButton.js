@@ -157,8 +157,10 @@ class MyNyplButton extends React.Component {
         className="myNyplButton-wrapper"
         style={_extend(styles.base, this.props.style)}
       >
+        <div>
         {this.renderMyNyplButton()}
         {this.renderMyNyplDialog()}
+        </div>
       </FocusTrap>
     );
   }

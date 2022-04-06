@@ -2,6 +2,10 @@
 
 ========
 
+
+### v3.0-r17
+> CHORE: Updated to webpack 5
+> CHORE: Upgrade to React 17
 ### v2.7.1-r16
 > Updating packages to be the same as what is on `master`.
 

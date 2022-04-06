@@ -5,12 +5,14 @@ const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV == 'production';
 const rootPath = path.resolve(__dirname);
+console.log("dirname", __dirname)
 
 const config = {
     entry: './src/app',
     output: {
         path: path.resolve(__dirname, '/dist'),
         filename: 'index.min.js',
+        publicPath: '/',
     },
     devServer: {
         static: path.join(__dirname, '/dist'),
@@ -40,9 +42,6 @@ const config = {
                 test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
                 type: 'asset',
             },
-
-            // Add your rules for custom modules here
-            // Learn more about loaders from https://webpack.js.org/loaders/
         ],
     },
 };

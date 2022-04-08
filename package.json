@@ -36,7 +36,7 @@
     "dgx-react-ga": "git+https://git@github.com/NYPL/dgx-react-ga.git#master",
     "dgx-skip-navigation-link": "git+https://git@github.com/NYPL/dgx-skip-navigation-link.git#master",
     "focus-trap-react": "3.0.3",
-    "moment": "2.24.0",
+    "moment": "2.29.2",
     "prop-types": "15.5.10",
     "react": "15.5.4",
     "react-dom": "15.5.4",

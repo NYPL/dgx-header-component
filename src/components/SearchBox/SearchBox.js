@@ -15,7 +15,7 @@ class SearchBox extends React.Component {
 
     this.state = {
       searchInput: '',
-      searchOption: 'catalog',
+      searchOption: 'circulatingCatalog',
       placeholder: this.props.placeholder,
       placeholderAnimation: null,
       isSearchRequested: false,
@@ -151,9 +151,7 @@ class SearchBox extends React.Component {
 
   handleKeyPress(e) {
     if (e.key === 'Enter' || e.charCode === 13) {
-      if (this.props.type !== 'mobile') {
-        this.submitSearchRequest(null);
-      }
+      this.submitSearchRequest();
     }
   }
 
@@ -165,7 +163,7 @@ class SearchBox extends React.Component {
     this.setState({ searchOption: event.target.value });
   }
 
-  submitSearchRequest(searchType) {
+  submitSearchRequest() {
     let requestUrl;
     let gaSearchLabel;
     const searchInputValue = this.state.searchInput;
@@ -195,28 +193,18 @@ class SearchBox extends React.Component {
     const isGAResponseReceived = this.state.isGAResponseReceived;
 
     if (this.isSearchInputValid(searchInputValue)) {
-      // Explicit checks for mobile search
-      if (this.props.type === 'mobile') {
-        if (searchType === 'catalog') {
-          gaSearchLabel = 'Submit Catalog Search';
-          GASearchedRepo = 'Encore';
-          requestUrl = this.setEncoreUrl(searchInputValue, encoreBaseUrl, 'eng');
-        } else if (searchType === 'website') {
-          gaSearchLabel = 'Submit Search';
-          GASearchedRepo = 'DrupalSearch';
-          requestUrl = this.setCatalogUrl(searchInputValue, catalogBaseUrl);
-        }
-      } else {
-        // Explicit checks for desktop search
-        if (searchOptionValue === 'catalog') {
-          gaSearchLabel = 'Submit Catalog Search';
-          GASearchedRepo = 'Encore';
-          requestUrl = this.setEncoreUrl(searchInputValue, encoreBaseUrl, 'eng');
-        } else if (searchOptionValue === 'website') {
-          gaSearchLabel = 'Submit Search';
-          GASearchedRepo = 'DrupalSearch';
-          requestUrl = this.setCatalogUrl(searchInputValue, catalogBaseUrl);
-        }
+      if (searchOptionValue === 'circulatingCatalog') {
+        gaSearchLabel = 'Submit Circulating Catalog Search';
+        GASearchedRepo = 'Encore';
+        requestUrl = this.setEncoreUrl(searchInputValue, encoreBaseUrl, 'eng');
+      } else if (searchOptionValue === 'researchCatalog') {
+        gaSearchLabel = 'Submit Research Catalog Search';
+        GASearchedRepo = 'Encore';
+        requestUrl = this.setEncoreUrl(searchInputValue, encoreBaseUrl, 'eng');
+      } else if (searchOptionValue === 'website') {
+        gaSearchLabel = 'Submit Search';
+        GASearchedRepo = 'DrupalSearch';
+        requestUrl = this.setCatalogUrl(searchInputValue, catalogBaseUrl);
       }
 
       // Safety check to ensure a proper requestUrl has been defined.
@@ -287,28 +275,13 @@ class SearchBox extends React.Component {
           autoComplete="off"
           autoFocus
         />
-        <SearchIcon ariaHidden focusable={false} />
-      </div>
-    );
-  }
-
-  renderMobileControls() {
-    return (
-      <div className={`${this.props.className}-mobileControls`}>
-        <button
-          aria-label="Submit Catalog Search"
-          onClick={() => this.submitSearchRequest('catalog')}
-        >
-          <span className="label">CATALOG</span>
-          <RightWedgeIcon ariaHidden focusable={false} />
-        </button>
-        <button
-          aria-label="Submit NYPL Website Search"
-          onClick={() => this.submitSearchRequest('website')}
-        >
-          <span className="label">NYPL.ORG</span>
-          <RightWedgeIcon ariaHidden focusable={false} />
-        </button>
+        {this.props.type === 'mobile' ? (
+            <button id="desktop-submit-search-btn" type="submit" onClick={() => this.submitSearchRequest()}>
+              <span className="visuallyHidden">Search</span>
+              <SearchIcon ariaHidden fill="#FFF" focusable={false} />
+            </button>
+          ) : null
+        }
       </div>
     );
   }
@@ -316,43 +289,58 @@ class SearchBox extends React.Component {
   renderDesktopControls() {
     return (
       <div className={`${this.props.className}-desktopControls`}>
-        <input
-          type="radio"
-          name="catalogWebsiteSearch"
-          id="catalogSearch"
-          value="catalog"
-          checked={this.state.searchOption === 'catalog'}
-          onChange={this.handleSearchOptionChange}
-        />
-        <label htmlFor="catalogSearch" className="catalogOption">Search the Catalog</label>
-        <input
-          type="radio"
-          name="catalogWebsiteSearch"
-          id="websiteSearch"
-          value="website"
-          checked={this.state.searchOption === 'website'}
-          onChange={this.handleSearchOptionChange}
-        />
-        <label htmlFor="websiteSearch" className="websiteOption">Search NYPL.org</label>
-        <button type="submit" onClick={() => this.submitSearchRequest(null)}>
-          <span className="visuallyHidden">Search</span>
-          <SearchIcon ariaHidden fill="#FFF" focusable={false} />
-        </button>
+        <div>
+          <input
+            type="radio"
+            name="catalogWebsiteSearch"
+            id="circulatingCatalogSearch"
+            value="circulatingCatalog"
+            checked={this.state.searchOption === 'circulatingCatalog'}
+            onChange={this.handleSearchOptionChange}
+          />
+          <label htmlFor="circulatingCatalogSearch" className="catalogOption">Search the Circulation Catalog</label>
+        </div>
+        <div>
+          <input
+            type="radio"
+            name="catalogWebsiteSearch"
+            id="researchCatalogSearch"
+            value="researchCatalog"
+            checked={this.state.searchOption === 'researchCatalog'}
+            onChange={this.handleSearchOptionChange}
+          />
+          <label htmlFor="researchCatalogSearch" className="catalogOption">Search the Research Catalog</label>
+        </div>
+        <div>
+          <input
+            type="radio"
+            name="catalogWebsiteSearch"
+            id="websiteSearch"
+            value="website"
+            checked={this.state.searchOption === 'website'}
+            onChange={this.handleSearchOptionChange}
+          />
+          <label htmlFor="websiteSearch" className="websiteOption">Search NYPL.org</label>
+        </div>
+        {this.props.type !== 'mobile' ? (
+          <button id="desktop-submit-search-btn" type="submit" onClick={() => this.submitSearchRequest()}>
+            <span className="visuallyHidden">Search</span>
+            <SearchIcon ariaHidden fill="#FFF" focusable={false} />
+          </button>
+        ) : null}
       </div>
     );
   }
 
   render() {
     return (
-      <div className={this.props.className} role="dialog">
+      <div aria-label="Search form dropdown"  className={this.props.className} role="dialog">
         <fieldset>
           <legend className={`${this.props.className}-legend visuallyHidden`}>
             {this.props.legendText}
           </legend>
           {this.renderSearchInputField()}
-          {(this.props.type === 'mobile') ?
-            this.renderMobileControls() : this.renderDesktopControls()
-          }
+          {this.renderDesktopControls()}
         </fieldset>
       </div>
     );

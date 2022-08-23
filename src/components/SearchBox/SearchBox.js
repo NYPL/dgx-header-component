@@ -40,6 +40,19 @@ class SearchBox extends React.Component {
     return null;
   }
 
+  /**
+   * setResearchCatalogUrl(searchString)
+   * Returns the final URL for the Research Catalog search.
+   */
+  setResearchCatalogUrl(searchString) {
+    const catalogUrl = '//www.nypl.org/research/research-catalog/search?q=';
+
+    if (searchString) {
+      return catalogUrl + encodeURIComponent(searchString) + "&" + this.generateQueriesForGA();
+    }
+    return null;
+  }
+
   getAnimationClass() {
     if (this.state.placeholderAnimation === 'initial') {
       return 'keywords-pulse-fade-in';
@@ -199,8 +212,8 @@ class SearchBox extends React.Component {
         requestUrl = this.setEncoreUrl(searchInputValue, encoreBaseUrl, 'eng');
       } else if (searchOptionValue === 'researchCatalog') {
         gaSearchLabel = 'Submit Research Catalog Search';
-        GASearchedRepo = 'Encore';
-        requestUrl = this.setEncoreUrl(searchInputValue, encoreBaseUrl, 'eng');
+        GASearchedRepo = 'Research Catalog';
+        requestUrl = this.setResearchCatalogUrl(searchInputValue);
       } else if (searchOptionValue === 'website') {
         gaSearchLabel = 'Submit Search';
         GASearchedRepo = 'DrupalSearch';
@@ -256,10 +269,7 @@ class SearchBox extends React.Component {
     const animationClass = this.getAnimationClass();
     return (
       <div className={`${this.props.className}-inputBox ${animationClass}`}>
-        <label
-          className={this.props.type === 'mobile' ? 'visuallyHidden' : ''}
-          htmlFor={`${this.props.className}-searchInput`}
-        >
+        <label htmlFor={`${this.props.className}-searchInput`}>
           Enter Search Keyword
         </label>
         <input

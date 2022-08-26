@@ -118,7 +118,7 @@ class Header extends React.Component {
     FeatureFlags.store.listen(this.onFeatureFlagsChange.bind(this));
     // Set the log out link to state
     this.setLogOutLink(window.location.href);
-    // Set the timer to log out the user from Encore and Catalog
+    // Set the timer to log out the user from the Encore Catalog
     // (mainly for Encore while Catalog as a side effect)
     EncoreCatalogLogOutTimer.setEncoreLoggedInTimer(
       window.location.host,

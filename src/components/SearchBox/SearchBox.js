@@ -28,11 +28,11 @@ class SearchBox extends React.Component {
   }
 
   /**
-   * setCatalogUrl(searchString, catalogBaseUrl)
+   * setNYPLSearchUrl(searchString, websiteSearchBaseUrl)
    * Returns the final URL for the catalog search.
    */
-  setCatalogUrl(searchString, catalogBaseUrl) {
-    const catalogUrl = catalogBaseUrl || '//www.nypl.org/search/';
+  setNYPLSearchUrl(searchString, websiteSearchBaseUrl) {
+    const catalogUrl = websiteSearchBaseUrl || '//www.nypl.org/search/';
 
     if (searchString) {
       return catalogUrl + encodeURIComponent(searchString) + this.generateQueriesForGA();
@@ -64,32 +64,35 @@ class SearchBox extends React.Component {
   }
 
   /**
-   * setEncoreUrl(searchInput, baseUrl, language, scopeString)
-   * Returns the final URL for encore search which,
+   * setCatalogUrl(searchInput, baseUrl, language, scopeString)
+   * Returns the final URL for Encore search which,
    * is first encoded, then concatenated by the
-   * base encore root url. An optional scope and
+   * base Encore root url. An optional scope and
    * language may be concatenated as well.
+   * 2022 Note: Eventually, Encore will be replaced and this URL will
+   * redirect the user. Until we get the new URL, we will keep this one.
    */
-  setEncoreUrl(searchInput, baseUrl, language, scopeString) {
-    const searchTerm = this.encoreEncodeSearchString(searchInput);
+  setCatalogUrl(searchInput, baseUrl, language, scopeString) {
+    const searchTerm = this.catalogEncodeSearchString(searchInput);
     const rootUrl = baseUrl || 'https://browse.nypl.org/iii/encore/search/';
     const defaultLang = (language) ? `&lang=${language}` : '';
-    let finalEncoreUrl;
+    let finalCatalogUrl;
 
     if (searchTerm) {
-      finalEncoreUrl = this.encoreAddScope(rootUrl, searchTerm, scopeString) +
+      finalCatalogUrl = this.catalogAddScope(rootUrl, searchTerm, scopeString) +
         this.generateQueriesForGA() + defaultLang;
     }
 
-    return finalEncoreUrl;
+    return finalCatalogUrl;
   }
 
   /**
    * generateQueriesForGA()
-   * Generates the queries to be added to the URL of Encore search page. It is for the scripts
-   * of GA on Encore to tell where the search request is coming from.
+   * Generates the queries to be added to the URL of Encore Catalogsearch page.
+   * It is for the scripts of GA on Encore to tell where the search request
+   * is coming from.
    *
-   * @return {string} the queries to add to the URL for Encore search.
+   * @return {string} the queries to add to the URL for Encore Catalog search.
    */
   generateQueriesForGA() {
     // the time stamp here is for the purpose of telling when this search query is made.
@@ -100,24 +103,24 @@ class SearchBox extends React.Component {
   }
 
   /**
-  * encoreAddScope(baseUrl, searchString, scopeString)
+  * catalogAddScope(baseUrl, searchString, scopeString)
   * Enchances the encore url with a possible scope.
   * If no scope is set, adds the required string to
   * be returned as the final url.
   */
-  encoreAddScope(baseUrl, searchString, scopeString) {
+  catalogAddScope(baseUrl, searchString, scopeString) {
     return scopeString ?
     `${baseUrl}C__S${searchString}${scopeString}__Orightresult__U` :
       `${baseUrl}C__S${searchString}__Orightresult__U`;
   }
 
   /**
-   * encoreEncodeSearchString(string)
+   * catalogEncodeSearchString(string)
    * base64_encoding_map includes special characters that need to be
    * encoded using base64 - these chars are "=","/", "\", "?"
    * character : base64 encoded
    */
-  encoreEncodeSearchString(string) {
+  catalogEncodeSearchString(string) {
     const base64EncMap = {
       '=': 'PQ==',
       '/': 'Lw==',
@@ -181,22 +184,22 @@ class SearchBox extends React.Component {
     let gaSearchLabel;
     const searchInputValue = this.state.searchInput;
     const searchOptionValue = this.state.searchOption;
-    const encoreBaseUrl = 'https://browse.nypl.org/iii/encore/search/';
-    let catalogBaseUrl;
+    const catalogBaseUrl = 'https://browse.nypl.org/iii/encore/search/';
+    let websiteSearchBaseUrl;
 
     try {
       if (appEnv === 'development') {
-        catalogBaseUrl = '//dev-www.nypl.org/search/';
+        websiteSearchBaseUrl = '//dev-www.nypl.org/search/';
       } else if (appEnv === 'qa') {
-        catalogBaseUrl = '//qa-www.nypl.org/search/';
+        websiteSearchBaseUrl = '//qa-www.nypl.org/search/';
       } else {
-        catalogBaseUrl = '//www.nypl.org/search/';
+        websiteSearchBaseUrl = '//www.nypl.org/search/';
       };
     }
     catch(err) {
       // For the header markup and static assets import, appEnv will not be set so it will always get caught here.
       // One example is the Drupal import.
-      catalogBaseUrl = '//www.nypl.org/search/';
+      websiteSearchBaseUrl = '//www.nypl.org/search/';
     }
 
     // For GA "Search" Catalog, "Query Sent" Action Event
@@ -208,8 +211,8 @@ class SearchBox extends React.Component {
     if (this.isSearchInputValid(searchInputValue)) {
       if (searchOptionValue === 'circulatingCatalog') {
         gaSearchLabel = 'Submit Circulating Catalog Search';
-        GASearchedRepo = 'Encore';
-        requestUrl = this.setEncoreUrl(searchInputValue, encoreBaseUrl, 'eng');
+        GASearchedRepo = 'Circulating Catalog';
+        requestUrl = this.setCatalogUrl(searchInputValue, catalogBaseUrl, 'eng');
       } else if (searchOptionValue === 'researchCatalog') {
         gaSearchLabel = 'Submit Research Catalog Search';
         GASearchedRepo = 'Research Catalog';
@@ -217,7 +220,7 @@ class SearchBox extends React.Component {
       } else if (searchOptionValue === 'website') {
         gaSearchLabel = 'Submit Search';
         GASearchedRepo = 'DrupalSearch';
-        requestUrl = this.setCatalogUrl(searchInputValue, catalogBaseUrl);
+        requestUrl = this.setNYPLSearchUrl(searchInputValue, websiteSearchBaseUrl);
       }
 
       // Safety check to ensure a proper requestUrl has been defined.

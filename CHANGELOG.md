@@ -1,6 +1,14 @@
 ### CHANGE LOG
 
 ========
+
+### v2.8.0
+> Adds a third radio button to the search form. There are now three search options:
+- Search the Circulating Catalog
+- Search the Research Catalog
+- Search NYPL.org
+> Removes the two "Catalog" and "NYPL.ORG" mobile search buttons and replaces them with three radio buttons.
+
 ### v2.7.1
 > Centers the alert/closing message in global header.
 

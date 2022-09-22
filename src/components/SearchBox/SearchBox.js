@@ -311,7 +311,7 @@ class SearchBox extends React.Component {
             checked={this.state.searchOption === 'circulatingCatalog'}
             onChange={this.handleSearchOptionChange}
           />
-          <label htmlFor="circulatingCatalogSearch" className="catalogOption">Search the Circulation Catalog</label>
+          <label htmlFor="circulatingCatalogSearch" className="catalogOption">Search books, music and movies</label>
         </div>
         <div>
           <input
@@ -322,7 +322,7 @@ class SearchBox extends React.Component {
             checked={this.state.searchOption === 'researchCatalog'}
             onChange={this.handleSearchOptionChange}
           />
-          <label htmlFor="researchCatalogSearch" className="catalogOption">Search the Research Catalog</label>
+          <label htmlFor="researchCatalogSearch" className="catalogOption">Search the research catalog</label>
         </div>
         <div>
           <input
@@ -333,7 +333,7 @@ class SearchBox extends React.Component {
             checked={this.state.searchOption === 'website'}
             onChange={this.handleSearchOptionChange}
           />
-          <label htmlFor="websiteSearch" className="websiteOption">Search NYPL.org</label>
+          <label htmlFor="websiteSearch" className="websiteOption">Search the library website</label>
         </div>
         {this.props.type !== 'mobile' ? (
           <button id="desktop-submit-search-btn" type="submit" onClick={() => this.submitSearchRequest()}>

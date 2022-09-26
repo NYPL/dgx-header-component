@@ -22,13 +22,13 @@ describe('SearchBox Component', () => {
       expect(component.find('input[name="catalogWebsiteSearch"]').length).to.equal(3)
       expect(
         component.find("input[name='catalogWebsiteSearch'] + label").at(0).text()
-      ).to.equal("Search the Circulation Catalog");
+      ).to.equal("Search books, music and movies");
       expect(
         component.find("input[name='catalogWebsiteSearch'] + label").at(1).text()
-      ).to.equal("Search the Research Catalog");
+      ).to.equal("Search the research catalog");
       expect(
         component.find("input[name='catalogWebsiteSearch'] + label").at(2).text()
-      ).to.equal("Search NYPL.org");
+      ).to.equal("Search the library website");
     });
   });
 

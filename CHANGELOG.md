@@ -7,7 +7,8 @@
 - Search the Circulating Catalog
 - Search the Research Catalog
 - Search NYPL.org
-> Removes the two "Catalog" and "NYPL.ORG" mobile search buttons and replaces them with three radio buttons.
+- Removes the two "Catalog" and "NYPL.ORG" mobile search buttons and replaces them with three radio buttons.
+- Updates text for each radio button in the search form.
 
 ### v2.7.1
 > Centers the alert/closing message in global header.

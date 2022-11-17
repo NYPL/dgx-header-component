@@ -49,17 +49,22 @@
       line-height: normal;
     }
 
-    & > input {
-      width: 60%;
+    & > div {
+      display: flex;
+      gap: 10px;
+    }
+
+    & > div > input {
       height: 66px;
       padding: 0 0 0 25px;
+      flex: 1;
       font-size: 18px;
       font-style: normal;
       line-height: normal !important;
       @include System-Light;
 
-      @include min-screen(490px) {
-        width: 75%;
+      &::placeholder {
+        font-size: 17px;
       }
     }
 
@@ -75,7 +80,6 @@
       padding: 18px;
       margin: 0 10px 0 0;
       width: 72px;
-      float: right;
     }
   }
 

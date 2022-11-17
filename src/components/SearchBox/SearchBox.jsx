@@ -275,26 +275,28 @@ class SearchBox extends React.Component {
         <label htmlFor={`${this.props.className}-searchInput`}>
           Enter Search Keyword
         </label>
-        <input
-          id={`${this.props.className}-searchInput`}
-          type="text"
-          ref="headerSearchInputField"
-          placeholder={this.state.placeholder}
-          value={this.state.searchInput}
-          onChange={this.handleSearchInputChange}
-          onKeyPress={this.handleKeyPress}
-          required
-          aria-required="true"
-          autoComplete="off"
-          autoFocus
-        />
-        {this.props.type === 'mobile' ? (
-            <button id="desktop-submit-search-btn" type="submit" onClick={() => this.submitSearchRequest()}>
-              <span className="visuallyHidden">Search</span>
-              <SearchIcon ariaHidden fill="#FFF" focusable={false} />
-            </button>
-          ) : null
-        }
+        <div>
+          <input
+            id={`${this.props.className}-searchInput`}
+            type="text"
+            ref="headerSearchInputField"
+            placeholder={this.state.placeholder}
+            value={this.state.searchInput}
+            onChange={this.handleSearchInputChange}
+            onKeyPress={this.handleKeyPress}
+            required
+            aria-required="true"
+            autoComplete="off"
+            autoFocus
+          />
+          {this.props.type === 'mobile' ? (
+              <button id="desktop-submit-search-btn" type="submit" onClick={() => this.submitSearchRequest()}>
+                <span className="visuallyHidden">Search</span>
+                <SearchIcon ariaHidden fill="#FFF" focusable={false} />
+              </button>
+            ) : null
+          }
+        </div>
       </div>
     );
   }

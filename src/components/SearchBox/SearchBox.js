@@ -313,7 +313,7 @@ class SearchBox extends React.Component {
             checked={this.state.searchOption === 'circulatingCatalog'}
             onChange={this.handleSearchOptionChange}
           />
-          <label htmlFor="circulatingCatalogSearch" className="catalogOption">Search books, music and movies</label>
+          <label htmlFor="circulatingCatalogSearch" className="catalogOption">Search books, music, and movies</label>
         </div>
         <div>
           <input
@@ -324,7 +324,7 @@ class SearchBox extends React.Component {
             checked={this.state.searchOption === 'researchCatalog'}
             onChange={this.handleSearchOptionChange}
           />
-          <label htmlFor="researchCatalogSearch" className="catalogOption">Search the research catalog</label>
+          <label htmlFor="researchCatalogSearch" className="catalogOption">Search the Research Catalog</label>
         </div>
         <div>
           <input

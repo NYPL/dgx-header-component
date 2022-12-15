@@ -35,7 +35,7 @@ const styles = {
     left: '0',
     minWidth: '250px',
     backgroundColor: '#1B7FA7',
-    padding: '25px 30px',
+    padding: '30px',
     marginTop: '10px',
   },
 };
@@ -104,9 +104,8 @@ class MyNyplButton extends React.Component {
   renderMyNyplButton() {
     let buttonClass = '';
     let icon = <GenericWedgeIcon className="dropDownIcon" ariaHidden focusable={false} />;
-    let myNyplButtonLabel = (this.props.patronName) ? 'My Account' : 'Log In';
-    const labelColorClass = (this.props.isLoggedIn) ? ' loggedIn' : '';
-    const loggedInFadeInAnimation = (this.props.patronName) ? ' animated fadeIn' : '';
+    let myNyplButtonLabel = 'My Account';
+    const labelColorClass = ' loggedIn';
 
     if (this.state.visible) {
       buttonClass = 'active';
@@ -116,7 +115,7 @@ class MyNyplButton extends React.Component {
 
     return (
       <a
-        className={`myNyplButton ${buttonClass}${labelColorClass}${loggedInFadeInAnimation}`}
+        className={`myNyplButton ${buttonClass}${labelColorClass}`}
         onClick={this.handleClick}
         style={_extend(styles.MyNyplButton, this.props.style)}
         href={this.props.target}
@@ -131,17 +130,13 @@ class MyNyplButton extends React.Component {
   }
 
   renderMyNyplDialog() {
-    const boxHeight = (this.props.isLoggedIn) ? ' loggedInHeight' : null;
+    const boxHeight = ' loggedInHeight';
     return (this.state.visible) ? (
       <div
         className={`myNypl-wrapper active animatedFast fadeIn${boxHeight}`}
         style={styles.MyNyplWrapper}
       >
-        <MyNypl
-          patronName={this.props.patronName}
-          isLoggedIn={this.props.isLoggedIn}
-          logOutLink={this.props.logOutLink}
-        />
+        <MyNypl />
       </div>
     ) : null;
   }

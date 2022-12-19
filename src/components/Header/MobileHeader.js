@@ -195,7 +195,7 @@ class MobileHeader extends React.Component {
     const gaAction = 'MyAccount';
     let icon = (
       <LoginIconSolid
-        className="loginIcon-loggedIn animated fadeIn"
+        className="loginIcon-loggedIn"
         ariaHidden
         focusable={false}
       />

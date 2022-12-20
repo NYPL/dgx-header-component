@@ -11,7 +11,7 @@ import utils from '../src/utils/utils';
 import configs from '../src/appConfig';
 
 const {
-  loginMyNyplLinks: {
+  myNyplLinks: {
     catalog,
     research,
     logOutLink,
@@ -59,13 +59,14 @@ describe('MyNypl', () => {
       }
     );
 
-    it('should call GA event tracker when "MyNypl-Catalog-Btn" is clicked', () => {
+    // Temporary (?) skip because cookie login is not supported in Vega
+    // and "log in" should not be displayed in the UI.
+    it.skip('should call GA event tracker when "MyNypl-Catalog-Btn" is clicked', () => {
       component.find('.myNypl-catalog-btn').simulate('click');
       expect(onClick.calledOnce).to.equal(true);
       expect(onClick.calledWith('Log In', 'Catalog')).to.equal(true);
     });
-
-    it('should call GA event tracker when "MyNypl-Research-Btn" is clicked', () => {
+    it.skip('should call GA event tracker when "MyNypl-Research-Btn" is clicked', () => {
       component.find('.myNypl-research-btn').simulate('click');
       expect(onClick.calledOnce).to.equal(true);
       expect(onClick.calledWith('Log In', 'Research')).to.equal(true);
@@ -75,18 +76,19 @@ describe('MyNypl', () => {
       'and logOutLink', () => {
       expect(component.props().isLoggedIn).to.equal(false);
       expect(component.props().patronName).to.equal('');
-      expect(component.props().logOutLink).to.equal(logOutLink);
     });
 
+    // Temporary (?) skip because cookie login is not supported in Vega
+    // and "log in" should not be displayed in the UI.
     // Tests ignore `aria-hidden` attribute
-    it('should have an <a> with class name "MyNypl-Catalog-Btn". Its text equals ' +
+    it.skip('should have an <a> with class name "MyNypl-Catalog-Btn". Its text equals ' +
       '"Log in to your accountLOG INTO THE CATALOG"', () => {
       expect(component.find('.myNypl-catalog-btn').text())
         .to.equal('Log in to your accountLOG INTO THE CATALOG');
     });
 
     it('should have the <a> with class name "MyNypl-Catalog-Btn". Its href equals' +
-      '"https://beta-oauth.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount"',
+      '"https://browse.nypl.org/iii/encore/myaccount"',
       () => {
         expect(component.find('.myNypl-catalog-btn').props().href).to.equal(
           catalog
@@ -94,15 +96,17 @@ describe('MyNypl', () => {
       }
     );
 
-    it('should have the <a> with class name "MyNypl-Research-Btn". Its text equals ' +
+    // Temporary (?) skip because cookie login is not supported in Vega
+    // and "log in" should not be displayed in the UI.
+    it.skip('should have the <a> with class name "MyNypl-Research-Btn". Its text equals ' +
       '"NYPL Building IconLOG INTO THE RESEARCH CATALOG"', () => {
       expect(component.find('.myNypl-research-btn').text()).to.equal(
         'NYPL Building IconLOG INTO THE RESEARCH CATALOG'
       );
     });
 
-    it('should have the <a> with class name "MyNypl-Research-Btn". Its href equals' +
-      '"https://beta-oauth.nypl.org/auth/login?redirect_uri=https://catalog.nypl.org/patroninfo/top"',
+    it('should have the <a> with class name "MyNypl-Research-Btn". Its href equals ' +
+      '"https://catalog.nypl.org/patroninfo/top"',
       () => {
         expect(component.find('.myNypl-research-btn').props().href).to.equal(
           research
@@ -127,7 +131,8 @@ describe('MyNypl', () => {
       onClick.restore();
     });
 
-    it('should have props isLoggedIn equals true, and logOutLink equals' +
+    // Temporary (?) skip because logout will not display
+    it.skip('should have props isLoggedIn equals true, and logOutLink equals' +
       '"https://beta-oauth.nypl.org/auth/logout"',
         () => {
           expect(component.props().isLoggedIn).to.equal(true);
@@ -137,21 +142,21 @@ describe('MyNypl', () => {
         }
       );
 
-    it('should have three <a>. Their class names are "MyNypl-Catalog-Btn",' +
-      '"MyNypl-Research-Btn", and "MyNypl-Catalog-Link"', () => {
-      expect(component.find('a')).to.have.length(3);
-      expect(component.find('.myNypl-catalog-link').type()).to.equal('a');
+    it('should have two <a>. Their class names are "MyNypl-Catalog-Btn", "MyNypl-Research-Btn"', () => {
+      expect(component.find('a')).to.have.length(2);
       expect(component.find('.myNypl-catalog-btn').type()).to.equal('a');
       expect(component.find('.myNypl-research-btn').type()).to.equal('a');
     });
 
-    it('should have the <a> with class name "MyNypl-Catalog-Btn". Its text equals ' +
+    // Temporary (?) skip because cookie login is not supported in Vega
+    // and "log in" should not be displayed in the UI.
+    it.skip('should have the <a> with class name "MyNypl-Catalog-Btn". Its text equals ' +
       '"Log in to your accountGO TO THE CATALOG"', () => {
       expect(component.find('.myNypl-catalog-btn').text())
         .to.equal('Log in to your accountGO TO THE CATALOG');
     });
 
-    it('should have the <a> with class name "MyNypl-Research-Btn". Its text equals ' +
+    it.skip('should have the <a> with class name "MyNypl-Research-Btn". Its text equals ' +
       '"NYPL Building IconGO TO THE RESEARCH CATALOG"', () => {
       expect(component.find('.myNypl-research-btn').text())
         .to.equal('NYPL Building IconGO TO THE RESEARCH CATALOG');
@@ -183,7 +188,9 @@ describe('MyNypl', () => {
       expect(onClick.calledWith('Go To', 'Research')).to.equal(true);
     });
 
-    it('should have the method "renderLogOutLink" to render the proper log out link',
+    // Temporary (?) skip because cookie login is not supported in Vega
+    // and "log in" should not be displayed in the UI.
+    it.skip('should have the method "renderLogOutLink" to render the proper log out link',
       () => {
         // renderLogOutLink() is one of the methods of <MobileMyNypl />. It locates in the
         // render() life cycle and renders HTML elements for log out link.
@@ -227,10 +234,8 @@ describe('MyNypl', () => {
         }
       );
 
-      it('should have three <a>. Their class names are "myNypl-catalog-btn",' +
-        '"myNypl-research-btn", and "myNypl-catalog-bink"', () => {
-        expect(component.find('a')).to.have.length(3);
-        expect(component.find('.myNypl-catalog-link').type()).to.equal('a');
+      it('should have two <a>. Their class names are "myNypl-catalog-btn", "myNypl-research-btn"', () => {
+        expect(component.find('a')).to.have.length(2);
         expect(component.find('.myNypl-catalog-btn').type()).to.equal('a');
         expect(component.find('.myNypl-research-btn').type()).to.equal('a');
       });
@@ -261,7 +266,9 @@ describe('MyNypl', () => {
         );
       });
 
-      it('should have the method "renderLogOutLink" to render the proper log out link',
+      // Temporary (?) skip because cookie login is not supported in Vega
+      // and "log in" should not be displayed in the UI.
+      it.skip('should have the method "renderLogOutLink" to render the proper log out link',
         () => {
           // renderLogOutLink() is one of the methods of <MobileMyNypl />. It locates in the
           // render() life cycle and renders HTML elements for log out link.
@@ -321,7 +328,9 @@ describe('MyNypl', () => {
       }
     );
 
-    it('should have two <p>. One is with the class name ' +
+    // Temporary (?) skip because cookie login is not supported in Vega
+    // and "log in" should not be displayed in the UI.
+    it.skip('should have two <p>. One is with the class name ' +
       '"myNypl-patron-greeting.login-indication". And its text equals "You are logged in as:". ' +
       'The other is with the class name "myNypl-patron-greeting.login-name". ' +
       'And its text equals "Stewart, Darren"',

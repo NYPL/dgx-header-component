@@ -12,7 +12,7 @@ import utils from '../src/utils/utils.js';
 import configs from '../src/appConfig.js';
 
 const {
-  loginMyNyplLinks: {
+  myNyplLinks: {
     catalog,
     research,
     logOutLink,
@@ -52,16 +52,19 @@ describe('MobileMyNypl', () => {
       'and logOutLink', () => {
       expect(component.props().isLoggedIn).to.equal(false);
       expect(component.props().patronName).to.equal('');
-      expect(component.props().logOutLink).to.equal(logOutLink);
     });
 
-    it('should have an <a> with class name "CatalogLink". Its text equals ' +
+    // Temporary (?) skip because cookie login is not supported in Vega
+    // and "log in" should not be displayed in the UI.
+    it.skip('should have an <a> with class name "CatalogLink". Its text equals ' +
       '"Log in to your accountLOG INTO THE CATALOG"', () => {
       expect(component.find('.catalogLink').text())
         .to.equal('Log in to your accountLOG INTO THE CATALOG');
     });
 
-    it('should have the <a> with class name "CatalogLink". Its href equals ' +
+    // Temporary (?) skip because cookie login is not supported in Vega
+    // and "log in" should not be displayed in the UI.
+    it.skip('should have the <a> with class name "CatalogLink". Its href equals ' +
       '"https://beta-oauth.nypl.org/auth/login?redirect_uri=https://browse.nypl.org/iii/encore/myaccount"',
       () => {
         expect(component.find('.catalogLink').props().href).to.equal(
@@ -70,13 +73,17 @@ describe('MobileMyNypl', () => {
       }
     );
 
-    it('should have the <a> with class name "ResearchLink". Its text equals ' +
+    // Temporary (?) skip because cookie login is not supported in Vega
+    // and "log in" should not be displayed in the UI.
+    it.skip('should have the <a> with class name "ResearchLink". Its text equals ' +
       '"NYPL Building IconLOG INTO THE RESEARCH CATALOG"', () => {
       expect(component.find('.researchLink').text())
         .to.equal('NYPL Building IconLOG INTO THE RESEARCH CATALOG');
     });
 
-    it('should have the <a> with class name "ResearchLink". Its href equals to ' +
+    // Temporary (?) skip because cookie login is not supported in Vega
+    // and "log in" should not be displayed in the UI.
+    it.skip('should have the <a> with class name "ResearchLink". Its href equals to ' +
       '"https://beta-oauth.nypl.org/auth/login?redirect_uri=https://catalog.nypl.org/patroninfo/top"',
       () => {
         expect(component.find('.researchLink').props().href).to.equal(
@@ -85,13 +92,17 @@ describe('MobileMyNypl', () => {
       }
     );
 
-    it('should call GA event tracker when "CatalogLink" is clicked', () => {
+    // Temporary (?) skip because cookie login is not supported in Vega
+    // and "log in" should not be displayed in the UI.
+    it.skip('should call GA event tracker when "CatalogLink" is clicked', () => {
       component.find('.catalogLink').simulate('click');
       expect(onClick.calledOnce).to.equal(true);
       expect(onClick.calledWith('Mobile Log In', 'Catalog')).to.equal(true);
     });
 
-    it('should call GA event tracker when "ResearchLink" is clicked', () => {
+    // Temporary (?) skip because cookie login is not supported in Vega
+    // and "log in" should not be displayed in the UI.
+    it.skip('should call GA event tracker when "ResearchLink" is clicked', () => {
       component.find('.researchLink').simulate('click');
       expect(onClick.calledOnce).to.equal(true);
       expect(onClick.calledWith('Mobile Log In', 'Research')).to.equal(true);
@@ -116,7 +127,8 @@ describe('MobileMyNypl', () => {
       onClick.restore();
     });
 
-    it('should have props isLoggedIn equals true and logOutLink equals' +
+    // Temporary (?) skip because the logout link will not display.
+    it.skip('should have props isLoggedIn equals true and logOutLink equals' +
       '"https://beta-oauth.nypl.org/auth/logout"',
       () => {
         expect(component.props().isLoggedIn).to.equal(true);
@@ -126,21 +138,23 @@ describe('MobileMyNypl', () => {
       }
     );
 
-    it('should have three <a>. Their class names are "CatalogLink",' +
-      '"ResearchLink", and "MobileMyNypl-Catalog-Link"', () => {
-      expect(component.find('a')).to.have.length(3);
-      expect(component.find('.mobileMyNypl-catalog-link').type()).to.equal('a');
+    it('should have two <a>. Their class names are "CatalogLink", "ResearchLink"', () => {
+      expect(component.find('a')).to.have.length(2);
       expect(component.find('.catalogLink').type()).to.equal('a');
       expect(component.find('.researchLink').type()).to.equal('a');
     });
 
-    it('should have the <a> with class name "CatalogLink". Its text equals ' +
+    // Temporary (?) skip because cookie login is not supported in Vega
+    // and "log in" should not be displayed in the UI.
+    it.skip('should have the <a> with class name "CatalogLink". Its text equals ' +
       '"Log in to your accountGO TO THE CATALOG"', () => {
       expect(component.find('.catalogLink').text())
         .to.equal('Log in to your accountGO TO THE CATALOG');
     });
 
-    it('should have the <a> with class name "ResearchLink". Its text equals ' +
+    // Temporary (?) skip because cookie login is not supported in Vega
+    // and "log in" should not be displayed in the UI.
+    it.skip('should have the <a> with class name "ResearchLink". Its text equals ' +
       '"NYPL Building IconGO TO THE RESEARCH CATALOG"', () => {
       expect(component.find('.researchLink').text())
         .to.equal('NYPL Building IconGO TO THE RESEARCH CATALOG');
@@ -172,7 +186,9 @@ describe('MobileMyNypl', () => {
       expect(onClick.calledWith('Mobile Go To', 'Research')).to.equal(true);
     });
 
-    it('should have the method "renderLogOutLink" to render the proper log out link',
+    // Temporary (?) skip because cookie login is not supported in Vega
+    // and "log in" should not be displayed in the UI.
+    it.skip('should have the method "renderLogOutLink" to render the proper log out link',
       () => {
         // renderLogOutLink() is one of the methods of <MobileMyNypl />. It locates in render()
         // life cycle and renders HTML elements for log out link.
@@ -216,10 +232,8 @@ describe('MobileMyNypl', () => {
         }
       );
 
-      it('should have three <a>. Their class names are "CatalogLink",' +
-        '"ResearchLink", and "MobileMyNypl-Catalog-Link"', () => {
-        expect(component.find('a')).to.have.length(3);
-        expect(component.find('.mobileMyNypl-catalog-link').type()).to.equal('a');
+      it('should have two <a>. Their class names are "CatalogLink", "ResearchLink"', () => {
+        expect(component.find('a')).to.have.length(2);
         expect(component.find('.catalogLink').type()).to.equal('a');
         expect(component.find('.researchLink').type()).to.equal('a');
       });
@@ -230,7 +244,7 @@ describe('MobileMyNypl', () => {
           .text()).to.equal('Log in to your accountGO TO THE CATALOG');
       });
 
-      it('should have the <a> with class name "ResearchLink". Its text equals to ' +
+      it.skip('should have the <a> with class name "ResearchLink". Its text equals to ' +
         '"NYPL Building IconGO TO THE RESEARCH CATALOG"', () => {
         expect(component.find('.researchLink').text())
           .to.equal('NYPL Building IconGO TO THE RESEARCH CATALOG');
@@ -250,7 +264,9 @@ describe('MobileMyNypl', () => {
         );
       });
 
-      it('should have the method "renderLogOutLink" to render the proper log out link',
+      // Temporary (?) skip because cookie login is not supported in Vega
+      // and "log in" should not be displayed in the UI.
+      it.skip('should have the method "renderLogOutLink" to render the proper log out link',
         () => {
           // renderLogOutLink() is one of the methods of <MobileMyNypl />. It locates in render()
           // life cycle and renders HTML elements for log out link.
@@ -275,7 +291,9 @@ describe('MobileMyNypl', () => {
     }
   );
 
-  describe('<MobileMyNypl> with the props patronName that has valid value but isLoggedIn is false',
+  // Temporary (?) skip because cookie login is not supported in Vega
+  // and "log in" should not be displayed in the UI.
+  describe.skip('<MobileMyNypl> with the props patronName that has valid value but isLoggedIn is false',
     () => {
       let component;
 
@@ -296,8 +314,9 @@ describe('MobileMyNypl', () => {
       );
     }
   );
-
-  describe('<MobileMyNypl> with the props patronName that has valid value and isLoggedIn is true',
+  // Temporary (?) skip because cookie login is not supported in Vega
+      // and "log in" should not be displayed in the UI.
+  describe.skip('<MobileMyNypl> with the props patronName that has valid value and isLoggedIn is true',
     () => {
       let component;
 

@@ -1,6 +1,6 @@
 {
   "name": "@nypl/dgx-header-component",
-  "version": "2.7.1",
+  "version": "2.8.0",
   "description": "NYPL Header as a React component.",
   "main": "dist/index.min.js",
   "scripts": {
@@ -28,7 +28,6 @@
     "nypl"
   ],
   "dependencies": {
-    "@nypl/design-toolkit": "0.1.36",
     "@nypl/dgx-svg-icons": "0.3.7",
     "axios": "0.19.2",
     "classnames": "2.2.6",

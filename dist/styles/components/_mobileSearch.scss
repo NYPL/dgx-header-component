@@ -11,28 +11,75 @@
     margin: 0;
   }
 
+  &-desktopControls {
+    color: white;
+    font-size: 20px;
+    margin: 0 40px 20px;
+
+    > div {
+      margin-bottom: 12px;
+
+      @include min-screen(600px) {
+        display: inline-block;
+        margin-right: 20px;;
+      }
+    }
+
+    input {
+      margin-right: 8px;
+    }
+    
+    @include min-screen(600px) {
+      margin: 0 20px 20px;
+    }
+  }
+
   &-inputBox {
     margin: 20px 15px;
     display: block;
     overflow: hidden;
     position: relative;
 
-    & > input {
-      width: 100%;
+    label {
+      color: #FFF;
+      display: inline-block;
+      font-size: 22px;
+      margin: 0 0 10px 0;
+      padding: 0 !important;
+      line-height: normal;
+    }
+
+    & > div {
+      display: flex;
+      gap: 10px;
+    }
+
+    & > div > input {
       height: 66px;
       padding: 0 0 0 25px;
+      flex: 1;
       font-size: 18px;
       font-style: normal;
       line-height: normal !important;
       @include System-Light;
+
+      &::placeholder {
+        font-size: 17px;
+      }
     }
 
-    svg {
-      fill: #1da1d4;
-      height: 20px;
-      left: 0;
-      position: absolute;
-      top: 24px;
+    button {
+      -webkit-border-radius: 50% !important;
+      border-radius: 50% !important;
+      background-clip: padding-box;
+      background-color: transparent;
+      background: transparent;
+      border: 2px solid #FFF;
+      height: 72px;
+      line-height: normal;
+      padding: 18px;
+      margin: 0 10px 0 0;
+      width: 72px;
     }
   }
 

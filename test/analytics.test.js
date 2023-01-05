@@ -50,7 +50,8 @@ describe('Google Analytics', function () {
 
   describe('Mobile', () => {
     describe('MyNypl link', () => {
-      it('fires "Click" action, "Mobile clickLogIn" label event for non-logged-in user', (done) => {
+      // Temporary skip because we are no longer "logging in" on the client side.
+      it.skip('fires "Click" action, "Mobile clickLogIn" label event for non-logged-in user', (done) => {
         const navButton = component.find('button.header-mobile-myNyplButton');
         expect(navButton).to.be.a('object');
 
@@ -166,7 +167,8 @@ describe('Google Analytics', function () {
 
   describe('Desktop', () => {
     describe('MyNypl link', () => {
-      it('fires "Log In"/"MyNyplButton - Open" event for non-logged-in user', () => {
+      // Temporary skip because we are no longer "logging in" on the client side.
+      it.skip('fires "Log In"/"MyNyplButton - Open" event for non-logged-in user', () => {
         const navButton = component.find('nav.header-buttons .myNyplButton-wrapper a');
         expect(navButton).to.be.a('object');
 

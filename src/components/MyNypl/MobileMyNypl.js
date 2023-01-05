@@ -21,7 +21,7 @@ const styles = {
     backgroundColor: '#E32B31',
     color: '#FFF',
     padding: 0,
-    marginTop: '60px',
+    margin: '30px 0',
     minHeight: '100px',
     textAlign: 'center',
     textDecoration: 'none',
@@ -81,11 +81,7 @@ const styles = {
 
 class MobileMyNypl extends React.Component {
   componentDidMount() {
-    if (this.refs.loginGreeting) {
-      ReactDOM.findDOMNode(this.refs.loginGreeting).focus();
-    } else {
-      ReactDOM.findDOMNode(this.refs.catalogLoginLink).focus();
-    }
+    ReactDOM.findDOMNode(this.refs.catalogLoginLink).focus();
   }
 
   /**
@@ -94,19 +90,10 @@ class MobileMyNypl extends React.Component {
    * based on different conditions.
    */
   renderLoginLinks() {
-    if (this.props.isLoggedIn) {
-      return (
-        {
-          catalogLink: this.props.catalogLink,
-          researchLink: this.props.researchLink,
-        }
-      );
-    }
-
     return (
       {
-        catalogLink: this.props.loginCatalogLink,
-        researchLink: this.props.loginResearchLink,
+        catalogLink: this.props.catalogLink,
+        researchLink: this.props.researchLink,
       }
     );
   }
@@ -143,11 +130,10 @@ class MobileMyNypl extends React.Component {
     const catalogLinkClass = 'catalogLink';
     const researchLinkClass = 'researchLink';
     const { catalogLink, researchLink } = this.renderLoginLinks();
-    const catalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
-    const researchCatalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE RESEARCH CATALOG' :
-      'LOG INTO THE RESEARCH CATALOG';
-    const loggedInMarginTop = (this.props.isLoggedIn) ? styles.loggedInLinksMarginTop : null;
-    const gaAction = (this.props.isLoggedIn) ? 'Mobile Go To' : 'Mobile Log In';
+    const catalogLinkLabel = 'GO TO THE CATALOG';
+    const researchCatalogLinkLabel = 'GO TO THE RESEARCH CATALOG';
+    const loggedInMarginTop = styles.loggedInLinksMarginTop;
+    const gaAction = 'Mobile Go To';
 
     return (
       <div
@@ -155,11 +141,10 @@ class MobileMyNypl extends React.Component {
         style={styles.base}
         role="dialog"
       >
-        {this.renderGreeting()}
         <a
           href={catalogLink}
           className={catalogLinkClass}
-          style={_extend(styles.links, loggedInMarginTop)}
+          style={styles.links}
           onClick={() => utils.trackHeader(gaAction, 'Catalog')}
           ref="catalogLoginLink"
         >
@@ -179,7 +164,7 @@ class MobileMyNypl extends React.Component {
         <a
           href={researchLink}
           className={researchLinkClass}
-          style={_extend(styles.links, loggedInMarginTop)}
+          style={styles.links}
           onClick={() => utils.trackHeader(gaAction, 'Research')}
         >
           <span
@@ -195,7 +180,6 @@ class MobileMyNypl extends React.Component {
             </span>
           </span>
         </a>
-        {this.renderLogOutLink()}
       </div>
     );
   }
@@ -216,8 +200,8 @@ MobileMyNypl.propTypes = {
 MobileMyNypl.defaultProps = {
   lang: 'en',
   className: 'mobileMyNypl',
-  loginCatalogLink: appConfig.loginMyNyplLinks.catalog,
-  loginResearchLink: appConfig.loginMyNyplLinks.research,
+  loginCatalogLink: appConfig.myNyplLinks.catalog,
+  loginResearchLink: appConfig.myNyplLinks.research,
   catalogLink: appConfig.myNyplLinks.catalog,
   researchLink: appConfig.myNyplLinks.research,
   logOutLink: appConfig.loginMyNyplLinks.logOutLink,

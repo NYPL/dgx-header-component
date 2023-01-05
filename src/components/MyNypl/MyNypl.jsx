@@ -33,18 +33,13 @@ const styles = {
     fontWeight: 400,
     fontSize: '14px',
     letterSpacing: '.03em',
-    marginTop: '20px',
     padding: '9px 17px 7px',
   },
 };
 
 class MyNypl extends React.Component {
   componentDidMount() {
-    if (this.refs.patronGreetingWrapper) {
-      ReactDOM.findDOMNode(this.refs.patronGreetingWrapper).focus();
-    } else {
-      this.refs.catalogLink.focus();
-    }
+    this.refs.catalogLink.focus();
   }
 
   /**
@@ -53,19 +48,10 @@ class MyNypl extends React.Component {
    * based on different conditions.
    */
   renderLoginLinks() {
-    if (this.props.isLoggedIn) {
-      return (
-        {
-          catalogLink: this.props.catalogLink,
-          researchLink: this.props.researchLink,
-        }
-      );
-    }
-
     return (
       {
-        catalogLink: this.props.loginCatalogLink,
-        researchLink: this.props.loginResearchLink,
+        catalogLink: this.props.catalogLink,
+        researchLink: this.props.researchLink,
       }
     );
   }
@@ -109,21 +95,23 @@ class MyNypl extends React.Component {
   }
 
   render() {
-    const catalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE CATALOG' : 'LOG INTO THE CATALOG';
-    const researchCatalogLinkLabel = (this.props.isLoggedIn) ? 'GO TO THE RESEARCH CATALOG' :
-      'LOG INTO THE RESEARCH CATALOG';
+    const catalogLinkLabel = 'GO TO THE CATALOG';
+    const researchCatalogLinkLabel = 'GO TO THE RESEARCH CATALOG';
     const { catalogLink, researchLink } = this.renderLoginLinks();
-    const gaAction = (this.props.isLoggedIn) ? 'Go To' : 'Log In';
+    const gaAction = 'Go To';
 
     return (
       <div className={this.props.className} role="dialog">
-       {this.renderGreeting()}
         <ul className={`${this.props.className}-login-list`}>
           <li>
             <a
               ref="catalogLink"
               href={catalogLink}
-              style={styles.loginButtons}
+              style={{
+                ...styles.loginButtons,
+                padding: "5px 58px 5px",
+                marginBottom: "20px",
+              }}
               className={`${this.props.className}-catalog-btn`}
               onClick={() => utils.trackHeader(gaAction, 'Catalog')}
             >
@@ -143,7 +131,6 @@ class MyNypl extends React.Component {
             </a>
           </li>
         </ul>
-        {this.renderLogOutLink()}
       </div>
     );
   }
@@ -166,8 +153,8 @@ MyNypl.defaultProps = {
   id: '',
   className: 'myNypl',
   lang: 'en',
-  loginCatalogLink: appConfig.loginMyNyplLinks.catalog,
-  loginResearchLink: appConfig.loginMyNyplLinks.research,
+  loginCatalogLink: appConfig.myNyplLinks.catalog,
+  loginResearchLink: appConfig.myNyplLinks.research,
   catalogLink: appConfig.myNyplLinks.catalog,
   researchLink: appConfig.myNyplLinks.research,
   logOutLink: appConfig.loginMyNyplLinks.logOutLink,

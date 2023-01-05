@@ -75,7 +75,7 @@ const styles = {
     position: 'absolute',
     zIndex: 1000,
     right: '0',
-    width: '220px',
+    width: '310px',
     minHeight: '130px',
     backgroundColor: '#1B7FA7',
     padding: '25px 30px',
@@ -117,8 +117,8 @@ class Header extends React.Component {
     // Listen on FeatureFlags Store updates
     FeatureFlags.store.listen(this.onFeatureFlagsChange.bind(this));
     // Set the log out link to state
-    this.setLogOutLink(window.location.href);
-    // Set the timer to log out the user from Encore and Catalog
+    // this.setLogOutLink(window.location.href);
+    // Set the timer to log out the user from the Encore Catalog
     // (mainly for Encore while Catalog as a side effect)
     EncoreCatalogLogOutTimer.setEncoreLoggedInTimer(
       window.location.host,
@@ -126,7 +126,7 @@ class Header extends React.Component {
       this.state.isTest
     );
     // Set nyplIdentityPatron cookie to the state.
-    this.setLoginCookie(this.state.loginCookieName);
+    // this.setLoginCookie(this.state.loginCookieName);
     // Set feature flag cookies to the state
     // We don't have any feature flags set in the config list at this moment though
     utils.checkFeatureFlagActivated(
@@ -219,7 +219,7 @@ class Header extends React.Component {
                 '//www.nypl.org/locations/map?nearme=true' : '/locations/map?nearme=true'
             }
             nyplRootUrl={(this.props.urlType === 'absolute') ? '//www.nypl.org' : '/'}
-            isLoggedIn={isLoggedIn}
+            isLoggedIn
             patronName={this.state.patronName}
             logOutLink={this.state.logOutUrl}
             navData={this.props.navData}
@@ -242,10 +242,7 @@ class Header extends React.Component {
                 <li>
                   <MyNyplButton
                     refId="desktopLogin"
-                    isLoggedIn={isLoggedIn}
-                    patronName={this.state.patronName}
-                    logOutLink={this.state.logOutUrl}
-                    gaAction={isLoggedIn ? 'My Account' : 'Log In'}
+                    gaAction='My Account'
                   />
                 </li>
                 <li>
@@ -311,7 +308,7 @@ class Header extends React.Component {
             lang={this.props.lang}
             items={this.state.navData}
             urlType={this.props.urlType}
-            isLoggedIn={isLoggedIn}
+            isLoggedIn
             patronName={this.state.patronName}
             logOutLink={this.state.logOutUrl}
           />

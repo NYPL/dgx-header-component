@@ -109,7 +109,7 @@
       label {
         color: #FFF;
         display: inline-block;
-        font-size: 18px;
+        font-size: 22px;
         margin: 0 0 10px 0;
         padding: 0 !important;
         line-height: normal;
@@ -150,8 +150,13 @@
       display: block;
       margin: 0 0 40px 20px;
       text-align: left;
+
       @include min-screen(1025px) {
         margin-left: 140px;
+      }
+
+      > div {
+        display: inline-block;
       }
 
       label {
@@ -161,37 +166,10 @@
         padding: 2px;
         color: #FFF;
         font-size: 18px;
-
-        &:before {
-          background-color: #FFFFFF;
-          @include border-radius(50%);
-          content: '';
-          display: inline-block;
-          height: 10px;
-          left: 0;
-          margin-right: 10px;
-          position: relative;
-          width: 10px;
-          top: 1px;
-          text-align: center;
-        }
       }
 
       input[type=radio] {
-        /* Hide original inputs, but still accessible for input related functions */
-        @include opacity(0);
-      }
-
-      input[type=radio]:checked + label:before {
-        content: '\2022';
-        color: #000000;
-        font-size: 18px;
-        line-height: 11px;
-      }
-
-      // Focus effect on label
-      input[type=radio]:focus + label {
-        @include basic-focus;
+        margin-right: 15px;
       }
 
       .catalogOption {
@@ -216,7 +194,6 @@
           box-shadow: 0px 0px 1px 4px $focus-color;
           outline: 0;
         }
-
       }
     }
   }

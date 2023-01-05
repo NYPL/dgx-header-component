@@ -15,7 +15,7 @@ class SearchBox extends React.Component {
 
     this.state = {
       searchInput: '',
-      searchOption: 'catalog',
+      searchOption: 'circulatingCatalog',
       placeholder: this.props.placeholder,
       placeholderAnimation: null,
       isSearchRequested: false,
@@ -28,14 +28,27 @@ class SearchBox extends React.Component {
   }
 
   /**
-   * setCatalogUrl(searchString, catalogBaseUrl)
+   * setNYPLSearchUrl(searchString, websiteSearchBaseUrl)
    * Returns the final URL for the catalog search.
    */
-  setCatalogUrl(searchString, catalogBaseUrl) {
-    const catalogUrl = catalogBaseUrl || '//www.nypl.org/search/';
+  setNYPLSearchUrl(searchString, websiteSearchBaseUrl) {
+    const catalogUrl = websiteSearchBaseUrl || '//www.nypl.org/search/';
 
     if (searchString) {
       return catalogUrl + encodeURIComponent(searchString) + this.generateQueriesForGA();
+    }
+    return null;
+  }
+
+  /**
+   * setResearchCatalogUrl(searchString)
+   * Returns the final URL for the Research Catalog search.
+   */
+   setResearchCatalogUrl(searchString) {
+    const catalogUrl = '//www.nypl.org/research/research-catalog/search?q=';
+
+    if (searchString) {
+      return catalogUrl + encodeURIComponent(searchString) + "&" + this.generateQueriesForGA();
     }
     return null;
   }
@@ -51,32 +64,35 @@ class SearchBox extends React.Component {
   }
 
   /**
-   * setEncoreUrl(searchInput, baseUrl, language, scopeString)
-   * Returns the final URL for encore search which,
+   * setCatalogUrl(searchInput, baseUrl, language, scopeString)
+   * Returns the final URL for Encore search which,
    * is first encoded, then concatenated by the
-   * base encore root url. An optional scope and
+   * base Encore root url. An optional scope and
    * language may be concatenated as well.
+   * 2022 Note: Eventually, Encore will be replaced and this URL will
+   * redirect the user. Until we get the new URL, we will keep this one.
    */
-  setEncoreUrl(searchInput, baseUrl, language, scopeString) {
-    const searchTerm = this.encoreEncodeSearchString(searchInput);
+  setCatalogUrl(searchInput, baseUrl, language, scopeString) {
+    const searchTerm = this.catalogEncodeSearchString(searchInput);
     const rootUrl = baseUrl || 'https://browse.nypl.org/iii/encore/search/';
     const defaultLang = (language) ? `&lang=${language}` : '';
-    let finalEncoreUrl;
+    let finalCatalogUrl;
 
     if (searchTerm) {
-      finalEncoreUrl = this.encoreAddScope(rootUrl, searchTerm, scopeString) +
+      finalCatalogUrl = this.catalogAddScope(rootUrl, searchTerm, scopeString) +
         this.generateQueriesForGA() + defaultLang;
     }
 
-    return finalEncoreUrl;
+    return finalCatalogUrl;
   }
 
   /**
    * generateQueriesForGA()
-   * Generates the queries to be added to the URL of Encore search page. It is for the scripts
-   * of GA on Encore to tell where the search request is coming from.
+   * Generates the queries to be added to the URL of Encore Catalogsearch page.
+   * It is for the scripts of GA on Encore to tell where the search request
+   * is coming from.
    *
-   * @return {string} the queries to add to the URL for Encore search.
+   * @return {string} the queries to add to the URL for Encore Catalog search.
    */
   generateQueriesForGA() {
     // the time stamp here is for the purpose of telling when this search query is made.
@@ -87,24 +103,24 @@ class SearchBox extends React.Component {
   }
 
   /**
-  * encoreAddScope(baseUrl, searchString, scopeString)
-  * Enchances the encore url with a possible scope.
+  * catalogAddScope(baseUrl, searchString, scopeString)
+  * Enchances the encore catalog url with a possible scope.
   * If no scope is set, adds the required string to
   * be returned as the final url.
   */
-  encoreAddScope(baseUrl, searchString, scopeString) {
+  catalogAddScope(baseUrl, searchString, scopeString) {
     return scopeString ?
     `${baseUrl}C__S${searchString}${scopeString}__Orightresult__U` :
       `${baseUrl}C__S${searchString}__Orightresult__U`;
   }
 
   /**
-   * encoreEncodeSearchString(string)
+   * catalogEncodeSearchString(string)
    * base64_encoding_map includes special characters that need to be
    * encoded using base64 - these chars are "=","/", "\", "?"
    * character : base64 encoded
    */
-  encoreEncodeSearchString(string) {
+  catalogEncodeSearchString(string) {
     const base64EncMap = {
       '=': 'PQ==',
       '/': 'Lw==',
@@ -151,9 +167,7 @@ class SearchBox extends React.Component {
 
   handleKeyPress(e) {
     if (e.key === 'Enter' || e.charCode === 13) {
-      if (this.props.type !== 'mobile') {
-        this.submitSearchRequest(null);
-      }
+      this.submitSearchRequest();
     }
   }
 
@@ -165,27 +179,27 @@ class SearchBox extends React.Component {
     this.setState({ searchOption: event.target.value });
   }
 
-  submitSearchRequest(searchType) {
+  submitSearchRequest() {
     let requestUrl;
     let gaSearchLabel;
     const searchInputValue = this.state.searchInput;
     const searchOptionValue = this.state.searchOption;
-    const encoreBaseUrl = 'https://browse.nypl.org/iii/encore/search/';
-    let catalogBaseUrl;
+    const catalogBaseUrl = 'https://browse.nypl.org/iii/encore/search/';
+    let websiteSearchBaseUrl;
 
     try {
       if (appEnv === 'development') {
-        catalogBaseUrl = '//dev-www.nypl.org/search/';
+        websiteSearchBaseUrl = '//dev-www.nypl.org/search/';
       } else if (appEnv === 'qa') {
-        catalogBaseUrl = '//qa-www.nypl.org/search/';
+        websiteSearchBaseUrl = '//qa-www.nypl.org/search/';
       } else {
-        catalogBaseUrl = '//www.nypl.org/search/';
+        websiteSearchBaseUrl = '//www.nypl.org/search/';
       };
     }
     catch(err) {
       // For the header markup and static assets import, appEnv will not be set so it will always get caught here.
       // One example is the Drupal import.
-      catalogBaseUrl = '//www.nypl.org/search/';
+      websiteSearchBaseUrl = '//www.nypl.org/search/';
     }
 
     // For GA "Search" Catalog, "Query Sent" Action Event
@@ -195,28 +209,18 @@ class SearchBox extends React.Component {
     const isGAResponseReceived = this.state.isGAResponseReceived;
 
     if (this.isSearchInputValid(searchInputValue)) {
-      // Explicit checks for mobile search
-      if (this.props.type === 'mobile') {
-        if (searchType === 'catalog') {
-          gaSearchLabel = 'Submit Catalog Search';
-          GASearchedRepo = 'Encore';
-          requestUrl = this.setEncoreUrl(searchInputValue, encoreBaseUrl, 'eng');
-        } else if (searchType === 'website') {
-          gaSearchLabel = 'Submit Search';
-          GASearchedRepo = 'DrupalSearch';
-          requestUrl = this.setCatalogUrl(searchInputValue, catalogBaseUrl);
-        }
-      } else {
-        // Explicit checks for desktop search
-        if (searchOptionValue === 'catalog') {
-          gaSearchLabel = 'Submit Catalog Search';
-          GASearchedRepo = 'Encore';
-          requestUrl = this.setEncoreUrl(searchInputValue, encoreBaseUrl, 'eng');
-        } else if (searchOptionValue === 'website') {
-          gaSearchLabel = 'Submit Search';
-          GASearchedRepo = 'DrupalSearch';
-          requestUrl = this.setCatalogUrl(searchInputValue, catalogBaseUrl);
-        }
+      if (searchOptionValue === 'circulatingCatalog') {
+        gaSearchLabel = 'Submit Circulating Catalog Search';
+        GASearchedRepo = 'Circulating Catalog';
+        requestUrl = this.setCatalogUrl(searchInputValue, catalogBaseUrl, 'eng');
+      } else if (searchOptionValue === 'researchCatalog') {
+        gaSearchLabel = 'Submit Research Catalog Search';
+        GASearchedRepo = 'Research Catalog';
+        requestUrl = this.setResearchCatalogUrl(searchInputValue);
+      } else if (searchOptionValue === 'website') {
+        gaSearchLabel = 'Submit Search';
+        GASearchedRepo = 'DrupalSearch';
+        requestUrl = this.setNYPLSearchUrl(searchInputValue, websiteSearchBaseUrl);
       }
 
       // Safety check to ensure a proper requestUrl has been defined.
@@ -268,47 +272,31 @@ class SearchBox extends React.Component {
     const animationClass = this.getAnimationClass();
     return (
       <div className={`${this.props.className}-inputBox ${animationClass}`}>
-        <label
-          className={this.props.type === 'mobile' ? 'visuallyHidden' : ''}
-          htmlFor={`${this.props.className}-searchInput`}
-        >
+        <label htmlFor={`${this.props.className}-searchInput`}>
           Enter Search Keyword
         </label>
-        <input
-          id={`${this.props.className}-searchInput`}
-          type="text"
-          ref="headerSearchInputField"
-          placeholder={this.state.placeholder}
-          value={this.state.searchInput}
-          onChange={this.handleSearchInputChange}
-          onKeyPress={this.handleKeyPress}
-          required
-          aria-required="true"
-          autoComplete="off"
-          autoFocus
-        />
-        <SearchIcon ariaHidden focusable={false} />
-      </div>
-    );
-  }
-
-  renderMobileControls() {
-    return (
-      <div className={`${this.props.className}-mobileControls`}>
-        <button
-          aria-label="Submit Catalog Search"
-          onClick={() => this.submitSearchRequest('catalog')}
-        >
-          <span className="label">CATALOG</span>
-          <RightWedgeIcon ariaHidden focusable={false} />
-        </button>
-        <button
-          aria-label="Submit NYPL Website Search"
-          onClick={() => this.submitSearchRequest('website')}
-        >
-          <span className="label">NYPL.ORG</span>
-          <RightWedgeIcon ariaHidden focusable={false} />
-        </button>
+        <div>
+          <input
+            id={`${this.props.className}-searchInput`}
+            type="text"
+            ref="headerSearchInputField"
+            placeholder={this.state.placeholder}
+            value={this.state.searchInput}
+            onChange={this.handleSearchInputChange}
+            onKeyPress={this.handleKeyPress}
+            required
+            aria-required="true"
+            autoComplete="off"
+            autoFocus
+          />
+          {this.props.type === 'mobile' ? (
+              <button id="desktop-submit-search-btn" type="submit" onClick={() => this.submitSearchRequest()}>
+                <span className="visuallyHidden">Search</span>
+                <SearchIcon ariaHidden fill="#FFF" focusable={false} />
+              </button>
+            ) : null
+          }
+        </div>
       </div>
     );
   }
@@ -316,43 +304,58 @@ class SearchBox extends React.Component {
   renderDesktopControls() {
     return (
       <div className={`${this.props.className}-desktopControls`}>
-        <input
-          type="radio"
-          name="catalogWebsiteSearch"
-          id="catalogSearch"
-          value="catalog"
-          checked={this.state.searchOption === 'catalog'}
-          onChange={this.handleSearchOptionChange}
-        />
-        <label htmlFor="catalogSearch" className="catalogOption">Search the Catalog</label>
-        <input
-          type="radio"
-          name="catalogWebsiteSearch"
-          id="websiteSearch"
-          value="website"
-          checked={this.state.searchOption === 'website'}
-          onChange={this.handleSearchOptionChange}
-        />
-        <label htmlFor="websiteSearch" className="websiteOption">Search NYPL.org</label>
-        <button type="submit" onClick={() => this.submitSearchRequest(null)}>
-          <span className="visuallyHidden">Search</span>
-          <SearchIcon ariaHidden fill="#FFF" focusable={false} />
-        </button>
+        <div>
+          <input
+            type="radio"
+            name="catalogWebsiteSearch"
+            id="circulatingCatalogSearch"
+            value="circulatingCatalog"
+            checked={this.state.searchOption === 'circulatingCatalog'}
+            onChange={this.handleSearchOptionChange}
+          />
+          <label htmlFor="circulatingCatalogSearch" className="catalogOption">Search books, music, and movies</label>
+        </div>
+        <div>
+          <input
+            type="radio"
+            name="catalogWebsiteSearch"
+            id="researchCatalogSearch"
+            value="researchCatalog"
+            checked={this.state.searchOption === 'researchCatalog'}
+            onChange={this.handleSearchOptionChange}
+          />
+          <label htmlFor="researchCatalogSearch" className="catalogOption">Search the Research Catalog</label>
+        </div>
+        <div>
+          <input
+            type="radio"
+            name="catalogWebsiteSearch"
+            id="websiteSearch"
+            value="website"
+            checked={this.state.searchOption === 'website'}
+            onChange={this.handleSearchOptionChange}
+          />
+          <label htmlFor="websiteSearch" className="websiteOption">Search the library website</label>
+        </div>
+        {this.props.type !== 'mobile' ? (
+          <button id="desktop-submit-search-btn" type="submit" onClick={() => this.submitSearchRequest()}>
+            <span className="visuallyHidden">Search</span>
+            <SearchIcon ariaHidden fill="#FFF" focusable={false} />
+          </button>
+        ) : null}
       </div>
     );
   }
 
   render() {
     return (
-      <div className={this.props.className} role="dialog">
+      <div aria-label="Search form dropdown" className={this.props.className} role="dialog">
         <fieldset>
           <legend className={`${this.props.className}-legend visuallyHidden`}>
             {this.props.legendText}
           </legend>
           {this.renderSearchInputField()}
-          {(this.props.type === 'mobile') ?
-            this.renderMobileControls() : this.renderDesktopControls()
-          }
+          {this.renderDesktopControls()}
         </fieldset>
       </div>
     );

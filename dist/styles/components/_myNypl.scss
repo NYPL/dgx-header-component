@@ -34,10 +34,10 @@
   text-transform: none;
   display: none;
   box-sizing: content-box;
-  min-height: 180px;
+  min-height: 110px;
 
   &.loggedInHeight {
-    min-height: 250px;
+    min-height: 110px;
   }
 
   &.active {

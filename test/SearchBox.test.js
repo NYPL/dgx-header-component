@@ -19,9 +19,16 @@ describe('SearchBox Component', () => {
       // Confirm search box empty (can not be set by props anyway)
       expect(component.find('input[type="text"]').prop('value')).to.equal('')
       // Confirm search type radio selects first option ('catalog')
-      expect(component.find('input[name="catalogWebsiteSearch"]').length).to.equal(2)
-      expect(component.find('input[name="catalogWebsiteSearch"]').first().prop('checked')).to.equal(true)
-      expect(component.find('input[name="catalogWebsiteSearch"]').last().prop('checked')).to.equal(false)
+      expect(component.find('input[name="catalogWebsiteSearch"]').length).to.equal(3)
+      expect(
+        component.find("input[name='catalogWebsiteSearch'] + label").at(0).text()
+      ).to.equal("Search books, music, and movies");
+      expect(
+        component.find("input[name='catalogWebsiteSearch'] + label").at(1).text()
+      ).to.equal("Search the Research Catalog");
+      expect(
+        component.find("input[name='catalogWebsiteSearch'] + label").at(2).text()
+      ).to.equal("Search the library website");
     });
   });
 

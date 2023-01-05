@@ -192,19 +192,16 @@ class MobileHeader extends React.Component {
   */
   renderMyNyplButton() {
     let myNyplClass = '';
-    const gaAction = (this.props.patronName) ? 'MyAccount' : 'LogIn';
-    let icon = <LoginIcon className="loginIcon" ariaHidden focusable={false} />;
-    if (this.props.patronName) {
-      icon = (
-        <LoginIconSolid
-          className="loginIcon-loggedIn animated fadeIn"
-          ariaHidden
-          focusable={false}
-        />
-      );
-    }
+    const gaAction = 'MyAccount';
+    let icon = (
+      <LoginIconSolid
+        className="loginIcon-loggedIn"
+        ariaHidden
+        focusable={false}
+      />
+    );
     let buttonStyles = styles.inactiveMyNyplButton;
-    let buttonLabel = (this.props.patronName) ? 'My Account' : 'Log In';
+    let buttonLabel = 'My Account';
     const active = this.state.activeButton === 'myNypl';
 
     if (active) {
@@ -238,12 +235,7 @@ class MobileHeader extends React.Component {
           </ReactTappable>
           {
             active &&
-              <MobileMyNypl
-                className={`${myNyplClass} mobileMyNypl`}
-                isLoggedIn={this.props.isLoggedIn}
-                patronName={this.props.patronName}
-                logOutLink={this.props.logOutLink}
-              />
+              <MobileMyNypl className={`${myNyplClass} mobileMyNypl`} />
           }
         </FocusTrap>
       </li>
@@ -357,7 +349,7 @@ class MobileHeader extends React.Component {
           lang={this.props.lang}
           items={this.props.navData}
           urlType={this.props.urlType}
-          isLoggedIn={this.props.isLoggedIn}
+          isLoggedIn
           patronName={this.state.patronName}
           logOutLink={this.state.logOutUrl}
           mobileActive={active}

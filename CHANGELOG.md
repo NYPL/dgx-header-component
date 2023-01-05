@@ -2,6 +2,16 @@
 
 ========
 
+### v2.8.0-r16
+> Adds a third radio button to the search form. There are now three search options:
+- Search the Circulating Catalog
+- Search the Research Catalog
+- Search NYPL.org
+- Removes the two "Catalog" and "NYPL.ORG" mobile search buttons and replaces them with three radio buttons.
+- Updates text for each radio button in the search form.
+> Removes the "Log In" button and replaces it with "My Account" button. The user's name and logout links will no longer be displayed.
+> Removes the NYPL Design Toolkit package.
+
 ### v2.7.1-r16
 > Updating packages to be the same as what is on `master`.
 

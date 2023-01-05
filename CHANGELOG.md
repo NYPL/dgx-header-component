@@ -10,6 +10,7 @@
 - Removes the two "Catalog" and "NYPL.ORG" mobile search buttons and replaces them with three radio buttons.
 - Updates text for each radio button in the search form.
 > Removes the "Log In" button and replaces it with "My Account" button. The user's name and logout links will no longer be displayed.
+> Removes the NYPL Design Toolkit package.
 
 ### v2.7.1
 > Centers the alert/closing message in global header.

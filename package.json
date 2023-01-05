@@ -29,7 +29,7 @@
   ],
   "dependencies": {
     "@nypl/dgx-svg-icons": "0.3.7",
-    "axios": "0.19.2",
+    "axios": "0.21.2",
     "classnames": "2.2.6",
     "dgx-feature-flags": "git+https://git@github.com/NYPL/dgx-feature-flags.git#master",
     "dgx-react-ga": "git+https://git@github.com/NYPL/dgx-react-ga.git#master",

@@ -1,3 +1,11 @@
+# Deprecated
+
+As of September 2024, this repo and the [npm package](https://www.npmjs.com/package/@nypl/dgx-header-component), are deprecated. See the instructions in the [`nypl-header-app`](https://github.com/NYPL/nypl-header-app) repo for using the new NYPL Header and Footer.
+
+Please contact the NYPL Design System team or Remediation Team for more information.
+
+---
+
 # NYPL Header React NPM Component
 
 [![GitHub version](https://badge.fury.io/gh/nypl%2Fdgx-header-component.svg)](https://badge.fury.io/gh/nypl%2Fdgx-header-component)
